@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 import Media from 'react-media';
+import theme from "./utils/theme";
 
 const H1 = styled.h1`
   color: green;
@@ -7,7 +8,7 @@ const H1 = styled.h1`
 
 function App() {
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <Media query="(max-width: 768px)">
                 <H1>
                     Hello Gonito mobile!
@@ -18,7 +19,7 @@ function App() {
                     Hello Gonito desktop!
                 </H1>
             </Media>
-        </>
+        </ThemeProvider>
     );
 }
 
