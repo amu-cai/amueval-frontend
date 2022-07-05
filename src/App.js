@@ -1,25 +1,20 @@
 import styled, {ThemeProvider} from 'styled-components';
-import Media from 'react-media';
 import theme from "./utils/theme";
-
-const H1 = styled.h1`
-  color: green;
-`
+import LandingPage from "./pages/LandingPage";
+import Challenges from "./pages/Challenges";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <Media query="(max-width: 768px)">
-                <H1>
-                    Hello Gonito mobile!
-                </H1>
-            </Media>
-            <Media query="(min-width: 768px)">
-                <H1>
-                    Hello Gonito desktop!
-                </H1>
-            </Media>
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <Routes>
+                    <Route path='/challenges' element={<Challenges/>}/>
+                    <Route exact path='/' element={<LandingPage/>}/>
+                    <Route element={<LandingPage/>}/>
+                </Routes>
+            </ThemeProvider>
+        </BrowserRouter>
     );
 }
 
