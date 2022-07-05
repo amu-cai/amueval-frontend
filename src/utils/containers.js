@@ -4,12 +4,14 @@ const Container = styled.div`
   padding: ${({setPadding}) => setPadding ? setPadding : '0'};
   margin: ${({setMargin}) => setMargin ? setMargin : '0'};
   width: ${({setWidth}) => setWidth ? setWidth : 'auto'};
+  text-align: ${({setTextAlign}) => setTextAlign ? setTextAlign : 'left'};
   max-width: ${({setMaxWidth}) => setMaxWidth ? setMaxWidth : 'auto'};
   min-width: ${({setMinWidth}) => setMinWidth ? setMinWidth : 'auto'};
   height: ${({setHeight}) => setHeight ? setHeight : 'auto'};
   max-height: ${({setMaxHeight}) => setMaxHeight ? setMaxHeight : 'auto'};
   min-height: ${({setMinHeight}) => setMinHeight ? setMinHeight : 'auto'};
   background-color: ${({setBackgroundColor}) => setBackgroundColor ? setBackgroundColor : 'transparent'};
+  color: ${({theme, setColor}) => setColor ? setColor : theme.colors.dark};
   border-radius: ${({setBorderRadius}) => setBorderRadius ? setBorderRadius : '0'};
   box-shadow: ${({shadow}) => shadow ? shadow : 'none'};
   gap: ${({setGap}) => setGap ? setGap : '0'};
@@ -18,19 +20,19 @@ const Container = styled.div`
   display: ${({setDisplay}) => setDisplay ? setDisplay : 'block'};
   opacity: ${({setOpacity}) => setOpacity ? setOpacity : '1'};
   outline: ${({setOutline}) => setOutline ? setOutline : 'none'};
-  transition: opacity 0.3s ease-in-out;
+  text-decoration: ${({setTextDecoration}) => setTextDecoration ? setTextDecoration : 'none'};
 `;
 
 const FlexRow = styled(Container)`
   display: ${({setDisplay}) => setDisplay ? setDisplay : 'flex'};
-  justify-content: ${({alignment}) => alignment ? alignment : 'center'};
+  justify-content: ${({alignmentX}) => alignmentX ? alignmentX : 'center'};
   align-items: ${({alignmentY}) => alignmentY ? alignmentY : 'center'};
 `;
 
 const FlexColumn = styled(FlexRow)`
   flex-direction: column;
   justify-content: ${({alignmentY}) => alignmentY ? alignmentY : 'center'};
-  align-items: ${({alignment}) => alignment ? alignment : 'center'};
+  align-items: ${({alignmentX}) => alignmentX ? alignmentX : 'center'};
 `;
 
 const Grid = styled(Container)`
