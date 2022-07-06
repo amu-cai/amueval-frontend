@@ -4,7 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import Challenges from "./pages/Challenges";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-function App() {
+const App = () => {
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>

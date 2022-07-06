@@ -18,7 +18,7 @@ const ButtonLinkStyle = styled(Label)`
   }
 `;
 
-function ButtonLink(props) {
+const ButtonLink = (props) => {
     return (
         <ButtonLinkStyle>
             {props.children}

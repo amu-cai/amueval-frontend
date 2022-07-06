@@ -1,6 +1,6 @@
 import React from "react";
 
-function Challenges() {
+const Challenges = () => {
     return (
         <>
             Challenges

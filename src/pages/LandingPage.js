@@ -5,7 +5,7 @@ import theme from "../utils/theme";
 import {Link} from "react-router-dom";
 import ButtonLink from "../components/ButtonLink";
 
-function LandingPage() {
+const LandingPage = () => {
     return (
         <FlexColumn alignmentY='flex-start' setWidth='100%' setMinHeight='100vh' as='main'>
             <FlexColumn alignmentX='flex-start' setGap='24px'
