@@ -1,5 +1,5 @@
 import React from "react";
-import {Body, H1, Label} from "../utils/fonts";
+import {Body, H1} from "../utils/fonts";
 import {Container, FlexColumn} from "../utils/containers";
 import theme from "../utils/theme";
 import {Link} from "react-router-dom";
@@ -7,12 +7,12 @@ import ButtonLink from "../components/ButtonLink";
 
 const LandingPage = () => {
     return (
-        <FlexColumn alignmentY='flex-start' setWidth='100%' setMinHeight='100vh' as='main'>
-            <FlexColumn alignmentX='flex-start' setGap='24px'
-                        setWidth='80%' setMaxWidtsetCursorh='352px' setMargin='90px 0 0 0'>
+        <FlexColumn alignmentY='flex-start' width='100%' minHeight='100vh' as='main'>
+            <FlexColumn alignmentX='flex-start' gap='24px'
+                        width='80%' maxWidth='352px' margin='90px 0 0 0'>
                 <H1 as="h1">
                     Welcome to
-                    <Container setDisplay="inline" setColor={theme.colors.green}>
+                    <Container display="inline" color={theme.colors.green}>
                         &nbsp;Gonito.net!
                     </Container>
                 </H1>

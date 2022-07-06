@@ -1,30 +1,31 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: ${({setPadding}) => setPadding ? setPadding : '0'};
-  margin: ${({setMargin}) => setMargin ? setMargin : '0'};
-  width: ${({setWidth}) => setWidth ? setWidth : 'auto'};
-  text-align: ${({setTextAlign}) => setTextAlign ? setTextAlign : 'left'};
-  max-width: ${({setMaxWidth}) => setMaxWidth ? setMaxWidth : 'auto'};
-  min-width: ${({setMinWidth}) => setMinWidth ? setMinWidth : 'auto'};
-  height: ${({setHeight}) => setHeight ? setHeight : 'auto'};
-  max-height: ${({setMaxHeight}) => setMaxHeight ? setMaxHeight : 'auto'};
-  min-height: ${({setMinHeight}) => setMinHeight ? setMinHeight : 'auto'};
-  background-color: ${({setBackgroundColor}) => setBackgroundColor ? setBackgroundColor : 'transparent'};
-  color: ${({theme, setColor}) => setColor ? setColor : theme.colors.dark};
-  border-radius: ${({setBorderRadius}) => setBorderRadius ? setBorderRadius : '0'};
+  padding: ${({padding}) => padding ? padding : '0'};
+  margin: ${({margin}) => margin ? margin : '0'};
+  width: ${({width}) => width ? width : 'auto'};
+  text-align: ${({textAlign}) => textAlign ? textAlign : 'left'};
+  max-width: ${({maxWidth}) => maxWidth ? maxWidth : 'auto'};
+  min-width: ${({minWidth}) => minWidth ? minWidth : 'auto'};
+  height: ${({height}) => height ? height : 'auto'};
+  max-height: ${({maxHeight}) => maxHeight ? maxHeight : 'auto'};
+  min-height: ${({minHeight}) => minHeight ? minHeight : 'auto'};
+  background-color: ${({backgroundColor}) => backgroundColor ? backgroundColor : 'transparent'};
+  color: ${({theme, color}) => color ? color : theme.colors.dark};
+  border-radius: ${({borderRadius}) => borderRadius ? borderRadius : '0'};
   box-shadow: ${({shadow}) => shadow ? shadow : 'none'};
-  gap: ${({setGap}) => setGap ? setGap : '0'};
-  border: ${({setBorder}) => setBorder ? setBorder : 'none'};
-  cursor: ${({setCursor}) => setCursor ? setCursor : 'auto'};
-  display: ${({setDisplay}) => setDisplay ? setDisplay : 'block'};
-  opacity: ${({setOpacity}) => setOpacity ? setOpacity : '1'};
-  outline: ${({setOutline}) => setOutline ? setOutline : 'none'};
-  text-decoration: ${({setTextDecoration}) => setTextDecoration ? setTextDecoration : 'none'};
+  gap: ${({gap}) => gap ? gap : '0'};
+  border: ${({border}) => border ? border : 'none'};
+  cursor: ${({cursor}) => cursor ? cursor : 'auto'};
+  display: ${({display}) => display ? display : 'block'};
+  opacity: ${({opacity}) => opacity ? opacity : '1'};
+  outline: ${({outline}) => outline ? outline : 'none'};
+  text-decoration: ${({textDecoration}) => textDecoration ? textDecoration : 'none'};
+  transform: translate(${({translateX}) => translateX ? translateX : 0}, ${({translateY}) => translateY ? translateY : 0});
 `;
 
 const FlexRow = styled(Container)`
-  display: ${({setDisplay}) => setDisplay ? setDisplay : 'flex'};
+  display: ${({display}) => display ? display : 'flex'};
   justify-content: ${({alignmentX}) => alignmentX ? alignmentX : 'center'};
   align-items: ${({alignmentY}) => alignmentY ? alignmentY : 'center'};
 `;
@@ -37,8 +38,14 @@ const FlexColumn = styled(FlexRow)`
 
 const Grid = styled(Container)`
   display: grid;
-  grid-template-columns: ${({setTemplateColumns}) => setTemplateColumns ? setTemplateColumns : 'auto'};
-  grid-template-rows: ${({setTemplateRows}) => setTemplateRows ? setTemplateRows : 'auto'};
+  grid-template-columns: ${({templateColumns}) => templateColumns ? templateColumns : 'auto'};
+  grid-template-rows: ${({templateRows}) => templateRows ? templateRows : 'auto'};
 `;
 
-export {Container, FlexRow, FlexColumn, Grid};
+const Svg = styled(Container)`
+  background-color: ${({backgroundColor, theme}) => backgroundColor ? backgroundColor : theme.colors.dark};
+  -webkit-mask: url(${({src}) => src}) no-repeat center;
+  mask: url(${({src}) => src}) no-repeat center;
+`;
+
+export {Container, FlexRow, FlexColumn, Grid, Svg};
