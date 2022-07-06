@@ -3,7 +3,7 @@ import theme from "./utils/theme";
 import LandingPage from "./pages/LandingPage";
 import Challenges from "./pages/Challenges";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/elements/NavBar";
 
 const App = () => {
     return (

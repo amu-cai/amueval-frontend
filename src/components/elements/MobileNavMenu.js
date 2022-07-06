@@ -1,9 +1,9 @@
 import React from "react";
-import {Container, FlexColumn, FlexRow, Svg} from "../utils/containers";
-import {Menu} from "../utils/fonts";
-import loginIco from '../assets/login_ico.svg';
-import registerIco from '../assets/register_ico.svg';
-import cupIco from '../assets/cup_ico.svg';
+import {Container, FlexColumn, FlexRow, Svg} from "../../utils/containers";
+import {Menu} from "../../utils/fonts";
+import loginIco from '../../assets/login_ico.svg';
+import registerIco from '../../assets/register_ico.svg';
+import cupIco from '../../assets/cup_ico.svg';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
@@ -59,7 +59,7 @@ const MobileNavMenu = (props) => {
                     Register
                 </Menu>
             </FlexRow>
-            <FlexRow as={Link} to='/' gap='16px'>
+            <FlexRow as={Link} to='/challenges' gap='16px'>
                 <Svg width='16px' height='16px' src={cupIco}/>
                 <Menu as='li'>
                     Challenges

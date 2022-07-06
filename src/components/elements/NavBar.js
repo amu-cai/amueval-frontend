@@ -1,8 +1,8 @@
 import React from "react";
-import {Container, FlexRow} from "../utils/containers";
+import {Container, FlexRow} from "../../utils/containers";
 import Logo from "./Logo";
 import styled from "styled-components";
-import menuButtonIcon from '../assets/menu-button.svg';
+import menuButtonIcon from '../../assets/menu-button.svg';
 import MobileNavMenu from "./MobileNavMenu";
 
 const NavBarStyle = styled(Container)`

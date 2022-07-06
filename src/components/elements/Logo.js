@@ -1,6 +1,6 @@
 import React from "react";
-import {H1} from "../utils/fonts";
-import theme from "../utils/theme";
+import {H1} from "../../utils/fonts";
+import theme from "../../utils/theme";
 import {Link} from "react-router-dom";
 
 const Logo = () => {
