@@ -14,7 +14,6 @@ const Container = styled.div`
   color: ${({theme, color}) => color ? color : theme.colors.dark};
   border-radius: ${({borderRadius}) => borderRadius ? borderRadius : '0'};
   box-shadow: ${({shadow}) => shadow ? shadow : 'none'};
-  gap: ${({gap}) => gap ? gap : '0'};
   border: ${({border}) => border ? border : 'none'};
   cursor: ${({cursor}) => cursor ? cursor : 'auto'};
   display: ${({display}) => display ? display : 'block'};
@@ -28,18 +27,21 @@ const FlexRow = styled(Container)`
   display: ${({display}) => display ? display : 'flex'};
   justify-content: ${({alignmentX}) => alignmentX ? alignmentX : 'center'};
   align-items: ${({alignmentY}) => alignmentY ? alignmentY : 'center'};
+  gap: ${({gap}) => gap ? gap : '0'};
 `;
 
 const FlexColumn = styled(FlexRow)`
   flex-direction: column;
   justify-content: ${({alignmentY}) => alignmentY ? alignmentY : 'center'};
   align-items: ${({alignmentX}) => alignmentX ? alignmentX : 'center'};
+  gap: ${({gap}) => gap ? gap : '0'};
 `;
 
 const Grid = styled(Container)`
   display: grid;
   grid-template-columns: ${({templateColumns}) => templateColumns ? templateColumns : 'auto'};
   grid-template-rows: ${({templateRows}) => templateRows ? templateRows : 'auto'};
+  grid-gap: ${({gridGap}) => gridGap ? gridGap : '0'};
 `;
 
 const Svg = styled(Container)`
