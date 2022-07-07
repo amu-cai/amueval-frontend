@@ -27,7 +27,7 @@ const SearchStyle = styled(FlexRow)`
 
   input {
     width: calc(100% - 24px - 34px);
-    color: ${({theme}) => theme.colors.dark05};
+    color: ${({theme}) => theme.colors.dark08};
   }
 `;
 

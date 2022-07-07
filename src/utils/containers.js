@@ -39,8 +39,8 @@ const FlexColumn = styled(FlexRow)`
 
 const Grid = styled(Container)`
   display: grid;
-  grid-template-columns: ${({templateColumns}) => templateColumns ? templateColumns : 'auto'};
-  grid-template-rows: ${({templateRows}) => templateRows ? templateRows : 'auto'};
+  grid-template-columns: ${({gridTemplateColumns}) => gridTemplateColumns ? gridTemplateColumns : 'auto'};
+  grid-template-rows: ${({gridTemplateRows}) => gridTemplateRows ? gridTemplateRows : 'auto'};
   grid-gap: ${({gridGap}) => gridGap ? gridGap : '0'};
 `;
 

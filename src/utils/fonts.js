@@ -29,7 +29,7 @@ const H3 = styled(Container)`
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 22px;
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 24px;
