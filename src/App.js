@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import Challenges from "./pages/Challenges";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NavBar from "./components/elements/NavBar";
+import Footer from "./components/sections/Footer";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                     <Route exact path='/' element={<LandingPage/>}/>
                     <Route element={<LandingPage/>}/>
                 </Routes>
+                <Footer/>
             </ThemeProvider>
         </BrowserRouter>
     );
