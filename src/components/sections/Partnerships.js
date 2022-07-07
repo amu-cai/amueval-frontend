@@ -5,7 +5,7 @@ import Placeholder from "../elements/Placeholder";
 
 const Partnerships = () => {
     return (
-        <FlexColumn as='section' alignmentX='flex-start' width='80%' maxWidth='452px' gap='32px'>
+        <FlexColumn as='section' alignmentX='flex-start' gap='32px'>
             <H2 as='h2'>
                 Our partnerships
             </H2>

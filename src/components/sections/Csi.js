@@ -4,7 +4,7 @@ import {Body, H2, Medium} from "../../utils/fonts";
 
 const Csi = () => {
     return (
-        <FlexColumn as='section' alignmentX='flex-start' width='80%' maxWidth='452px'>
+        <FlexColumn as='section' alignmentX='flex-start'>
             <H2 as='h2' margin='0 0 24px 0'>
                 Center for artificial intelligence
             </H2>

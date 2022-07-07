@@ -7,8 +7,7 @@ import {Link} from "react-router-dom";
 
 const Hero = () => {
     return (
-        <FlexColumn alignmentX='flex-start' gap='24px'
-                    width='80%' maxWidth='452px'>
+        <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='452px'>
             <H1 as="h1">
                 Welcome to
                 <Container display="inline" color={theme.colors.green}>

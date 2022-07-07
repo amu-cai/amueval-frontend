@@ -9,12 +9,14 @@ import Partnerships from "../components/sections/Partnerships";
 const LandingPage = () => {
     return (
         <FlexColumn as='main' alignmentY='flex-start' width='100%'
-                    minHeight='100vh' padding='90px 0 32px 0' gap='48px'>
-            <Hero/>
-            <Motivation/>
-            <Csi/>
-            <Commercial/>
-            <Partnerships/>
+                    minHeight='100vh' padding='90px 0 32px 0'>
+            <FlexColumn maxWidth='452px' gap='48px' width='80%'>
+                <Hero/>
+                <Motivation/>
+                <Csi/>
+                <Commercial/>
+                <Partnerships/>
+            </FlexColumn>
         </FlexColumn>
     );
 }

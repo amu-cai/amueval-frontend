@@ -6,7 +6,7 @@ import theme from "../../utils/theme";
 
 const Motivation = () => {
     return (
-        <FlexColumn as='section' alignmentX='flex-start' gap='24px' width='80%' maxWidth='452px'>
+        <FlexColumn as='section' alignmentX='flex-start' gap='24px' width='100%'>
             <H2 as='h2'>
                 Motivation
             </H2>

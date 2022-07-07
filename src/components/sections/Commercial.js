@@ -5,7 +5,7 @@ import CircleNumber from "../elements/CircleNumber";
 
 const Commercial = () => {
     return (
-        <FlexColumn as='section' alignmentX='flex-start' width='80%' maxWidth='452px'>
+        <FlexColumn as='section' alignmentX='flex-start'>
             <H2 as='h2' margin='0 0 24px 0'>
                 Commercial challanges
             </H2>
