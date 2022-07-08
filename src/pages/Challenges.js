@@ -6,6 +6,7 @@ import MiniChallenge from "../components/elements/MiniChallenge";
 import textIco from '../assets/text_ico.svg';
 import tabularIco from '../assets/tabular_ico.svg';
 import imageIco from '../assets/image_ico.svg';
+import Pager from "../components/elements/Pager";
 
 const Challenges = () => {
     return (
@@ -25,6 +26,7 @@ const Challenges = () => {
                                    describe={`Guess publication location for a piece of text.`}/>
                 </Grid>
             </FlexColumn>
+            <Pager number={1}/>
         </FlexColumn>
     );
 }
