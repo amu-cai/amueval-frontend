@@ -13,14 +13,10 @@ const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
   border: 1px solid ${({theme}) => theme.colors.dark05};
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 
   p {
     width: 80%;
-  }
-
-  h3, p {
-    transition: color 0.3s ease-in-out;
   }
 
   * {
@@ -28,16 +24,7 @@ const ChallengeStyle = styled(FlexColumn)`
   }
 
   &:hover {
-    background-color: ${({theme}) => theme.colors.green};
-    border-color: ${({theme}) => theme.colors.white};
-
-    h3, p {
-      color: ${({theme}) => theme.colors.white};
-    }
-
-    .icon {
-      background-color: ${({theme}) => theme.colors.white};
-    }
+    transform: scale(1.05);
   }
 `;
 
