@@ -3,11 +3,6 @@ import {Container, FlexColumn, FlexRow, Grid, Svg} from "../../utils/containers"
 import {Body, H3} from "../../utils/fonts";
 import styled from "styled-components";
 import IconLabel from "./IconLabel";
-import metricIco from '../../assets/metric_ico.svg';
-import coinsIco from '../../assets/coins_ico.svg';
-import baselineIco from '../../assets/baseline_ico.svg';
-import clockIco from '../../assets/clock_ico.svg';
-import cupIco from '../../assets/cup_ico.svg';
 
 const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
@@ -60,19 +55,19 @@ const MiniChallenge = (props) => {
                 {props.describe}
             </Body>
             <IconsGrid>
-                <IconLabel size='24px' gap='8px' ico={metricIco}>
+                <IconLabel size='24px' gap='8px' type={'metric'}>
                     Haversine
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' ico={cupIco}>
+                <IconLabel size='24px' gap='8px' type={'bestScore'}>
                     79%
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' ico={clockIco}>
+                <IconLabel size='24px' gap='8px' type={'timeLeft'}>
                     6 days
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' ico={baselineIco}>
+                <IconLabel size='24px' gap='8px' type={'baseline'}>
                     55%
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' ico={coinsIco}>
+                <IconLabel size='24px' gap='8px' type={'prize'}>
                     150000 PLN
                 </IconLabel>
             </IconsGrid>
