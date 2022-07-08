@@ -1,0 +1,241 @@
+const challenges = [
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'image',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'tabular',
+    },
+    {
+        title: 'Example 1',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 2',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 3',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 4',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 5',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 6',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 7',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 8',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 9',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 10',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 11',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'image',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'tabular',
+    },
+    {
+        title: 'Example 1',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 2',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 3',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 4',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 5',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 6',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 7',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 8',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 9',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 10',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 11',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'image',
+    },
+    {
+        title: 'Challenging America geo prediction',
+        describe: 'Guess publication location for a piece of text',
+        type: 'tabular',
+    },
+    {
+        title: 'Example 1',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 2',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 3',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 4',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 5',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 6',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 7',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'text',
+    },
+    {
+        title: 'Example 8',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    },
+    {
+        title: 'Example 9',
+        describe: 'Guess publication location for a piece of text',
+        type: 'text',
+    },
+    {
+        title: 'Example 10',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'image',
+    },
+    {
+        title: 'Example 11',
+        describe: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis nunc odio, 
+        ut lacinia mi vestibulum eget. Donec non tellus lorem. Aliquam maximus semper accumsan.`,
+        type: 'tabular',
+    }
+]
+
+export default challenges;

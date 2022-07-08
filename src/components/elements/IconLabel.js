@@ -14,7 +14,8 @@ import imageIco from '../../assets/image_ico.svg';
 const HoverLabel = styled(Body)`
   position: absolute;
   top: -32px;
-  left: 0;
+  left: ${({type}) => (type === 'text' || type === 'image' || type === 'tabular') ? '-32px' : 0};
+  width: 100px;
   display: none;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,7 @@ const HoverLabel = styled(Body)`
 
 const renderHoverLabel = (type) => {
     const hoverLabel = (label) =>
-        <HoverLabel className='HoverLabel'>
+        <HoverLabel className='HoverLabel' type={type}>
             {label}
         </HoverLabel>;
 

@@ -17,29 +17,13 @@ const RightArrow = styled(Svg)`
 `;
 
 const Pager = (props) => {
-    const [page, setPage] = React.useState(1);
-
-    const nextPage = () => {
-        if (page !== props.pages) {
-            let newPage = page + 1;
-            setPage(newPage);
-        }
-    }
-
-    const previousPage = () => {
-        if (page !== 1) {
-            let newPage = page - 1;
-            setPage(newPage);
-        }
-    }
-
     return (
         <FlexRow gap='14px'>
-            <LeftArrow as='button' src={polygon} onClick={previousPage}
-                       backgroundColor={(page === 1) ? 'transparent' : theme.colors.dark}/>
-            <CircleNumber number={page}/>
-            <RightArrow as='button' src={polygon} onClick={nextPage}
-                        backgroundColor={(page === props.pages) ? 'transparent' : theme.colors.dark}/>
+            <LeftArrow as='button' src={polygon} onClick={props.previousPage}
+                       backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
+            <CircleNumber number={props.pageNr}/>
+            <RightArrow as='button' src={polygon} onClick={props.nextPage}
+                        backgroundColor={(props.pageNr === props.pages) ? 'transparent' : theme.colors.dark}/>
         </FlexRow>
     );
 }
