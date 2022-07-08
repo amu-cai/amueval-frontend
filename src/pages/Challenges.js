@@ -3,9 +3,6 @@ import {H1} from "../utils/fonts";
 import {FlexColumn, Grid} from "../utils/containers";
 import Search from "../components/elements/Search";
 import MiniChallenge from "../components/elements/MiniChallenge";
-import textIco from '../assets/text_ico.svg';
-import tabularIco from '../assets/tabular_ico.svg';
-import imageIco from '../assets/image_ico.svg';
 import Pager from "../components/elements/Pager";
 
 const Challenges = () => {
@@ -19,11 +16,11 @@ const Challenges = () => {
                 <Search/>
                 <FlexColumn width='100%'>
                     <Grid margin='32px 0' gridGap='32px 0'>
-                        <MiniChallenge title='Challenging America geo prediction' ico={textIco}
+                        <MiniChallenge title='Challenging America geo prediction' type={'text'}
                                        describe={`Guess publication location for a piece of text.`}/>
-                        <MiniChallenge title='Challenging America geo prediction' ico={tabularIco}
+                        <MiniChallenge title='Challenging America geo prediction' type={'image'}
                                        describe={`Guess publication location for a piece of text.`}/>
-                        <MiniChallenge title='Challenging America geo prediction' ico={imageIco}
+                        <MiniChallenge title='Challenging America geo prediction' type={'tabular'}
                                        describe={`Guess publication location for a piece of text.`}/>
                     </Grid>
                 </FlexColumn>

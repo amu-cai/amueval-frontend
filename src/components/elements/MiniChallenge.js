@@ -48,7 +48,7 @@ const MiniChallenge = (props) => {
                 <H3 as='h3' width='85%'>
                     {props.title}
                 </H3>
-                <Svg src={props.ico} width='30px' height='30px'/>
+                <IconLabel type={props.type} size='30px'/>
             </FlexRow>
             <Line/>
             <Body as='p' margin='0 0 14px 0'>

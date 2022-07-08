@@ -7,6 +7,9 @@ import baselineIco from '../../assets/baseline_ico.svg';
 import clockIco from '../../assets/clock_ico.svg';
 import cupIco from '../../assets/cup_ico.svg';
 import styled from "styled-components";
+import textIco from '../../assets/text_ico.svg';
+import tabularIco from '../../assets/tabular_ico.svg';
+import imageIco from '../../assets/image_ico.svg';
 
 const HoverLabel = styled(Body)`
   position: absolute;
@@ -22,27 +25,28 @@ const HoverLabel = styled(Body)`
 `;
 
 const renderHoverLabel = (type) => {
+    const hoverLabel = (label) =>
+        <HoverLabel className='HoverLabel'>
+            {label}
+        </HoverLabel>;
+
     switch (type) {
         case 'metric':
-            return <HoverLabel className='HoverLabel'>
-                metric
-            </HoverLabel>;
+            return hoverLabel('metric');
         case 'prize':
-            return <HoverLabel className='HoverLabel'>
-                prize
-            </HoverLabel>;
+            return hoverLabel('prize');
         case 'baseline':
-            return <HoverLabel className='HoverLabel'>
-                baseline
-            </HoverLabel>;
+            return hoverLabel('baseline');
         case 'timeLeft':
-            return <HoverLabel className='HoverLabel'>
-                time left
-            </HoverLabel>;
+            return hoverLabel('time left');
         case 'bestScore':
-            return <HoverLabel className='HoverLabel'>
-                best score
-            </HoverLabel>;
+            return hoverLabel('best score');
+        case 'text':
+            return hoverLabel('text data');
+        case 'image':
+            return hoverLabel('image data');
+        case 'tabular':
+            return hoverLabel('tabular data');
     }
 }
 
@@ -58,6 +62,12 @@ const renderIco = (type) => {
             return clockIco;
         case 'bestScore':
             return cupIco;
+        case 'text':
+            return textIco;
+        case 'image':
+            return imageIco;
+        case 'tabular':
+            return tabularIco;
     }
 }
 
@@ -76,9 +86,10 @@ const IconLabel = (props) => {
         <IconLabelStyle gap={props.gap}>
             <Svg width={props.size} height={props.size}
                  src={renderIco(props.type)}/>
-            <Medium as='p'>
-                {props.children}
-            </Medium>
+            {props.children ?
+                <Medium as='p'>
+                    {props.children}
+                </Medium> : ''}
             {renderHoverLabel(props.type)}
         </IconLabelStyle>
     );
