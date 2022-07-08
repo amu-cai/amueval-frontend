@@ -26,7 +26,7 @@ const Challenges = () => {
                                    describe={`Guess publication location for a piece of text.`}/>
                 </Grid>
             </FlexColumn>
-            <Pager number={1}/>
+            <Pager pages={5}/>
         </FlexColumn>
     );
 }
