@@ -17,14 +17,16 @@ const Challenges = () => {
                     Challenges
                 </H1>
                 <Search/>
-                <Grid margin='32px 0' gridGap='32px 0'>
-                    <MiniChallenge title='Challenging America geo prediction' ico={textIco}
-                                   describe={`Guess publication location for a piece of text.`}/>
-                    <MiniChallenge title='Challenging America geo prediction' ico={tabularIco}
-                                   describe={`Guess publication location for a piece of text.`}/>
-                    <MiniChallenge title='Challenging America geo prediction' ico={imageIco}
-                                   describe={`Guess publication location for a piece of text.`}/>
-                </Grid>
+                <FlexColumn width='100%'>
+                    <Grid margin='32px 0' gridGap='32px 0'>
+                        <MiniChallenge title='Challenging America geo prediction' ico={textIco}
+                                       describe={`Guess publication location for a piece of text.`}/>
+                        <MiniChallenge title='Challenging America geo prediction' ico={tabularIco}
+                                       describe={`Guess publication location for a piece of text.`}/>
+                        <MiniChallenge title='Challenging America geo prediction' ico={imageIco}
+                                       describe={`Guess publication location for a piece of text.`}/>
+                    </Grid>
+                </FlexColumn>
             </FlexColumn>
             <Pager pages={5}/>
         </FlexColumn>

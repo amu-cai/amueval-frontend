@@ -5,8 +5,7 @@ import {Medium} from "../../utils/fonts";
 const IconLabel = (props) => {
     return (
         <FlexRow gap={props.gap}>
-            <Svg className='icon'
-                 width={props.size} height={props.size}
+            <Svg width={props.size} height={props.size}
                  src={props.ico}/>
             <Medium as='p'>
                 {props.children}

@@ -30,7 +30,7 @@ const ChallengeStyle = styled(FlexColumn)`
 
 const Line = styled(Container)`
   height: 1px;
-  width: 80%;
+  width: 85%;
   background-color: ${({theme}) => theme.colors.dark05};
   margin-bottom: 14px;
 `;
@@ -49,13 +49,13 @@ const IconsGrid = styled(Grid)`
 const MiniChallenge = (props) => {
     return (
         <ChallengeStyle as='article' alignmentX='flex-start'>
-            <FlexRow margin='0 0 14px 0' gap='12px'>
-                <H3 as='h3' width='80%'>
+            <FlexRow margin='0 0 14px 0' gap='12px' width='100%' alignmentX='space-between'>
+                <H3 as='h3' width='85%'>
                     {props.title}
                 </H3>
-                <Svg className='icon' src={props.ico} width='30px' height='30px'/>
+                <Svg src={props.ico} width='30px' height='30px'/>
             </FlexRow>
-            <Line className='icon'/>
+            <Line/>
             <Body as='p' margin='0 0 14px 0'>
                 {props.describe}
             </Body>
