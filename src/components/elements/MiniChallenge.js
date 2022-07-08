@@ -56,19 +56,19 @@ const MiniChallenge = (props) => {
             </Body>
             <IconsGrid>
                 <IconLabel size='24px' gap='8px' type={'metric'}>
-                    Haversine
+                    {props.metric}
                 </IconLabel>
                 <IconLabel size='24px' gap='8px' type={'bestScore'}>
-                    79%
+                    {props.bestScore}
                 </IconLabel>
                 <IconLabel size='24px' gap='8px' type={'timeLeft'}>
-                    6 days
+                    {props.timeLeft}
                 </IconLabel>
                 <IconLabel size='24px' gap='8px' type={'baseline'}>
-                    55%
+                    {props.baseline}
                 </IconLabel>
                 <IconLabel size='24px' gap='8px' type={'prize'}>
-                    150000 PLN
+                    {props.prize}
                 </IconLabel>
             </IconsGrid>
         </ChallengeStyle>

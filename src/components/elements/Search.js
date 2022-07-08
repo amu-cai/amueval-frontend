@@ -31,11 +31,11 @@ const SearchStyle = styled(FlexRow)`
   }
 `;
 
-const Search = () => {
+const Search = (props) => {
     return (
         <SearchStyle>
             <Svg src={loopIco}/>
-            <Body as='input'/>
+            <Body as='input' onChange={(event) => props.searchQueryHandler(event)}/>
             <Svg as='button' src={filtersIco}/>
         </SearchStyle>
     );
