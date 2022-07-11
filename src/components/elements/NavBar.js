@@ -29,22 +29,22 @@ const MenuButton = styled(Container)`
 `;
 
 const NavBar = () => {
-    const [navMenuTranslateY, setNavMenuTranslateY] = React.useState('-100vh');
+    const [navMenuTranslateY, setNavMenuTranslateY] = React.useState('calc(-100vh - 42px)');
 
     const toggleNavMenu = () => {
-        if (navMenuTranslateY === '-100vh')
+        if (navMenuTranslateY === 'calc(-100vh - 42px)')
             setNavMenuTranslateY('0');
         else
-            setNavMenuTranslateY('-100vh');
+            setNavMenuTranslateY('calc(-100vh - 42px)');
     }
 
     return (
         <NavBarStyle as='header'>
             <FlexRow height='100%' alignmentX='space-between' as='nav'>
                 <Logo/>
-                <MenuButton as='button' onClick={() => toggleNavMenu()}/>
+                <MenuButton as='button' onClick={toggleNavMenu}/>
             </FlexRow>
-            <MobileNavMenu translateY={navMenuTranslateY}/>
+            <MobileNavMenu translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>
         </NavBarStyle>
     );
 }

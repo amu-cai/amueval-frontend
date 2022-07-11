@@ -8,12 +8,12 @@ import challengesResp from "../prototypeData/challenges";
 import {ELEMENTS_PER_PAGE} from "../utils/globals";
 
 const Challenges = () => {
-    const calcPages = (challenges) => {
-        return Math.ceil(challenges.length / ELEMENTS_PER_PAGE);
-    }
-
     const [pageNr, setPageNr] = React.useState(1);
     const [challenges, setChallenges] = React.useState(challengesResp);
+
+    const calcPages = () => {
+        return Math.ceil(challenges.length / ELEMENTS_PER_PAGE);
+    }
 
     const searchQueryHandler = (event) => {
         let searchQuery = event.target.value;
@@ -47,7 +47,6 @@ const Challenges = () => {
     }
 
     const renderChallenges = () => {
-
         const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
         return (
             challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
@@ -75,7 +74,7 @@ const Challenges = () => {
                     </Grid>
                 </FlexColumn>
             </FlexColumn>
-            <Pager pageNr={pageNr} pages={calcPages(challenges)}
+            <Pager pageNr={pageNr} pages={calcPages()}
                    nextPage={nextPage} previousPage={previousPage}/>
         </FlexColumn>
     );
