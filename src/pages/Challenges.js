@@ -53,7 +53,7 @@ const Challenges = () => {
         return (
             challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
                 return (
-                    <MiniChallenge key={index} title={challenge.title} type={challenge.type}
+                    <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
                                    describe={challenge.describe} metric={challenge.metric}
                                    bestScore={challenge.bestScore} baseline={challenge.baseline}
                                    prize={challenge.prize} timeLeft={challenge.timeLeft}/>

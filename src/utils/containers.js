@@ -51,6 +51,7 @@ const Svg = styled(Container)`
   mask: url(${({src}) => src}) no-repeat center;
   width: ${({width}) => width ? width : '16px'};
   height: ${({height}) => height ? height : '16px'};
+  transform: rotate(${({rotate}) => rotate ? rotate : '0'});
 `;
 
 const TransBack = styled(FlexRow)`
