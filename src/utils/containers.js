@@ -52,4 +52,15 @@ const Svg = styled(Container)`
   height: ${({height}) => height ? height : '16px'};
 `;
 
-export {Container, FlexRow, FlexColumn, Grid, Svg};
+const TransBack = styled(FlexRow)`
+  position: fixed;
+  top: ${({top}) => top ? top : '0'};
+  left: ${({left}) => left ? left : '0'};
+  width: 100%;
+  height: 100vh;
+  transition: ${({transition}) => transition ? transition : 'opacity'} 0.3s ease-in-out;
+  background-color: ${({theme, backgroundColor}) => backgroundColor ? backgroundColor : 'transparent'};
+  z-index: 2;
+`;
+
+export {Container, FlexRow, FlexColumn, Grid, Svg, TransBack};

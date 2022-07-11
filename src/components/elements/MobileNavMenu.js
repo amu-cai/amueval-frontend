@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, FlexColumn, FlexRow, Svg} from "../../utils/containers";
+import {FlexColumn, FlexRow, Svg, TransBack} from "../../utils/containers";
 import {Menu} from "../../utils/fonts";
 import loginIco from '../../assets/login_ico.svg';
 import registerIco from '../../assets/register_ico.svg';
@@ -44,21 +44,10 @@ const MobileNavMenuStyle = styled(FlexColumn)`
   }
 `;
 
-const TransBack = styled(Container)`
-  position: fixed;
-  top: 42px;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  transition: transform 0.3s ease-in-out;
-`
-
 const MobileNavMenu = (props) => {
     return (
-        <TransBack translateY={props.translateY} onClick={props.toggleNavMenu}>
+        <TransBack transition='transform' alignmentX='flex-start' top='42px'
+                   translateY={props.translateY} onClick={props.toggleNavMenu}>
             <MobileNavMenuStyle as='ul'>
                 <FlexRow as={Link} to='/' gap='16px'>
                     <Svg width='16px' height='16px' src={loginIco}/>

@@ -36,7 +36,7 @@ const Search = (props) => {
         <SearchStyle>
             <Svg src={loopIco}/>
             <Body as='input' onChange={(event) => props.searchQueryHandler(event)}/>
-            <Svg as='button' src={filtersIco}/>
+            <Svg as='button' src={filtersIco} onClick={props.toggleFiltersMenu}/>
         </SearchStyle>
     );
 }
