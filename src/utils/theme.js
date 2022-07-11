@@ -9,7 +9,6 @@ const theme = {
     navShadow: '0 1px 2px rgba(52, 52, 52, 0.25)',
     buttonShadow: '0 4px 4px rgba(52, 52, 52, 0.25)',
     filtersShadow: '-4px 4px 4px rgba(52, 52, 52, 0.25)'
-
 };
 
 export default theme;

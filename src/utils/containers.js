@@ -17,9 +17,10 @@ const Container = styled.div`
   border: ${({border}) => border ? border : 'none'};
   cursor: ${({cursor}) => cursor ? cursor : 'auto'};
   display: ${({display}) => display ? display : 'block'};
-  opacity: ${({opacity}) => opacity ? opacity : '1'};
   outline: ${({outline}) => outline ? outline : 'none'};
   text-decoration: ${({textDecoration}) => textDecoration ? textDecoration : 'none'};
+  text-transform: ${({textTransform}) => textTransform ? textTransform : 'none'};
+  opacity: ${({opacity}) => opacity ? opacity : '1'};
   transform: translate(${({translateX}) => translateX ? translateX : 0}, ${({translateY}) => translateY ? translateY : 0});
 `;
 

@@ -6,7 +6,7 @@ import MiniChallenge from "../components/elements/MiniChallenge";
 import Pager from "../components/elements/Pager";
 import challengesResp from "../prototypeData/challenges";
 import {ELEMENTS_PER_PAGE} from "../utils/globals";
-import Filters from "../components/elements/Filters";
+import FiltersMenu from "../components/elements/FiltersMenu";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -69,8 +69,8 @@ const Challenges = () => {
 
     return (
         <>
-            <Filters translateX={filtersMenu ? '0' : '100vw'} opacity={filtersMenu ? '1' : '0'}
-                     toggleFiltersMenu={toggleFiltersMenu}/>
+            <FiltersMenu translateX={filtersMenu ? '0' : '100vw'} opacity={filtersMenu ? '1' : '0'}
+                         toggleFiltersMenu={toggleFiltersMenu}/>
             <FlexColumn as='main' alignmentY='flex-start' width='100%'
                         minHeight='100vh' padding='90px 0 32px 0'>
                 <FlexColumn alignmentX='flex-start' width='80%'>

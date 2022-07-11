@@ -13,6 +13,11 @@ const ButtonStyle = styled(Medium)`
   color: ${({theme, color}) => color ? color : theme.colors.white};
   box-shadow: ${({theme}) => theme.buttonShadow};
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.15);
+  }
 `;
 
 const Button = (props) => {
