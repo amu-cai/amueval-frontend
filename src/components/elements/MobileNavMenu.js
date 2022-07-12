@@ -6,6 +6,7 @@ import registerIco from '../../assets/register_ico.svg';
 import cupIco from '../../assets/cup_ico.svg';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {CHALLENGES_PAGE} from "../../utils/globals";
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -61,7 +62,7 @@ const MobileNavMenu = (props) => {
                         Register
                     </Menu>
                 </FlexRow>
-                <FlexRow as={Link} to='/challenges' gap='16px'>
+                <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
                     <Svg width='16px' height='16px' src={cupIco}/>
                     <Menu as='li'>
                         Challenges

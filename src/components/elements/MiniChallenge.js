@@ -3,12 +3,16 @@ import {Container, FlexColumn, FlexRow, Grid} from "../../utils/containers";
 import {Body, H3} from "../../utils/fonts";
 import styled from "styled-components";
 import IconLabel from "./IconLabel";
+import {Link} from "react-router-dom";
+import {CHALLENGE_PAGE} from "../../utils/globals";
 
 const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
   border: 1px solid ${({theme}) => theme.colors.dark05};
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  position: relative;
+  max-width: 420px;
 
   p {
     width: 80%;
@@ -20,6 +24,14 @@ const ChallengeStyle = styled(FlexColumn)`
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -78,6 +90,7 @@ const MiniChallenge = (props) => {
                     {props.prize}
                 </IconLabel> : ''}
             </IconsGrid>
+            <Container as={Link} to={`${CHALLENGE_PAGE}/${props.name}`}/>
         </ChallengeStyle>
     );
 }

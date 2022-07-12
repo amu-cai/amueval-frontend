@@ -9,8 +9,8 @@ const Csi = () => {
                 Center for artificial intelligence
             </H2>
             <Body as='p' margin='0 0 16px 0'>
-                <Medium display='inline'>Gonito.net</Medium> belongs to the
-                <Medium display='inline'>&nbsp;Artificial Intelligence Centre (CSI)&nbsp;</Medium>
+                <Medium as='span' display='inline'>Gonito.net</Medium> belongs to the
+                <Medium as='span' display='inline'>&nbsp;Artificial Intelligence Centre (CSI)&nbsp;</Medium>
                 at Adam Mickiewicz University (UAM) which conducts research on the development of artificial
                 intelligence, carries out scientific and research and development projects, integrates the research
                 of scientists from various departments of Adam Mickiewicz University and outside it - from leading

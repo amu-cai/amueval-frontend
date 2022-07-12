@@ -9,7 +9,8 @@ const _renderChallenges = (pageNr, challenges) => {
                 <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
                                description={challenge.description} metric={challenge.mainMetric}
                                bestScore={challenge.bestScore} baseline={challenge.baseline}
-                               prize={challenge.prize} deadline={challenge.deadline}/>
+                               prize={challenge.prize} deadline={challenge.deadline}
+                               name={challenge.name}/>
             );
         })
     )
