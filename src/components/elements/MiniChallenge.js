@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, FlexColumn, FlexRow, Grid, Svg} from "../../utils/containers";
+import {Container, FlexColumn, FlexRow, Grid} from "../../utils/containers";
 import {Body, H3} from "../../utils/fonts";
 import styled from "styled-components";
 import IconLabel from "./IconLabel";
@@ -42,6 +42,13 @@ const IconsGrid = styled(Grid)`
 `;
 
 const MiniChallenge = (props) => {
+
+    const renderDescription = (description) => {
+        if (description.length <= 200)
+            return description;
+        return `${description.slice(0, 100)}...`
+    }
+
     return (
         <ChallengeStyle as='article' alignmentX='flex-start'>
             <FlexRow margin='0 0 14px 0' gap='12px' width='100%' alignmentX='space-between'>
@@ -52,23 +59,23 @@ const MiniChallenge = (props) => {
             </FlexRow>
             <Line/>
             <Body as='p' margin='0 0 14px 0'>
-                {props.describe}
+                {props.description ? renderDescription(props.description) : 'xxx'}
             </Body>
             <IconsGrid>
-                <IconLabel size='24px' gap='8px' type={'metric'}>
-                    {props.metric}
+                <IconLabel size='24px' gap='8px' type='metric'>
+                    {props.metric ? props.metric : 'xxx'}
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' type={'bestScore'}>
-                    {props.bestScore}
+                <IconLabel size='24px' gap='8px' type='bestScore'>
+                    {props.bestScore ? props.bestScore : 'xxx'}
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' type={'timeLeft'}>
-                    {props.timeLeft}
+                <IconLabel size='24px' gap='8px' type='deadline'>
+                    {props.deadline ? props.deadline.slice(0, 10) : 'xxx'}
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' type={'baseline'}>
-                    {props.baseline}
+                <IconLabel size='24px' gap='8px' type='baseline'>
+                    {props.baseline ? props.baseline : 'xxx'}
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' type={'prize'}>
-                    {props.prize}
+                <IconLabel size='24px' gap='8px' type='prize'>
+                    {props.prize ? props.prize : 'xxx'}
                 </IconLabel>
             </IconsGrid>
         </ChallengeStyle>

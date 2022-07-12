@@ -38,8 +38,8 @@ const renderHoverLabel = (type) => {
             return hoverLabel('prize');
         case 'baseline':
             return hoverLabel('baseline');
-        case 'timeLeft':
-            return hoverLabel('time left');
+        case 'deadline':
+            return hoverLabel('deadline');
         case 'bestScore':
             return hoverLabel('best score');
         case 'text':
@@ -48,6 +48,8 @@ const renderHoverLabel = (type) => {
             return hoverLabel('image data');
         case 'tabular':
             return hoverLabel('tabular data');
+        default:
+            return '';
     }
 }
 
@@ -59,7 +61,7 @@ const renderIco = (type) => {
             return coinsIco;
         case 'baseline':
             return baselineIco;
-        case 'timeLeft':
+        case 'deadline':
             return clockIco;
         case 'bestScore':
             return cupIco;
@@ -69,6 +71,8 @@ const renderIco = (type) => {
             return imageIco;
         case 'tabular':
             return tabularIco;
+        default:
+            return '';
     }
 }
 

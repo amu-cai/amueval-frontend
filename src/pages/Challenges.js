@@ -4,18 +4,32 @@ import {FlexColumn, Grid} from "../utils/containers";
 import Search from "../components/elements/Search";
 import MiniChallenge from "../components/elements/MiniChallenge";
 import Pager from "../components/elements/Pager";
-import challengesResp from "../prototypeData/challenges";
-import {ELEMENTS_PER_PAGE} from "../utils/globals";
+import {ELEMENTS_PER_PAGE, API} from "../utils/globals";
 import FiltersMenu from "../components/elements/FiltersMenu";
+import _searchQueryHandler from "./_searchQueryHandler";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
-    const [challenges, setChallenges] = React.useState(challengesResp);
+    const [challengesFromAPI, setChallengesFromAPI] = React.useState([]);
+    const [challenges, setChallenges] = React.useState([]);
     const [filtersMenu, setFiltersMenu] = React.useState(false);
     const [sortBy, setSortBy] = React.useState(0);
     const [status, setStatus] = React.useState(0);
     const [challengeType, setChallengeType] = React.useState(0);
     const [commercial, setCommercial] = React.useState(0);
+
+    React.useEffect(() => {
+        challengesRequest();
+    }, []);
+
+    const challengesRequest = () => {
+        fetch(`${API}/list-challenges`)
+            .then(response => response.json())
+            .then(data => {
+                setChallengesFromAPI(data);
+                setChallenges(data);
+            });
+    }
 
     const sortByHandler = (value) => {
         setSortBy(value);
@@ -38,20 +52,7 @@ const Challenges = () => {
     }
 
     const searchQueryHandler = (event) => {
-        let searchQuery = event.target.value;
-        let challengesToRender = [];
-        setPageNr(1);
-        if (searchQuery === '')
-            setChallenges(challengesResp)
-        else {
-            for (let challenge of challengesResp) {
-                let str = `${challenge.title} ${challenge.describe} ${challenge.type} ${challenge.metric} 
-                ${challenge.bestScore} ${challenge.timeLeft} ${challenge.baseline} ${challenge.prize}`;
-                if (str.toLowerCase().includes(searchQuery.toLowerCase()))
-                    challengesToRender.push(challenge);
-            }
-            setChallenges(challengesToRender);
-        }
+        _searchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);
     }
 
     const nextPage = () => {
@@ -74,9 +75,9 @@ const Challenges = () => {
             challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
                 return (
                     <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
-                                   describe={challenge.describe} metric={challenge.metric}
+                                   description={challenge.description} metric={challenge.mainMetric}
                                    bestScore={challenge.bestScore} baseline={challenge.baseline}
-                                   prize={challenge.prize} timeLeft={challenge.timeLeft}/>
+                                   prize={challenge.prize} deadline={challenge.deadline}/>
                 );
             })
         )
