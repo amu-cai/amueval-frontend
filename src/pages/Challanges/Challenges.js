@@ -1,12 +1,13 @@
 import React from "react";
-import {H1} from "../utils/fonts";
-import {FlexColumn, Grid} from "../utils/containers";
-import Search from "../components/elements/Search";
-import MiniChallenge from "../components/elements/MiniChallenge";
-import Pager from "../components/elements/Pager";
-import {ELEMENTS_PER_PAGE, API} from "../utils/globals";
-import FiltersMenu from "../components/elements/FiltersMenu";
+import {H1} from "../../utils/fonts";
+import {FlexColumn, Grid} from "../../utils/containers";
+import Search from "../../components/elements/Search";
+import Pager from "../../components/elements/Pager";
+import {ELEMENTS_PER_PAGE} from "../../utils/globals";
+import FiltersMenu from "../../components/elements/FiltersMenu";
 import _searchQueryHandler from "./_searchQueryHandler";
+import _challengesRequest from "./_challengesRequest";
+import _renderChallenges from "./_renderChallenges";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -23,12 +24,7 @@ const Challenges = () => {
     }, []);
 
     const challengesRequest = () => {
-        fetch(`${API}/list-challenges`)
-            .then(response => response.json())
-            .then(data => {
-                setChallengesFromAPI(data);
-                setChallenges(data);
-            });
+        _challengesRequest(setChallengesFromAPI, setChallenges);
     }
 
     const sortByHandler = (value) => {
@@ -70,17 +66,7 @@ const Challenges = () => {
     }
 
     const renderChallenges = () => {
-        const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
-        return (
-            challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
-                return (
-                    <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
-                                   description={challenge.description} metric={challenge.mainMetric}
-                                   bestScore={challenge.bestScore} baseline={challenge.baseline}
-                                   prize={challenge.prize} deadline={challenge.deadline}/>
-                );
-            })
-        )
+        return _renderChallenges(pageNr, challenges);
     }
 
     const toggleFiltersMenu = () => {

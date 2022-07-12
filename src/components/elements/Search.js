@@ -23,6 +23,11 @@ const SearchStyle = styled(FlexRow)`
     margin-left: 12px;
     width: 14px;
     height: 20px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.25);
+    }
   }
 
   input {

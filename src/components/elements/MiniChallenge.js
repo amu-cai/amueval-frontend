@@ -74,9 +74,9 @@ const MiniChallenge = (props) => {
                 <IconLabel size='24px' gap='8px' type='baseline'>
                     {props.baseline ? props.baseline : 'xxx'}
                 </IconLabel>
-                <IconLabel size='24px' gap='8px' type='prize'>
-                    {props.prize ? props.prize : 'xxx'}
-                </IconLabel>
+                {props.prize ? <IconLabel size='24px' gap='8px' type='prize'>
+                    {props.prize}
+                </IconLabel> : ''}
             </IconsGrid>
         </ChallengeStyle>
     );

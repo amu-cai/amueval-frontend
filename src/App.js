@@ -1,7 +1,7 @@
-import styled, {ThemeProvider} from 'styled-components';
+import {ThemeProvider} from 'styled-components';
 import theme from "./utils/theme";
 import LandingPage from "./pages/LandingPage";
-import Challenges from "./pages/Challenges";
+import Challenges from "./pages/Challanges/Challenges";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NavBar from "./components/elements/NavBar";
 import Footer from "./components/sections/Footer";

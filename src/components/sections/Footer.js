@@ -2,7 +2,6 @@ import React from "react";
 import {Container, FlexRow} from "../../utils/containers";
 import styled from "styled-components";
 import {Medium} from "../../utils/fonts";
-import {Link} from "react-router-dom";
 
 const FooterStyle = styled(FlexRow)`
   width: 100%;
@@ -12,7 +11,7 @@ const FooterStyle = styled(FlexRow)`
   align-items: center;
   background-color: ${({theme}) => theme.colors.green};
 
-  * {
+  p, a {
     color: ${({theme}) => theme.colors.white}
   }
 
