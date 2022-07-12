@@ -10,12 +10,14 @@ const FilterBy = (props) => {
         return (
             props.options.map((option, index) => {
                 return (
-                    <Filter key={`filter_option-${index}`}>
-                        <Body>
+                    <Filter key={`filter_option-${index}`} active={props.active}
+                            option={props.option} handler={props.handler}
+                            id={`${props.header}-${option.name}-${index}`} name={props.header} index={index}>
+                        <Body as='p'>
                             {option.name}
                         </Body>
                         {option.sort ?
-                            <Svg src={arrow} rotate={option.rotate ? option.rotate : '0'}
+                            <Svg as='span' src={arrow} rotate={option.rotate ? option.rotate : '0'}
                                  margin={option.rotate ? '2px 0 0 0' : '0 0 2px 0'}/>
                             : ''}
                     </Filter>
@@ -25,8 +27,8 @@ const FilterBy = (props) => {
     }
 
     return (
-        <FlexColumn width='200px' alignmentX='flex-start' gap='12px'>
-            <Medium as='p' textTransform='uppercase'>
+        <FlexColumn as='fieldset' width='220px' alignmentX='flex-start'>
+            <Medium as='legend' textTransform='uppercase' margin='0 0 12px 0'>
                 {props.header}
             </Medium>
             <Grid gridTemplateColumns='auto auto' gridGap='12px'>

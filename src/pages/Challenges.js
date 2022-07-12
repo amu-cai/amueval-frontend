@@ -12,6 +12,26 @@ const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
     const [challenges, setChallenges] = React.useState(challengesResp);
     const [filtersMenu, setFiltersMenu] = React.useState(false);
+    const [sortBy, setSortBy] = React.useState(0);
+    const [status, setStatus] = React.useState(0);
+    const [challengeType, setChallengeType] = React.useState(0);
+    const [commercial, setCommercial] = React.useState(0);
+
+    const sortByHandler = (value) => {
+        setSortBy(value);
+    }
+
+    const statusHandler = (value) => {
+        setStatus(value)
+    }
+
+    const challengeTypeHandler = (value) => {
+        setChallengeType(value);
+    }
+
+    const commercialHandler = (value) => {
+        setCommercial(value);
+    }
 
     const calcPages = () => {
         return Math.ceil(challenges.length / ELEMENTS_PER_PAGE);
@@ -70,7 +90,10 @@ const Challenges = () => {
     return (
         <>
             <FiltersMenu translateX={filtersMenu ? '0' : '100vw'} opacity={filtersMenu ? '1' : '0'}
-                         toggleFiltersMenu={toggleFiltersMenu}/>
+                         toggleFiltersMenu={toggleFiltersMenu}
+                         sortByHandler={sortByHandler} statusHandler={statusHandler}
+                         challengeTypeHandler={challengeTypeHandler} commercialHandler={commercialHandler}
+                         sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
             <FlexColumn as='main' alignmentY='flex-start' width='100%'
                         minHeight='100vh' padding='90px 0 32px 0'>
                 <FlexColumn alignmentX='flex-start' width='80%'>

@@ -10,8 +10,15 @@ const FilterStyle = styled(FlexRow)`
   border: 1px solid ${({theme}) => theme.colors.dark};
   box-shadow: ${({theme}) => theme.shadow};
   cursor: pointer;
-  color: ${({theme, active}) => active ? theme.colors.white : theme.colors.dark};
-  background-color: ${({theme, active}) => active ? theme.colors.darj : theme.colors.white};
+  background-color: ${({theme, active}) => active ? theme.colors.dark : theme.colors.white};
+
+  p {
+    color: ${({theme, active}) => active ? theme.colors.white : theme.colors.dark};
+  }
+
+  span {
+    background-color: ${({theme, active}) => active ? theme.colors.white : theme.colors.dark};
+  }
 
   * {
     cursor: pointer;
@@ -19,10 +26,21 @@ const FilterStyle = styled(FlexRow)`
 `;
 
 const Filter = (props) => {
+
+    const onCheckHandler = (e) => {
+        if (e.target.checked)
+            props.handler(Number(e.target.value));
+    }
+
     return (
-        <FilterStyle as='button' active={props.active}>
-            {props.children}
-        </FilterStyle>
+        <>
+            <FilterStyle as='label' htmlFor={props.id}
+                         active={props.option === props.index}>
+                {props.children}
+            </FilterStyle>
+            <FlexRow display='none' as='input' type='radio' value={props.index}
+                     id={props.id} name={props.name} onChange={(e) => onCheckHandler(e)}/>
+        </>
     );
 }
 
