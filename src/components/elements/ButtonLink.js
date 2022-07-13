@@ -16,6 +16,13 @@ const ButtonLinkStyle = styled(Label)`
   &:hover {
     transform: scale(1.15);
   }
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+  }
 `;
 
 const ButtonLink = (props) => {
