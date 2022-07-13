@@ -51,6 +51,7 @@ const Svg = styled(Container)`
   width: ${({width}) => width ? width : '16px'};
   height: ${({height}) => height ? height : '16px'};
   transform: rotate(${({rotate}) => rotate ? rotate : '0'});
+  mask-size: ${({size}) => size ? size : 'auto'};
 `;
 
 const TransBack = styled(FlexRow)`
@@ -64,4 +65,11 @@ const TransBack = styled(FlexRow)`
   z-index: 2;
 `;
 
-export {Container, FlexRow, FlexColumn, Grid, Svg, TransBack};
+const ImageBackground = styled(FlexColumn)`
+  background-size: cover;
+  background-position: center;
+  background-image: url(${({image}) => image});
+  background-repeat: no-repeat;
+`;
+
+export {Container, FlexRow, FlexColumn, Grid, Svg, TransBack, ImageBackground};
