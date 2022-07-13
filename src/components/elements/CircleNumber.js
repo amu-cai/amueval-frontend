@@ -14,6 +14,12 @@ const CircleNumberStyle = styled(Container)`
   font-weight: 500;
   width: 24px;
   height: 24px;
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+  }
 `
 
 const CircleNumber = (props) => {

@@ -61,12 +61,12 @@ const TransBack = styled(FlexRow)`
   width: 100%;
   height: 100vh;
   transition: ${({transition}) => transition ? transition : 'opacity'} 0.3s ease-in-out;
-  background-color: ${({theme, backgroundColor}) => backgroundColor ? backgroundColor : 'transparent'};
+  background-color: ${({backgroundColor}) => backgroundColor ? backgroundColor : 'transparent'};
   z-index: 2;
 `;
 
 const ImageBackground = styled(FlexColumn)`
-  background-size: cover;
+  background-size: ${({size}) => size ? size : 'cover'};
   background-position: center;
   background-image: url(${({image}) => image});
   background-repeat: no-repeat;
