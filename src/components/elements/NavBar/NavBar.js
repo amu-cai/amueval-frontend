@@ -42,7 +42,7 @@ const NavBar = () => {
             <FlexRow height='100%' alignmentX='space-between' as='nav'>
                 <Logo/>
                 <MenuButton as='button' onClick={toggleNavMenu}/>
-                <FlexRow as='ul' gap='32px'>
+                <FlexRow as='ul' className='ul-desktop' gap='32px'>
                     <FlexRow as={Link} to='/' gap='16px'>
                         <Svg width='16px' height='16px' src={loginIco}/>
                         <Menu as='li'>

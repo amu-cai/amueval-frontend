@@ -12,7 +12,7 @@ const NavBarStyle = styled(Container)`
   padding: 0 10px;
   z-index: 2;
 
-  ul {
+  .ul-desktop {
     display: none;
   }
 
@@ -20,7 +20,7 @@ const NavBarStyle = styled(Container)`
     height: 48px;
     padding: 0 16px;
 
-    ul {
+    .ul-desktop {
       display: flex;
 
       a {

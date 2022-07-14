@@ -18,7 +18,7 @@ const MobileNavMenuStyle = styled(FlexColumn)`
   left: 0;
   width: 100%;
   align-items: flex-start;
-  z-index: 2;
+  z-index: 3;
 
   a {
     cursor: pointer;
