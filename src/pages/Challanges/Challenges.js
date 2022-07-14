@@ -1,6 +1,6 @@
 import React from "react";
-import {H1} from "../../utils/fonts";
-import {FlexColumn} from "../../utils/containers";
+import {Body, H1} from "../../utils/fonts";
+import {FlexColumn, FlexRow, Svg} from "../../utils/containers";
 import Search from "../../components/elements/Search";
 import Pager from "../../components/elements/Pager";
 import {ELEMENTS_PER_PAGE} from "../../utils/globals";
@@ -10,6 +10,7 @@ import _challengesRequest from "./_challengesRequest";
 import _renderChallenges from "./_renderChallenges";
 import Media from "react-media";
 import theme from "../../utils/theme";
+import cupIco from '../../assets/cup_ico.svg';
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -112,10 +113,19 @@ const Challenges = () => {
                 <FlexColumn as='main' alignmentY='flex-start' width='100%'
                             minHeight='100vh' padding='112px 0 82px 310px'>
                     <FlexColumn alignmentX='flex-start'>
-                        <H1 as='h1' margin='0 0 32px 0'>
-                            Challenges
-                        </H1>
-                        <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                        <FlexRow width='100%' gap='32px'>
+                            <FlexColumn alignmentX='flex-start' gap='32px' width='75%' maxWidth='720px'>
+                                <H1 as='h1'>
+                                    Challenges
+                                </H1>
+                                <Body margin='0 0 12px 0' maxWidth='400px'>
+                                    Increase your machine learning skills by competing in our exciting challenges.
+                                </Body>
+                                <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                            </FlexColumn>
+                            <Svg src={cupIco} size='contain' width='25%'
+                                 height='160px' backgroundColor={theme.colors.green}/>
+                        </FlexRow>
                         <FlexColumn width='100%'>
                             {renderChallenges()}
                         </FlexColumn>
