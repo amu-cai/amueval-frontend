@@ -25,10 +25,11 @@ const Motivation = () => {
                     {
                         content.map((paragraph, index) => {
                             return (
-                                <FlexRow key={`motivation-${index}`} as='li' gap='12px' alignmentY='flex-start'>
+                                <FlexRow key={`motivation-${index}`} as='li' gap='12px' alignmentX='flex-start'
+                                         alignmentY='flex-start'>
                                     <Svg src={cubeIcon} width='14px' height='14px' margin='4px 0 0 0'
                                          backgroundColor={theme.colors.green}/>
-                                    <Body as='p'>
+                                    <Body as='p' width='90%'>
                                         {paragraph}
                                     </Body>
                                 </FlexRow>
