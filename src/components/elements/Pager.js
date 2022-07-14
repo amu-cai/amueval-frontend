@@ -5,26 +5,46 @@ import polygon from '../../assets/polygon.svg';
 import styled from "styled-components";
 import theme from "../../utils/theme";
 
+const PagerStyle = styled(FlexRow)`
+  gap: 14px;
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    gap: 20px;
+  }
+`;
+
 const LeftArrow = styled(Svg)`
   background-color: ${({backgroundColor}) => backgroundColor};
   cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
+  width: 10px;
+  height: 10px;
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 12px;
+    height: 12px;
+  }
 `;
 
 const RightArrow = styled(Svg)`
-  display: ${({display}) => display};
+  background-color: ${({backgroundColor}) => backgroundColor};
   transform: rotate(180deg);
   cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
+  width: 10px;
+  height: 10px;
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 12px;
+    height: 12px;
+  }
 `;
 
 const Pager = (props) => {
     return (
-        <FlexRow gap='14px'>
-            <LeftArrow as='button' src={polygon} onClick={props.previousPage}
+        <PagerStyle>
+            <LeftArrow as='button' src={polygon} onClick={props.previousPage} size='cover'
                        backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
             <CircleNumber number={props.pageNr}/>
-            <RightArrow as='button' src={polygon} onClick={props.nextPage}
+            <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
                         backgroundColor={(props.pageNr === props.pages) ? 'transparent' : theme.colors.dark}/>
-        </FlexRow>
+        </PagerStyle>
     );
 }
 

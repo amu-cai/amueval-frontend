@@ -19,6 +19,10 @@ const FooterStyle = styled(FlexRow)`
     text-decoration: underline;
     cursor: pointer;
   }
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    height: 72px;
+  }
 `;
 
 const Footer = () => {

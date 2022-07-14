@@ -1,6 +1,6 @@
 import React from "react";
 import {H1} from "../../utils/fonts";
-import {FlexColumn, Grid} from "../../utils/containers";
+import {FlexColumn} from "../../utils/containers";
 import Search from "../../components/elements/Search";
 import Pager from "../../components/elements/Pager";
 import {ELEMENTS_PER_PAGE} from "../../utils/globals";
@@ -8,6 +8,8 @@ import FiltersMenu from "../../components/elements/FiltersMenu";
 import _searchQueryHandler from "./_searchQueryHandler";
 import _challengesRequest from "./_challengesRequest";
 import _renderChallenges from "./_renderChallenges";
+import Media from "react-media";
+import theme from "../../utils/theme";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -74,29 +76,59 @@ const Challenges = () => {
         setFiltersMenu(newFiltersMenu);
     }
 
-    return (
-        <>
-            <FiltersMenu translateX={filtersMenu ? '0' : '100vw'} opacity={filtersMenu ? '1' : '0'}
-                         toggleFiltersMenu={toggleFiltersMenu}
-                         sortByHandler={sortByHandler} statusHandler={statusHandler}
-                         challengeTypeHandler={challengeTypeHandler} commercialHandler={commercialHandler}
-                         sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
+    const mobileRender = () => {
+        return (
+            <>
+                <FiltersMenu translateX={filtersMenu ? '0' : '100vw'} opacity={filtersMenu ? '1' : '0'}
+                             toggleFiltersMenu={toggleFiltersMenu}
+                             sortByHandler={sortByHandler} statusHandler={statusHandler}
+                             challengeTypeHandler={challengeTypeHandler} commercialHandler={commercialHandler}
+                             sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
+                <FlexColumn as='main' alignmentY='flex-start' width='100%'
+                            minHeight='100vh' padding='90px 0 32px 0'>
+                    <FlexColumn alignmentX='flex-start' width='80%'>
+                        <H1 as='h1' margin='0 0 20px 0'>
+                            Challenges
+                        </H1>
+                        <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                        <FlexColumn width='100%'>
+                            {renderChallenges()}
+                        </FlexColumn>
+                    </FlexColumn>
+                    <Pager pageNr={pageNr} pages={calcPages()}
+                           nextPage={nextPage} previousPage={previousPage}/>
+                </FlexColumn>
+            </>
+        );
+    }
+
+    const desktopRender = () => {
+        return (
             <FlexColumn as='main' alignmentY='flex-start' width='100%'
-                        minHeight='100vh' padding='90px 0 32px 0'>
-                <FlexColumn alignmentX='flex-start' width='80%'>
-                    <H1 as='h1' margin='0 0 20px 0'>
+                        minHeight='100vh' padding='112px 0 82px 0'>
+                <FlexColumn alignmentX='flex-start'>
+                    <H1 as='h1' margin='0 0 32px 0'>
                         Challenges
                     </H1>
                     <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
                     <FlexColumn width='100%'>
-                        <Grid margin='32px 0' gridGap='32px 0'>
-                            {renderChallenges()}
-                        </Grid>
+                        {renderChallenges()}
                     </FlexColumn>
                 </FlexColumn>
                 <Pager pageNr={pageNr} pages={calcPages()}
                        nextPage={nextPage} previousPage={previousPage}/>
             </FlexColumn>
+        );
+    }
+
+    return (
+        <>
+            <Media query={theme.mobile}>
+                {mobileRender()}
+            </Media>
+            <Media query={theme.desktop}>
+                {desktopRender()}
+            </Media>
         </>
     );
 }
