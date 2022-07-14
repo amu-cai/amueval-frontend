@@ -10,6 +10,8 @@ const FooterStyle = styled(FlexRow)`
   justify-content: center;
   align-items: center;
   background-color: ${({theme}) => theme.colors.green};
+  z-index: 1000;
+  position: relative;
 
   p, a {
     color: ${({theme}) => theme.colors.white}

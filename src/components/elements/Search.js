@@ -28,6 +28,10 @@ const SearchStyle = styled(FlexRow)`
     &:hover {
       transform: scale(1.25);
     }
+
+    @media (min-width: ${({theme}) => theme.overMobile}) {
+      display: none;
+    }
   }
 
   input {

@@ -5,6 +5,7 @@ import theme from "../../../utils/theme";
 import styled from "styled-components";
 import FilterBy from "../../sections/FilterBy";
 import filterOptions from "./filterOptions";
+import Media from "react-media";
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
@@ -16,17 +17,29 @@ const FiltersMenuStyle = styled(FlexColumn)`
   max-height: 650px;
   justify-content: flex-start;
   padding: 14px 16px 14px 24px;
-  box-shadow: ${({theme}) => theme.filtersShadow};
+  box-shadow: ${({theme}) => theme.filtersShadowLeft};
   background-color: ${({theme}) => theme.colors.white};
   transition: transform 0.5s ease-in-out;
   z-index: 3;
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 310px;
+    max-height: none;
+    top: 50px;
+    right: auto;
+    left: 0;
+    height: 100vh;
+    box-shadow: ${({theme}) => theme.filtersShadowRight};
+    padding: 32px 32px 64px;
+  }
 `;
 
 const FiltersMenu = (props) => {
     return (
         <>
             <TransBack backgroundColor={theme.colors.dark03} translateX={props.translateX}
-                       opacity={props.opacity} onClick={props.toggleFiltersMenu}/>
+                       opacity={props.opacity} onClick={props.toggleFiltersMenu}
+                       display={props.transBackDisplay ? props.transBackDisplay : 'flex'}/>
             <FiltersMenuStyle translateX={props.translateX} gap='16px'>
                 <FilterBy header='Sort by' options={filterOptions[0]}
                           handler={props.sortByHandler} option={props.sortBy}/>
@@ -36,15 +49,25 @@ const FiltersMenu = (props) => {
                           handler={props.challengeTypeHandler} option={props.challengeType}/>
                 <FilterBy header='Commercial' options={filterOptions[3]}
                           handler={props.commercialHandler} option={props.commercial}/>
-                <FlexRow gap='16px' margin='14px 0 0 0'>
-                    <Button as='button' width='64px' height='28px'>
-                        Done
-                    </Button>
-                    <Button as='button' width='64px' height='28px'
-                            backgroundColor={theme.colors.dark}>
-                        Clear
-                    </Button>
-                </FlexRow>
+                <Media query={theme.mobile}>
+                    <FlexRow gap='16px' margin='14px 0 0 0'>
+                        <Button as='button' width='64px' height='28px'>
+                            Done
+                        </Button>
+                        <Button as='button' width='64px' height='28px'
+                                backgroundColor={theme.colors.dark}>
+                            Reset
+                        </Button>
+                    </FlexRow>
+                </Media>
+                <Media query={theme.desktop}>
+                    <FlexRow margin='20px 0 0 0' width='94%' alignmentX='flex-start'>
+                        <Button as='button' width='72px' height='34px'
+                                backgroundColor={theme.colors.green}>
+                            Reset
+                        </Button>
+                    </FlexRow>
+                </Media>
             </FiltersMenuStyle>
         </>
     );

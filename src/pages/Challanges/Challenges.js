@@ -104,20 +104,26 @@ const Challenges = () => {
 
     const desktopRender = () => {
         return (
-            <FlexColumn as='main' alignmentY='flex-start' width='100%'
-                        minHeight='100vh' padding='112px 0 82px 0'>
-                <FlexColumn alignmentX='flex-start'>
-                    <H1 as='h1' margin='0 0 32px 0'>
-                        Challenges
-                    </H1>
-                    <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
-                    <FlexColumn width='100%'>
-                        {renderChallenges()}
+            <>
+                <FiltersMenu toggleFiltersMenu={toggleFiltersMenu} transBackDisplay='none'
+                             sortByHandler={sortByHandler} statusHandler={statusHandler}
+                             challengeTypeHandler={challengeTypeHandler} commercialHandler={commercialHandler}
+                             sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
+                <FlexColumn as='main' alignmentY='flex-start' width='100%'
+                            minHeight='100vh' padding='112px 0 82px 310px'>
+                    <FlexColumn alignmentX='flex-start'>
+                        <H1 as='h1' margin='0 0 32px 0'>
+                            Challenges
+                        </H1>
+                        <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                        <FlexColumn width='100%'>
+                            {renderChallenges()}
+                        </FlexColumn>
                     </FlexColumn>
+                    <Pager pageNr={pageNr} pages={calcPages()}
+                           nextPage={nextPage} previousPage={previousPage}/>
                 </FlexColumn>
-                <Pager pageNr={pageNr} pages={calcPages()}
-                       nextPage={nextPage} previousPage={previousPage}/>
-            </FlexColumn>
+            </>
         );
     }
 

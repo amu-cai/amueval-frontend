@@ -18,6 +18,12 @@ const LeftArrow = styled(Svg)`
   cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
   width: 10px;
   height: 10px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
   @media (min-width: ${({theme}) => theme.overMobile}) {
     width: 12px;
     height: 12px;
@@ -30,6 +36,12 @@ const RightArrow = styled(Svg)`
   cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
   width: 10px;
   height: 10px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: rotate(180deg) scale(1.1);
+  }
+
   @media (min-width: ${({theme}) => theme.overMobile}) {
     width: 12px;
     height: 12px;
