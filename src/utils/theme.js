@@ -8,8 +8,8 @@ const theme = {
     shadow: '1px 2px 4px rgba(52, 52, 52, 0.25)',
     navShadow: '0 1px 2px rgba(52, 52, 52, 0.25)',
     buttonShadow: '0 4px 4px rgba(52, 52, 52, 0.25)',
-    filtersShadowLeft: '-4px 4px 4px rgba(52, 52, 52, 0.25)',
-    filtersShadowRight: '2px 2px 4px rgba(52, 52, 52, 0.25)'
+    shadowLeft: '-4px 4px 4px rgba(52, 52, 52, 0.25)',
+    shadowRight: '2px 2px 4px rgba(52, 52, 52, 0.25)'
 };
 
 export default theme;

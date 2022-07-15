@@ -17,7 +17,7 @@ const FiltersMenuStyle = styled(FlexColumn)`
   max-height: 650px;
   justify-content: flex-start;
   padding: 14px 16px 14px 24px;
-  box-shadow: ${({theme}) => theme.filtersShadowLeft};
+  box-shadow: ${({theme}) => theme.shadowLeft};
   background-color: ${({theme}) => theme.colors.white};
   transition: transform 0.5s ease-in-out;
   z-index: 3;
@@ -32,8 +32,7 @@ const FiltersMenuStyle = styled(FlexColumn)`
     top: 50px;
     right: auto;
     left: 0;
-    height: 100vh;
-    box-shadow: ${({theme}) => theme.filtersShadowRight};
+    box-shadow: ${({theme}) => theme.shadowRight};
     padding: 32px 32px 64px;
   }
 `;

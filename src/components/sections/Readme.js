@@ -4,8 +4,8 @@ import {H2} from "../../utils/fonts";
 
 const Readme = () => {
     return (
-        <FlexColumn padding='24px'>
-            <H2>
+        <FlexColumn padding='24px' as='section'>
+            <H2 as='h2'>
                 Readme
             </H2>
         </FlexColumn>

@@ -67,24 +67,21 @@ const Challenge = () => {
     const desktopRender = () => {
         return (
             <>
-                <DesktopChallengeMenu/>
+                <DesktopChallengeMenu setSection={setSection}/>
                 <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 0 64px 310px'>
-                    <FlexRow gap='32px' margin='0 0 32px 0'>
-                        <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='628px'>
-                            <H1>
+                    <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
+                        <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>
+                            <H1 as='h1'>
                                 {getChallenge().title}
                             </H1>
-                            <Medium>
+                            <Medium as='p'>
                                 {MINI_DESCRIPTION_RENDER(getChallenge().description)}
                             </Medium>
                         </FlexColumn>
                         <Svg src={getChallenge().type ? RENDER_ICO(getChallenge().type) : textIco}
-                             width='120px'
-                             height='120px'
-                             size='cover'/>
+                             width='120px' height='120px' size='contain'/>
                     </FlexRow>
-
-                    <Container width='55%' minWidth='600px' height='1px' backgroundColor={theme.colors.dark}/>
+                    <Container width='55%' height='1px' backgroundColor={theme.colors.dark}/>
                     {sectionRender()}
                 </FlexColumn>
             </>

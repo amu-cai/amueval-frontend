@@ -2,7 +2,7 @@ import React from "react";
 import {Container, FlexColumn, FlexRow, Grid} from "../../utils/containers";
 import {Body, H3} from "../../utils/fonts";
 import styled from "styled-components";
-import IconLabel from "./IconLabel";
+import IconLabel from "../elements/IconLabel";
 import {Link} from "react-router-dom";
 import {CHALLENGE_PAGE, MINI_DESCRIPTION_RENDER} from "../../utils/globals";
 import theme from "../../utils/theme";
