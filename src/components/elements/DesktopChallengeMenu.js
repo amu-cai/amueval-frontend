@@ -24,7 +24,7 @@ const Option = styled(FlexColumn)`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({theme}) => theme.colors.green};
+    background-color: ${({theme}) => theme.colors.green05};
   }
 `;
 
