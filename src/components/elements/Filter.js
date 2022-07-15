@@ -11,6 +11,11 @@ const FilterStyle = styled(FlexRow)`
   box-shadow: ${({theme}) => theme.shadow};
   cursor: pointer;
   background-color: ${({theme, active}) => active ? theme.colors.dark : theme.colors.white};
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   p {
     color: ${({theme, active}) => active ? theme.colors.white : theme.colors.dark};

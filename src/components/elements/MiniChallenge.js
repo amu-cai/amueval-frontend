@@ -4,7 +4,7 @@ import {Body, H3} from "../../utils/fonts";
 import styled from "styled-components";
 import IconLabel from "./IconLabel";
 import {Link} from "react-router-dom";
-import {CHALLENGE_PAGE, MINI_DESCRIPTION_LENGTH} from "../../utils/globals";
+import {CHALLENGE_PAGE, MINI_DESCRIPTION_RENDER} from "../../utils/globals";
 import theme from "../../utils/theme";
 
 const ChallengeStyle = styled(FlexColumn)`
@@ -51,12 +51,6 @@ const IconsGrid = styled(Grid)`
 `;
 
 const MiniChallenge = (props) => {
-    const renderDescription = (description) => {
-        if (description.length <= MINI_DESCRIPTION_LENGTH)
-            return description;
-        return `${description.slice(0, MINI_DESCRIPTION_LENGTH)}...`
-    }
-
     return (
         <ChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.name}`}>
             <FlexColumn as='article'>
@@ -68,7 +62,7 @@ const MiniChallenge = (props) => {
                 </FlexRow>
                 <Container margin='0 0 14px 0' width='85%' height='1px' backgroundColor={theme.colors.dark05}/>
                 <Body as='p' margin='0 0 14px 0'>
-                    {props.description ? renderDescription(props.description) : 'xxx'}
+                    {props.description ? MINI_DESCRIPTION_RENDER(props.description) : 'xxx'}
                 </Body>
                 <IconsGrid>
                     <IconLabel size='24px' gap='8px' type='metric'>

@@ -1,7 +1,7 @@
 import React from "react";
-import {Container, FlexColumn, FlexRow} from "../utils/containers";
+import {Container, FlexColumn, FlexRow, Svg} from "../utils/containers";
 import {useParams} from "react-router-dom";
-import {H1} from "../utils/fonts";
+import {H1, Medium} from "../utils/fonts";
 import getChallenges from "../api/getChallenges";
 import theme from "../utils/theme";
 import MobileChallengeMenu from "../components/elements/MobileChallengeMenu";
@@ -10,6 +10,10 @@ import Readme from "../components/sections/Readme";
 import HowTo from "../components/sections/HowTo";
 import MyEntries from "../components/sections/MyEntries";
 import Submit from "../components/sections/Submit";
+import Media from "react-media";
+import DesktopChallengeMenu from "../components/elements/DesktopChallengeMenu";
+import {MINI_DESCRIPTION_RENDER, RENDER_ICO} from "../utils/globals";
+import textIco from "../assets/text_ico.svg";
 
 const Challenge = () => {
     const challengeName = useParams().challengeId;
@@ -47,15 +51,55 @@ const Challenge = () => {
         }
     }
 
+    const mobileRender = () => {
+        return (
+            <FlexColumn minHeight='100vh' gap='12px' alignmentY='flex-start' padding='66px 0 0 0'>
+                <H1 margin='0 0 8px 0'>
+                    {getChallenge().title}
+                </H1>
+                <MobileChallengeMenu setSection={setSection}/>
+                <Container width='75%' height='1px' backgroundColor={theme.colors.dark}/>
+                {sectionRender()}
+            </FlexColumn>
+        );
+    }
+
+    const desktopRender = () => {
+        return (
+            <>
+                <DesktopChallengeMenu/>
+                <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 0 64px 310px'>
+                    <FlexRow gap='32px' margin='0 0 32px 0'>
+                        <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='628px'>
+                            <H1>
+                                {getChallenge().title}
+                            </H1>
+                            <Medium>
+                                {MINI_DESCRIPTION_RENDER(getChallenge().description)}
+                            </Medium>
+                        </FlexColumn>
+                        <Svg src={getChallenge().type ? RENDER_ICO(getChallenge().type) : textIco}
+                             width='120px'
+                             height='120px'
+                             size='cover'/>
+                    </FlexRow>
+
+                    <Container width='55%' minWidth='600px' height='1px' backgroundColor={theme.colors.dark}/>
+                    {sectionRender()}
+                </FlexColumn>
+            </>
+        );
+    }
+
     return (
-        <FlexColumn minHeight='100vh' gap='12px' alignmentY='flex-start' padding='66px 0 0 0'>
-            <H1 margin='0 0 8px 0'>
-                {getChallenge().title}
-            </H1>
-            <MobileChallengeMenu setSection={setSection}/>
-            <Container width='75%' height='1px' backgroundColor={theme.colors.dark}/>
-            {sectionRender()}
-        </FlexColumn>
+        <>
+            <Media query={theme.mobile}>
+                {mobileRender()}
+            </Media>
+            <Media query={theme.desktop}>
+                {desktopRender()}
+            </Media>
+        </>
     );
 }
 

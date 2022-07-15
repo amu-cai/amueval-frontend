@@ -1,15 +1,8 @@
 import React from "react";
 import {FlexRow, Svg} from "../../utils/containers";
 import {Body, Medium} from "../../utils/fonts";
-import metricIco from '../../assets/metric_ico.svg';
-import coinsIco from '../../assets/coins_ico.svg';
-import baselineIco from '../../assets/baseline_ico.svg';
-import clockIco from '../../assets/clock_ico.svg';
-import cupIco from '../../assets/cup_ico.svg';
 import styled from "styled-components";
-import textIco from '../../assets/text_ico.svg';
-import tabularIco from '../../assets/tabular_ico.svg';
-import imageIco from '../../assets/image_ico.svg';
+import {RENDER_ICO} from "../../utils/globals";
 
 const HoverLabel = styled(Body)`
   position: absolute;
@@ -53,29 +46,6 @@ const renderHoverLabel = (type) => {
     }
 }
 
-const renderIco = (type) => {
-    switch (type) {
-        case 'metric':
-            return metricIco;
-        case 'prize':
-            return coinsIco;
-        case 'baseline':
-            return baselineIco;
-        case 'deadline':
-            return clockIco;
-        case 'bestScore':
-            return cupIco;
-        case 'text':
-            return textIco;
-        case 'image':
-            return imageIco;
-        case 'tabular':
-            return tabularIco;
-        default:
-            return '';
-    }
-}
-
 const IconLabelStyle = styled(FlexRow)`
   position: relative;
 
@@ -90,7 +60,7 @@ const IconLabel = (props) => {
     return (
         <IconLabelStyle gap={props.gap}>
             <Svg width={props.size} height={props.size}
-                 src={renderIco(props.type)}/>
+                 src={RENDER_ICO(props.type)}/>
             {props.children ?
                 <Medium as='p'>
                     {props.children}
