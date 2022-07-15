@@ -5,6 +5,7 @@ import styled from "styled-components";
 import IconLabel from "./IconLabel";
 import {Link} from "react-router-dom";
 import {CHALLENGE_PAGE, MINI_DESCRIPTION_LENGTH} from "../../utils/globals";
+import theme from "../../utils/theme";
 
 const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
@@ -38,13 +39,6 @@ const ChallengeStyle = styled(FlexColumn)`
   }
 `;
 
-const Line = styled(Container)`
-  height: 1px;
-  width: 85%;
-  background-color: ${({theme}) => theme.colors.dark05};
-  margin-bottom: 14px;
-`;
-
 const IconsGrid = styled(Grid)`
   width: 100%;
   grid-gap: 14px;
@@ -72,7 +66,7 @@ const MiniChallenge = (props) => {
                     </H3>
                     {props.type ? <IconLabel type={props.type} size='30px'/> : 'xxx'}
                 </FlexRow>
-                <Line/>
+                <Container margin='0 0 14px 0' width='85%' height='1px' backgroundColor={theme.colors.dark05}/>
                 <Body as='p' margin='0 0 14px 0'>
                     {props.description ? renderDescription(props.description) : 'xxx'}
                 </Body>

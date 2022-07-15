@@ -6,11 +6,11 @@ import Pager from "../../components/elements/Pager";
 import {ELEMENTS_PER_PAGE} from "../../utils/globals";
 import FiltersMenu from "../../components/elements/FiltersMenu";
 import _searchQueryHandler from "./_searchQueryHandler";
-import _challengesRequest from "./_challengesRequest";
 import _renderChallenges from "./_renderChallenges";
 import Media from "react-media";
 import theme from "../../utils/theme";
 import cupIco from '../../assets/cup_ico.svg';
+import getChallenges from "../../api/getChallenges";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -27,7 +27,8 @@ const Challenges = () => {
     }, []);
 
     const challengesRequest = () => {
-        _challengesRequest(setChallengesFromAPI, setChallenges);
+        getChallenges(setChallengesFromAPI);
+        getChallenges(setChallenges);
     }
 
     const sortByHandler = (value) => {
