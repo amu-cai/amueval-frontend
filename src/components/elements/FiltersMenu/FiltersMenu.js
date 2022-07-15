@@ -11,7 +11,7 @@ const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
   top: 0;
   right: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 260px;
   height: 100vh;
   max-height: 650px;
@@ -21,6 +21,10 @@ const FiltersMenuStyle = styled(FlexColumn)`
   background-color: ${({theme}) => theme.colors.white};
   transition: transform 0.5s ease-in-out;
   z-index: 3;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
     width: 310px;
