@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  position: ${({position}) => position ? position : 'static'};
   padding: ${({padding}) => padding ? padding : '0'};
   margin: ${({margin}) => margin ? margin : '0'};
   width: ${({width}) => width ? width : 'auto'};
