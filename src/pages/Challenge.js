@@ -18,7 +18,7 @@ import textIco from "../assets/text_ico.svg";
 const Challenge = () => {
     const challengeName = useParams().challengeId;
     const [challenges, setChallenges] = React.useState([]);
-    const [section, setSection] = React.useState([0]);
+    const [section, setSection] = React.useState(0);
 
     React.useEffect(() => {
         getChallenges(setChallenges);
@@ -67,7 +67,7 @@ const Challenge = () => {
     const desktopRender = () => {
         return (
             <>
-                <DesktopChallengeMenu setSection={setSection}/>
+                <DesktopChallengeMenu setSection={setSection} section={section}/>
                 <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 0 64px 310px'>
                     <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
                         <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>

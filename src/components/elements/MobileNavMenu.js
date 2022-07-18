@@ -50,10 +50,10 @@ const MobileNavMenu = (props) => {
         <TransBack transition='transform' alignmentX='flex-start' top='42px'
                    translateY={props.translateY} onClick={props.toggleNavMenu}>
             <MobileNavMenuStyle as='ul'>
-                <FlexRow as={Link} to='/' gap='16px'>
-                    <Svg width='16px' height='16px' src={loginIco}/>
+                <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
+                    <Svg width='16px' height='16px' src={cupIco}/>
                     <Menu as='li'>
-                        Sign in
+                        Challenges
                     </Menu>
                 </FlexRow>
                 <FlexRow as={Link} to='/' gap='16px'>
@@ -62,10 +62,10 @@ const MobileNavMenu = (props) => {
                         Register
                     </Menu>
                 </FlexRow>
-                <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
-                    <Svg width='16px' height='16px' src={cupIco}/>
+                <FlexRow as={Link} to='/' gap='16px'>
+                    <Svg width='16px' height='16px' src={loginIco}/>
                     <Menu as='li'>
-                        Challenges
+                        Sign in
                     </Menu>
                 </FlexRow>
             </MobileNavMenuStyle>

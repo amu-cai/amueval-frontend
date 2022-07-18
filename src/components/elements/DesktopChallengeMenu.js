@@ -22,6 +22,7 @@ const Option = styled(FlexColumn)`
   width: 100%;
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
+  background-color: ${({theme, active}) => active ? theme.colors.green05 : theme.colors.white};
 
   * {
     cursor: pointer;
@@ -39,6 +40,7 @@ const DesktopChallengeMenu = (props) => {
             {options.map((option, index) => {
                 return (
                     <Option key={`challenge_menu_option-${index}`} as='button'
+                            active={index === props.section}
                             onClick={() => props.setSection(index)}>
                         <H3 textTransform='uppercase'>
                             {option}

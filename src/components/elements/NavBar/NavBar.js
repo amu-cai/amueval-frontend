@@ -43,10 +43,10 @@ const NavBar = () => {
                 <Logo/>
                 <MenuButton as='button' onClick={toggleNavMenu}/>
                 <FlexRow as='ul' className='ul-desktop' gap='32px'>
-                    <FlexRow as={Link} to='/' gap='16px'>
-                        <Svg width='16px' height='16px' src={loginIco}/>
+                    <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
+                        <Svg width='16px' height='16px' src={cupIco}/>
                         <Menu as='li'>
-                            Sign in
+                            Challenges
                         </Menu>
                     </FlexRow>
                     <FlexRow as={Link} to='/' gap='16px'>
@@ -55,10 +55,10 @@ const NavBar = () => {
                             Register
                         </Menu>
                     </FlexRow>
-                    <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
-                        <Svg width='16px' height='16px' src={cupIco}/>
+                    <FlexRow as={Link} to='/' gap='16px'>
+                        <Svg width='16px' height='16px' src={loginIco}/>
                         <Menu as='li'>
-                            Challenges
+                            Sign in
                         </Menu>
                     </FlexRow>
                 </FlexRow>
