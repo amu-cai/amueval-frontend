@@ -4,15 +4,15 @@ import theme from "../../../utils/theme";
 import _mobileRender from "./_mobileRender";
 import _desktopRender from "./_desktopRender";
 
-const Leaderboard = () => {
+const Leaderboard = (props) => {
     const [variant, setVariant] = React.useState(0);
 
     const mobileRender = () => {
-        return _mobileRender(variant, setVariant);
+        return _mobileRender(variant, setVariant, props.challengeName);
     }
 
     const desktopRender = () => {
-        return _desktopRender(variant, setVariant);
+        return _desktopRender(variant, setVariant, props.challengeName);
     }
 
     return (

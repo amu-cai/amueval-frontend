@@ -1,6 +1,7 @@
 import {FlexColumn, FlexRow} from "../../../utils/containers";
 import {H2} from "../../../utils/fonts";
 import styled from "styled-components";
+import Table from "../../elements/Table";
 
 const BoardVariantMobile = styled(FlexRow)`
   transition: color, background-color 0.3s ease-in-out;
@@ -25,9 +26,9 @@ const BoardVariantMobile = styled(FlexRow)`
   }
 `;
 
-const mobileRender = (variant, setVariant) => {
+const mobileRender = (variant, setVariant, challengeName) => {
     return (
-        <FlexColumn padding='24px' as='section'>
+        <FlexColumn padding='24px 12px' as='section'>
             <H2 as='h2' margin='0 0 12px 0'>
                 Leaderboard
             </H2>
@@ -39,6 +40,7 @@ const mobileRender = (variant, setVariant) => {
                     By metric
                 </BoardVariantMobile>
             </FlexRow>
+            <Table challengeName={challengeName}/>
         </FlexColumn>
     );
 }

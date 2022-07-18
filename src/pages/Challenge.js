@@ -37,7 +37,7 @@ const Challenge = () => {
     const sectionRender = () => {
         switch (section) {
             case 0:
-                return <Leaderboard/>
+                return <Leaderboard challengeName={challengeName}/>
             case 1:
                 return <Readme/>
             case 2:
