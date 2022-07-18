@@ -54,7 +54,7 @@ const Challenge = () => {
     const mobileRender = () => {
         return (
             <FlexColumn minHeight='100vh' gap='12px' alignmentY='flex-start' padding='66px 0 0 0'>
-                <H1 margin='0 0 8px 0' textAlign='center'>
+                <H1 as='h1' margin='0 0 8px 0' textAlign='center'>
                     {getChallenge().title}
                 </H1>
                 <MobileChallengeMenu setSection={setSection} section={section}/>
