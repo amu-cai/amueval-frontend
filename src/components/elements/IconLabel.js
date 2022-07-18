@@ -18,7 +18,16 @@ const HoverLabel = styled(Body)`
   color: ${({theme}) => theme.colors.white};
 `;
 
-const renderHoverLabel = (type) => {
+const renderDeadlineTime = (time) => {
+    if (time) {
+        const date = time.slice(0, 10);
+        const hour = time.slice(11, 16);
+        return `${date} ${hour}`;
+    }
+    return '';
+}
+
+const renderHoverLabel = (type, time) => {
     const hoverLabel = (label) =>
         <HoverLabel className='HoverLabel' type={type}>
             {label}
@@ -32,7 +41,7 @@ const renderHoverLabel = (type) => {
         case 'baseline':
             return hoverLabel('baseline');
         case 'deadline':
-            return hoverLabel('deadline');
+            return hoverLabel(`deadline ${renderDeadlineTime(time)}`);
         case 'bestScore':
             return hoverLabel('best score');
         case 'text':
@@ -65,7 +74,7 @@ const IconLabel = (props) => {
                 <Medium as='p'>
                     {props.children}
                 </Medium> : ''}
-            {renderHoverLabel(props.type)}
+            {renderHoverLabel(props.type, props.time)}
         </IconLabelStyle>
     );
 }

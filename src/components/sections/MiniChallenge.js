@@ -71,7 +71,7 @@ const MiniChallenge = (props) => {
                     <IconLabel size='24px' gap='8px' type='bestScore'>
                         {props.bestScore ? props.bestScore : 'xxx'}
                     </IconLabel>
-                    <IconLabel size='24px' gap='8px' type='deadline'>
+                    <IconLabel size='24px' gap='8px' type='deadline' time={props.deadline}>
                         {props.deadline ? props.deadline.slice(0, 10) : 'xxx'}
                     </IconLabel>
                     <IconLabel size='24px' gap='8px' type='baseline'>

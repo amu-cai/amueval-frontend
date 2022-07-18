@@ -23,6 +23,10 @@ const Option = styled(FlexColumn)`
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
 
+  * {
+    cursor: pointer;
+  }
+
   &:hover {
     background-color: ${({theme}) => theme.colors.green05};
   }
