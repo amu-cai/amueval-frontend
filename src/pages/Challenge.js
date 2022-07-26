@@ -66,7 +66,7 @@ const Challenge = () => {
                                 {challenge.title}
                             </H1>
                             <Medium as='p'>
-                                {MINI_DESCRIPTION_RENDER(challenge.description)}
+                                {challenge.description}
                             </Medium>
                         </FlexColumn>
                         <Svg src={challenge.type ? RENDER_ICO(challenge.type) : textIco}
