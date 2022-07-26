@@ -29,13 +29,14 @@ const Challenge = () => {
             case 0:
                 return <Leaderboard challengeName={challengeName}/>
             case 1:
-                return <Readme/>
+                return <Readme challengeName={challengeName} metric={challenge.mainMetric}
+                               description={challenge.description} deadline={challenge.deadline}/>
             case 2:
-                return <HowTo/>
+                return <HowTo challengeName={challengeName}/>
             case 3:
-                return <MyEntries/>
+                return <MyEntries challengeName={challengeName}/>
             case 4:
-                return <Submit/>
+                return <Submit challengeName={challengeName}/>
             default:
                 return <Leaderboard challengeName={challengeName}/>
         }

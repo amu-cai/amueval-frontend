@@ -2,7 +2,7 @@ import React from "react";
 import {FlexRow, Svg} from "../../utils/containers";
 import {Body, Medium} from "../../utils/fonts";
 import styled from "styled-components";
-import {RENDER_ICO} from "../../utils/globals";
+import {RENDER_DEADLINE_TIME, RENDER_ICO} from "../../utils/globals";
 
 const HoverLabel = styled(Body)`
   position: absolute;
@@ -18,15 +18,6 @@ const HoverLabel = styled(Body)`
   color: ${({theme}) => theme.colors.white};
 `;
 
-const renderDeadlineTime = (time) => {
-    if (time) {
-        const date = time.slice(0, 10);
-        const hour = time.slice(11, 16);
-        return `${date} ${hour}`;
-    }
-    return '';
-}
-
 const renderHoverLabel = (type, time) => {
     const hoverLabel = (label) =>
         <HoverLabel className='HoverLabel' type={type}>
@@ -41,7 +32,7 @@ const renderHoverLabel = (type, time) => {
         case 'baseline':
             return hoverLabel('baseline');
         case 'deadline':
-            return hoverLabel(`deadline ${renderDeadlineTime(time)}`);
+            return hoverLabel(`deadline ${RENDER_DEADLINE_TIME(time)}`);
         case 'bestScore':
             return hoverLabel('best score');
         case 'text':

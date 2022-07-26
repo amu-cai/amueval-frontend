@@ -49,6 +49,15 @@ const CALC_PAGES = (objects) => {
     return Math.ceil(objects.length / ELEMENTS_PER_PAGE);
 }
 
+const RENDER_DEADLINE_TIME = (time) => {
+    if (time) {
+        const date = time.slice(0, 10);
+        const hour = time.slice(11, 16);
+        return `${date} ${hour}`;
+    }
+    return '';
+}
+
 export {
     ELEMENTS_PER_PAGE,
     API,
@@ -57,5 +66,6 @@ export {
     MINI_DESCRIPTION_LENGTH,
     MINI_DESCRIPTION_RENDER,
     RENDER_ICO,
-    CALC_PAGES
+    CALC_PAGES,
+    RENDER_DEADLINE_TIME
 };
