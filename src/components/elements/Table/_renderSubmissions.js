@@ -16,27 +16,28 @@ const _renderSubmissions = (pageNr, submissions) => {
     const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
     if (submissions) {
         return (
-            <FlexColumn as='tbody'>
+            <FlexColumn as='tbody' width='100%'>
                 {submissions.slice(n, n + ELEMENTS_PER_PAGE).map((submission, index) => {
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`} gridTemplateColumns='1fr 3fr 3fr 1fr 1fr'
-                              gridGap='10px' margin='10px 0 0 0' position='relative'>
-                            <Line as='td'/>
+                              gridGap='10px' margin='10px 0 0 0' position='relative' width='100%'>
                             <Body as='td'>
                                 {index + n + 1}
                             </Body>
                             <Body as='td'>
-                                {submission.submitter}
+                                {submission.submitter ? submission.submitter : '[anonymized]'}
                             </Body>
                             <Body as='td'>
-                                {submission.when.slice(11, 16)} {submission.when.slice(0, 10)}
+                                {submission.when ? `${submission.when.slice(11, 16)} ${submission.when.slice(0, 10)}`
+                                    : 'xxx'}
                             </Body>
                             <Body as='td'>
-                                {submission.evaluations[0].score}
+                                {submission.evaluations[0] ? submission.evaluations[0].score : 'xxx'}
                             </Body>
                             <Body as='td' textAlign='right' padding='0 2px 0 0'>
-                                {submission.version.length}
+                                {submission.version ? submission.version.length : 1}
                             </Body>
+                            <Line as='td'/>
                         </Grid>
                     );
                 })}
