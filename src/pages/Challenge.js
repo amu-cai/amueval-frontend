@@ -11,7 +11,7 @@ import MyEntries from "../components/sections/MyEntries";
 import Submit from "../components/sections/Submit";
 import Media from "react-media";
 import DesktopChallengeMenu from "../components/elements/DesktopChallengeMenu";
-import {MINI_DESCRIPTION_RENDER, RENDER_ICO} from "../utils/globals";
+import {RENDER_ICO} from "../utils/globals";
 import textIco from "../assets/text_ico.svg";
 import getChallengeInfo from "../api/getChallengeInfo";
 
@@ -22,7 +22,7 @@ const Challenge = () => {
 
     React.useEffect(() => {
         getChallengeInfo(setChallenge, challengeName);
-    }, []);
+    }, [challengeName]);
 
     const sectionRender = () => {
         switch (section) {

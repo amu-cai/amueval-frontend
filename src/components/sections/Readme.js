@@ -11,13 +11,53 @@ import coinsIco from '../../assets/coins_ico.svg';
 import textIco from '../../assets/text_ico.svg';
 import {RENDER_DEADLINE_TIME} from "../../utils/globals";
 import getChallengeFullDescription from "../../api/getChallengeFullDescription";
+import {markdown} from "markdown";
+import styled from "styled-components";
+
+const ReadmeStyle = styled(Body)`
+  h3 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+    @media (min-width: ${({theme}) => theme.overMobile}) {
+      font-size: 24px;
+      line-height: 26px;
+    }
+  }
+
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+
+    @media (min-width: ${({theme}) => theme.overMobile}) {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+`;
 
 const Readme = (props) => {
     const [fullDescription, setFullDescription] = React.useState('');
 
     React.useEffect(() => {
         getChallengeFullDescription(setFullDescription, props.challengeName);
-    }, []);
+    }, [props.challengeName]);
+
+    const parseMarkdownResponse = (response) => {
+        let result = markdown.toHTML(response);
+        let regex = /<h1>[^<>]*<\/h1>/g;
+        result = result.replace(regex, '');
+        regex = /<h2>/g;
+        result = result.replace(regex, '<h3>');
+        regex = /<\/h2>/g;
+        result = result.replace(regex, '</h3>');
+        return result;
+    }
 
     const mobileRender = () => {
         return (
@@ -71,13 +111,14 @@ const Readme = (props) => {
                         </FlexRow>
                     </FlexColumn>
                 </FlexColumn>
-                <FlexColumn gap='16px' alignmentX='flex-start' maxWidth='260px'>
+                <FlexColumn alignmentX='flex-start' maxWidth='260px'>
                     <H2 as='h2'>
                         Description
                     </H2>
-                    <Body as='p'>
-                        {fullDescription ? fullDescription : props.description}
-                    </Body>
+                    <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
+                        __html: fullDescription
+                            ? parseMarkdownResponse(fullDescription) : props.description
+                    }}/>
                 </FlexColumn>
                 <FlexColumn gap='16px' alignmentX='flex-start' maxWidth='260px'>
                     <H2 as='h2'>
@@ -153,13 +194,14 @@ const Readme = (props) => {
                         </FlexRow>
                     </FlexColumn>
                 </FlexColumn>
-                <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
+                <FlexColumn alignmentX='flex-start' width='80%' maxWidth='1000px'>
                     <H2 as='h2'>
                         Description
                     </H2>
-                    <Body as='p'>
-                        {fullDescription ? fullDescription : props.description}
-                    </Body>
+                    <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
+                        __html: fullDescription
+                            ? parseMarkdownResponse(fullDescription) : props.description
+                    }}/>
                 </FlexColumn>
                 <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
                     <H2 as='h2'>
