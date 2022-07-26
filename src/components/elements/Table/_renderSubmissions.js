@@ -25,7 +25,7 @@ const _renderSubmissions = (pageNr, submissions) => {
                                 {index + n + 1}
                             </Body>
                             <Body as='td'>
-                                {submission.submitter ? submission.submitter : '[anonymized]'}
+                                {submission.submitter ? submission.submitter : '[anonymous]'}
                             </Body>
                             <Body as='td'>
                                 {submission.when ? `${submission.when.slice(11, 16)} ${submission.when.slice(0, 10)}`
