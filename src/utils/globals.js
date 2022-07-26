@@ -45,6 +45,10 @@ const RENDER_ICO = (type) => {
     }
 }
 
+const CALC_PAGES = (objects) => {
+    return Math.ceil(objects.length / ELEMENTS_PER_PAGE);
+}
+
 export {
     ELEMENTS_PER_PAGE,
     API,
@@ -52,5 +56,6 @@ export {
     CHALLENGE_PAGE,
     MINI_DESCRIPTION_LENGTH,
     MINI_DESCRIPTION_RENDER,
-    RENDER_ICO
+    RENDER_ICO,
+    CALC_PAGES
 };

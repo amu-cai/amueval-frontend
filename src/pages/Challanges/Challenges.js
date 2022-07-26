@@ -3,7 +3,6 @@ import {Body, H1} from "../../utils/fonts";
 import {FlexColumn, FlexRow, Svg} from "../../utils/containers";
 import Search from "../../components/elements/Search";
 import Pager from "../../components/elements/Pager";
-import {ELEMENTS_PER_PAGE} from "../../utils/globals";
 import FiltersMenu from "../../components/elements/FiltersMenu";
 import _searchQueryHandler from "./_searchQueryHandler";
 import _renderChallenges from "./_renderChallenges";
@@ -11,6 +10,7 @@ import Media from "react-media";
 import theme from "../../utils/theme";
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from "../../api/getChallenges";
+import {CALC_PAGES} from "../../utils/globals";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -47,16 +47,12 @@ const Challenges = () => {
         setCommercial(value);
     }
 
-    const calcPages = () => {
-        return Math.ceil(challenges.length / ELEMENTS_PER_PAGE);
-    }
-
     const searchQueryHandler = (event) => {
         _searchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);
     }
 
     const nextPage = () => {
-        if (pageNr !== calcPages(challenges)) {
+        if (pageNr !== CALC_PAGES(challenges)) {
             let newPage = pageNr + 1;
             setPageNr(newPage);
         }
@@ -97,7 +93,7 @@ const Challenges = () => {
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager pageNr={pageNr} pages={calcPages()}
+                    <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
                            nextPage={nextPage} previousPage={previousPage}/>
                 </FlexColumn>
             </>
@@ -131,7 +127,7 @@ const Challenges = () => {
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager pageNr={pageNr} pages={calcPages()}
+                    <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
                            nextPage={nextPage} previousPage={previousPage}/>
                 </FlexColumn>
             </>
