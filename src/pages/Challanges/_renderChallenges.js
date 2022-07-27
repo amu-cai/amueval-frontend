@@ -23,15 +23,14 @@ const _renderChallenges = (pageNr, challenges) => {
     if (challenges && challenges !== []) {
         return (
             <ChallengesGrid margin='32px 0' gridGap='32px 0'>
-                {challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
-                    return (
-                        <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
-                                       description={challenge.description} metric={challenge.mainMetric}
-                                       bestScore={challenge.bestScore} baseline={challenge.baseline}
-                                       prize={challenge.prize} deadline={challenge.deadline}
-                                       name={challenge.name}/>
-                    );
-                })}
+                {challenges.slice(n, n + ELEMENTS_PER_PAGE).map(
+                    ({title, type, description, mainMetric, bestScore, baseline, prize, deadline, name}, index) => {
+                        return (
+                            <MiniChallenge key={`challenge-${index}`} title={title} type={type}
+                                           description={description} metric={mainMetric} bestScore={bestScore}
+                                           baseline={baseline} prize={prize} deadline={deadline} name={name}/>
+                        );
+                    })}
             </ChallengesGrid>
         )
     }

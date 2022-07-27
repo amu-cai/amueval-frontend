@@ -17,7 +17,7 @@ const _renderSubmissions = (pageNr, submissions) => {
     if (submissions) {
         return (
             <FlexColumn as='tbody' width='100%'>
-                {submissions.slice(n, n + ELEMENTS_PER_PAGE).map((submission, index) => {
+                {submissions.slice(n, n + ELEMENTS_PER_PAGE).map(({submitter, when, evaluations, version}, index) => {
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`} gridTemplateColumns='1fr 3fr 3fr 1fr 1fr'
                               gridGap='10px' margin='10px 0 0 0' position='relative' width='100%'>
@@ -25,17 +25,17 @@ const _renderSubmissions = (pageNr, submissions) => {
                                 {index + n + 1}
                             </Body>
                             <Body as='td'>
-                                {submission.submitter ? submission.submitter : '[anonymous]'}
+                                {submitter ? submitter : '[anonymous]'}
                             </Body>
                             <Body as='td'>
-                                {submission.when ? `${submission.when.slice(11, 16)} ${submission.when.slice(0, 10)}`
+                                {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
                                     : 'xxx'}
                             </Body>
                             <Body as='td'>
-                                {submission.evaluations[0] ? submission.evaluations[0].score : 'xxx'}
+                                {evaluations[0] ? evaluations[0].score : 'xxx'}
                             </Body>
                             <Body as='td' textAlign='right' padding='0 2px 0 0'>
-                                {submission.version ? submission.version.length : 1}
+                                {version ? version.length : 1}
                             </Body>
                             <Line as='td'/>
                         </Grid>
