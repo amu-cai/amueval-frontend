@@ -16,7 +16,7 @@ const ReadmeStyle = styled(Body)`
     line-height: 22px;
 
     @media (min-width: ${({theme}) => theme.overMobile}) {
-      font-size: 24px;
+      font-size: 22px;
       line-height: 26px;
     }
   }
@@ -31,6 +31,21 @@ const ReadmeStyle = styled(Body)`
       font-weight: 400;
       font-size: 16px;
       line-height: 22px;
+    }
+  }
+
+  a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: ${({theme}) => theme.colors.dark};
+    text-decoration: none;
+
+    @media (min-width: ${({theme}) => theme.overMobile}) {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 500;
     }
   }
 `;
@@ -106,8 +121,7 @@ const Readme = (props) => {
                         Description
                     </H2>
                     <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
-                        __html: fullDescription
-                            ? parseMarkdownResponse(fullDescription) : props.description
+                        __html: fullDescription ? parseMarkdownResponse(fullDescription) : props.description
                     }}/>
                 </FlexColumn>
                 <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
