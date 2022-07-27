@@ -5,6 +5,7 @@ import {Body, H3, Medium} from "../../utils/fonts";
 import arrow from "../../assets/arrow.svg";
 import Media from "react-media";
 import theme from "../../utils/theme";
+import PropsTypes from "prop-types";
 
 const FilterBy = (props) => {
     const renderFilterOptions = () => {
@@ -46,5 +47,17 @@ const FilterBy = (props) => {
         </FlexColumn>
     );
 }
+
+FilterBy.propTypes = {
+    options: PropsTypes.arrayOf(PropsTypes.shape({
+        name: PropsTypes.string,
+        sort: PropsTypes.bool,
+        rotate: PropsTypes.string
+    }))
+};
+
+FilterBy.defaultProps = {
+    options: [],
+};
 
 export default FilterBy;

@@ -3,6 +3,7 @@ const filterOptions = [
         {
             name: 'Closing',
             sort: true,
+            rotate: ''
         },
         {
             name: 'Closing',
@@ -12,6 +13,7 @@ const filterOptions = [
         {
             name: 'Hotness',
             sort: true,
+            rotate: ''
         },
         {
             name: 'Hotness',
@@ -21,6 +23,7 @@ const filterOptions = [
         {
             name: 'Reward',
             sort: true,
+            rotate: ''
         },
         {
             name: 'Reward',
@@ -29,36 +32,56 @@ const filterOptions = [
         }
     ], [
         {
-            name: 'Both'
+            name: 'Both',
+            sort: false,
+            rotate: ''
         },
         {
-            name: 'Completed'
+            name: 'Completed',
+            sort: false,
+            rotate: ''
         },
         {
-            name: 'Active'
-        },
-    ], [
-        {
-            name: 'All'
-        },
-        {
-            name: 'Tabular'
-        },
-        {
-            name: 'Text'
-        },
-        {
-            name: 'Image'
+            name: 'Active',
+            sort: false,
+            rotate: ''
         },
     ], [
         {
-            name: 'Both'
+            name: 'All',
+            sort: false,
+            rotate: ''
         },
         {
-            name: 'Yes'
+            name: 'Tabular',
+            sort: false,
+            rotate: ''
         },
         {
-            name: 'No'
+            name: 'Text',
+            sort: false,
+            rotate: ''
+        },
+        {
+            name: 'Image',
+            sort: false,
+            rotate: ''
+        },
+    ], [
+        {
+            name: 'Both',
+            sort: false,
+            rotate: ''
+        },
+        {
+            name: 'Yes',
+            sort: false,
+            rotate: ''
+        },
+        {
+            name: 'No',
+            sort: false,
+            rotate: ''
         },
     ]
 ];

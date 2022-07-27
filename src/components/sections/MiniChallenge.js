@@ -6,6 +6,7 @@ import IconLabel from "../elements/IconLabel";
 import {Link} from "react-router-dom";
 import {CHALLENGE_PAGE, MINI_DESCRIPTION_RENDER} from "../../utils/globals";
 import theme from "../../utils/theme";
+import PropsTypes from "prop-types";
 
 const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
@@ -84,6 +85,30 @@ const MiniChallenge = (props) => {
             </FlexColumn>
         </ChallengeStyle>
     );
+}
+
+MiniChallenge.propTypes = {
+    name: PropsTypes.string,
+    title: PropsTypes.string,
+    type: PropsTypes.string,
+    description: PropsTypes.string,
+    metric: PropsTypes.string,
+    bestScore: PropsTypes.string,
+    deadline: PropsTypes.string,
+    baseline: PropsTypes.string,
+    prize: PropsTypes.string
+};
+
+MiniChallenge.defaultProps = {
+    name: 'xxx',
+    title: 'xxx',
+    type: 'xxx',
+    description: 'xxx',
+    metric: 'xxx',
+    bestScore: 'xxx',
+    deadline: 'xxx',
+    baseline: 'xxx',
+    prize: 'xxx'
 }
 
 export default MiniChallenge;

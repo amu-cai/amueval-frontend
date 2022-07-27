@@ -7,7 +7,6 @@ import Media from "react-media";
 import ellipse from '../../assets/ellipse.svg'
 
 const Motivation = () => {
-
     const content = [
         'Explore interesting solutions to problems using AI',
         'Train by solving our challenges',

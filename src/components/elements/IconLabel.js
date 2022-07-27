@@ -3,6 +3,7 @@ import {FlexRow, Svg} from "../../utils/containers";
 import {Body, Medium} from "../../utils/fonts";
 import styled from "styled-components";
 import {RENDER_DEADLINE_TIME, RENDER_ICO} from "../../utils/globals";
+import PropsTypes from "prop-types";
 
 const HoverLabel = styled(Body)`
   position: absolute;
@@ -68,6 +69,22 @@ const IconLabel = (props) => {
             {renderHoverLabel(props.type, props.time)}
         </IconLabelStyle>
     );
-}
+};
+
+IconLabel.propTypes = {
+    gap: PropsTypes.string,
+    size: PropsTypes.string,
+    type: PropsTypes.string,
+    time: PropsTypes.string,
+    children: PropsTypes.node,
+};
+
+IconLabel.defaultProps = {
+    gap: '0',
+    size: '24px',
+    type: '',
+    time: '',
+    children: '',
+};
 
 export default IconLabel;

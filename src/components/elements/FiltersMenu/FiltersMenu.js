@@ -6,6 +6,7 @@ import styled from "styled-components";
 import FilterBy from "../../sections/FilterBy";
 import filterOptions from "./filterOptions";
 import Media from "react-media";
+import PropsTypes from "prop-types";
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
@@ -75,5 +76,35 @@ const FiltersMenu = (props) => {
         </>
     );
 }
+
+FiltersMenu.propTypes = {
+    translateX: PropsTypes.string,
+    opacity: PropsTypes.string,
+    transBackDisplay: PropsTypes.string,
+    toggleFiltersMenu: PropsTypes.func,
+    sortByHandler: PropsTypes.func,
+    statusHandler: PropsTypes.func,
+    challengeTypeHandler: PropsTypes.func,
+    commercialHandler: PropsTypes.func,
+    sortBy: PropsTypes.number,
+    status: PropsTypes.number,
+    challengeType: PropsTypes.number,
+    commercial: PropsTypes.number,
+};
+
+FiltersMenu.defaultProps = {
+    translateX: '',
+    opacity: '',
+    transBackDisplay: 'flex',
+    toggleFiltersMenu: null,
+    sortByHandler: null,
+    statusHandler: null,
+    challengeTypeHandler: null,
+    commercialHandler: null,
+    sortBy: 0,
+    status: 0,
+    challengeType: 0,
+    commercial: 0,
+};
 
 export default FiltersMenu;

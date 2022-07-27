@@ -8,6 +8,8 @@ import {markdown} from "markdown";
 import styled from "styled-components";
 import InfoList from "../elements/InfoList";
 import Loading from "../elements/Loading";
+import PropsTypes from "prop-types";
+import MiniChallenge from "./MiniChallenge";
 
 const ReadmeStyle = styled(Body)`
   h3 {
@@ -157,6 +159,16 @@ const Readme = (props) => {
             </Media>
         </>
     );
+}
+
+MiniChallenge.propTypes = {
+    challengeName: PropsTypes.string,
+    description: PropsTypes.string,
+};
+
+MiniChallenge.defaultProps = {
+    challengeName: '',
+    description: '',
 }
 
 export default Readme;

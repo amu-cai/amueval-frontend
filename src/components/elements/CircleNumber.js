@@ -1,6 +1,7 @@
 import React from "react";
 import {Container} from "../../utils/containers";
 import styled from "styled-components";
+import PropsTypes from "prop-types";
 
 const CircleNumberStyle = styled(Container)`
   border-radius: 50%;
@@ -29,5 +30,13 @@ const CircleNumber = (props) => {
         </CircleNumberStyle>
     );
 }
+
+CircleNumber.propTypes = {
+    number: PropsTypes.number,
+};
+
+CircleNumber.defaultProps = {
+    number: 0,
+};
 
 export default CircleNumber;

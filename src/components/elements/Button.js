@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {Medium} from "../../utils/fonts";
+import PropsTypes from "prop-types";
 
 const ButtonStyle = styled(Medium)`
   display: flex;
@@ -28,5 +29,23 @@ const Button = (props) => {
         </ButtonStyle>
     );
 }
+
+Button.propTypes = {
+    handler: PropsTypes.func,
+    width: PropsTypes.string,
+    height: PropsTypes.string,
+    color: PropsTypes.string,
+    backgroundColor: PropsTypes.string,
+    children: PropsTypes.node
+};
+
+Button.defaultProps = {
+    handler: null,
+    width: '64px',
+    height: '28px',
+    color: '',
+    backgroundColor: '',
+    children: ''
+};
 
 export default Button;

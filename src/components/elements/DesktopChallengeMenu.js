@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {FlexColumn} from "../../utils/containers";
 import {H3} from "../../utils/fonts";
+import PropsTypes from "prop-types";
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -50,6 +51,16 @@ const DesktopChallengeMenu = (props) => {
             })}
         </DesktopChallengeMenuStyle>
     );
+}
+
+DesktopChallengeMenu.propTypes = {
+    section: PropsTypes.number,
+    setSection: PropsTypes.func
+};
+
+DesktopChallengeMenu.defaultProps = {
+    section: 0,
+    setSection: null,
 }
 
 export default DesktopChallengeMenu;

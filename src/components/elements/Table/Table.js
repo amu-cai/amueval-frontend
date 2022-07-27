@@ -8,6 +8,7 @@ import {CALC_PAGES} from "../../../utils/globals";
 import Media from "react-media";
 import theme from "../../../utils/theme";
 import Loading from "../Loading";
+import PropsTypes from "prop-types";
 
 const Table = (props) => {
     const headerElements = ['#', 'submitter', 'when', 'result', 'entries'];
@@ -56,7 +57,6 @@ const Table = (props) => {
                         )
                     })}
                 </Grid>
-                <Loading visible={loading}/>
                 {renderSubmissions()}
             </FlexColumn>
 
@@ -77,7 +77,6 @@ const Table = (props) => {
                         )
                     })}
                 </Grid>
-                <Loading visible={loading}/>
                 {renderSubmissions()}
             </FlexColumn>
         );
@@ -85,6 +84,7 @@ const Table = (props) => {
 
     return (
         <>
+            <Loading visible={loading}/>
             <Media query={theme.mobile}>
                 {mobileRender()}
             </Media>
@@ -95,6 +95,14 @@ const Table = (props) => {
                    pages={CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])}/>
         </>
     );
+}
+
+Table.propTypes = {
+    challengeName: PropsTypes.string,
+};
+
+Table.defaultProps = {
+    challengeName: '',
 }
 
 export default Table;

@@ -5,6 +5,7 @@ import {FlexColumn, FlexRow} from "../../utils/containers";
 import {H2, H3} from "../../utils/fonts";
 import Table from "../elements/Table";
 import styled from "styled-components";
+import PropsTypes from 'prop-types';
 
 const BoardVariantMobile = styled(FlexRow)`
   transition: color, background-color 0.3s ease-in-out;
@@ -101,5 +102,13 @@ const Leaderboard = (props) => {
         </>
     )
 }
+
+Leaderboard.propsTypes = {
+    challengeName: PropsTypes.string,
+}
+
+Leaderboard.defaultProps = {
+    challengeName: '',
+};
 
 export default Leaderboard;
