@@ -1,10 +1,12 @@
 import {API} from "../utils/globals";
 
-const getChallengeFullDescription = (setState, challengeName) => {
+const getChallengeFullDescription = (setDataState, setLoading, challengeName) => {
     fetch(`${API}/challenge-readme/${challengeName}/markdown`)
         .then(response => response.text())
         .then(data => {
-            setState(data);
+            setDataState(data);
+            if (setLoading)
+                setLoading(false);
         });
 }
 

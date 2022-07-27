@@ -7,6 +7,7 @@ import getChallengeFullDescription from "../../api/getChallengeFullDescription";
 import {markdown} from "markdown";
 import styled from "styled-components";
 import InfoList from "../elements/InfoList";
+import Loading from "../elements/Loading";
 
 const ReadmeStyle = styled(Body)`
   h3 {
@@ -52,9 +53,10 @@ const ReadmeStyle = styled(Body)`
 
 const Readme = (props) => {
     const [fullDescription, setFullDescription] = React.useState('');
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        getChallengeFullDescription(setFullDescription, props.challengeName);
+        getChallengeFullDescription(setFullDescription, setLoading, props.challengeName);
     }, [props.challengeName]);
 
     const parseMarkdownResponse = (response) => {
@@ -148,10 +150,10 @@ const Readme = (props) => {
     return (
         <>
             <Media query={theme.mobile}>
-                {mobileRender()}
+                {!loading ? mobileRender() : <Loading visible={loading}/>}
             </Media>
             <Media query={theme.desktop}>
-                {desktopRender()}
+                {!loading ? desktopRender() : <Loading visible={loading}/>}
             </Media>
         </>
     );

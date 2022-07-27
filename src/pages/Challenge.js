@@ -14,14 +14,16 @@ import DesktopChallengeMenu from "../components/elements/DesktopChallengeMenu";
 import {RENDER_ICO} from "../utils/globals";
 import textIco from "../assets/text_ico.svg";
 import getChallengeInfo from "../api/getChallengeInfo";
+import Loading from "../components/elements/Loading";
 
 const Challenge = () => {
     const challengeName = useParams().challengeId;
     const [challenge, setChallenge] = React.useState([]);
     const [section, setSection] = React.useState(0);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        getChallengeInfo(setChallenge, challengeName);
+        getChallengeInfo(setChallenge, setLoading, challengeName);
     }, [challengeName]);
 
     const sectionRender = () => {
@@ -45,6 +47,7 @@ const Challenge = () => {
     const mobileRender = () => {
         return (
             <FlexColumn minHeight='100vh' gap='12px' alignmentY='flex-start' padding='66px 0 0 0'>
+                <Loading visible={loading}/>
                 <H1 as='h1' margin='0 0 8px 0' textAlign='center'>
                     {challenge.title}
                 </H1>
@@ -61,6 +64,7 @@ const Challenge = () => {
                 <DesktopChallengeMenu setSection={setSection} section={section}/>
                 <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 0 64px 310px'>
                     <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
+                        <Loading visible={loading}/>
                         <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>
                             <H1 as='h1'>
                                 {challenge.title}

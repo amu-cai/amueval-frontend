@@ -1,10 +1,12 @@
 import {API} from "../utils/globals";
 
-const getChallengeSubmissions = (setState, challengeName) => {
+const getChallengeSubmissions = (setDataState, setLoading, challengeName) => {
     fetch(`${API}/challenge-all-submissions/${challengeName}`)
         .then(response => response.json())
         .then(data => {
-            setState(data);
+            setDataState(data);
+            if (setLoading)
+                setLoading(false);
         });
 }
 

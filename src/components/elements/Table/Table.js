@@ -7,18 +7,20 @@ import Pager from "../Pager";
 import {CALC_PAGES} from "../../../utils/globals";
 import Media from "react-media";
 import theme from "../../../utils/theme";
+import Loading from "../Loading";
 
 const Table = (props) => {
     const headerElements = ['#', 'submitter', 'when', 'result', 'entries'];
     const [challengeData, setChallengeData] = React.useState({});
     const [pageNr, setPageNr] = React.useState(1);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         challengeDataRequest();
     });
 
     const challengeDataRequest = () => {
-        getChallengeSubmissions(setChallengeData, props.challengeName);
+        getChallengeSubmissions(setChallengeData, setLoading, props.challengeName);
     }
 
     const renderSubmissions = () => {
@@ -54,6 +56,7 @@ const Table = (props) => {
                         )
                     })}
                 </Grid>
+                <Loading visible={loading}/>
                 {renderSubmissions()}
             </FlexColumn>
 
@@ -74,6 +77,7 @@ const Table = (props) => {
                         )
                     })}
                 </Grid>
+                <Loading visible={loading}/>
                 {renderSubmissions()}
             </FlexColumn>
         );
@@ -87,7 +91,7 @@ const Table = (props) => {
             <Media query={theme.desktop}>
                 {desktopRender()}
             </Media>
-            <Pager pageNr={pageNr} nextPage={nextPage} previousPage={previousPage}
+            <Pager visible={!loading} pageNr={pageNr} nextPage={nextPage} previousPage={previousPage}
                    pages={CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])}/>
         </>
     );

@@ -11,6 +11,7 @@ import theme from "../../utils/theme";
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from "../../api/getChallenges";
 import {CALC_PAGES} from "../../utils/globals";
+import Loading from "../../components/elements/Loading";
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -21,6 +22,7 @@ const Challenges = () => {
     const [status, setStatus] = React.useState(0);
     const [challengeType, setChallengeType] = React.useState(0);
     const [commercial, setCommercial] = React.useState(0);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         challengesRequest();
@@ -28,7 +30,7 @@ const Challenges = () => {
 
     const challengesRequest = () => {
         getChallenges(setChallengesFromAPI);
-        getChallenges(setChallenges);
+        getChallenges(setChallenges, setLoading);
     }
 
     const sortByHandler = (value) => {
@@ -90,10 +92,11 @@ const Challenges = () => {
                         </H1>
                         <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
                         <FlexColumn width='100%'>
+                            <Loading visible={loading}/>
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
+                    <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
                            nextPage={nextPage} previousPage={previousPage}/>
                 </FlexColumn>
             </>
@@ -124,10 +127,11 @@ const Challenges = () => {
                                  height='160px' backgroundColor={theme.colors.green}/>
                         </FlexRow>
                         <FlexColumn width='100%'>
+                            <Loading visible={loading}/>
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
+                    <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
                            nextPage={nextPage} previousPage={previousPage}/>
                 </FlexColumn>
             </>

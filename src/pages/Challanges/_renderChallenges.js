@@ -20,19 +20,22 @@ const ChallengesGrid = styled(Grid)`
 
 const _renderChallenges = (pageNr, challenges) => {
     const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
-    return (
-        <ChallengesGrid margin='32px 0' gridGap='32px 0'>
-            {challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
-                return (
-                    <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
-                                   description={challenge.description} metric={challenge.mainMetric}
-                                   bestScore={challenge.bestScore} baseline={challenge.baseline}
-                                   prize={challenge.prize} deadline={challenge.deadline}
-                                   name={challenge.name}/>
-                );
-            })}
-        </ChallengesGrid>
-    )
+    if (challenges && challenges !== []) {
+        return (
+            <ChallengesGrid margin='32px 0' gridGap='32px 0'>
+                {challenges.slice(n, n + ELEMENTS_PER_PAGE).map((challenge, index) => {
+                    return (
+                        <MiniChallenge key={`challenge-${index}`} title={challenge.title} type={challenge.type}
+                                       description={challenge.description} metric={challenge.mainMetric}
+                                       bestScore={challenge.bestScore} baseline={challenge.baseline}
+                                       prize={challenge.prize} deadline={challenge.deadline}
+                                       name={challenge.name}/>
+                    );
+                })}
+            </ChallengesGrid>
+        )
+    }
+    return '';
 }
 
 export default _renderChallenges;

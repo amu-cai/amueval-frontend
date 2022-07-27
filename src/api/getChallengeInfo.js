@@ -1,10 +1,12 @@
 import {API} from "../utils/globals";
 
-const getChallengeInfo = (setState, challengeName) => {
+const getChallengeInfo = (setDataState, setLoadingState, challengeName) => {
     fetch(`${API}/challenge-info/${challengeName}`)
         .then(response => response.json())
         .then(data => {
-            setState(data);
+            setDataState(data);
+            if (setLoadingState)
+                setLoadingState(false);
         });
 }
 
