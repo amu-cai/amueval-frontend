@@ -112,7 +112,7 @@ const Challenges = () => {
                              sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
                 <FlexColumn as='main' alignmentY='flex-start' width='100%'
                             minHeight='100vh' padding='112px 0 82px 310px'>
-                    <FlexColumn alignmentX='flex-start'>
+                    <FlexColumn alignmentX='flex-start' width='80%'>
                         <FlexRow width='100%' gap='32px'>
                             <FlexColumn alignmentX='flex-start' gap='32px' width='75%' maxWidth='720px'>
                                 <H1 as='h1'>
