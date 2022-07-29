@@ -1,10 +1,10 @@
-import React from "react";
-import Media from "react-media";
-import theme from "../../utils/theme";
-import {FlexColumn, FlexRow} from "../../utils/containers";
-import {H2, H3} from "../../utils/fonts";
-import Table from "../elements/Table";
-import styled from "styled-components";
+import React from 'react';
+import Media from 'react-media';
+import theme from '../../utils/theme';
+import {FlexColumn, FlexRow} from '../../utils/containers';
+import {H2, H3} from '../../utils/fonts';
+import Table from '../elements/Table';
+import styled from 'styled-components';
 import PropsTypes from 'prop-types';
 
 const BoardVariantMobile = styled(FlexRow)`
@@ -64,7 +64,7 @@ const Leaderboard = (props) => {
                 <Table challengeName={props.challengeName}/>
             </FlexColumn>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -89,7 +89,7 @@ const Leaderboard = (props) => {
                 <Table challengeName={props.challengeName}/>
             </FlexColumn>
         );
-    }
+    };
 
     return (
         <>
@@ -100,12 +100,12 @@ const Leaderboard = (props) => {
                 {desktopRender()}
             </Media>
         </>
-    )
-}
+    );
+};
 
 Leaderboard.propsTypes = {
     challengeName: PropsTypes.string,
-}
+};
 
 Leaderboard.defaultProps = {
     challengeName: '',

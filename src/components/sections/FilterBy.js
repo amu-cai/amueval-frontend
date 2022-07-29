@@ -1,11 +1,11 @@
-import React from "react";
-import {FlexColumn, Grid, Svg} from "../../utils/containers";
-import Filter from "../elements/Filter";
-import {Body, H3, Medium} from "../../utils/fonts";
-import arrow from "../../assets/arrow.svg";
-import Media from "react-media";
-import theme from "../../utils/theme";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexColumn, Grid, Svg} from '../../utils/containers';
+import Filter from '../elements/Filter';
+import {Body, H3, Medium} from '../../utils/fonts';
+import arrow from '../../assets/arrow.svg';
+import Media from 'react-media';
+import theme from '../../utils/theme';
+import PropsTypes from 'prop-types';
 
 const FilterBy = (props) => {
     const renderFilterOptions = () => {
@@ -26,7 +26,7 @@ const FilterBy = (props) => {
                 );
             })
         );
-    }
+    };
 
     return (
         <FlexColumn as='fieldset' width='94%' alignmentX='flex-start'>
@@ -46,7 +46,7 @@ const FilterBy = (props) => {
             </Grid>
         </FlexColumn>
     );
-}
+};
 
 FilterBy.propTypes = {
     options: PropsTypes.arrayOf(PropsTypes.shape({

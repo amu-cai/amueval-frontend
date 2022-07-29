@@ -1,15 +1,15 @@
-import React from "react";
-import {FlexColumn} from "../../utils/containers";
-import {Body, H2, Medium} from "../../utils/fonts";
-import Media from "react-media";
-import theme from "../../utils/theme";
-import getChallengeFullDescription from "../../api/getChallengeFullDescription";
-import {markdown} from "markdown";
-import styled from "styled-components";
-import InfoList from "../elements/InfoList";
-import Loading from "../elements/Loading";
-import PropsTypes from "prop-types";
-import MiniChallenge from "./MiniChallenge";
+import React from 'react';
+import {FlexColumn} from '../../utils/containers';
+import {Body, H2, Medium} from '../../utils/fonts';
+import Media from 'react-media';
+import theme from '../../utils/theme';
+import getChallengeFullDescription from '../../api/getChallengeFullDescription';
+import {markdown} from 'markdown';
+import styled from 'styled-components';
+import InfoList from '../elements/InfoList';
+import Loading from '../elements/Loading';
+import PropsTypes from 'prop-types';
+import MiniChallenge from './MiniChallenge';
 
 const ReadmeStyle = styled(Body)`
   h3 {
@@ -70,7 +70,7 @@ const Readme = (props) => {
         regex = /<\/h2>/g;
         result = result.replace(regex, '</h3>');
         return result;
-    }
+    };
 
     const mobileRender = () => {
         return (
@@ -109,7 +109,7 @@ const Readme = (props) => {
                 </FlexColumn>
             </FlexColumn>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -147,7 +147,7 @@ const Readme = (props) => {
                 </FlexColumn>
             </FlexColumn>
         );
-    }
+    };
 
     return (
         <>
@@ -159,7 +159,7 @@ const Readme = (props) => {
             </Media>
         </>
     );
-}
+};
 
 MiniChallenge.propTypes = {
     challengeName: PropsTypes.string,
@@ -169,6 +169,6 @@ MiniChallenge.propTypes = {
 MiniChallenge.defaultProps = {
     challengeName: '',
     description: '',
-}
+};
 
 export default Readme;

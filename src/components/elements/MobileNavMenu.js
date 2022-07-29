@@ -1,13 +1,13 @@
-import React from "react";
-import {FlexColumn, FlexRow, Svg, TransBack} from "../../utils/containers";
-import {Menu} from "../../utils/fonts";
+import React from 'react';
+import {FlexColumn, FlexRow, Svg, TransBack} from '../../utils/containers';
+import {Menu} from '../../utils/fonts';
 import loginIco from '../../assets/login_ico.svg';
 import registerIco from '../../assets/register_ico.svg';
 import cupIco from '../../assets/cup_ico.svg';
-import styled from "styled-components";
-import {Link} from "react-router-dom";
-import {CHALLENGES_PAGE} from "../../utils/globals";
-import PropsTypes from "prop-types";
+import styled from 'styled-components';
+import {Link} from 'react-router-dom';
+import {CHALLENGES_PAGE} from '../../utils/globals';
+import PropsTypes from 'prop-types';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -72,7 +72,7 @@ const MobileNavMenu = (props) => {
             </MobileNavMenuStyle>
         </TransBack>
     );
-}
+};
 
 MobileNavMenu.propTypes = {
     translateY: PropsTypes.string,

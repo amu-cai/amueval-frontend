@@ -1,12 +1,12 @@
-import React from "react";
-import {Body, H1, Medium} from "../../utils/fonts";
-import {Container, FlexColumn, FlexRow, Svg} from "../../utils/containers";
-import theme from "../../utils/theme";
-import ButtonLink from "../elements/ButtonLink";
-import {Link} from "react-router-dom";
-import Media from "react-media";
+import React from 'react';
+import {Body, H1, Medium} from '../../utils/fonts';
+import {Container, FlexColumn, FlexRow, Svg} from '../../utils/containers';
+import theme from '../../utils/theme';
+import ButtonLink from '../elements/ButtonLink';
+import {Link} from 'react-router-dom';
+import Media from 'react-media';
 import codepenIco from '../../assets/codepen_ico.svg';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TitleParagraph = styled(Medium)`
   font-size: 20px;
@@ -31,7 +31,7 @@ const mobileRender = () => {
             </ButtonLink>
         </FlexColumn>
     );
-}
+};
 
 const desktopRender = () => {
     return (
@@ -56,7 +56,7 @@ const desktopRender = () => {
             </FlexRow>
         </FlexColumn>
     );
-}
+};
 
 const Hero = () => {
     return (
@@ -69,6 +69,6 @@ const Hero = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Hero;

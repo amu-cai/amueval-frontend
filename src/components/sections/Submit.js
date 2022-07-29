@@ -1,6 +1,6 @@
-import React from "react";
-import {FlexColumn} from "../../utils/containers";
-import {H2} from "../../utils/fonts";
+import React from 'react';
+import {FlexColumn} from '../../utils/containers';
+import {H2} from '../../utils/fonts';
 
 const Submit = () => {
     return (
@@ -10,6 +10,6 @@ const Submit = () => {
             </H2>
         </FlexColumn>
     );
-}
+};
 
 export default Submit;

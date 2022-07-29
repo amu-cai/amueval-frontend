@@ -1,7 +1,7 @@
-import {ELEMENTS_PER_PAGE} from "../../../utils/globals";
-import {FlexColumn, FlexRow, Grid} from "../../../utils/containers";
-import {Body} from "../../../utils/fonts";
-import styled from "styled-components";
+import {ELEMENTS_PER_PAGE} from '../../../utils/globals';
+import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
+import {Body} from '../../../utils/fonts';
+import styled from 'styled-components';
 
 const Line = styled(FlexRow)`
   position: absolute;
@@ -44,6 +44,6 @@ const _renderSubmissions = (pageNr, submissions) => {
             </FlexColumn>
         );
     }
-}
+};
 
 export default _renderSubmissions;

@@ -1,16 +1,16 @@
-import React from "react";
-import {Container, FlexRow, Svg} from "../../../utils/containers";
-import Logo from "../Logo";
-import styled from "styled-components";
+import React from 'react';
+import {Container, FlexRow, Svg} from '../../../utils/containers';
+import Logo from '../Logo';
+import styled from 'styled-components';
 import menuButtonIcon from '../../../assets/menu-button.svg';
-import MobileNavMenu from "../MobileNavMenu";
-import {Link} from "react-router-dom";
-import loginIco from "../../../assets/login_ico.svg";
-import {Menu} from "../../../utils/fonts";
-import registerIco from "../../../assets/register_ico.svg";
-import {CHALLENGES_PAGE} from "../../../utils/globals";
-import cupIco from "../../../assets/cup_ico.svg";
-import NavBarStyle from "./NavBarStyle";
+import MobileNavMenu from '../MobileNavMenu';
+import {Link} from 'react-router-dom';
+import loginIco from '../../../assets/login_ico.svg';
+import {Menu} from '../../../utils/fonts';
+import registerIco from '../../../assets/register_ico.svg';
+import {CHALLENGES_PAGE} from '../../../utils/globals';
+import cupIco from '../../../assets/cup_ico.svg';
+import NavBarStyle from './NavBarStyle';
 
 const MenuButton = styled(Container)`
   width: 20px;
@@ -35,7 +35,7 @@ const NavBar = () => {
             setNavMenuTranslateY('0');
         else
             setNavMenuTranslateY('calc(-100vh - 42px)');
-    }
+    };
 
     return (
         <NavBarStyle as='header'>
@@ -66,6 +66,6 @@ const NavBar = () => {
             <MobileNavMenu translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>
         </NavBarStyle>
     );
-}
+};
 
 export default NavBar;

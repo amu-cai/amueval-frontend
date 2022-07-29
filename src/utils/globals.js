@@ -1,11 +1,11 @@
-import metricIco from "../assets/metric_ico.svg";
-import coinsIco from "../assets/coins_ico.svg";
-import baselineIco from "../assets/baseline_ico.svg";
-import clockIco from "../assets/clock_ico.svg";
-import cupIco from "../assets/cup_ico.svg";
-import textIco from "../assets/text_ico.svg";
-import imageIco from "../assets/image_ico.svg";
-import tabularIco from "../assets/tabular_ico.svg";
+import metricIco from '../assets/metric_ico.svg';
+import coinsIco from '../assets/coins_ico.svg';
+import baselineIco from '../assets/baseline_ico.svg';
+import clockIco from '../assets/clock_ico.svg';
+import cupIco from '../assets/cup_ico.svg';
+import textIco from '../assets/text_ico.svg';
+import imageIco from '../assets/image_ico.svg';
+import tabularIco from '../assets/tabular_ico.svg';
 
 const ELEMENTS_PER_PAGE = 12;
 const MINI_DESCRIPTION_LENGTH = 70;
@@ -20,7 +20,7 @@ const MINI_DESCRIPTION_RENDER = (description) => {
         return `${description.slice(0, MINI_DESCRIPTION_LENGTH)}...`;
     }
     return 'xxx';
-}
+};
 
 const RENDER_ICO = (type) => {
     switch (type) {
@@ -43,11 +43,11 @@ const RENDER_ICO = (type) => {
         default:
             return '';
     }
-}
+};
 
 const CALC_PAGES = (objects) => {
     return Math.ceil(objects.length / ELEMENTS_PER_PAGE);
-}
+};
 
 const RENDER_DEADLINE_TIME = (time) => {
     if (time) {
@@ -56,7 +56,7 @@ const RENDER_DEADLINE_TIME = (time) => {
         return `${date} ${hour}`;
     }
     return '';
-}
+};
 
 export {
     ELEMENTS_PER_PAGE,

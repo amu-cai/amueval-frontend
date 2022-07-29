@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import {Label} from "../../utils/fonts";
-import PropsTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import {Label} from '../../utils/fonts';
+import PropsTypes from 'prop-types';
 
 const ButtonLinkStyle = styled(Label)`
   background-color: ${({theme}) => theme.colors.green};
@@ -32,7 +32,7 @@ const ButtonLink = (props) => {
             {props.children}
         </ButtonLinkStyle>
     );
-}
+};
 
 ButtonLink.propTypes = {
     children: PropsTypes.node,

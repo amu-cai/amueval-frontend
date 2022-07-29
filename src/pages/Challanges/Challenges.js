@@ -1,17 +1,17 @@
-import React from "react";
-import {Body, H1} from "../../utils/fonts";
-import {FlexColumn, FlexRow, Svg} from "../../utils/containers";
-import Search from "../../components/elements/Search";
-import Pager from "../../components/elements/Pager";
-import FiltersMenu from "../../components/elements/FiltersMenu";
-import _searchQueryHandler from "./_searchQueryHandler";
-import _renderChallenges from "./_renderChallenges";
-import Media from "react-media";
-import theme from "../../utils/theme";
+import React from 'react';
+import {Body, H1} from '../../utils/fonts';
+import {FlexColumn, FlexRow, Svg} from '../../utils/containers';
+import Search from '../../components/elements/Search';
+import Pager from '../../components/elements/Pager';
+import FiltersMenu from '../../components/elements/FiltersMenu';
+import _searchQueryHandler from './_searchQueryHandler';
+import _renderChallenges from './_renderChallenges';
+import Media from 'react-media';
+import theme from '../../utils/theme';
 import cupIco from '../../assets/cup_ico.svg';
-import getChallenges from "../../api/getChallenges";
-import {CALC_PAGES} from "../../utils/globals";
-import Loading from "../../components/elements/Loading";
+import getChallenges from '../../api/getChallenges';
+import {CALC_PAGES} from '../../utils/globals';
+import Loading from '../../components/elements/Loading';
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -38,7 +38,7 @@ const Challenges = () => {
     };
 
     const statusHandler = (value) => {
-        setStatus(value)
+        setStatus(value);
     };
 
     const challengeTypeHandler = (value) => {
@@ -51,30 +51,30 @@ const Challenges = () => {
 
     const searchQueryHandler = (event) => {
         _searchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);
-    }
+    };
 
     const nextPage = () => {
         if (pageNr !== CALC_PAGES(challenges)) {
             let newPage = pageNr + 1;
             setPageNr(newPage);
         }
-    }
+    };
 
     const previousPage = () => {
         if (pageNr !== 1) {
             let newPage = pageNr - 1;
             setPageNr(newPage);
         }
-    }
+    };
 
     const renderChallenges = () => {
         return _renderChallenges(pageNr, challenges);
-    }
+    };
 
     const toggleFiltersMenu = () => {
         let newFiltersMenu = !filtersMenu;
         setFiltersMenu(newFiltersMenu);
-    }
+    };
 
     const mobileRender = () => {
         return (
@@ -101,7 +101,7 @@ const Challenges = () => {
                 </FlexColumn>
             </>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -136,7 +136,7 @@ const Challenges = () => {
                 </FlexColumn>
             </>
         );
-    }
+    };
 
     return (
         <>
@@ -148,6 +148,6 @@ const Challenges = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Challenges;

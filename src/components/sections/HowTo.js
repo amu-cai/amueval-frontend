@@ -1,6 +1,6 @@
-import React from "react";
-import {FlexColumn} from "../../utils/containers";
-import {H2} from "../../utils/fonts";
+import React from 'react';
+import {FlexColumn} from '../../utils/containers';
+import {H2} from '../../utils/fonts';
 
 const HowTo = () => {
     return (
@@ -10,6 +10,6 @@ const HowTo = () => {
             </H2>
         </FlexColumn>
     );
-}
+};
 
 export default HowTo;

@@ -1,7 +1,7 @@
-import React from "react";
-import {FlexColumn} from "../../utils/containers";
-import theme from "../../utils/theme";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexColumn} from '../../utils/containers';
+import theme from '../../utils/theme';
+import PropsTypes from 'prop-types';
 
 const Placeholder = (props) => {
     return (

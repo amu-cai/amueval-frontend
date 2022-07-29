@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import {FlexRow} from "../../utils/containers";
-import PropsTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import {FlexRow} from '../../utils/containers';
+import PropsTypes from 'prop-types';
 
 const FilterStyle = styled(FlexRow)`
   width: fit-content;
@@ -35,7 +35,7 @@ const Filter = (props) => {
     const onCheckHandler = (e) => {
         if (e.target.checked)
             props.handler(Number(e.target.value));
-    }
+    };
 
     return (
         <>
@@ -61,6 +61,6 @@ Filter.propTypes = {
 Filter.defaultProps = {
     handler: null,
     children: '',
-}
+};
 
 export default Filter;

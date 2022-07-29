@@ -1,12 +1,12 @@
 import {ThemeProvider} from 'styled-components';
-import theme from "./utils/theme";
-import LandingPage from "./pages/LandingPage";
-import Challenges from "./pages/Challanges/Challenges";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import NavBar from "./components/elements/NavBar";
-import Footer from "./components/sections/Footer";
-import {CHALLENGE_PAGE, CHALLENGES_PAGE} from "./utils/globals";
-import Challenge from "./pages/Challenge";
+import theme from './utils/theme';
+import LandingPage from './pages/LandingPage';
+import Challenges from './pages/Challanges/Challenges';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import NavBar from './components/elements/NavBar';
+import Footer from './components/sections/Footer';
+import {CHALLENGE_PAGE, CHALLENGES_PAGE} from './utils/globals';
+import Challenge from './pages/Challenge';
 
 const App = () => {
     return (
@@ -23,6 +23,6 @@ const App = () => {
             </ThemeProvider>
         </BrowserRouter>
     );
-}
+};
 
 export default App;

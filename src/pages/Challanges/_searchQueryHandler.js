@@ -13,6 +13,6 @@ const _searchQueryHandler = (event, challengesFromAPI, setPageNr, setChallenges)
         }
         setChallenges(challengesToRender);
     }
-}
+};
 
 export default _searchQueryHandler;

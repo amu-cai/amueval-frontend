@@ -1,14 +1,14 @@
-import React from "react";
-import {FlexColumn, FlexRow, Grid} from "../../../utils/containers";
-import getChallengeSubmissions from "../../../api/getChallengeSubmissions";
-import {H3, Medium} from "../../../utils/fonts";
-import _renderSubmissions from "./_renderSubmissions";
-import Pager from "../Pager";
-import {CALC_PAGES} from "../../../utils/globals";
-import Media from "react-media";
-import theme from "../../../utils/theme";
-import Loading from "../Loading";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
+import getChallengeSubmissions from '../../../api/getChallengeSubmissions';
+import {H3, Medium} from '../../../utils/fonts';
+import _renderSubmissions from './_renderSubmissions';
+import Pager from '../Pager';
+import {CALC_PAGES} from '../../../utils/globals';
+import Media from 'react-media';
+import theme from '../../../utils/theme';
+import Loading from '../Loading';
+import PropsTypes from 'prop-types';
 
 const Table = (props) => {
     const headerElements = ['#', 'submitter', 'when', 'result', 'entries'];
@@ -22,26 +22,26 @@ const Table = (props) => {
 
     const challengeDataRequest = () => {
         getChallengeSubmissions(setChallengeData, setLoading, props.challengeName);
-    }
+    };
 
     const renderSubmissions = () => {
         return _renderSubmissions(pageNr, challengeData.submissions
             ? challengeData.submissions : []);
-    }
+    };
 
     const nextPage = () => {
         if (pageNr !== CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])) {
             let newPage = pageNr + 1;
             setPageNr(newPage);
         }
-    }
+    };
 
     const previousPage = () => {
         if (pageNr !== 1) {
             let newPage = pageNr - 1;
             setPageNr(newPage);
         }
-    }
+    };
 
     const mobileRender = () => {
         return (
@@ -54,14 +54,14 @@ const Table = (props) => {
                                      alignmentX={elem === 'entries' ? 'flex-end' : 'flex-start'}>
                                 <Medium as='th'>{elem}</Medium>
                             </FlexRow>
-                        )
+                        );
                     })}
                 </Grid>
                 {renderSubmissions()}
             </FlexColumn>
 
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -74,13 +74,13 @@ const Table = (props) => {
                                      alignmentX={elem === 'entries' ? 'flex-end' : 'flex-start'}>
                                 <H3 as='th'>{elem}</H3>
                             </FlexRow>
-                        )
+                        );
                     })}
                 </Grid>
                 {renderSubmissions()}
             </FlexColumn>
         );
-    }
+    };
 
     return (
         <>
@@ -95,7 +95,7 @@ const Table = (props) => {
                    pages={CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])}/>
         </>
     );
-}
+};
 
 Table.propTypes = {
     challengeName: PropsTypes.string,
@@ -103,6 +103,6 @@ Table.propTypes = {
 
 Table.defaultProps = {
     challengeName: '',
-}
+};
 
 export default Table;

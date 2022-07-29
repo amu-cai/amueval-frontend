@@ -1,8 +1,8 @@
-import React from "react";
-import {FlexColumn, FlexRow, Svg} from "../../utils/containers";
-import {Body, H2, Medium} from "../../utils/fonts";
-import Media from "react-media";
-import theme from "../../utils/theme";
+import React from 'react';
+import {FlexColumn, FlexRow, Svg} from '../../utils/containers';
+import {Body, H2, Medium} from '../../utils/fonts';
+import Media from 'react-media';
+import theme from '../../utils/theme';
 import uamLogo from '../../assets/uam-logo.svg';
 
 const Csi = () => {
@@ -26,7 +26,7 @@ const Csi = () => {
                 </Medium>
             </FlexColumn>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -53,7 +53,7 @@ const Csi = () => {
                 <Svg src={uamLogo} width='200px' height='242px' size='contain'/>
             </FlexRow>
         );
-    }
+    };
 
     return (
         <>
@@ -65,6 +65,6 @@ const Csi = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Csi;

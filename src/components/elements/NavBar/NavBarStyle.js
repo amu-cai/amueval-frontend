@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Container} from "../../../utils/containers";
+import {Container} from '../../../utils/containers';
 
 const NavBarStyle = styled(Container)`
   position: fixed;

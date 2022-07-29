@@ -1,7 +1,7 @@
-import React from "react";
-import {Container} from "../../utils/containers";
-import styled from "styled-components";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {Container} from '../../utils/containers';
+import styled from 'styled-components';
+import PropsTypes from 'prop-types';
 
 const CircleNumberStyle = styled(Container)`
   border-radius: 50%;
@@ -21,7 +21,7 @@ const CircleNumberStyle = styled(Container)`
     height: 36px;
     font-size: 22px;
   }
-`
+`;
 
 const CircleNumber = (props) => {
     return (
@@ -29,7 +29,7 @@ const CircleNumber = (props) => {
             {props.number}
         </CircleNumberStyle>
     );
-}
+};
 
 CircleNumber.propTypes = {
     number: PropsTypes.number,

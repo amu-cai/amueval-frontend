@@ -1,8 +1,8 @@
-import React from "react";
-import {FlexRow} from "../../utils/containers";
-import styled from "styled-components";
-import {Medium} from "../../utils/fonts";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexRow} from '../../utils/containers';
+import styled from 'styled-components';
+import {Medium} from '../../utils/fonts';
+import PropsTypes from 'prop-types';
 
 const MenuOption = styled(Medium)`
   cursor: pointer;

@@ -1,12 +1,12 @@
-import React from "react";
-import {FlexColumn, FlexRow, TransBack} from "../../../utils/containers";
-import Button from "../Button";
-import theme from "../../../utils/theme";
-import styled from "styled-components";
-import FilterBy from "../../sections/FilterBy";
-import filterOptions from "./filterOptions";
-import Media from "react-media";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexColumn, FlexRow, TransBack} from '../../../utils/containers';
+import Button from '../Button';
+import theme from '../../../utils/theme';
+import styled from 'styled-components';
+import FilterBy from '../../sections/FilterBy';
+import filterOptions from './filterOptions';
+import Media from 'react-media';
+import PropsTypes from 'prop-types';
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
@@ -45,7 +45,7 @@ const FiltersMenu = (props) => {
         props.statusHandler(0);
         props.challengeTypeHandler(0);
         props.commercialHandler(0);
-    }
+    };
 
     return (
         <>
@@ -81,7 +81,7 @@ const FiltersMenu = (props) => {
             </FiltersMenuStyle>
         </>
     );
-}
+};
 
 FiltersMenu.propTypes = {
     translateX: PropsTypes.string,

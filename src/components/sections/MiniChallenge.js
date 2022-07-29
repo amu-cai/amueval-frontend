@@ -1,12 +1,12 @@
-import React from "react";
-import {Container, FlexColumn, FlexRow, Grid} from "../../utils/containers";
-import {Body, H3} from "../../utils/fonts";
-import styled from "styled-components";
-import IconLabel from "../elements/IconLabel";
-import {Link} from "react-router-dom";
-import {CHALLENGE_PAGE, MINI_DESCRIPTION_RENDER} from "../../utils/globals";
-import theme from "../../utils/theme";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {Container, FlexColumn, FlexRow, Grid} from '../../utils/containers';
+import {Body, H3} from '../../utils/fonts';
+import styled from 'styled-components';
+import IconLabel from '../elements/IconLabel';
+import {Link} from 'react-router-dom';
+import {CHALLENGE_PAGE, MINI_DESCRIPTION_RENDER} from '../../utils/globals';
+import theme from '../../utils/theme';
+import PropsTypes from 'prop-types';
 
 const ChallengeStyle = styled(FlexColumn)`
   padding: 12px;
@@ -85,7 +85,7 @@ const MiniChallenge = (props) => {
             </FlexColumn>
         </ChallengeStyle>
     );
-}
+};
 
 MiniChallenge.propTypes = {
     name: PropsTypes.string,
@@ -109,6 +109,6 @@ MiniChallenge.defaultProps = {
     deadline: 'xxx',
     baseline: 'xxx',
     prize: 'xxx'
-}
+};
 
 export default MiniChallenge;

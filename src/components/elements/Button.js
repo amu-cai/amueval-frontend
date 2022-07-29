@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import {Medium} from "../../utils/fonts";
-import PropsTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import {Medium} from '../../utils/fonts';
+import PropsTypes from 'prop-types';
 
 const ButtonStyle = styled(Medium)`
   display: flex;
@@ -28,7 +28,7 @@ const Button = (props) => {
             {props.children}
         </ButtonStyle>
     );
-}
+};
 
 Button.propTypes = {
     handler: PropsTypes.func,

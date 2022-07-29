@@ -1,7 +1,7 @@
-import {ELEMENTS_PER_PAGE} from "../../utils/globals";
-import MiniChallenge from "../../components/sections/MiniChallenge";
-import {Grid} from "../../utils/containers";
-import styled from "styled-components";
+import {ELEMENTS_PER_PAGE} from '../../utils/globals';
+import MiniChallenge from '../../components/sections/MiniChallenge';
+import {Grid} from '../../utils/containers';
+import styled from 'styled-components';
 
 const ChallengesGrid = styled(Grid)`
   margin: 32px 0;
@@ -32,9 +32,9 @@ const _renderChallenges = (pageNr, challenges) => {
                         );
                     })}
             </ChallengesGrid>
-        )
+        );
     }
     return '';
-}
+};
 
 export default _renderChallenges;

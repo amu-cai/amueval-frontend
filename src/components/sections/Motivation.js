@@ -1,10 +1,10 @@
-import React from "react";
-import {FlexColumn, FlexRow, ImageBackground, Svg} from "../../utils/containers";
-import {Body, H2} from "../../utils/fonts";
+import React from 'react';
+import {FlexColumn, FlexRow, ImageBackground, Svg} from '../../utils/containers';
+import {Body, H2} from '../../utils/fonts';
 import cubeIcon from '../../assets/cube_ico.svg';
-import theme from "../../utils/theme";
-import Media from "react-media";
-import ellipse from '../../assets/ellipse.svg'
+import theme from '../../utils/theme';
+import Media from 'react-media';
+import ellipse from '../../assets/ellipse.svg';
 
 const Motivation = () => {
     const content = [
@@ -38,7 +38,7 @@ const Motivation = () => {
                 </FlexColumn>
             </FlexColumn>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -65,7 +65,7 @@ const Motivation = () => {
                 </FlexColumn>
             </ImageBackground>
         );
-    }
+    };
 
     return (
         <>
@@ -77,6 +77,6 @@ const Motivation = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Motivation;

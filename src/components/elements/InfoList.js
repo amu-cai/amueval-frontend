@@ -1,16 +1,16 @@
-import React from "react";
-import {FlexColumn} from "../../utils/containers";
-import InfoItem from "./InfoItem";
-import textIco from "../../assets/text_ico.svg";
-import metricIco from "../../assets/metric_ico.svg";
-import bestScoreIco from "../../assets/cup_ico.svg";
-import baselineIco from "../../assets/baseline_ico.svg";
-import timeIco from "../../assets/clock_ico.svg";
-import {RENDER_DEADLINE_TIME} from "../../utils/globals";
-import coinsIco from "../../assets/coins_ico.svg";
-import Media from "react-media";
-import theme from "../../utils/theme";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexColumn} from '../../utils/containers';
+import InfoItem from './InfoItem';
+import textIco from '../../assets/text_ico.svg';
+import metricIco from '../../assets/metric_ico.svg';
+import bestScoreIco from '../../assets/cup_ico.svg';
+import baselineIco from '../../assets/baseline_ico.svg';
+import timeIco from '../../assets/clock_ico.svg';
+import {RENDER_DEADLINE_TIME} from '../../utils/globals';
+import coinsIco from '../../assets/coins_ico.svg';
+import Media from 'react-media';
+import theme from '../../utils/theme';
+import PropsTypes from 'prop-types';
 
 const InfoList = (props) => {
     const itemsRender = (gap, iconsSize) => {
@@ -36,7 +36,7 @@ const InfoList = (props) => {
                 </InfoItem>
             </>
         );
-    }
+    };
 
     return (
         <>
@@ -53,7 +53,7 @@ const InfoList = (props) => {
             </Media>
         </>
     );
-}
+};
 
 InfoList.propTypes = {
     iconsSize: PropsTypes.string,

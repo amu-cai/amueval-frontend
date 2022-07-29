@@ -1,8 +1,8 @@
-import React from "react";
-import {H1} from "../../utils/fonts";
-import theme from "../../utils/theme";
-import {Link} from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import {H1} from '../../utils/fonts';
+import theme from '../../utils/theme';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 
 const LogoStyle = styled(H1)`
   font-size: 24px;

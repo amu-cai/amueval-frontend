@@ -1,20 +1,20 @@
-import React from "react";
-import {Container, FlexColumn, FlexRow, Svg} from "../utils/containers";
-import {useParams} from "react-router-dom";
-import {H1, Medium} from "../utils/fonts";
-import theme from "../utils/theme";
-import MobileChallengeMenu from "../components/elements/MobileChallengeMenu";
-import Leaderboard from "../components/sections/Leaderboard";
-import Readme from "../components/sections/Readme";
-import HowTo from "../components/sections/HowTo";
-import MyEntries from "../components/sections/MyEntries";
-import Submit from "../components/sections/Submit";
-import Media from "react-media";
-import DesktopChallengeMenu from "../components/elements/DesktopChallengeMenu";
-import {RENDER_ICO} from "../utils/globals";
-import textIco from "../assets/text_ico.svg";
-import getChallengeInfo from "../api/getChallengeInfo";
-import Loading from "../components/elements/Loading";
+import React from 'react';
+import {Container, FlexColumn, FlexRow, Svg} from '../utils/containers';
+import {useParams} from 'react-router-dom';
+import {H1, Medium} from '../utils/fonts';
+import theme from '../utils/theme';
+import MobileChallengeMenu from '../components/elements/MobileChallengeMenu';
+import Leaderboard from '../components/sections/Leaderboard';
+import Readme from '../components/sections/Readme';
+import HowTo from '../components/sections/HowTo';
+import MyEntries from '../components/sections/MyEntries';
+import Submit from '../components/sections/Submit';
+import Media from 'react-media';
+import DesktopChallengeMenu from '../components/elements/DesktopChallengeMenu';
+import {RENDER_ICO} from '../utils/globals';
+import textIco from '../assets/text_ico.svg';
+import getChallengeInfo from '../api/getChallengeInfo';
+import Loading from '../components/elements/Loading';
 
 const Challenge = () => {
     const challengeName = useParams().challengeId;
@@ -29,20 +29,20 @@ const Challenge = () => {
     const sectionRender = () => {
         switch (section) {
             case 0:
-                return <Leaderboard challengeName={challengeName}/>
+                return <Leaderboard challengeName={challengeName}/>;
             case 1:
                 return <Readme challengeName={challengeName} metric={challenge.mainMetric}
-                               description={challenge.description} deadline={challenge.deadline}/>
+                               description={challenge.description} deadline={challenge.deadline}/>;
             case 2:
-                return <HowTo challengeName={challengeName}/>
+                return <HowTo challengeName={challengeName}/>;
             case 3:
-                return <MyEntries challengeName={challengeName}/>
+                return <MyEntries challengeName={challengeName}/>;
             case 4:
-                return <Submit challengeName={challengeName}/>
+                return <Submit challengeName={challengeName}/>;
             default:
-                return <Leaderboard challengeName={challengeName}/>
+                return <Leaderboard challengeName={challengeName}/>;
         }
-    }
+    };
 
     const mobileRender = () => {
         return (
@@ -56,7 +56,7 @@ const Challenge = () => {
                 {sectionRender()}
             </FlexColumn>
         );
-    }
+    };
 
     const desktopRender = () => {
         return (
@@ -81,7 +81,7 @@ const Challenge = () => {
                 </FlexColumn>
             </>
         );
-    }
+    };
 
     return (
         <>
@@ -93,6 +93,6 @@ const Challenge = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Challenge;

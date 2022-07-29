@@ -1,9 +1,9 @@
-import React from "react";
-import {FlexRow, Svg} from "../../utils/containers";
-import {Body, Medium} from "../../utils/fonts";
-import styled from "styled-components";
-import {RENDER_DEADLINE_TIME, RENDER_ICO} from "../../utils/globals";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexRow, Svg} from '../../utils/containers';
+import {Body, Medium} from '../../utils/fonts';
+import styled from 'styled-components';
+import {RENDER_DEADLINE_TIME, RENDER_ICO} from '../../utils/globals';
+import PropsTypes from 'prop-types';
 
 const HoverLabel = styled(Body)`
   position: absolute;
@@ -45,7 +45,7 @@ const renderHoverLabel = (type, time) => {
         default:
             return '';
     }
-}
+};
 
 const IconLabelStyle = styled(FlexRow)`
   position: relative;
@@ -55,7 +55,7 @@ const IconLabelStyle = styled(FlexRow)`
       display: flex;
     }
   }
-`
+`;
 
 const IconLabel = (props) => {
     return (

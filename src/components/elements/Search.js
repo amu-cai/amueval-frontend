@@ -1,10 +1,10 @@
-import React from "react";
-import {FlexRow, Svg} from "../../utils/containers";
+import React from 'react';
+import {FlexRow, Svg} from '../../utils/containers';
 import loopIco from '../../assets/loop_ico.svg';
 import filtersIco from '../../assets/filters_ico.svg';
-import styled from "styled-components";
-import {Body} from "../../utils/fonts";
-import PropsTypes from "prop-types";
+import styled from 'styled-components';
+import {Body} from '../../utils/fonts';
+import PropsTypes from 'prop-types';
 
 const SearchStyle = styled(FlexRow)`
   width: 100%;

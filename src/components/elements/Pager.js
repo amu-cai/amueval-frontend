@@ -1,10 +1,10 @@
-import React from "react";
-import {FlexRow, Svg} from "../../utils/containers";
-import CircleNumber from "./CircleNumber";
+import React from 'react';
+import {FlexRow, Svg} from '../../utils/containers';
+import CircleNumber from './CircleNumber';
 import polygon from '../../assets/polygon.svg';
-import styled from "styled-components";
-import theme from "../../utils/theme";
-import PropsTypes from "prop-types";
+import styled from 'styled-components';
+import theme from '../../utils/theme';
+import PropsTypes from 'prop-types';
 
 const PagerStyle = styled(FlexRow)`
   gap: 14px;
@@ -63,7 +63,7 @@ const Pager = (props) => {
         );
     }
     return '';
-}
+};
 
 Pager.propTypes = {
     visible: PropsTypes.bool,

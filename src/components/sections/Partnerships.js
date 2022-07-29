@@ -1,8 +1,8 @@
-import React from "react";
-import {FlexColumn, Grid} from "../../utils/containers";
-import {H2} from "../../utils/fonts";
-import Placeholder from "../elements/Placeholder";
-import styled from "styled-components";
+import React from 'react';
+import {FlexColumn, Grid} from '../../utils/containers';
+import {H2} from '../../utils/fonts';
+import Placeholder from '../elements/Placeholder';
+import styled from 'styled-components';
 
 const PartnershipsStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -43,6 +43,6 @@ const Partnerships = () => {
             </FlexColumn>
         </PartnershipsStyle>
     );
-}
+};
 
 export default Partnerships;

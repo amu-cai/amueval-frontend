@@ -1,8 +1,8 @@
-import React from "react";
-import {FlexRow, Svg} from "../../utils/containers";
-import theme from "../../utils/theme";
-import {Medium} from "../../utils/fonts";
-import PropsTypes from "prop-types";
+import React from 'react';
+import {FlexRow, Svg} from '../../utils/containers';
+import theme from '../../utils/theme';
+import {Medium} from '../../utils/fonts';
+import PropsTypes from 'prop-types';
 
 const InfoItem = (props) => {
     return (

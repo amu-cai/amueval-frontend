@@ -1,9 +1,9 @@
-import React from "react";
-import {FlexColumn, FlexRow, ImageBackground} from "../../utils/containers";
-import {Body, H2, Medium} from "../../utils/fonts";
-import CircleNumber from "../elements/CircleNumber";
-import Media from "react-media";
-import theme from "../../utils/theme";
+import React from 'react';
+import {FlexColumn, FlexRow, ImageBackground} from '../../utils/containers';
+import {Body, H2, Medium} from '../../utils/fonts';
+import CircleNumber from '../elements/CircleNumber';
+import Media from 'react-media';
+import theme from '../../utils/theme';
 import commercialImage from '../../assets/commercial-image.svg';
 
 const Commercial = () => {
@@ -100,6 +100,6 @@ const Commercial = () => {
             </Media>
         </>
     );
-}
+};
 
 export default Commercial;

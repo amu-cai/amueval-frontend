@@ -1,7 +1,7 @@
-import React from "react";
-import {Container, FlexRow} from "../../utils/containers";
-import styled from "styled-components";
-import {Medium} from "../../utils/fonts";
+import React from 'react';
+import {Container, FlexRow} from '../../utils/containers';
+import styled from 'styled-components';
+import {Medium} from '../../utils/fonts';
 
 const FooterStyle = styled(FlexRow)`
   width: 100%;
@@ -39,6 +39,6 @@ const Footer = () => {
             </Medium>
         </FooterStyle>
     );
-}
+};
 
 export default Footer;
