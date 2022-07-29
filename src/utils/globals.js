@@ -46,6 +46,7 @@ const RENDER_ICO = (type) => {
 };
 
 const CALC_PAGES = (objects) => {
+    if (objects.length === 0) return 1;
     return Math.ceil(objects.length / ELEMENTS_PER_PAGE);
 };
 

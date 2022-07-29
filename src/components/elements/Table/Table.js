@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
-import getChallengeSubmissions from '../../../api/getChallengeSubmissions';
+import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
 import {H3, Medium} from '../../../utils/fonts';
 import _renderSubmissions from './_renderSubmissions';
 import Pager from '../Pager';
@@ -12,7 +12,7 @@ import PropsTypes from 'prop-types';
 
 const Table = (props) => {
     const headerElements = ['#', 'submitter', 'when', 'result', 'entries'];
-    const [challengeData, setChallengeData] = React.useState({});
+    const [leaderboardData, setLeaderboardData] = React.useState({});
     const [pageNr, setPageNr] = React.useState(1);
     const [loading, setLoading] = React.useState(true);
 
@@ -21,16 +21,16 @@ const Table = (props) => {
     });
 
     const challengeDataRequest = () => {
-        getChallengeSubmissions(setChallengeData, setLoading, props.challengeName);
+        getChallengeLeaderboard(setLeaderboardData, setLoading, props.challengeName);
     };
 
     const renderSubmissions = () => {
-        return _renderSubmissions(pageNr, challengeData.submissions
-            ? challengeData.submissions : []);
+        return _renderSubmissions(pageNr, leaderboardData.entries
+            ? leaderboardData.entries : []);
     };
 
     const nextPage = () => {
-        if (pageNr !== CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])) {
+        if (pageNr !== CALC_PAGES(leaderboardData.entries ? leaderboardData.entries : [])) {
             let newPage = pageNr + 1;
             setPageNr(newPage);
         }
@@ -86,13 +86,13 @@ const Table = (props) => {
         <>
             <Loading visible={loading}/>
             <Media query={theme.mobile}>
-                {mobileRender()}
+                {!loading ? mobileRender() : ''}
             </Media>
             <Media query={theme.desktop}>
-                {desktopRender()}
+                {!loading ? desktopRender() : ''}
             </Media>
             <Pager visible={!loading} pageNr={pageNr} nextPage={nextPage} previousPage={previousPage}
-                   pages={CALC_PAGES(challengeData.submissions ? challengeData.submissions : [])}/>
+                   pages={CALC_PAGES(leaderboardData.entries ? leaderboardData.entries : [])}/>
         </>
     );
 };
