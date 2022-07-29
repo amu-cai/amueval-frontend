@@ -1,4 +1,4 @@
-import {API} from "../utils/globals";
+import {API} from '../utils/globals';
 
 const getChallenges = (setDataState, setLoadingState) => {
     fetch(`${API}/list-challenges`)
@@ -8,6 +8,6 @@ const getChallenges = (setDataState, setLoadingState) => {
             if (setLoadingState)
                 setLoadingState(false);
         });
-}
+};
 
 export default getChallenges;

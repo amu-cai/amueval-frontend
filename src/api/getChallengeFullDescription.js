@@ -1,4 +1,4 @@
-import {API} from "../utils/globals";
+import {API} from '../utils/globals';
 
 const getChallengeFullDescription = (setDataState, setLoading, challengeName) => {
     fetch(`${API}/challenge-readme/${challengeName}/markdown`)
@@ -8,6 +8,6 @@ const getChallengeFullDescription = (setDataState, setLoading, challengeName) =>
             if (setLoading)
                 setLoading(false);
         });
-}
+};
 
 export default getChallengeFullDescription;
