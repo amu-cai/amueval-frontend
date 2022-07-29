@@ -39,6 +39,14 @@ const FiltersMenuStyle = styled(FlexColumn)`
 `;
 
 const FiltersMenu = (props) => {
+    const resetHandler = () => {
+        console.log('siema');
+        props.sortByHandler(0);
+        props.statusHandler(0);
+        props.challengeTypeHandler(0);
+        props.commercialHandler(0);
+    }
+
     return (
         <>
             <TransBack backgroundColor={theme.colors.dark03} translateX={props.translateX}
@@ -55,19 +63,17 @@ const FiltersMenu = (props) => {
                           handler={props.commercialHandler} option={props.commercial}/>
                 <Media query={theme.mobile}>
                     <FlexRow gap='16px' margin='14px 0 0 0'>
-                        <Button as='button' width='64px' height='28px'>
+                        <Button width='64px' height='28px' handler={props.toggleFiltersMenu}>
                             Done
                         </Button>
-                        <Button as='button' width='64px' height='28px'
-                                backgroundColor={theme.colors.dark}>
+                        <Button width='64px' height='28px' backgroundColor={theme.colors.dark} handler={resetHandler}>
                             Reset
                         </Button>
                     </FlexRow>
                 </Media>
                 <Media query={theme.desktop}>
                     <FlexRow margin='20px 0 0 0' width='94%' alignmentX='flex-start'>
-                        <Button as='button' width='72px' height='34px'
-                                backgroundColor={theme.colors.green}>
+                        <Button width='72px' height='34px' backgroundColor={theme.colors.green} handler={resetHandler}>
                             Reset
                         </Button>
                     </FlexRow>

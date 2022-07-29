@@ -31,23 +31,23 @@ const Challenges = () => {
     const challengesRequest = () => {
         getChallenges(setChallengesFromAPI);
         getChallenges(setChallenges, setLoading);
-    }
+    };
 
     const sortByHandler = (value) => {
         setSortBy(value);
-    }
+    };
 
     const statusHandler = (value) => {
         setStatus(value)
-    }
+    };
 
     const challengeTypeHandler = (value) => {
         setChallengeType(value);
-    }
+    };
 
     const commercialHandler = (value) => {
         setCommercial(value);
-    }
+    };
 
     const searchQueryHandler = (event) => {
         _searchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);

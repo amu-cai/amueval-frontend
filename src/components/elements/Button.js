@@ -23,7 +23,7 @@ const ButtonStyle = styled(Medium)`
 
 const Button = (props) => {
     return (
-        <ButtonStyle onClick={props.handler} width={props.width} height={props.height}
+        <ButtonStyle as='button' onClick={props.handler} width={props.width} height={props.height}
                      color={props.color} backgroundColor={props.backgroundColor}>
             {props.children}
         </ButtonStyle>
