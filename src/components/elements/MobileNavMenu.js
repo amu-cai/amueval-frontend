@@ -7,6 +7,7 @@ import cupIco from '../../assets/cup_ico.svg';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {CHALLENGES_PAGE} from "../../utils/globals";
+import PropsTypes from "prop-types";
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -72,5 +73,15 @@ const MobileNavMenu = (props) => {
         </TransBack>
     );
 }
+
+MobileNavMenu.propTypes = {
+    translateY: PropsTypes.string,
+    toggleNavMenu: PropsTypes.func,
+};
+
+MobileNavMenu.defaultProps = {
+    translateY: 'calc(-100vh - 42px)',
+    toggleNavMenu: null,
+};
 
 export default MobileNavMenu;

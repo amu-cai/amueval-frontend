@@ -19,6 +19,6 @@ const Logo = () => {
             Gonito.net
         </LogoStyle>
     );
-}
+};
 
 export default Logo;

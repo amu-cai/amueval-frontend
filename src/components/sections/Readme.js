@@ -79,7 +79,7 @@ const Readme = (props) => {
                     <H2 as='h2'>
                         Info
                     </H2>
-                    <InfoList iconsSize='24px'/>
+                    <InfoList iconsSize='24px' metric={props.metric} deadline={props.deadline}/>
                 </FlexColumn>
                 <FlexColumn alignmentX='flex-start' maxWidth='260px'>
                     <H2 as='h2'>
@@ -118,7 +118,7 @@ const Readme = (props) => {
                     <H2 as='h2'>
                         Info
                     </H2>
-                    <InfoList iconsSize='32px'/>
+                    <InfoList iconsSize='32px' metric={props.metric} deadline={props.deadline}/>
                 </FlexColumn>
                 <FlexColumn alignmentX='flex-start' width='80%' maxWidth='1000px'>
                     <H2 as='h2'>

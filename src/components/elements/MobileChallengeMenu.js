@@ -2,6 +2,7 @@ import React from "react";
 import {FlexRow} from "../../utils/containers";
 import styled from "styled-components";
 import {Medium} from "../../utils/fonts";
+import PropsTypes from "prop-types";
 
 const MenuOption = styled(Medium)`
   cursor: pointer;
@@ -37,6 +38,14 @@ const MobileChallengeMenu = (props) => {
             </FlexRow>
         </>
     );
-}
+};
+
+MobileChallengeMenu.propTypes = {
+    section: PropsTypes.number,
+};
+
+MobileChallengeMenu.defaultProps = {
+    section: 0,
+};
 
 export default MobileChallengeMenu;

@@ -4,6 +4,7 @@ import loopIco from '../../assets/loop_ico.svg';
 import filtersIco from '../../assets/filters_ico.svg';
 import styled from "styled-components";
 import {Body} from "../../utils/fonts";
+import PropsTypes from "prop-types";
 
 const SearchStyle = styled(FlexRow)`
   width: 100%;
@@ -48,6 +49,16 @@ const Search = (props) => {
             <Svg as='button' src={filtersIco} onClick={props.toggleFiltersMenu}/>
         </SearchStyle>
     );
-}
+};
+
+Search.propTypes = {
+    searchQueryHandler: PropsTypes.func,
+    toggleFiltersMenu: PropsTypes.func,
+};
+
+Search.defaultProps = {
+    searchQueryHandler: null,
+    toggleFiltersMenu: null,
+};
 
 export default Search;

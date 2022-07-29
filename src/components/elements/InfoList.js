@@ -10,6 +10,7 @@ import {RENDER_DEADLINE_TIME} from "../../utils/globals";
 import coinsIco from "../../assets/coins_ico.svg";
 import Media from "react-media";
 import theme from "../../utils/theme";
+import PropsTypes from "prop-types";
 
 const InfoList = (props) => {
     const itemsRender = (gap, iconsSize) => {
@@ -53,5 +54,23 @@ const InfoList = (props) => {
         </>
     );
 }
+
+InfoList.propTypes = {
+    iconsSize: PropsTypes.string,
+    metric: PropsTypes.string,
+    bestScore: PropsTypes.string,
+    baseline: PropsTypes.string,
+    deadline: PropsTypes.string,
+    prize: PropsTypes.string,
+};
+
+InfoList.defaultProps = {
+    iconsSize: '',
+    metric: '',
+    bestScore: '',
+    baseline: '',
+    deadline: '',
+    prize: '',
+};
 
 export default InfoList;

@@ -4,6 +4,7 @@ import CircleNumber from "./CircleNumber";
 import polygon from '../../assets/polygon.svg';
 import styled from "styled-components";
 import theme from "../../utils/theme";
+import PropsTypes from "prop-types";
 
 const PagerStyle = styled(FlexRow)`
   gap: 14px;
@@ -63,5 +64,21 @@ const Pager = (props) => {
     }
     return '';
 }
+
+Pager.propTypes = {
+    visible: PropsTypes.bool,
+    previousPage: PropsTypes.func,
+    pageNr: PropsTypes.number,
+    nextPage: PropsTypes.func,
+    pages: PropsTypes.number,
+};
+
+Pager.defaultProps = {
+    visible: false,
+    previousPage: null,
+    pageNr: 1,
+    nextPage: null,
+    pages: 1
+};
 
 export default Pager;

@@ -1,6 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 import {Container} from "../../utils/containers";
+import PropsTypes from "prop-types";
 
 const rotate = keyframes`
   from {
@@ -45,6 +46,14 @@ const Loading = (props) => {
             </SpinnerContainer> : ''}
         </>
     );
+};
+
+Loading.propTypes = {
+    visible: PropsTypes.bool,
+};
+
+Loading.defaultProps = {
+    visible: true,
 }
 
 export default Loading;
