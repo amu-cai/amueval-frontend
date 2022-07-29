@@ -56,7 +56,8 @@ const Pager = (props) => {
                            backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
                 <CircleNumber number={props.pageNr}/>
                 <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
-                            backgroundColor={(props.pageNr === props.pages) ? 'transparent' : theme.colors.dark}/>
+                            backgroundColor={(props.pageNr === props.pages || props.pages === 0)
+                                ? 'transparent' : theme.colors.dark}/>
             </PagerStyle>
         );
     }
