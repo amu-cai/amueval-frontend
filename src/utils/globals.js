@@ -12,6 +12,7 @@ const MINI_DESCRIPTION_LENGTH = 70;
 const API = 'https://gonito.net/api';
 const CHALLENGES_PAGE = '/challenges';
 const CHALLENGE_PAGE = '/challenge';
+const CSI_LINK = 'https://csi.amu.edu.pl/';
 
 const MINI_DESCRIPTION_RENDER = (description) => {
     if (description) {
@@ -65,6 +66,7 @@ export {
     CHALLENGES_PAGE,
     CHALLENGE_PAGE,
     MINI_DESCRIPTION_LENGTH,
+    CSI_LINK,
     MINI_DESCRIPTION_RENDER,
     RENDER_ICO,
     CALC_PAGES,

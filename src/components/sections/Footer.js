@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, FlexRow} from '../../utils/containers';
 import styled from 'styled-components';
 import {Medium} from '../../utils/fonts';
+import {CSI_LINK} from '../../utils/globals';
 
 const FooterStyle = styled(FlexRow)`
   width: 100%;
@@ -33,7 +34,7 @@ const Footer = () => {
             <Medium as='p'>
                 Read more about&nbsp;
                 <Container as='a' display='inline' target='_blank'
-                           href='https://wmi.amu.edu.pl/wiadomosci/wmi-w-mediach/centrum-sztucznej-inteligencji'>
+                           href={CSI_LINK}>
                     CSI
                 </Container>
             </Medium>
