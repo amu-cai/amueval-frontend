@@ -86,13 +86,25 @@ const Table = (props) => {
         <>
             <Loading visible={loading}/>
             <Media query={theme.mobile}>
-                {!loading ? mobileRender() : ''}
+                <>
+                    {!loading ? mobileRender() : ''}
+                    <Pager visible={!loading} pageNr={pageNr}
+                           pages={CALC_PAGES(leaderboardData.entries ? leaderboardData.entries : [])}
+                           nextPage={nextPage} previousPage={previousPage} width='48px' borderRadius='64px'
+                           number={`${pageNr} / ${CALC_PAGES(leaderboardData.entries ?
+                               leaderboardData.entries : [])}`}/>
+                </>
             </Media>
             <Media query={theme.desktop}>
-                {!loading ? desktopRender() : ''}
+                <>
+                    {!loading ? desktopRender() : ''}
+                    <Pager visible={!loading} pageNr={pageNr}
+                           pages={CALC_PAGES(leaderboardData.entries ? leaderboardData.entries : [])}
+                           nextPage={nextPage} previousPage={previousPage} width='72px' borderRadius='64px'
+                           number={`${pageNr} / ${CALC_PAGES(leaderboardData.entries ?
+                               leaderboardData.entries : [])}`}/>
+                </>
             </Media>
-            <Pager visible={!loading} pageNr={pageNr} nextPage={nextPage} previousPage={previousPage}
-                   pages={CALC_PAGES(leaderboardData.entries ? leaderboardData.entries : [])}/>
         </>
     );
 };

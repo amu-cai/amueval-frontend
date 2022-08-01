@@ -97,7 +97,8 @@ const Challenges = () => {
                         </FlexColumn>
                     </FlexColumn>
                     <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                           nextPage={nextPage} previousPage={previousPage}/>
+                           nextPage={nextPage} previousPage={previousPage} width='48px' borderRadius='64px'
+                           number={`${pageNr} / ${CALC_PAGES(challenges)}`}/>
                 </FlexColumn>
             </>
         );
@@ -132,7 +133,8 @@ const Challenges = () => {
                         </FlexColumn>
                     </FlexColumn>
                     <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                           nextPage={nextPage} previousPage={previousPage}/>
+                           nextPage={nextPage} previousPage={previousPage} width='72px' borderRadius='64px'
+                           number={`${pageNr} / ${CALC_PAGES(challenges)}`}/>
                 </FlexColumn>
             </>
         );

@@ -55,7 +55,7 @@ const Pager = (props) => {
             <PagerStyle>
                 <LeftArrow as='button' src={polygon} onClick={props.previousPage} size='cover'
                            backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
-                <CircleNumber number={props.pageNr}/>
+                <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
                 <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
                             backgroundColor={(props.pageNr === props.pages)
                                 ? 'transparent' : theme.colors.dark}/>
@@ -71,6 +71,9 @@ Pager.propTypes = {
     pageNr: PropsTypes.number,
     nextPage: PropsTypes.func,
     pages: PropsTypes.number,
+    number: PropsTypes.string,
+    width: PropsTypes.string,
+    borderRadius: PropsTypes.string
 };
 
 Pager.defaultProps = {
@@ -78,7 +81,10 @@ Pager.defaultProps = {
     previousPage: null,
     pageNr: 1,
     nextPage: null,
-    pages: 1
+    pages: 1,
+    number: '',
+    width: null,
+    borderRadius: null
 };
 
 export default Pager;
