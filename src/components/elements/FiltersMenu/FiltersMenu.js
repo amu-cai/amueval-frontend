@@ -40,7 +40,6 @@ const FiltersMenuStyle = styled(FlexColumn)`
 
 const FiltersMenu = (props) => {
     const resetHandler = () => {
-        console.log('siema');
         props.sortByHandler(0);
         props.statusHandler(0);
         props.challengeTypeHandler(0);

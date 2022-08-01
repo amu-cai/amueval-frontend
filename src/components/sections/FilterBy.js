@@ -29,7 +29,7 @@ const FilterBy = (props) => {
     };
 
     return (
-        <FlexColumn as='fieldset' width='94%' alignmentX='flex-start'>
+        <FlexColumn as='fieldset' width='100%' alignmentX='flex-start' padding='8px'>
             <Media query={theme.mobile}>
                 <Medium as='legend' textTransform='uppercase' margin='0 0 12px 0'>
                     {props.header}
@@ -39,9 +39,8 @@ const FilterBy = (props) => {
                 <H3 as='legend' textTransform='uppercase' margin='0 0 24px 0'>
                     {props.header}
                 </H3>
-
             </Media>
-            <Grid gridTemplateColumns='auto auto' gridGap='12px'>
+            <Grid gridTemplateColumns='auto auto' gridGap='12px' position='relative'>
                 {renderFilterOptions()}
             </Grid>
         </FlexColumn>
