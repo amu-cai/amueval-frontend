@@ -29,10 +29,6 @@ const SearchStyle = styled(FlexRow)`
     &:hover {
       transform: scale(1.25);
     }
-
-    @media (min-width: ${({theme}) => theme.overMobile}) {
-      display: none;
-    }
   }
 
   input {
@@ -46,7 +42,8 @@ const Search = (props) => {
         <SearchStyle>
             <Svg src={loopIco}/>
             <Body as='input' onChange={(event) => props.searchQueryHandler(event)}/>
-            <Svg as='button' src={filtersIco} onClick={props.toggleFiltersMenu}/>
+            <Svg as='button' src={filtersIco} onClick={props.toggleFiltersMenu}
+                 display={props.filterButton ? 'block' : 'none'}/>
         </SearchStyle>
     );
 };
@@ -54,11 +51,13 @@ const Search = (props) => {
 Search.propTypes = {
     searchQueryHandler: PropsTypes.func,
     toggleFiltersMenu: PropsTypes.func,
+    filterButton: PropsTypes.bool
 };
 
 Search.defaultProps = {
     searchQueryHandler: null,
     toggleFiltersMenu: null,
+    filterButton: false,
 };
 
 export default Search;

@@ -71,7 +71,7 @@ const FiltersMenu = (props) => {
                     </FlexRow>
                 </Media>
                 <Media query={theme.desktop}>
-                    <FlexRow margin='20px 0 0 0' width='94%' alignmentX='flex-start'>
+                    <FlexRow margin='8px 0 0 0' width='94%' alignmentX='flex-start'>
                         <Button width='72px' height='34px' backgroundColor={theme.colors.green} handler={resetHandler}>
                             Reset
                         </Button>

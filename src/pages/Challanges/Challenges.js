@@ -90,15 +90,16 @@ const Challenges = () => {
                         <H1 as='h1' margin='0 0 20px 0'>
                             Challenges
                         </H1>
-                        <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                        <Search searchQueryHandler={searchQueryHandler} filterButton
+                                toggleFiltersMenu={toggleFiltersMenu}/>
                         <FlexColumn width='100%'>
                             <Loading visible={loading}/>
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                           nextPage={nextPage} previousPage={previousPage} width='48px' borderRadius='64px'
-                           number={`${pageNr} / ${CALC_PAGES(challenges)}`}/>
+                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
+                                       nextPage={nextPage} previousPage={previousPage} width='48px' borderRadius='64px'
+                                       number={`${pageNr} / ${CALC_PAGES(challenges)}`}/> : ''}
                 </FlexColumn>
             </>
         );
@@ -122,7 +123,7 @@ const Challenges = () => {
                                 <Body margin='0 0 12px 0' maxWidth='400px'>
                                     Increase your machine learning skills by competing in our exciting challenges.
                                 </Body>
-                                <Search searchQueryHandler={searchQueryHandler} toggleFiltersMenu={toggleFiltersMenu}/>
+                                <Search searchQueryHandler={searchQueryHandler}/>
                             </FlexColumn>
                             <Svg src={cupIco} size='contain' width='25%'
                                  height='160px' backgroundColor={theme.colors.green}/>
@@ -132,9 +133,9 @@ const Challenges = () => {
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    <Pager visible={!loading} pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                           nextPage={nextPage} previousPage={previousPage} width='72px' borderRadius='64px'
-                           number={`${pageNr} / ${CALC_PAGES(challenges)}`}/>
+                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
+                                       nextPage={nextPage} previousPage={previousPage} width='72px' borderRadius='64px'
+                                       number={`${pageNr} / ${CALC_PAGES(challenges)}`}/> : ''}
                 </FlexColumn>
             </>
         );

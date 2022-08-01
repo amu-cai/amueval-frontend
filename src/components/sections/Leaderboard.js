@@ -53,7 +53,7 @@ const Leaderboard = (props) => {
                 <H2 as='h2' margin='0 0 12px 0'>
                     Leaderboard
                 </H2>
-                <FlexRow gap='12px' margin='0 0 20px 0'>
+                <FlexRow gap='12px' margin='0 0 24px 0'>
                     <BoardVariantMobile as='button' active={0 === variant} onClick={() => setVariant(0)}>
                         By user
                     </BoardVariantMobile>
@@ -72,7 +72,7 @@ const Leaderboard = (props) => {
                 <H2 as='h2' margin='0 0 32px 0'>
                     Leaderboard
                 </H2>
-                <FlexRow border={`1px solid ${theme.colors.green05}`} margin='0 0 76px 0'>
+                <FlexRow border={`1px solid ${theme.colors.green05}`} margin='0 0 48px 0'>
                     <BoardVariantDesktop as='button' width='150px' height='48px'
                                          active={0 === variant} onClick={() => setVariant(0)}>
                         <H3 as='span'>

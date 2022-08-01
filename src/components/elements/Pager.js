@@ -50,23 +50,19 @@ const RightArrow = styled(Svg)`
 `;
 
 const Pager = (props) => {
-    if (props.visible) {
-        return (
-            <PagerStyle>
-                <LeftArrow as='button' src={polygon} onClick={props.previousPage} size='cover'
-                           backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
-                <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
-                <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
-                            backgroundColor={(props.pageNr === props.pages)
-                                ? 'transparent' : theme.colors.dark}/>
-            </PagerStyle>
-        );
-    }
-    return '';
+    return (
+        <PagerStyle>
+            <LeftArrow as='button' src={polygon} onClick={props.previousPage} size='cover'
+                       backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
+            <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
+            <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
+                        backgroundColor={(props.pageNr === props.pages)
+                            ? 'transparent' : theme.colors.dark}/>
+        </PagerStyle>
+    );
 };
 
 Pager.propTypes = {
-    visible: PropsTypes.bool,
     previousPage: PropsTypes.func,
     pageNr: PropsTypes.number,
     nextPage: PropsTypes.func,
@@ -77,7 +73,6 @@ Pager.propTypes = {
 };
 
 Pager.defaultProps = {
-    visible: false,
     previousPage: null,
     pageNr: 1,
     nextPage: null,
