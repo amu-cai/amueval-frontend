@@ -49,7 +49,7 @@ const NavBar = () => {
                             Challenges
                         </Menu>
                     </FlexRow>
-                    <FlexRow as={Link} to='/' gap='16px'>
+                    <FlexRow as={Link} to='/register' gap='16px'>
                         <Svg width='16px' height='16px' src={registerIco}/>
                         <Menu as='li'>
                             Register
