@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {Container} from './containers';
 
 const H1 = styled(Container)`
+  display: inline-block;
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
   font-size: 24px;
@@ -14,6 +15,7 @@ const H1 = styled(Container)`
 `;
 
 const H2 = styled(Container)`
+  display: inline-block;
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -26,6 +28,7 @@ const H2 = styled(Container)`
 `;
 
 const H3 = styled(Container)`
+  display: inline-block;
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -38,6 +41,7 @@ const H3 = styled(Container)`
 `;
 
 const Body = styled(Container)`
+  display: inline-block;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 14px;
@@ -51,6 +55,7 @@ const Body = styled(Container)`
 `;
 
 const Medium = styled(Container)`
+  display: inline-block;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -64,6 +69,7 @@ const Medium = styled(Container)`
 `;
 
 const Menu = styled(Container)`
+  display: inline-block;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   line-height: 24px;
@@ -71,6 +77,7 @@ const Menu = styled(Container)`
 `;
 
 const Label = styled(Menu)`
+  display: inline-block;
   font-weight: 300;
 
   @media (min-width: ${({theme}) => theme.overMobile}) {

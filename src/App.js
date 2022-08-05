@@ -8,6 +8,7 @@ import Footer from './components/sections/Footer';
 import {CHALLENGE_PAGE, CHALLENGES_PAGE} from './utils/globals';
 import Challenge from './pages/Challenge';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <NavBar/>
                 <Routes>
+                    <Route path='/login' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
                     <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
