@@ -55,7 +55,7 @@ const NavBar = () => {
                             Register
                         </Menu>
                     </FlexRow>
-                    <FlexRow as={Link} to='/' gap='16px'>
+                    <FlexRow as={Link} to='/login' gap='16px'>
                         <Svg width='16px' height='16px' src={loginIco}/>
                         <Menu as='li'>
                             Sign in

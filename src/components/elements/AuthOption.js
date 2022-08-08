@@ -13,9 +13,21 @@ const AuthOptionStyle = styled(FlexRow)`
   border: 1px solid ${({theme}) => theme.colors.dark03};
   box-shadow: ${({theme}) => theme.shadow};
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 
   * {
     cursor: pointer;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 260px;
+    height: 50px;
+    padding: 10px 24px;
+    gap: 40px;
   }
 `;
 

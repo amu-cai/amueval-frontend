@@ -18,6 +18,8 @@ const AuthHeaderStyle = styled(FlexRow)`
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
     justify-content: space-around;
+    width: 400px;
+    height: 80px;
   }
 
   h1 {
@@ -31,6 +33,11 @@ const AuthHeaderStyle = styled(FlexRow)`
     line-height: 22px;
     color: ${({theme}) => theme.colors.dark};
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    
+    &:hover {
+      color: ${({theme}) => theme.colors.green};
+    }
 
     @media (min-width: ${({theme}) => theme.overMobile}) {
       font-size: 24px;

@@ -3,7 +3,6 @@ import {FlexColumn} from '../utils/containers';
 import AuthHeader from '../components/elements/AuthHeader';
 import {Body, Medium} from '../utils/fonts';
 import {Link} from 'react-router-dom';
-import theme from '../utils/theme';
 import styled from 'styled-components';
 import AuthOption from '../components/elements/AuthOption';
 import githubIco from '../assets/github_ico.svg';
@@ -25,6 +24,25 @@ const OptionsContainerStyle = styled(FlexColumn)`
   gap: 32px;
   padding: 32px;
   box-shadow: ${({theme}) => theme.shadow};
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 400px;
+    height: 382px;
+  }
+`;
+
+const LinkStyle = styled(Medium)`
+  cursor: pointer;
+  color: ${({theme}) => theme.colors.green};
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: ${({theme}) => theme.colors.green};
+  }
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    color: ${({theme}) => theme.colors.dark};
+  }
 `;
 
 const Register = () => {
@@ -54,10 +72,9 @@ const Register = () => {
                 </FlexColumn>
                 <Body>
                     Have an account?&nbsp;
-                    <Medium as={Link} color={theme.colors.green} cursor='pointer'
-                            display='inline-block' to='/login'>
+                    <LinkStyle as={Link} to='/login'>
                         Sign in.
-                    </Medium>
+                    </LinkStyle>
                 </Body>
             </OptionsContainerStyle>
         </MainContainerStyle>
