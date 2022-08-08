@@ -7,8 +7,8 @@ import NavBar from './components/elements/NavBar';
 import Footer from './components/sections/Footer';
 import {CHALLENGE_PAGE, CHALLENGES_PAGE} from './utils/globals';
 import Challenge from './pages/Challenge';
-import Register from './pages/Register';
-import Login from './pages/Login';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
 
 const App = () => {
     return (
