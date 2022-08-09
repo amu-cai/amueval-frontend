@@ -4,6 +4,7 @@ import theme from '../../utils/theme';
 import PropsTypes from 'prop-types';
 import {Body} from '../../utils/fonts';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const AuthOptionStyle = styled(FlexRow)`
   gap: 16px;
@@ -33,7 +34,7 @@ const AuthOptionStyle = styled(FlexRow)`
 
 const AuthOption = (props) => {
     return (
-        <AuthOptionStyle as='button'>
+        <AuthOptionStyle as={Link} to={props.to}>
             <Svg width='20px' height='20px' src={props.icon} backgroundColor={theme.colors.dark}/>
             <Body>
                 {props.children}
@@ -45,11 +46,13 @@ const AuthOption = (props) => {
 AuthOption.propTypes = {
     children: PropsTypes.node,
     icon: PropsTypes.string,
+    to: PropsTypes.string,
 };
 
 AuthOption.defaultProps = {
     children: '',
     icon: '',
+    to: '#'
 };
 
 export default AuthOption;

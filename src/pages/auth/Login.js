@@ -29,7 +29,7 @@ const Login = () => {
                             Github
                         </Medium>
                     </AuthOption>
-                    <AuthOption icon={emailIco}>
+                    <AuthOption to='/login-email' icon={emailIco}>
                         Sign in with&nbsp;
                         <Medium>
                             Email

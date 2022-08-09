@@ -14,12 +14,8 @@ const H1 = styled(Container)`
   }
 `;
 
-const H2 = styled(Container)`
-  display: inline-block;
-  font-family: 'Kanit', sans-serif;
-  font-weight: 400;
+const H2 = styled(H1)`
   font-size: 20px;
-  line-height: 24px;
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 32px;
@@ -27,10 +23,7 @@ const H2 = styled(Container)`
   }
 `;
 
-const H3 = styled(Container)`
-  display: inline-block;
-  font-family: 'Kanit', sans-serif;
-  font-weight: 400;
+const H3 = styled(H1)`
   font-size: 18px;
   line-height: 22px;
 
@@ -54,16 +47,10 @@ const Body = styled(Container)`
   }
 `;
 
-const Medium = styled(Container)`
-  display: inline-block;
-  font-family: 'Roboto', sans-serif;
+const Medium = styled(Body)`
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
-    font-size: 16px;
-    line-height: 22px;
     font-weight: 500;
   }
 `;

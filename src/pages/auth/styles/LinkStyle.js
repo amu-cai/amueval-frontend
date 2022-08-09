@@ -3,7 +3,7 @@ import {Medium} from '../../../utils/fonts';
 
 const LinkStyle = styled(Medium)`
   cursor: pointer;
-  color: ${({theme}) => theme.colors.green};
+  color: ${({theme, color}) => color ? color : theme.colors.green};
   transition: color 0.3s ease-in-out;
 
   &:hover {
