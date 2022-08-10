@@ -8,6 +8,12 @@ const AuthInputStyle = styled(Medium)`
   height: 36px;
   padding: 4px;
   border: 1px solid ${({theme}) => theme.colors.dark05};
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    width: 310px;
+    height: 52px;
+    padding: 8px;
+  }
 `;
 
 const AuthLabel = styled(FlexRow)`
@@ -20,6 +26,11 @@ const AuthLabel = styled(FlexRow)`
   font-weight: 400;
   padding: 4px;
   z-index: 2;
+
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    font-size: 16px;
+    top: -14px;
+  }
 `;
 
 const AuthInput = (props) => {

@@ -9,6 +9,7 @@ import LinkStyle from './styles/LinkStyle';
 import {Link} from 'react-router-dom';
 import {Body} from '../../utils/fonts';
 import theme from '../../utils/theme';
+import Media from 'react-media';
 
 const LoginWithEmail = () => {
     return (
@@ -17,11 +18,18 @@ const LoginWithEmail = () => {
             <OptionsContainerStyle>
                 <AuthInput label='Email / Username'/>
                 <AuthInput label='Password'/>
-                <FlexRow width='100%' alignmentX='flex-end'>
-                    <Button>
+                <Media query={theme.mobile}>
+                    <FlexRow width='100%' alignmentX='flex-end'>
+                        <Button>
+                            Sign in
+                        </Button>
+                    </FlexRow>
+                </Media>
+                <Media query={theme.desktop}>
+                    <Button width='112px' height='36px'>
                         Sign in
                     </Button>
-                </FlexRow>
+                </Media>
             </OptionsContainerStyle>
             <Body margin='32px 0 0 0'>
                 Forgot&nbsp;
