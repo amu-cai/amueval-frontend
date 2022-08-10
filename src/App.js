@@ -10,6 +10,7 @@ import Challenge from './pages/Challenge';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import LoginWithEmail from './pages/auth/LoginWithEmail';
+import RegisterWithEmail from './pages/auth/RegisterWithEmail';
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <NavBar/>
                 <Routes>
+                    <Route path='/register-email' element={<RegisterWithEmail/>}/>
                     <Route path='/login-email' element={<LoginWithEmail/>}/>
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>

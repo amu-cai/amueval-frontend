@@ -29,7 +29,7 @@ const Register = () => {
                             Github
                         </Medium>
                     </AuthOption>
-                    <AuthOption icon={emailIco}>
+                    <AuthOption to='/register-email' icon={emailIco}>
                         Register with&nbsp;
                         <Medium>
                             Email

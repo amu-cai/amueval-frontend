@@ -10,7 +10,8 @@ const OptionsContainerStyle = styled(FlexColumn)`
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
     width: 400px;
-    height: 382px;
+    min-height: 382px;
+    padding: 48px;
   }
 `;
 
