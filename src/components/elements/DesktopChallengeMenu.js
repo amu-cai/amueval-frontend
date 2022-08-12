@@ -9,7 +9,7 @@ const DesktopChallengeMenuStyle = styled(FlexColumn)`
   position: fixed;
   left: 0;
   overflow-y: auto;
-  width: 310px;
+  width: 280px;
   height: 100vh;
   top: 50px;
   padding: 64px 0 0 0;

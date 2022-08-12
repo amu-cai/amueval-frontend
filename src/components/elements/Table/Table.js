@@ -13,7 +13,7 @@ import _tableSearchQueryHandler from './_tableSearchQueryHandler';
 import Search from '../Search';
 
 const Table = (props) => {
-    const headerElements = ['#', 'submitter', 'when', 'result', 'entries'];
+    const headerElements = ['#', 'submitter', 'result', 'entries', 'when'];
     const [entriesFromApi, setEntriesFromApi] = React.useState([]);
     const [entries, setEntries] = React.useState([]);
     const [pageNr, setPageNr] = React.useState(1);
@@ -28,9 +28,9 @@ const Table = (props) => {
         getChallengeLeaderboard(setEntries, challengeName, setLoading);
     };
 
-    const renderSubmissions = () => {
+    const renderSubmissions = (gridGap) => {
         return _renderSubmissions(pageNr, entries
-            ? entries : []);
+            ? entries : [], gridGap);
     };
 
     const tableSearchQueryHandler = (event) => {
@@ -56,18 +56,18 @@ const Table = (props) => {
             <>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
                 <FlexColumn as='table' margin='20px 0 32px 0' minHeight='380px'>
-                    <Grid as='thead' gridTemplateColumns='1fr 3fr 3fr 1fr 1fr'
+                    <Grid as='thead' gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
                           gridGap='10px' width='100%'>
                         {headerElements.map((elem, index) => {
                             return (
                                 <FlexRow as='tr' key={`leaderboard-header-${index}`}
-                                         alignmentX={elem === 'entries' ? 'flex-end' : 'flex-start'}>
+                                         alignmentX={(elem === '#' || elem === 'submitter') ? 'flex-start' : 'flex-end'}>
                                     <Medium as='th'>{elem}</Medium>
                                 </FlexRow>
                             );
                         })}
                     </Grid>
-                    {renderSubmissions()}
+                    {renderSubmissions('10px')}
                 </FlexColumn>
                 <Pager pageNr={pageNr} width='48px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
@@ -81,19 +81,19 @@ const Table = (props) => {
         return (
             <>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
-                <FlexColumn as='table' margin='32px 0 72px 0' minHeight='438px'>
-                    <Grid as='thead' gridTemplateColumns='1fr 3fr 3fr 1fr 1fr'
-                          gridGap='10px' width='100%' margin='0 0 28px 0'>
+                <FlexColumn as='table' margin='32px 0 72px 0' minHeight='438px' width='100%'>
+                    <Grid as='thead' gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
+                          gridGap='32px' width='100%' margin='0 0 28px 0'>
                         {headerElements.map((elem, index) => {
                             return (
                                 <FlexRow as='tr' key={`leaderboard-header-${index}`}
-                                         alignmentX={elem === 'entries' ? 'flex-end' : 'flex-start'}>
+                                         alignmentX={(elem === '#' || elem === 'submitter') ? 'flex-start' : 'flex-end'}>
                                     <H3 as='th'>{elem}</H3>
                                 </FlexRow>
                             );
                         })}
                     </Grid>
-                    {renderSubmissions()}
+                    {renderSubmissions('32px')}
                 </FlexColumn>
                 <Pager pageNr={pageNr} width='72px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
