@@ -50,12 +50,13 @@ const NavBar = () => {
                             Challenges
                         </Menu>
                     </FlexRow>
-                    <FlexRow as={Link} to='/register' gap='16px'>
-                        <Svg width='16px' height='16px' src={registerIco}/>
-                        <Menu as='li'>
-                            Register
-                        </Menu>
-                    </FlexRow>
+                    {!KeyCloakService.isLoggedIn() ?
+                        <FlexRow as='button' onClick={KeyCloakService.doRegister} gap='16px'>
+                            <Svg width='16px' height='16px' src={registerIco}/>
+                            <Menu as='li'>
+                                Register
+                            </Menu>
+                        </FlexRow> : ''}
                     {KeyCloakService.isLoggedIn() ?
                         <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
                             <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
@@ -68,8 +69,7 @@ const NavBar = () => {
                             <Menu as='li'>
                                 Sign in
                             </Menu>
-                        </FlexRow>
-                    }
+                        </FlexRow>}
                 </FlexRow>
             </FlexRow>
             <MobileNavMenu translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>

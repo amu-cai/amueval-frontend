@@ -28,18 +28,22 @@ const ButtonLinkStyle = styled(Label)`
 
 const ButtonLink = (props) => {
     return (
-        <ButtonLinkStyle>
+        <ButtonLinkStyle as={props.as} onClick={props.onClick}>
             {props.children}
         </ButtonLinkStyle>
     );
 };
 
 ButtonLink.propTypes = {
+    as: PropsTypes.string,
+    onClick: PropsTypes.func,
     children: PropsTypes.node,
 };
 
 ButtonLink.defaultProps = {
     children: '',
+    as: 'div',
+    onClick: null,
 };
 
 export default ButtonLink;

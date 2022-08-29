@@ -3,10 +3,10 @@ import {Body, H1, Medium} from '../../utils/fonts';
 import {Container, FlexColumn, FlexRow, Svg} from '../../utils/containers';
 import theme from '../../utils/theme';
 import ButtonLink from '../elements/ButtonLink';
-import {Link} from 'react-router-dom';
 import Media from 'react-media';
 import codepenIco from '../../assets/codepen_ico.svg';
 import styled from 'styled-components';
+import KeyCloakService from '../../services/KeyCloakService';
 
 const TitleParagraph = styled(Medium)`
   font-size: 20px;
@@ -26,7 +26,7 @@ const mobileRender = () => {
                 A data challenge platform for machine learning research,
                 competition, cooperation and reproducibility.
             </Body>
-            <ButtonLink as={Link} to='/'>
+            <ButtonLink as='button' onClick={KeyCloakService.doRegister}>
                 Join us!
             </ButtonLink>
         </FlexColumn>
@@ -48,7 +48,7 @@ const desktopRender = () => {
                         A data challenge platform for machine learning research,
                         competition, cooperation and reproducibility.
                     </TitleParagraph>
-                    <ButtonLink as={Link} to='/'>
+                    <ButtonLink as='button' onClick={KeyCloakService.doRegister}>
                         Join us!
                     </ButtonLink>
                 </Container>

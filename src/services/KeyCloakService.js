@@ -27,6 +27,8 @@ const doLogout = _kc.logout;
 
 const getToken = () => _kc.token;
 
+const doRegister = _kc.register;
+
 const isLoggedIn = () => {
     return _kc.authenticated;
 };
@@ -49,6 +51,7 @@ const KeyCloakService = {
     updateToken,
     getUsername,
     hasRole,
+    doRegister
 };
 
 export default KeyCloakService;
