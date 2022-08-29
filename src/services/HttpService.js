@@ -1,5 +1,5 @@
 import axios from 'axios';
-import UserService from './UserService';
+import KeyCloakService from './KeyCloakService';
 
 const HttpMethods = {
     GET: 'GET',
@@ -11,12 +11,12 @@ const _axios = axios.create();
 
 const configure = () => {
     _axios.interceptors.request.use((config) => {
-        if (UserService.isLoggedIn()) {
+        if (KeyCloakService.isLoggedIn()) {
             const cb = () => {
-                config.headers.Authorization = `Bearer ${UserService.getToken()}`;
+                config.headers.Authorization = `Bearer ${KeyCloakService.getToken()}`;
                 return Promise.resolve(config);
             };
-            return UserService.updateToken(cb);
+            return KeyCloakService.updateToken(cb);
         }
     });
 };

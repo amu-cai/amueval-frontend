@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {CHALLENGES_PAGE} from '../../utils/globals';
 import PropsTypes from 'prop-types';
+import KeyCloakService from '../../services/KeyCloakService';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -21,7 +22,7 @@ const MobileNavMenuStyle = styled(FlexColumn)`
   align-items: flex-start;
   z-index: 3;
 
-  a {
+  a, button {
     cursor: pointer;
 
     div {
@@ -63,12 +64,20 @@ const MobileNavMenu = (props) => {
                         Register
                     </Menu>
                 </FlexRow>
-                <FlexRow as={Link} to='/login' gap='16px'>
-                    <Svg width='16px' height='16px' src={loginIco}/>
-                    <Menu as='li'>
-                        Sign in
-                    </Menu>
-                </FlexRow>
+                {KeyCloakService.isLoggedIn() ?
+                    <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
+                        <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
+                        <Menu as='li'>
+                            Sign out
+                        </Menu>
+                    </FlexRow> :
+                    <FlexRow as='button' onClick={KeyCloakService.doLogin} gap='16px'>
+                        <Svg width='16px' height='16px' src={loginIco}/>
+                        <Menu as='li'>
+                            Sign in
+                        </Menu>
+                    </FlexRow>
+                }
             </MobileNavMenuStyle>
         </TransBack>
     );

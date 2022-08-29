@@ -11,6 +11,7 @@ import registerIco from '../../../assets/register_ico.svg';
 import {CHALLENGES_PAGE} from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
+import KeyCloakService from '../../../services/KeyCloakService';
 
 const MenuButton = styled(Container)`
   width: 20px;
@@ -55,12 +56,20 @@ const NavBar = () => {
                             Register
                         </Menu>
                     </FlexRow>
-                    <FlexRow as={Link} to='/login' gap='16px'>
-                        <Svg width='16px' height='16px' src={loginIco}/>
-                        <Menu as='li'>
-                            Sign in
-                        </Menu>
-                    </FlexRow>
+                    {KeyCloakService.isLoggedIn() ?
+                        <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
+                            <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
+                            <Menu as='li'>
+                                Sign out
+                            </Menu>
+                        </FlexRow> :
+                        <FlexRow as='button' onClick={KeyCloakService.doLogin} gap='16px'>
+                            <Svg width='16px' height='16px' src={loginIco}/>
+                            <Menu as='li'>
+                                Sign in
+                            </Menu>
+                        </FlexRow>
+                    }
                 </FlexRow>
             </FlexRow>
             <MobileNavMenu translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>

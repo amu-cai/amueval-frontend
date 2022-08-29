@@ -23,7 +23,7 @@ const NavBarStyle = styled(Container)`
     .ul-desktop {
       display: flex;
 
-      a {
+      a, button {
         cursor: pointer;
 
         div {

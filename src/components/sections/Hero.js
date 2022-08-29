@@ -7,7 +7,6 @@ import {Link} from 'react-router-dom';
 import Media from 'react-media';
 import codepenIco from '../../assets/codepen_ico.svg';
 import styled from 'styled-components';
-import UserService from '../../services/UserService';
 
 const TitleParagraph = styled(Medium)`
   font-size: 20px;
@@ -52,12 +51,6 @@ const desktopRender = () => {
                     <ButtonLink as={Link} to='/'>
                         Join us!
                     </ButtonLink>
-                    <button onClick={UserService.doLogin}>
-                        test keycloak login
-                    </button>
-                    <button onClick={() => console.log(UserService.isLoggedIn())}>
-                        isLoggedIn
-                    </button>
                 </Container>
                 <Svg src={codepenIco} width='212px' height='180px' backgroundColor={theme.colors.green}/>
             </FlexRow>
