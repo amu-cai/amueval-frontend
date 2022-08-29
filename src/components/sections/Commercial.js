@@ -32,7 +32,7 @@ const Commercial = () => {
                             listItemsContent.map((item, index) => {
                                 return (
                                     <FlexRow key={`commercial-item-${index}`} width='100%' gap='8px'>
-                                        <CircleNumber number={index + 1}/>
+                                        <CircleNumber number={String(index + 1)}/>
                                         <Medium width='80%' as='li'>
                                             {item}
                                         </Medium>
@@ -69,7 +69,7 @@ const Commercial = () => {
                                 listItemsContent.map((item, index) => {
                                     return (
                                         <FlexRow key={`commercial-item-${index}`} width='100%' gap='16px'>
-                                            <CircleNumber number={index + 1}/>
+                                            <CircleNumber number={String(index + 1)}/>
                                             <Medium width='80%' as='li'>
                                                 {item}
                                             </Medium>
