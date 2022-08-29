@@ -47,7 +47,7 @@ const IconsGrid = styled(Grid)`
   grid-template-rows: 1fr 1fr;
 
   @media (min-width: 500px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
   }
 `;
 
