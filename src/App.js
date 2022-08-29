@@ -11,6 +11,7 @@ import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import LoginWithEmail from './pages/auth/LoginWithEmail';
 import RegisterWithEmail from './pages/auth/RegisterWithEmail';
+import UserService from './services/UserService';
 
 const App = () => {
     return (
@@ -24,8 +25,16 @@ const App = () => {
                     <Route path='/register' element={<Register/>}/>
                     <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
                     <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
-                    <Route exact path='/' element={<LandingPage/>}/>
-                    <Route element={<LandingPage/>}/>
+
+                    {
+                        UserService.isLoggedIn() ? <>
+                            <Route exact path='/' element={<Challenges/>}/>
+                            <Route element={<Challenges/>}/>
+                        </> : <>
+                            <Route exact path='/' element={<LandingPage/>}/>
+                            <Route element={<LandingPage/>}/>
+                        </>
+                    }
                 </Routes>
                 <Footer/>
             </ThemeProvider>

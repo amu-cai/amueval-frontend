@@ -12,6 +12,7 @@ import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
 import {CALC_PAGES} from '../../utils/globals';
 import Loading from '../../components/elements/Loading';
+import UserService from '../../services/UserService';
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);
@@ -120,6 +121,12 @@ const Challenges = () => {
                                 <H1 as='h1'>
                                     Challenges
                                 </H1>
+                                <button onClick={UserService.doLogout}>
+                                    test keycloak logout
+                                </button>
+                                <button onClick={() => console.log(UserService.isLoggedIn())}>
+                                    isLoggedIn
+                                </button>
                                 <Body margin='0 0 12px 0' maxWidth='400px'>
                                     Increase your machine learning skills by competing in our exciting challenges.
                                 </Body>
