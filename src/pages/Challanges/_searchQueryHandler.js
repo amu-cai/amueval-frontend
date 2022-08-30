@@ -8,7 +8,7 @@ const _searchQueryHandler = (event, challengesFromAPI, setPageNr, setChallenges)
         for (let challenge of challengesFromAPI) {
             const {title, description, type, mainMetric, bestScore, deadline, baseline, prize} = challenge;
             const str = `${title} ${description} ${type} ${mainMetric} ${bestScore} 
-            ${deadline.slice(11, 16)} ${deadline.slice(0, 10)} ${baseline} ${prize}`;
+            ${deadline ? deadline.slice(11, 16) : ''} ${deadline ? deadline.slice(0, 10) : ''} ${baseline} ${prize}`;
             if (str.toLowerCase().includes(searchQuery.toLowerCase()))
                 challengesToRender.push(challenge);
         }

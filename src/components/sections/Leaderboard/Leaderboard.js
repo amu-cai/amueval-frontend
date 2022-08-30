@@ -1,11 +1,17 @@
 import React from 'react';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-import {FlexColumn, FlexRow} from '../../utils/containers';
-import {H2, H3} from '../../utils/fonts';
-import Table from '../elements/Table';
+import theme from '../../../utils/theme';
+import {FlexColumn, FlexRow} from '../../../utils/containers';
+import {H2, H3} from '../../../utils/fonts';
+import Table from '../../elements/Table';
 import styled from 'styled-components';
 import PropsTypes from 'prop-types';
+import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
+import _renderSubmissions from './_renderSubmissions';
+import _tableSearchQueryHandler from './_tableSearchQueryHandler';
+import {CALC_PAGES} from '../../../utils/globals';
+import Search from '../../elements/Search';
+import Pager from '../../elements/Pager';
 
 const BoardVariantMobile = styled(FlexRow)`
   transition: color, background-color 0.3s ease-in-out;
@@ -46,6 +52,43 @@ const BoardVariantDesktop = styled(FlexRow)`
 
 const Leaderboard = (props) => {
     const [variant, setVariant] = React.useState(0);
+    const headerElements = ['#', 'submitter', 'result', 'entries', 'when'];
+    const [entriesFromApi, setEntriesFromApi] = React.useState([]);
+    const [entries, setEntries] = React.useState([]);
+    const [pageNr, setPageNr] = React.useState(1);
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        challengeDataRequest(props.challengeName);
+    }, [props.challengeName]);
+
+    const challengeDataRequest = (challengeName) => {
+        getChallengeLeaderboard(setEntriesFromApi, challengeName);
+        getChallengeLeaderboard(setEntries, challengeName, setLoading);
+    };
+
+    const renderSubmissions = (gridGap) => {
+        return _renderSubmissions(pageNr, entries
+            ? entries : [], gridGap);
+    };
+
+    const tableSearchQueryHandler = (event) => {
+        _tableSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
+    };
+
+    const nextPage = () => {
+        if (pageNr !== CALC_PAGES(entries ? entries : [])) {
+            let newPage = pageNr + 1;
+            setPageNr(newPage);
+        }
+    };
+
+    const previousPage = () => {
+        if (pageNr !== 1) {
+            let newPage = pageNr - 1;
+            setPageNr(newPage);
+        }
+    };
 
     const mobileRender = () => {
         return (
@@ -61,7 +104,13 @@ const Leaderboard = (props) => {
                         By metric
                     </BoardVariantMobile>
                 </FlexRow>
-                <Table challengeName={props.challengeName}/>
+                <Search searchQueryHandler={tableSearchQueryHandler}/>
+                <Table challengeName={props.challengeName} loading={loading}
+                       renderElements={renderSubmissions} headerElements={headerElements}/>
+                <Pager pageNr={pageNr} width='48px' borderRadius='64px'
+                       pages={CALC_PAGES(entries ? entries : [])}
+                       nextPage={nextPage} previousPage={previousPage}
+                       number={`${pageNr} / ${CALC_PAGES(entries ? entries : [])}`}/>
             </FlexColumn>
         );
     };
@@ -86,7 +135,13 @@ const Leaderboard = (props) => {
                         </H3>
                     </BoardVariantDesktop>
                 </FlexRow>
-                <Table challengeName={props.challengeName}/>
+                <Search searchQueryHandler={tableSearchQueryHandler}/>
+                <Table challengeName={props.challengeName} loading={loading}
+                       renderElements={renderSubmissions} headerElements={headerElements}/>
+                <Pager pageNr={pageNr} width='72px' borderRadius='64px'
+                       pages={CALC_PAGES(entries ? entries : [])}
+                       nextPage={nextPage} previousPage={previousPage}
+                       number={`${pageNr} / ${CALC_PAGES(entries ? entries : [])}`}/>
             </FlexColumn>
         );
     };

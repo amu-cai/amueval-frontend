@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {H1, Medium} from '../utils/fonts';
 import theme from '../utils/theme';
 import MobileChallengeMenu from '../components/elements/MobileChallengeMenu';
-import Leaderboard from '../components/sections/Leaderboard';
+import Leaderboard from '../components/sections/Leaderboard/Leaderboard';
 import Readme from '../components/sections/Readme';
 import HowTo from '../components/sections/HowTo';
 import MyEntries from '../components/sections/MyEntries';
