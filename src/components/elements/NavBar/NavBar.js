@@ -6,6 +6,7 @@ import menuButtonIcon from '../../../assets/menu-button.svg';
 import MobileNavMenu from '../MobileNavMenu';
 import {Link} from 'react-router-dom';
 import loginIco from '../../../assets/login_ico.svg';
+import userIco from '../../../assets/user_ico.svg';
 import {Menu} from '../../../utils/fonts';
 import registerIco from '../../../assets/register_ico.svg';
 import {CHALLENGES_PAGE} from '../../../utils/globals';
@@ -28,7 +29,7 @@ const MenuButton = styled(Container)`
   }
 `;
 
-const NavBar = () => {
+const NavBar = (props) => {
     const [navMenuTranslateY, setNavMenuTranslateY] = React.useState('calc(-100vh - 42px)');
 
     const toggleNavMenu = () => {
@@ -58,12 +59,8 @@ const NavBar = () => {
                             </Menu>
                         </FlexRow> : ''}
                     {KeyCloakService.isLoggedIn() ?
-                        <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
-                            <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
-                            <Menu as='li'>
-                                Sign out
-                            </Menu>
-                        </FlexRow> :
+                        <Svg as='button' onClick={props.loggedBarVisibleHandler}
+                             width='32px' height='32px' src={userIco} margin='0 16px 0 0'/> :
                         <FlexRow as='button' onClick={KeyCloakService.doLogin} gap='16px'>
                             <Svg width='16px' height='16px' src={loginIco}/>
                             <Menu as='li'>

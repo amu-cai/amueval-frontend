@@ -12,12 +12,22 @@ import Login from './pages/auth/Login';
 import LoginWithEmail from './pages/auth/LoginWithEmail';
 import RegisterWithEmail from './pages/auth/RegisterWithEmail';
 import KeyCloakService from './services/KeyCloakService';
+import React from 'react';
+import LoggedBar from './components/elements/LoggedBar';
 
 const App = () => {
+    const [loggedBarVisible, setLoggedBarVisible] = React.useState(false);
+
+    const loggedBarVisibleHandler = () => {
+        let newLoggedBarVisible = !loggedBarVisible;
+        setLoggedBarVisible(newLoggedBarVisible);
+    };
+
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
-                <NavBar/>
+                <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
+                <LoggedBar visible={loggedBarVisible} username={KeyCloakService.getUsername()}/>
                 <Routes>
                     <Route path='/register-email' element={<RegisterWithEmail/>}/>
                     <Route path='/login-email' element={<LoginWithEmail/>}/>
