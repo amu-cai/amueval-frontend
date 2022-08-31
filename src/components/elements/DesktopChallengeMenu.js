@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {FlexColumn} from '../../utils/containers';
 import {H3} from '../../utils/fonts';
 import PropsTypes from 'prop-types';
+import KeyCloakService from '../../services/KeyCloakService';
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -35,7 +36,9 @@ const Option = styled(FlexColumn)`
 `;
 
 const DesktopChallengeMenu = (props) => {
-    const options = ['Leaderboard', 'Readme', 'How to', 'My entries', 'Submit'];
+    let options = ['Leaderboard', 'Readme', 'How to'];
+    if (KeyCloakService.isLoggedIn())
+        options = ['Leaderboard', 'Readme', 'How to', 'My entries', 'Submit'];
     return (
         <DesktopChallengeMenuStyle>
             {options.map((option, index) => {
