@@ -22,6 +22,24 @@ const LoggedBarStyle = styled(FlexColumn)`
   button {
     cursor: pointer;
 
+    li {
+      transition: color 0.3s ease-in-out;
+    }
+
+    div {
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    &:hover {
+      li {
+        color: ${({theme}) => theme.colors.green};
+      }
+
+      div {
+        background-color: ${({theme}) => theme.colors.green};
+      }
+    }
+
     * {
       cursor: pointer;
     }

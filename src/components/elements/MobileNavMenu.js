@@ -2,6 +2,7 @@ import React from 'react';
 import {FlexColumn, FlexRow, Svg, TransBack} from '../../utils/containers';
 import {Menu} from '../../utils/fonts';
 import loginIco from '../../assets/login_ico.svg';
+import userIco from '../../assets/user_ico.svg';
 import registerIco from '../../assets/register_ico.svg';
 import cupIco from '../../assets/cup_ico.svg';
 import styled from 'styled-components';
@@ -66,12 +67,20 @@ const MobileNavMenu = (props) => {
                         </Menu>
                     </FlexRow> : ''}
                 {KeyCloakService.isLoggedIn() ?
-                    <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
-                        <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
-                        <Menu as='li'>
-                            Sign out
-                        </Menu>
-                    </FlexRow> :
+                    <>
+                        <FlexRow as='button' gap='16px'>
+                            <Svg width='16px' height='16px' src={userIco} size='cover'/>
+                            <Menu as='li'>
+                                Profile
+                            </Menu>
+                        </FlexRow>
+                        <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
+                            <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
+                            <Menu as='li'>
+                                Sign out
+                            </Menu>
+                        </FlexRow>
+                    </> :
                     <FlexRow as='button' onClick={KeyCloakService.doLogin} gap='16px'>
                         <Svg width='16px' height='16px' src={loginIco}/>
                         <Menu as='li'>
