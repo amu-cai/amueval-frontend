@@ -16,18 +16,20 @@ import React from 'react';
 import LoggedBar from './components/elements/LoggedBar';
 
 const App = () => {
-    const [loggedBarVisible, setLoggedBarVisible] = React.useState(false);
+    const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
 
     const loggedBarVisibleHandler = () => {
-        let newLoggedBarVisible = !loggedBarVisible;
-        setLoggedBarVisible(newLoggedBarVisible);
+        if (loggedBarVisible === '0')
+            setLoggedBarVisible('100vw');
+        else setLoggedBarVisible('0');
     };
 
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
-                <LoggedBar visible={loggedBarVisible} username={KeyCloakService.getUsername()}/>
+                <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
+                           username={KeyCloakService.getUsername()}/>
                 <Routes>
                     <Route path='/register-email' element={<RegisterWithEmail/>}/>
                     <Route path='/login-email' element={<LoginWithEmail/>}/>

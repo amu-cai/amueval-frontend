@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, FlexColumn, FlexRow, Svg} from '../../utils/containers';
+import {Container, FlexColumn, FlexRow, Svg, TransBack} from '../../utils/containers';
 import {Body, H3} from '../../utils/fonts';
 import theme from '../../utils/theme';
 import userIco from '../../assets/user_ico.svg';
@@ -11,7 +11,7 @@ const LoggedBarStyle = styled(FlexColumn)`
   width: 260px;
   height: calc(100vh - 48px);
   position: fixed;
-  top: 48px;
+  top: 50px;
   right: 0;
   align-items: flex-start;
   justify-content: flex-start;
@@ -29,8 +29,9 @@ const LoggedBarStyle = styled(FlexColumn)`
 `;
 
 const LoggedBar = (props) => {
-    if (props.visible) {
-        return (
+    return (
+        <TransBack transition='transform' translateX={props.visible}
+                   onClick={props.loggedBarVisibleHandler} animTime='0.5s'>
             <LoggedBarStyle>
                 <FlexRow alignmentX='flex-start' alignmentY='flex-end'
                          gap='16px' width='100%' padding='12px 16px'>
@@ -47,7 +48,7 @@ const LoggedBar = (props) => {
                             Profile
                         </Body>
                     </FlexRow>
-                    <FlexRow as='button' onClick={KeyCloakService.doLogout} gap='16px'>
+                    <FlexRow as='button' onClick={props.visible === '0' ? KeyCloakService.doLogout : null} gap='16px'>
                         <Svg width='16px' height='16px' src={loginIco} rotate='180deg'/>
                         <Body as='li'>
                             Sign out
@@ -55,8 +56,8 @@ const LoggedBar = (props) => {
                     </FlexRow>
                 </FlexColumn>
             </LoggedBarStyle>
-        );
-    }
+        </TransBack>
+    );
 };
 
 export default LoggedBar;

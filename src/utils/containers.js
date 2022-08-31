@@ -62,9 +62,9 @@ const TransBack = styled(FlexRow)`
   left: ${({left}) => left ? left : '0'};
   width: 100%;
   height: 100vh;
-  transition: ${({transition}) => transition ? transition : 'opacity'} 0.3s ease-in-out;
+  transition: ${({transition}) => transition ? transition : 'opacity'} ${({animTime}) => animTime ? animTime : '0.3s'} ease-in-out;
   background-color: ${({backgroundColor}) => backgroundColor ? backgroundColor : 'transparent'};
-  z-index: 2;
+  z-index: 4;
 `;
 
 const ImageBackground = styled(FlexColumn)`
