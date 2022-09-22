@@ -49,7 +49,7 @@ const LoggedBarStyle = styled(FlexColumn)`
 const LoggedBar = (props) => {
     return (
         <TransBack transition='transform' translateX={props.visible}
-                   onClick={props.loggedBarVisibleHandler} animTime='0.5s'>
+                   onClick={props.loggedBarVisibleHandler} animTime='0.2s'>
             <LoggedBarStyle>
                 <FlexRow alignmentX='flex-start' alignmentY='flex-end'
                          gap='16px' width='100%' padding='12px 16px'>
@@ -59,7 +59,8 @@ const LoggedBar = (props) => {
                     </H3>
                 </FlexRow>
                 <Container width='90%' backgroundColor={theme.colors.dark05} height='1px'/>
-                <FlexColumn as='ul' gap='24px' padding='32px 24px' alignmentX='flex-start'>
+                <FlexColumn as='ul' onClick={() => console.log('profile click')}
+                            gap='24px' padding='32px 24px' alignmentX='flex-start'>
                     <FlexRow as='button' gap='16px'>
                         <Svg width='16px' height='16px' src={userIco} size='cover'/>
                         <Body as='li'>
