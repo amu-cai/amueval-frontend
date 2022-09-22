@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   position: ${({position}) => position ? position : 'static'};
+  top: ${({top}) => top ? top : 'auto'};
+  left: ${({left}) => left ? left : 'auto'};
+  right: ${({right}) => right ? right : 'auto'};
+  bottom: ${({bottom}) => bottom ? bottom : 'auto'};
   padding: ${({padding}) => padding ? padding : '0'};
   margin: ${({margin}) => margin ? margin : '0'};
   width: ${({width}) => width ? width : 'auto'};
@@ -58,8 +62,6 @@ const Svg = styled(Container)`
 
 const TransBack = styled(FlexRow)`
   position: fixed;
-  top: ${({top}) => top ? top : '0'};
-  left: ${({left}) => left ? left : '0'};
   width: 100%;
   height: 100vh;
   transition: ${({transition}) => transition ? transition : 'opacity'} ${({animTime}) => animTime ? animTime : '0.3s'} ease-in-out;

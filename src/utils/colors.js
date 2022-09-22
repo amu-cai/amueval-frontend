@@ -8,6 +8,7 @@ const colors = {
     dark03: 'rgba(52, 52, 52, 0.3)',
     dark04: 'rgba(52, 52, 52, 0.4)',
     dark05: 'rgba(52, 52, 52, 0.5)',
+    dark07: 'rgba(52, 52, 52, 0.7)',
     dark08: 'rgba(52, 52, 52, 0.8)',
 };
 
