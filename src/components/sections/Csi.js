@@ -10,7 +10,7 @@ const Csi = () => {
         return (
             <FlexColumn as='section' alignmentX='flex-start'>
                 <H2 as='h2' margin='0 0 24px 0'>
-                    Center for artificial intelligence
+                    Artificial Intelligence Centre (CSI)
                 </H2>
                 <Body as='p' margin='0 0 16px 0'>
                     <Medium as='span' display='inline'>Gonito.net</Medium> belongs to the
@@ -33,7 +33,7 @@ const Csi = () => {
             <FlexRow gap='46px'>
                 <FlexColumn as='section' alignmentX='flex-start' maxWidth='490px'>
                     <H2 as='h2' margin='0 0 48px 0'>
-                        Center for artificial intelligence
+                        Artificial Intelligence Centre (CSI)
                     </H2>
                     <Body as='p' margin='0 0 24px 0'>
                         <Medium as='span' display='inline'>Gonito.net</Medium> belongs to the
