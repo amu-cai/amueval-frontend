@@ -18,7 +18,7 @@ const CodeShellStyle = styled(FlexColumn)`
 const CodeShell = (props) => {
     return (
         <CodeShellStyle>
-            <Svg position='absolute' top='12px' right='12px'
+            <Svg position='absolute' top='12px' right='12px' cursor='pointer'
                  backgroundColor={theme.colors.white} src={copyIco}/>
             {props.children}
         </CodeShellStyle>

@@ -7,7 +7,6 @@ const H1 = styled(Container)`
   font-weight: 400;
   font-size: 24px;
   line-height: 24px;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 48px;
     line-height: 52px;
@@ -16,7 +15,6 @@ const H1 = styled(Container)`
 
 const H2 = styled(H1)`
   font-size: 20px;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 32px;
     line-height: 36px;
@@ -26,7 +24,6 @@ const H2 = styled(H1)`
 const H3 = styled(H1)`
   font-size: 18px;
   line-height: 22px;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 24px;
     line-height: 26px;
@@ -39,7 +36,6 @@ const Body = styled(Container)`
   font-weight: 300;
   font-size: 14px;
   line-height: 20px;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-weight: 400;
     font-size: 16px;
@@ -49,7 +45,6 @@ const Body = styled(Container)`
 
 const Medium = styled(Body)`
   font-weight: 400;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-weight: 500;
   }
@@ -66,11 +61,32 @@ const Menu = styled(Container)`
 const Label = styled(Menu)`
   display: inline-block;
   font-weight: 300;
-
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 22px;
     line-height: 24px;
   }
 `;
 
-export {H1, H2, H3, Body, Medium, Menu, Label};
+const Code = styled(Container)`
+  display: inline-block;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+  color: ${({theme}) => theme.colors.white};
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+`;
+
+const CodeMedium = styled(Code)`
+  color: ${({theme}) => theme.colors.green};
+  font-weight: 400;
+  @media (min-width: ${({theme}) => theme.overMobile}) {
+    font-weight: 500;
+  }
+`;
+
+export {H1, H2, H3, Body, Medium, Menu, Label, Code, CodeMedium};
