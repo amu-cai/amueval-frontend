@@ -1,53 +1,45 @@
 import React from 'react';
-import {FlexColumn, FlexRow, Svg} from '../../utils/containers';
-import {Body, Code, CodeMedium, H2, H3, Medium} from '../../utils/fonts';
+import {FlexColumn, FlexRow, Grid, Svg} from '../../utils/containers';
+import {Body, H2, H3, Medium} from '../../utils/fonts';
 import CircleNumber from '../elements/CircleNumber';
 import CodeShell from '../elements/CodeShell';
 import cubeIcon from '../../assets/cube_ico.svg';
 import theme from '../../utils/theme';
+import {IS_MOBILE} from '../../utils/globals';
 
 const HowTo = () => {
     return (
-        <FlexColumn margin='64px 0 0 0' gap='48px' alignmentX='flex-start' maxWidth='668px'>
-            <FlexColumn as='article' gap='24px' alignmentX='flex-start'>
-                <H2 as='h2' margin='0 0 8px 0'>
+        <FlexColumn margin={IS_MOBILE() ? null : '64px 0 0 0'} padding={IS_MOBILE() ? '12px 20px' : null}
+                    gap={IS_MOBILE() ? '24px' : '48px'} alignmentX='flex-start' maxWidth='668px'>
+            <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
+                <H2 as='h2' margin={IS_MOBILE() ? '0 0 4px 0' : '0 0 8px 0'}>
                     Get challenge repo
                 </H2>
-                <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                     <CircleNumber number='1'/>
-                    <Body as='p'>
+                    <Body as='p' margin='auto 0'>
                         You need to create empty repo with name:
                         <Medium>
                             yourID/challengeName
                         </Medium>
                     </Body>
-                </FlexRow>
-                <CodeShell>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git clone
-                        git@git.wmi.amu.edu.pl:YOURID/challenging-america-geo-prediction.git
-                    </Code>
-                </CodeShell>
-                <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                </Grid>
+                <CodeShell codeBlockIndex={1}
+                           commands={['git clone git@git.wmi.amu.edu.pl:YOURID/challenging-america-geo-prediction.git']}/>
+                <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                     <CircleNumber number='2'/>
-                    <Body as='p'>
+                    <Body as='p' margin='auto 0'>
                         Pull gonito challenge repo
                     </Body>
-                </FlexRow>
-                <CodeShell>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> cd challenging-america-geo-prediction
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git pull git://gonito.net/challenging-america-geo-prediction.git
-                    </Code>
-                </CodeShell>
+                </Grid>
+                <CodeShell codeBlockIndex={2} commands={['cd challenging-america-geo-prediction',
+                    'git pull git://gonito.net/challenging-america-geo-prediction.git']}/>
                 <Body as='p'>
                     Make sure Gonito.net has access to your repo (e.g. by making it public).
                 </Body>
             </FlexColumn>
-            <FlexColumn as='article' gap='24px' alignmentX='flex-start'>
-                <H2 as='h2' margin='0 0 8px 0'>
+            <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
+                <H2 as='h2' margin={IS_MOBILE() ? '0 0 4px 0' : '0 0 8px 0'}>
                     Work on your solution
                 </H2>
                 <Body as='p'>
@@ -62,21 +54,12 @@ const HowTo = () => {
                     <H3 as='h3'>
                         Install geval
                     </H3>
-                    <CodeShell>
-                        <Code as='p'>
-                            <CodeMedium>~$</CodeMedium> wget https://gonito.net/get/bin/geval
-                        </Code>
-                        <Code as='p'>
-                            <CodeMedium>~$</CodeMedium> chmod u+x geval
-                        </Code>
-                        <Code as='p'>
-                            <CodeMedium>~$</CodeMedium> ./geval --help
-                        </Code>
-                    </CodeShell>
+                    <CodeShell codeBlockIndex={3}
+                               commands={['wget https://gonito.net/get/bin/geval', 'chmod u+x geval', './geval --help']}/>
                 </FlexColumn>
             </FlexColumn>
-            <FlexColumn as='article' gap='24px' alignmentX='flex-start'>
-                <H2 as='h2' margin='0 0 8px 0'>
+            <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
+                <H2 as='h2' margin={IS_MOBILE() ? '0 0 4px 0' : '0 0 8px 0'}>
                     Push your solution
                 </H2>
                 <Body>
@@ -84,34 +67,34 @@ const HowTo = () => {
                     source codes along
                     with <Medium>out.tsv</Medium> files.
                 </Body>
-                <CodeShell>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> cd challenging-america-geo-prediction
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git checkout -b my-brilliant-branch # switch to some other branch
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git add foo.py build.sh # add your source codes
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git add gonito.yaml # it's a good practice to add metadata file, see
-                        below
-                    </Code>
-                </CodeShell>
-                <CodeShell>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git add dev-0/out.tsv test-A/out.tsv # add your output files
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git commit -m 'my brilliant solution'
-                    </Code>
-                    <Code as='p'>
-                        <CodeMedium>~$</CodeMedium> git push origin my-brilliant-branch
-                    </Code>
-                </CodeShell>
+                {/*<CodeShell>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> cd challenging-america-geo-prediction*/}
+                {/*    </Code>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git checkout -b my-brilliant-branch # switch to some other branch*/}
+                {/*    </Code>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git add foo.py build.sh # add your source codes*/}
+                {/*    </Code>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git add gonito.yaml # it's a good practice to add metadata file, see*/}
+                {/*        below*/}
+                {/*    </Code>*/}
+                {/*</CodeShell>*/}
+                {/*<CodeShell>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git add dev-0/out.tsv test-A/out.tsv # add your output files*/}
+                {/*    </Code>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git commit -m 'my brilliant solution'*/}
+                {/*    </Code>*/}
+                {/*    <Code as='p'>*/}
+                {/*        <CodeMedium>~$</CodeMedium> git push origin my-brilliant-branch*/}
+                {/*    </Code>*/}
+                {/*</CodeShell>*/}
             </FlexColumn>
-            <FlexColumn as='article' gap='24px' alignmentX='flex-start'>
+            <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
                 <H2 as='h2' margin='0 0 8px 0'>
                     Submit solution to Gonito
                 </H2>
@@ -124,7 +107,7 @@ const HowTo = () => {
                         form</Medium>.
                     </Body>
                 </FlexColumn>
-                <FlexColumn as='article' gap='24px' alignmentX='flex-start' width='100%'>
+                <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start' width='100%'>
                     <H3 as='h3'>
                         Integration with external repos
                     </H3>
@@ -133,7 +116,7 @@ const HowTo = () => {
                         configure a webhook.
                     </Body>
                 </FlexColumn>
-                <FlexColumn as='article' gap='24px' alignmentX='flex-start' width='100%'>
+                <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start' width='100%'>
                     <H3 as='h3'>
                         Submission metadata
                     </H3>
@@ -141,12 +124,12 @@ const HowTo = () => {
                         Gonito can take the metadata (description, tags, parameters) of a submission from a number of
                         sources (in order of precedence):
                     </Body>
-                    <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                    <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                         <CircleNumber number='1'/>
-                        <Body as='p'>
+                        <Body as='p' margin='auto 0'>
                             The YAML files specified in the param-files field of the gonito.yaml file
                         </Body>
-                    </FlexRow>
+                    </Grid>
                     <FlexRow gap='16px' alignmentX='flex-start' margin='0 0 0 44px'>
                         <Svg src={cubeIcon} width='24px' height='22px' size='cover'
                              backgroundColor={theme.colors.green}/>
@@ -170,12 +153,12 @@ const HowTo = () => {
                             discarded,
                         </Body>
                     </FlexRow>
-                    <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                    <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                         <CircleNumber number='2'/>
-                        <Body as='p'>
+                        <Body as='p' margin='auto 0'>
                             <Medium>Gonito.yaml</Medium> file committed to the repository,
                         </Body>
-                    </FlexRow>
+                    </Grid>
                     <FlexRow gap='16px' alignmentX='flex-start' margin='0 0 0 44px'>
                         <Svg src={cubeIcon} width='24px' height='22px' size='cover'
                              backgroundColor={theme.colors.green}/>
@@ -197,12 +180,12 @@ const HowTo = () => {
                             parameters given in params field,
                         </Body>
                     </FlexRow>
-                    <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                    <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                         <CircleNumber number='3'/>
-                        <Body as='p'>
+                        <Body as='p' margin='auto 0'>
                             Names of output files (only for parameters)
                         </Body>
-                    </FlexRow>
+                    </Grid>
                     <FlexRow gap='16px' alignmentX='flex-start' margin='0 0 0 44px'>
                         <Svg src={cubeIcon} width='24px' height='22px' size='cover'
                              backgroundColor={theme.colors.green}/>
@@ -212,18 +195,18 @@ const HowTo = () => {
                             <Medium>epochs=10</Medium> and <Medium>learning-rare=0.01</Medium> will be extracted;
                         </Body>
                     </FlexRow>
-                    <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                    <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                         <CircleNumber number='4'/>
-                        <Body as='p'>
+                        <Body as='p' margin='auto 0'>
                             Submission form (when submitting manually)
                         </Body>
-                    </FlexRow>
-                    <FlexRow width='100%' gap='16px' alignmentX='flex-start'>
+                    </Grid>
+                    <Grid width='100%' gridTemplateColumns='auto 1fr' gridGap={IS_MOBILE() ? '8px' : '16px'}>
                         <CircleNumber number='5'/>
-                        <Body as='p'>
+                        <Body as='p' margin='auto 0'>
                             Git commit message
                         </Body>
-                    </FlexRow>
+                    </Grid>
                     <FlexRow gap='16px' alignmentX='flex-start' margin='0 0 0 44px'>
                         <Svg src={cubeIcon} width='24px' height='22px' size='cover'
                              backgroundColor={theme.colors.green}/>
@@ -243,65 +226,65 @@ const HowTo = () => {
                         that you can also
                         add links to external resources using the <Medium>`links`</Medium> section):
                     </Body>
-                    <CodeShell>
-                        <Code as='p'>
-                            description: This my brilliant solution
-                        </Code>
-                        <Code as='p'>
-                            tags:
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - neural-network
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - left-to-right
-                        </Code>
-                        <Code as='p'>
-                            params:
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            epochs: 10
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            learning-rate: 0.01
-                        </Code>
-                        <Code as='p'>
-                            unwanted-params:
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - model-file
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - vocab-file
-                        </Code>
-                        <Code as='p'>
-                            param-files:
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - “*.yaml”
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - config/*.yaml
-                        </Code>
-                        <Code as='p'>
-                            links:
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - title: "Some external link"
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            &nbsp;&nbsp;url: "https://example.com/foo-bar-baz-123"
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - title: "Yet another link"
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            &nbsp;&nbsp;url: "https://example.org/xyz"
-                        </Code>
-                        <Code as='p' margin='0 0 0 12px'>
-                            - url: "https://example.net/bare-link-without-text"
-                        </Code>
-                    </CodeShell>
+                    {/*<CodeShell>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        description: This my brilliant solution*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        tags:*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - neural-network*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - left-to-right*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        params:*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        epochs: 10*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        learning-rate: 0.01*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        unwanted-params:*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - model-file*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - vocab-file*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        param-files:*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - “*.yaml”*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - config/*.yaml*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p'>*/}
+                    {/*        links:*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - title: "Some external link"*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        &nbsp;&nbsp;url: "https://example.com/foo-bar-baz-123"*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - title: "Yet another link"*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        &nbsp;&nbsp;url: "https://example.org/xyz"*/}
+                    {/*    </Code>*/}
+                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
+                    {/*        - url: "https://example.net/bare-link-without-text"*/}
+                    {/*    </Code>*/}
+                    {/*</CodeShell>*/}
                     <Body>
                         It might seem a little bit complicated, but you could simply use the method which is the most
                         convenient for you.

@@ -60,6 +60,10 @@ const RENDER_DEADLINE_TIME = (time) => {
     return '';
 };
 
+const IS_MOBILE = () => {
+    return document.body.clientWidth <= 768;
+};
+
 export {
     ELEMENTS_PER_PAGE,
     API,
@@ -70,5 +74,6 @@ export {
     MINI_DESCRIPTION_RENDER,
     RENDER_ICO,
     CALC_PAGES,
-    RENDER_DEADLINE_TIME
+    RENDER_DEADLINE_TIME,
+    IS_MOBILE
 };

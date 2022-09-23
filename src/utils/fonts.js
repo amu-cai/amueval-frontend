@@ -74,6 +74,18 @@ const Code = styled(Container)`
   line-height: 18px;
   font-weight: 300;
   color: ${({theme}) => theme.colors.white};
+
+  &:before {
+    display: ${({before}) => before ? 'inline-block' : 'none'};
+    content: '~$';
+    color: ${({theme}) => theme.colors.green};
+    font-weight: 400;
+    margin: 0 4px 0 0;
+    @media (min-width: ${({theme}) => theme.overMobile}) {
+      font-weight: 500;
+    }
+  }
+
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 16px;
     line-height: 24px;
