@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js';
 
 const _kc = new Keycloak({
-    url: 'http://0.0.0.0:8080/',
-    realm: 'test',
-    clientId: 'test'
+    url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
+    realm: 'gonito-dev',
+    clientId: 'gonito-dev-heroku'
 });
 
 const initKeycloak = (onAuthenticatedCallback) => {
@@ -13,8 +13,10 @@ const initKeycloak = (onAuthenticatedCallback) => {
         pkceMethod: 'S256',
     })
         .then((authenticated) => {
+            console.log('user is authenticated!');
+            console.log(isLoggedIn());
             if (!authenticated) {
-                console.log('user is not authenticated..!');
+                console.log('user is NOT authenticated..!');
             }
             onAuthenticatedCallback();
         })
