@@ -67,32 +67,17 @@ const HowTo = () => {
                     source codes along
                     with <Medium>out.tsv</Medium> files.
                 </Body>
-                {/*<CodeShell>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> cd challenging-america-geo-prediction*/}
-                {/*    </Code>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git checkout -b my-brilliant-branch # switch to some other branch*/}
-                {/*    </Code>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git add foo.py build.sh # add your source codes*/}
-                {/*    </Code>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git add gonito.yaml # it's a good practice to add metadata file, see*/}
-                {/*        below*/}
-                {/*    </Code>*/}
-                {/*</CodeShell>*/}
-                {/*<CodeShell>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git add dev-0/out.tsv test-A/out.tsv # add your output files*/}
-                {/*    </Code>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git commit -m 'my brilliant solution'*/}
-                {/*    </Code>*/}
-                {/*    <Code as='p'>*/}
-                {/*        <CodeMedium>~$</CodeMedium> git push origin my-brilliant-branch*/}
-                {/*    </Code>*/}
-                {/*</CodeShell>*/}
+                <CodeShell codeBlockIndex={3} 
+                           commands={['cd challenging-america-geo-prediction', 
+                                      'git checkout -b my-brilliant-branch # switch to some other branch',
+                                      'git add foo.py build.sh # add your source codes',
+                                      /* eslint-disable */
+                                      `git add gonito.yaml # it's a good practice to add metadata file, see below`]}/>
+                <CodeShell codeBlockIndex={4}
+                           commands={['git add dev-0/out.tsv test-A/out.tsv # add your output files',
+                           /* eslint-disable */
+                           `git commit -m 'my brilliant solution'`,
+                           'git push origin my-brilliant-branch']}/>
             </FlexColumn>
             <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
                 <H2 as='h2' margin='0 0 8px 0'>
@@ -226,65 +211,16 @@ const HowTo = () => {
                         that you can also
                         add links to external resources using the <Medium>`links`</Medium> section):
                     </Body>
-                    {/*<CodeShell>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        description: This my brilliant solution*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        tags:*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - neural-network*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - left-to-right*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        params:*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        epochs: 10*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        learning-rate: 0.01*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        unwanted-params:*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - model-file*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - vocab-file*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        param-files:*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - “*.yaml”*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - config/*.yaml*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p'>*/}
-                    {/*        links:*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - title: "Some external link"*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        &nbsp;&nbsp;url: "https://example.com/foo-bar-baz-123"*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - title: "Yet another link"*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        &nbsp;&nbsp;url: "https://example.org/xyz"*/}
-                    {/*    </Code>*/}
-                    {/*    <Code as='p' margin='0 0 0 12px'>*/}
-                    {/*        - url: "https://example.net/bare-link-without-text"*/}
-                    {/*    </Code>*/}
-                    {/*</CodeShell>*/}
+                    <CodeShell codeBlockIndex={5} disablePrompt 
+                               commands={['description: This my brilliant solution',
+                               'tags:', '\t- neutral-network', '\t- left-to-right', 
+                               'params:', '\tepochs: 10', '\tlearning-rate: 0.01',
+                               'unwanted-params:', '\t- model-file', '\t- vocab-file',
+                               'param-files:', '\t- “*.yaml”*', '\t- config/*.yaml*/',
+                               'links:', '\t- title: "Some external link"', 
+                               '\t\s\surl: "https://example.org/xyz"', '\t- title: "Yet another link"',
+                               '\t\s\shttps://example.com/foo-bar-baz-123"', 
+                               '\t- url: "https://example.net/bare-link-without-text']}/>
                     <Body>
                         It might seem a little bit complicated, but you could simply use the method which is the most
                         convenient for you.

@@ -22,12 +22,22 @@ const CodeShellStyle = styled(FlexColumn)`
 `;
 
 const CodeShell = (props) => {
+    const formatCommand = (command) => {
+        if (command[0] === '\t') {
+            return <>&nbsp;&nbsp;&nbsp;&nbsp;{formatCommand(command.slice(1))}</>;
+            /* eslint-disable */
+        } else if (command[0] === '\s') {
+            return <>&nbsp;{formatCommand(command.slice(1))}</>;
+        } return command;
+    };
+
     const renderCommands = () => {
         return (
             props.commands.map((command, index) => {
                 return (
-                    <Code key={`command-${props.codeBlockIndex}-${index}`} as='li' before>
-                        {command}
+                    <Code key={`command-${props.codeBlockIndex}-${index}`} as='li' 
+                          before={!props.disablePrompt}>
+                        {formatCommand(command)}
                     </Code>
                 );
             })
