@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, FlexColumn, FlexRow, Svg, TransBack} from '../../utils/containers';
-import {Body, H3} from '../../utils/fonts';
+import {Body, Medium} from '../../utils/fonts';
 import theme from '../../utils/theme';
 import userIco from '../../assets/user_ico.svg';
 import KeyCloakService from '../../services/KeyCloakService';
@@ -8,7 +8,7 @@ import loginIco from '../../assets/login_ico.svg';
 import styled from 'styled-components';
 
 const LoggedBarStyle = styled(FlexColumn)`
-  width: 260px;
+  width: 360px;
   height: calc(100vh - 48px);
   position: fixed;
   top: 50px;
@@ -54,9 +54,9 @@ const LoggedBar = (props) => {
                 <FlexRow alignmentX='flex-start' alignmentY='flex-end'
                          gap='16px' width='100%' padding='12px 16px'>
                     <Svg src={userIco} width='32px' height='32px' backgroundColor={theme.colors.dark} size='cover'/>
-                    <H3>
+                    <Medium as='p'>
                         {props.username}
-                    </H3>
+                    </Medium>
                 </FlexRow>
                 <Container width='90%' backgroundColor={theme.colors.dark05} height='1px'/>
                 <FlexColumn as='ul' onClick={() => console.log('profile click')}
