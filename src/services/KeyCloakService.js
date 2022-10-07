@@ -1,20 +1,31 @@
 import Keycloak from 'keycloak-js';
 
+// const _kc = new Keycloak({
+//     url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
+//     realm: 'gonito-dev',
+//     clientId: 'gonito-dev-localhost'
+// });
+
 const _kc = new Keycloak({
     url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
     realm: 'gonito-dev',
     clientId: 'gonito-dev-heroku'
 });
 
+// const _kc = new Keycloak({
+//     url: 'http://0.0.0.0:8080',
+//     realm: 'test',
+//     clientId: 'test'
+// });
+
 const initKeycloak = (onAuthenticatedCallback) => {
     _kc.init({
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
         pkceMethod: 'S256',
+        checkLoginIframe: false
     })
         .then((authenticated) => {
-            console.log('user is authenticated!');
-            console.log(isLoggedIn());
             if (!authenticated) {
                 console.log('user is NOT authenticated..!');
             }
@@ -31,9 +42,7 @@ const getToken = () => _kc.token;
 
 const doRegister = _kc.register;
 
-const isLoggedIn = () => {
-    return _kc.authenticated;
-};
+const isLoggedIn = () => !!_kc.token;
 
 const updateToken = (successCallback) =>
     _kc.updateToken(5)

@@ -18,11 +18,6 @@ import LoggedBar from './components/elements/LoggedBar';
 const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
 
-    React.useEffect(() => {
-        console.log('czy zalogowany');
-        console.log(KeyCloakService.isLoggedIn());
-    });
-
     const loggedBarVisibleHandler = () => {
         if (loggedBarVisible === '0')
             setLoggedBarVisible('100vw');
