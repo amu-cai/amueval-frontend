@@ -19,6 +19,21 @@ const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
     const [loggedBarHover, setLoggedBarHover] = React.useState(false);
 
+    React.useEffect(() => {
+        if (sessionStorage.getItem('logged') !== 'yes') {
+            if (KeyCloakService.isLoggedIn())
+                sessionStorage.setItem('logged', 'yes');
+        }
+
+        setTimeout(() => {
+            if (sessionStorage.getItem('logged') === 'yes') {
+                if (!KeyCloakService.isLoggedIn()) {
+                    KeyCloakService.doLogin();
+                }
+            }
+        }, 200);
+    });
+
     const loggedBarVisibleHandler = () => {
         if (loggedBarVisible === '0' && !loggedBarHover)
             setLoggedBarVisible('100vw');
