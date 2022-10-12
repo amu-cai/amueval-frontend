@@ -12,12 +12,17 @@ const Line = styled(FlexRow)`
   height: 1px;
 `;
 
-const _renderSubmissions = (pageNr, submissions, gridGap) => {
+const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose) => {
     const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
     if (submissions) {
         return (
             <FlexColumn as='tbody' width='100%'>
-                {submissions.slice(n, n + ELEMENTS_PER_PAGE).map(({submitter, when, evaluations, times}, index) => {
+                {submissions.slice(n, n + ELEMENTS_PER_PAGE).sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score).map(({
+                                                                                                                                                            submitter,
+                                                                                                                                                            when,
+                                                                                                                                                            evaluations,
+                                                                                                                                                            times
+                                                                                                                                                        }, index) => {
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`} gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
                               gridGap={gridGap} margin='10px 0 0 0' position='relative' width='100%' padding='4px'>
@@ -28,7 +33,7 @@ const _renderSubmissions = (pageNr, submissions, gridGap) => {
                                 {submitter ? submitter : '[anonymous]'}
                             </Body>
                             <Body as='td' textAlign='right'>
-                                {evaluations[0] ? evaluations[0].score : 'xxx'}
+                                {evaluations[metricChoose] ? evaluations[metricChoose].score : 'xxx'}
                             </Body>
                             <Body as='td' padding='0 2px 0 0' textAlign='right'>
                                 {times ? times : 1}

@@ -7,26 +7,17 @@ const FilterStyle = styled(FlexRow)`
   width: fit-content;
   height: 36px;
   padding: 8px 16px;
-  border-radius: 32px;
+  border-radius: ${({borderRadius}) => borderRadius ? borderRadius : '32px'};
   border: 1px solid ${({theme}) => theme.colors.dark};
   box-shadow: ${({theme}) => theme.shadow};
   cursor: pointer;
   background-color: ${({theme, active}) => active ? theme.colors.dark : theme.colors.white};
-  //transition: color, background-color 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
   z-index: 2;
+  color: ${({theme, active}) => active ? theme.colors.white : theme.colors.dark};
 
   &:hover {
-      //background-color: ${({theme}) => theme.colors.dark};
     transform: scale(1.1);
-
-    // p {
-      //   color: ${({theme}) => theme.colors.white};
-    // }
-    //
-    // span {
-      //   background-color: ${({theme}) => theme.colors.white};
-    // }
   }
 
   p {
@@ -44,14 +35,13 @@ const FilterStyle = styled(FlexRow)`
 
 const Filter = (props) => {
     const onCheckHandler = (e) => {
-        console.log('elo');
         if (e.target.checked)
             props.handler(Number(e.target.value));
     };
 
     return (
         <>
-            <FilterStyle as='label' htmlFor={props.id}
+            <FilterStyle as='label' borderRadius={props.borderRadius} htmlFor={props.id}
                          active={props.option === props.index}>
                 {props.children}
             </FilterStyle>

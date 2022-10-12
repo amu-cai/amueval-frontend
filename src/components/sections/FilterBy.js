@@ -12,7 +12,7 @@ const FilterBy = (props) => {
         return (
             props.options.map((option, index) => {
                 return (
-                    <Filter key={`filter_option-${index}`} active={props.active}
+                    <Filter key={`filter_option-${index}`}
                             option={props.option} handler={props.handler}
                             id={`${props.header}-${option.name}-${index}`} name={props.header} index={index}>
                         <Body as='p'>
