@@ -12,17 +12,46 @@ const Line = styled(FlexRow)`
   height: 1px;
 `;
 
-const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose) => {
+
+const sortBySwitch = (submissions, metricChoose, sortBy) => {
+    switch (sortBy) {
+        case 0:
+            return submissions.sort((a, b) => (a.submitter < b.submitter) ? 1 : ((b.submitter < a.submitter) ? -1 : 0));
+        case 1:
+            return submissions.sort((a, b) => a.evaluations[metricChoose].score - b.evaluations[metricChoose].score);
+        case 2:
+            return submissions.sort((a, b) => a.times - b.times);
+        case 3:
+            console.log(submissions[0].when);
+            return submissions.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
+        case 4:
+            return submissions.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
+        case 5:
+            return submissions.sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score);
+        case 6:
+            return submissions.sort((a, b) => b.times - a.times);
+        case 7:
+            console.log(submissions[0].when);
+            return submissions.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
+        default:
+            return submissions.sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score);
+    }
+};
+
+const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy) => {
     const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
+
     if (submissions) {
+        submissions = sortBySwitch(submissions, metricChoose, sortBy);
+        submissions = submissions.slice(n, n + ELEMENTS_PER_PAGE);
         return (
             <FlexColumn as='tbody' width='100%'>
-                {submissions.slice(n, n + ELEMENTS_PER_PAGE).sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score).map(({
-                                                                                                                                                            submitter,
-                                                                                                                                                            when,
-                                                                                                                                                            evaluations,
-                                                                                                                                                            times
-                                                                                                                                                        }, index) => {
+                {submissions.map(({
+                                      submitter,
+                                      when,
+                                      evaluations,
+                                      times
+                                  }, index) => {
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`} gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
                               gridGap={gridGap} margin='10px 0 0 0' position='relative' width='100%' padding='4px'>

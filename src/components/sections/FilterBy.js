@@ -29,18 +29,22 @@ const FilterBy = (props) => {
     };
 
     return (
-        <FlexColumn as='fieldset' width='100%' alignmentX='flex-start' padding='8px'>
+        <FlexColumn as='fieldset' width='100%' padding='8px' margin={props.margin ? props.margin : '0'}
+                    alignmentX={props.alignmentX ? props.alignmentX : 'flex-start'}>
             <Media query={theme.mobile}>
                 <Medium as='legend' textTransform='uppercase' margin='0 0 12px 0'>
                     {props.header}
                 </Medium>
             </Media>
             <Media query={theme.desktop}>
-                <H3 as='legend' textTransform='uppercase' margin='0 0 24px 0'>
+                <H3 as='legend' textTransform='uppercase' width='100%'
+                    textAlign={props.textAlign ? props.textAlign : 'left'} margin='0 0 24px 0'>
                     {props.header}
                 </H3>
             </Media>
-            <Grid gridTemplateColumns='auto auto' gridGap='12px' position='relative'>
+            <Grid gridTemplateColumns={props.gridTemplateColumns ? props.gridTemplateColumns : 'auto auto'}
+                  gridTemplateRows={props.gridTemplateRows ? props.gridTemplateRows : 'auto'}
+                  gridGap='12px' position='relative'>
                 {renderFilterOptions()}
             </Grid>
         </FlexColumn>
