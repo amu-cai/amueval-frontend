@@ -1,16 +1,16 @@
 import Keycloak from 'keycloak-js';
 
-// const _kc = new Keycloak({
-//     url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
-//     realm: 'gonito-dev',
-//     clientId: 'gonito-dev-localhost'
-// });
-
 const _kc = new Keycloak({
     url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
     realm: 'gonito-dev',
-    clientId: 'gonito-dev-heroku'
+    clientId: 'gonito-dev-localhost'
 });
+
+// const _kc = new Keycloak({
+//     url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
+//     realm: 'gonito-dev',
+//     clientId: 'gonito-dev-heroku'
+// });
 
 // const _kc = new Keycloak({
 //     url: 'http://0.0.0.0:8080',

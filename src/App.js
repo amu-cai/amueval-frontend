@@ -17,11 +17,20 @@ import LoggedBar from './components/elements/LoggedBar';
 
 const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
+    const [loggedBarHover, setLoggedBarHover] = React.useState(false);
 
     const loggedBarVisibleHandler = () => {
-        if (loggedBarVisible === '0')
+        if (loggedBarVisible === '0' && !loggedBarHover)
             setLoggedBarVisible('100vw');
         else setLoggedBarVisible('0');
+    };
+
+    const loggedBarHoverTrue = () => {
+        setLoggedBarHover(true);
+    };
+
+    const loggedBarHoverFalse = () => {
+        setLoggedBarHover(false);
     };
 
     return (
@@ -29,6 +38,7 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
                 <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
+                           loggedBarHoverTrue={loggedBarHoverTrue} loggedBarHoverFalse={loggedBarHoverFalse}
                            username={KeyCloakService.getUsername()}/>
                 <Routes>
                     <Route path='/register-email' element={<RegisterWithEmail/>}/>

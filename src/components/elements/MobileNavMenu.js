@@ -52,7 +52,8 @@ const MobileNavMenu = (props) => {
     return (
         <TransBack transition='transform' alignmentX='flex-start' top='42px'
                    translateY={props.translateY} onClick={props.toggleNavMenu}>
-            <MobileNavMenuStyle as='ul'>
+            <MobileNavMenuStyle as='ul' onMouseEnter={props.mobileMenuHoverTrue}
+                                onMouseLeave={props.mobileMenuHoverFalse}>
                 <FlexRow as={Link} to={CHALLENGES_PAGE} gap='16px'>
                     <Svg width='16px' height='16px' src={cupIco}/>
                     <Menu as='li'>

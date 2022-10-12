@@ -50,7 +50,8 @@ const LoggedBar = (props) => {
     return (
         <TransBack transition='transform' translateX={props.visible}
                    onClick={props.loggedBarVisibleHandler} animTime='0.2s'>
-            <LoggedBarStyle>
+            <LoggedBarStyle onMouseEnter={props.loggedBarHoverTrue}
+                            onMouseLeave={props.loggedBarHoverFalse}>
                 <FlexRow alignmentX='flex-start' alignmentY='flex-end'
                          gap='16px' width='100%' padding='12px 16px'>
                     <Svg src={userIco} width='32px' height='32px' backgroundColor={theme.colors.dark} size='cover'/>

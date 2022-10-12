@@ -33,11 +33,20 @@ const MenuButton = styled(Container)`
 
 const NavBar = (props) => {
     const [navMenuTranslateY, setNavMenuTranslateY] = React.useState('calc(-100vh - 42px)');
+    const [mobileMenuHover, setMobileMenuHover] = React.useState(false);
+
+    const mobileMenuHoverTrue = () => {
+        setMobileMenuHover(true);
+    };
+
+    const mobileMenuHoverFalse = () => {
+        setMobileMenuHover(false);
+    };
 
     const toggleNavMenu = () => {
-        if (navMenuTranslateY === 'calc(-100vh - 42px)')
+        if ((navMenuTranslateY === 'calc(-100vh - 42px)'))
             setNavMenuTranslateY('0');
-        else
+        else if (!mobileMenuHover)
             setNavMenuTranslateY('calc(-100vh - 42px)');
     };
 
@@ -76,7 +85,8 @@ const NavBar = (props) => {
                         </FlexRow>}
                 </FlexRow>
             </FlexRow>
-            <MobileNavMenu translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>
+            <MobileNavMenu mobileMenuHoverTrue={mobileMenuHoverTrue} mobileMenuHoverFalse={mobileMenuHoverFalse}
+                           translateY={navMenuTranslateY} toggleNavMenu={toggleNavMenu}/>
         </NavBarStyle>
     );
 };
