@@ -65,7 +65,6 @@ const App = () => {
                     <Route path='/register' element={<Register/>}/>
                     <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
                     <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
-
                     {
                         KeyCloakService.isLoggedIn() ? <>
                             <Route exact path='/' element={<Challenges/>}/>

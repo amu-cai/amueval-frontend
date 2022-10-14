@@ -83,7 +83,11 @@ const Leaderboard = (props) => {
                 <H2 as='h2' margin='0 0 12px 0'>
                     Leaderboard
                 </H2>
-                <FlexRow width='100%' gap='16px' as='section' margin='16px 0'>
+                <Search searchQueryHandler={tableSearchQueryHandler}/>
+                {/*<FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto'*/}
+                {/*          option={sortBy} textAlign='center'*/}
+                {/*          alignmentX='center' handler={sortByHandler}/>*/}
+                {!loading ? <FlexRow width='100%' gap='16px' as='section' margin='16px 0'>
                     <H3>
                         Metric:
                     </H3>
@@ -95,8 +99,7 @@ const Leaderboard = (props) => {
                                 {metric}
                             </Filter>);
                     }) : ''}
-                </FlexRow>
-                <Search searchQueryHandler={tableSearchQueryHandler}/>
+                </FlexRow> : ''}
                 <Table challengeName={props.challengeName} loading={loading}
                        renderElements={renderSubmissions} headerElements={headerElements}/>
                 <Pager pageNr={pageNr} width='48px' borderRadius='64px'
@@ -115,30 +118,31 @@ const Leaderboard = (props) => {
                 </H2>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
                 <FlexRow gap='40px' margin='32px 0'>
-                    <FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'
-                              option={sortBy} textAlign='center'
-                              alignmentX='center' handler={sortByHandler}/>
-                    <FlexColumn gap='32px' as='section'>
-                        <H3>
-                            Metric
-                        </H3>
-                        <FlexRow gap='32px'>
-                            {getPossibleMetrics() ? getPossibleMetrics().map((metric, index) => {
-                                return (
-                                    <Filter option={metricChoose} index={index} borderRadius='4px' width='200px'
-                                            height='40px'
-                                            key={`metric-${index}`} handler={metricChooseHandler}
-                                            id={`metric-${index}`} name={`metric-${index}`}>
-                                        {metric}
-                                    </Filter>);
-                            }) : ''}
-                        </FlexRow>
-                    </FlexColumn>
+                    {!loading ? <>
+                        <FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'
+                                  option={sortBy} textAlign='center'
+                                  alignmentX='center' handler={sortByHandler}/>
+                        <FlexColumn gap='32px' as='section'>
+                            <H3>
+                                Metric
+                            </H3>
+                            <FlexRow gap='32px'>
+                                {getPossibleMetrics() ? getPossibleMetrics().map((metric, index) => {
+                                    return (
+                                        <Filter option={metricChoose} index={index} borderRadius='4px' width='200px'
+                                                height='40px'
+                                                key={`metric-${index}`} handler={metricChooseHandler}
+                                                id={`metric-${index}`} name={`metric-${index}`}>
+                                            {metric}
+                                        </Filter>);
+                                }) : ''}
+                            </FlexRow>
+                        </FlexColumn>
+                    </> : ''}
                 </FlexRow>
                 <Table challengeName={props.challengeName} loading={loading}
                        renderElements={renderSubmissions}
                        headerElements={headerElements}/>
-
                 <Pager pageNr={pageNr} width='72px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
                        nextPage={nextPage} previousPage={previousPage}
