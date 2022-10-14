@@ -79,14 +79,11 @@ const Leaderboard = (props) => {
 
     const mobileRender = () => {
         return (
-            <FlexColumn padding='24px 12px' as='section'>
+            <FlexColumn padding='24px 12px' as='section' id='start'>
                 <H2 as='h2' margin='0 0 12px 0'>
                     Leaderboard
                 </H2>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
-                {/*<FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto'*/}
-                {/*          option={sortBy} textAlign='center'*/}
-                {/*          alignmentX='center' handler={sortByHandler}/>*/}
                 {!loading ? <FlexRow width='100%' gap='16px' as='section' margin='16px 0'>
                     <H3>
                         Metric:
