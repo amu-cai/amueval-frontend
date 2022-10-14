@@ -52,10 +52,10 @@ const RightArrow = styled(Svg)`
 const Pager = (props) => {
     return (
         <PagerStyle>
-            <LeftArrow as='button' src={polygon} onClick={props.previousPage} size='cover'
+            <LeftArrow as='a' href='#start' src={polygon} onClick={props.previousPage} size='cover'
                        backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
             <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
-            <RightArrow as='button' src={polygon} onClick={props.nextPage} size='cover'
+            <RightArrow as='a' href='#start' src={polygon} onClick={props.nextPage} size='cover'
                         backgroundColor={(props.pageNr === props.pages)
                             ? 'transparent' : theme.colors.dark}/>
         </PagerStyle>

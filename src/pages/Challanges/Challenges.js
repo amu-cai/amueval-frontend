@@ -97,8 +97,8 @@ const Challenges = () => {
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                                       nextPage={nextPage} previousPage={previousPage} width='48px' borderRadius='64px'
+                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)} width='48px'
+                                       nextPage={nextPage} previousPage={previousPage} borderRadius='64px'
                                        number={`${pageNr} / ${CALC_PAGES(challenges)}`}/> : ''}
                 </FlexColumn>
             </>
@@ -112,7 +112,7 @@ const Challenges = () => {
                              sortByHandler={sortByHandler} statusHandler={statusHandler}
                              challengeTypeHandler={challengeTypeHandler} commercialHandler={commercialHandler}
                              sortBy={sortBy} status={status} challengeType={challengeType} commercial={commercial}/>
-                <FlexColumn as='main' alignmentY='flex-start' width='100%'
+                <FlexColumn as='main' alignmentY='flex-start' width='100%' id='start'
                             minHeight='100vh' padding='112px 0 82px 310px'>
                     <FlexColumn alignmentX='flex-start' width='80%'>
                         <FlexRow width='100%' gap='32px'>
@@ -133,8 +133,8 @@ const Challenges = () => {
                             {renderChallenges()}
                         </FlexColumn>
                     </FlexColumn>
-                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)}
-                                       nextPage={nextPage} previousPage={previousPage} width='72px' borderRadius='64px'
+                    {!loading ? <Pager pageNr={pageNr} pages={CALC_PAGES(challenges)} borderRadius='64px'
+                                       nextPage={nextPage} previousPage={previousPage} width='72px'
                                        number={`${pageNr} / ${CALC_PAGES(challenges)}`}/> : ''}
                 </FlexColumn>
             </>

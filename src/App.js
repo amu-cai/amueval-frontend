@@ -14,6 +14,7 @@ import RegisterWithEmail from './pages/auth/RegisterWithEmail';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
 import LoggedBar from './components/elements/LoggedBar';
+import addUser from './api/addUser';
 
 const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
@@ -21,8 +22,10 @@ const App = () => {
 
     React.useEffect(() => {
         if (sessionStorage.getItem('logged') !== 'yes') {
-            if (KeyCloakService.isLoggedIn())
+            if (KeyCloakService.isLoggedIn()) {
                 sessionStorage.setItem('logged', 'yes');
+                addUser();
+            }
         }
 
         setTimeout(() => {
