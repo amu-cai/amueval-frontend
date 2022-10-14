@@ -47,6 +47,7 @@ const Medium = styled(Body)`
   font-weight: 400;
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-weight: 500;
+    font-size: ${({fontSize}) => fontSize ? fontSize : '16px'}
   }
 `;
 

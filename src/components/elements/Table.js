@@ -1,6 +1,5 @@
 import React from 'react';
-import {FlexColumn, FlexRow, Grid} from '../../utils/containers';
-import {H3, Medium} from '../../utils/fonts';
+import {FlexColumn} from '../../utils/containers';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import Loading from './Loading';
@@ -10,37 +9,15 @@ const Table = (props) => {
     const mobileRender = () => {
         return (
             <FlexColumn as='table' margin='20px 0 32px 0' minHeight='380px'>
-                <Grid as='thead' gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
-                      gridGap='10px' width='100%'>
-                    {props.headerElements.map((elem, index) => {
-                        return (
-                            <FlexRow as='tr' key={`leaderboard-header-${index}`}
-                                     alignmentX={(elem === '#' || elem === 'submitter') ? 'flex-start' : 'flex-end'}>
-                                <Medium as='th'>{elem}</Medium>
-                            </FlexRow>
-                        );
-                    })}
-                </Grid>
-                {props.renderElements('10px')}
+                {props.renderElements('10px', props.headerElements)}
             </FlexColumn>
         );
     };
 
     const desktopRender = () => {
         return (
-            <FlexColumn as='table' margin='32px 0 72px 0' minHeight='438px' width='100%'>
-                <Grid as='thead' gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
-                      gridGap='32px' width='100%' margin='0 0 28px 0'>
-                    {props.headerElements.map((elem, index) => {
-                        return (
-                            <FlexRow as='tr' key={`leaderboard-header-${index}`}
-                                     alignmentX={(elem === '#' || elem === 'submitter') ? 'flex-start' : 'flex-end'}>
-                                <H3 as='th'>{elem}</H3>
-                            </FlexRow>
-                        );
-                    })}
-                </Grid>
-                {props.renderElements('32px')}
+            <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
+                {props.renderElements('32px', props.headerElements)}
             </FlexColumn>
         );
     };

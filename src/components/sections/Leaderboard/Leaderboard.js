@@ -16,7 +16,6 @@ import FilterBy from '../FilterBy';
 import sortOptions from './sortOptions';
 
 const Leaderboard = (props) => {
-    const headerElements = ['#', 'submitter', 'result', 'entries', 'when'];
     const [entriesFromApi, setEntriesFromApi] = React.useState([]);
     const [entries, setEntries] = React.useState([]);
     const [pageNr, setPageNr] = React.useState(1);
@@ -33,9 +32,9 @@ const Leaderboard = (props) => {
         getChallengeLeaderboard(setEntries, challengeName, setLoading);
     };
 
-    const renderSubmissions = (gridGap) => {
+    const renderSubmissions = (gridGap, headerElements) => {
         return _renderSubmissions(pageNr, entries
-            ? entries : [], gridGap, metricChoose, sortBy);
+            ? entries : [], gridGap, metricChoose, sortBy, headerElements);
     };
 
     const tableSearchQueryHandler = (event) => {
@@ -69,6 +68,16 @@ const Leaderboard = (props) => {
         return metrics;
     };
 
+    const getLeaderboardHeader = () => {
+        let header = ['#', 'submitter'];
+        for (let metric of getPossibleMetrics()) {
+            header.push(metric);
+        }
+        header.push('entries');
+        header.push('when');
+        return header;
+    };
+
     const metricChooseHandler = (value) => {
         setMetricChoose(value);
     };
@@ -98,7 +107,8 @@ const Leaderboard = (props) => {
                     }) : ''}
                 </FlexRow> : ''}
                 <Table challengeName={props.challengeName} loading={loading}
-                       renderElements={renderSubmissions} headerElements={headerElements}/>
+                       renderElements={renderSubmissions}
+                       headerElements={['#', 'submitter', 'result', 'entries', 'when']}/>
                 <Pager pageNr={pageNr} width='48px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
                        nextPage={nextPage} previousPage={previousPage}
@@ -114,32 +124,12 @@ const Leaderboard = (props) => {
                     Leaderboard
                 </H2>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
-                <FlexRow gap='40px' margin='32px 0'>
-                    {!loading ? <>
-                        <FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'
-                                  option={sortBy} textAlign='center'
-                                  alignmentX='center' handler={sortByHandler}/>
-                        <FlexColumn gap='32px' as='section'>
-                            <H3>
-                                Metric
-                            </H3>
-                            <FlexRow gap='32px'>
-                                {getPossibleMetrics() ? getPossibleMetrics().map((metric, index) => {
-                                    return (
-                                        <Filter option={metricChoose} index={index} borderRadius='4px' width='200px'
-                                                height='40px'
-                                                key={`metric-${index}`} handler={metricChooseHandler}
-                                                id={`metric-${index}`} name={`metric-${index}`}>
-                                            {metric}
-                                        </Filter>);
-                                }) : ''}
-                            </FlexRow>
-                        </FlexColumn>
-                    </> : ''}
-                </FlexRow>
+                <FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'
+                          option={sortBy} textAlign='center' margin='32px 0 0 0'
+                          alignmentX='center' handler={sortByHandler}/>
                 <Table challengeName={props.challengeName} loading={loading}
                        renderElements={renderSubmissions}
-                       headerElements={headerElements}/>
+                       headerElements={getLeaderboardHeader()}/>
                 <Pager pageNr={pageNr} width='72px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
                        nextPage={nextPage} previousPage={previousPage}

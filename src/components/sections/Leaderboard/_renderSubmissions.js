@@ -1,6 +1,6 @@
-import {ELEMENTS_PER_PAGE} from '../../../utils/globals';
+import {ELEMENTS_PER_PAGE, IS_MOBILE} from '../../../utils/globals';
 import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
-import {Body} from '../../../utils/fonts';
+import {Body, Medium} from '../../../utils/fonts';
 import styled from 'styled-components';
 
 const Line = styled(FlexRow)`
@@ -38,7 +38,7 @@ const sortBySwitch = (submissions, metricChoose, sortBy) => {
     }
 };
 
-const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy) => {
+const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, headerElements) => {
     const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
 
     if (submissions) {
@@ -53,25 +53,43 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy) 
                                       times
                                   }, index) => {
                     return (
-                        <Grid as='tr' key={`leaderboard-row-${index}`} gridTemplateColumns='1fr 3fr 1fr 1fr 2fr'
+                        <Grid as='tr' key={`leaderboard-row-${index}`}
+                              gridTemplateColumns={!IS_MOBILE() ? '1fr 3fr ' + '1fr '.repeat(evaluations.length) + '1fr 2fr' : '1fr 3fr 1fr 1fr 2fr'}
                               gridGap={gridGap} margin='10px 0 0 0' position='relative' width='100%' padding='4px'>
-                            <Body as='td'>
-                                {index + n + 1}
-                            </Body>
-                            <Body as='td'>
-                                {submitter ? submitter : '[anonymous]'}
-                            </Body>
-                            <Body as='td' textAlign='right'>
-                                {evaluations[metricChoose] ? evaluations[metricChoose].score : 'xxx'}
-                            </Body>
-                            <Body as='td' padding='0 2px 0 0' textAlign='right'>
-                                {times ? times : 1}
-                            </Body>
-                            <Body as='td' textAlign='right'>
-                                {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
-                                    : 'xxx'}
-                            </Body>
-                            <Line as='td'/>
+                            {index === 0 ? headerElements.map((elem, i) => {
+                                return (
+                                    <Medium key={`leaderboard-header-${i}`}
+                                            textAlign={elem === 'entries' || elem === 'when' ? 'right' : 'left'}
+                                            minWidth={elem === 'result' ? '72px' : 'none'}
+                                            fontSize='18px'
+                                            as='td'>{elem}</Medium>
+                                );
+                            }) : ''}
+                            {index > 0 ? <>
+                                <Body as='td'>
+                                    {index + n}
+                                </Body>
+                                <Body as='td'>
+                                    {submitter ? submitter : '[anonymous]'}
+                                </Body>
+                                {!IS_MOBILE() ? evaluations.map((metric, i) => {
+                                    return (
+                                        <Body key={`metric-result-${i}`} as='td' textAlign='left' minWidth='72px'>
+                                            {metric.score.slice(0, 7)}
+                                        </Body>
+                                    );
+                                }) : <Body as='td' textAlign='left' minWidth='72px'>
+                                    {evaluations[metricChoose] ? evaluations[metricChoose].score.slice(0, 7) : 'xxx'}
+                                </Body>}
+                                <Body as='td' padding='0 2px 0 0' textAlign='right'>
+                                    {times ? times : 1}
+                                </Body>
+                                <Body as='td' textAlign='right'>
+                                    {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
+                                        : 'xxx'}
+                                </Body>
+                                <Line as='td'/>
+                            </> : ''}
                         </Grid>
                     );
                 })}

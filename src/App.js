@@ -5,7 +5,7 @@ import Challenges from './pages/Challanges/Challenges';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NavBar from './components/elements/NavBar';
 // import Footer from './components/sections/Footer';
-import {CHALLENGE_PAGE, CHALLENGES_PAGE} from './utils/globals';
+import {CHALLENGE_PAGE, CHALLENGES_PAGE, IS_MOBILE} from './utils/globals';
 import Challenge from './pages/Challenge';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
@@ -34,7 +34,7 @@ const App = () => {
                     KeyCloakService.doLogin();
                 }
             }
-        }, 200);
+        }, 500);
     });
 
     const loggedBarVisibleHandler = () => {
@@ -55,9 +55,10 @@ const App = () => {
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
-                <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
-                           loggedBarHoverTrue={loggedBarHoverTrue} loggedBarHoverFalse={loggedBarHoverFalse}
-                           username={KeyCloakService.getUsername()}/>
+                {!IS_MOBILE() ? <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
+                                           loggedBarHoverTrue={loggedBarHoverTrue}
+                                           loggedBarHoverFalse={loggedBarHoverFalse}
+                                           username={KeyCloakService.getUsername()}/> : ''}
                 <Routes>
                     <Route path='/register-email' element={<RegisterWithEmail/>}/>
                     <Route path='/login-email' element={<LoginWithEmail/>}/>

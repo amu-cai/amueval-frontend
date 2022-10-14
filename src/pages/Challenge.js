@@ -29,7 +29,7 @@ const Challenge = () => {
     const sectionRender = () => {
         switch (section) {
             case 0:
-                return <Leaderboard challengeName={challengeName}/>;
+                return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
             case 1:
                 return <Readme challengeName={challengeName} metric={challenge.mainMetric}
                                description={challenge.description} deadline={challenge.deadline}/>;
@@ -40,7 +40,7 @@ const Challenge = () => {
             case 4:
                 return <Submit challengeName={challengeName}/>;
             default:
-                return <Leaderboard challengeName={challengeName}/>;
+                return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
         }
     };
 
