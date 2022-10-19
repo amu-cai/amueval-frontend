@@ -7,10 +7,10 @@ const getMyEntries = (challengeName, setDataState, setLoadingState) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setDataState(data);
             if (setLoadingState)
-                setLoadingState(false);
+                console.log(data);
+            setLoadingState(false);
         });
 };
 

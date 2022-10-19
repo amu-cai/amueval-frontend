@@ -4,7 +4,6 @@ import LandingPage from './pages/LandingPage';
 import Challenges from './pages/Challanges/Challenges';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NavBar from './components/elements/NavBar';
-// import Footer from './components/sections/Footer';
 import {CHALLENGE_PAGE, CHALLENGES_PAGE, IS_MOBILE} from './utils/globals';
 import Challenge from './pages/Challenge';
 import Register from './pages/auth/Register';
@@ -15,6 +14,8 @@ import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
 import LoggedBar from './components/elements/LoggedBar';
 import addUser from './api/addUser';
+import Loading from './components/elements/Loading';
+import {FlexColumn} from './utils/containers';
 
 const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
@@ -51,35 +52,53 @@ const App = () => {
         setLoggedBarHover(false);
     };
 
-    return (
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
-                {!IS_MOBILE() ? <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
-                                           loggedBarHoverTrue={loggedBarHoverTrue}
-                                           loggedBarHoverFalse={loggedBarHoverFalse}
-                                           username={KeyCloakService.getUsername()}/> : ''}
-                <Routes>
-                    <Route path='/register-email' element={<RegisterWithEmail/>}/>
-                    <Route path='/login-email' element={<LoginWithEmail/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                    <Route path='/register' element={<Register/>}/>
-                    <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
-                    <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
-                    {
-                        KeyCloakService.isLoggedIn() ? <>
-                            <Route exact path='/' element={<Challenges/>}/>
-                            <Route element={<Challenges/>}/>
-                        </> : <>
-                            <Route exact path='/' element={<LandingPage/>}/>
-                            <Route element={<LandingPage/>}/>
-                        </>
-                    }
-                </Routes>
-                {/*<Footer/>*/}
-            </ThemeProvider>
-        </BrowserRouter>
-    );
+    const renderApp = () => {
+        return (
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>
+                    <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
+                    {!IS_MOBILE() ?
+                        <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
+                                   loggedBarHoverTrue={loggedBarHoverTrue}
+                                   loggedBarHoverFalse={loggedBarHoverFalse}
+                                   username={KeyCloakService.getUsername()}/> : ''}
+                    <Routes>
+                        <Route path='/register-email' element={<RegisterWithEmail/>}/>
+                        <Route path='/login-email' element={<LoginWithEmail/>}/>
+                        <Route path='/login' element={<Login/>}/>
+                        <Route path='/register' element={<Register/>}/>
+                        <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
+                        <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
+                        {
+                            KeyCloakService.isLoggedIn() ? <>
+                                <Route exact path='/' element={<Challenges/>}/>
+                                <Route element={<Challenges/>}/>
+                            </> : <>
+                                <Route exact path='/' element={<LandingPage/>}/>
+                                <Route element={<LandingPage/>}/>
+                            </>
+                        }
+                    </Routes>
+                </ThemeProvider>
+            </BrowserRouter>
+        );
+    };
+
+    if (sessionStorage.getItem('logged') === 'yes') {
+        if (KeyCloakService.isLoggedIn()) {
+            return renderApp();
+        } else {
+            return (
+                <ThemeProvider theme={theme}>
+                    <FlexColumn width='100vw' height='100vh'>
+                        <Loading/>
+                    </FlexColumn>
+                </ThemeProvider>
+            );
+        }
+    } else {
+        return renderApp();
+    }
 };
 
 export default App;

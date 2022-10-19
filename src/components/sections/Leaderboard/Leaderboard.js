@@ -20,7 +20,7 @@ const Leaderboard = (props) => {
     const [entries, setEntries] = React.useState([]);
     const [pageNr, setPageNr] = React.useState(1);
     const [loading, setLoading] = React.useState(true);
-    const [metricChoose, setMetricChoose] = React.useState(0);
+    const [metricChoose, setMetricChoose] = React.useState(null);
     const [sortBy, setSortBy] = React.useState(5);
 
     React.useEffect(() => {
@@ -32,9 +32,19 @@ const Leaderboard = (props) => {
         getChallengeLeaderboard(setEntries, challengeName, setLoading);
     };
 
+    const getMainMetricIndex = () => {
+        let i = 0;
+        for (let evaluation of entriesFromApi[0].evaluations) {
+            if (evaluation.test.metric === props.mainMetric) {
+                return i;
+            }
+            i++;
+        }
+    };
+
     const renderSubmissions = (gridGap, headerElements) => {
         return _renderSubmissions(pageNr, entries
-            ? entries : [], gridGap, metricChoose, sortBy, headerElements);
+            ? entries : [], gridGap, (metricChoose ? metricChoose : getMainMetricIndex()), sortBy, headerElements);
     };
 
     const tableSearchQueryHandler = (event) => {
@@ -119,7 +129,7 @@ const Leaderboard = (props) => {
 
     const desktopRender = () => {
         return (
-            <FlexColumn padding='24px' as='section' width='100%' maxWidth='800px'>
+            <FlexColumn padding='24px' as='section' width='100%' maxWidth='1000px'>
                 <H2 as='h2' margin='0 0 32px 0'>
                     Leaderboard
                 </H2>

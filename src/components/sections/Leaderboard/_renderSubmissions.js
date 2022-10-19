@@ -18,7 +18,9 @@ const sortBySwitch = (submissions, metricChoose, sortBy) => {
         case 0:
             return submissions.sort((a, b) => (a.submitter < b.submitter) ? 1 : ((b.submitter < a.submitter) ? -1 : 0));
         case 1:
-            return submissions.sort((a, b) => a.evaluations[metricChoose].score - b.evaluations[metricChoose].score);
+            if (metricChoose)
+                return submissions.sort((a, b) => a.evaluations[metricChoose].score - b.evaluations[metricChoose].score);
+            return submissions;
         case 2:
             return submissions.sort((a, b) => a.times - b.times);
         case 3:
@@ -27,7 +29,9 @@ const sortBySwitch = (submissions, metricChoose, sortBy) => {
         case 4:
             return submissions.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
         case 5:
-            return submissions.sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score);
+            if (metricChoose)
+                return submissions.sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score);
+            return submissions;
         case 6:
             return submissions.sort((a, b) => b.times - a.times);
         case 7:
@@ -65,31 +69,29 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, 
                                             as='td'>{elem}</Medium>
                                 );
                             }) : ''}
-                            {index > 0 ? <>
-                                <Body as='td'>
-                                    {index + n}
-                                </Body>
-                                <Body as='td'>
-                                    {submitter ? submitter : '[anonymous]'}
-                                </Body>
-                                {!IS_MOBILE() ? evaluations.map((metric, i) => {
-                                    return (
-                                        <Body key={`metric-result-${i}`} as='td' textAlign='left' minWidth='72px'>
-                                            {metric.score.slice(0, 7)}
-                                        </Body>
-                                    );
-                                }) : <Body as='td' textAlign='left' minWidth='72px'>
-                                    {evaluations[metricChoose] ? evaluations[metricChoose].score.slice(0, 7) : 'xxx'}
-                                </Body>}
-                                <Body as='td' padding='0 2px 0 0' textAlign='right'>
-                                    {times ? times : 1}
-                                </Body>
-                                <Body as='td' textAlign='right'>
-                                    {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
-                                        : 'xxx'}
-                                </Body>
-                                <Line as='td'/>
-                            </> : ''}
+                            <Body as='td'>
+                                {index + n}
+                            </Body>
+                            <Body as='td'>
+                                {submitter ? submitter : '[anonymous]'}
+                            </Body>
+                            {!IS_MOBILE() ? evaluations.map((metric, i) => {
+                                return (
+                                    <Body key={`metric-result-${i}`} as='td' textAlign='left' minWidth='72px'>
+                                        {metric.score.slice(0, 7)}
+                                    </Body>
+                                );
+                            }) : <Body as='td' textAlign='left' minWidth='72px'>
+                                {evaluations[metricChoose] ? evaluations[metricChoose].score.slice(0, 7) : 'xxx'}
+                            </Body>}
+                            <Body as='td' padding='0 2px 0 0' textAlign='right'>
+                                {times ? times : 1}
+                            </Body>
+                            <Body as='td' textAlign='right'>
+                                {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
+                                    : 'xxx'}
+                            </Body>
+                            {index !== 0 ? <Line as='td'/> : ''}
                         </Grid>
                     );
                 })}
