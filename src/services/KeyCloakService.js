@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js';
 
 const _kc = new Keycloak({
-    url: process.env.KC_URL,
-    realm: process.env.KC_REALM,
-    clientId: process.env.KC_CLIENT_ID
+    url: 'https://auth-dev.csi.wmi.amu.edu.pl/',
+    realm: 'gonito-dev',
+    clientId: 'gonito-dev-heroku'
 });
 
 const initKeycloak = (onAuthenticatedCallback) => {
