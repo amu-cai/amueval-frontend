@@ -39,5 +39,22 @@
   To begin the development, run `npm start` or `yarn start`.
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
+<script>
+    {
+        var WS = window.WebSocket;
+
+        function DevWebSocket(s) {
+            if (s === "ws://localhost:3000/sockjs-node") {
+                console.info("[DEV NOTICE] Live Reload Has Been Disabled");
+                return {};
+            } else {
+                // Pass through other usage of sockets
+                return new WS(s);
+            }
+        }
+
+        window.WebSocket = DevWebSocket;
+    }
+</script>
 </body>
 </html>
