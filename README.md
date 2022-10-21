@@ -9,3 +9,7 @@ App will work on port 3001.
 ## Stop app
 
 `docker-compose stop`
+
+## Keycloak
+
+Set variables in *.env* to choose keycloak connect.
