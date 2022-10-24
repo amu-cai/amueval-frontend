@@ -21,7 +21,6 @@ pipeline {
             steps {
                 //sh 'npm install --loglevel=verbose'
 				sh 'npm install'
-				sh 'npm audit fix'
 				sh 'npm clean-install --only=production'
 				sh 'npm run build'
             }
