@@ -21,7 +21,7 @@ pipeline {
         }
 		stage('Package') { 
             steps {
-                sh 'tar zcf build.tar.gz build/*'
+                sh 'cd build && tar zcf ../build.tar.gz .'
             }
         }
 		stage('SSH-publish-transfer') {
@@ -33,8 +33,10 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
+							cleanRemote: true,
 							sourceFiles: 'build.tar.gz',
-							execCommand: 'tar zxf build.tar.gz -O public_html'
+							remoteDirectory: 'public_html',
+							execCommand: 'tar zxf public_html/build.tar.gz -C public_html && rm public_html/build.tar.gz'
 							)],
 						verbose: true
 						)
