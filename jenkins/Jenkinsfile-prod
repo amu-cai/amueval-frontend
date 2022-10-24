@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:19-bullseye-slim' 
+            image 'node:lts-bullseye-slim' 
         }
     }
 	environment {
@@ -12,9 +12,9 @@ pipeline {
 		HOME = '.'
 		NPM_CONFIG_CACHE = 'npm_cache'
 		// set application configuration
-		REACT_APP_KC_URL = 'https://auth-dev.csi.wmi.amu.edu.pl/'
-		REACT_APP_KC_REALM = 'gonito-dev'
-		REACT_APP_KC_CLIENT_ID = 'gonito-front-dev'
+		REACT_APP_KC_URL = 'https://auth.csi.wmi.amu.edu.pl/'
+		REACT_APP_KC_REALM = 'csi-gonito'
+		REACT_APP_KC_CLIENT_ID = 'gonito-frontend'
     }
     stages {
         stage('Build') { 
@@ -38,7 +38,7 @@ pipeline {
 					failOnError: true,
 					publishers: [
 						sshPublisherDesc(
-						configName: "mprill-gonito-front-dev",
+						configName: "mprill-gonito-front-prod",
 						transfers: [sshTransfer(
 							remoteDirectory: 'public_html',
 							// ensure clean deployment by deleting everything in remote directory
@@ -61,7 +61,7 @@ pipeline {
 					failOnError: true,
 					publishers: [
 						sshPublisherDesc(
-						configName: "mprill-gonito-front-dev",
+						configName: "mprill-gonito-front-prod",
 						transfers: [sshTransfer(
 							// set proper permissions required for hosting
 							execCommand: 'chmod -R o+rX public_html'
