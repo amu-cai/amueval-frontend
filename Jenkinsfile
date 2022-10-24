@@ -19,7 +19,7 @@ pipeline {
 				sh 'npm run build'
             }
         }
-		stage('SSH-publish') {
+		stage('SSH-publish-transfer') {
 			steps {
 				sshPublisher(
 					continueOnError: false, 
@@ -31,6 +31,21 @@ pipeline {
 							sourceFiles: 'build/**',
 							remoteDirectory: 'public_html'
 							)],
+						verbose: true
+						)
+					]
+				)
+			}
+		}
+		stage('SSH-publish-permissions') {
+			steps {
+				sshPublisher(
+					continueOnError: false, 
+					failOnError: true,
+					publishers: [
+						sshPublisherDesc(
+						configName: "mprill-gonito-front-dev",
+						transfers: [sshTransfer(execCommand: 'chmod o+rX public_html')],
 						verbose: true
 						)
 					]
