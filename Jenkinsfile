@@ -7,6 +7,8 @@ pipeline {
 	environment {
         CI = 'true'
 		NODE_ENV = 'production'
+		HOME = '.'
+		npm_config_cache = 'npm_cache'
     }
     stages {
         stage('Build') { 
