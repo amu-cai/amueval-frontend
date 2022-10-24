@@ -19,6 +19,11 @@ pipeline {
 				sh 'npm run build'
             }
         }
+		stage('Package') { 
+            steps {
+                sh 'tar zcf build.tar.gz build/*'
+            }
+        }
 		stage('SSH-publish-transfer') {
 			steps {
 				sshPublisher(
@@ -28,8 +33,8 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
-							sourceFiles: 'build/**',
-							remoteDirectory: 'public_html'
+							sourceFiles: build.tar.gz',
+							execCommand: 'tar zxf build.tar.gz -O public_html'
 							)],
 						verbose: true
 						)
