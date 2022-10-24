@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'node:19-bullseye-slim' 
-            args '-p 3000:3000' 
         }
     }
 	environment {
