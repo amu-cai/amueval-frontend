@@ -4,74 +4,74 @@ pipeline {
             image 'node:lts-bullseye-slim' 
         }
     }
-	environment {
-		// ensure production environmental variable are present
+    environment {
+        // ensure production environmental variable are present
         CI = 'true'
-		NODE_ENV = 'production'
-		// set NPM parameters
-		HOME = '.'
-		NPM_CONFIG_CACHE = 'npm_cache'
-		// set application configuration
-		REACT_APP_KC_URL = 'https://auth.csi.wmi.amu.edu.pl/'
-		REACT_APP_KC_REALM = 'csi-gonito'
-		REACT_APP_KC_CLIENT_ID = 'gonito-frontend'
+        NODE_ENV = 'production'
+        // set NPM parameters
+        HOME = '.'
+        NPM_CONFIG_CACHE = 'npm_cache'
+        // set application configuration
+        REACT_APP_KC_URL = 'https://auth.csi.wmi.amu.edu.pl/'
+        REACT_APP_KC_REALM = 'csi-gonito'
+        REACT_APP_KC_CLIENT_ID = 'gonito-frontend'
     }
     stages {
         stage('Build') { 
             steps {
                 //sh 'npm install --loglevel=verbose'
-				sh 'npm install'
-				sh 'npm clean-install --only=production'
-				sh 'npm run build'
+                sh 'npm install'
+                sh 'npm clean-install --only=production'
+                sh 'npm run build'
             }
         }
-		stage('Package') { 
+        stage('Package') { 
             steps {
-				// due to involved path processing of sshPublisher it's easier to pack everything into an archive
+                // due to involved path processing of sshPublisher it's easier to pack everything into an archive
                 sh 'cd build && tar cf ../build.tar.xz .'
             }
         }
-		stage('SSH-publish-transfer') {
-			steps {
-				sshPublisher(
-					continueOnError: false, 
-					failOnError: true,
-					publishers: [
-						sshPublisherDesc(
-						configName: "mprill-gonito-front-prod",
-						transfers: [sshTransfer(
-							remoteDirectory: 'public_html',
-							// ensure clean deployment by deleting everything in remote directory
-							cleanRemote: true,
-							// transfer archive
-							sourceFiles: 'build.tar.xz',
-							// unpack archive and clean up
-							execCommand: 'tar xf public_html/build.tar.xz -C public_html && rm public_html/build.tar.xz'
-							)],
-						verbose: true
-						)
-					]
-				)
-			}
-		}
-		stage('SSH-publish-permissions') {
-			steps {
-				sshPublisher(
-					continueOnError: false, 
-					failOnError: true,
-					publishers: [
-						sshPublisherDesc(
-						configName: "mprill-gonito-front-prod",
-						transfers: [sshTransfer(
-							// set proper permissions required for hosting
-							execCommand: 'chmod -R o+rX public_html'
-							)],
-						verbose: true
-						)
-					]
-				)
-			}
-		}
-	}
+        stage('SSH-publish-transfer') {
+            steps {
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                        configName: "mprill-gonito-front-prod",
+                        transfers: [sshTransfer(
+                            remoteDirectory: 'public_html',
+                            // ensure clean deployment by deleting everything in remote directory
+                            cleanRemote: true,
+                            // transfer archive
+                            sourceFiles: 'build.tar.xz',
+                            // unpack archive and clean up
+                            execCommand: 'tar xf public_html/build.tar.xz -C public_html && rm public_html/build.tar.xz'
+                            )],
+                        verbose: true
+                        )
+                    ]
+                )
+            }
+        }
+        stage('SSH-publish-permissions') {
+            steps {
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                        configName: "mprill-gonito-front-prod",
+                        transfers: [sshTransfer(
+                            // set proper permissions required for hosting
+                            execCommand: 'chmod -R o+rX public_html'
+                            )],
+                        verbose: true
+                        )
+                    ]
+                )
+            }
+        }
+    }
 }
 
