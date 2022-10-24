@@ -11,7 +11,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install'
+				sh 'uname -a'
+                sh 'npm install --loglevel=verbose'
 				sh 'npm install react-scripts@3.4.1 -g'
 				sh 'npm clean-install --only=production'
             }
