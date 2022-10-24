@@ -11,6 +11,10 @@ pipeline {
 		// set NPM parameters
 		HOME = '.'
 		NPM_CONFIG_CACHE = 'npm_cache'
+		// set application configuration
+		REACT_APP_KC_URL = 'https://auth.csi.wmi.amu.edu.pl/'
+		REACT_APP_KC_REALM = 'csi-gonito'
+		REACT_APP_KC_CLIENT_ID = 'gonito-front-dev'
     }
     stages {
         stage('Build') { 
