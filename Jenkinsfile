@@ -19,23 +19,23 @@ pipeline {
 				sh 'npm run build'
             }
         }
-    }
-	stage('SSH-publish') {
-		steps {
-			sshPublisher(
-				continueOnError: false, 
-				failOnError: true,
-				publishers: [
-					sshPublisherDesc(
-					configName: "mprill-gonito-front-dev",
-					transfers: [sshTransfer(
-						sourceFiles: 'build/*',
-						remoteDirectory: 'public_html'
-						)],
-					verbose: true
-					)
-				]
-			)
+		stage('SSH-publish') {
+			steps {
+				sshPublisher(
+					continueOnError: false, 
+					failOnError: true,
+					publishers: [
+						sshPublisherDesc(
+						configName: "mprill-gonito-front-dev",
+						transfers: [sshTransfer(
+							sourceFiles: 'build/*',
+							remoteDirectory: 'public_html'
+							)],
+						verbose: true
+						)
+					]
+				)
+			}
 		}
 	}
 }
