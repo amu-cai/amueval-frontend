@@ -28,7 +28,7 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
-							sourceFiles: 'build/*',
+							sourceFiles: 'build/**',
 							remoteDirectory: 'public_html'
 							)],
 						verbose: true
