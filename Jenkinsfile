@@ -15,8 +15,10 @@ pipeline {
             steps {
 				sh 'uname -a'
                 sh 'npm install --loglevel=verbose'
-				sh 'npm install react-scripts@3.4.1 -g'
+				sh 'npm install react-scripts@3.4.1'
 				sh 'npm clean-install --only=production'
+				sh 'pwd'
+				sh 'ls -alrth'
             }
         }
     }
