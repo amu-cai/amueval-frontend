@@ -52,7 +52,7 @@ pipeline {
 					publishers: [
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
-						transfers: [sshTransfer(execCommand: 'chmod o+rX public_html')],
+						transfers: [sshTransfer(execCommand: 'chmod -R o+rX public_html')],
 						verbose: true
 						)
 					]
