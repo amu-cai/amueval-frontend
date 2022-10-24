@@ -5,10 +5,12 @@ pipeline {
         }
     }
 	environment {
+		// ensure production environmental variable are present
         CI = 'true'
 		NODE_ENV = 'production'
+		// set NPM parameters
 		HOME = '.'
-		npm_config_cache = 'npm_cache'
+		NPM_CONFIG_CACHE = 'npm_cache'
     }
     stages {
         stage('Build') { 
@@ -21,6 +23,7 @@ pipeline {
         }
 		stage('Package') { 
             steps {
+				// due to involved path processing of sshPublisher it's easier to pack everything into an archive
                 sh 'cd build && tar cf ../build.tar.xz .'
             }
         }
@@ -33,9 +36,12 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
-							cleanRemote: true,
-							sourceFiles: 'build.tar.xz',
 							remoteDirectory: 'public_html',
+							// ensure clean deployment by deleting everything in remote directory
+							cleanRemote: true,
+							// transfer archive
+							sourceFiles: 'build.tar.xz',
+							// unpack archive and clean up
 							execCommand: 'tar xf public_html/build.tar.xz -C public_html && rm public_html/build.tar.xz'
 							)],
 						verbose: true
@@ -53,6 +59,7 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
+							// set proper permissions required for hosting
 							execCommand: 'chmod -R o+rX public_html'
 							)],
 						verbose: true
