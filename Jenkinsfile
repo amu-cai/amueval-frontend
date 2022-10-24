@@ -13,13 +13,30 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-				sh 'uname -a'
-                sh 'npm install --loglevel=verbose'
-				//sh 'npm install react-scripts@3.4.1'
+                //sh 'npm install --loglevel=verbose'
+				sh 'npm install'
 				sh 'npm clean-install --only=production'
 				sh 'npm run build'
             }
         }
     }
+	stage('SSH-publish') {
+		steps {
+			sshPublisher(
+				continueOnError: false, 
+				failOnError: true,
+				publishers: [
+					sshPublisherDesc(
+					configName: "mprill-gonito-front-dev",
+					transfers: [sshTransfer(
+						sourceFiles: 'build/*',
+						remoteDirectory: 'public_html'
+						)],
+					verbose: true
+					)
+				]
+			)
+		}
+	}
 }
 
