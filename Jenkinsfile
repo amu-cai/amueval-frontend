@@ -17,6 +17,7 @@ pipeline {
                 sh 'npm install --loglevel=verbose'
 				//sh 'npm install react-scripts@3.4.1'
 				sh 'npm clean-install --only=production'
+				sh 'npm run build'
             }
         }
     }
