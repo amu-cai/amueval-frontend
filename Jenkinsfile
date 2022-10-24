@@ -33,7 +33,7 @@ pipeline {
 						sshPublisherDesc(
 						configName: "mprill-gonito-front-dev",
 						transfers: [sshTransfer(
-							sourceFiles: build.tar.gz',
+							sourceFiles: 'build.tar.gz',
 							execCommand: 'tar zxf build.tar.gz -O public_html'
 							)],
 						verbose: true
