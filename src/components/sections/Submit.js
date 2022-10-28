@@ -24,7 +24,7 @@ const Submit = (props) => {
     };
 
     const challengeSubmissionSubmit = () => {
-        challengeSubmission(props.challengeName, repoUrl, repoBranch, description);
+        challengeSubmission(props.challengeName, repoUrl, repoBranch, description).then(r => console.log(r));
     };
 
     return (

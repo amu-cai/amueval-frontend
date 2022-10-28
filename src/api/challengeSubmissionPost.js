@@ -1,29 +1,27 @@
 import KeyCloakService from '../services/KeyCloakService';
 import {API} from '../utils/globals';
 
-async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
+const challengeSubmission = (challengeName, repoUrl, repoBranch, description) => {
+    const details = {
+        'f1': description,
+        'f3': repoUrl,
+        'f4': repoBranch
+    };
+    let formBody = [];
+    for (let property in details) {
+        let encodedKey = encodeURIComponent(property);
+        let encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + '=' + encodedValue);
+    }
+    formBody = formBody.join('&');
+    return fetch(`${API}/challenge-submission/${challengeName}`, {
         method: 'POST',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Authorization': `Bearer ${KeyCloakService.getToken()}`
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(data)
+        body: formBody
     });
-    return response.json();
-}
-
-const challengeSubmission = (challengeName, repoUrl, repoBranch, description) => {
-    postData(`${API}/challenge-submission/${challengeName}`,
-        {f1: description, f3: repoUrl, f4: repoBranch})
-        .then((data) => {
-            console.log(data);
-        });
 };
 
 export default challengeSubmission;

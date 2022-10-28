@@ -92,7 +92,7 @@ const MyEntries = (props) => {
             );
         } else {
             return (
-                <FlexColumn padding='24px' as='section' width='100%' maxWidth='1000px'>
+                <FlexColumn padding='24px' as='section' width='100%' maxWidth='1400px'>
                     <H2 as='h2' margin='0 0 32px 0'>
                         My entries
                     </H2>

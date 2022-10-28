@@ -35,7 +35,7 @@ const App = () => {
                     KeyCloakService.doLogin();
                 }
             }
-        }, 500);
+        }, 1500);
     });
 
     const loggedBarVisibleHandler = () => {

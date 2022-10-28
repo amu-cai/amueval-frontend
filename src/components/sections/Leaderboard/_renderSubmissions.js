@@ -2,16 +2,18 @@ import {ELEMENTS_PER_PAGE, IS_MOBILE} from '../../../utils/globals';
 import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
 import {Body, Medium} from '../../../utils/fonts';
 import styled from 'styled-components';
+import theme from '../../../utils/theme';
+
 
 const Line = styled(FlexRow)`
   position: absolute;
-  top: -6px;
+  top: ${({top}) => top ? top : 'auto'};
+  bottom: ${({bottom}) => bottom ? bottom : 'auto'};
   left: 0;
   width: 100%;
   background-color: ${({theme}) => theme.colors.dark04};
-  height: 1px;
+  height: ${({height}) => height ? height : '1px'};
 `;
-
 
 const sortBySwitch = (submissions, metricChoose, sortBy) => {
     switch (sortBy) {
@@ -24,7 +26,6 @@ const sortBySwitch = (submissions, metricChoose, sortBy) => {
         case 2:
             return submissions.sort((a, b) => a.times - b.times);
         case 3:
-            console.log(submissions[0].when);
             return submissions.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
         case 4:
             return submissions.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
@@ -35,7 +36,6 @@ const sortBySwitch = (submissions, metricChoose, sortBy) => {
         case 6:
             return submissions.sort((a, b) => b.times - a.times);
         case 7:
-            console.log(submissions[0].when);
             return submissions.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
         default:
             return submissions.sort((a, b) => b.evaluations[metricChoose].score - a.evaluations[metricChoose].score);
@@ -58,17 +58,19 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, 
                                   }, index) => {
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`}
+                              backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
                               gridTemplateColumns={!IS_MOBILE() ? '1fr 3fr ' + '1fr '.repeat(evaluations.length) + '1fr 2fr' : '1fr 3fr 1fr 1fr 2fr'}
-                              gridGap={gridGap} margin='10px 0 0 0' position='relative' width='100%' padding='4px'>
+                              gridGap='20px' position='relative' width='100%' padding='4px'>
                             {index === 0 ? headerElements.map((elem, i) => {
                                 return (
                                     <Medium key={`leaderboard-header-${i}`}
                                             textAlign={elem === 'entries' || elem === 'when' ? 'right' : 'left'}
-                                            minWidth={elem === 'result' ? '72px' : 'none'}
-                                            fontSize='18px'
-                                            as='td'>{elem}</Medium>
+                                            minWidth={elem === 'result' ? '72px' : 'none'} fontSize='18px' as='td'>
+                                        {elem}
+                                    </Medium>
                                 );
                             }) : ''}
+                            {index === 0 ? <Line height='2px' top='40px'/> : ''}
                             <Body as='td'>
                                 {index + n}
                             </Body>
@@ -91,7 +93,7 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, 
                                 {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
                                     : 'xxx'}
                             </Body>
-                            {index !== 0 ? <Line as='td'/> : ''}
+                            {index !== 0 ? <Line top='0' as='td'/> : ''}
                         </Grid>
                     );
                 })}
