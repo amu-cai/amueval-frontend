@@ -1,27 +1,25 @@
 import React from 'react';
 import Media from 'react-media';
 import theme from '../../../utils/theme';
-import {FlexColumn, FlexRow} from '../../../utils/containers';
-import {H2, H3} from '../../../utils/fonts';
+import {FlexColumn} from '../../../utils/containers';
+import {H2} from '../../../utils/fonts';
 import Table from '../../elements/Table';
 import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
-import _renderSubmissions from './_renderSubmissions';
 import _tableSearchQueryHandler from './_tableSearchQueryHandler';
 import {CALC_PAGES} from '../../../utils/globals';
 import Search from '../../elements/Search';
 import Pager from '../../elements/Pager';
-import Filter from '../../elements/Filter';
-import FilterBy from '../FilterBy';
-import sortOptions from './sortOptions';
 
 const Leaderboard = (props) => {
     const [entriesFromApi, setEntriesFromApi] = React.useState([]);
     const [entries, setEntries] = React.useState([]);
     const [pageNr, setPageNr] = React.useState(1);
     const [loading, setLoading] = React.useState(true);
-    const [metricChoose, setMetricChoose] = React.useState(null);
-    const [sortBy, setSortBy] = React.useState(5);
+    const [submitterSorted, setSubmitterSorted] = React.useState(false);
+    const [entriesSorted, setEntriesSorted] = React.useState(false);
+    const [whenSorted, setWhenSorted] = React.useState(false);
+    const [scoreSorted, setScoreSorted] = React.useState(false);
 
     React.useEffect(() => {
         challengeDataRequest(props.challengeName);
@@ -32,19 +30,14 @@ const Leaderboard = (props) => {
         getChallengeLeaderboard(setEntries, challengeName, setLoading);
     };
 
-    const getMainMetricIndex = () => {
+    const getMetricIndex = (metricName) => {
         let i = 0;
         for (let evaluation of entriesFromApi[0].evaluations) {
-            if (evaluation.test.metric === props.mainMetric) {
+            if (evaluation.test.metric === metricName) {
                 return i;
             }
             i++;
         }
-    };
-
-    const renderSubmissions = (gridGap, headerElements) => {
-        return _renderSubmissions(pageNr, entries
-            ? entries : [], gridGap, (metricChoose ? metricChoose : getMainMetricIndex()), sortBy, headerElements);
     };
 
     const tableSearchQueryHandler = (event) => {
@@ -88,12 +81,50 @@ const Leaderboard = (props) => {
         return header;
     };
 
-    const metricChooseHandler = (value) => {
-        setMetricChoose(value);
-    };
-
-    const sortByHandler = (value) => {
-        setSortBy(value);
+    const sortByUpdate = (elem) => {
+        let newEntries = entries;
+        console.log(elem);
+        switch (elem) {
+            case 'submitter':
+                if (submitterSorted) {
+                    newEntries = newEntries.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
+                    setSubmitterSorted(false);
+                } else {
+                    newEntries = newEntries.sort((a, b) => (a.submitter < b.submitter) ? 1 : ((b.submitter < a.submitter) ? -1 : 0));
+                    setSubmitterSorted(true);
+                }
+                break;
+            case 'entries':
+                if (entriesSorted) {
+                    newEntries = newEntries.sort((a, b) => a.times - b.times);
+                    setEntriesSorted(false);
+                } else {
+                    newEntries = newEntries.sort((a, b) => b.times - a.times);
+                    setEntriesSorted(true);
+                }
+                break;
+            case 'when':
+                if (whenSorted) {
+                    newEntries = newEntries.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
+                    setWhenSorted(false);
+                } else {
+                    newEntries = newEntries.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
+                    setWhenSorted(true);
+                }
+                break;
+            default:
+                // eslint-disable-next-line no-case-declarations
+                let metricIndex = getMetricIndex(elem);
+                if (scoreSorted) {
+                    newEntries = newEntries.sort((a, b) => b.evaluations[metricIndex].score - a.evaluations[metricIndex].score);
+                    setScoreSorted(false);
+                } else {
+                    newEntries = newEntries.sort((a, b) => a.evaluations[metricIndex].score - b.evaluations[metricIndex].score);
+                    setScoreSorted(true);
+                }
+                break;
+        }
+        setEntries(newEntries);
     };
 
     const mobileRender = () => {
@@ -103,22 +134,9 @@ const Leaderboard = (props) => {
                     Leaderboard
                 </H2>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
-                {!loading ? <FlexRow width='100%' gap='16px' as='section' margin='16px 0'>
-                    <H3>
-                        Metric:
-                    </H3>
-                    {getPossibleMetrics() ? getPossibleMetrics().map((metric, index) => {
-                        return (
-                            <Filter option={metricChoose} index={index} borderRadius='4px'
-                                    key={`metric-${index}`} handler={metricChooseHandler}
-                                    id={`metric-${index}`} name={`metric-${index}`}>
-                                {metric}
-                            </Filter>);
-                    }) : ''}
-                </FlexRow> : ''}
                 <Table challengeName={props.challengeName} loading={loading}
-                       renderElements={renderSubmissions}
-                       headerElements={['#', 'submitter', 'result', 'entries', 'when']}/>
+                       headerElements={['#', 'submitter', 'result', 'entries', 'when']}
+                       pageNr={pageNr} submissions={entries} sortByUpdate={sortByUpdate}/>
                 <Pager pageNr={pageNr} width='48px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
                        nextPage={nextPage} previousPage={previousPage}
@@ -134,12 +152,8 @@ const Leaderboard = (props) => {
                     Leaderboard
                 </H2>
                 <Search searchQueryHandler={tableSearchQueryHandler}/>
-                <FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'
-                          option={sortBy} textAlign='center' margin='32px 0 0 0'
-                          alignmentX='center' handler={sortByHandler}/>
-                <Table challengeName={props.challengeName} loading={loading}
-                       renderElements={renderSubmissions}
-                       headerElements={getLeaderboardHeader()}/>
+                <Table challengeName={props.challengeName} loading={loading} headerElements={getLeaderboardHeader()}
+                       pageNr={pageNr} submissions={entries} sortByUpdate={sortByUpdate}/>
                 <Pager pageNr={pageNr} width='72px' borderRadius='64px'
                        pages={CALC_PAGES(entries ? entries : [])}
                        nextPage={nextPage} previousPage={previousPage}

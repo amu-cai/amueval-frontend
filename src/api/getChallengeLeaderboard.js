@@ -5,8 +5,11 @@ const getChallengeLeaderboard = (setDataState, challengeName, setLoading) => {
         .then(response => response.json())
         .then(data => {
             setDataState(data.entries);
-            if (setLoading)
-                setLoading(false);
+            if (setLoading) {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 3000);
+            }
         });
 };
 
