@@ -1,27 +1,21 @@
 import React from 'react';
-import {FlexColumn} from '../../utils/containers';
-import {H2} from '../../utils/fonts';
-import getMyEntries from '../../api/getMyEntries';
-// import Search from '../elements/Search';
-import Table from '../elements/Table';
-import Pager from '../elements/Pager';
-import {CALC_PAGES} from '../../utils/globals';
+import {FlexColumn} from '../../../utils/containers';
+import {H2} from '../../../utils/fonts';
+import getMyEntries from '../../../api/getMyEntries';
+import Pager from '../../elements/Pager';
+import {CALC_PAGES} from '../../../utils/globals';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-// import sortOptions from './Leaderboard/sortOptions';
-// import FilterBy from './FilterBy';
-import _tableSearchQueryHandler from './Leaderboard/_tableSearchQueryHandler';
-import Loading from '../elements/Loading';
-import _renderMySubmissions from './MyEntries/_renderMySubmissions';
+import theme from '../../../utils/theme';
+import _tableSearchQueryHandler from '../Leaderboard/_tableSearchQueryHandler';
+import Loading from '../../elements/Loading';
+import _renderMySubmissions from './_renderMySubmissions';
 
 const MyEntries = (props) => {
-    /* eslint-disable */
     const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
-    /* eslint-disable */
     const [myEntries, setMyEntries] = React.useState({});
-    /* eslint-disable */
     const [loading, setLoading] = React.useState(true);
     const [pageNr, setPageNr] = React.useState(1);
+    /* eslint-disable */
     const [metricChoose, setMetricChoose] = React.useState(0);
     const [sortBy, setSortBy] = React.useState(5);
 
@@ -96,13 +90,12 @@ const MyEntries = (props) => {
                     <H2 as='h2' margin='0 0 32px 0'>
                         My entries
                     </H2>
-                    {/*<Search searchQueryHandler={tableSearchQueryHandler}/>*/}
-                    {/*<FilterBy header='Sort by' options={sortOptions} gridTemplateColumns='auto auto auto auto'*/}
-                    {/*          option={sortBy} textAlign='center' margin='32px 0 0 0'*/}
-                    {/*          alignmentX='center' handler={sortByHandler}/>*/}
-                    <Table challengeName={props.challengeName} loading={loading}
-                           renderElements={renderSubmissions}
-                           headerElements={getMyEntriesHeader()}/>
+                    <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
+                        {renderSubmissions('32px', getMyEntriesHeader())}
+                    </FlexColumn>
+                    {/*<Table challengeName={props.challengeName} loading={loading}*/}
+                    {/*       renderElements={renderSubmissions}*/}
+                    {/*       headerElements={getMyEntriesHeader()}/>*/}
                     <Pager pageNr={pageNr} width='72px' borderRadius='64px'
                            pages={CALC_PAGES(myEntries.submissions ? myEntries.submissions : [])}
                            nextPage={nextPage} previousPage={previousPage}
