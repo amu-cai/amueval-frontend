@@ -63,7 +63,7 @@ const _renderMySubmissions = (pageNr, myEntries, gridGap, metricChoose, sortBy, 
                                     </FlexRow>
                                 );
                             }) : ''}
-                            {index === 0 ? <Line height='2px' top='50%'/> : ''}
+                            {index === 0 ? <Line height='2px' top='50%' shadow={theme.shadow}/> : ''}
                             <Body as='td'>
                                 {index + n + 1}
                             </Body>

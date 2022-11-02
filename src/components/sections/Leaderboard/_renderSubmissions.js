@@ -1,8 +1,9 @@
 import {ELEMENTS_PER_PAGE, IS_MOBILE} from '../../../utils/globals';
-import {FlexColumn, FlexRow, Grid} from '../../../utils/containers';
+import {FlexColumn, FlexRow, Grid, Svg} from '../../../utils/containers';
 import {Body, Medium} from '../../../utils/fonts';
 import styled from 'styled-components';
 import theme from '../../../utils/theme';
+import arrow from '../../../assets/arrow.svg';
 
 
 const Line = styled(FlexRow)`
@@ -59,18 +60,28 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, 
                     return (
                         <Grid as='tr' key={`leaderboard-row-${index}`}
                               backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
-                              gridTemplateColumns={!IS_MOBILE() ? '1fr 3fr ' + '1fr '.repeat(evaluations.length) + '1fr 2fr' : '1fr 3fr 1fr 1fr 2fr'}
+                              gridTemplateColumns={!IS_MOBILE() ? '1fr 3fr ' + '2fr '.repeat(evaluations.length) + '1fr 2fr' : '1fr 3fr 1fr 1fr 2fr'}
                               gridGap='20px' position='relative' width='100%' padding='4px'>
                             {index === 0 ? headerElements.map((elem, i) => {
                                 return (
-                                    <Medium key={`leaderboard-header-${i}`}
-                                            textAlign={elem === 'entries' || elem === 'when' ? 'right' : 'left'}
-                                            minWidth={elem === 'result' ? '72px' : 'none'} fontSize='18px' as='td'>
-                                        {elem}
-                                    </Medium>
+                                    <FlexRow alignmentX='flex-start'>
+                                        <Medium key={`leaderboard-header-${i}`}
+                                                textAlign={elem === 'submitter' ? 'left' : 'right'}
+                                                width={elem === 'when' ? '100%' : 'auto'} padding='0 6px 0 0'
+                                                minWidth={elem === 'result' ? '72px' : 'none'} fontSize='18px' as='td'>
+                                            {elem}
+                                        </Medium>
+                                        {elem !== '#' ?
+                                            <>
+                                                <Svg width='8px' rotate='180deg' src={arrow}
+                                                     backgroundColor={theme.colors.dark} margin='2px 0 0 0'/>
+                                                <Svg width='8px' src={arrow} backgroundColor={theme.colors.dark}
+                                                     margin='0 0 2px 0'/>
+                                            </> : ''}
+                                    </FlexRow>
                                 );
                             }) : ''}
-                            {index === 0 ? <Line height='2px' top='40px'/> : ''}
+                            {index === 0 ? <Line height='2px' top='38px' shadow={theme.shadow}/> : ''}
                             <Body as='td'>
                                 {index + n}
                             </Body>
@@ -86,7 +97,7 @@ const _renderSubmissions = (pageNr, submissions, gridGap, metricChoose, sortBy, 
                             }) : <Body as='td' textAlign='left' minWidth='72px'>
                                 {evaluations[metricChoose] ? evaluations[metricChoose].score.slice(0, 7) : 'xxx'}
                             </Body>}
-                            <Body as='td' padding='0 2px 0 0' textAlign='right'>
+                            <Body as='td' padding='0 2px 0 0' textAlign='left'>
                                 {times ? times : 1}
                             </Body>
                             <Body as='td' textAlign='right'>
