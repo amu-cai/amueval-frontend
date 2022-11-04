@@ -1,14 +1,14 @@
 import React from 'react';
-import {FlexColumn} from '../../../utils/containers';
-import {H2} from '../../../utils/fonts';
-import getMyEntries from '../../../api/getMyEntries';
-import Pager from '../../elements/Pager';
-import {CALC_PAGES} from '../../../utils/globals';
+import {FlexColumn} from '../../utils/containers';
+import {H2} from '../../utils/fonts';
+import getMyEntries from '../../api/getMyEntries';
+import Pager from '../elements/Pager';
+import {CALC_PAGES, RENDER_WHEN} from '../../utils/globals';
 import Media from 'react-media';
-import theme from '../../../utils/theme';
-import _tableSearchQueryHandler from '../Leaderboard/_tableSearchQueryHandler';
-import Loading from '../../elements/Loading';
-import _renderMySubmissions from './_renderMySubmissions';
+import theme from '../../utils/theme';
+import _tableSearchQueryHandler from './Leaderboard/_tableSearchQueryHandler';
+import Loading from '../elements/Loading';
+import Table from '../elements/Table';
 
 const MyEntries = (props) => {
     const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
@@ -22,11 +22,6 @@ const MyEntries = (props) => {
     React.useEffect(() => {
         challengesRequest();
     }, []);
-
-    const renderSubmissions = (gridGap, headerElements) => {
-        return _renderMySubmissions(pageNr, myEntries
-            ? myEntries : [], gridGap, metricChoose, sortBy, headerElements);
-    };
 
     const tableSearchQueryHandler = (event) => {
         _tableSearchQueryHandler(event, myEntriesFromAPI, setPageNr, setMyEntries);
@@ -67,17 +62,27 @@ const MyEntries = (props) => {
     };
 
     const challengesRequest = () => {
-        getMyEntries(props.challengeName, setMyEntriesFromAPI);
+        getMyEntries(props.challengeName, setMyEntriesFromAPI, setLoading);
         getMyEntries(props.challengeName, setMyEntries, setLoading);
-    };
-
-    const sortByHandler = (value) => {
-        setSortBy(value);
     };
 
     const mobileRender = () => {
 
     }
+
+    const renderEvalResult = (evaluations, test) => {
+        for (let myEval of evaluations) {
+            if (myEval.test.name === test.name && myEval.test.metric === test.metric) {
+                return myEval.score.slice(0, 7);
+            }
+        }
+        return 'xxx';
+    };
+
+    const sortByUpdate = (elem) => {
+        let newEntries = myEntries;
+        return myEntries;
+    };
 
     const desktopRender = () => {
         if (loading) {
@@ -90,16 +95,27 @@ const MyEntries = (props) => {
                     <H2 as='h2' margin='0 0 32px 0'>
                         My entries
                     </H2>
-                    <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
-                        {renderSubmissions('32px', getMyEntriesHeader())}
-                    </FlexColumn>
-                    {/*<Table challengeName={props.challengeName} loading={loading}*/}
-                    {/*       renderElements={renderSubmissions}*/}
-                    {/*       headerElements={getMyEntriesHeader()}/>*/}
-                    <Pager pageNr={pageNr} width='72px' borderRadius='64px'
-                           pages={CALC_PAGES(myEntries.submissions ? myEntries.submissions : [])}
-                           nextPage={nextPage} previousPage={previousPage}
-                           number={`${pageNr} / ${CALC_PAGES(myEntries.submissions ? myEntries.submissions : [])}`}/>
+                    {myEntries.submissions ?
+                        <>
+                            <Table challengeName={props.challengeName} loading={loading}
+                                   headerElements={getMyEntriesHeader()}
+                                   gridTemplateColumns={'1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)}
+                                   staticColumnElements={
+                                       [
+                                           {name: 'id', format: null, order: 1, align: 'left'},
+                                           {name: 'when', format: RENDER_WHEN, order: 3, align: 'right'}
+                                       ]
+                                   }
+                                   metrics={getPossibleMetrics()} myEntries={myEntries}
+                                   renderEvalResult={renderEvalResult}
+                                   pageNr={pageNr} elements={myEntries.submissions}
+                                   sortByUpdate={sortByUpdate}/>
+                            <Pager pageNr={pageNr} width='72px' borderRadius='64px'
+                                   pages={CALC_PAGES(myEntries.submissions, 2)}
+                                   nextPage={nextPage} previousPage={previousPage}
+                                   number={`${pageNr} / ${CALC_PAGES(myEntries.submissions, 2)}`}/>
+                        </>
+                        : <Loading/>}
                 </FlexColumn>
             );
         }

@@ -46,9 +46,9 @@ const RENDER_ICO = (type) => {
     }
 };
 
-const CALC_PAGES = (objects) => {
+const CALC_PAGES = (objects, n = 1) => {
     if (objects.length === 0) return 1;
-    return Math.ceil(objects.length / ELEMENTS_PER_PAGE);
+    return Math.ceil(objects.length / (ELEMENTS_PER_PAGE * n));
 };
 
 const RENDER_DEADLINE_TIME = (time) => {
@@ -58,6 +58,10 @@ const RENDER_DEADLINE_TIME = (time) => {
         return `${date} ${hour}`;
     }
     return '';
+};
+
+const RENDER_WHEN = (when) => {
+    return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
 
 const IS_MOBILE = () => {
@@ -75,5 +79,6 @@ export {
     RENDER_ICO,
     CALC_PAGES,
     RENDER_DEADLINE_TIME,
-    IS_MOBILE
+    IS_MOBILE,
+    RENDER_WHEN
 };

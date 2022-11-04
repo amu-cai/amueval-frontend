@@ -2,9 +2,7 @@ import React from 'react';
 import {FlexColumn, FlexRow, Grid, Svg} from '../../utils/containers';
 import Media from 'react-media';
 import theme from '../../utils/theme';
-import Loading from './Loading';
-import PropsTypes from 'prop-types';
-import {ELEMENTS_PER_PAGE, IS_MOBILE} from '../../utils/globals';
+import {ELEMENTS_PER_PAGE} from '../../utils/globals';
 import {Body, Medium} from '../../utils/fonts';
 import arrow from '../../assets/arrow.svg';
 import styled from 'styled-components';
@@ -32,68 +30,71 @@ const Table = (props) => {
     };
 
     const desktopRender = () => {
-        const n = (props.pageNr - 1) * ELEMENTS_PER_PAGE;
-        let submissionToMap = props.submissions.slice(n, n + ELEMENTS_PER_PAGE);
+        const n = (props.pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+        console.log(props.elements);
+        let elementsToMap = props.elements.slice(n, n + (ELEMENTS_PER_PAGE * 2));
         return (
             <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
                 <FlexColumn as='tbody' width='100%'>
-                    {submissionToMap.map(({
-                                              submitter,
-                                              when,
-                                              evaluations,
-                                              times
-                                          }, index) => {
+                    <Grid
+                        gridGap='20px' position='relative' width='100%' padding='4px' margin='0 0 6px 0'
+                        gridTemplateColumns={props.gridTemplateColumns}>
+                        {props.headerElements.map((elem, i) => {
+                            return (
+                                <FlexRow key={`leaderboard-header-${i}`} alignmentX='flex-start' as='td'
+                                         onClick={() => {
+                                             props.sortByUpdate(elem);
+                                             forceUpdate();
+                                         }}>
+                                    <Medium textAlign={elem === 'submitter' ? 'left' : 'right'}
+                                            width={elem === 'when' ? '100%' : 'auto'} padding='0 6px 0 0'
+                                            minWidth={elem === 'result' ? '72px' : 'none'}>
+                                        {elem}
+                                    </Medium>
+                                    {elem !== '#' ?
+                                        <>
+                                            <Svg width='8px' rotate='180deg' src={arrow}
+                                                 backgroundColor={theme.colors.dark} margin='2px 0 0 0'/>
+                                            <Svg width='8px' src={arrow} backgroundColor={theme.colors.dark}
+                                                 margin='0 0 2px 0'/>
+                                        </> : ''}
+                                </FlexRow>
+                            );
+                        })}
+                        <Line height='2px' top='32px' shadow={theme.shadow}/>
+                    </Grid>
+                    {elementsToMap.map((elem, index) => {
                         return (
                             <Grid as='tr' key={`leaderboard-row-${index}`}
                                   backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
-                                  gridTemplateColumns={!IS_MOBILE() ? '1fr 3fr ' + '2fr '.repeat(evaluations.length) + '1fr 2fr' : '1fr 3fr 1fr 1fr 2fr'}
+                                  gridTemplateColumns={props.gridTemplateColumns}
                                   gridGap='20px' position='relative' width='100%' padding='4px'>
-                                {index === 0 ? props.headerElements.map((elem, i) => {
+                                {props.staticColumnElements.map((elemName, i) => {
                                     return (
-                                        <FlexRow key={`leaderboard-header-${i}`} alignmentX='flex-start' as='td'
-                                                 onClick={() => {
-                                                     props.sortByUpdate(elem);
-                                                     forceUpdate();
-                                                 }}>
-                                            <Medium textAlign={elem === 'submitter' ? 'left' : 'right'}
-                                                    width={elem === 'when' ? '100%' : 'auto'} padding='0 6px 0 0'
-                                                    minWidth={elem === 'result' ? '72px' : 'none'} fontSize='18px'>
-                                                {elem}
-                                            </Medium>
-                                            {elem !== '#' ?
-                                                <>
-                                                    <Svg width='8px' rotate='180deg' src={arrow}
-                                                         backgroundColor={theme.colors.dark} margin='2px 0 0 0'/>
-                                                    <Svg width='8px' src={arrow} backgroundColor={theme.colors.dark}
-                                                         margin='0 0 2px 0'/>
-                                                </> : ''}
-                                        </FlexRow>
-                                    );
-                                }) : ''}
-                                {index === 0 ? <Line as='td' height='2px' top='38px' shadow={theme.shadow}/> : ''}
-                                <Body as='td'>
-                                    {index + n}
-                                </Body>
-                                <Body as='td'>
-                                    {submitter ? submitter : '[anonymous]'}
-                                </Body>
-                                {!IS_MOBILE() ? evaluations.map((metric, i) => {
-                                    return (
-                                        <Body key={`metric-result-${i}`} as='td' textAlign='left' minWidth='72px'>
-                                            {metric.score.slice(0, 7)}
+                                        <Body key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`} as='td'
+                                              order={elemName.order} textAlign={elemName.align}>
+                                            {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
                                         </Body>
                                     );
-                                }) : <Body as='td' textAlign='left' minWidth='72px'>
-                                    {evaluations[0] ? evaluations[0].score.slice(0, 7) : 'xxx'}
-                                </Body>}
-                                <Body as='td' padding='0 2px 0 0' textAlign='left'>
-                                    {times ? times : 1}
-                                </Body>
-                                <Body as='td' textAlign='right'>
-                                    {when ? `${when.slice(11, 16)} ${when.slice(0, 10)}`
-                                        : 'xxx'}
-                                </Body>
-                                {index !== 0 ? <Line top='0' as='td'/> : ''}
+                                })}
+                                {props.iterableColumnElement ? elem[props.iterableColumnElement.name].map((iterableElem, i) => {
+                                    return (
+                                        <Body key={`metric-result-${i}`} as='td'
+                                              order={props.iterableColumnElement.order}
+                                              textAlign={props.iterableColumnElement.align} minWidth='72px'>
+                                            {props.iterableColumnElement.format ?
+                                                props.iterableColumnElement.format(iterableElem) : iterableElem}
+                                        </Body>
+                                    );
+                                }) : ''}
+                                {props.myEntries ? props.myEntries.tests.map((test, i) => {
+                                    return (
+                                        <Body key={`eval-result-${i}`} width='80px' as='td' textAlign='left'
+                                              minWidth='72px' order={2}>
+                                            {props.renderEvalResult(elem.evaluations, test)}
+                                        </Body>
+                                    );
+                                }) : ''}
                             </Grid>
                         );
                     })}
@@ -104,29 +105,14 @@ const Table = (props) => {
 
     return (
         <>
-            <Loading visible={props.loading}/>
             <Media query={theme.mobile}>
-                {!props.loading ? mobileRender() : ''}
+                {mobileRender()}
             </Media>
             <Media query={theme.desktop}>
-                {!props.loading ? desktopRender() : ''}
+                {desktopRender()}
             </Media>
         </>
     );
-};
-
-Table.propTypes = {
-    challengeName: PropsTypes.string,
-    loading: PropsTypes.bool,
-    renderElements: PropsTypes.func,
-    headerElements: PropsTypes.arrayOf(PropsTypes.string),
-};
-
-Table.defaultProps = {
-    challengeName: '',
-    loading: true,
-    renderElements: null,
-    headerElements: [],
 };
 
 export default Table;

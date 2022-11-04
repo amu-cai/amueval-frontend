@@ -7,9 +7,10 @@ import Table from '../../elements/Table';
 import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
 import _tableSearchQueryHandler from './_tableSearchQueryHandler';
-import {CALC_PAGES} from '../../../utils/globals';
+import {CALC_PAGES, RENDER_WHEN} from '../../../utils/globals';
 import Search from '../../elements/Search';
 import Pager from '../../elements/Pager';
+import Loading from '../../elements/Loading';
 
 const Leaderboard = (props) => {
     const [entriesFromApi, setEntriesFromApi] = React.useState([]);
@@ -82,6 +83,7 @@ const Leaderboard = (props) => {
     };
 
     const sortByUpdate = (elem) => {
+        let metricIndex = 0;
         let newEntries = entries;
         console.log(elem);
         switch (elem) {
@@ -113,8 +115,7 @@ const Leaderboard = (props) => {
                 }
                 break;
             default:
-                // eslint-disable-next-line no-case-declarations
-                let metricIndex = getMetricIndex(elem);
+                metricIndex = getMetricIndex(elem);
                 if (scoreSorted) {
                     newEntries = newEntries.sort((a, b) => b.evaluations[metricIndex].score - a.evaluations[metricIndex].score);
                     setScoreSorted(false);
@@ -145,19 +146,43 @@ const Leaderboard = (props) => {
         );
     };
 
+    const evaluationsFormat = (evaluate) => {
+        return evaluate.score.slice(0, 7);
+    };
+
     const desktopRender = () => {
         return (
             <FlexColumn padding='24px' as='section' width='100%' maxWidth='1200px'>
                 <H2 as='h2' margin='0 0 32px 0'>
                     Leaderboard
                 </H2>
-                <Search searchQueryHandler={tableSearchQueryHandler}/>
-                <Table challengeName={props.challengeName} loading={loading} headerElements={getLeaderboardHeader()}
-                       pageNr={pageNr} submissions={entries} sortByUpdate={sortByUpdate}/>
-                <Pager pageNr={pageNr} width='72px' borderRadius='64px'
-                       pages={CALC_PAGES(entries ? entries : [])}
-                       nextPage={nextPage} previousPage={previousPage}
-                       number={`${pageNr} / ${CALC_PAGES(entries ? entries : [])}`}/>
+                {!loading ?
+                    <>
+                        <Search searchQueryHandler={tableSearchQueryHandler}/>
+                        <Table challengeName={props.challengeName} headerElements={getLeaderboardHeader()}
+                               gridTemplateColumns={entries[0] ? '1fr 3fr ' + '2fr '.repeat(entries[0].evaluations.length) + '1fr 2fr' : ''}
+                               staticColumnElements={
+                                   [
+                                       {name: 'id', format: null, order: 1, align: 'left'},
+                                       {name: 'submitter', format: null, order: 2, align: 'left'},
+                                       {name: 'times', format: null, order: 4, align: 'left'},
+                                       {name: 'when', format: RENDER_WHEN, order: 5, align: 'right'}
+                                   ]
+                               }
+                               metrics={getPossibleMetrics()}
+                               iterableColumnElement={{
+                                   name: 'evaluations',
+                                   format: evaluationsFormat,
+                                   order: 3,
+                                   align: 'left'
+                               }}
+                               pageNr={pageNr} elements={entries} sortByUpdate={sortByUpdate}/>
+                        <Pager pageNr={pageNr} width='72px' borderRadius='64px'
+                               pages={CALC_PAGES(entries, 2)}
+                               nextPage={nextPage} previousPage={previousPage}
+                               number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}/>
+                    </>
+                    : <Loading/>}
             </FlexColumn>
         );
     };
