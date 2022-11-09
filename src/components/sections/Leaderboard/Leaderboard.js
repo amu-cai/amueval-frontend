@@ -22,6 +22,8 @@ const Leaderboard = (props) => {
     const [whenSorted, setWhenSorted] = React.useState(false);
     const [scoreSorted, setScoreSorted] = React.useState(false);
 
+    // const [columnIcons, setColumnIcons] = React.useState([]);
+
     React.useEffect(() => {
         challengeDataRequest(props.challengeName);
     }, [props.challengeName]);
@@ -97,19 +99,19 @@ const Leaderboard = (props) => {
                 break;
             case 'entries':
                 if (entriesSorted) {
-                    newEntries = newEntries.sort((a, b) => a.times - b.times);
+                    newEntries = newEntries.sort((a, b) => b.times - a.times);
                     setEntriesSorted(false);
                 } else {
-                    newEntries = newEntries.sort((a, b) => b.times - a.times);
+                    newEntries = newEntries.sort((a, b) => a.times - b.times);
                     setEntriesSorted(true);
                 }
                 break;
             case 'when':
                 if (whenSorted) {
-                    newEntries = newEntries.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
                     setWhenSorted(false);
                 } else {
-                    newEntries = newEntries.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
                     setWhenSorted(true);
                 }
                 break;

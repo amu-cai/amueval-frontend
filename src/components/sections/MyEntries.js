@@ -69,31 +69,30 @@ const MyEntries = (props) => {
 
     }
 
-    const sortByUpdate = (elem) => {
+    const sortByUpdate = (elem, i) => {
         let newEntries = myEntries;
         switch (elem) {
             case '#':
                 break;
             case 'when':
                 if (whenSorted) {
-                    newEntries = newEntries.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
                     setWhenSorted(false);
                 } else {
-                    newEntries = newEntries.sort((a, b) => (a.when < b.when) ? 1 : ((b.when < a.when) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.when > b.when) ? 1 : ((b.when > a.when) ? -1 : 0));
                     setWhenSorted(true);
                 }
                 break;
             default:
                 if (scoreSorted) {
-                    newEntries = newEntries.sort((a, b) => b.evaluations[elem] - a.evaluations[elem]);
+                    newEntries = newEntries.sort((a, b) => a.evaluations[elem] - b.evaluations[elem]);
                     setScoreSorted(false);
                 } else {
-                    newEntries = newEntries.sort((a, b) => a.evaluations[elem] - b.evaluations[elem]);
+                    newEntries = newEntries.sort((a, b) => b.evaluations[elem] - a.evaluations[elem]);
                     setScoreSorted(true);
                 }
                 break;
         }
-        console.log(newEntries);
         setMyEntries(newEntries);
     };
 

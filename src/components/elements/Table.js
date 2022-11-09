@@ -1,11 +1,11 @@
 import React from 'react';
-import {FlexColumn, FlexRow, Grid, Svg} from '../../utils/containers';
+import {FlexColumn, FlexRow, Grid} from '../../utils/containers';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import {ELEMENTS_PER_PAGE} from '../../utils/globals';
 import {Body, Medium} from '../../utils/fonts';
-import arrow from '../../assets/arrow.svg';
 import styled from 'styled-components';
+import ColumnFilterIcon from './ColumnFilterIcon';
 
 const Line = styled(FlexRow)`
   position: absolute;
@@ -20,6 +20,8 @@ const Line = styled(FlexRow)`
 const Table = (props) => {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
+    const [activeIcon, setActiveIcon] = React.useState(null);
+    const [rotateActiveIcon, setRotateActiveIcon] = React.useState(false);
 
     const mobileRender = () => {
         return (
@@ -71,7 +73,14 @@ const Table = (props) => {
                             return (
                                 <FlexRow key={`table-header-${i}`} alignmentX='flex-start' as='td'
                                          onClick={() => {
-                                             props.sortByUpdate(elem);
+                                             if (activeIcon === i) {
+                                                 let newRotateActiveIcon = !rotateActiveIcon;
+                                                 setRotateActiveIcon(newRotateActiveIcon);
+                                             } else {
+                                                 setRotateActiveIcon(false);
+                                             }
+                                             setActiveIcon(i);
+                                             props.sortByUpdate(elem, i);
                                              forceUpdate();
                                          }}>
                                     <Medium textAlign={elem === 'submitter' ? 'left' : 'right'}
@@ -80,12 +89,8 @@ const Table = (props) => {
                                         {elem}
                                     </Medium>
                                     {elem !== '#' ?
-                                        <>
-                                            <Svg width='8px' rotate='180deg' src={arrow}
-                                                 backgroundColor={theme.colors.dark} margin='2px 0 0 0'/>
-                                            <Svg width='8px' src={arrow} backgroundColor={theme.colors.dark}
-                                                 margin='0 0 2px 0'/>
-                                        </> : ''}
+                                        <ColumnFilterIcon index={i} active={activeIcon} rotateIcon={rotateActiveIcon}/>
+                                        : ''}
                                 </FlexRow>
                             );
                         })}
