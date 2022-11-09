@@ -7,7 +7,7 @@ import Table from '../../elements/Table';
 import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
 import _tableSearchQueryHandler from './_tableSearchQueryHandler';
-import {CALC_PAGES, RENDER_WHEN} from '../../../utils/globals';
+import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../../utils/globals';
 import Search from '../../elements/Search';
 import Pager from '../../elements/Pager';
 import Loading from '../../elements/Loading';
@@ -85,7 +85,6 @@ const Leaderboard = (props) => {
     const sortByUpdate = (elem) => {
         let metricIndex = 0;
         let newEntries = entries;
-        console.log(elem);
         switch (elem) {
             case 'submitter':
                 if (submitterSorted) {
@@ -125,6 +124,7 @@ const Leaderboard = (props) => {
                 }
                 break;
         }
+        console.log(newEntries);
         setEntries(newEntries);
     };
 
@@ -144,10 +144,6 @@ const Leaderboard = (props) => {
                        number={`${pageNr} / ${CALC_PAGES(entries ? entries : [])}`}/>
             </FlexColumn>
         );
-    };
-
-    const evaluationsFormat = (evaluate) => {
-        return evaluate.score.slice(0, 7);
     };
 
     const desktopRender = () => {
@@ -172,7 +168,7 @@ const Leaderboard = (props) => {
                                metrics={getPossibleMetrics()}
                                iterableColumnElement={{
                                    name: 'evaluations',
-                                   format: evaluationsFormat,
+                                   format: EVALUATIONS_FORMAT,
                                    order: 3,
                                    align: 'left'
                                }}

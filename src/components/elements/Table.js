@@ -29,9 +29,37 @@ const Table = (props) => {
         );
     };
 
+    const metricsRender = (elem) => {
+        if (!props.iterableColumnElement)
+            return <></>;
+        if (Array.isArray(elem[props.iterableColumnElement.name]))
+            elem = elem[props.iterableColumnElement.name];
+        else {
+            let newElem = [];
+            for (let metric of props.possibleMetrics) {
+                if (elem[props.iterableColumnElement.name][metric] === '-1')
+                    newElem.push('N/A');
+                else
+                    newElem.push(elem[props.iterableColumnElement.name][metric]);
+            }
+            elem = newElem;
+        }
+        return (
+            elem.map((iterableElem, i) => {
+                return (
+                    <Body key={`metric-result-${i}`} as='td'
+                          order={props.iterableColumnElement.order}
+                          textAlign={props.iterableColumnElement.align} minWidth='72px'>
+                        {props.iterableColumnElement.format ?
+                            props.iterableColumnElement.format(iterableElem) : iterableElem}
+                    </Body>
+                );
+            })
+        );
+    };
+
     const desktopRender = () => {
         const n = (props.pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-        console.log(props.elements);
         let elementsToMap = props.elements.slice(n, n + (ELEMENTS_PER_PAGE * 2));
         return (
             <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
@@ -41,7 +69,7 @@ const Table = (props) => {
                         gridTemplateColumns={props.gridTemplateColumns}>
                         {props.headerElements.map((elem, i) => {
                             return (
-                                <FlexRow key={`leaderboard-header-${i}`} alignmentX='flex-start' as='td'
+                                <FlexRow key={`table-header-${i}`} alignmentX='flex-start' as='td'
                                          onClick={() => {
                                              props.sortByUpdate(elem);
                                              forceUpdate();
@@ -77,24 +105,7 @@ const Table = (props) => {
                                         </Body>
                                     );
                                 })}
-                                {props.iterableColumnElement ? elem[props.iterableColumnElement.name].map((iterableElem, i) => {
-                                    return (
-                                        <Body key={`metric-result-${i}`} as='td'
-                                              order={props.iterableColumnElement.order}
-                                              textAlign={props.iterableColumnElement.align} minWidth='72px'>
-                                            {props.iterableColumnElement.format ?
-                                                props.iterableColumnElement.format(iterableElem) : iterableElem}
-                                        </Body>
-                                    );
-                                }) : ''}
-                                {props.myEntries ? props.myEntries.tests.map((test, i) => {
-                                    return (
-                                        <Body key={`eval-result-${i}`} width='80px' as='td' textAlign='left'
-                                              minWidth='72px' order={2}>
-                                            {props.renderEvalResult(elem.evaluations, test)}
-                                        </Body>
-                                    );
-                                }) : ''}
+                                {props.headerElements ? metricsRender(elem) : ''}
                             </Grid>
                         );
                     })}

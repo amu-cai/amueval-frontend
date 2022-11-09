@@ -64,6 +64,12 @@ const RENDER_WHEN = (when) => {
     return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
 
+const EVALUATIONS_FORMAT = (evaluate) => {
+    if (Object.hasOwn(evaluate, 'score'))
+        return evaluate.score.slice(0, 7);
+    return evaluate.slice(0, 7);
+};
+
 const IS_MOBILE = () => {
     return document.body.clientWidth <= 768;
 };
@@ -80,5 +86,6 @@ export {
     CALC_PAGES,
     RENDER_DEADLINE_TIME,
     IS_MOBILE,
-    RENDER_WHEN
+    RENDER_WHEN,
+    EVALUATIONS_FORMAT
 };
