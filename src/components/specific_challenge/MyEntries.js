@@ -2,13 +2,13 @@ import React from 'react';
 import {FlexColumn} from '../../utils/containers';
 import {H2} from '../../utils/fonts';
 import getMyEntries from '../../api/getMyEntries';
-import Pager from '../elements/Pager';
+import Pager from '../generic/Pager';
 import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../utils/globals';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import _tableSearchQueryHandler from './Leaderboard/_tableSearchQueryHandler';
-import Loading from '../elements/Loading';
-import Table from '../elements/Table';
+import Loading from '../generic/Loading';
+import Table from './Table';
 
 const MyEntries = (props) => {
     const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});

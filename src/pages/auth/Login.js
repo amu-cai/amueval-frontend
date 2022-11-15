@@ -1,9 +1,9 @@
 import React from 'react';
 import {FlexColumn} from '../../utils/containers';
-import AuthHeader from '../../components/elements/AuthHeader';
+import AuthHeader from '../../components/auth/AuthHeader';
 import {Body, Medium} from '../../utils/fonts';
 import {Link} from 'react-router-dom';
-import AuthOption from '../../components/elements/AuthOption';
+import AuthOption from '../../components/auth/AuthOption';
 import githubIco from '../../assets/github_ico.svg';
 import emailIco from '../../assets/email_ico.svg';
 import googleIco from '../../assets/google_ico.svg';

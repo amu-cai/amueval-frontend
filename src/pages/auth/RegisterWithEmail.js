@@ -1,11 +1,11 @@
 import React from 'react';
-import AuthHeader from '../../components/elements/AuthHeader';
+import AuthHeader from '../../components/auth/AuthHeader';
 import OptionsContainerStyle from './styles/OptionsContainerStyle';
-import AuthInput from '../../components/elements/AuthInput';
+import AuthInput from '../../components/auth/AuthInput';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import {FlexRow} from '../../utils/containers';
-import Button from '../../components/elements/Button';
+import Button from '../../components/generic/Button';
 import MainContainerStyle from './styles/MainContainerStyle';
 
 const RegisterWithEmail = () => {

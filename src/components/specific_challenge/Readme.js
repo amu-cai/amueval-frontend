@@ -6,10 +6,10 @@ import theme from '../../utils/theme';
 import getChallengeFullDescription from '../../api/getChallengeFullDescription';
 import {markdown} from 'markdown';
 import styled from 'styled-components';
-import InfoList from '../elements/InfoList';
-import Loading from '../elements/Loading';
+import InfoList from '../generic/InfoList';
+import Loading from '../generic/Loading';
 import PropsTypes from 'prop-types';
-import MiniChallenge from './MiniChallenge';
+import MiniChallenge from '../challenges_list/MiniChallenge';
 
 const ReadmeStyle = styled(Body)`
   h3 {

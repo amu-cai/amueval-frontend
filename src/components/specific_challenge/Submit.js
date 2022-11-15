@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlexColumn} from '../../utils/containers';
 import {H2, Menu} from '../../utils/fonts';
-import SubmitInput from '../elements/SubmitInput';
-import Button from '../elements/Button';
+import SubmitInput from '../generic/SubmitInput';
+import Button from '../generic/Button';
 import theme from '../../utils/theme';
 import challengeSubmission from '../../api/challengeSubmissionPost';
 

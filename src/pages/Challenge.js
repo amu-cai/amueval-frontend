@@ -3,18 +3,18 @@ import {Container, FlexColumn, FlexRow, Svg} from '../utils/containers';
 import {useParams} from 'react-router-dom';
 import {H1, Medium} from '../utils/fonts';
 import theme from '../utils/theme';
-import MobileChallengeMenu from '../components/elements/MobileChallengeMenu';
-import Leaderboard from '../components/sections/Leaderboard/Leaderboard';
-import Readme from '../components/sections/Readme';
-import HowTo from '../components/sections/HowTo';
-import MyEntries from '../components/sections/MyEntries';
-import Submit from '../components/sections/Submit';
+import MobileChallengeMenu from '../components/specific_challenge/MobileChallengeMenu';
+import Leaderboard from '../components/specific_challenge/Leaderboard/Leaderboard';
+import Readme from '../components/specific_challenge/Readme';
+import HowTo from '../components/specific_challenge/HowTo';
+import MyEntries from '../components/specific_challenge/MyEntries';
+import Submit from '../components/specific_challenge/Submit';
 import Media from 'react-media';
-import DesktopChallengeMenu from '../components/elements/DesktopChallengeMenu';
+import DesktopChallengeMenu from '../components/specific_challenge/DesktopChallengeMenu';
 import {RENDER_ICO} from '../utils/globals';
 import textIco from '../assets/text_ico.svg';
 import getChallengeInfo from '../api/getChallengeInfo';
-import Loading from '../components/elements/Loading';
+import Loading from '../components/generic/Loading';
 
 const Challenge = () => {
     const challengeName = useParams().challengeId;

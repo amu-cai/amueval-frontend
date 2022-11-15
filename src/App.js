@@ -3,7 +3,7 @@ import theme from './utils/theme';
 import LandingPage from './pages/LandingPage';
 import Challenges from './pages/Challanges/Challenges';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import NavBar from './components/elements/NavBar';
+import NavBar from './components/navigation/NavBar';
 import {CHALLENGE_PAGE, CHALLENGES_PAGE, IS_MOBILE} from './utils/globals';
 import Challenge from './pages/Challenge';
 import Register from './pages/auth/Register';
@@ -12,9 +12,9 @@ import LoginWithEmail from './pages/auth/LoginWithEmail';
 import RegisterWithEmail from './pages/auth/RegisterWithEmail';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
-import LoggedBar from './components/elements/LoggedBar';
+import LoggedBar from './components/navigation/LoggedBar';
 import addUser from './api/addUser';
-import Loading from './components/elements/Loading';
+import Loading from './components/generic/Loading';
 import {FlexColumn} from './utils/containers';
 
 const App = () => {

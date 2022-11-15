@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlexColumn, FlexRow, Grid, Svg} from '../../utils/containers';
 import {Body, H2, H3, Medium} from '../../utils/fonts';
-import CircleNumber from '../elements/CircleNumber';
-import CodeShell from '../elements/CodeShell';
+import CircleNumber from '../generic/CircleNumber';
+import CodeShell from '../generic/CodeShell';
 import cubeIcon from '../../assets/cube_ico.svg';
 import theme from '../../utils/theme';
 import {IS_MOBILE} from '../../utils/globals';
@@ -67,17 +67,17 @@ const HowTo = () => {
                     source codes along
                     with <Medium>out.tsv</Medium> files.
                 </Body>
-                <CodeShell codeBlockIndex={3} 
-                           commands={['cd challenging-america-geo-prediction', 
-                                      'git checkout -b my-brilliant-branch # switch to some other branch',
-                                      'git add foo.py build.sh # add your source codes',
-                                      /* eslint-disable */
-                                      `git add gonito.yaml # it's a good practice to add metadata file, see below`]}/>
+                <CodeShell codeBlockIndex={3}
+                           commands={['cd challenging-america-geo-prediction',
+                               'git checkout -b my-brilliant-branch # switch to some other branch',
+                               'git add foo.py build.sh # add your source codes',
+                               /* eslint-disable */
+                               `git add gonito.yaml # it's a good practice to add metadata file, see below`]}/>
                 <CodeShell codeBlockIndex={4}
                            commands={['git add dev-0/out.tsv test-A/out.tsv # add your output files',
-                           /* eslint-disable */
-                           `git commit -m 'my brilliant solution'`,
-                           'git push origin my-brilliant-branch']}/>
+                               /* eslint-disable */
+                               `git commit -m 'my brilliant solution'`,
+                               'git push origin my-brilliant-branch']}/>
             </FlexColumn>
             <FlexColumn as='article' gap={IS_MOBILE() ? '16px' : '24px'} alignmentX='flex-start'>
                 <H2 as='h2' margin='0 0 8px 0'>
@@ -211,16 +211,16 @@ const HowTo = () => {
                         that you can also
                         add links to external resources using the <Medium>`links`</Medium> section):
                     </Body>
-                    <CodeShell codeBlockIndex={5} disablePrompt 
+                    <CodeShell codeBlockIndex={5} disablePrompt
                                commands={['description: This my brilliant solution',
-                               'tags:', '\t- neutral-network', '\t- left-to-right', 
-                               'params:', '\tepochs: 10', '\tlearning-rate: 0.01',
-                               'unwanted-params:', '\t- model-file', '\t- vocab-file',
-                               'param-files:', '\t- “*.yaml”*', '\t- config/*.yaml*/',
-                               'links:', '\t- title: "Some external link"', 
-                               '\t\s\surl: "https://example.org/xyz"', '\t- title: "Yet another link"',
-                               '\t\s\shttps://example.com/foo-bar-baz-123"', 
-                               '\t- url: "https://example.net/bare-link-without-text']}/>
+                                   'tags:', '\t- neutral-network', '\t- left-to-right',
+                                   'params:', '\tepochs: 10', '\tlearning-rate: 0.01',
+                                   'unwanted-params:', '\t- model-file', '\t- vocab-file',
+                                   'param-files:', '\t- “*.yaml”*', '\t- config/*.yaml*/',
+                                   'links:', '\t- title: "Some external link"',
+                                   '\t\s\surl: "https://example.org/xyz"', '\t- title: "Yet another link"',
+                                   '\t\s\shttps://example.com/foo-bar-baz-123"',
+                                   '\t- url: "https://example.net/bare-link-without-text']}/>
                     <Body>
                         It might seem a little bit complicated, but you could simply use the method which is the most
                         convenient for you.

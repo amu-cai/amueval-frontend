@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, FlexRow, Svg} from '../../../utils/containers';
-import Logo from '../Logo';
+import Logo from '../../generic/Logo';
 import styled from 'styled-components';
 import menuButtonIcon from '../../../assets/menu-button.svg';
 import MobileNavMenu from '../MobileNavMenu';

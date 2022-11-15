@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlexColumn, Grid, Svg} from '../../utils/containers';
-import Filter from '../elements/Filter';
+import Filter from '../generic/Filter';
 import {Body, H3, Medium} from '../../utils/fonts';
 import arrow from '../../assets/arrow.svg';
 import Media from 'react-media';

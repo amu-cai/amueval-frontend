@@ -1,9 +1,9 @@
 import React from 'react';
 import {FlexColumn, FlexRow, TransBack} from '../../../utils/containers';
-import Button from '../Button';
+import Button from '../../generic/Button';
 import theme from '../../../utils/theme';
 import styled from 'styled-components';
-import FilterBy from '../../sections/FilterBy';
+import FilterBy from '../FilterBy';
 import filterOptions from './filterOptions';
 import Media from 'react-media';
 import PropsTypes from 'prop-types';

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Body, H1} from '../../utils/fonts';
 import {FlexColumn, FlexRow, Svg} from '../../utils/containers';
-import Search from '../../components/elements/Search';
-import Pager from '../../components/elements/Pager';
-import FiltersMenu from '../../components/elements/FiltersMenu';
+import Search from '../../components/generic/Search';
+import Pager from '../../components/generic/Pager';
+import FiltersMenu from '../../components/challenges_list/FiltersMenu';
 import _searchQueryHandler from './_searchQueryHandler';
 import _renderChallenges from './_renderChallenges';
 import Media from 'react-media';
@@ -11,7 +11,7 @@ import theme from '../../utils/theme';
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
 import {CALC_PAGES} from '../../utils/globals';
-import Loading from '../../components/elements/Loading';
+import Loading from '../../components/generic/Loading';
 
 const Challenges = () => {
     const [pageNr, setPageNr] = React.useState(1);

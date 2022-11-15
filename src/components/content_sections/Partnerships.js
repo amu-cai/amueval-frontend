@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlexColumn, Grid} from '../../utils/containers';
 import {H2} from '../../utils/fonts';
-import Placeholder from '../elements/Placeholder';
+import Placeholder from '../generic/Placeholder';
 import styled from 'styled-components';
 
 const PartnershipsStyle = styled(FlexColumn)`

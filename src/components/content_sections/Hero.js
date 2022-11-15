@@ -2,7 +2,7 @@ import React from 'react';
 import {Body, H1, Medium} from '../../utils/fonts';
 import {Container, FlexColumn, FlexRow, Svg} from '../../utils/containers';
 import theme from '../../utils/theme';
-import ButtonLink from '../elements/ButtonLink';
+import ButtonLink from '../generic/ButtonLink';
 import Media from 'react-media';
 import codepenIco from '../../assets/codepen_ico.svg';
 import styled from 'styled-components';

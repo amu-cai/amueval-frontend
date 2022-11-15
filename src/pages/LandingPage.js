@@ -1,10 +1,10 @@
 import React from 'react';
 import {FlexColumn} from '../utils/containers';
-import Motivation from '../components/sections/Motivation';
-import Csi from '../components/sections/Csi';
-import Commercial from '../components/sections/Commercial';
-import Hero from '../components/sections/Hero';
-import Partnerships from '../components/sections/Partnerships';
+import Motivation from '../components/content_sections/Motivation';
+import Csi from '../components/content_sections/Csi';
+import Commercial from '../components/content_sections/Commercial';
+import Hero from '../components/content_sections/Hero';
+import Partnerships from '../components/content_sections/Partnerships';
 import styled from 'styled-components';
 
 const LandingPageStyle = styled(FlexColumn)`
