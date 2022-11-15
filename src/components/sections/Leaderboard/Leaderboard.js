@@ -90,10 +90,10 @@ const Leaderboard = (props) => {
         switch (elem) {
             case 'submitter':
                 if (submitterSorted) {
-                    newEntries = newEntries.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.submitter < b.submitter) ? 1 : ((b.submitter < a.submitter) ? -1 : 0));
                     setSubmitterSorted(false);
                 } else {
-                    newEntries = newEntries.sort((a, b) => (a.submitter < b.submitter) ? 1 : ((b.submitter < a.submitter) ? -1 : 0));
+                    newEntries = newEntries.sort((a, b) => (a.submitter > b.submitter) ? 1 : ((b.submitter > a.submitter) ? -1 : 0));
                     setSubmitterSorted(true);
                 }
                 break;
@@ -126,7 +126,6 @@ const Leaderboard = (props) => {
                 }
                 break;
         }
-        console.log(newEntries);
         setEntries(newEntries);
     };
 

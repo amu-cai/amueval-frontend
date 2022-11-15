@@ -1,7 +1,7 @@
 import {API} from '../utils/globals';
 import KeyCloakService from '../services/KeyCloakService';
 
-const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoadingState) => {
+const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoadingState, setScoreSorted) => {
     fetch(`${API}/challenge-my-submissions/${challengeName}`, {
         headers: {'Authorization': `Bearer ${KeyCloakService.getToken()}`}
     })
@@ -10,6 +10,7 @@ const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoad
             setDataOriginalState(data);
             let item = {};
             let result = [];
+            let initSetScoreSorted = [];
             let tests = data.tests;
             for (let submission of data.submissions) {
                 for (let evaluation of submission.evaluations) {
@@ -41,6 +42,11 @@ const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoad
                 result.push(item);
                 item = {};
             }
+            // eslint-disable-next-line no-unused-vars
+            for (let _ of tests) {
+                initSetScoreSorted.push(false);
+            }
+            setScoreSorted(initSetScoreSorted);
             setDataState(result);
             setLoadingState(false);
         });

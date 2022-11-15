@@ -16,7 +16,7 @@ const MyEntries = (props) => {
     const [loading, setLoading] = React.useState(true);
     const [pageNr, setPageNr] = React.useState(1);
     const [whenSorted, setWhenSorted] = React.useState(false);
-    const [scoreSorted, setScoreSorted] = React.useState(false);
+    const [scoresSorted, setScoresSorted] = React.useState([]);
     /* eslint-disable */
 
     React.useEffect(() => {
@@ -62,7 +62,7 @@ const MyEntries = (props) => {
     };
 
     const challengesRequest = () => {
-        getMyEntries(props.challengeName, setMyEntriesFromAPI, setMyEntries, setLoading);
+        getMyEntries(props.challengeName, setMyEntriesFromAPI, setMyEntries, setLoading, setScoresSorted);
     };
 
     const mobileRender = () => {
@@ -84,12 +84,16 @@ const MyEntries = (props) => {
                 }
                 break;
             default:
-                if (scoreSorted) {
-                    newEntries = newEntries.sort((a, b) => a.evaluations[elem] - b.evaluations[elem]);
-                    setScoreSorted(false);
-                } else {
+                let metricIndex = getPossibleMetrics().indexOf(elem);
+                let newScoresSorted = scoresSorted;
+                if (scoresSorted[metricIndex]) {
                     newEntries = newEntries.sort((a, b) => b.evaluations[elem] - a.evaluations[elem]);
-                    setScoreSorted(true);
+                    newScoresSorted[metricIndex] = false;
+                    setScoresSorted(newScoresSorted);
+                } else {
+                    newEntries = newEntries.sort((a, b) => a.evaluations[elem] - b.evaluations[elem]);
+                    newScoresSorted[metricIndex] = true;
+                    setScoresSorted(newScoresSorted);
                 }
                 break;
         }
