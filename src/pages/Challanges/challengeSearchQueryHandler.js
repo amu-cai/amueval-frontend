@@ -1,4 +1,4 @@
-const _searchQueryHandler = (event, challengesFromAPI, setPageNr, setChallenges) => {
+const challengeSearchQueryHandler = (event, challengesFromAPI, setPageNr, setChallenges) => {
     let searchQuery = event.target.value;
     let challengesToRender = [];
     setPageNr(1);
@@ -16,4 +16,4 @@ const _searchQueryHandler = (event, challengesFromAPI, setPageNr, setChallenges)
     }
 };
 
-export default _searchQueryHandler;
+export default challengeSearchQueryHandler;

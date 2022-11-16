@@ -7,7 +7,7 @@ import MobileChallengeMenu from '../components/specific_challenge/MobileChalleng
 import Leaderboard from '../components/specific_challenge/Leaderboard/Leaderboard';
 import Readme from '../components/specific_challenge/Readme';
 import HowTo from '../components/specific_challenge/HowTo';
-import MyEntries from '../components/specific_challenge/MyEntries';
+import MyEntries from '../components/specific_challenge/MyEntries/MyEntries';
 import Submit from '../components/specific_challenge/Submit';
 import Media from 'react-media';
 import DesktopChallengeMenu from '../components/specific_challenge/DesktopChallengeMenu';

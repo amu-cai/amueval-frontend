@@ -63,60 +63,70 @@ const Table = (props) => {
     const desktopRender = () => {
         const n = (props.pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
         let elementsToMap = props.elements.slice(n, n + (ELEMENTS_PER_PAGE * 2));
-        return (
-            <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
-                <FlexColumn as='tbody' width='100%'>
-                    <Grid
-                        gridGap='20px' position='relative' width='100%' padding='4px' margin='0 0 6px 0'
-                        gridTemplateColumns={props.gridTemplateColumns}>
-                        {props.headerElements.map((elem, i) => {
+        if (elementsToMap.length > 0) {
+            return (
+                <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
+                    <FlexColumn as='tbody' width='100%'>
+                        <Grid
+                            gridGap='20px' position='relative' width='100%' padding='4px' margin='0 0 6px 0'
+                            gridTemplateColumns={props.gridTemplateColumns}>
+                            {props.headerElements.map((elem, i) => {
+                                return (
+                                    <FlexRow key={`table-header-${i}`} alignmentX='flex-start' as='td'
+                                             onClick={() => {
+                                                 if (activeIcon === i) {
+                                                     let newRotateActiveIcon = !rotateActiveIcon;
+                                                     setRotateActiveIcon(newRotateActiveIcon);
+                                                 } else {
+                                                     setRotateActiveIcon(false);
+                                                 }
+                                                 setActiveIcon(i);
+                                                 props.sortByUpdate(elem, i);
+                                                 forceUpdate();
+                                             }}>
+                                        <Medium textAlign={elem === 'submitter' ? 'left' : 'right'}
+                                                width={elem === 'when' ? '100%' : 'auto'} padding='0 6px 0 0'
+                                                minWidth={elem === 'result' ? '72px' : 'none'}>
+                                            {elem}
+                                        </Medium>
+                                        {elem !== '#' ?
+                                            <ColumnFilterIcon index={i} active={activeIcon}
+                                                              rotateIcon={rotateActiveIcon}/>
+                                            : ''}
+                                    </FlexRow>
+                                );
+                            })}
+                            <Line height='2px' top='32px' shadow={theme.shadow}/>
+                        </Grid>
+                        {elementsToMap.map((elem, index) => {
                             return (
-                                <FlexRow key={`table-header-${i}`} alignmentX='flex-start' as='td'
-                                         onClick={() => {
-                                             if (activeIcon === i) {
-                                                 let newRotateActiveIcon = !rotateActiveIcon;
-                                                 setRotateActiveIcon(newRotateActiveIcon);
-                                             } else {
-                                                 setRotateActiveIcon(false);
-                                             }
-                                             setActiveIcon(i);
-                                             props.sortByUpdate(elem, i);
-                                             forceUpdate();
-                                         }}>
-                                    <Medium textAlign={elem === 'submitter' ? 'left' : 'right'}
-                                            width={elem === 'when' ? '100%' : 'auto'} padding='0 6px 0 0'
-                                            minWidth={elem === 'result' ? '72px' : 'none'}>
-                                        {elem}
-                                    </Medium>
-                                    {elem !== '#' ?
-                                        <ColumnFilterIcon index={i} active={activeIcon} rotateIcon={rotateActiveIcon}/>
-                                        : ''}
-                                </FlexRow>
+                                <Grid as='tr' key={`leaderboard-row-${index}`}
+                                      backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
+                                      gridTemplateColumns={props.gridTemplateColumns}
+                                      gridGap='20px' position='relative' width='100%' padding='4px'>
+                                    {props.staticColumnElements.map((elemName, i) => {
+                                        return (
+                                            <Body key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
+                                                  as='td'
+                                                  order={elemName.order} textAlign={elemName.align}>
+                                                {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
+                                            </Body>
+                                        );
+                                    })}
+                                    {props.headerElements ? metricsRender(elem) : ''}
+                                </Grid>
                             );
                         })}
-                        <Line height='2px' top='32px' shadow={theme.shadow}/>
-                    </Grid>
-                    {elementsToMap.map((elem, index) => {
-                        return (
-                            <Grid as='tr' key={`leaderboard-row-${index}`}
-                                  backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
-                                  gridTemplateColumns={props.gridTemplateColumns}
-                                  gridGap='20px' position='relative' width='100%' padding='4px'>
-                                {props.staticColumnElements.map((elemName, i) => {
-                                    return (
-                                        <Body key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`} as='td'
-                                              order={elemName.order} textAlign={elemName.align}>
-                                            {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
-                                        </Body>
-                                    );
-                                })}
-                                {props.headerElements ? metricsRender(elem) : ''}
-                            </Grid>
-                        );
-                    })}
+                    </FlexColumn>
                 </FlexColumn>
-            </FlexColumn>
-        );
+            );
+        } else {
+            return (
+                <Medium margin='72px 0'>
+                    Query not found
+                </Medium>
+            );
+        }
     };
 
     return (

@@ -6,7 +6,7 @@ import {H2} from '../../../utils/fonts';
 import Table from '../Table';
 import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
-import _tableSearchQueryHandler from './_tableSearchQueryHandler';
+import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';
 import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../../utils/globals';
 import Search from '../../generic/Search';
 import Pager from '../../generic/Pager';
@@ -21,8 +21,6 @@ const Leaderboard = (props) => {
     const [entriesSorted, setEntriesSorted] = React.useState(false);
     const [whenSorted, setWhenSorted] = React.useState(false);
     const [scoreSorted, setScoreSorted] = React.useState(false);
-
-    // const [columnIcons, setColumnIcons] = React.useState([]);
 
     React.useEffect(() => {
         challengeDataRequest(props.challengeName);
@@ -43,8 +41,8 @@ const Leaderboard = (props) => {
         }
     };
 
-    const tableSearchQueryHandler = (event) => {
-        _tableSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
+    const searchQueryHandler = (event) => {
+        leaderboardSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
     };
 
     const nextPage = () => {
@@ -135,7 +133,7 @@ const Leaderboard = (props) => {
                 <H2 as='h2' margin='0 0 12px 0'>
                     Leaderboard
                 </H2>
-                <Search searchQueryHandler={tableSearchQueryHandler}/>
+                <Search searchQueryHandler={searchQueryHandler}/>
                 <Table challengeName={props.challengeName} loading={loading}
                        headerElements={['#', 'submitter', 'result', 'entries', 'when']}
                        pageNr={pageNr} submissions={entries} sortByUpdate={sortByUpdate}/>
@@ -155,7 +153,7 @@ const Leaderboard = (props) => {
                 </H2>
                 {!loading ?
                     <>
-                        <Search searchQueryHandler={tableSearchQueryHandler}/>
+                        <Search searchQueryHandler={searchQueryHandler}/>
                         <Table challengeName={props.challengeName} headerElements={getLeaderboardHeader()}
                                gridTemplateColumns={entries[0] ? '1fr 3fr ' + '2fr '.repeat(entries[0].evaluations.length) + '1fr 2fr' : ''}
                                staticColumnElements={

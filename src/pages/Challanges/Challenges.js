@@ -4,7 +4,7 @@ import {FlexColumn, FlexRow, Svg} from '../../utils/containers';
 import Search from '../../components/generic/Search';
 import Pager from '../../components/generic/Pager';
 import FiltersMenu from '../../components/challenges_list/FiltersMenu';
-import _searchQueryHandler from './_searchQueryHandler';
+import challengeSearchQueryHandler from './challengeSearchQueryHandler';
 import _renderChallenges from './_renderChallenges';
 import Media from 'react-media';
 import theme from '../../utils/theme';
@@ -50,7 +50,7 @@ const Challenges = () => {
     };
 
     const searchQueryHandler = (event) => {
-        _searchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);
+        challengeSearchQueryHandler(event, challengesFromAPI, setPageNr, setChallenges);
     };
 
     const nextPage = () => {

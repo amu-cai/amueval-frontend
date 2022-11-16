@@ -1,7 +1,7 @@
 import {API} from '../utils/globals';
 import KeyCloakService from '../services/KeyCloakService';
 
-const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoadingState, setScoreSorted) => {
+const getMyEntries = (challengeName, setDataOriginalState, setDataStateForSearch, setDataState, setLoadingState, setScoreSorted) => {
     fetch(`${API}/challenge-my-submissions/${challengeName}`, {
         headers: {'Authorization': `Bearer ${KeyCloakService.getToken()}`}
     })
@@ -47,6 +47,7 @@ const getMyEntries = (challengeName, setDataOriginalState, setDataState, setLoad
                 initSetScoreSorted.push(false);
             }
             setScoreSorted(initSetScoreSorted);
+            setDataStateForSearch(result);
             setDataState(result);
             setLoadingState(false);
         });

@@ -1,17 +1,19 @@
 import React from 'react';
-import {FlexColumn} from '../../utils/containers';
-import {H2} from '../../utils/fonts';
-import getMyEntries from '../../api/getMyEntries';
-import Pager from '../generic/Pager';
-import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../utils/globals';
+import {FlexColumn} from '../../../utils/containers';
+import {H2} from '../../../utils/fonts';
+import getMyEntries from '../../../api/getMyEntries';
+import Pager from '../../generic/Pager';
+import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../../utils/globals';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-import _tableSearchQueryHandler from './Leaderboard/_tableSearchQueryHandler';
-import Loading from '../generic/Loading';
-import Table from './Table';
+import theme from '../../../utils/theme';
+import Loading from '../../generic/Loading';
+import Table from '../Table';
+import myEntriesSearchQueryHandler from './myEntriesSearchQueryHandler';
+import Search from '../../generic/Search';
 
 const MyEntries = (props) => {
     const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
+    const [myEntriesAll, setMyEntriesAll] = React.useState({});
     const [myEntries, setMyEntries] = React.useState({});
     const [loading, setLoading] = React.useState(true);
     const [pageNr, setPageNr] = React.useState(1);
@@ -23,8 +25,8 @@ const MyEntries = (props) => {
         challengesRequest();
     }, []);
 
-    const tableSearchQueryHandler = (event) => {
-        _tableSearchQueryHandler(event, myEntriesFromAPI, setPageNr, setMyEntries);
+    const searchQueryHandler = (event) => {
+        myEntriesSearchQueryHandler(event, myEntriesAll, setPageNr, setMyEntries);
     };
 
     const getPossibleMetrics = () => {
@@ -62,7 +64,7 @@ const MyEntries = (props) => {
     };
 
     const challengesRequest = () => {
-        getMyEntries(props.challengeName, setMyEntriesFromAPI, setMyEntries, setLoading, setScoresSorted);
+        getMyEntries(props.challengeName, setMyEntriesFromAPI, setMyEntriesAll, setMyEntries, setLoading, setScoresSorted);
     };
 
     const mobileRender = () => {
@@ -108,6 +110,7 @@ const MyEntries = (props) => {
                 </H2>
                 {myEntries && !loading ?
                     <>
+                        <Search searchQueryHandler={searchQueryHandler}/>
                         <Table challengeName={props.challengeName} headerElements={getMyEntriesHeader()}
                                possibleMetrics={getPossibleMetrics()}
                                gridTemplateColumns={'1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)}
