@@ -25,6 +25,7 @@ const Submit = (props) => {
 
     const challengeSubmissionSubmit = () => {
         challengeSubmission(props.challengeName, repoUrl, repoBranch, description).then(r => console.log(r));
+        props.popUpMessageHandler('Submit success!', 'Check your entries.');
     };
 
     return (

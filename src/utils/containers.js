@@ -27,6 +27,7 @@ const Container = styled.div`
   opacity: ${({opacity}) => opacity ? opacity : '1'};
   transform: translate(${({translateX}) => translateX ? translateX : 0}, ${({translateY}) => translateY ? translateY : 0});
   order: ${({order}) => order ? order : '0'};
+  z-index: ${({zIndex}) => zIndex ? zIndex : '0'};
 `;
 
 const FlexRow = styled(Container)`

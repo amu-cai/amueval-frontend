@@ -16,10 +16,13 @@ import LoggedBar from './components/navigation/LoggedBar';
 import addUser from './api/addUser';
 import Loading from './components/generic/Loading';
 import {FlexColumn} from './utils/containers';
+import PopupMessage from './components/generic/PopupMessage';
 
 const App = () => {
     const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
     const [loggedBarHover, setLoggedBarHover] = React.useState(false);
+    const [popUpHeader, setPopUpHeader] = React.useState('');
+    const [popUpMessage, setPopUpMessage] = React.useState('');
 
     React.useEffect(() => {
         if (sessionStorage.getItem('logged') !== 'yes') {
@@ -37,6 +40,22 @@ const App = () => {
             }
         }, 1500);
     });
+
+    const popUpMessageHandler = (header, message) => {
+        console.log('elo');
+        console.log(header);
+        console.log(message);
+        setPopUpHeader(header);
+        setPopUpMessage(message);
+    };
+
+    const popUpMessageRender = () => {
+        if (popUpHeader !== '' || popUpMessage !== '') {
+            return (
+                <PopupMessage header={popUpHeader} message={popUpMessage} popUpMessageHandler={popUpMessageHandler}/>
+            );
+        }
+    };
 
     const loggedBarVisibleHandler = () => {
         if (loggedBarVisible === '0' && !loggedBarHover)
@@ -56,6 +75,7 @@ const App = () => {
         return (
             <BrowserRouter>
                 <ThemeProvider theme={theme}>
+                    {popUpMessageRender()}
                     <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler}/>
                     {!IS_MOBILE() ?
                         <LoggedBar visible={loggedBarVisible} loggedBarVisibleHandler={loggedBarVisibleHandler}
@@ -67,7 +87,8 @@ const App = () => {
                         <Route path='/login-email' element={<LoginWithEmail/>}/>
                         <Route path='/login' element={<Login/>}/>
                         <Route path='/register' element={<Register/>}/>
-                        <Route path={`${CHALLENGE_PAGE}/:challengeId`} element={<Challenge/>}/>
+                        <Route path={`${CHALLENGE_PAGE}/:challengeId`}
+                               element={<Challenge popUpMessageHandler={popUpMessageHandler}/>}/>
                         <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
                         {
                             KeyCloakService.isLoggedIn() ? <>

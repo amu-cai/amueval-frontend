@@ -16,7 +16,7 @@ import textIco from '../assets/text_ico.svg';
 import getChallengeInfo from '../api/getChallengeInfo';
 import Loading from '../components/generic/Loading';
 
-const Challenge = () => {
+const Challenge = (props) => {
     const challengeName = useParams().challengeId;
     const [challenge, setChallenge] = React.useState([]);
     const [section, setSection] = React.useState(0);
@@ -38,7 +38,7 @@ const Challenge = () => {
             case 3:
                 return <MyEntries challengeName={challengeName}/>;
             case 4:
-                return <Submit challengeName={challengeName}/>;
+                return <Submit popUpMessageHandler={props.popUpMessageHandler} challengeName={challengeName}/>;
             default:
                 return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
         }
