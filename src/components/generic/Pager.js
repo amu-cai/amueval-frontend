@@ -19,9 +19,13 @@ const LeftArrow = styled(Svg)`
   cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
   width: 10px;
   height: 10px;
-  transition: transform 0.3s ease-in-out;
+  transition: background-color, transform 0.3s ease-in-out;
 
-  &:hover {
+  &:hover, &:focus {
+    background-color: ${({
+                           theme,
+                           backgroundColor
+                         }) => (backgroundColor === 'transparent') ? 'transparent' : theme.colors.green};
     transform: scale(1.1);
   }
 
@@ -31,33 +35,50 @@ const LeftArrow = styled(Svg)`
   }
 `;
 
-const RightArrow = styled(Svg)`
-  background-color: ${({backgroundColor}) => backgroundColor};
+const RightArrow = styled(LeftArrow)`
   transform: rotate(180deg);
-  cursor: ${({backgroundColor}) => (backgroundColor === 'transparent') ? 'auto' : 'pointer'};
-  width: 10px;
-  height: 10px;
-  transition: transform 0.3s ease-in-out;
 
-  &:hover {
-    transform: rotate(180deg) scale(1.1);
-  }
-
-  @media (min-width: ${({theme}) => theme.overMobile}) {
-    width: 12px;
-    height: 12px;
+  &:hover, &:focus {
+    background-color: ${({
+                           theme,
+                           backgroundColor
+                         }) => (backgroundColor === 'transparent') ? 'transparent' : theme.colors.green};
+    transform: scale(1.1) rotate(180deg);
   }
 `;
 
 const Pager = (props) => {
+    const leftArrowVisible = () => {
+        if (props.pageNr === 1)
+            return 'transparent';
+        return theme.colors.dark;
+    };
+
+    const leftArrowClickable = () => {
+        if (props.pageNr === 1)
+            return null;
+        return props.previousPage;
+    };
+
+    const rightArrowVisible = () => {
+        if (props.pageNr === props.pages)
+            return 'transparent';
+        return theme.colors.dark;
+    };
+
+    const rightArrowClickable = () => {
+        if (props.pageNr === props.pages)
+            return null;
+        return props.nextPage;
+    };
+
     return (
         <PagerStyle>
-            <LeftArrow as='a' href='#start' src={polygon} onClick={props.previousPage} size='cover'
-                       backgroundColor={(props.pageNr === 1) ? 'transparent' : theme.colors.dark}/>
+            <LeftArrow as='a' href='#start' src={polygon} onClick={leftArrowClickable()} size='cover'
+                       backgroundColor={leftArrowVisible()}/>
             <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
-            <RightArrow as='a' href='#start' src={polygon} onClick={props.nextPage} size='cover'
-                        backgroundColor={(props.pageNr === props.pages)
-                            ? 'transparent' : theme.colors.dark}/>
+            <RightArrow as='a' href='#start' src={polygon} onClick={rightArrowClickable()} size='cover'
+                        backgroundColor={rightArrowVisible()}/>
         </PagerStyle>
     );
 };
