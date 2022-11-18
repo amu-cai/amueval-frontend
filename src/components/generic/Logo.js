@@ -16,7 +16,7 @@ const LogoStyle = styled(H1)`
 const Logo = () => {
     return (
         <LogoStyle as={Link} cursor='pointer' to='/' color={theme.colors.green}>
-            Gonito.net
+            Gonito
         </LogoStyle>
     );
 };

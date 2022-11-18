@@ -39,7 +39,7 @@ const desktopRender = () => {
             <H1 as="h1">
                 Welcome to
                 <Container display="inline" color={theme.colors.green}>
-                    &nbsp;Gonito.net!
+                    &nbsp;Gonito!
                 </Container>
             </H1>
             <FlexRow gap='20px'>
@@ -52,7 +52,7 @@ const desktopRender = () => {
                         Join us!
                     </ButtonLink>
                 </Container>
-                <Svg src={codepenIco} width='212px' height='180px' backgroundColor={theme.colors.green}/>
+                <Svg src={codepenIco} width='180px' height='150px' size='contain' backgroundColor={theme.colors.green}/>
             </FlexRow>
         </FlexColumn>
     );
