@@ -67,9 +67,9 @@ const Table = (props) => {
             return (
                 <FlexColumn as='table' margin='32px 0 72px 0' width='100%'>
                     <FlexColumn as='tbody' width='100%'>
-                        <Grid
-                            gridGap='20px' position='relative' width='100%' padding='4px' margin='0 0 6px 0'
-                            gridTemplateColumns={props.gridTemplateColumns}>
+                        <Grid as='tr'
+                              gridGap='20px' position='relative' width='100%' padding='4px' margin='0 0 6px 0'
+                              gridTemplateColumns={props.gridTemplateColumns}>
                             {props.headerElements.map((elem, i) => {
                                 return (
                                     <FlexRow key={`table-header-${i}`} alignmentX='flex-start' as='td'
@@ -96,7 +96,7 @@ const Table = (props) => {
                                     </FlexRow>
                                 );
                             })}
-                            <Line height='2px' top='32px' shadow={theme.shadow}/>
+                            <Line height='2px' top='32px' as='td' shadow={theme.shadow}/>
                         </Grid>
                         {elementsToMap.map((elem, index) => {
                             return (

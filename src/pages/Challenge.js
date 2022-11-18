@@ -62,7 +62,7 @@ const Challenge = (props) => {
         return (
             <>
                 <DesktopChallengeMenu setSection={setSection} section={section}/>
-                <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 0 64px 310px'>
+                <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 24px 64px 310px'>
                     <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
                         <Loading visible={loading}/>
                         <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>
