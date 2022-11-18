@@ -52,6 +52,16 @@ const IconsGrid = styled(Grid)`
 `;
 
 const MiniChallenge = (props) => {
+    const deadlineRender = () => {
+        if (props.deadline) {
+            return (
+                <IconLabel size='24px' gap='8px' type='deadline' time={props.deadline}>
+                    {props.deadline.slice(0, 10)}
+                </IconLabel>
+            );
+        }
+    };
+
     return (
         <ChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.name}`}>
             <FlexColumn as='article'>
@@ -72,9 +82,7 @@ const MiniChallenge = (props) => {
                     <IconLabel size='24px' gap='8px' type='bestScore'>
                         {props.bestScore ? props.bestScore : 'xxx'}
                     </IconLabel>
-                    <IconLabel size='24px' gap='8px' type='deadline' time={props.deadline}>
-                        {props.deadline ? props.deadline.slice(0, 10) : 'xxx'}
-                    </IconLabel>
+                    {deadlineRender()}
                     <IconLabel size='24px' gap='8px' type='baseline'>
                         {props.baseline ? props.baseline : 'xxx'}
                     </IconLabel>
