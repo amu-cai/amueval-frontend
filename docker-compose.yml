@@ -12,3 +12,6 @@ services:
       - REACT_APP_KC_URL=${REACT_APP_KC_URL}
       - REACT_APP_KC_REALM=${REACT_APP_KC_REALM}
       - REACT_APP_KC_CLIENT_ID=${REACT_APP_KC_CLIENT_ID}
+    volumes:
+     - .:/app
+     - /app/node_modules

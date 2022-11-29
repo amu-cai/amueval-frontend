@@ -1,6 +1,6 @@
 # Getting Started with Gonito-frontend
 
-App will work on port 3001.
+App will work on port 3000.
 
 ## Run app
 

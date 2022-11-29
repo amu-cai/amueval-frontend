@@ -19,7 +19,7 @@ const mobileRender = () => {
             <H1 as="h1">
                 Welcome to
                 <Container display="inline" color={theme.colors.green}>
-                    &nbsp;Gonito.net!
+                    &nbsp;Gonito!
                 </Container>
             </H1>
             <Body as="p">
