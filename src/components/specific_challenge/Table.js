@@ -60,6 +60,33 @@ const Table = (props) => {
         );
     };
 
+    const rowRender = (elem) => {
+        if (elem.submitter === props.user) {
+            return (
+                props.staticColumnElements.map((elemName, i) => {
+                    return (
+                        <Medium key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
+                                as='td'
+                                order={elemName.order} textAlign={elemName.align}>
+                            {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
+                        </Medium>
+                    );
+                })
+            );
+        }
+        return (
+            props.staticColumnElements.map((elemName, i) => {
+                return (
+                    <Body key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
+                          as='td'
+                          order={elemName.order} textAlign={elemName.align}>
+                        {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
+                    </Body>
+                );
+            })
+        );
+    };
+
     const desktopRender = () => {
         const n = (props.pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
         let elementsToMap = props.elements.slice(n, n + (ELEMENTS_PER_PAGE * 2));
@@ -104,15 +131,7 @@ const Table = (props) => {
                                       backgroundColor={index % 2 === 1 ? theme.colors.dark01 : 'transparent'}
                                       gridTemplateColumns={props.gridTemplateColumns}
                                       gridGap='20px' position='relative' width='100%' padding='4px'>
-                                    {props.staticColumnElements.map((elemName, i) => {
-                                        return (
-                                            <Body key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
-                                                  as='td'
-                                                  order={elemName.order} textAlign={elemName.align}>
-                                                {elemName.format ? elemName.format(elem[elemName.name]) : elem[elemName.name]}
-                                            </Body>
-                                        );
-                                    })}
+                                    {rowRender(elem)}
                                     {props.headerElements ? metricsRender(elem) : ''}
                                 </Grid>
                             );

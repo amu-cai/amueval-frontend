@@ -42,9 +42,6 @@ const App = () => {
     });
 
     const popUpMessageHandler = (header, message) => {
-        console.log('elo');
-        console.log(header);
-        console.log(message);
         setPopUpHeader(header);
         setPopUpMessage(message);
     };
