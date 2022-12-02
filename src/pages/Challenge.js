@@ -6,7 +6,7 @@ import theme from '../utils/theme';
 import MobileChallengeMenu from '../components/specific_challenge/MobileChallengeMenu';
 import Leaderboard from '../components/specific_challenge/Leaderboard/Leaderboard';
 import Readme from '../components/specific_challenge/Readme';
-import HowTo from '../components/specific_challenge/HowTo';
+import HowTo from '../components/specific_challenge/HowTo/HowTo';
 import MyEntries from '../components/specific_challenge/MyEntries/MyEntries';
 import Submit from '../components/specific_challenge/Submit';
 import Media from 'react-media';
@@ -15,26 +15,29 @@ import {RENDER_ICO} from '../utils/globals';
 import textIco from '../assets/text_ico.svg';
 import getChallengeInfo from '../api/getChallengeInfo';
 import Loading from '../components/generic/Loading';
+import getUser from '../api/getUser';
 
 const Challenge = (props) => {
     const challengeName = useParams().challengeId;
     const [challenge, setChallenge] = React.useState([]);
     const [section, setSection] = React.useState(0);
     const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = React.useState('');
 
     React.useEffect(() => {
         getChallengeInfo(setChallenge, setLoading, challengeName);
+        getUser(setUser);
     }, [challengeName]);
 
     const sectionRender = () => {
         switch (section) {
             case 0:
-                return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
+                return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric} user={user}/>;
             case 1:
                 return <Readme challengeName={challengeName} metric={challenge.mainMetric}
                                description={challenge.description} deadline={challenge.deadline}/>;
             case 2:
-                return <HowTo challengeName={challengeName}/>;
+                return <HowTo challengeName={challengeName} user={user}/>;
             case 3:
                 return <MyEntries challengeName={challengeName}/>;
             case 4:

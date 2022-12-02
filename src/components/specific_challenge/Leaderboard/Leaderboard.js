@@ -11,7 +11,6 @@ import {CALC_PAGES, EVALUATIONS_FORMAT, RENDER_WHEN} from '../../../utils/global
 import Search from '../../generic/Search';
 import Pager from '../../generic/Pager';
 import Loading from '../../generic/Loading';
-import getUser from '../../../api/getUser';
 
 const Leaderboard = (props) => {
     const [entriesFromApi, setEntriesFromApi] = React.useState([]);
@@ -22,7 +21,6 @@ const Leaderboard = (props) => {
     const [entriesSorted, setEntriesSorted] = React.useState(false);
     const [whenSorted, setWhenSorted] = React.useState(false);
     const [scoreSorted, setScoreSorted] = React.useState(false);
-    const [user, setUser] = React.useState('');
 
     React.useEffect(() => {
         challengeDataRequest(props.challengeName);
@@ -30,7 +28,6 @@ const Leaderboard = (props) => {
 
     const challengeDataRequest = (challengeName) => {
         getChallengeLeaderboard(setEntriesFromApi, challengeName);
-        getUser(setUser);
         getChallengeLeaderboard(setEntries, challengeName, setLoading);
     };
 
@@ -159,7 +156,7 @@ const Leaderboard = (props) => {
                         <Search searchQueryHandler={searchQueryHandler}/>
                         <Table challengeName={props.challengeName} headerElements={getLeaderboardHeader()}
                                gridTemplateColumns={entries[0] ? '1fr 3fr ' + '2fr '.repeat(entries[0].evaluations.length) + '1fr 2fr' : ''}
-                               user={user}
+                               user={props.user}
                                staticColumnElements={
                                    [
                                        {name: 'id', format: null, order: 1, align: 'left'},

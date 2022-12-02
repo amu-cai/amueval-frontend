@@ -142,7 +142,7 @@ const Table = (props) => {
         } else {
             return (
                 <Medium margin='72px 0'>
-                    Query not found
+                    No results ;c
                 </Medium>
             );
         }

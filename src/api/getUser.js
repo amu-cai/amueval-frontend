@@ -1,8 +1,11 @@
 import {API} from '../utils/globals';
+import KeyCloakService from '../services/KeyCloakService';
 
 const getUser = (setDataState, setLoadingState) => {
-    fetch(`${API}/user-info`)
-        .then(response => response.text())
+    fetch(`${API}/user-info`, {
+        headers: {'Authorization': `Bearer ${KeyCloakService.getToken()}`}
+    })
+        .then(response => response.json())
         .then(data => {
             console.log(data);
             setDataState(data);
