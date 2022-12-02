@@ -6,10 +6,6 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NavBar from './components/navigation/NavBar';
 import {CHALLENGE_PAGE, CHALLENGES_PAGE, IS_MOBILE} from './utils/globals';
 import Challenge from './pages/Challenge';
-import Register from './pages/auth/Register';
-import Login from './pages/auth/Login';
-import LoginWithEmail from './pages/auth/LoginWithEmail';
-import RegisterWithEmail from './pages/auth/RegisterWithEmail';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
 import LoggedBar from './components/navigation/LoggedBar';
@@ -80,10 +76,6 @@ const App = () => {
                                    loggedBarHoverFalse={loggedBarHoverFalse}
                                    username={KeyCloakService.getUsername()}/> : ''}
                     <Routes>
-                        <Route path='/register-email' element={<RegisterWithEmail/>}/>
-                        <Route path='/login-email' element={<LoginWithEmail/>}/>
-                        <Route path='/login' element={<Login/>}/>
-                        <Route path='/register' element={<Register/>}/>
                         <Route path={`${CHALLENGE_PAGE}/:challengeId`}
                                element={<Challenge popUpMessageHandler={popUpMessageHandler}/>}/>
                         <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>

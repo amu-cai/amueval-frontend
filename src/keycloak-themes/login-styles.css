@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500&family=Roboto:wght@300;400;500&family=Ubuntu:wght@300;400;500&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #343434;
+    background: #1B998B none;
+}
+
+#kc-login {
+    background-color: #1B998B;
+}
+
+#kc-header-wrapper {
+    display: none;
+}
+
+#kc-page-title {
+    font-family: 'Kanit', sans-serif;
+}
+
+#kc-login {
+    border-radius: 4px;
+}
+
+.login-pf body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #1B998B none;
+}
+
+.card-pf {
+    width: 100%;
+    max-width: 600px;
+    background-color: #FCFCFC;
+}
+
+.login-pf-page {
+    display: flex;
+    justify-content: center;
+}
+
