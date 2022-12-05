@@ -16,6 +16,10 @@ const ButtonStyle = styled(Medium)`
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 
+  * {
+    cursor: pointer;
+  }
+
   &:hover {
     transform: scale(1.15);
   }

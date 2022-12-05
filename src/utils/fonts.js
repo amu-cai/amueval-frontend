@@ -7,6 +7,7 @@ const H1 = styled(Container)`
   font-weight: 400;
   font-size: 24px;
   line-height: 24px;
+  letter-spacing: 0.1px;
   @media (min-width: ${({theme}) => theme.overMobile}) {
     font-size: 48px;
     line-height: 52px;

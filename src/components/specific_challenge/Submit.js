@@ -10,7 +10,6 @@ const Submit = (props) => {
     const [description, setDescription] = React.useState('');
     const [repoUrl, setRepoUrl] = React.useState('');
     const [repoBranch, setRepoBranch] = React.useState('');
-    const [responseNumber, setResponseNumber] = React.useState(0);
 
     const descriptionHandler = (e) => {
         setDescription(e.target.value);
@@ -25,8 +24,7 @@ const Submit = (props) => {
     };
 
     const challengeSubmissionSubmit = () => {
-        challengeSubmission(props.challengeName, repoUrl, repoBranch, description, setResponseNumber);
-        console.log(responseNumber);
+        challengeSubmission(props.challengeName, repoUrl, repoBranch, description, props.setLoading);
     };
 
     return (
