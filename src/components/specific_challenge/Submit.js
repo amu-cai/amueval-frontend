@@ -10,6 +10,7 @@ const Submit = (props) => {
     const [description, setDescription] = React.useState('');
     const [repoUrl, setRepoUrl] = React.useState('');
     const [repoBranch, setRepoBranch] = React.useState('');
+    const [responseNumber, setResponseNumber] = React.useState(0);
 
     const descriptionHandler = (e) => {
         setDescription(e.target.value);
@@ -24,10 +25,8 @@ const Submit = (props) => {
     };
 
     const challengeSubmissionSubmit = () => {
-        challengeSubmission(props.challengeName, repoUrl, repoBranch, description)
-            .then((response) => response.text())
-            .then((data) => console.log(data));
-        props.popUpMessageHandler('Submit success!', 'Check your entries.');
+        challengeSubmission(props.challengeName, repoUrl, repoBranch, description, setResponseNumber);
+        console.log(responseNumber);
     };
 
     return (
