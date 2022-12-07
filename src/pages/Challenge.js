@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, FlexColumn, FlexRow, Svg} from '../utils/containers';
 import {useParams} from 'react-router-dom';
-import {H1, Medium} from '../utils/fonts';
+import {H1, H2, Medium} from '../utils/fonts';
 import theme from '../utils/theme';
 import MobileChallengeMenu from '../components/specific_challenge/MobileChallengeMenu';
 import Leaderboard from '../components/specific_challenge/Leaderboard/Leaderboard';
@@ -41,7 +41,7 @@ const Challenge = (props) => {
             case 3:
                 return <MyEntries challengeName={challengeName}/>;
             case 4:
-                return <Submit popUpMessageHandler={props.popUpMessageHandler} challengeName={challengeName}/>;
+                return <Submit popUpMessageHandler={props.popUpMessageHandler} challengeName={challengeName} setLoading={setLoading}/>;
             default:
                 return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
         }
@@ -62,28 +62,39 @@ const Challenge = (props) => {
     };
 
     const desktopRender = () => {
-        return (
-            <>
-                <DesktopChallengeMenu setSection={setSection} section={section}/>
-                <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 24px 64px 310px' id='start'>
-                    <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
-                        <Loading visible={loading}/>
-                        <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>
-                            <H1 as='h1'>
-                                {challenge.title}
-                            </H1>
-                            <Medium as='p'>
-                                {challenge.description}
-                            </Medium>
-                        </FlexColumn>
-                        <Svg src={challenge.type ? RENDER_ICO(challenge.type) : textIco}
-                             width='120px' height='120px' size='contain'/>
-                    </FlexRow>
-                    <Container width='55%' height='1px' backgroundColor={theme.colors.dark}/>
-                    {sectionRender()}
+        if (!loading) {
+            return (
+                <>
+                    <DesktopChallengeMenu setSection={setSection} section={section}/>
+                    <FlexColumn minHeight='100vh' alignmentY='flex-start' padding='64px 24px 64px 310px' id='start'>
+                        <FlexRow gap='32px' margin='0 0 32px 0' padding='16px'>
+                            <FlexColumn alignmentX='flex-start' gap='24px' maxWidth='500px'>
+                                <H1 as='h1'>
+                                    {challenge.title}
+                                </H1>
+                                <Medium as='p'>
+                                    {challenge.description}
+                                </Medium>
+                            </FlexColumn>
+                            <Svg src={challenge.type ? RENDER_ICO(challenge.type) : textIco}
+                                 width='120px' height='120px' size='contain'/>
+                        </FlexRow>
+                        <Container width='55%' height='1px' backgroundColor={theme.colors.dark}/>
+                        {sectionRender()}
+                    </FlexColumn>
+                </>
+            );
+        }
+        else {
+            return (
+                <FlexColumn position='fixed' top='0' left='0' width='100%' height='100vh' zIndex='10'>
+                    <H2 as='h1'>
+                        Submission processing...
+                    </H2>
+                    <Loading />
                 </FlexColumn>
-            </>
-        );
+            );
+        }
     };
 
     return (

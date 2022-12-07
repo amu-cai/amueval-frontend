@@ -1,7 +1,7 @@
 import KeyCloakService from '../services/KeyCloakService';
 import {API} from '../utils/globals';
 
-const challengeSubmission = (challengeName, repoUrl, repoBranch, description) => {
+const challengeSubmission = (challengeName, repoUrl, repoBranch, description, setLoading) => {
     const details = {
         'f1': description,
         'f3': repoUrl,
@@ -14,13 +14,17 @@ const challengeSubmission = (challengeName, repoUrl, repoBranch, description) =>
         formBody.push(encodedKey + '=' + encodedValue);
     }
     formBody = formBody.join('&');
-    return fetch(`${API}/challenge-submission/${challengeName}`, {
+    fetch(`${API}/challenge-submission/${challengeName}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Authorization': `Bearer ${KeyCloakService.getToken()}`
         },
         body: formBody
+    }).then((resp) => resp.json())
+    .then((data) => {
+        setLoading(true);
+        window.location.replace(`https://gonito.net/view-progress/${data}#form`);
     });
 };
 
