@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500&family=Roboto:wght@300;400;500&family=Ubuntu:wght@300;400;500&display=swap');
 
+:root {
+    --pf-global--primary-color--dark-100: #1B998B;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
@@ -23,6 +27,19 @@ body {
     border-radius: 4px;
 }
 
+a {
+    color: #343434;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #1B998B;
+}
+
+#rememberMe {
+    margin: 3px 0 0 -20px;
+}
+
 .login-pf body {
     height: 100%;
     display: flex;
@@ -43,3 +60,30 @@ body {
     justify-content: center;
 }
 
+.login-pf-settings div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pf-c-form-control::placeholder {
+    color: #1B998B;
+}
+
+.pf-c-form-control:focus {
+    --pf-c-form-control--BorderBottomColor: #1B998B;
+    padding-bottom: #1B998B;
+    border-bottom-width: #1B998B;
+}
+
+.login-pf-settings div:last-child span {
+    margin-top: 1px;
+}
+
+#kc-form-options div {
+    margin-bottom: 6px;
+}
+
+#kc-form-buttons input {
+    background-color: #1B998B;
+}
