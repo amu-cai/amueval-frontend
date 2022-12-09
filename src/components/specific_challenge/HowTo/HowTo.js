@@ -15,7 +15,7 @@ const HowTo = (props) => {
                     gap={IS_MOBILE() ? '24px' : '48px'} alignmentX={IS_MOBILE() ? 'flex-start' : 'center'}
                     maxWidth={IS_MOBILE() ? '668px' : 'none'}>
             <FlexColumn maxWidth='680px' alignmentX='flex-start' gap='48px'>
-                <GetChallengeRepo user={props.user} challengeName={props.challengeName}/>
+                <GetChallengeRepo user={props.user ? props.user : 'yourID'} challengeName={props.challengeName}/>
                 <WorkOnYourSolution/>
                 <PushYourSolution challengeName={props.challengeName}/>
             </FlexColumn>
