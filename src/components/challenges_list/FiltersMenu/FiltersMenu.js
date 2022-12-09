@@ -21,7 +21,7 @@ const FiltersMenuStyle = styled(FlexColumn)`
   box-shadow: ${({theme}) => theme.shadowLeft};
   background-color: ${({theme}) => theme.colors.white};
   transition: transform 0.5s ease-in-out;
-  z-index: 3;
+  z-index: 5;
 
   ::-webkit-scrollbar {
     display: none;
