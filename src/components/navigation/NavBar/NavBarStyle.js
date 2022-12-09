@@ -9,11 +9,20 @@ const NavBarStyle = styled(Container)`
   height: 42px;
   background-color: ${({theme}) => theme.colors.white};
   box-shadow: ${({theme}) => theme.navShadow};
-  padding: 0 10px;
+  padding: 0;
   z-index: 2;
 
   .ul-desktop {
     display: none;
+  }
+
+  nav {
+    a {
+      margin: 0 0 0 10px;
+    }
+    button {
+      margin: 0 10px 0 0;
+    }
   }
 
   @media (min-width: ${({theme}) => theme.overMobile}) {
