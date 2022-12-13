@@ -41,7 +41,8 @@ const Challenge = (props) => {
             case 3:
                 return <MyEntries challengeName={challengeName}/>;
             case 4:
-                return <Submit popUpMessageHandler={props.popUpMessageHandler} challengeName={challengeName} setLoading={setLoading}/>;
+                return <Submit popUpMessageHandler={props.popUpMessageHandler} challengeName={challengeName}
+                               setLoading={setLoading}/>;
             default:
                 return <Leaderboard challengeName={challengeName} mainMetric={challenge.mainMetric}/>;
         }
@@ -84,14 +85,13 @@ const Challenge = (props) => {
                     </FlexColumn>
                 </>
             );
-        }
-        else {
+        } else {
             return (
                 <FlexColumn position='fixed' top='0' left='0' width='100%' height='100vh' zIndex='10'>
                     <H2 as='h1'>
                         Submission processing...
                     </H2>
-                    <Loading />
+                    <Loading/>
                 </FlexColumn>
             );
         }

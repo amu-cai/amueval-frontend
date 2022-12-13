@@ -82,6 +82,14 @@ const Leaderboard = (props) => {
         return header;
     };
 
+    const getLeaderboardHeaderMobile = () => {
+        let header = ['#', 'submitter', 'entries', 'when'];
+        for (let metric of getPossibleMetrics()) {
+            header.push(metric);
+        }
+        return header;
+    };
+
     const sortByUpdate = (elem) => {
         let metricIndex = 0;
         let newEntries = entries;
@@ -129,18 +137,38 @@ const Leaderboard = (props) => {
 
     const mobileRender = () => {
         return (
-            <FlexColumn padding='24px 12px' as='section' id='start'>
+            <FlexColumn padding='24px 12px' width='70%' as='section' id='start'>
                 <H2 as='h2' margin='0 0 12px 0'>
                     Leaderboard
                 </H2>
-                <Search searchQueryHandler={searchQueryHandler}/>
-                <Table challengeName={props.challengeName} loading={loading}
-                       headerElements={['#', 'submitter', 'result', 'entries', 'when']}
-                       pageNr={pageNr} submissions={entries} sortByUpdate={sortByUpdate}/>
-                <Pager pageNr={pageNr} width='48px' borderRadius='64px'
-                       pages={CALC_PAGES(entries ? entries : [])}
-                       nextPage={nextPage} previousPage={previousPage}
-                       number={`${pageNr} / ${CALC_PAGES(entries ? entries : [])}`}/>
+                {!loading ?
+                    <>
+                        <Search searchQueryHandler={searchQueryHandler}/>
+                        <Table challengeName={props.challengeName} headerElements={getLeaderboardHeaderMobile()}
+                               gridTemplateColumns={entries[0] ? '1fr 3fr ' + '2fr '.repeat(entries[0].evaluations.length) + '1fr 2fr' : ''}
+                               user={props.user}
+                               staticColumnElements={
+                                   [
+                                       {name: 'id', format: null, order: 1, align: 'left'},
+                                       {name: 'submitter', format: null, order: 2, align: 'left'},
+                                       {name: 'times', format: null, order: 4, align: 'left'},
+                                       {name: 'when', format: RENDER_WHEN, order: 5, align: 'right'}
+                                   ]
+                               }
+                               metrics={getPossibleMetrics()}
+                               iterableColumnElement={{
+                                   name: 'evaluations',
+                                   format: EVALUATIONS_FORMAT,
+                                   order: 3,
+                                   align: 'left'
+                               }}
+                               pageNr={pageNr} elements={entries} sortByUpdate={sortByUpdate}/>
+                        <Pager pageNr={pageNr} width='48px' borderRadius='64px'
+                               pages={CALC_PAGES(entries)}
+                               nextPage={nextPage} previousPage={previousPage}
+                               number={`${pageNr} / ${CALC_PAGES(entries)}`}/>
+                    </>
+                    : <Loading/>}
             </FlexColumn>
         );
     };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlexColumn, FlexRow, Grid} from '../../utils/containers';
+import {Container, FlexColumn, FlexRow, Grid} from '../../utils/containers';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import {ELEMENTS_PER_PAGE} from '../../utils/globals';
@@ -17,19 +17,101 @@ const Line = styled(FlexRow)`
   height: ${({height}) => height ? height : '1px'};
 `;
 
+const MobileTableStyle = styled(Container)`
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+
+  tr:nth-of-type(odd) {
+    background: ${({theme}) => theme.colors.dark03};
+  }
+
+  th {
+    background: ${({theme}) => theme.colors.dark05};
+    color: ${({theme}) => theme.colors.white};
+  }
+
+  td, th {
+    padding: 6px;
+    border: 1px solid ${({theme}) => theme.colors.white};
+    text-align: left;
+  }
+
+  display: block;
+
+  thead, tbody, th, td {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid ${({theme}) => theme.colors.dark01};
+    position: relative;
+    padding-left: 50%;
+
+    &:before {
+      font-weight: 400;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+  }
+
+  td:nth-of-type(1):before {
+    content: ${({headerElements}) => headerElements[0] ? `'${headerElements[0]}'` : ''};
+  }
+
+  td:nth-of-type(2):before {
+    content: ${({headerElements}) => headerElements[1] ? `'${headerElements[1]}'` : ''};
+  }
+
+  td:nth-of-type(3):before {
+    content: ${({headerElements}) => headerElements[2] ? `'${headerElements[2]}'` : ''};
+  }
+
+  td:nth-of-type(4):before {
+    content: ${({headerElements}) => headerElements[3] ? `'${headerElements[3]}'` : ''};
+  }
+
+  td:nth-of-type(5):before {
+    content: ${({headerElements}) => headerElements[4] ? `'${headerElements[4]}'` : ''};
+  }
+
+  td:nth-of-type(6):before {
+    content: ${({headerElements}) => headerElements[5] ? `'${headerElements[5]}'` : ''};
+  }
+
+  td:nth-of-type(7):before {
+    content: ${({headerElements}) => headerElements[6] ? `'${headerElements[6]}'` : ''};
+  }
+
+  td:nth-of-type(8):before {
+    content: ${({headerElements}) => headerElements[7] ? `'${headerElements[7]}'` : ''};
+  }
+
+  td:nth-of-type(9):before {
+    content: ${({headerElements}) => headerElements[8] ? `'${headerElements[8]}'` : ''};
+  }
+
+  td:nth-of-type(10):before {
+    content: ${({headerElements}) => headerElements[9] ? `'${headerElements[9]}'` : ''};
+  }
+`;
+
 const Table = (props) => {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
     const [activeIcon, setActiveIcon] = React.useState(null);
     const [rotateActiveIcon, setRotateActiveIcon] = React.useState(false);
-
-    const mobileRender = () => {
-        return (
-            <FlexColumn as='table' margin='20px 0 32px 0' minHeight='380px'>
-                {/*{props.renderElements('10px', props.headerElements)}*/}
-            </FlexColumn>
-        );
-    };
 
     const metricsRender = (elem) => {
         if (!props.iterableColumnElement)
@@ -138,6 +220,45 @@ const Table = (props) => {
                         })}
                     </FlexColumn>
                 </FlexColumn>
+            );
+        } else {
+            return (
+                <Medium margin='72px 0'>
+                    No results ;c
+                </Medium>
+            );
+        }
+    };
+
+    const mobileRender = () => {
+        const n = (props.pageNr - 1) * ELEMENTS_PER_PAGE;
+        let elementsToMap = props.elements.slice(n, n + ELEMENTS_PER_PAGE);
+        if (elementsToMap.length > 0) {
+            return (
+                <MobileTableStyle as='table' staticColumnElements={props.staticColumnElements}
+                                  headerElements={props.headerElements}>
+                    <Container as='thead'>
+                        <Container as='tr'>
+                            {props.headerElements.map((elem, i) => {
+                                return (
+                                    <Medium key={`table-header-${i}`} as='th'>
+                                        {elem}
+                                    </Medium>
+                                );
+                            })}
+                        </Container>
+                    </Container>
+                    <Container as='tbody'>
+                        {elementsToMap.map((elem, index) => {
+                            return (
+                                <Grid as='tr' key={`leaderboard-row-${index}`}>
+                                    {rowRender(elem)}
+                                    {props.headerElements ? metricsRender(elem) : ''}
+                                </Grid>
+                            );
+                        })}
+                    </Container>
+                </MobileTableStyle>
             );
         } else {
             return (
