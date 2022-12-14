@@ -20,7 +20,7 @@ const Leaderboard = (props) => {
     const [submitterSorted, setSubmitterSorted] = React.useState(false);
     const [entriesSorted, setEntriesSorted] = React.useState(false);
     const [whenSorted, setWhenSorted] = React.useState(false);
-    const [scoreSorted, setScoreSorted] = React.useState(false);
+    const [scoresSorted, setScoresSorted] = React.useState([]);
 
     React.useEffect(() => {
         challengeDataRequest(props.challengeName);
@@ -124,12 +124,16 @@ const Leaderboard = (props) => {
                 break;
             default:
                 metricIndex = getMetricIndex(elem);
-                if (scoreSorted) {
+                // eslint-disable-next-line no-case-declarations
+                let newScoresSorted = scoresSorted;
+                if (scoresSorted[metricIndex]) {
                     newEntries = newEntries.sort((a, b) => b.evaluations[metricIndex].score - a.evaluations[metricIndex].score);
-                    setScoreSorted(false);
+                    newScoresSorted[metricIndex] = false;
+                    setScoresSorted(newScoresSorted);
                 } else {
                     newEntries = newEntries.sort((a, b) => a.evaluations[metricIndex].score - b.evaluations[metricIndex].score);
-                    setScoreSorted(true);
+                    newScoresSorted[metricIndex] = true;
+                    setScoresSorted(newScoresSorted);
                 }
                 break;
         }

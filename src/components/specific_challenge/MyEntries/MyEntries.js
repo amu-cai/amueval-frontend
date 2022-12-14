@@ -19,10 +19,10 @@ const MyEntries = (props) => {
     const [pageNr, setPageNr] = React.useState(1);
     const [whenSorted, setWhenSorted] = React.useState(false);
     const [scoresSorted, setScoresSorted] = React.useState([]);
-    /* eslint-disable */
 
     React.useEffect(() => {
         challengesRequest();
+        // eslint-disable-next-line
     }, []);
 
     const searchQueryHandler = (event) => {
@@ -38,7 +38,7 @@ const MyEntries = (props) => {
             }
         }
         return metrics;
-    }
+    };
 
     const nextPage = () => {
         if (pageNr !== CALC_PAGES(myEntries ? myEntries : [])) {
@@ -69,7 +69,7 @@ const MyEntries = (props) => {
 
     const mobileRender = () => {
 
-    }
+    };
 
     const sortByUpdate = (elem, i) => {
         let newEntries = myEntries;
@@ -86,7 +86,9 @@ const MyEntries = (props) => {
                 }
                 break;
             default:
+                // eslint-disable-next-line no-case-declarations
                 let metricIndex = getPossibleMetrics().indexOf(elem);
+                // eslint-disable-next-line no-case-declarations
                 let newScoresSorted = scoresSorted;
                 if (scoresSorted[metricIndex]) {
                     newEntries = newEntries.sort((a, b) => b.evaluations[elem] - a.evaluations[elem]);
