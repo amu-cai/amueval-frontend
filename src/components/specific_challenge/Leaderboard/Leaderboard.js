@@ -34,7 +34,7 @@ const Leaderboard = (props) => {
     const getMetricIndex = (metricName) => {
         let i = 0;
         for (let evaluation of entriesFromApi[0].evaluations) {
-            if (evaluation.test.metric === metricName) {
+            if (`${evaluation.test.metric}.${evaluation.test.name}` === metricName) {
                 return i;
             }
             i++;
