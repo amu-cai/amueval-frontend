@@ -71,7 +71,7 @@ const EVALUATIONS_FORMAT = (evaluate) => {
 };
 
 const IS_MOBILE = () => {
-    return document.body.clientWidth <= 768;
+    return document.body.clientWidth <= 1024;
 };
 
 export {

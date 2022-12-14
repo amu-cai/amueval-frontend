@@ -7,7 +7,6 @@ const getUser = (setDataState, setLoadingState) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setDataState(data);
             if (setLoadingState)
                 setLoadingState(false);

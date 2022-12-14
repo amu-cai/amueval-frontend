@@ -64,8 +64,9 @@ const Leaderboard = (props) => {
         for (let entry of entriesFromApi) {
             for (let evaluation of entry.evaluations) {
                 let metric = evaluation.test.metric;
-                if (metric && !metrics.includes(metric)) {
-                    metrics.push(metric);
+                let name = evaluation.test.name;
+                if (metric && !metrics.includes(`${metric}.${name}`)) {
+                    metrics.push(`${metric}.${name}`);
                 }
             }
         }
