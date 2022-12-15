@@ -31,8 +31,7 @@ const LandingPageStyle = styled(FlexColumn)`
 
 const LandingPage = () => {
     return (
-        <LandingPageStyle as='main' alignmentY='flex-start' width='100%'
-                          minHeight='100vh' padding='90px 0 32px 0'>
+        <LandingPageStyle as='main'>
             <FlexColumn className='main-container'>
                 <Hero/>
                 <Motivation/>
