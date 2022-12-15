@@ -121,10 +121,14 @@ const Table = (props) => {
         else {
             let newElem = [];
             for (let metric of props.possibleMetrics) {
-                if (elem[props.iterableColumnElement.name][metric] === '-1')
+                if (Object.hasOwn(elem, props.iterableColumnElement.name)) {
+                    if (elem[props.iterableColumnElement.name][metric] === '-1')
+                        newElem.push('N/A');
+                    else
+                        newElem.push(elem[props.iterableColumnElement.name][metric]);
+                } else {
                     newElem.push('N/A');
-                else
-                    newElem.push(elem[props.iterableColumnElement.name][metric]);
+                }
             }
             elem = newElem;
         }

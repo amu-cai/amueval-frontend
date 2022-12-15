@@ -23,14 +23,16 @@ const getMyEntries = (challengeName, setDataOriginalState, setDataStateForSearch
                     };
                 }
                 for (let test of tests) {
-                    if (!Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)) {
-                        item = {
-                            ...item,
-                            evaluations: {
-                                ...item.evaluations,
-                                [`${test.metric}.${test.name}`]: '-1'
-                            }
-                        };
+                    if (item.evaluations) {
+                        if (!Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)) {
+                            item = {
+                                ...item,
+                                evaluations: {
+                                    ...item.evaluations,
+                                    [`${test.metric}.${test.name}`]: '-1'
+                                }
+                            };
+                        }
                     }
                 }
                 item = {
