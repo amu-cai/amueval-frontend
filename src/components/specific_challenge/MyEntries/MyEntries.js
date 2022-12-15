@@ -91,11 +91,11 @@ const MyEntries = (props) => {
                 // eslint-disable-next-line no-case-declarations
                 let newScoresSorted = scoresSorted;
                 if (scoresSorted[metricIndex]) {
-                    newEntries = newEntries.sort((a, b) => b.evaluations[elem] - a.evaluations[elem]);
+                    newEntries = newEntries.sort((a, b) => (b.evaluations ? b.evaluations[elem] : -1) - (a.evaluations ? a.evaluations[elem] : -1));
                     newScoresSorted[metricIndex] = false;
                     setScoresSorted(newScoresSorted);
                 } else {
-                    newEntries = newEntries.sort((a, b) => a.evaluations[elem] - b.evaluations[elem]);
+                    newEntries = newEntries.sort((a, b) => (a.evaluations ? a.evaluations[elem] : -1) - (b.evaluations ? b.evaluations[elem] : -1));
                     newScoresSorted[metricIndex] = true;
                     setScoresSorted(newScoresSorted);
                 }
