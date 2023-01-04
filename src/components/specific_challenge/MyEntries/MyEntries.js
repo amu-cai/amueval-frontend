@@ -78,8 +78,6 @@ const MyEntries = (props) => {
     );
   };
 
-  const mobileRender = () => {};
-
   const sortByUpdate = (elem, i) => {
     let newEntries = myEntries;
     switch (elem) {
@@ -125,12 +123,59 @@ const MyEntries = (props) => {
     setMyEntries(newEntries);
   };
 
+  const mobileRender = () => {
+    return (
+      <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
+        <H2 as="h2" margin="0 0 12px 0">
+          My Entries
+        </H2>
+        {!loading ? (
+          <>
+            <Search searchQueryHandler={searchQueryHandler} />
+            <Pager
+              pageNr={pageNr}
+              width="48px"
+              borderRadius="64px"
+              pages={CALC_PAGES(myEntries)}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
+            />
+          </>
+        ) : (
+          <Loading />
+        )}
+      </FlexColumn>
+    );
+  };
+
   const desktopRender = () => {
     return (
       <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
         <H2 as="h2" margin="0 0 32px 0">
           My entries
-        </H2>
+        </H2>{' '}
+        <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
+          <H2 as="h2" margin="0 0 12px 0">
+            My Entries
+          </H2>
+          {!loading ? (
+            <>
+              <Search searchQueryHandler={searchQueryHandler} />
+              <Pager
+                pageNr={pageNr}
+                width="48px"
+                borderRadius="64px"
+                pages={CALC_PAGES(myEntries)}
+                nextPage={nextPage}
+                previousPage={previousPage}
+                number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
+              />
+            </>
+          ) : (
+            <Loading />
+          )}
+        </FlexColumn>
         {myEntries && !loading ? (
           <>
             <Search searchQueryHandler={searchQueryHandler} />
@@ -150,6 +195,7 @@ const MyEntries = (props) => {
                 format: EVALUATIONS_FORMAT,
                 order: 2,
                 align: 'left',
+                mobileRender,
               }}
               pageNr={pageNr}
               elements={myEntries}
@@ -158,6 +204,7 @@ const MyEntries = (props) => {
             <Pager
               pageNr={pageNr}
               width="72px"
+              mobileRender
               borderRadius="64px"
               pages={CALC_PAGES(myEntries, 2)}
               nextPage={nextPage}

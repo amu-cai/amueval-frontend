@@ -13,8 +13,6 @@ import { CHALLENGES_PAGE, POLICY_PRIVACY_PAGE } from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
 import KeyCloakService from '../../../services/KeyCloakService';
-import Media from 'react-media';
-import theme from '../../../utils/theme';
 import policyIco from '../../../assets/policy_ico.svg';
 
 const MenuButton = styled(Container)`
@@ -54,22 +52,7 @@ const NavBar = (props) => {
     <NavBarStyle as="header">
       <FlexRow height="100%" alignmentX="space-between" as="nav">
         <Logo />
-        {KeyCloakService.isLoggedIn() ? (
-          <Media query={theme.mobile}>
-            <Svg
-              as="button"
-              width="20px"
-              onClick={toggleNavMenu}
-              height="20px"
-              src={userIco}
-              size="cover"
-              cursor="pointer"
-            />
-            POLICY_PRIVACY_PAGE
-          </Media>
-        ) : (
-          <MenuButton as="button" onClick={toggleNavMenu} />
-        )}
+        <MenuButton as="button" onClick={toggleNavMenu} />
         <FlexRow as="ul" className="ul-desktop" gap="32px">
           <FlexRow as={Link} to={CHALLENGES_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={cupIco} />
