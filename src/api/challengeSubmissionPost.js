@@ -24,7 +24,7 @@ const challengeSubmission = (challengeName, repoUrl, repoBranch, description, se
     }).then((resp) => resp.json())
     .then((data) => {
         setLoading(true);
-        window.location.replace(`https://gonito.net/view-progress/${data}#form`);
+        window.location.replace(`https://gonito.net/open-view-progress/${data}#form`);
     });
 };
 
