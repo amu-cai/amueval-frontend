@@ -25,14 +25,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
     .catch(console.error);
 };
 
-const doLogin = () => {
-  const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
-  if (privacyPolicyAccept !== 'accept') {
-    window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}`);
-  } else {
-    _kc.login();
-  }
-};
+const doLogin = _kc.login;
 
 const doLogout = () => {
   sessionStorage.clear();
@@ -41,7 +34,14 @@ const doLogout = () => {
 
 const getToken = () => _kc.token;
 
-const doRegister = _kc.register;
+const doRegister = () => {
+  const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
+  if (privacyPolicyAccept !== 'accept') {
+    window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}`);
+  } else {
+    _kc.register();
+  }
+};
 
 const isLoggedIn = () => !!_kc.token;
 
