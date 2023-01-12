@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:lts
+FROM node:lts-bullseye
 
 # set working directory
 WORKDIR /app
