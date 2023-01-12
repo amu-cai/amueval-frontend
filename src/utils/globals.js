@@ -9,7 +9,7 @@ import tabularIco from '../assets/tabular_ico.svg';
 
 const ELEMENTS_PER_PAGE = 12;
 const MINI_DESCRIPTION_LENGTH = 70;
-const API = 'https://gonito.net/api';
+const API = process.env.REACT_APP_API;
 const CHALLENGES_PAGE = '/challenges';
 const CHALLENGE_PAGE = '/challenge';
 const POLICY_PRIVACY_PAGE = '/policy-privacy';
