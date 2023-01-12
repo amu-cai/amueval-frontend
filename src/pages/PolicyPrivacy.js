@@ -41,13 +41,13 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
 
 const PolicyPrivacy = () => {
   const listItemsContent = [
-    `prawo dostępu do danych osobowych, w tym prawo do uzyskania kopii tych danych przysługuje w ramach przesłanek i na warunkach określonych w art. 15 RODO,`,
-    `prawo do żądania sprostowania (poprawienia) danych osobowych przysługuje w ramach przesłanek i na warunkach określonych w art. 16 RODO,`,
-    `prawo do usunięcia danych - przysługuje w ram${POLICY_PRIVACY_PAGE}ach przesłanek i na warunkach określonych w art. 17 RODO,`,
-    `prawo ograniczenia przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 18 RODO,`,
-    `prawo wniesienia sprzeciwu wobec przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 21 RODO,`,
-    `prawo do przenoszenia danych osobowych - przysługuje w ramach przesłanek i na warunkach określonych w art. 20 RODO,`,
-    `prawo wniesienia skargi do organu nadzorczego (Prezes Urzędu Ochrony Danych Osobowych),`,
+    'prawo dostępu do danych osobowych, w tym prawo do uzyskania kopii tych danych przysługuje w ramach przesłanek i na warunkach określonych w art. 15 RODO,',
+    'prawo do żądania sprostowania (poprawienia) danych osobowych przysługuje w ramach przesłanek i na warunkach określonych w art. 16 RODO,',
+    'prawo do usunięcia danych - przysługuje w ram${POLICY_PRIVACY_PAGE}ach przesłanek i na warunkach określonych w art. 17 RODO,',
+    'prawo ograniczenia przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 18 RODO,',
+    'prawo wniesienia sprzeciwu wobec przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 21 RODO,',
+    'prawo do przenoszenia danych osobowych - przysługuje w ramach przesłanek i na warunkach określonych w art. 20 RODO,',
+    'prawo wniesienia skargi do organu nadzorczego (Prezes Urzędu Ochrony Danych Osobowych),',
   ];
 
   const renderButtons = () => {
