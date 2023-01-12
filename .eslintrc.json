@@ -19,7 +19,7 @@
       2,
       "single",
       {
-	    "avoid-escape": true,
+	    "avoidEscape": true,
 	    "allowTemplateLiterals": true
 	  }
     ]
