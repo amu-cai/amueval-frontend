@@ -15,7 +15,7 @@ pipeline {
         REACT_APP_KC_URL = 'https://auth-dev.csi.wmi.amu.edu.pl/'
         REACT_APP_KC_REALM = 'gonito-dev'
         REACT_APP_KC_CLIENT_ID = 'gonito-front-dev'
-		REACT_APP_API = 'https://gonito-back-dev.csi.wmi.amu.edu.pl/api'
+        REACT_APP_API = 'https://gonito-back-dev.csi.wmi.amu.edu.pl/api'
     }
     stages {
         stage('Build') { 
