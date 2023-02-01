@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
+            image 'node:lts-bullseye' 
         }
     }
     environment {
@@ -15,6 +15,7 @@ pipeline {
         REACT_APP_KC_URL = 'https://auth.csi.wmi.amu.edu.pl/'
         REACT_APP_KC_REALM = 'csi-gonito'
         REACT_APP_KC_CLIENT_ID = 'gonito-frontend'
+        REACT_APP_API = 'https://gonito.net/api'
     }
     stages {
         stage('Build') { 

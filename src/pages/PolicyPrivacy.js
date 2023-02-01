@@ -41,13 +41,13 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
 
 const PolicyPrivacy = () => {
   const listItemsContent = [
-    'prawo dostępu do danych osobowych, w tym prawo do uzyskania kopii tych danych przysługuje w ramach przesłanek i na warunkach określonych w art. 15 RODO,',
-    'prawo do żądania sprostowania (poprawienia) danych osobowych przysługuje w ramach przesłanek i na warunkach określonych w art. 16 RODO,',
-    'prawo do usunięcia danych - przysługuje w ram${POLICY_PRIVACY_PAGE}ach przesłanek i na warunkach określonych w art. 17 RODO,',
-    'prawo ograniczenia przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 18 RODO,',
-    'prawo wniesienia sprzeciwu wobec przetwarzania - przysługuje w ramach przesłanek i na warunkach określonych w art. 21 RODO,',
-    'prawo do przenoszenia danych osobowych - przysługuje w ramach przesłanek i na warunkach określonych w art. 20 RODO,',
-    'prawo wniesienia skargi do organu nadzorczego (Prezes Urzędu Ochrony Danych Osobowych),',
+    'The right of access to personal data, including the right to obtain a copy of that data, is granted under the grounds and conditions set out in Article 15 of the RODO,',
+    'The right to request the rectification (amendment) of personal data shall be exercised within the grounds and under the conditions set out in Article 16 RODO,',
+    'The right to erasure - shall be exercised within the grounds and under the conditions set out in Article 17 of the RODO,',
+    'The right to restrict processing - is available under the grounds and conditions set out in Article 18 RODO,',
+    'The right to object to processing - you have the right to object within the grounds and under the conditions set out in Article 21 RODO,',
+    'The right to data portability - you have the right to data portability under the grounds and conditions set out in Article 20 of the RODO,',
+    'The right to lodge a complaint with the supervisory authority (President of the Office for Personal Data Protection),',
   ];
 
   const renderButtons = () => {
@@ -81,70 +81,66 @@ const PolicyPrivacy = () => {
   return (
     <PolicyPrivacyStyle as="main">
       <FlexColumn className="main-container">
-        <H1 as="h1">Klauzula informacyjna</H1>
+        <H1 as="h1">Information clause</H1>
         <Body as="p">
-          Zgodnie z art. 13 Rozporządzenia Parlamentu Europejskiego i Rady (UE)
-          2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych
-          w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
-          przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne
-          rozporządzenie o ochronie danych), Uniwersytet im. Adama Mickiewicza w
-          Poznaniu informuje, iż:
+          Pursuant to Article 13 of Regulation (EU) 2016/679 of the European
+          Parliament and of the Council of 27 April 2016 on the protection of
+          natural persons with regard to the processing of personal data and on
+          the free movement of such data and repealing Directive 95/46/EC
+          (General Data Protection Regulation), Adam Mickiewicz University of
+          Poznan informs you that:
         </Body>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
           <H2 as="h2">1. Administrator</H2>
           <Body>
-            Administratorem Pani/Pana danych osobowych jest Uniwersytet im.
-            Adama Mickiewicza w Poznaniu z siedzibą przy ul. H. Wieniawskiego 1,
-            61-712 Poznań.
+            The administrator of your personal data is the Adam Mickiewicz
+            University in Poznań with its seat at H. Wieniawskiego 1, 61-712
+            Poznań.
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">2. Inspektor Ochrony Danych</H2>
+          <H2 as="h2">2. Data Protection Officer</H2>
           <Body as="p">
-            Administrator danych wyznaczył Inspektora Ochrony Danych - kontakt
-            mailowy&nbsp;
+            The data controller has appointed a Data Protection Officer - email
+            contact&nbsp;
             <Medium as="a" cursor="pointer" href="mailto:iod@amu.edu.pl">
               iod@amu.edu.pl
             </Medium>
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">3. Cel i podstawa prawna przetwarzania</H2>
+          <H2 as="h2">3. Purpose and legal basis of processing</H2>
           <Body as="p">
-            Pani/Pana dane osobowe przetwarzane będą w celu założenia konta
-            użytkownika i umożliwienia korzystania z platformy gonito, a także w
-            celu kontaktowania się ze zwycięzcami konkursów, na podstawie
-            wyrażonej przez Panią/Pana zgody, stosownie do art. 6 ust. 1 lit. a
-            RODO.
+            Your personal data will be processed in order to set up your user
+            account and enable you to use the gonito platform, as well as to
+            contact the winners of the competitions, based on your consent,
+            pursuant to Article 6(1)(a) of the RODO.
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">4. Okres przechowywania danych</H2>
+          <H2 as="h2">4. Data retention period</H2>
           <Body as="p">
-            Pani/Pana dane osobowe przetwarzane będą przez okres niezbędny do
-            czasu realizacji celu dla jakiego zostały zebrane lub do momentu
-            cofnięcia zgody na przetwarzanie danych osobowych/wniesienia
-            sprzeciwu wobec przetwarzania, w zależności od tego co nastąpi
-            wcześniej.
+            Your personal data will be processed for the period necessary until
+            the purpose for which it was collected has been fulfilled or until
+            you withdraw your consent to the processing of your personal
+            data/objection to the processing, whichever comes first.
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">5. Odbiorcy danych</H2>
+          <H2 as="h2">5. Recipients of the data</H2>
           <Body as="p">
-            Odbiorcami Pani/Pana danych osobowych mogą być podmioty, którym
-            Administrator zleca wykonanie określonych czynności, z którymi wiąże
-            się konieczność przetwarzania danych osobowych (podmioty
-            przetwarzające), w szczególności operatorzy systemów
-            informatycznych, operatorzy systemów e-mail, kancelarie prawne i
-            audytorskie.
+            The recipients of your personal data may be entities to which the
+            Administrator subcontracts certain activities that require the
+            processing of personal data (processors), in particular IT system
+            operators, e-mail system operators, law firms and auditing firms.
           </Body>
           <Body as="p">
-            Pani/Pana dane osobowe mogą być także udostępnione podmiotom
-            uprawnionym na podstawie przepisów prawa.
+            Your personal data may also be made available to entities authorised
+            by law.
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">6. Prawa związane z przetwarzaniem danych</H2>
+          <H2 as="h2">6. Rights in relation to data processing</H2>
           <FlexColumn
             as="ol"
             margin="0"
@@ -178,15 +174,15 @@ const PolicyPrivacy = () => {
           </FlexColumn>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">7. Cofnięcie zgody na przetwarzanie danych</H2>
+          <H2 as="h2">7. Withdrawal of consent to data processing</H2>
           <Body as="p">
-            Prawo do cofnięcia zgody na przetwarzanie danych osobowych (w
-            stosunku do danych osobowych które są przetwarzane na podstawie
-            Pani/Pana zgody - ma Pan/Pani prawo w dowolnym momencie wycofać
-            zgodę na przetwarzanie danych osobowych. Wycofanie zgody nie wpływa
-            na zgodność z prawem przetwarzania, którego dokonano na podstawie
-            zgody przed jej wycofaniem. Wycofać zgodę może Pani/Pan poprzez
-            przesłanie wiadomości na skrzynkę mailową:&nbsp;
+            Right to withdraw consent to the processing of personal data (in
+            relation to personal data that is processed on the basis of your
+            consent - you have the right to withdraw your consent to the
+            processing of personal data at any time. The withdrawal of consent
+            does not affect the lawfulness of the processing that was carried
+            out on the basis of consent before its withdrawal. You can withdraw
+            your consent by sending an email to:&nbsp;
             <Medium
               as="a"
               cursor="pointer"
@@ -197,21 +193,21 @@ const PolicyPrivacy = () => {
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">8. Obowiązek podania danych i konsekwencje niepodania</H2>
+          <H2 as="h2">
+            8. Obligation to provide data and consequences of failure to do so
+          </H2>
           <Body as="p">
-            Podanie danych osobowych zbieranych na podstawie zgody jest
-            dobrowolne, ale niezbędne do realizacji celu do jakiego zostały
-            zebrane.
+            The provision of personal data collected on the basis of consent is
+            voluntary, but necessary to fulfil the purpose for which it was
+            collected.
           </Body>
         </FlexColumn>
         <FlexColumn as="section" alignmentX="flex-start" gap="16px">
-          <H2 as="h2">
-            9. Profilowanie i zautomatyzowane podejmowanie decyzji
-          </H2>
+          <H2 as="h2">9. Profiling and automated decision-making</H2>
           <Body as="p">
-            W odniesieniu do Pani/Pana danych osobowych, decyzje nie będą
-            podejmowane w sposób zautomatyzowany i nie będą poddawane
-            profilowaniu, stosownie do art. 22 RODO.
+            With regard to your personal data, decisions will not be taken by
+            automated means and will not be subject to profiling, pursuant to
+            Article 22 of the RODO.
           </Body>
         </FlexColumn>
         {renderButtons()}
