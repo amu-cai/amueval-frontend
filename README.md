@@ -12,4 +12,4 @@ App will work on port 3000.
 
 ## Keycloak
 
-Set variables in *.env* to choose keycloak connect.
+Set variables in *.env* to choose keycloak connect and API url.
