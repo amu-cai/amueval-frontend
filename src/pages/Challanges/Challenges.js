@@ -83,57 +83,57 @@ const Challenges = () => {
 
   const mobileRender = () => {
     return (
-      <p>siema</p>
-      //   <>
-      //     <FiltersMenu
-      //       translateX={filtersMenu ? '0' : '100vw'}
-      //       opacity={filtersMenu ? '1' : '0'}
-      //       toggleFiltersMenu={toggleFiltersMenu}
-      //       sortByHandler={sortByHandler}
-      //       statusHandler={statusHandler}
-      //       challengeTypeHandler={challengeTypeHandler}
-      //       commercialHandler={commercialHandler}
-      //       sortBy={sortBy}
-      //       status={status}
-      //       challengeType={challengeType}
-      //       commercial={commercial}
-      //     />
-      //     <FlexColumn
-      //       as="main"
-      //       alignmentY="flex-start"
-      //       width="100%"
-      //       minHeight="100vh"
-      //       padding="90px 0 32px 0"
-      //     >
-      //       <FlexColumn alignmentX="flex-start" width="80%">
-      //         <H1 as="h1" margin="0 0 20px 0">
-      //           Challenges
-      //         </H1>
-      //         <Search
-      //           searchQueryHandler={searchQueryHandler}
-      //           filterButton
-      //           toggleFiltersMenu={toggleFiltersMenu}
-      //         />
-      //         <FlexColumn width="100%">
-      //           <Loading visible={loading} />
-      //           {renderChallenges()}
-      //         </FlexColumn>
-      //       </FlexColumn>
-      //       {!loading ? (
-      //         <Pager
-      //           pageNr={pageNr}
-      //           pages={CALC_PAGES(challenges)}
-      //           width="48px"
-      //           nextPage={nextPage}
-      //           previousPage={previousPage}
-      //           borderRadius="64px"
-      //           number={`${pageNr} / ${CALC_PAGES(challenges)}`}
-      //         />
-      //       ) : (
-      //         ''
-      //       )}
-      //     </FlexColumn>
-      //   </>
+      <>
+        <FiltersMenu
+          translateX={filtersMenu ? '0' : '100vw'}
+          opacity={filtersMenu ? '1' : '0'}
+          toggleFiltersMenu={toggleFiltersMenu}
+          sortByHandler={sortByHandler}
+          statusHandler={statusHandler}
+          challengeTypeHandler={challengeTypeHandler}
+          commercialHandler={commercialHandler}
+          sortBy={sortBy}
+          status={status}
+          challengeType={challengeType}
+          commercial={commercial}
+        />
+        <FlexColumn
+          as="main"
+          alignmentY="flex-start"
+          width="100%"
+          id="start"
+          minHeight="100vh"
+          padding="90px 0 32px 0"
+        >
+          <FlexColumn alignmentX="flex-start" width="80%">
+            <H1 as="h1" margin="0 0 20px 0">
+              Challenges
+            </H1>
+            <Search
+              searchQueryHandler={searchQueryHandler}
+              filterButton
+              toggleFiltersMenu={toggleFiltersMenu}
+            />
+            <FlexColumn width="100%">
+              <Loading visible={loading} />
+              {renderChallenges()}
+            </FlexColumn>
+          </FlexColumn>
+          {!loading ? (
+            <Pager
+              pageNr={pageNr}
+              pages={CALC_PAGES(challenges)}
+              width="48px"
+              nextPage={nextPage}
+              previousPage={previousPage}
+              borderRadius="64px"
+              number={`${pageNr} / ${CALC_PAGES(challenges)}`}
+            />
+          ) : (
+            ''
+          )}
+        </FlexColumn>
+      </>
     );
   };
 
