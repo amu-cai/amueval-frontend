@@ -1,22 +1,33 @@
 import React from 'react';
 import {FlexColumn} from '../../utils/containers';
-import {Body, H2, Medium} from '../../utils/fonts';
+import {Body, H2} from '../../utils/fonts';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import getChallengeFullDescription from '../../api/getChallengeFullDescription';
-import {markdown} from 'markdown';
+// import {markdown} from 'markdown';
 import styled from 'styled-components';
 import InfoList from '../generic/InfoList';
 import Loading from '../generic/Loading';
 import PropsTypes from 'prop-types';
 import MiniChallenge from '../challenges_list/MiniChallenge';
+import { marked } from 'marked';
 
 const ReadmeStyle = styled(Body)`
+  * {
+    font-weight: inherit;
+  }
+
+  h2 {
+    font-family: 'Kanit', sans-serif;
+    margin: 32px 0;
+  }
+
   h3 {
     font-family: 'Kanit', sans-serif;
-    font-weight: 400;
+    font-weight: inherit;
     font-size: 18px;
     line-height: 22px;
+    margin: 24px 0;
 
     @media (min-width: ${({theme}) => theme.overMobile}) {
       font-size: 22px;
@@ -62,13 +73,19 @@ const Readme = (props) => {
     }, [props.challengeName]);
 
     const parseMarkdownResponse = (response) => {
-        let result = markdown.toHTML(response);
-        let regex = /<h1>[^<>]*<\/h1>/g;
-        result = result.replace(regex, '');
-        regex = /<h2>/g;
-        result = result.replace(regex, '<h3>');
+        let result = marked.parse(response);
+        let regex = /<h3 /g;
+        result = result.replace(regex, '<h4 ');
+        regex = /<\/h3>/g;
+        result = result.replace(regex, '</h4>');
+        regex = /<h2 /g;
+        result = result.replace(regex, '<h3 ');
         regex = /<\/h2>/g;
         result = result.replace(regex, '</h3>');
+        regex = /<h1 /g;
+        result = result.replace(regex, '<h2 ');
+        regex = /<\/h1>/g;
+        result = result.replace(regex, '</h2>');
         return result;
     };
 
@@ -82,15 +99,15 @@ const Readme = (props) => {
                     <InfoList iconsSize='24px' metric={props.metric} deadline={props.deadline}/>
                 </FlexColumn>
                 <FlexColumn alignmentX='flex-start' maxWidth='260px'>
-                    <H2 as='h2'>
+                    {/* <H2 as='h2'>
                         Description
-                    </H2>
+                    </H2> */}
                     <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
                         __html: fullDescription
                             ? parseMarkdownResponse(fullDescription) : props.description
                     }}/>
                 </FlexColumn>
-                <FlexColumn gap='16px' alignmentX='flex-start' maxWidth='260px'>
+                {/* <FlexColumn gap='16px' alignmentX='flex-start' maxWidth='260px'>
                     <H2 as='h2'>
                         Baseline
                     </H2>
@@ -106,7 +123,7 @@ const Readme = (props) => {
                             </Medium>
                         </Body>
                     </FlexColumn>
-                </FlexColumn>
+                </FlexColumn> */}
             </FlexColumn>
         );
     };
@@ -120,15 +137,15 @@ const Readme = (props) => {
                     </H2>
                     <InfoList iconsSize='32px' metric={props.metric} deadline={props.deadline}/>
                 </FlexColumn>
-                <FlexColumn alignmentX='flex-start' width='80%' maxWidth='1000px'>
-                    <H2 as='h2'>
+                <FlexColumn alignmentX='flex-start' width='80%' maxWidth='1200px'>
+                    {/* <H2 as='h2'>
                         Description
-                    </H2>
-                    <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
+                    </H2> */}
+                    <ReadmeStyle as={fullDescription ? 'section' : 'p'} dangerouslySetInnerHTML={{
                         __html: fullDescription ? parseMarkdownResponse(fullDescription) : props.description
                     }}/>
                 </FlexColumn>
-                <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
+                {/* <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
                     <H2 as='h2'>
                         Baseline
                     </H2>
@@ -144,7 +161,7 @@ const Readme = (props) => {
                             </Medium>
                         </Body>
                     </FlexColumn>
-                </FlexColumn>
+                </FlexColumn> */}
             </FlexColumn>
         );
     };
