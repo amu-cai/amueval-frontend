@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlexColumn} from '../utils/containers';
+import { FlexColumn } from '../utils/containers';
 import Motivation from '../components/content_sections/Motivation';
 import Csi from '../components/content_sections/Csi';
 import Commercial from '../components/content_sections/Commercial';
@@ -19,7 +19,7 @@ const LandingPageStyle = styled(FlexColumn)`
     width: 80%;
   }
 
-  @media (min-width: ${({theme}) => theme.overMobile}) {
+  @media (min-width: ${({ theme }) => theme.overMobile}) {
     padding: 172px 0 124px;
 
     .main-container {
@@ -29,18 +29,18 @@ const LandingPageStyle = styled(FlexColumn)`
   }
 `;
 
-const LandingPage = () => {
-    return (
-        <LandingPageStyle as='main'>
-            <FlexColumn className='main-container'>
-                <Hero/>
-                <Motivation/>
-                <Csi/>
-                <Commercial/>
-                <Partnerships/>
-            </FlexColumn>
-        </LandingPageStyle>
-    );
+const LandingPage = (props) => {
+  return (
+    <LandingPageStyle as="main">
+      <FlexColumn className="main-container">
+        <Hero popUpMessageHandler={props.popUpMessageHandler} />
+        <Motivation />
+        <Csi />
+        <Commercial />
+        <Partnerships />
+      </FlexColumn>
+    </LandingPageStyle>
+  );
 };
 
 export default LandingPage;

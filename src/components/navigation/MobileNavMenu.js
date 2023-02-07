@@ -73,7 +73,17 @@ const MobileNavMenu = (props) => {
           <Menu as="li">Privacy policy</Menu>
         </FlexRow>
         {!KeyCloakService.isLoggedIn() ? (
-          <FlexRow as="button" onClick={KeyCloakService.doRegister} gap="16px">
+          <FlexRow
+            as="button"
+            onClick={() =>
+              props.popUpMessageHandler(
+                'Reminder',
+                'Remember to check your spam mailbox to confirm your account.',
+                () => KeyCloakService.doRegister
+              )
+            }
+            gap="16px"
+          >
             <Svg width="16px" height="16px" src={registerIco} />
             <Menu as="li">Register</Menu>
           </FlexRow>

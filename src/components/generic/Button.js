@@ -30,7 +30,7 @@ const Button = (props) => {
   return (
     <ButtonStyle
       as={props.as ? props.as : 'button'}
-      onClick={props.handler}
+      onClick={() => props.handler()}
       width={props.width}
       height={props.height}
       color={props.color}

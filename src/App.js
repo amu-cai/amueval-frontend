@@ -25,6 +25,8 @@ const App = () => {
   const [loggedBarHover, setLoggedBarHover] = React.useState(false);
   const [popUpHeader, setPopUpHeader] = React.useState('');
   const [popUpMessage, setPopUpMessage] = React.useState('');
+  const [confirmPopUpHandler, setConfirmPopUpHandler] = React.useState(null);
+
   React.useEffect(() => {
     if (sessionStorage.getItem('logged') !== 'yes') {
       if (KeyCloakService.isLoggedIn()) {
@@ -42,9 +44,14 @@ const App = () => {
     }, 1500);
   });
 
-  const popUpMessageHandler = (header, message) => {
+  const popUpMessageHandler = (header, message, confirmHandler) => {
     setPopUpHeader(header);
     setPopUpMessage(message);
+    if (confirmHandler !== null) {
+      setConfirmPopUpHandler(() => confirmHandler());
+    } else {
+      setConfirmPopUpHandler(null);
+    }
   };
 
   const popUpMessageRender = () => {
@@ -53,6 +60,7 @@ const App = () => {
         <PopupMessage
           header={popUpHeader}
           message={popUpMessage}
+          confirmHandler={confirmPopUpHandler}
           popUpMessageHandler={popUpMessageHandler}
         />
       );
@@ -78,7 +86,10 @@ const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           {popUpMessageRender()}
-          <NavBar loggedBarVisibleHandler={loggedBarVisibleHandler} />
+          <NavBar
+            loggedBarVisibleHandler={loggedBarVisibleHandler}
+            popUpMessageHandler={popUpMessageHandler}
+          />
           {!IS_MOBILE() ? (
             <LoggedBar
               visible={loggedBarVisible}
@@ -104,8 +115,18 @@ const App = () => {
               </>
             ) : (
               <>
-                <Route exact path="/" element={<LandingPage />} />
-                <Route element={<LandingPage />} />
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <LandingPage popUpMessageHandler={popUpMessageHandler} />
+                  }
+                />
+                <Route
+                  element={
+                    <LandingPage popUpMessageHandler={popUpMessageHandler} />
+                  }
+                />
               </>
             )}
           </Routes>

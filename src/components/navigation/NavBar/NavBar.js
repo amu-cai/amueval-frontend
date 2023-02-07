@@ -65,7 +65,13 @@ const NavBar = (props) => {
           {!KeyCloakService.isLoggedIn() ? (
             <FlexRow
               as="button"
-              onClick={KeyCloakService.doRegister}
+              onClick={() =>
+                props.popUpMessageHandler(
+                  'Reminder',
+                  'Remember to check your spam mailbox to confirm your account.',
+                  () => KeyCloakService.doRegister
+                )
+              }
               gap="16px"
             >
               <Svg width="16px" height="16px" src={registerIco} />
@@ -96,6 +102,7 @@ const NavBar = (props) => {
         mobileMenuHoverFalse={mobileMenuHoverFalse}
         translateY={navMenuTranslateY}
         toggleNavMenu={toggleNavMenu}
+        popUpMessageHandler={props.popUpMessageHandler}
       />
     </NavBarStyle>
   );
