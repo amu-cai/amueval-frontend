@@ -47,7 +47,7 @@ const App = () => {
   const popUpMessageHandler = (header, message, confirmHandler) => {
     setPopUpHeader(header);
     setPopUpMessage(message);
-    if (confirmHandler !== null) {
+    if (confirmHandler !== null && confirmHandler !== undefined) {
       setConfirmPopUpHandler(() => confirmHandler());
     } else {
       setConfirmPopUpHandler(null);
@@ -104,10 +104,15 @@ const App = () => {
           <Routes>
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId`}
-              element={<Challenge popUpMessageHandler={popUpMessageHandler} />}
+              element={<Challenge />}
             />
             <Route path={CHALLENGES_PAGE} element={<Challenges />} />
-            <Route path={POLICY_PRIVACY_PAGE} element={<PolicyPrivacy />} />
+            <Route
+              path={POLICY_PRIVACY_PAGE}
+              element={
+                <PolicyPrivacy popUpMessageHandler={popUpMessageHandler} />
+              }
+            />
             {KeyCloakService.isLoggedIn() ? (
               <>
                 <Route exact path="/" element={<Challenges />} />

@@ -39,7 +39,15 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
   }
 `;
 
-const PolicyPrivacy = () => {
+const PolicyPrivacy = (props) => {
+  React.useEffect(() => {
+    props.popUpMessageHandler(
+      'Policy privacy',
+      'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.'
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const listItemsContent = [
     'The right of access to personal data, including the right to obtain a copy of that data, is granted under the grounds and conditions set out in Article 15 of the RODO,',
     'The right to request the rectification (amendment) of personal data shall be exercised within the grounds and under the conditions set out in Article 16 RODO,',
@@ -50,13 +58,21 @@ const PolicyPrivacy = () => {
     'The right to lodge a complaint with the supervisory authority (President of the Office for Personal Data Protection),',
   ];
 
+  const doRegister = () => {
+    localStorage.setItem('privacyPolicy', 'accept');
+    KeyCloakService.doRegister();
+  };
+
   const renderButtons = () => {
     return (
       <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
         <Button
           handler={() => {
-            localStorage.setItem('privacyPolicy', 'accept');
-            KeyCloakService.doLogin();
+            props.popUpMessageHandler(
+              'Reminder',
+              'Remember to check your spam mailbox to confirm your account.',
+              () => doRegister
+            );
           }}
           width="72px"
           height="32px"
