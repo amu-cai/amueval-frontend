@@ -1,16 +1,19 @@
-import {API} from '../utils/globals';
+import { API } from '../utils/globals';
 
-const getChallengeLeaderboard = (setDataState, challengeName, setLoading) => {
-    fetch(`${API}/leaderboard/${challengeName}`)
-        .then(response => response.json())
-        .then(data => {
-            setDataState(data.entries);
-            if (setLoading) {
-                setTimeout(() => {
-                    setLoading(false);
-                }, 3000);
-            }
-        });
+const getChallengeLeaderboard = async (
+  setDataState,
+  challengeName,
+  setLoading
+) => {
+  await fetch(`${API}/leaderboard/${challengeName}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setDataState(data.entries);
+    });
+
+  if (setLoading) {
+    setLoading(false);
+  }
 };
 
 export default getChallengeLeaderboard;
