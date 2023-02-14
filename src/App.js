@@ -113,6 +113,24 @@ const App = () => {
                 <PolicyPrivacy popUpMessageHandler={popUpMessageHandler} />
               }
             />
+            <Route
+              path={`${POLICY_PRIVACY_PAGE}/login`}
+              element={
+                <PolicyPrivacy
+                  popUpMessageHandler={popUpMessageHandler}
+                  beforeLogin
+                />
+              }
+            />
+            <Route
+              path={`${POLICY_PRIVACY_PAGE}/register`}
+              element={
+                <PolicyPrivacy
+                  popUpMessageHandler={popUpMessageHandler}
+                  beforeRegister
+                />
+              }
+            />
             {KeyCloakService.isLoggedIn() ? (
               <>
                 <Route exact path="/" element={<Challenges />} />

@@ -28,7 +28,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
 const doLogin = () => {
   const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
   if (privacyPolicyAccept !== 'accept') {
-    window.location = `${ROOT_URL}${POLICY_PRIVACY_PAGE}`;
+    window.location = `${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`;
   } else {
     _kc.login();
   }
@@ -44,7 +44,7 @@ const getToken = () => _kc.token;
 const doRegister = () => {
   const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
   if (privacyPolicyAccept !== 'accept') {
-    window.location = `${ROOT_URL}${POLICY_PRIVACY_PAGE}`;
+    window.location = `${ROOT_URL}${POLICY_PRIVACY_PAGE}/register`;
   } else {
     _kc.register();
   }

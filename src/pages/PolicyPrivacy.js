@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { Body, H1, H2, Medium } from '../utils/fonts';
 import CircleNumber from '../components/generic/CircleNumber';
 import Button from '../components/generic/Button';
-import theme from '../utils/theme';
 import KeyCloakService from '../services/KeyCloakService';
-import { ROOT_URL } from '../utils/globals';
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -41,10 +39,13 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
 
 const PolicyPrivacy = (props) => {
   React.useEffect(() => {
-    props.popUpMessageHandler(
-      'Policy privacy',
-      'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.'
-    );
+    const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
+    if (privacyPolicyAccept !== 'accept') {
+      props.popUpMessageHandler(
+        'Policy privacy',
+        'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.'
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,35 +64,34 @@ const PolicyPrivacy = (props) => {
     KeyCloakService.doRegister();
   };
 
+  const doLogin = () => {
+    localStorage.setItem('privacyPolicy', 'accept');
+    KeyCloakService.doLogin();
+  };
+
   const renderButtons = () => {
-    return (
-      <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
-        <Button
-          handler={() => {
-            props.popUpMessageHandler(
-              'Reminder',
-              'Remember to check your spam mailbox to confirm your account.',
-              () => doRegister
-            );
-          }}
-          width="72px"
-          height="32px"
-        >
-          Accept
-        </Button>
-        <Button
-          width="72px"
-          height="32px"
-          handler={() => {
-            localStorage.removeItem('privacyPolicy');
-            window.location.replace(ROOT_URL);
-          }}
-          backgroundColor={theme.colors.dark}
-        >
-          Reject
-        </Button>
-      </FlexRow>
-    );
+    let acceptHandler = null;
+    let buttonHandler = null;
+    if (props.beforeLogin) buttonHandler = doLogin;
+    if (props.beforeRegister) {
+      acceptHandler = () => doRegister;
+      buttonHandler = () => {
+        props.popUpMessageHandler(
+          'Reminder',
+          'Remember to check your spam mailbox to confirm your account.',
+          acceptHandler
+        );
+      };
+    }
+    if (props.beforeLogin || props.beforeRegister) {
+      return (
+        <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
+          <Button handler={buttonHandler} width="72px" height="32px">
+            Accept
+          </Button>
+        </FlexRow>
+      );
+    }
   };
 
   return (
