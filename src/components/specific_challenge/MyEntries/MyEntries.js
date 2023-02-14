@@ -152,29 +152,10 @@ const MyEntries = (props) => {
   const desktopRender = () => {
     return (
       <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
-        <H2 as="h2" margin="0 0 32px 0">
-          My entries
-        </H2>{' '}
         <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
           <H2 as="h2" margin="0 0 12px 0">
             My Entries
           </H2>
-          {!loading ? (
-            <>
-              <Search searchQueryHandler={searchQueryHandler} />
-              <Pager
-                pageNr={pageNr}
-                width="48px"
-                borderRadius="64px"
-                pages={CALC_PAGES(myEntries)}
-                nextPage={nextPage}
-                previousPage={previousPage}
-                number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
-              />
-            </>
-          ) : (
-            <Loading />
-          )}
         </FlexColumn>
         {myEntries && !loading ? (
           <>
