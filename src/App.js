@@ -10,7 +10,6 @@ import {
   IS_MOBILE,
   POLICY_PRIVACY_PAGE,
 } from './utils/globals';
-import Challenge from './pages/Challenge';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
 import LoggedBar from './components/navigation/LoggedBar';
@@ -19,6 +18,7 @@ import Loading from './components/generic/Loading';
 import { FlexColumn } from './utils/containers';
 import PopupMessage from './components/generic/PopupMessage';
 import PolicyPrivacy from './pages/PolicyPrivacy';
+import Challenge from './components/specific_challenge/Challenge';
 
 const App = () => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
@@ -104,7 +104,27 @@ const App = () => {
           <Routes>
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId`}
-              element={<Challenge />}
+              element={<Challenge section={0} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
+              element={<Challenge section={0} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/readme`}
+              element={<Challenge section={1} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/howto`}
+              element={<Challenge section={2} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
+              element={<Challenge section={3} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/submit`}
+              element={<Challenge section={4} />}
             />
             <Route path={CHALLENGES_PAGE} element={<Challenges />} />
             <Route

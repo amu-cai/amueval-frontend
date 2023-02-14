@@ -27,16 +27,14 @@ const MobileChallengeMenu = (props) => {
           <MenuOption
             as="button"
             active={3 === props.section}
-            to="/"
-            onClick={() => props.setSection(3)}
+            to={`${props.challengeName}/${options[3].toLowerCase()}`}
           >
             {options[3]}
           </MenuOption>
           <MenuOption
             as="button"
             active={4 === props.section}
-            to="/"
-            onClick={() => props.setSection(4)}
+            to={`${props.challengeName}/${options[4].toLowerCase()}`}
           >
             {options[4]}
           </MenuOption>
@@ -50,24 +48,21 @@ const MobileChallengeMenu = (props) => {
         <MenuOption
           as="button"
           active={0 === props.section}
-          to="/"
-          onClick={() => props.setSection(0)}
+          to={`${props.challengeName}/${options[0].toLowerCase()}`}
         >
           {options[0]}
         </MenuOption>
         <MenuOption
           as="button"
           active={1 === props.section}
-          to="/"
-          onClick={() => props.setSection(1)}
+          to={`${props.challengeName}/${options[1].toLowerCase()}`}
         >
           {options[1]}
         </MenuOption>
         <MenuOption
           as="button"
           active={2 === props.section}
-          to="/"
-          onClick={() => props.setSection(2)}
+          to={`${props.challengeName}/${options[2].toLowerCase()}`}
         >
           {options[2]}
         </MenuOption>
