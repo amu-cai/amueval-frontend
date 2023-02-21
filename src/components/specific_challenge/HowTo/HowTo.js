@@ -1,13 +1,7 @@
 import React from 'react';
 import { FlexColumn } from '../../../utils/containers';
 import { IS_MOBILE } from '../../../utils/globals';
-// import Media from 'react-media';
-import GetChallengeRepo from './sections/GetChallengeRepo';
-import WorkOnYourSolution from './sections/WorkOnYourSolution';
-import PushYourSolution from './sections/PushYourSolution';
-// import SubmissionMetadataSmallDesktop from './sections/SubmissionMetadataSmallDesktop';
-// import SubmissionMetadataLargeDesktop from './sections/SubmissionMetadataLargeDesktop';
-import SubmitSolutionToGonito from './sections/SubmitSolutionToGonito';
+import HowToContent from './sections/HowToContent';
 
 const HowTo = (props) => {
   return (
@@ -19,22 +13,10 @@ const HowTo = (props) => {
       maxWidth={IS_MOBILE() ? '668px' : 'none'}
     >
       <FlexColumn maxWidth="680px" alignmentX="flex-start" gap="48px">
-        <GetChallengeRepo
+        <HowToContent
           user={props.user ? props.user : 'yourID'}
           challengeName={props.challengeName}
         />
-        <WorkOnYourSolution />
-        <PushYourSolution challengeName={props.challengeName} />
-        <SubmitSolutionToGonito />
-      </FlexColumn>
-      <FlexColumn as="article">
-        {/* <SubmitSolutionToGonito /> */}
-        {/* <Media query='(max-width: 1224px)'>
-                    <SubmissionMetadataSmallDesktop/>
-                </Media>
-                <Media query='(min-width: 1225px)'>
-                    <SubmissionMetadataLargeDesktop/>
-                </Media> */}
       </FlexColumn>
     </FlexColumn>
   );
