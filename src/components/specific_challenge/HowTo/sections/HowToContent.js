@@ -75,17 +75,6 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="4" />
         <Body as="p" margin="auto 0">
-          Commit and push at least <Medium>*/out.tsv</Medium> files to your
-          repo. It is also recommended to push your source code files.
-        </Body>
-      </Grid>
-      <Grid
-        width="100%"
-        gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
-      >
-        <CircleNumber number="5" />
-        <Body as="p" margin="auto 0">
           You need to generate your solution for the test set as{' '}
           <Medium as="span">test-A/out.tsv</Medium>. You may also create the
           output for the dev set <Medium as="span">dev-0/out.tsv</Medium>.
@@ -96,7 +85,7 @@ const HowToContent = (props) => {
         gridTemplateColumns="auto 1fr"
         gridGap={IS_MOBILE() ? '8px' : '16px'}
       >
-        <CircleNumber number="6" />
+        <CircleNumber number="5" />
         <Body as="p" margin="auto 0">
           (This step is optional.) You can evaluate results for the dev set
           locally by <Medium as="span">geval</Medium>.
@@ -116,7 +105,7 @@ const HowToContent = (props) => {
         gridTemplateColumns="auto 1fr"
         gridGap={IS_MOBILE() ? '8px' : '16px'}
       >
-        <CircleNumber number="7" />
+        <CircleNumber number="6" />
         <Body as="p" margin="auto 0">
           Commit and push at least <Medium>*/out.tsv</Medium> files to your
           repo. It is also recommended to push your source code files.
@@ -127,7 +116,7 @@ const HowToContent = (props) => {
         gridTemplateColumns="auto 1fr"
         gridGap={IS_MOBILE() ? '8px' : '16px'}
       >
-        <CircleNumber number="8" />
+        <CircleNumber number="7" />
         <Body as="p" margin="auto 0">
           Submit your solution to Gonito using <Medium>SUBMIT</Medium> on the
           panel on the left.
