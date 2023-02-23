@@ -76,6 +76,8 @@ const Code = styled(Container)`
   line-height: 18px;
   font-weight: 300;
   color: ${({theme}) => theme.colors.white};
+  max-width: 600px;
+  overflow-wrap: break-word;
 
   &:before {
     display: ${({before}) => before ? 'inline-block' : 'none'};
