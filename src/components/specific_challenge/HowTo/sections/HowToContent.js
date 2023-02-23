@@ -17,6 +17,12 @@ const HowToContent = (props) => {
     }
   };
 
+  const repoKeyRender = () => {
+    if (props.userFullInfo) {
+      return props.userFullInfo.individualKey;
+    } return 'REPO_KEY_HERE';
+  };
+
   return (
     <FlexColumn
       as="article"
@@ -46,7 +52,7 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="2" />
         <Body as="p" margin="auto 0">
-          Add the following ssh key <Medium as="span">REPO_KEY_HERE</Medium> to
+          Add the following ssh key <Medium as="span">{repoKeyRender()}</Medium> to
           your deploy keys in your git repository settings.
         </Body>
       </Grid>
