@@ -22,9 +22,7 @@ const HowToContent = (props) => {
       return (
         <CodeShell
           codeBlockIndex={0}
-          commands={[
-            props.userFullInfo.individualKey
-          ]}
+          commands={[props.userFullInfo.individualKey]}
         />
       );
     }
@@ -49,7 +47,7 @@ const HowToContent = (props) => {
         <Body as="p" margin="auto 0">
           Create a private git repository with the name
           <Medium as="span">&nbsp;{props.challengeName}</Medium>
-          .&nbsp;The name of the repository must match!
+          &nbsp;The name of the repository must match!
         </Body>
       </Grid>
       <Grid
@@ -59,8 +57,9 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="2" />
         <Body as="p" margin="auto 0">
-          Add the following ssh key <Medium as="span">{props.userFullInfo ? '' : 'REPO_KEY_HERE'}</Medium> to
-          your deploy keys in your git repository settings.
+          Add the following ssh key{' '}
+          <Medium as="span">{props.userFullInfo ? '' : 'REPO_KEY_HERE'}</Medium>{' '}
+          to your deploy keys in your git repository settings.
         </Body>
       </Grid>
       {repoKeyRender()}
