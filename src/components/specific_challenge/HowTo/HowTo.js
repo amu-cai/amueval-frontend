@@ -1,16 +1,24 @@
 import React from 'react';
 import getFullUser from '../../../api/getFullUserInfo';
+import KeyCloakService from '../../../services/KeyCloakService';
 import { FlexColumn } from '../../../utils/containers';
 import { IS_MOBILE } from '../../../utils/globals';
 import HowToContent from './sections/HowToContent';
 
 const HowTo = (props) => {
   const [userFullInfo, setUserFullInfo] = React.useState(null);
-  // const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     getFullUser(setUserFullInfo);
-  }, []);
+
+    if (!KeyCloakService.isLoggedIn()) {
+      props.popUpMessageHandler(
+        'Please log in',
+        'To see everything you must log in',
+        () => KeyCloakService.doLogin
+      );
+    }
+  }, [props]);
 
   return (
     <FlexColumn

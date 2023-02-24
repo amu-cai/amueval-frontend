@@ -116,7 +116,12 @@ const App = () => {
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/howto`}
-              element={<Challenge section={2} />}
+              element={
+                <Challenge
+                  popUpMessageHandler={popUpMessageHandler}
+                  section={2}
+                />
+              }
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/myentries`}

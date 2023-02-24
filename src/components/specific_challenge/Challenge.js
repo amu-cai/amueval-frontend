@@ -48,7 +48,13 @@ const Challenge = (props) => {
           />
         );
       case 2:
-        return <HowTo challengeName={challengeName} user={user} />;
+        return (
+          <HowTo
+            popUpMessageHandler={props.popUpMessageHandler}
+            challengeName={challengeName}
+            user={user}
+          />
+        );
       case 3:
         return <MyEntries challengeName={challengeName} />;
       case 4:
