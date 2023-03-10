@@ -48,7 +48,7 @@ const DesktopChallengeMenu = (props) => {
           <Option
             key={`challenge_menu_option-${index}`}
             as={Link}
-            active={index === props.section}
+            active={index === props.section ? 1 : 0}
             to={`/challenge/${props.challengeName}/${options[index]
               .toLowerCase()
               .replace(' ', '')}`}

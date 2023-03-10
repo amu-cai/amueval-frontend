@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, FlexColumn, FlexRow, Svg } from '../../utils/containers';
 import { useParams } from 'react-router-dom';
-import { H1, H2, Medium } from '../../utils/fonts';
+import { H1, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import MobileChallengeMenu from './MobileChallengeMenu';
 import Leaderboard from './Leaderboard/Leaderboard';
@@ -70,29 +70,33 @@ const Challenge = (props) => {
   };
 
   const mobileRender = () => {
-    return (
-      <FlexColumn
-        minHeight="100vh"
-        gap="12px"
-        alignmentY="flex-start"
-        padding="66px 0 0 0"
-      >
-        <Loading visible={loading} />
-        <H1 as="h1" margin="0 0 8px 0" textAlign="center">
-          {challenge.title}
-        </H1>
-        <MobileChallengeMenu
-          challengeName={challengeName}
-          section={props.section}
-        />
-        <Container
-          width="75%"
-          height="1px"
-          backgroundColor={theme.colors.dark}
-        />
-        {sectionRender()}
-      </FlexColumn>
-    );
+    if (!loading) {
+      return (
+        <FlexColumn
+          minHeight="100vh"
+          gap="12px"
+          alignmentY="flex-start"
+          padding="66px 0 0 0"
+        >
+          <Loading visible={loading} />
+          <H1 as="h1" margin="0 0 8px 0" textAlign="center">
+            {challenge.title}
+          </H1>
+          <MobileChallengeMenu
+            challengeName={challengeName}
+            section={props.section}
+          />
+          <Container
+            width="75%"
+            height="1px"
+            backgroundColor={theme.colors.dark}
+          />
+          {sectionRender()}
+        </FlexColumn>
+      );
+    } else {
+      return <Loading />;
+    }
   };
 
   const desktopRender = () => {
@@ -131,19 +135,7 @@ const Challenge = (props) => {
         </>
       );
     } else {
-      return (
-        <FlexColumn
-          position="fixed"
-          top="0"
-          left="0"
-          width="100%"
-          height="100vh"
-          zIndex="10"
-        >
-          <H2 as="h1">Submission processing...</H2>
-          <Loading />
-        </FlexColumn>
-      );
+      return <Loading />;
     }
   };
 
