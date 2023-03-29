@@ -30,12 +30,14 @@ const doLogin = () => {
   if (privacyPolicyAccept !== 'accept') {
     window.location = `${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`;
   } else {
+    sessionStorage.setItem('logout', '');
     _kc.login();
   }
 };
 
 const doLogout = () => {
   sessionStorage.clear();
+  sessionStorage.setItem('logout', 'yes');
   _kc.logout();
 };
 

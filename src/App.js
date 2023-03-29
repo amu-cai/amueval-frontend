@@ -9,6 +9,8 @@ import {
   CHALLENGES_PAGE,
   IS_MOBILE,
   POLICY_PRIVACY_PAGE,
+  LOGIN_REQUIRED_PAGES,
+  ROOT_URL,
 } from './utils/globals';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
@@ -28,6 +30,13 @@ const App = () => {
   const [confirmPopUpHandler, setConfirmPopUpHandler] = React.useState(null);
 
   React.useEffect(() => {
+    if (sessionStorage.getItem('logout') === 'yes') {
+      const pageName = window.location.pathname.split('/').at(-1);
+      if (LOGIN_REQUIRED_PAGES.includes(pageName)) {
+        window.location.replace(`${ROOT_URL}/challenges`);
+      }
+    }
+
     if (sessionStorage.getItem('logged') !== 'yes') {
       if (KeyCloakService.isLoggedIn()) {
         sessionStorage.setItem('logged', 'yes');

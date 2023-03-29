@@ -16,6 +16,8 @@ const POLICY_PRIVACY_PAGE = '/policy-privacy';
 const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
 
+const LOGIN_REQUIRED_PAGES = ['myentries', 'submit', 'howto'];
+
 const MINI_DESCRIPTION_RENDER = (description) => {
   if (description) {
     if (description.length <= MINI_DESCRIPTION_LENGTH) return description;
@@ -83,6 +85,7 @@ export {
   CSI_LINK,
   POLICY_PRIVACY_PAGE,
   ROOT_URL,
+  LOGIN_REQUIRED_PAGES,
   MINI_DESCRIPTION_RENDER,
   RENDER_ICO,
   CALC_PAGES,
