@@ -44,6 +44,14 @@ const App = () => {
       }
     }
 
+    if (
+      sessionStorage.getItem('logged') === 'yes' &&
+      (window.location.pathname === `${POLICY_PRIVACY_PAGE}/login` ||
+        window.location.pathname === `${POLICY_PRIVACY_PAGE}/register`)
+    ) {
+      window.location.replace(`${ROOT_URL}/challenges`);
+    }
+
     setTimeout(() => {
       if (sessionStorage.getItem('logged') === 'yes') {
         if (!KeyCloakService.isLoggedIn()) {
