@@ -40,7 +40,14 @@ const Option = styled(FlexColumn)`
 const DesktopChallengeMenu = (props) => {
   let options = ['Leaderboard', 'Readme', 'How to'];
   if (KeyCloakService.isLoggedIn())
-    options = ['Leaderboard', 'Readme', 'How to', 'My entries', 'Submit'];
+    options = [
+      'Leaderboard',
+      'Readme',
+      'How to',
+      'My entries',
+      'Submit',
+      'All entries',
+    ];
   return (
     <DesktopChallengeMenuStyle>
       {options.map((option, index) => {

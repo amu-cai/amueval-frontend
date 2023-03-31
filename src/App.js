@@ -148,6 +148,10 @@ const App = () => {
               path={`${CHALLENGE_PAGE}/:challengeId/submit`}
               element={<Challenge section={4} />}
             />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/allentries`}
+              element={<Challenge section={5} />}
+            />
             <Route path={CHALLENGES_PAGE} element={<Challenges />} />
             <Route
               path={POLICY_PRIVACY_PAGE}

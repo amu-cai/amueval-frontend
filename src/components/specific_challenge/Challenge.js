@@ -16,6 +16,7 @@ import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../generic/Loading';
 import getUser from '../../api/getUser';
+import AllEntries from './AllEntries/AllEntries';
 
 const Challenge = (props) => {
   const challengeName = useParams().challengeId;
@@ -59,6 +60,10 @@ const Challenge = (props) => {
         return <MyEntries challengeName={challengeName} />;
       case 4:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
+      case 5:
+        return (
+          <AllEntries challengeName={challengeName} setLoading={setLoading} />
+        );
       default:
         return (
           <Leaderboard
