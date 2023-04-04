@@ -18,6 +18,15 @@ const ROOT_URL = window.location.origin;
 
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
+const CHALLENGE_SECTIONS = {
+  LEADERBOARD: 0,
+  ALL_ENTRIES: 1,
+  README: 2,
+  HOW_TO: 3,
+  MY_ENTRIES: 4,
+  SUBMIT: 5,
+};
+
 const MINI_DESCRIPTION_RENDER = (description) => {
   if (description) {
     if (description.length <= MINI_DESCRIPTION_LENGTH) return description;
@@ -86,6 +95,7 @@ export {
   POLICY_PRIVACY_PAGE,
   ROOT_URL,
   LOGIN_REQUIRED_PAGES,
+  CHALLENGE_SECTIONS,
   MINI_DESCRIPTION_RENDER,
   RENDER_ICO,
   CALC_PAGES,

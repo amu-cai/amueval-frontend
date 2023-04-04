@@ -1,10 +1,9 @@
 import React from 'react';
-import {FlexColumn} from '../../utils/containers';
-import {Body, H2} from '../../utils/fonts';
+import { FlexColumn } from '../../utils/containers';
+import { Body, H2 } from '../../utils/fonts';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import getChallengeFullDescription from '../../api/getChallengeFullDescription';
-// import {markdown} from 'markdown';
 import styled from 'styled-components';
 import InfoList from '../generic/InfoList';
 import Loading from '../generic/Loading';
@@ -29,7 +28,7 @@ const ReadmeStyle = styled(Body)`
     line-height: 22px;
     margin: 24px 0;
 
-    @media (min-width: ${({theme}) => theme.overMobile}) {
+    @media (min-width: ${({ theme }) => theme.overMobile}) {
       font-size: 22px;
       line-height: 26px;
     }
@@ -41,7 +40,7 @@ const ReadmeStyle = styled(Body)`
     font-size: 14px;
     line-height: 20px;
 
-    @media (min-width: ${({theme}) => theme.overMobile}) {
+    @media (min-width: ${({ theme }) => theme.overMobile}) {
       font-weight: 400;
       font-size: 16px;
       line-height: 22px;
@@ -53,10 +52,10 @@ const ReadmeStyle = styled(Body)`
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: ${({theme}) => theme.colors.dark};
+    color: ${({ theme }) => theme.colors.dark};
     text-decoration: none;
 
-    @media (min-width: ${({theme}) => theme.overMobile}) {
+    @media (min-width: ${({ theme }) => theme.overMobile}) {
       font-size: 16px;
       line-height: 22px;
       font-weight: 500;
@@ -65,127 +64,104 @@ const ReadmeStyle = styled(Body)`
 `;
 
 const Readme = (props) => {
-    const [fullDescription, setFullDescription] = React.useState('');
-    const [loading, setLoading] = React.useState(true);
+  const [fullDescription, setFullDescription] = React.useState('');
+  const [loading, setLoading] = React.useState(true);
 
-    React.useEffect(() => {
-        getChallengeFullDescription(setFullDescription, setLoading, props.challengeName);
-    }, [props.challengeName]);
-
-    const parseMarkdownResponse = (response) => {
-        let result = marked.parse(response);
-        let regex = /<h3 /g;
-        result = result.replace(regex, '<h4 ');
-        regex = /<\/h3>/g;
-        result = result.replace(regex, '</h4>');
-        regex = /<h2 /g;
-        result = result.replace(regex, '<h3 ');
-        regex = /<\/h2>/g;
-        result = result.replace(regex, '</h3>');
-        regex = /<h1 /g;
-        result = result.replace(regex, '<h2 ');
-        regex = /<\/h1>/g;
-        result = result.replace(regex, '</h2>');
-        return result;
-    };
-
-    const mobileRender = () => {
-        return (
-            <FlexColumn as='section' padding='20px' gap='24px'>
-                <FlexColumn gap='12px' alignmentX='flex-start'>
-                    <H2 as='h2'>
-                        Info
-                    </H2>
-                    <InfoList iconsSize='24px' metric={props.metric} deadline={props.deadline}/>
-                </FlexColumn>
-                <FlexColumn alignmentX='flex-start' maxWidth='260px'>
-                    {/* <H2 as='h2'>
-                        Description
-                    </H2> */}
-                    <ReadmeStyle as={fullDescription ? 'article' : 'p'} dangerouslySetInnerHTML={{
-                        __html: fullDescription
-                            ? parseMarkdownResponse(fullDescription) : props.description
-                    }}/>
-                </FlexColumn>
-                {/* <FlexColumn gap='16px' alignmentX='flex-start' maxWidth='260px'>
-                    <H2 as='h2'>
-                        Baseline
-                    </H2>
-                    <FlexColumn gap='12px' alignmentX='flex-start'>
-                        <Body as='p'>
-                            In metus ex, venenatis quis risus eget, sodales venenatis nibh. Sed ullamcorper leo non nunc
-                            euismod, id faucibus justo finibus. Nullam malesuada eros quam, eu lobortis leo feugiat non.
-                        </Body>
-                        <Body as='p'>
-                            See notebook&nbsp;
-                            <Medium as='a' href='#' display='inline-block' cursor='pointer'>
-                                here.
-                            </Medium>
-                        </Body>
-                    </FlexColumn>
-                </FlexColumn> */}
-            </FlexColumn>
-        );
-    };
-
-    const desktopRender = () => {
-        return (
-            <FlexColumn as='section' padding='20px' gap='64px'>
-                <FlexColumn gap='32px'>
-                    <H2 as='h2'>
-                        Info
-                    </H2>
-                    <InfoList iconsSize='32px' metric={props.metric} deadline={props.deadline}/>
-                </FlexColumn>
-                <FlexColumn alignmentX='flex-start' width='80%' maxWidth='1200px'>
-                    {/* <H2 as='h2'>
-                        Description
-                    </H2> */}
-                    <ReadmeStyle as={fullDescription ? 'section' : 'p'} dangerouslySetInnerHTML={{
-                        __html: fullDescription ? parseMarkdownResponse(fullDescription) : props.description
-                    }}/>
-                </FlexColumn>
-                {/* <FlexColumn gap='16px' alignmentX='flex-start' width='80%' maxWidth='1000px'>
-                    <H2 as='h2'>
-                        Baseline
-                    </H2>
-                    <FlexColumn gap='12px' alignmentX='flex-start'>
-                        <Body as='p'>
-                            In metus ex, venenatis quis risus eget, sodales venenatis nibh. Sed ullamcorper leo non nunc
-                            euismod, id faucibus justo finibus. Nullam malesuada eros quam, eu lobortis leo feugiat non.
-                        </Body>
-                        <Body as='p'>
-                            See notebook&nbsp;
-                            <Medium as='a' href='#' display='inline-block' cursor='pointer'>
-                                here.
-                            </Medium>
-                        </Body>
-                    </FlexColumn>
-                </FlexColumn> */}
-            </FlexColumn>
-        );
-    };
-
-    return (
-        <>
-            <Media query={theme.mobile}>
-                {!loading ? mobileRender() : <Loading visible={loading}/>}
-            </Media>
-            <Media query={theme.desktop}>
-                {!loading ? desktopRender() : <Loading visible={loading}/>}
-            </Media>
-        </>
+  React.useEffect(() => {
+    getChallengeFullDescription(
+      setFullDescription,
+      setLoading,
+      props.challengeName
     );
+  }, [props.challengeName]);
+
+  const parseMarkdownResponse = (response) => {
+    let result = marked.parse(response);
+    let regex = /<h3 /g;
+    result = result.replace(regex, '<h4 ');
+    regex = /<\/h3>/g;
+    result = result.replace(regex, '</h4>');
+    regex = /<h2 /g;
+    result = result.replace(regex, '<h3 ');
+    regex = /<\/h2>/g;
+    result = result.replace(regex, '</h3>');
+    regex = /<h1 /g;
+    result = result.replace(regex, '<h2 ');
+    regex = /<\/h1>/g;
+    result = result.replace(regex, '</h2>');
+    return result;
+  };
+
+  const mobileRender = () => {
+    return (
+      <FlexColumn as="section" padding="20px" gap="24px">
+        <FlexColumn gap="12px" alignmentX="flex-start">
+          <H2 as="h2">Info</H2>
+          <InfoList
+            iconsSize="24px"
+            metric={props.metric}
+            deadline={props.deadline}
+          />
+        </FlexColumn>
+        <FlexColumn alignmentX="flex-start" maxWidth="260px">
+          <ReadmeStyle
+            as={fullDescription ? 'article' : 'p'}
+            dangerouslySetInnerHTML={{
+              __html: fullDescription
+                ? parseMarkdownResponse(fullDescription)
+                : props.description,
+            }}
+          />
+        </FlexColumn>
+      </FlexColumn>
+    );
+  };
+
+  const desktopRender = () => {
+    return (
+      <FlexColumn as="section" padding="20px" gap="64px">
+        <FlexColumn gap="32px">
+          <H2 as="h2">Info</H2>
+          <InfoList
+            iconsSize="32px"
+            metric={props.metric}
+            deadline={props.deadline}
+          />
+        </FlexColumn>
+        <FlexColumn alignmentX="flex-start" width="80%" maxWidth="1200px">
+          <ReadmeStyle
+            as={fullDescription ? 'section' : 'p'}
+            dangerouslySetInnerHTML={{
+              __html: fullDescription
+                ? parseMarkdownResponse(fullDescription)
+                : props.description,
+            }}
+          />
+        </FlexColumn>
+      </FlexColumn>
+    );
+  };
+
+  return (
+    <>
+      <Media query={theme.mobile}>
+        {!loading ? mobileRender() : <Loading visible={loading} />}
+      </Media>
+      <Media query={theme.desktop}>
+        {!loading ? desktopRender() : <Loading visible={loading} />}
+      </Media>
+    </>
+  );
 };
 
 MiniChallenge.propTypes = {
-    challengeName: PropsTypes.string,
-    description: PropsTypes.string,
+  challengeName: PropsTypes.string,
+  description: PropsTypes.string,
 };
 
 MiniChallenge.defaultProps = {
-    challengeName: '',
-    description: '',
+  challengeName: '',
+  description: '',
 };
 
 export default Readme;

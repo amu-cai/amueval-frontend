@@ -11,6 +11,7 @@ import {
   POLICY_PRIVACY_PAGE,
   LOGIN_REQUIRED_PAGES,
   ROOT_URL,
+  CHALLENGE_SECTIONS,
 } from './utils/globals';
 import KeyCloakService from './services/KeyCloakService';
 import React from 'react';
@@ -121,36 +122,36 @@ const App = () => {
           <Routes>
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId`}
-              element={<Challenge section={0} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
-              element={<Challenge section={0} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/allentries`}
-              element={<Challenge section={1} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.ALL_ENTRIES} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/readme`}
-              element={<Challenge section={2} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.README} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/howto`}
               element={
                 <Challenge
                   popUpMessageHandler={popUpMessageHandler}
-                  section={3}
+                  section={CHALLENGE_SECTIONS.HOW_TO}
                 />
               }
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
-              element={<Challenge section={4} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-              element={<Challenge section={5} />}
+              element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
             />
             <Route path={CHALLENGES_PAGE} element={<Challenges />} />
             <Route

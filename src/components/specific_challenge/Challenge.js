@@ -11,7 +11,7 @@ import MyEntries from './MyEntries/MyEntries';
 import Submit from './Submit';
 import Media from 'react-media';
 import DesktopChallengeMenu from './DesktopChallengeMenu';
-import { RENDER_ICO } from '../../utils/globals';
+import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
 import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../generic/Loading';
@@ -31,7 +31,7 @@ const Challenge = (props) => {
 
   const sectionRender = () => {
     switch (props.section) {
-      case 0:
+      case CHALLENGE_SECTIONS.LEADERBOARD:
         return (
           <Leaderboard
             challengeName={challengeName}
@@ -39,11 +39,11 @@ const Challenge = (props) => {
             user={user}
           />
         );
-      case 1:
+      case CHALLENGE_SECTIONS.ALL_ENTRIES:
         return (
           <AllEntries challengeName={challengeName} setLoading={setLoading} />
         );
-      case 2:
+      case CHALLENGE_SECTIONS.README:
         return (
           <Readme
             challengeName={challengeName}
@@ -52,7 +52,7 @@ const Challenge = (props) => {
             deadline={challenge.deadline}
           />
         );
-      case 3:
+      case CHALLENGE_SECTIONS.HOW_TO:
         return (
           <HowTo
             popUpMessageHandler={props.popUpMessageHandler}
@@ -60,9 +60,9 @@ const Challenge = (props) => {
             user={user}
           />
         );
-      case 4:
+      case CHALLENGE_SECTIONS.MY_ENTRIES:
         return <MyEntries challengeName={challengeName} />;
-      case 5:
+      case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
       default:
         return (

@@ -27,6 +27,7 @@ const Option = styled(FlexColumn)`
   cursor: pointer;
   background-color: ${({ theme, active }) =>
     active ? theme.colors.green05 : theme.colors.white};
+  text-decoration: none;
 
   * {
     cursor: pointer;
