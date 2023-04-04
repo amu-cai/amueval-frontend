@@ -4,7 +4,7 @@ import Media from 'react-media';
 import { FlexColumn } from '../../../utils/containers';
 import { H2 } from '../../../utils/fonts';
 import {
-  // CALC_PAGES,
+  CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
 } from '../../../utils/globals';
@@ -17,31 +17,39 @@ import getAllEntries from '../../../api/getAllEntries';
 
 const AllEntries = (props) => {
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);
+  const [entriesAll, setEntriesAll] = React.useState([]);
   const [entries, setEntries] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
-  // const [submitterSorted, setSubmitterSorted] = React.useState(false);
-  // const [entriesSorted, setEntriesSorted] = React.useState(false);
-  const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
+  const [submitterSorted, setSubmitterSorted] = React.useState(false);
+  const [whenSorted, setWhenSorted] = React.useState(false);
 
   React.useEffect(() => {
-    challengeDataRequest(props.challengeName);
+    if (props.challengeName) challengeDataRequest(props.challengeName);
   }, [props.challengeName]);
 
   const challengeDataRequest = (challengeName) => {
-    getAllEntries(setEntriesFromApi, challengeName);
-    getAllEntries(setEntries, challengeName, setLoading);
+    getAllEntries(challengeName, setEntriesFromApi, setEntriesAll);
+    getAllEntries(
+      challengeName,
+      undefined,
+      setEntries,
+      setLoading,
+      setScoresSorted
+    );
   };
 
   const getPossibleMetrics = () => {
     let metrics = [];
-    // for (let test of entriesFromApi.tests) {
-    //   let myEval = `${test.metric}.${test.name}`;
-    //   if (myEval && !metrics.includes(myEval)) {
-    //     metrics.push(myEval);
-    //   }
-    // }
+    if (entriesFromApi.tests) {
+      for (let test of entriesFromApi.tests) {
+        let myEval = `${test.metric}.${test.name}`;
+        if (myEval && !metrics.includes(myEval)) {
+          metrics.push(myEval);
+        }
+      }
+    }
     return metrics;
   };
 
@@ -50,20 +58,19 @@ const AllEntries = (props) => {
     for (let metric of getPossibleMetrics()) {
       header.push(metric);
     }
-    header.push('entries');
     header.push('when');
     return header;
   };
 
   const searchQueryHandler = (event) => {
-    allEntriesSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
+    allEntriesSearchQueryHandler(event, entriesAll, setPageNr, setEntries);
   };
 
   const nextPage = () => {
-    // if (pageNr !== CALC_PAGES(entries ? entries : [])) {
-    //   let newPage = pageNr + 1;
-    //   setPageNr(newPage);
-    // }
+    if (pageNr !== CALC_PAGES(entries ? entries : [])) {
+      let newPage = pageNr + 1;
+      setPageNr(newPage);
+    }
   };
 
   const previousPage = () => {
@@ -78,17 +85,38 @@ const AllEntries = (props) => {
     switch (elem) {
       case '#':
         break;
+      case 'submitter':
+        if (submitterSorted) {
+          setSubmitterSorted(false);
+          newEntries = newEntries.sort((a, b) =>
+            a.submitter.toLowerCase() < b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() < a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        } else {
+          setSubmitterSorted(true);
+          newEntries = newEntries.sort((a, b) =>
+            a.submitter.toLowerCase() > b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() > a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        }
+        break;
       case 'when':
         if (whenSorted) {
+          setWhenSorted(false);
           newEntries = newEntries.sort((a, b) =>
             a.when < b.when ? 1 : b.when < a.when ? -1 : 0
           );
-          setWhenSorted(false);
         } else {
+          setWhenSorted(true);
           newEntries = newEntries.sort((a, b) =>
             a.when > b.when ? 1 : b.when > a.when ? -1 : 0
           );
-          setWhenSorted(true);
         }
         break;
       default:
@@ -124,7 +152,7 @@ const AllEntries = (props) => {
 
   const desktopRender = () => {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1200px">
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
         <H2 as="h2" margin="0 0 32px 0">
           All Entries
         </H2>
@@ -134,18 +162,14 @@ const AllEntries = (props) => {
             <Table
               challengeName={props.challengeName}
               headerElements={getAllEntriesHeader()}
-              // gridTemplateColumns={
-              //   entries[0]
-              //     ? '1fr 3fr ' +
-              //       '2fr '.repeat(entries[0].evaluations.length) +
-              //       '1fr 2fr'
-              //     : ''
-              // }
+              possibleMetrics={getPossibleMetrics()}
+              gridTemplateColumns={
+                '1fr 3fr ' + '3fr '.repeat(getPossibleMetrics().length) + ' 3fr'
+              }
               user={props.user}
               staticColumnElements={[
                 { name: 'id', format: null, order: 1, align: 'left' },
                 { name: 'submitter', format: null, order: 2, align: 'left' },
-                { name: 'times', format: null, order: 4, align: 'left' },
                 { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
               ]}
               metrics={getPossibleMetrics()}
@@ -156,17 +180,17 @@ const AllEntries = (props) => {
                 align: 'left',
               }}
               pageNr={pageNr}
-              elements={[]}
+              elements={entries}
               sortByUpdate={sortByUpdate}
             />
             <Pager
               pageNr={pageNr}
               width="72px"
               borderRadius="64px"
-              pages={2} //CALC_PAGES(entries, 2)
+              pages={CALC_PAGES(entries, 2)}
               nextPage={nextPage}
               previousPage={previousPage}
-              number={1} //`${pageNr} / ${CALC_PAGES(entries, 2)}`}
+              number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
             />
           </>
         ) : (

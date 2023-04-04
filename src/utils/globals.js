@@ -16,7 +16,7 @@ const POLICY_PRIVACY_PAGE = '/policy-privacy';
 const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
 
-const LOGIN_REQUIRED_PAGES = ['myentries', 'submit', 'howto'];
+const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
 const MINI_DESCRIPTION_RENDER = (description) => {
   if (description) {

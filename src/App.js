@@ -128,28 +128,28 @@ const App = () => {
               element={<Challenge section={0} />}
             />
             <Route
-              path={`${CHALLENGE_PAGE}/:challengeId/readme`}
+              path={`${CHALLENGE_PAGE}/:challengeId/allentries`}
               element={<Challenge section={1} />}
+            />
+            <Route
+              path={`${CHALLENGE_PAGE}/:challengeId/readme`}
+              element={<Challenge section={2} />}
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/howto`}
               element={
                 <Challenge
                   popUpMessageHandler={popUpMessageHandler}
-                  section={2}
+                  section={3}
                 />
               }
             />
             <Route
               path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
-              element={<Challenge section={3} />}
-            />
-            <Route
-              path={`${CHALLENGE_PAGE}/:challengeId/submit`}
               element={<Challenge section={4} />}
             />
             <Route
-              path={`${CHALLENGE_PAGE}/:challengeId/allentries`}
+              path={`${CHALLENGE_PAGE}/:challengeId/submit`}
               element={<Challenge section={5} />}
             />
             <Route path={CHALLENGES_PAGE} element={<Challenges />} />

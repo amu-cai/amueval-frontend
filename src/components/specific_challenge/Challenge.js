@@ -41,6 +41,10 @@ const Challenge = (props) => {
         );
       case 1:
         return (
+          <AllEntries challengeName={challengeName} setLoading={setLoading} />
+        );
+      case 2:
+        return (
           <Readme
             challengeName={challengeName}
             metric={challenge.mainMetric}
@@ -48,7 +52,7 @@ const Challenge = (props) => {
             deadline={challenge.deadline}
           />
         );
-      case 2:
+      case 3:
         return (
           <HowTo
             popUpMessageHandler={props.popUpMessageHandler}
@@ -56,14 +60,10 @@ const Challenge = (props) => {
             user={user}
           />
         );
-      case 3:
-        return <MyEntries challengeName={challengeName} />;
       case 4:
-        return <Submit challengeName={challengeName} setLoading={setLoading} />;
+        return <MyEntries challengeName={challengeName} />;
       case 5:
-        return (
-          <AllEntries challengeName={challengeName} setLoading={setLoading} />
-        );
+        return <Submit challengeName={challengeName} setLoading={setLoading} />;
       default:
         return (
           <Leaderboard

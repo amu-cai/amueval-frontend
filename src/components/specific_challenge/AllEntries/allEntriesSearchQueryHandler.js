@@ -10,15 +10,18 @@ const allEntriesSearchQueryHandler = (
   if (searchQuery === '') setEntries(entriesFromApi);
   else {
     for (let entry of entriesFromApi) {
-      const { id, submitter, when, times } = entry;
+      const { id, when, submitter } = entry;
+      console.log(entry);
       let evaluations = '';
-      for (let evaluation of entry.evaluations) {
-        evaluations += ` ${evaluation.score}`;
+      if (entry.evaluations) {
+        for (let evaluation of Object.values(entry.evaluations)) {
+          evaluations += ` ${evaluation}`;
+        }
       }
       const str = `${id} ${submitter} ${when.slice(11, 16)} ${when.slice(
         0,
         10
-      )} ${evaluations} ${times}`;
+      )} ${evaluations}`;
       if (str.toLowerCase().includes(searchQuery.toLowerCase()))
         submissionsToRender.push(entry);
     }

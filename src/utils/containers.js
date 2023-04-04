@@ -35,6 +35,8 @@ const Container = styled.div`
   order: ${({ order }) => (order ? order : '0')};
   z-index: ${({ zIndex }) => (zIndex ? zIndex : '0')};
   list-style: ${({ listStyle }) => (listStyle ? listStyle : 'none')};
+  overflow-wrap: ${({ overflowWrap }) =>
+    overflowWrap ? overflowWrap : 'normal'};
 `;
 
 const FlexRow = styled(Container)`
