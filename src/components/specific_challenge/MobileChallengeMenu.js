@@ -4,6 +4,12 @@ import styled from 'styled-components';
 import { Medium } from '../../utils/fonts';
 import PropsTypes from 'prop-types';
 import KeyCloakService from '../../services/KeyCloakService';
+import {
+  CHALLENGE_SECTIONS,
+  MENU_CHALEENGE_SECTIONS_WITH_LOGIN,
+  MENU_CHALLENGE_SECTIONS_NO_LOGIN,
+} from '../../utils/globals';
+import { Link } from 'react-router-dom';
 
 const MenuOption = styled(Medium)`
   cursor: pointer;
@@ -17,54 +23,83 @@ const MenuOption = styled(Medium)`
 `;
 
 const MobileChallengeMenu = (props) => {
-  let options = ['Leaderboard', 'Readme', 'How to'];
+  let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
   if (KeyCloakService.isLoggedIn())
-    options = ['Leaderboard', 'Readme', 'How to', 'My entries', 'Submit'];
+    options = MENU_CHALEENGE_SECTIONS_WITH_LOGIN;
   const renderLoggedOptions = () => {
-    if (options.length > 3) {
-      return (
-        <FlexRow gap="36px">
-          <MenuOption
-            as="button"
-            active={3 === props.section}
-            to={`${props.challengeName}/${options[3].toLowerCase()}`}
-          >
-            {options[3]}
-          </MenuOption>
-          <MenuOption
-            as="button"
-            active={4 === props.section}
-            to={`${props.challengeName}/${options[4].toLowerCase()}`}
-          >
-            {options[4]}
-          </MenuOption>
-        </FlexRow>
-      );
-    }
+    return (
+      <FlexRow gap="36px">
+        <MenuOption
+          as={Link}
+          active={CHALLENGE_SECTIONS.HOW_TO === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.HOW_TO
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
+        >
+          {options[CHALLENGE_SECTIONS.HOW_TO]}
+        </MenuOption>
+        <MenuOption
+          as={Link}
+          active={CHALLENGE_SECTIONS.MY_ENTRIES === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.MY_ENTRIES
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
+        >
+          {options[CHALLENGE_SECTIONS.MY_ENTRIES]}
+        </MenuOption>
+        <MenuOption
+          as={Link}
+          active={CHALLENGE_SECTIONS.SUBMIT === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.SUBMIT
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
+        >
+          {options[CHALLENGE_SECTIONS.SUBMIT]}
+        </MenuOption>
+      </FlexRow>
+    );
   };
   return (
     <>
       <FlexRow gap="32px">
         <MenuOption
-          as="button"
-          active={0 === props.section}
-          to={`${props.challengeName}/${options[0].toLowerCase()}`}
+          as={Link}
+          active={CHALLENGE_SECTIONS.LEADERBOARD === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.LEADERBOARD
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
         >
-          {options[0]}
+          {options[CHALLENGE_SECTIONS.LEADERBOARD]}
         </MenuOption>
         <MenuOption
-          as="button"
-          active={1 === props.section}
-          to={`${props.challengeName}/${options[1].toLowerCase()}`}
+          as={Link}
+          active={CHALLENGE_SECTIONS.ALL_ENTRIES === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.ALL_ENTRIES
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
         >
-          {options[1]}
+          {options[CHALLENGE_SECTIONS.ALL_ENTRIES]}
         </MenuOption>
         <MenuOption
-          as="button"
-          active={2 === props.section}
-          to={`${props.challengeName}/${options[2].toLowerCase()}`}
+          as={Link}
+          active={CHALLENGE_SECTIONS.README === props.section}
+          to={`/challenge/${props.challengeName}/${options[
+            CHALLENGE_SECTIONS.README
+          ]
+            .toLowerCase()
+            .replace(' ', '')}`}
         >
-          {options[2]}
+          {options[CHALLENGE_SECTIONS.README]}
         </MenuOption>
       </FlexRow>
       {renderLoggedOptions()}

@@ -18,6 +18,21 @@ const ROOT_URL = window.location.origin;
 
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
+const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
+  'Leaderboard',
+  'All entries',
+  'Readme',
+  'How to',
+];
+const MENU_CHALEENGE_SECTIONS_WITH_LOGIN = [
+  'Leaderboard',
+  'All entries',
+  'Readme',
+  'How to',
+  'My entries',
+  'Submit',
+];
+
 const CHALLENGE_SECTIONS = {
   LEADERBOARD: 0,
   ALL_ENTRIES: 1,
@@ -96,6 +111,8 @@ export {
   ROOT_URL,
   LOGIN_REQUIRED_PAGES,
   CHALLENGE_SECTIONS,
+  MENU_CHALLENGE_SECTIONS_NO_LOGIN,
+  MENU_CHALEENGE_SECTIONS_WITH_LOGIN,
   MINI_DESCRIPTION_RENDER,
   RENDER_ICO,
   CALC_PAGES,

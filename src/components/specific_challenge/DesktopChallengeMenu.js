@@ -5,6 +5,10 @@ import { H3 } from '../../utils/fonts';
 import PropsTypes from 'prop-types';
 import KeyCloakService from '../../services/KeyCloakService';
 import { Link } from 'react-router-dom';
+import {
+  MENU_CHALEENGE_SECTIONS_WITH_LOGIN,
+  MENU_CHALLENGE_SECTIONS_NO_LOGIN,
+} from '../../utils/globals';
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -39,16 +43,9 @@ const Option = styled(FlexColumn)`
 `;
 
 const DesktopChallengeMenu = (props) => {
-  let options = ['Leaderboard', 'All entries', 'Readme', 'How to'];
+  let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
   if (KeyCloakService.isLoggedIn())
-    options = [
-      'Leaderboard',
-      'All entries',
-      'Readme',
-      'How to',
-      'My entries',
-      'Submit',
-    ];
+    options = MENU_CHALEENGE_SECTIONS_WITH_LOGIN;
   return (
     <DesktopChallengeMenuStyle>
       {options.map((option, index) => {

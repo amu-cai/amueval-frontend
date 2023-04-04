@@ -132,6 +132,27 @@ const MyEntries = (props) => {
         {!loading ? (
           <>
             <Search searchQueryHandler={searchQueryHandler} />
+            <Table
+              challengeName={props.challengeName}
+              headerElements={getMyEntriesHeader()}
+              possibleMetrics={getPossibleMetrics()}
+              gridTemplateColumns={
+                '1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)
+              }
+              staticColumnElements={[
+                { name: 'id', format: null, order: 1, align: 'left' },
+                { name: 'when', format: RENDER_WHEN, order: 3, align: 'right' },
+              ]}
+              iterableColumnElement={{
+                name: 'evaluations',
+                format: EVALUATIONS_FORMAT,
+                order: 2,
+                align: 'left',
+              }}
+              pageNr={pageNr}
+              elements={myEntries}
+              sortByUpdate={sortByUpdate}
+            />
             <Pager
               pageNr={pageNr}
               width="48px"
@@ -176,7 +197,6 @@ const MyEntries = (props) => {
                 format: EVALUATIONS_FORMAT,
                 order: 2,
                 align: 'left',
-                mobileRender,
               }}
               pageNr={pageNr}
               elements={myEntries}
