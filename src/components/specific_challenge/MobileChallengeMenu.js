@@ -6,7 +6,7 @@ import PropsTypes from 'prop-types';
 import KeyCloakService from '../../services/KeyCloakService';
 import {
   CHALLENGE_SECTIONS,
-  MENU_CHALEENGE_SECTIONS_WITH_LOGIN,
+  MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
 } from '../../utils/globals';
 import { Link } from 'react-router-dom';
@@ -25,45 +25,46 @@ const MenuOption = styled(Medium)`
 const MobileChallengeMenu = (props) => {
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
   if (KeyCloakService.isLoggedIn())
-    options = MENU_CHALEENGE_SECTIONS_WITH_LOGIN;
+    options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   const renderLoggedOptions = () => {
-    return (
-      <FlexRow gap="36px">
-        <MenuOption
-          as={Link}
-          active={CHALLENGE_SECTIONS.HOW_TO === props.section}
-          to={`/challenge/${props.challengeName}/${options[
-            CHALLENGE_SECTIONS.HOW_TO
-          ]
-            .toLowerCase()
-            .replace(' ', '')}`}
-        >
-          {options[CHALLENGE_SECTIONS.HOW_TO]}
-        </MenuOption>
-        <MenuOption
-          as={Link}
-          active={CHALLENGE_SECTIONS.MY_ENTRIES === props.section}
-          to={`/challenge/${props.challengeName}/${options[
-            CHALLENGE_SECTIONS.MY_ENTRIES
-          ]
-            .toLowerCase()
-            .replace(' ', '')}`}
-        >
-          {options[CHALLENGE_SECTIONS.MY_ENTRIES]}
-        </MenuOption>
-        <MenuOption
-          as={Link}
-          active={CHALLENGE_SECTIONS.SUBMIT === props.section}
-          to={`/challenge/${props.challengeName}/${options[
-            CHALLENGE_SECTIONS.SUBMIT
-          ]
-            .toLowerCase()
-            .replace(' ', '')}`}
-        >
-          {options[CHALLENGE_SECTIONS.SUBMIT]}
-        </MenuOption>
-      </FlexRow>
-    );
+    if (options === MENU_CHALLENGE_SECTIONS_WITH_LOGIN)
+      return (
+        <FlexRow gap="36px">
+          <MenuOption
+            as={Link}
+            active={CHALLENGE_SECTIONS.HOW_TO === props.section}
+            to={`/challenge/${props.challengeName}/${options[
+              CHALLENGE_SECTIONS.HOW_TO
+            ]
+              .toLowerCase()
+              .replace(' ', '')}`}
+          >
+            {options[CHALLENGE_SECTIONS.HOW_TO]}
+          </MenuOption>
+          <MenuOption
+            as={Link}
+            active={CHALLENGE_SECTIONS.MY_ENTRIES === props.section}
+            to={`/challenge/${props.challengeName}/${options[
+              CHALLENGE_SECTIONS.MY_ENTRIES
+            ]
+              .toLowerCase()
+              .replace(' ', '')}`}
+          >
+            {options[CHALLENGE_SECTIONS.MY_ENTRIES]}
+          </MenuOption>
+          <MenuOption
+            as={Link}
+            active={CHALLENGE_SECTIONS.SUBMIT === props.section}
+            to={`/challenge/${props.challengeName}/${options[
+              CHALLENGE_SECTIONS.SUBMIT
+            ]
+              .toLowerCase()
+              .replace(' ', '')}`}
+          >
+            {options[CHALLENGE_SECTIONS.SUBMIT]}
+          </MenuOption>
+        </FlexRow>
+      );
   };
   return (
     <>
