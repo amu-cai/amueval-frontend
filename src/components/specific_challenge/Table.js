@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, FlexColumn, FlexRow, Grid } from '../../utils/containers';
 import Media from 'react-media';
 import theme from '../../utils/theme';
-import { ELEMENTS_PER_PAGE } from '../../utils/globals';
+import { ELEMENTS_PER_PAGE, IS_MOBILE } from '../../utils/globals';
 import { Body, Medium } from '../../utils/fonts';
 import styled from 'styled-components';
 import ColumnFilterIcon from './ColumnFilterIcon';
@@ -58,66 +58,16 @@ const MobileTableStyle = styled(Container)`
     border-bottom: 1px solid ${({ theme }) => theme.colors.dark01};
     position: relative;
     padding-left: 50%;
-
-    &:before {
-      font-weight: 400;
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-    }
   }
 
-  td:nth-of-type(1):before {
-    content: ${({ headerElements }) =>
-      headerElements[0] ? `'${headerElements[0]}'` : ''};
-  }
-
-  td:nth-of-type(2):before {
-    content: ${({ headerElements }) =>
-      headerElements[1] ? `'${headerElements[1]}'` : ''};
-  }
-
-  td:nth-of-type(3):before {
-    content: ${({ headerElements }) =>
-      headerElements[2] ? `'${headerElements[2]}'` : ''};
-  }
-
-  td:nth-of-type(4):before {
-    content: ${({ headerElements }) =>
-      headerElements[3] ? `'${headerElements[3]}'` : ''};
-  }
-
-  td:nth-of-type(5):before {
-    content: ${({ headerElements }) =>
-      headerElements[4] ? `'${headerElements[4]}'` : ''};
-  }
-
-  td:nth-of-type(6):before {
-    content: ${({ headerElements }) =>
-      headerElements[5] ? `'${headerElements[5]}'` : ''};
-  }
-
-  td:nth-of-type(7):before {
-    content: ${({ headerElements }) =>
-      headerElements[6] ? `'${headerElements[6]}'` : ''};
-  }
-
-  td:nth-of-type(8):before {
-    content: ${({ headerElements }) =>
-      headerElements[7] ? `'${headerElements[7]}'` : ''};
-  }
-
-  td:nth-of-type(9):before {
-    content: ${({ headerElements }) =>
-      headerElements[8] ? `'${headerElements[8]}'` : ''};
-  }
-
-  td:nth-of-type(10):before {
-    content: ${({ headerElements }) =>
-      headerElements[9] ? `'${headerElements[9]}'` : ''};
+  .mobile-table-header {
+    font-weight: 400;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
   }
 `;
 
@@ -144,6 +94,8 @@ const Table = (props) => {
       }
       elem = newElem;
     }
+    let indexModificator = 2;
+    if (props.tableType === 'Leaderboard') indexModificator = 4;
     return elem.map((iterableElem, i) => {
       return (
         <Body
@@ -153,6 +105,11 @@ const Table = (props) => {
           textAlign={props.iterableColumnElement.align}
           minWidth="72px"
         >
+          {IS_MOBILE() && (
+            <Container className="mobile-table-header">
+              {props.headerElements[indexModificator + i]}
+            </Container>
+          )}
           {props.iterableColumnElement.format
             ? props.iterableColumnElement.format(iterableElem)
             : iterableElem}
@@ -162,34 +119,25 @@ const Table = (props) => {
   };
 
   const rowRender = (elem) => {
-    if (elem.submitter === props.user) {
-      return props.staticColumnElements.map((elemName, i) => {
-        return (
-          <Medium
-            key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
-            as="td"
-            order={elemName.order}
-            textAlign={elemName.align}
-          >
-            {elemName.format
-              ? elemName.format(elem[elemName.name])
-              : elem[elemName.name]}
-          </Medium>
-        );
-      });
-    }
+    let RowStyle = Body;
+    if (elem.submitter === props.user) RowStyle = Medium;
     return props.staticColumnElements.map((elemName, i) => {
       return (
-        <Body
+        <RowStyle
           key={`leaderboard-static-elemName-${i}-${elem[elemName.name]}`}
           as="td"
           order={elemName.order}
           textAlign={elemName.align}
         >
+          {IS_MOBILE() && (
+            <Container className="mobile-table-header">
+              {props.headerElements[i]}
+            </Container>
+          )}
           {elemName.format
             ? elemName.format(elem[elemName.name])
             : elem[elemName.name]}
-        </Body>
+        </RowStyle>
       );
     });
   };
@@ -239,15 +187,13 @@ const Table = (props) => {
                     >
                       {elem.replace('.', ' ')}
                     </Medium>
-                    {elem !== '#' ? (
+                    {elem !== '#' && (
                       <ColumnFilterIcon
                         cursor="pointer"
                         index={i}
                         active={activeIcon}
                         rotateIcon={rotateActiveIcon}
                       />
-                    ) : (
-                      ''
                     )}
                   </FlexRow>
                 );
@@ -276,9 +222,8 @@ const Table = (props) => {
           </FlexColumn>
         </FlexColumn>
       );
-    } else {
-      return <Medium margin="72px 0">No results ;c</Medium>;
     }
+    return <Medium margin="72px 0">No results ;c</Medium>;
   };
 
   const mobileRender = () => {
@@ -291,17 +236,6 @@ const Table = (props) => {
           staticColumnElements={props.staticColumnElements}
           headerElements={props.headerElements}
         >
-          <Container as="thead">
-            <Container as="tr">
-              {props.headerElements.map((elem, i) => {
-                return (
-                  <Medium key={`table-header-${i}`} as="th">
-                    {elem}
-                  </Medium>
-                );
-              })}
-            </Container>
-          </Container>
           <Container as="tbody">
             {elementsToMap.map((elem, index) => {
               return (
@@ -314,9 +248,8 @@ const Table = (props) => {
           </Container>
         </MobileTableStyle>
       );
-    } else {
-      return <Medium margin="72px 0">No results ;c</Medium>;
     }
+    return <Medium margin="72px 0">No results ;c</Medium>;
   };
 
   return (

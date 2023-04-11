@@ -6,6 +6,7 @@ import Pager from '../../generic/Pager';
 import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
+  IS_MOBILE,
   RENDER_WHEN,
 } from '../../../utils/globals';
 import Media from 'react-media';
@@ -60,10 +61,11 @@ const MyEntries = (props) => {
 
   const getMyEntriesHeader = () => {
     let header = ['#'];
+    if (IS_MOBILE()) header.push('when');
     for (let myEval of getPossibleMetrics()) {
       header.push(myEval);
     }
-    header.push('when');
+    if (!IS_MOBILE()) header.push('when');
     return header;
   };
 
@@ -136,6 +138,7 @@ const MyEntries = (props) => {
               challengeName={props.challengeName}
               headerElements={getMyEntriesHeader()}
               possibleMetrics={getPossibleMetrics()}
+              tableType="myEntries"
               gridTemplateColumns={
                 '1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)
               }
