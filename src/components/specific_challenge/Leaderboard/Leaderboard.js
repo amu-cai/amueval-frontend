@@ -180,7 +180,7 @@ const Leaderboard = (props) => {
             <Table
               challengeName={props.challengeName}
               headerElements={getLeaderboardHeaderMobile()}
-              tableType="Leaderboard"
+              tableType="leaderboard"
               gridTemplateColumns={
                 entries[0]
                   ? '1fr 3fr ' +

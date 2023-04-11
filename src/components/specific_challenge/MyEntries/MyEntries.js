@@ -177,7 +177,7 @@ const MyEntries = (props) => {
     return (
       <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
         <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-          <H2 as="h2" margin="0 0 12px 0">
+          <H2 as="h2" margin="0 0 32px 0">
             My Entries
           </H2>
         </FlexColumn>

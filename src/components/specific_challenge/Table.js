@@ -95,7 +95,9 @@ const Table = (props) => {
       elem = newElem;
     }
     let indexModificator = 2;
-    if (props.tableType === 'Leaderboard') indexModificator = 4;
+    if (props.tableType === 'leaderboard') indexModificator = 4;
+    if (props.tableType === 'allEntries') indexModificator = 3;
+
     return elem.map((iterableElem, i) => {
       return (
         <Body
