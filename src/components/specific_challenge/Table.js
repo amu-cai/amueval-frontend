@@ -106,6 +106,8 @@ const Table = (props) => {
           order={props.iterableColumnElement.order}
           textAlign={props.iterableColumnElement.align}
           minWidth="72px"
+          margin="auto 0"
+          overflowWrap="anywhere"
         >
           {IS_MOBILE() && (
             <Container className="mobile-table-header">
@@ -130,6 +132,8 @@ const Table = (props) => {
           as="td"
           order={elemName.order}
           textAlign={elemName.align}
+          margin="auto 0"
+          overflowWrap="anywhere"
         >
           {IS_MOBILE() && (
             <Container className="mobile-table-header">
@@ -156,7 +160,8 @@ const Table = (props) => {
               gridGap="20px"
               position="relative"
               width="100%"
-              padding="4px"
+              padding="0 6px"
+              minHeight="44px"
               margin="0 0 6px 0"
               gridTemplateColumns={props.gridTemplateColumns}
             >
@@ -183,8 +188,8 @@ const Table = (props) => {
                       cursor={elem !== '#' ? 'pointer' : ''}
                       textAlign={elem === 'when' ? 'right' : 'left'}
                       width={elem === 'when' ? '100%' : 'auto'}
-                      padding="0 6px 0 0"
-                      overflowWrap="break-word"
+                      padding="0 4px 0 0"
+                      overflowWrap="anywhere"
                       minWidth={elem === 'result' ? '72px' : 'none'}
                     >
                       {elem.replace('.', ' ')}
@@ -200,7 +205,12 @@ const Table = (props) => {
                   </FlexRow>
                 );
               })}
-              <Line height="2px" top="100%" as="td" shadow={theme.shadow} />
+              <Line
+                height="2px"
+                top="calc(100% + 2px)"
+                as="td"
+                shadow={theme.shadow}
+              />
             </Grid>
             {elementsToMap.map((elem, index) => {
               return (
@@ -215,6 +225,7 @@ const Table = (props) => {
                   position="relative"
                   width="100%"
                   padding="4px"
+                  minHeight="48px"
                 >
                   {rowRender(elem)}
                   {props.headerElements ? metricsRender(elem) : ''}

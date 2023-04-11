@@ -9,7 +9,8 @@ const ColumnFilterIcon = (props) => {
     if (props.index === props.active) {
       return (
         <Svg
-          width="8px"
+          minWidth="8px"
+          maxWidth="8px"
           src={filterIco}
           cursor={props.cursor}
           backgroundColor={theme.colors.dark}
@@ -20,7 +21,8 @@ const ColumnFilterIcon = (props) => {
     } else {
       return (
         <Svg
-          width="8px"
+          minWidth="8px"
+          maxWidth="8px"
           src={arrow}
           cursor={props.cursor}
           backgroundColor={theme.colors.dark}
@@ -33,7 +35,8 @@ const ColumnFilterIcon = (props) => {
   return (
     <>
       <Svg
-        width="8px"
+        minWidth="8px"
+        maxWidth="8px"
         rotate="180deg"
         src={arrow}
         cursor={props.cursor}

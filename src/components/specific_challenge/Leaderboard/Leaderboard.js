@@ -225,7 +225,7 @@ const Leaderboard = (props) => {
 
   const desktopRender = () => {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1200px">
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
         <H2 as="h2" margin="0 0 32px 0">
           Leaderboard
         </H2>
