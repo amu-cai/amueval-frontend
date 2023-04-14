@@ -10,9 +10,7 @@ import Media from 'react-media';
 import theme from '../../utils/theme';
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
-import { CALC_PAGES,
-  PREVIOUS_PAGE,
-  NEXT_PAGE, } from '../../utils/globals';
+import { CALC_PAGES } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
 
 const Challenges = () => {
@@ -109,11 +107,11 @@ const Challenges = () => {
           </FlexColumn>
           {!loading ? (
             <Pager
+              elements={challenges}
               pageNr={pageNr}
+              setPageNr={setPageNr}
               pages={CALC_PAGES(challenges)}
               width="48px"
-              nextPage={NEXT_PAGE(challenges, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               borderRadius="64px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
@@ -179,10 +177,10 @@ const Challenges = () => {
           {!loading ? (
             <Pager
               pageNr={pageNr}
+              setPageNr={setPageNr}
+              elements={challenges}
               pages={CALC_PAGES(challenges)}
               borderRadius="64px"
-              nextPage={NEXT_PAGE(challenges, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               width="72px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />

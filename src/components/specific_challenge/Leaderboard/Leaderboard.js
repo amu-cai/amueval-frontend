@@ -11,8 +11,7 @@ import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
-  PREVIOUS_PAGE,
-  NEXT_PAGE,
+
 } from '../../../utils/globals';
 import Search from '../../generic/Search';
 import Pager from '../../generic/Pager';
@@ -196,11 +195,11 @@ const Leaderboard = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={entries}
+              setPageNr={setPageNr}
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(entries)}
-              nextPage={NEXT_PAGE(entries, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(entries)}`}
             />
           </>
@@ -246,15 +245,17 @@ const Leaderboard = (props) => {
               }}
               pageNr={pageNr}
               elements={entries}
+              setPageNr={setPageNr}
               sortByUpdate={sortByUpdate}
             />
             <Pager
               pageNr={pageNr}
+              elements={entries}
+              setPageNr={setPageNr}
               width="72px"
               borderRadius="64px"
               pages={CALC_PAGES(entries, 2)}
-              nextPage={NEXT_PAGE(entries, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
+              
               number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
             />
           </>

@@ -8,8 +8,6 @@ import {
   EVALUATIONS_FORMAT,
   IS_MOBILE,
   RENDER_WHEN,
-  PREVIOUS_PAGE,
-  NEXT_PAGE,
 } from '../../../utils/globals';
 import Media from 'react-media';
 import theme from '../../../utils/theme';
@@ -146,11 +144,11 @@ const MyEntries = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={myEntries}
+              setPageNr={setPageNr}
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(myEntries)}
-              nextPage={NEXT_PAGE(myEntries, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
             />
           </>
@@ -195,12 +193,12 @@ const MyEntries = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={myEntries}
+              setPageNr={setPageNr}
               width="72px"
               mobileRender
               borderRadius="64px"
               pages={CALC_PAGES(myEntries, 2)}
-              nextPage={NEXT_PAGE(myEntries, pageNr, setPageNr)}
-              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
             />
           </>
