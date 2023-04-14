@@ -56,23 +56,11 @@ const Pager = (props) => {
         return theme.colors.dark;
     };
 
-    // const leftArrowClickable = () => {
-    //     if (props.pageNr === 1)
-    //         return null;
-    //     return props.previousPage;
-    // };
-
     const rightArrowVisible = () => {
         if (props.pageNr === props.pages)
             return 'transparent';
         return theme.colors.dark;
     };
-
-    // const rightArrowClickable = () => {
-    //     if (props.pageNr === props.pages)
-    //         return null;
-    //     return props.nextPage;
-    // };
 
     return (
         <PagerStyle>
