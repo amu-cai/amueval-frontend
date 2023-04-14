@@ -115,7 +115,7 @@ const Challenge = (props) => {
           <FlexColumn
             minHeight="100vh"
             alignmentY="flex-start"
-            padding="64px 24px 64px 310px"
+            padding="64px 24px 64px 280px"
             id="start"
           >
             <FlexRow gap="32px" margin="0 0 32px 0" padding="16px">

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
+  IS_MOBILE,
 } from '../../utils/globals';
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
@@ -15,7 +16,7 @@ const DesktopChallengeMenuStyle = styled(FlexColumn)`
   position: fixed;
   left: 0;
   overflow-y: auto;
-  width: 280px;
+  width: 240px;
   height: 100vh;
   top: 50px;
   padding: 64px 0 0 0;
@@ -58,7 +59,12 @@ const DesktopChallengeMenu = (props) => {
               .toLowerCase()
               .replace(' ', '')}`}
           >
-            <H3 textTransform="uppercase">{option}</H3>
+            <H3
+              fontSize={IS_MOBILE() ? '18px' : '22px'}
+              textTransform="uppercase"
+            >
+              {option}
+            </H3>
           </Option>
         );
       })}

@@ -161,9 +161,9 @@ const MyEntries = (props) => {
 
   const desktopRender = () => {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
         <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-          <H2 as="h2" margin="0 0 12px 0">
+          <H2 as="h2" margin="0 0 32px 0">
             My Entries
           </H2>
         </FlexColumn>
@@ -175,7 +175,7 @@ const MyEntries = (props) => {
               headerElements={getMyEntriesHeader()}
               possibleMetrics={getPossibleMetrics()}
               gridTemplateColumns={
-                '1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)
+                '1fr ' + '3fr '.repeat(getMyEntriesHeader().length - 2) + ' 4fr'
               }
               staticColumnElements={[
                 { name: 'id', format: null, order: 1, align: 'left' },

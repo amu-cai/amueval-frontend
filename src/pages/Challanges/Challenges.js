@@ -5,13 +5,14 @@ import Search from '../../components/generic/Search';
 import Pager from '../../components/generic/Pager';
 import FiltersMenu from '../../components/challenges_list/FiltersMenu';
 import challengeSearchQueryHandler from './challengeSearchQueryHandler';
-import _renderChallenges from './_renderChallenges';
+import renderChallenges from './renderChallenges';
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
-import { CALC_PAGES } from '../../utils/globals';
+import { CALC_PAGES, CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
+import ChallengesStyle from './ChallengesStyle';
 
 const Challenges = () => {
   const [pageNr, setPageNr] = React.useState(1);
@@ -19,7 +20,7 @@ const Challenges = () => {
   const [challenges, setChallenges] = React.useState([]);
   const [filtersMenu, setFiltersMenu] = React.useState(false);
   const [sortBy, setSortBy] = React.useState(0);
-  const [status, setStatus] = React.useState(0);
+  const [status, setStatus] = React.useState(CHALLENGES_STATUS_FILTER.BOTH);
   const [challengeType, setChallengeType] = React.useState(0);
   const [commercial, setCommercial] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
@@ -33,22 +34,6 @@ const Challenges = () => {
     getChallenges(setChallenges, setLoading);
   };
 
-  const sortByHandler = (value) => {
-    setSortBy(value);
-  };
-
-  const statusHandler = (value) => {
-    setStatus(value);
-  };
-
-  const challengeTypeHandler = (value) => {
-    setChallengeType(value);
-  };
-
-  const commercialHandler = (value) => {
-    setCommercial(value);
-  };
-
   const searchQueryHandler = (event) => {
     challengeSearchQueryHandler(
       event,
@@ -56,10 +41,6 @@ const Challenges = () => {
       setPageNr,
       setChallenges
     );
-  };
-
-  const renderChallenges = () => {
-    return _renderChallenges(pageNr, challenges);
   };
 
   const toggleFiltersMenu = () => {
@@ -74,27 +55,18 @@ const Challenges = () => {
           translateX={filtersMenu ? '0' : '100vw'}
           opacity={filtersMenu ? '1' : '0'}
           toggleFiltersMenu={toggleFiltersMenu}
-          sortByHandler={sortByHandler}
-          statusHandler={statusHandler}
-          challengeTypeHandler={challengeTypeHandler}
-          commercialHandler={commercialHandler}
+          sortByHandler={setSortBy}
+          statusHandler={setStatus}
+          challengeTypeHandler={setChallengeType}
+          commercialHandler={setCommercial}
           sortBy={sortBy}
           status={status}
           challengeType={challengeType}
           commercial={commercial}
         />
-        <FlexColumn
-          as="main"
-          alignmentY="flex-start"
-          width="100%"
-          id="start"
-          minHeight="100vh"
-          padding="90px 0 32px 0"
-        >
-          <FlexColumn alignmentX="flex-start" width="80%">
-            <H1 as="h1" margin="0 0 20px 0">
-              Challenges
-            </H1>
+        <ChallengesStyle as="main" id="start">
+          <FlexColumn className="ChallengesStyle__page-container">
+            <H1 as="h1">Challenges</H1>
             <Search
               searchQueryHandler={searchQueryHandler}
               filterButton
@@ -102,10 +74,10 @@ const Challenges = () => {
             />
             <FlexColumn width="100%">
               <Loading visible={loading} />
-              {renderChallenges()}
+              {renderChallenges(pageNr, challenges)}
             </FlexColumn>
           </FlexColumn>
-          {!loading ? (
+          {!loading && (
             <Pager
               elements={challenges}
               pageNr={pageNr}
@@ -115,10 +87,8 @@ const Challenges = () => {
               borderRadius="64px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
-          ) : (
-            ''
           )}
-        </FlexColumn>
+        </ChallengesStyle>
       </>
     );
   };
@@ -129,65 +99,45 @@ const Challenges = () => {
         <FiltersMenu
           toggleFiltersMenu={toggleFiltersMenu}
           transBackDisplay="none"
-          sortByHandler={sortByHandler}
-          statusHandler={statusHandler}
-          challengeTypeHandler={challengeTypeHandler}
-          commercialHandler={commercialHandler}
+          sortByHandler={setSortBy}
+          statusHandler={setStatus}
+          challengeTypeHandler={setChallengeType}
+          commercialHandler={setCommercial}
           sortBy={sortBy}
           status={status}
           challengeType={challengeType}
           commercial={commercial}
         />
-        <FlexColumn
-          as="main"
-          alignmentY="flex-start"
-          width="100%"
-          id="start"
-          minHeight="100vh"
-          padding="112px 0 82px 310px"
-        >
-          <FlexColumn alignmentX="flex-start" width="80%">
-            <FlexRow width="100%" gap="32px">
-              <FlexColumn
-                alignmentX="flex-start"
-                gap="32px"
-                width="75%"
-                maxWidth="720px"
-              >
+        <ChallengesStyle as="main" id="start">
+          <FlexColumn className="ChallengesStyle__page-container">
+            <FlexRow className="ChallengesStyle__page-header-container">
+              <FlexColumn className="ChallengesStyle__page-header">
                 <H1 as="h1">Challenges</H1>
-                <Body margin="0 0 12px 0" maxWidth="400px">
+                <Body className="ChallengesStyle__header-content">
                   Increase your machine learning skills by competing in our
                   exciting challenges.
                 </Body>
                 <Search searchQueryHandler={searchQueryHandler} />
               </FlexColumn>
-              <Svg
-                src={cupIco}
-                size="contain"
-                width="25%"
-                height="160px"
-                backgroundColor={theme.colors.green}
-              />
+              <Svg src={cupIco} className="ChallengesStyle__main-image" />
             </FlexRow>
             <FlexColumn width="100%">
               <Loading visible={loading} />
-              {renderChallenges()}
+              {renderChallenges(pageNr, challenges)}
             </FlexColumn>
           </FlexColumn>
-          {!loading ? (
+          {!loading && (
             <Pager
               pageNr={pageNr}
               setPageNr={setPageNr}
               elements={challenges}
               pages={CALC_PAGES(challenges)}
-              borderRadius="64px"
               width="72px"
+              borderRadius="64px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
-          ) : (
-            ''
           )}
-        </FlexColumn>
+        </ChallengesStyle>
       </>
     );
   };
