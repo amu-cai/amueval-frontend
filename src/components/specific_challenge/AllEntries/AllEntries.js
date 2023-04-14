@@ -6,9 +6,9 @@ import { H2 } from '../../../utils/fonts';
 import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
-  RENDER_WHEN
-  IS_MOBILE,
   RENDER_WHEN,
+  PREVIOUS_PAGE,
+  NEXT_PAGE,
 } from '../../../utils/globals';
 import Loading from '../../generic/Loading';
 import Pager from '../../generic/Pager';
@@ -57,11 +57,10 @@ const AllEntries = (props) => {
 
   const getAllEntriesHeader = () => {
     let header = ['#', 'submitter'];
-    if (IS_MOBILE()) header.push('when');
     for (let metric of getPossibleMetrics()) {
       header.push(metric);
     }
-    if (!IS_MOBILE()) header.push('when');
+    header.push('when');
     return header;
   };
 
@@ -138,57 +137,12 @@ const AllEntries = (props) => {
   };
 
   const mobileRender = () => {
-    return (
-      <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-        <H2 as="h2" margin="0 0 12px 0">
-          All Entries
-        </H2>
-        {!loading ? (
-          <>
-            <Search searchQueryHandler={searchQueryHandler} />
-            <Table
-              challengeName={props.challengeName}
-              headerElements={getAllEntriesHeader()}
-              possibleMetrics={getPossibleMetrics()}
-              tableType="allEntries"
-              gridTemplateColumns={
-                '1fr ' + '4fr '.repeat(getAllEntriesHeader().length - 1)
-              }
-              staticColumnElements={[
-                { name: 'id', format: null, order: 1, align: 'left' },
-                { name: 'submitter', format: null, order: 2, align: 'left' },
-                { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
-              ]}
-              iterableColumnElement={{
-                name: 'evaluations',
-                format: EVALUATIONS_FORMAT,
-                order: 3,
-                align: 'left',
-              }}
-              pageNr={pageNr}
-              elements={entries}
-              sortByUpdate={sortByUpdate}
-            />
-            <Pager
-              pageNr={pageNr}
-              width="48px"
-              borderRadius="64px"
-              pages={CALC_PAGES(entries)}
-              nextPage={nextPage}
-              previousPage={previousPage}
-              number={`${pageNr} / ${CALC_PAGES(entries)}`}
-            />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </FlexColumn>
-    );
+    return <></>;
   };
 
   const desktopRender = () => {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
         <H2 as="h2" margin="0 0 32px 0">
           All Entries
         </H2>
