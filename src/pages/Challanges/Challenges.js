@@ -3,7 +3,6 @@ import { Body, H1 } from '../../utils/fonts';
 import { FlexColumn, FlexRow, Svg } from '../../utils/containers';
 import Search from '../../components/generic/Search';
 import Pager from '../../components/generic/Pager';
-import FiltersMenu from '../../components/challenges_list/FiltersMenu';
 import challengeSearchQueryHandler from './challengeSearchQueryHandler';
 import renderChallenges from './renderChallenges';
 import Media from 'react-media';
@@ -13,6 +12,8 @@ import getChallenges from '../../api/getChallenges';
 import { CALC_PAGES, CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
 import ChallengesStyle from './ChallengesStyle';
+import FiltersMenu from '../../components/challenges_list/FiltersMenu';
+import statusFilter from './statusFilter';
 
 const Challenges = () => {
   const [pageNr, setPageNr] = React.useState(1);
@@ -28,6 +29,10 @@ const Challenges = () => {
   React.useEffect(() => {
     challengesRequest();
   }, []);
+
+  React.useEffect(() => {
+    statusFilter(status, challenges, setChallenges);
+  }, [challenges, status]);
 
   const challengesRequest = () => {
     getChallenges(setChallengesFromAPI);
@@ -62,12 +67,37 @@ const Challenges = () => {
     setFiltersMenu(newFiltersMenu);
   };
 
+  const filtersMenuRender = (
+    translateX = '0',
+    opacity = '1',
+    transBackDisplay = 'none'
+  ) => {
+    return (
+      <FiltersMenu
+        toggleFiltersMenu={toggleFiltersMenu}
+        sortByHandler={setSortBy}
+        statusHandler={setStatus}
+        challengeTypeHandler={setChallengeType}
+        commercialHandler={setCommercial}
+        sortBy={sortBy}
+        status={status}
+        challengeType={challengeType}
+        commercial={commercial}
+        translateX={translateX}
+        opacity={opacity}
+        transBackDisplay={transBackDisplay}
+      />
+    );
+  };
+
   const mobileRender = () => {
     return (
       <>
+        {filtersMenuRender(
+          filtersMenu ? '0' : '100vw',
+          filtersMenu ? '1' : '0'
+        )}
         <FiltersMenu
-          translateX={filtersMenu ? '0' : '100vw'}
-          opacity={filtersMenu ? '1' : '0'}
           toggleFiltersMenu={toggleFiltersMenu}
           sortByHandler={setSortBy}
           statusHandler={setStatus}
@@ -77,6 +107,8 @@ const Challenges = () => {
           status={status}
           challengeType={challengeType}
           commercial={commercial}
+          translateX={filtersMenu ? '0' : '100vw'}
+          opacity={filtersMenu ? '1' : '0'}
         />
         <ChallengesStyle as="main" id="start">
           <FlexColumn className="ChallengesStyle__page-container">
@@ -110,18 +142,7 @@ const Challenges = () => {
   const desktopRender = () => {
     return (
       <>
-        <FiltersMenu
-          toggleFiltersMenu={toggleFiltersMenu}
-          transBackDisplay="none"
-          sortByHandler={setSortBy}
-          statusHandler={setStatus}
-          challengeTypeHandler={setChallengeType}
-          commercialHandler={setCommercial}
-          sortBy={sortBy}
-          status={status}
-          challengeType={challengeType}
-          commercial={commercial}
-        />
+        {filtersMenuRender()}
         <ChallengesStyle as="main" id="start">
           <FlexColumn className="ChallengesStyle__page-container">
             <FlexRow className="ChallengesStyle__page-header-container">
