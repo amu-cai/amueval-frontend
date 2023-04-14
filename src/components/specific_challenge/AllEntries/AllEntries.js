@@ -7,8 +7,6 @@ import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
-  PREVIOUS_PAGE,
-  NEXT_PAGE,
 } from '../../../utils/globals';
 import Loading from '../../generic/Loading';
 import Pager from '../../generic/Pager';
@@ -67,8 +65,6 @@ const AllEntries = (props) => {
   const searchQueryHandler = (event) => {
     allEntriesSearchQueryHandler(event, entriesAll, setPageNr, setEntries);
   };
-
-  
 
   const sortByUpdate = (elem, i) => {
     let newEntries = entries;
@@ -137,7 +133,52 @@ const AllEntries = (props) => {
   };
 
   const mobileRender = () => {
-    return <></>;
+    return (
+      <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
+        <H2 as="h2" margin="0 0 12px 0">
+          All Entries
+        </H2>
+        {!loading ? (
+          <>
+            <Search searchQueryHandler={searchQueryHandler} />
+            <Table
+              challengeName={props.challengeName}
+              headerElements={getAllEntriesHeader()}
+              possibleMetrics={getPossibleMetrics()}
+              tableType="allEntries"
+              gridTemplateColumns={
+                '1fr ' + '4fr '.repeat(getAllEntriesHeader().length - 1)
+              }
+              staticColumnElements={[
+                { name: 'id', format: null, order: 1, align: 'left' },
+                { name: 'submitter', format: null, order: 2, align: 'left' },
+                { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
+              ]}
+              iterableColumnElement={{
+                name: 'evaluations',
+                format: EVALUATIONS_FORMAT,
+                order: 3,
+                align: 'left',
+              }}
+              pageNr={pageNr}
+              elements={entries}
+              sortByUpdate={sortByUpdate}
+            />
+            <Pager
+              pageNr={pageNr}
+              elements={entries}
+              setPageNr={setPageNr}
+              width="48px"
+              borderRadius="64px"
+              pages={CALC_PAGES(entries)}
+              number={`${pageNr} / ${CALC_PAGES(entries)}`}
+            />
+          </>
+        ) : (
+          <Loading />
+        )}
+      </FlexColumn>
+    );
   };
 
   const desktopRender = () => {
