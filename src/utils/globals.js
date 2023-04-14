@@ -86,7 +86,6 @@ const RENDER_DEADLINE_TIME = (time) => {
   }
   return '';
 };
-/* eslint-disable */
 const NEXT_PAGE = (elements, pageNr, setPageNr) => {
   if (pageNr !== CALC_PAGES(elements ? elements : [])) {
     let newPage = pageNr + 1;
