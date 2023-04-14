@@ -5,6 +5,8 @@ import polygon from '../../assets/polygon.svg';
 import styled from 'styled-components';
 import theme from '../../utils/theme';
 import PropsTypes from 'prop-types';
+import { NEXT_PAGE, PREVIOUS_PAGE } from '../../utils/globals';
+
 
 const PagerStyle = styled(FlexRow)`
   gap: 14px;
@@ -54,30 +56,18 @@ const Pager = (props) => {
         return theme.colors.dark;
     };
 
-    const leftArrowClickable = () => {
-        if (props.pageNr === 1)
-            return null;
-        return props.previousPage;
-    };
-
     const rightArrowVisible = () => {
         if (props.pageNr === props.pages)
             return 'transparent';
         return theme.colors.dark;
     };
 
-    const rightArrowClickable = () => {
-        if (props.pageNr === props.pages)
-            return null;
-        return props.nextPage;
-    };
-
     return (
         <PagerStyle>
-            <LeftArrow as='a' href='#start' src={polygon} onClick={leftArrowClickable()} size='cover'
+            <LeftArrow as='a' href='#start' src={polygon} onClick={() => PREVIOUS_PAGE(props.pageNr, props.setPageNr)} size='cover'
                        backgroundColor={leftArrowVisible()}/>
             <CircleNumber number={props.number} width={props.width} borderRadius={props.borderRadius}/>
-            <RightArrow as='a' href='#start' src={polygon} onClick={rightArrowClickable()} size='cover'
+            <RightArrow as='a' href='#start' src={polygon} onClick={() => NEXT_PAGE(props.elements, props.pageNr, props.setPageNr)} size='cover'
                         backgroundColor={rightArrowVisible()}/>
         </PagerStyle>
     );

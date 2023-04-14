@@ -48,20 +48,6 @@ const Challenges = () => {
     );
   };
 
-  const nextPage = () => {
-    if (pageNr !== CALC_PAGES(challenges)) {
-      let newPage = pageNr + 1;
-      setPageNr(newPage);
-    }
-  };
-
-  const previousPage = () => {
-    if (pageNr !== 1) {
-      let newPage = pageNr - 1;
-      setPageNr(newPage);
-    }
-  };
-
   const toggleFiltersMenu = () => {
     let newFiltersMenu = !filtersMenu;
     setFiltersMenu(newFiltersMenu);
@@ -125,12 +111,12 @@ const Challenges = () => {
           </FlexColumn>
           {!loading && (
             <Pager
+              elements={challenges}
               pageNr={pageNr}
+              setPageNr={setPageNr}
               pages={CALC_PAGES(challenges)}
               width="48px"
               borderRadius="64px"
-              nextPage={nextPage}
-              previousPage={previousPage}
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
           )}
@@ -164,11 +150,11 @@ const Challenges = () => {
           {!loading && (
             <Pager
               pageNr={pageNr}
+              setPageNr={setPageNr}
+              elements={challenges}
               pages={CALC_PAGES(challenges)}
               width="72px"
               borderRadius="64px"
-              nextPage={nextPage}
-              previousPage={previousPage}
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
           )}

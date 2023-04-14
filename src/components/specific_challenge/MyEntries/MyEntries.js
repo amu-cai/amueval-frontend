@@ -45,20 +45,6 @@ const MyEntries = (props) => {
     return metrics;
   };
 
-  const nextPage = () => {
-    if (pageNr !== CALC_PAGES(myEntries ? myEntries : [])) {
-      let newPage = pageNr + 1;
-      setPageNr(newPage);
-    }
-  };
-
-  const previousPage = () => {
-    if (pageNr !== 1) {
-      let newPage = pageNr - 1;
-      setPageNr(newPage);
-    }
-  };
-
   const getMyEntriesHeader = () => {
     let header = ['#'];
     if (IS_MOBILE()) header.push('when');
@@ -158,11 +144,11 @@ const MyEntries = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={myEntries}
+              setPageNr={setPageNr}
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(myEntries)}
-              nextPage={nextPage}
-              previousPage={previousPage}
               number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
             />
           </>
@@ -207,12 +193,12 @@ const MyEntries = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={myEntries}
+              setPageNr={setPageNr}
               width="72px"
               mobileRender
               borderRadius="64px"
               pages={CALC_PAGES(myEntries, 2)}
-              nextPage={nextPage}
-              previousPage={previousPage}
               number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
             />
           </>
