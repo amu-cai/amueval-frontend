@@ -6,9 +6,8 @@ import { H2 } from '../../../utils/fonts';
 import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
-  RENDER_WHEN
-  IS_MOBILE,
   RENDER_WHEN,
+  IS_MOBILE,
 } from '../../../utils/globals';
 import Loading from '../../generic/Loading';
 import Pager from '../../generic/Pager';
@@ -68,8 +67,6 @@ const AllEntries = (props) => {
   const searchQueryHandler = (event) => {
     allEntriesSearchQueryHandler(event, entriesAll, setPageNr, setEntries);
   };
-
-  
 
   const sortByUpdate = (elem, i) => {
     let newEntries = entries;
@@ -171,11 +168,11 @@ const AllEntries = (props) => {
             />
             <Pager
               pageNr={pageNr}
+              elements={entries}
+              setPageNr={setPageNr}
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(entries)}
-              nextPage={nextPage}
-              previousPage={previousPage}
               number={`${pageNr} / ${CALC_PAGES(entries)}`}
             />
           </>

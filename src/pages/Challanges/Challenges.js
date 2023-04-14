@@ -31,8 +31,9 @@ const Challenges = () => {
   }, []);
 
   React.useEffect(() => {
-    statusFilter(status, challenges, setChallenges);
-  }, [challenges, status]);
+    statusFilter(status, challengesFromAPI, setChallenges);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   const challengesRequest = () => {
     getChallenges(setChallengesFromAPI);
