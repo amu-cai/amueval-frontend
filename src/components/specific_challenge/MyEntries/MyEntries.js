@@ -8,6 +8,8 @@ import {
   EVALUATIONS_FORMAT,
   IS_MOBILE,
   RENDER_WHEN,
+  PREVIOUS_PAGE,
+  NEXT_PAGE,
 } from '../../../utils/globals';
 import Media from 'react-media';
 import theme from '../../../utils/theme';
@@ -43,20 +45,6 @@ const MyEntries = (props) => {
       }
     }
     return metrics;
-  };
-
-  const nextPage = () => {
-    if (pageNr !== CALC_PAGES(myEntries ? myEntries : [])) {
-      let newPage = pageNr + 1;
-      setPageNr(newPage);
-    }
-  };
-
-  const previousPage = () => {
-    if (pageNr !== 1) {
-      let newPage = pageNr - 1;
-      setPageNr(newPage);
-    }
   };
 
   const getMyEntriesHeader = () => {
@@ -161,8 +149,8 @@ const MyEntries = (props) => {
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(myEntries)}
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(myEntries, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
             />
           </>
@@ -211,8 +199,8 @@ const MyEntries = (props) => {
               mobileRender
               borderRadius="64px"
               pages={CALC_PAGES(myEntries, 2)}
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(myEntries, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
             />
           </>

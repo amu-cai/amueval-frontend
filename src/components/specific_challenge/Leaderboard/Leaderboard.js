@@ -11,6 +11,8 @@ import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
+  PREVIOUS_PAGE,
+  NEXT_PAGE,
 } from '../../../utils/globals';
 import Search from '../../generic/Search';
 import Pager from '../../generic/Pager';
@@ -47,20 +49,6 @@ const Leaderboard = (props) => {
 
   const searchQueryHandler = (event) => {
     leaderboardSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
-  };
-
-  const nextPage = () => {
-    if (pageNr !== CALC_PAGES(entries ? entries : [])) {
-      let newPage = pageNr + 1;
-      setPageNr(newPage);
-    }
-  };
-
-  const previousPage = () => {
-    if (pageNr !== 1) {
-      let newPage = pageNr - 1;
-      setPageNr(newPage);
-    }
   };
 
   const getPossibleMetrics = () => {
@@ -211,8 +199,8 @@ const Leaderboard = (props) => {
               width="48px"
               borderRadius="64px"
               pages={CALC_PAGES(entries)}
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(entries, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(entries)}`}
             />
           </>
@@ -265,8 +253,8 @@ const Leaderboard = (props) => {
               width="72px"
               borderRadius="64px"
               pages={CALC_PAGES(entries, 2)}
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(entries, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
             />
           </>

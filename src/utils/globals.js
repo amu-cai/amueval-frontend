@@ -87,6 +87,20 @@ const RENDER_DEADLINE_TIME = (time) => {
   return '';
 };
 
+const NEXT_PAGE = (elements, pageNr, setPageNr) => {
+  if (pageNr !== CALC_PAGES(elements ? elements : [])) {
+    let newPage = pageNr + 1;
+    setPageNr(newPage);
+  }
+};
+
+const PREVIOUS_PAGE = (pageNr, setPageNr) => {
+  if (pageNr !== 1) {
+    let newPage = pageNr - 1;
+    setPageNr(newPage);
+  }
+};
+
 const RENDER_WHEN = (when) => {
   return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
@@ -120,4 +134,6 @@ export {
   IS_MOBILE,
   RENDER_WHEN,
   EVALUATIONS_FORMAT,
+  PREVIOUS_PAGE,
+  NEXT_PAGE
 };

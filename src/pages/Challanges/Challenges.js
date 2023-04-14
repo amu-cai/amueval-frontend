@@ -10,7 +10,9 @@ import Media from 'react-media';
 import theme from '../../utils/theme';
 import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
-import { CALC_PAGES } from '../../utils/globals';
+import { CALC_PAGES,
+  PREVIOUS_PAGE,
+  NEXT_PAGE, } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
 
 const Challenges = () => {
@@ -56,20 +58,6 @@ const Challenges = () => {
       setPageNr,
       setChallenges
     );
-  };
-
-  const nextPage = () => {
-    if (pageNr !== CALC_PAGES(challenges)) {
-      let newPage = pageNr + 1;
-      setPageNr(newPage);
-    }
-  };
-
-  const previousPage = () => {
-    if (pageNr !== 1) {
-      let newPage = pageNr - 1;
-      setPageNr(newPage);
-    }
   };
 
   const renderChallenges = () => {
@@ -124,8 +112,8 @@ const Challenges = () => {
               pageNr={pageNr}
               pages={CALC_PAGES(challenges)}
               width="48px"
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(challenges, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               borderRadius="64px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
@@ -193,8 +181,8 @@ const Challenges = () => {
               pageNr={pageNr}
               pages={CALC_PAGES(challenges)}
               borderRadius="64px"
-              nextPage={nextPage}
-              previousPage={previousPage}
+              nextPage={NEXT_PAGE(challenges, pageNr, setPageNr)}
+              previousPage={PREVIOUS_PAGE(pageNr, setPageNr)}
               width="72px"
               number={`${pageNr} / ${CALC_PAGES(challenges)}`}
             />
