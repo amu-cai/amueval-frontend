@@ -19,8 +19,13 @@ const getDeadlineTime = (deadline) => {
   }
 };
 
-const statusFilter = (status, challenges, setChallenges) => {
-  let result = challenges;
+const statusFilter = (
+  status,
+  challengesAll,
+  challengesToRender,
+  setChallenges
+) => {
+  let result = challengesAll;
   const date = new Date();
   const currentDate = {
     year: date.getFullYear(),
@@ -29,28 +34,30 @@ const statusFilter = (status, challenges, setChallenges) => {
   };
   switch (status) {
     case CHALLENGES_STATUS_FILTER.CLOSED:
-      result = challenges.filter((challenge) =>
+      result = challengesAll.filter((challenge) =>
         dateIsOlder(
           currentDate,
           challenge.deadline ? getDeadlineTime(challenge.deadline) : false
         )
       );
-      setChallenges(result);
       break;
     case CHALLENGES_STATUS_FILTER.ACTIVE:
-      result = challenges.filter(
+      result = challengesAll.filter(
         (challenge) =>
           !dateIsOlder(
             currentDate,
-            challenge.deadline ? getDeadlineTime(challenge.deadline) : true
+            challenge.deadline ? getDeadlineTime(challenge.deadline) : false
           )
       );
-      setChallenges(result);
       break;
     default:
-      setChallenges(challenges);
+      result = challengesAll;
       break;
   }
+  //   result = result.filter((elem) => {
+  //     return !challengesToRender.includes(elem);
+  //   });
+  setChallenges(result);
 };
 
 export default statusFilter;

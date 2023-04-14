@@ -31,7 +31,7 @@ const Challenges = () => {
   }, []);
 
   React.useEffect(() => {
-    statusFilter(status, challengesFromAPI, setChallenges);
+    statusFilter(status, challengesFromAPI, challenges, setChallenges);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
@@ -82,21 +82,9 @@ const Challenges = () => {
       <>
         {filtersMenuRender(
           filtersMenu ? '0' : '100vw',
-          filtersMenu ? '1' : '0'
+          filtersMenu ? '1' : '0',
+          'flex'
         )}
-        <FiltersMenu
-          toggleFiltersMenu={toggleFiltersMenu}
-          sortByHandler={setSortBy}
-          statusHandler={setStatus}
-          challengeTypeHandler={setChallengeType}
-          commercialHandler={setCommercial}
-          sortBy={sortBy}
-          status={status}
-          challengeType={challengeType}
-          commercial={commercial}
-          translateX={filtersMenu ? '0' : '100vw'}
-          opacity={filtersMenu ? '1' : '0'}
-        />
         <ChallengesStyle as="main" id="start">
           <FlexColumn className="ChallengesStyle__page-container">
             <H1 as="h1">Challenges</H1>
