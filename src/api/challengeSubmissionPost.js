@@ -33,6 +33,29 @@ const challengeSubmission = (
       setLoading(true);
       const processUrl = API.replace('/api', '');
       window.location.replace(`${processUrl}/open-view-progress/${data}#form`);
+      // console.log(data);
+
+      // fetch(`${API}/view-progress-with-web-sockets/${data}`)
+      //   .then((response) => response.text())
+      //   .then((data) => {
+      //     console.log(data);
+      //   });
+
+      // const viewLog = () => {
+      //   fetch(`${API}/view-progress-log/${data}`)
+      //     .then((response) => response.text())
+      //     .then((data) => {
+      //       console.log(data);
+      //     });
+      // };
+
+      // for (let i = 0; i < 20; i++) {
+      //   setInterval(() => {
+      //     viewLog();
+      //   }, 1000);
+      // }
+
+      // clearInterval();
     });
 };
 
