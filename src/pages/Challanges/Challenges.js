@@ -1,19 +1,13 @@
 import React from 'react';
-import { Body, H1 } from '../../utils/fonts';
-import { FlexColumn, FlexRow, Svg } from '../../utils/containers';
-import Search from '../../components/generic/Search';
-import Pager from '../../components/generic/Pager';
-import challengeSearchQueryHandler from './challengeSearchQueryHandler';
-import renderChallenges from './renderChallenges';
 import Media from 'react-media';
 import theme from '../../utils/theme';
-import cupIco from '../../assets/cup_ico.svg';
 import getChallenges from '../../api/getChallenges';
-import { CALC_PAGES, CHALLENGES_STATUS_FILTER } from '../../utils/globals';
-import Loading from '../../components/generic/Loading';
-import ChallengesStyle from './ChallengesStyle';
+import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import FiltersMenu from '../../components/challenges_list/FiltersMenu';
 import statusFilter from './statusFilter';
+import ChallengesMobile from './ChallengesMobile';
+import ChallengesDesktop from './ChallengesDesktop';
+import challengeSearchQueryHandler from './challengeSearchQueryHandler';
 
 const Challenges = () => {
   const [pageNr, setPageNr] = React.useState(1);
@@ -79,85 +73,32 @@ const Challenges = () => {
     );
   };
 
-  const mobileRender = () => {
-    return (
-      <>
-        {filtersMenuRender(
-          filtersMenu ? '0' : '100vw',
-          filtersMenu ? '1' : '0',
-          'flex'
-        )}
-        <ChallengesStyle as="main" id="start">
-          <FlexColumn className="ChallengesStyle__page-container">
-            <H1 as="h1">Challenges</H1>
-            <Search
-              searchQueryHandler={searchQueryHandler}
-              filterButton
-              toggleFiltersMenu={toggleFiltersMenu}
-            />
-            <FlexColumn width="100%">
-              <Loading visible={loading} />
-              {renderChallenges(pageNr, challengesFiltered)}
-            </FlexColumn>
-          </FlexColumn>
-          {!loading && (
-            <Pager
-              elements={challengesFiltered}
-              pageNr={pageNr}
-              setPageNr={setPageNr}
-              pages={CALC_PAGES(challengesFiltered)}
-              width="48px"
-              borderRadius="64px"
-              number={`${pageNr} / ${CALC_PAGES(challengesFiltered)}`}
-            />
-          )}
-        </ChallengesStyle>
-      </>
-    );
-  };
-
-  const desktopRender = () => {
-    return (
-      <>
-        {filtersMenuRender()}
-        <ChallengesStyle as="main" id="start">
-          <FlexColumn className="ChallengesStyle__page-container">
-            <FlexRow className="ChallengesStyle__page-header-container">
-              <FlexColumn className="ChallengesStyle__page-header">
-                <H1 as="h1">Challenges</H1>
-                <Body className="ChallengesStyle__header-content">
-                  Increase your machine learning skills by competing in our
-                  exciting challenges.
-                </Body>
-                <Search searchQueryHandler={searchQueryHandler} />
-              </FlexColumn>
-              <Svg src={cupIco} className="ChallengesStyle__main-image" />
-            </FlexRow>
-            <FlexColumn width="100%">
-              <Loading visible={loading} />
-              {renderChallenges(pageNr, challengesFiltered)}
-            </FlexColumn>
-          </FlexColumn>
-          {!loading && (
-            <Pager
-              pageNr={pageNr}
-              setPageNr={setPageNr}
-              elements={challengesFiltered}
-              pages={CALC_PAGES(challengesFiltered)}
-              width="72px"
-              borderRadius="64px"
-              number={`${pageNr} / ${CALC_PAGES(challengesFiltered)}`}
-            />
-          )}
-        </ChallengesStyle>
-      </>
-    );
-  };
-
   return (
     <>
-      <Media query={theme.mobile}>{mobileRender()}</Media>
-      <Media query={theme.desktop}>{desktopRender()}</Media>
+      <Media query={theme.mobile}>
+        <ChallengesMobile
+          filtersMenuRender={filtersMenuRender}
+          filtersMenu={filtersMenu}
+          searchQueryHandler={searchQueryHandler}
+          toggleFiltersMenu={toggleFiltersMenu}
+          loading={loading}
+          pageNr={pageNr}
+          setPageNr={setPageNr}
+          challengesFiltered={challengesFiltered}
+        />
+      </Media>
+      <Media query={theme.desktop}>
+        <ChallengesDesktop
+          filtersMenuRender={filtersMenuRender}
+          filtersMenu={filtersMenu}
+          searchQueryHandler={searchQueryHandler}
+          toggleFiltersMenu={toggleFiltersMenu}
+          loading={loading}
+          pageNr={pageNr}
+          setPageNr={setPageNr}
+          challengesFiltered={challengesFiltered}
+        />
+      </Media>
     </>
   );
 };
