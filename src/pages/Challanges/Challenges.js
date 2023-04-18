@@ -19,6 +19,7 @@ const Challenges = () => {
   const [pageNr, setPageNr] = React.useState(1);
   const [challengesFromAPI, setChallengesFromAPI] = React.useState([]);
   const [challenges, setChallenges] = React.useState([]);
+  const [challengesFiltered, setChallengesFiltered] = React.useState([]);
   const [filtersMenu, setFiltersMenu] = React.useState(false);
   const [sortBy, setSortBy] = React.useState(0);
   const [status, setStatus] = React.useState(CHALLENGES_STATUS_FILTER.BOTH);
@@ -31,13 +32,14 @@ const Challenges = () => {
   }, []);
 
   React.useEffect(() => {
-    statusFilter(status, challengesFromAPI, challenges, setChallenges);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+    statusFilter(status, challenges, setChallengesFiltered);
+  }, [status, challenges]);
 
   const challengesRequest = () => {
-    getChallenges(setChallengesFromAPI);
-    getChallenges(setChallenges, setLoading);
+    getChallenges(
+      [setChallengesFromAPI, setChallenges, setChallengesFiltered],
+      setLoading
+    );
   };
 
   const searchQueryHandler = (event) => {
@@ -95,18 +97,18 @@ const Challenges = () => {
             />
             <FlexColumn width="100%">
               <Loading visible={loading} />
-              {renderChallenges(pageNr, challenges)}
+              {renderChallenges(pageNr, challengesFiltered)}
             </FlexColumn>
           </FlexColumn>
           {!loading && (
             <Pager
-              elements={challenges}
+              elements={challengesFiltered}
               pageNr={pageNr}
               setPageNr={setPageNr}
-              pages={CALC_PAGES(challenges)}
+              pages={CALC_PAGES(challengesFiltered)}
               width="48px"
               borderRadius="64px"
-              number={`${pageNr} / ${CALC_PAGES(challenges)}`}
+              number={`${pageNr} / ${CALC_PAGES(challengesFiltered)}`}
             />
           )}
         </ChallengesStyle>
@@ -133,18 +135,18 @@ const Challenges = () => {
             </FlexRow>
             <FlexColumn width="100%">
               <Loading visible={loading} />
-              {renderChallenges(pageNr, challenges)}
+              {renderChallenges(pageNr, challengesFiltered)}
             </FlexColumn>
           </FlexColumn>
           {!loading && (
             <Pager
               pageNr={pageNr}
               setPageNr={setPageNr}
-              elements={challenges}
-              pages={CALC_PAGES(challenges)}
+              elements={challengesFiltered}
+              pages={CALC_PAGES(challengesFiltered)}
               width="72px"
               borderRadius="64px"
-              number={`${pageNr} / ${CALC_PAGES(challenges)}`}
+              number={`${pageNr} / ${CALC_PAGES(challengesFiltered)}`}
             />
           )}
         </ChallengesStyle>

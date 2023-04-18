@@ -1,13 +1,12 @@
-import {API} from '../utils/globals';
+import { API } from '../utils/globals';
 
-const getChallenges = (setDataState, setLoadingState) => {
-    fetch(`${API}/list-challenges`)
-        .then(response => response.json())
-        .then(data => {
-            setDataState(data);
-            if (setLoadingState)
-                setLoadingState(false);
-        });
+const getChallenges = (setDataStates, setLoadingState) => {
+  fetch(`${API}/list-challenges`)
+    .then((response) => response.json())
+    .then((data) => {
+      for (let setState of setDataStates) setState(data);
+      if (setLoadingState) setLoadingState(false);
+    });
 };
 
 export default getChallenges;
