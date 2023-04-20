@@ -7,7 +7,6 @@ import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
-  IS_MOBILE,
 } from '../../../utils/globals';
 import Loading from '../../generic/Loading';
 import Pager from '../../generic/Pager';
@@ -56,11 +55,10 @@ const AllEntries = (props) => {
 
   const getAllEntriesHeader = () => {
     let header = ['#', 'submitter'];
-    if (IS_MOBILE()) header.push('when');
     for (let metric of getPossibleMetrics()) {
       header.push(metric);
     }
-    if (!IS_MOBILE()) header.push('when');
+    header.push('when');
     return header;
   };
 
@@ -185,7 +183,7 @@ const AllEntries = (props) => {
 
   const desktopRender = () => {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1400px">
         <H2 as="h2" margin="0 0 32px 0">
           All Entries
         </H2>

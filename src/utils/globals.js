@@ -99,6 +99,13 @@ const NEXT_PAGE = (elements, pageNr, setPageNr) => {
   }
 };
 
+const LAST_PAGE = (elements, pageNr, setPageNr) => {
+  if (pageNr !== CALC_PAGES(elements ? elements : [])) {
+    let newPage = CALC_PAGES(elements ? elements : []);
+    setPageNr(newPage);
+  }
+};
+
 
 const PREVIOUS_PAGE = (pageNr, setPageNr) => {
   if (pageNr !== 1) {
@@ -106,6 +113,14 @@ const PREVIOUS_PAGE = (pageNr, setPageNr) => {
     setPageNr(newPage);
   }
 };
+
+const FIRST_PAGE = (pageNr, setPageNr) => {
+  if (pageNr !== 1) {
+    let newPage = 1;
+    setPageNr(newPage);
+  }
+};
+
 
 const RENDER_WHEN = (when) => {
   return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
@@ -142,5 +157,7 @@ export {
   RENDER_WHEN,
   EVALUATIONS_FORMAT,
   PREVIOUS_PAGE,
-  NEXT_PAGE
+  NEXT_PAGE,
+  FIRST_PAGE,
+  LAST_PAGE,
 };
