@@ -7,6 +7,10 @@ import { Body, Medium } from '../../utils/fonts';
 import styled from 'styled-components';
 import ColumnFilterIcon from './ColumnFilterIcon';
 
+const TableStyle = styled(FlexColumn)`
+  overflow-x: ${({metrics}) => metrics > 10 ? 'scroll' : 'auto'};
+`;
+
 const Line = styled(FlexRow)`
   position: absolute;
   top: ${({ top }) => (top ? top : 'auto')};
@@ -105,7 +109,7 @@ const Table = (props) => {
           as="td"
           order={props.iterableColumnElement.order}
           textAlign={props.iterableColumnElement.align}
-          minWidth="72px"
+          minWidth="88px"
           margin="auto 0"
           overflowWrap="anywhere"
         >
@@ -133,6 +137,7 @@ const Table = (props) => {
           order={elemName.order}
           textAlign={elemName.align}
           margin="auto 0"
+          minWidth="88px"
           overflowWrap="anywhere"
         >
           {IS_MOBILE() && (
@@ -153,7 +158,7 @@ const Table = (props) => {
     let elementsToMap = props.elements.slice(n, n + ELEMENTS_PER_PAGE * 2);
     if (elementsToMap.length > 0) {
       return (
-        <FlexColumn as="table" margin="32px 0 72px 0" width="100%">
+        <TableStyle as="table" margin="32px 0 72px 0" width="100%">
           <FlexColumn as="tbody" width="100%">
             <Grid
               as="tr"
@@ -190,7 +195,9 @@ const Table = (props) => {
                       width={elem === 'when' ? '100%' : 'auto'}
                       padding="0 4px 0 0"
                       overflowWrap="anywhere"
-                      minWidth={elem === 'result' ? '72px' : 'none'}
+                      minWidth="72px"
+
+                      // minWidth={elem === 'result' ? '72px' : 'none'}
                     >
                       {elem.replace('.', ' ')}
                     </Medium>
@@ -233,7 +240,7 @@ const Table = (props) => {
               );
             })}
           </FlexColumn>
-        </FlexColumn>
+        </TableStyle>
       );
     }
     return <Medium margin="72px 0">No results ;c</Medium>;
