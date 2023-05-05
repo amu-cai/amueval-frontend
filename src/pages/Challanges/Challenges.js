@@ -39,13 +39,8 @@ const Challenges = () => {
 
   const searchQueryHandler = React.useCallback(
     (event) =>
-      challengeSearchQueryHandler(
-        event,
-        state.challengesFromAPI,
-        state.setPageNr,
-        dispatch
-      ),
-    [state.challengesFromAPI, state.setPageNr]
+      challengeSearchQueryHandler(event, state.challengesFromAPI, dispatch),
+    [state.challengesFromAPI]
   );
 
   const filtersMenuRender = React.useCallback(

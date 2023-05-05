@@ -7,24 +7,18 @@ import Button from '../generic/Button';
 import theme from '../../utils/theme';
 import challengeSubmission from '../../api/challengeSubmissionPost';
 import Loading from '../generic/Loading';
+import getTags from '../../api/getTags';
 
 const Submit = (props) => {
   const [description, setDescription] = React.useState('');
   const [repoUrl, setRepoUrl] = React.useState('');
   const [repoBranch, setRepoBranch] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [tags, setTags] = React.useState([]);
 
-  const descriptionHandler = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const repoUrlHandler = (e) => {
-    setRepoUrl(e.target.value);
-  };
-
-  const repoBranchHandler = (e) => {
-    setRepoBranch(e.target.value);
-  };
+  React.useMemo(() => {
+    getTags(setTags);
+  }, []);
 
   const challengeSubmissionSubmit = () => {
     setLoading(true);
@@ -38,6 +32,7 @@ const Submit = (props) => {
   };
 
   if (!loading) {
+    console.log(tags);
     return (
       <FlexColumn
         margin="40px 0 0 0"
@@ -54,13 +49,10 @@ const Submit = (props) => {
         <FlexColumn width="100%" gap="32px">
           <SubmitInput
             label="Submission description"
-            handler={descriptionHandler}
+            handler={setDescription}
           />
-          <SubmitInput label="Submission repo URL" handler={repoUrlHandler} />
-          <SubmitInput
-            label="Submission repo branch"
-            handler={repoBranchHandler}
-          />
+          <SubmitInput label="Submission repo URL" handler={setRepoUrl} />
+          <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>
           <Menu color={theme.colors.white}>Submit</Menu>
