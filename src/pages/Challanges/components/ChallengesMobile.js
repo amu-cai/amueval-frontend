@@ -1,13 +1,13 @@
 import React from 'react';
-import ChallengesStyle from './ChallengesStyle';
-import { FlexColumn } from '../../utils/containers';
-import Pager from '../../components/generic/Pager';
-import { H1 } from '../../utils/fonts';
-import Search from '../../components/generic/Search';
-import { CALC_PAGES } from '../../utils/globals';
-import renderChallenges from './renderChallenges';
-import Loading from '../../components/generic/Loading';
-import CHALLENGES_ACTION from './ChallengesActionEnum';
+import ChallengesStyle from '../ChallengesStyle';
+import { FlexColumn } from '../../../utils/containers';
+import Pager from '../../../components/generic/Pager';
+import { H1 } from '../../../utils/fonts';
+import Search from '../../../components/generic/Search';
+import { CALC_PAGES } from '../../../utils/globals';
+import renderChallenges from '../functions/renderChallenges';
+import Loading from '../../../components/generic/Loading';
+import CHALLENGES_ACTION from '../model/ChallengesActionEnum';
 
 const ChallengesMobile = (props) => {
   return (

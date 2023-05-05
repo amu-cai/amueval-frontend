@@ -1,5 +1,5 @@
-import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
-import CHALLENGES_ACTION from './ChallengesActionEnum';
+import { CHALLENGES_STATUS_FILTER } from '../../../utils/globals';
+import CHALLENGES_ACTION from '../model/ChallengesActionEnum';
 
 const dateIsOlder = (newerDate, olderDate) => {
   if (newerDate.year > olderDate.year) return true;

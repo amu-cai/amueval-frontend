@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import FilterBy from '../FilterBy';
 import filterOptions from './filterOptions';
 import Media from 'react-media';
-import CHALLENGES_ACTION from '../../../pages/Challanges/ChallengesActionEnum';
+import CHALLENGES_ACTION from '../../../pages/Challanges/model/ChallengesActionEnum';
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;

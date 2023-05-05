@@ -4,12 +4,12 @@ import theme from '../../utils/theme';
 import getChallenges from '../../api/getChallenges';
 import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import FiltersMenu from '../../components/challenges_list/FiltersMenu';
-import statusFilterHandle from './statusFilterHandle';
-import ChallengesMobile from './ChallengesMobile';
-import ChallengesDesktop from './ChallengesDesktop';
-import challengeSearchQueryHandler from './challengeSearchQueryHandler';
-import ChallengesReducer from './ChallengesReducer';
-import CHALLENGES_ACTION from './ChallengesActionEnum';
+import statusFilterHandle from './functions/statusFilterHandle';
+import ChallengesMobile from './components/ChallengesMobile';
+import ChallengesDesktop from './components/ChallengesDesktop';
+import challengeSearchQueryHandler from './functions/challengeSearchQueryHandler';
+import ChallengesReducer from './model/ChallengesReducer';
+import CHALLENGES_ACTION from './model/ChallengesActionEnum';
 
 const Challenges = () => {
   const [state, dispatch] = React.useReducer(ChallengesReducer, {

@@ -1,4 +1,4 @@
-import CHALLENGES_ACTION from '../pages/Challanges/ChallengesActionEnum';
+import CHALLENGES_ACTION from '../pages/Challanges/model/ChallengesActionEnum';
 import { API } from '../utils/globals';
 
 const getChallenges = (dispatch) => {

@@ -1,14 +1,14 @@
 import React from 'react';
-import ChallengesStyle from './ChallengesStyle';
-import { FlexColumn, FlexRow } from '../../utils/containers';
-import Pager from '../../components/generic/Pager';
-import { H1, Body } from '../../utils/fonts';
-import Search from '../../components/generic/Search';
-import { CALC_PAGES } from '../../utils/globals';
-import renderChallenges from './renderChallenges';
-import Loading from '../../components/generic/Loading';
-import cupIco from '../../assets/cup_ico.svg';
-import { Svg } from '../../utils/containers';
+import ChallengesStyle from '../ChallengesStyle';
+import { FlexColumn, FlexRow } from '../../../utils/containers';
+import Pager from '../../../components/generic/Pager';
+import { H1, Body } from '../../../utils/fonts';
+import Search from '../../../components/generic/Search';
+import { CALC_PAGES } from '../../../utils/globals';
+import renderChallenges from '../functions/renderChallenges';
+import Loading from '../../../components/generic/Loading';
+import cupIco from '../../../assets/cup_ico.svg';
+import { Svg } from '../../../utils/containers';
 
 const ChallengesDesktop = (props) => {
   return (
