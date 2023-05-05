@@ -1,11 +1,14 @@
+import CHALLENGES_ACTION from '../pages/Challanges/ChallengesActionEnum';
 import { API } from '../utils/globals';
 
-const getChallenges = (setDataStates, setLoadingState) => {
+const getChallenges = (dispatch) => {
   fetch(`${API}/list-challenges`)
     .then((response) => response.json())
     .then((data) => {
-      for (let setState of setDataStates) setState(data);
-      if (setLoadingState) setLoadingState(false);
+      dispatch({
+        type: CHALLENGES_ACTION.LOAD_CHALLENGES_FROM_API,
+        payload: data,
+      });
     });
 };
 

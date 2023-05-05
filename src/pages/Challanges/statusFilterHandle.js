@@ -1,8 +1,7 @@
 import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
+import CHALLENGES_ACTION from './ChallengesActionEnum';
 
 const dateIsOlder = (newerDate, olderDate) => {
-  console.log(newerDate);
-  console.log(olderDate);
   if (newerDate.year > olderDate.year) return true;
   else if (newerDate.month > olderDate.month) return true;
   else if (newerDate.day > olderDate.day) return true;
@@ -19,7 +18,7 @@ const getDeadlineTime = (deadline) => {
   }
 };
 
-const statusFilter = (status, challenges, setChallengesFiltered) => {
+const statusFilterHandle = (status, challenges, dispatch) => {
   let result = challenges;
   const date = new Date();
   const currentDate = {
@@ -49,7 +48,10 @@ const statusFilter = (status, challenges, setChallengesFiltered) => {
       result = challenges;
       break;
   }
-  setChallengesFiltered(result);
+  dispatch({
+    type: CHALLENGES_ACTION.SET_CHALLENGES_FILTERED,
+    payload: result,
+  });
 };
 
-export default statusFilter;
+export default statusFilterHandle;

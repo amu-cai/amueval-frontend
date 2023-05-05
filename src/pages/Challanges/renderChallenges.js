@@ -18,7 +18,7 @@ const ChallengesGrid = styled(Grid)`
   }
 `;
 
-const renderChallenges = (pageNr, challenges, statusFilter) => {
+const renderChallenges = (pageNr, challenges) => {
   const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
   if (challenges && challenges !== []) {
     return (

@@ -7,6 +7,7 @@ import Search from '../../components/generic/Search';
 import { CALC_PAGES } from '../../utils/globals';
 import renderChallenges from './renderChallenges';
 import Loading from '../../components/generic/Loading';
+import CHALLENGES_ACTION from './ChallengesActionEnum';
 
 const ChallengesMobile = (props) => {
   return (
@@ -22,7 +23,11 @@ const ChallengesMobile = (props) => {
           <Search
             searchQueryHandler={props.searchQueryHandler}
             filterButton
-            toggleFiltersMenu={props.toggleFiltersMenu}
+            toggleFiltersMenu={() =>
+              props.dispatch({
+                type: CHALLENGES_ACTION.TOGGLE_FILTERS_MENU,
+              })
+            }
           />
           <FlexColumn width="100%">
             <Loading visible={props.loading} />
@@ -31,12 +36,12 @@ const ChallengesMobile = (props) => {
         </FlexColumn>
         {!props.loading && (
           <Pager
-            elements={props.challengesFiltered}
-            pageNr={props.pageNr}
-            setPageNr={props.setPageNr}
-            pages={CALC_PAGES(props.challengesFiltered)}
             width="48px"
             borderRadius="64px"
+            elements={props.challengesFiltered}
+            pageNr={props.pageNr}
+            setPage={props.setPage}
+            pages={CALC_PAGES(props.challengesFiltered)}
             number={`${props.pageNr} / ${CALC_PAGES(props.challengesFiltered)}`}
           />
         )}

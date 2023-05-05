@@ -92,18 +92,17 @@ const RENDER_DEADLINE_TIME = (time) => {
   }
   return '';
 };
-const NEXT_PAGE = (elements, pageNr, setPageNr) => {
+const NEXT_PAGE = (elements, pageNr, setPage) => {
   if (pageNr !== CALC_PAGES(elements ? elements : [])) {
     let newPage = pageNr + 1;
-    setPageNr(newPage);
+    setPage(newPage);
   }
 };
 
-
-const PREVIOUS_PAGE = (pageNr, setPageNr) => {
+const PREVIOUS_PAGE = (pageNr, setPage) => {
   if (pageNr !== 1) {
     let newPage = pageNr - 1;
-    setPageNr(newPage);
+    setPage(newPage);
   }
 };
 
@@ -142,5 +141,5 @@ export {
   RENDER_WHEN,
   EVALUATIONS_FORMAT,
   PREVIOUS_PAGE,
-  NEXT_PAGE
+  NEXT_PAGE,
 };

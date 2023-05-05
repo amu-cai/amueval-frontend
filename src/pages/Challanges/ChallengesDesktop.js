@@ -35,7 +35,7 @@ const ChallengesDesktop = (props) => {
         {!props.loading && (
           <Pager
             pageNr={props.pageNr}
-            setPageNr={props.setPageNr}
+            setPage={props.setPage}
             elements={props.challengesFiltered}
             pages={CALC_PAGES(props.challengesFiltered)}
             width="72px"

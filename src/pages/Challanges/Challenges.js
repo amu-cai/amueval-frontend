@@ -4,99 +4,97 @@ import theme from '../../utils/theme';
 import getChallenges from '../../api/getChallenges';
 import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import FiltersMenu from '../../components/challenges_list/FiltersMenu';
-import statusFilter from './statusFilter';
+import statusFilterHandle from './statusFilterHandle';
 import ChallengesMobile from './ChallengesMobile';
 import ChallengesDesktop from './ChallengesDesktop';
 import challengeSearchQueryHandler from './challengeSearchQueryHandler';
+import ChallengesReducer from './ChallengesReducer';
+import CHALLENGES_ACTION from './ChallengesActionEnum';
 
 const Challenges = () => {
-  const [pageNr, setPageNr] = React.useState(1);
-  const [challengesFromAPI, setChallengesFromAPI] = React.useState([]);
-  const [challenges, setChallenges] = React.useState([]);
-  const [challengesFiltered, setChallengesFiltered] = React.useState([]);
-  const [filtersMenu, setFiltersMenu] = React.useState(false);
-  const [sortBy, setSortBy] = React.useState(0);
-  const [status, setStatus] = React.useState(CHALLENGES_STATUS_FILTER.BOTH);
-  const [challengeType, setChallengeType] = React.useState(0);
-  const [commercial, setCommercial] = React.useState(0);
-  const [loading, setLoading] = React.useState(true);
+  const [state, dispatch] = React.useReducer(ChallengesReducer, {
+    pageNr: 1,
+    challengesFromAPI: [],
+    challenges: [],
+    challengesFiltered: [],
+    filtersMenu: false,
+    sortBy: 0,
+    statusFilter: CHALLENGES_STATUS_FILTER.BOTH,
+    challengeTypeFilter: 0,
+    commercialFilter: 0,
+    loading: true,
+  });
 
-  React.useEffect(() => {
-    challengesRequest();
+  React.useMemo(() => {
+    getChallenges(dispatch);
   }, []);
 
   React.useEffect(() => {
-    statusFilter(status, challenges, setChallengesFiltered);
-  }, [status, challenges]);
+    statusFilterHandle(state.statusFilter, state.challenges, dispatch);
+  }, [state.statusFilter, state.challenges]);
 
-  const challengesRequest = () => {
-    getChallenges(
-      [setChallengesFromAPI, setChallenges, setChallengesFiltered],
-      setLoading
-    );
-  };
+  const setPage = React.useCallback((value) => {
+    dispatch({ type: CHALLENGES_ACTION.SET_PAGE, payload: value });
+  }, []);
 
-  const searchQueryHandler = (event) => {
-    challengeSearchQueryHandler(
-      event,
-      challengesFromAPI,
-      setPageNr,
-      setChallenges
-    );
-  };
+  const searchQueryHandler = React.useCallback(
+    (event) =>
+      challengeSearchQueryHandler(
+        event,
+        state.challengesFromAPI,
+        state.setPageNr,
+        dispatch
+      ),
+    [state.challengesFromAPI, state.setPageNr]
+  );
 
-  const toggleFiltersMenu = () => {
-    let newFiltersMenu = !filtersMenu;
-    setFiltersMenu(newFiltersMenu);
-  };
-
-  const filtersMenuRender = (
-    translateX = '0',
-    opacity = '1',
-    transBackDisplay = 'none'
-  ) => {
-    return (
-      <FiltersMenu
-        toggleFiltersMenu={toggleFiltersMenu}
-        sortByHandler={setSortBy}
-        statusHandler={setStatus}
-        challengeTypeHandler={setChallengeType}
-        commercialHandler={setCommercial}
-        sortBy={sortBy}
-        status={status}
-        challengeType={challengeType}
-        commercial={commercial}
-        translateX={translateX}
-        opacity={opacity}
-        transBackDisplay={transBackDisplay}
-      />
-    );
-  };
+  const filtersMenuRender = React.useCallback(
+    (translateX = '0', opacity = '1', transBackDisplay = 'none') => {
+      return (
+        <FiltersMenu
+          dispatch={dispatch}
+          sortBy={state.sortBy}
+          status={state.statusFilter}
+          challengeTypeFilter={state.challengeTypeFilter}
+          commercialFilter={state.commercialFilter}
+          translateX={translateX}
+          opacity={opacity}
+          transBackDisplay={transBackDisplay}
+        />
+      );
+    },
+    [
+      state.sortBy,
+      state.statusFilter,
+      state.challengeTypeFilter,
+      state.commercialFilter,
+    ]
+  );
 
   return (
     <>
       <Media query={theme.mobile}>
         <ChallengesMobile
+          dispatch={dispatch}
           filtersMenuRender={filtersMenuRender}
-          filtersMenu={filtersMenu}
           searchQueryHandler={searchQueryHandler}
-          toggleFiltersMenu={toggleFiltersMenu}
-          loading={loading}
-          pageNr={pageNr}
-          setPageNr={setPageNr}
-          challengesFiltered={challengesFiltered}
+          setPage={setPage}
+          filtersMenu={state.filtersMenu}
+          loading={state.loading}
+          pageNr={state.pageNr}
+          challengesFiltered={state.challengesFiltered}
         />
       </Media>
       <Media query={theme.desktop}>
         <ChallengesDesktop
+          dispatch={dispatch}
           filtersMenuRender={filtersMenuRender}
-          filtersMenu={filtersMenu}
           searchQueryHandler={searchQueryHandler}
-          toggleFiltersMenu={toggleFiltersMenu}
-          loading={loading}
-          pageNr={pageNr}
-          setPageNr={setPageNr}
-          challengesFiltered={challengesFiltered}
+          setPage={setPage}
+          filtersMenu={state.filtersMenu}
+          loading={state.loading}
+          pageNr={state.pageNr}
+          challengesFiltered={state.challengesFiltered}
         />
       </Media>
     </>
