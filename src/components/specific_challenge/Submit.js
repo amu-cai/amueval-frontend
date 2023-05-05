@@ -8,6 +8,7 @@ import theme from '../../utils/theme';
 import challengeSubmission from '../../api/challengeSubmissionPost';
 import Loading from '../generic/Loading';
 import getTags from '../../api/getTags';
+import DropdownWithPopup from '../generic/DropdownWithPopup';
 
 const Submit = (props) => {
   const [description, setDescription] = React.useState('');
@@ -15,6 +16,8 @@ const Submit = (props) => {
   const [repoBranch, setRepoBranch] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [tags, setTags] = React.useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [submissionTags, setSubmissionTags] = React.useState([]);
 
   React.useMemo(() => {
     getTags(setTags);
@@ -53,6 +56,10 @@ const Submit = (props) => {
           />
           <SubmitInput label="Submission repo URL" handler={setRepoUrl} />
           <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
+          <DropdownWithPopup
+            label="Submission tags"
+            handler={setSubmissionTags}
+          />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>
           <Menu color={theme.colors.white}>Submit</Menu>

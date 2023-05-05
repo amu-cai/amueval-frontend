@@ -11,11 +11,10 @@ const CircleNumberStyle = styled(Container)`
   justify-content: center;
   align-items: center;
   font-family: 'Kanit', sans-serif;
-  font-size: 14px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '14px')};
   font-weight: 500;
   width: ${({ width }) => (width ? width : '24px')};
   height: ${({ height }) => (height ? height : '24px')};
-  margin: ${({ margin }) => (margin ? margin : '0')};
 
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     width: ${({ width }) => (width ? width : '36px')};
@@ -32,6 +31,12 @@ const CircleNumber = (props) => {
       fontSize={props.fontSize}
       borderRadius={props.borderRadius}
       margin={props.margin}
+      padding={props.padding}
+      position={props.position}
+      top={props.top}
+      left={props.left}
+      right={props.right}
+      bottom={props.bottom}
     >
       {props.number}
     </CircleNumberStyle>

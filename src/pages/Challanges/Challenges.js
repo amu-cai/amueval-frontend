@@ -29,7 +29,7 @@ const Challenges = () => {
     getChallenges(dispatch);
   }, []);
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     statusFilterHandle(state.statusFilter, state.challenges, dispatch);
   }, [state.statusFilter, state.challenges]);
 
