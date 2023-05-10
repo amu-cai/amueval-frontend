@@ -4,10 +4,29 @@ import { Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import ImageButton from './ImageButton';
 import pencilIco from '../../assets/pencil_ico.svg';
+import styled from 'styled-components';
+import PopUp from './PopUp';
+import { createPortal } from 'react-dom';
+
+const DropdownWithPopupStyle = styled(FlexColumn)`
+  cursor: pointer;
+  gap: 8px;
+  width: 100%;
+  align-items: flex-start;
+  * {
+    cursor: pointer;
+  }
+`;
 
 const DropdownWithPopup = (props) => {
+  const [tagsPopUp, setTagsPopUp] = React.useState(false);
+
   return (
-    <FlexColumn gap="8px" width="100%" alignmentX="flex-start">
+    <DropdownWithPopupStyle
+      onClick={() => {
+        if (!tagsPopUp) setTagsPopUp(true);
+      }}
+    >
       <Medium as="label" htmlFor={props.label}>
         {props.label}
       </Medium>
@@ -29,7 +48,12 @@ const DropdownWithPopup = (props) => {
         </FlexRow>
         <ImageButton src={pencilIco} width="20px" height="20px" />
       </Grid>
-    </FlexColumn>
+      {tagsPopUp &&
+        createPortal(
+          <PopUp closeHandler={() => setTagsPopUp(false)}></PopUp>,
+          document.body
+        )}
+    </DropdownWithPopupStyle>
   );
 };
 

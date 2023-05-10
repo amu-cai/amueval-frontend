@@ -5,6 +5,9 @@ const ImageButtonStyle = styled(FlexRow)`
   cursor: pointer;
   transition: transform ease-in-out 0.3s;
   transform: rotate(${({ rotate }) => (rotate ? rotate : '0')});
+  * {
+    cursor: pointer;
+  }
   &:hover {
     transform: rotate(${({ rotate }) => (rotate ? rotate : '0')}), scale(1.2);
   }
