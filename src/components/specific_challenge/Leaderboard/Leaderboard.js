@@ -11,7 +11,6 @@ import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
-
 } from '../../../utils/globals';
 import Search from '../../generic/Search';
 import Pager from '../../generic/Pager';
@@ -65,7 +64,7 @@ const Leaderboard = (props) => {
   };
 
   const getLeaderboardHeader = () => {
-    let header = ['#', 'submitter'];
+    let header = ['#', 'submitter', 'description'];
     for (let metric of getPossibleMetrics()) {
       header.push(metric);
     }
@@ -75,7 +74,7 @@ const Leaderboard = (props) => {
   };
 
   const getLeaderboardHeaderMobile = () => {
-    let header = ['#', 'submitter', 'entries', 'when'];
+    let header = ['#', 'submitter', 'description', 'entries', 'when'];
     for (let metric of getPossibleMetrics()) {
       header.push(metric);
     }
@@ -170,7 +169,7 @@ const Leaderboard = (props) => {
               tableType="leaderboard"
               gridTemplateColumns={
                 entries[0]
-                  ? '1fr 3fr ' +
+                  ? '1fr 2fr 3fr ' +
                     '2fr '.repeat(entries[0].evaluations.length) +
                     '1fr 2fr'
                   : ''
@@ -179,6 +178,7 @@ const Leaderboard = (props) => {
               staticColumnElements={[
                 { name: 'id', format: null, order: 1, align: 'left' },
                 { name: 'submitter', format: null, order: 2, align: 'left' },
+                { name: 'description', format: null, order: 3, align: 'left' },
                 { name: 'times', format: null, order: 4, align: 'left' },
                 { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
               ]}
@@ -224,7 +224,7 @@ const Leaderboard = (props) => {
               headerElements={getLeaderboardHeader()}
               gridTemplateColumns={
                 entries[0]
-                  ? '1fr 3fr ' +
+                  ? '1fr 2fr 3fr ' +
                     '2fr '.repeat(entries[0].evaluations.length) +
                     '1fr 2fr'
                   : ''
@@ -233,6 +233,7 @@ const Leaderboard = (props) => {
               staticColumnElements={[
                 { name: 'id', format: null, order: 1, align: 'left' },
                 { name: 'submitter', format: null, order: 2, align: 'left' },
+                { name: 'description', format: null, order: 3, align: 'left' },
                 { name: 'times', format: null, order: 4, align: 'left' },
                 { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
               ]}
@@ -255,7 +256,6 @@ const Leaderboard = (props) => {
               width="72px"
               borderRadius="64px"
               pages={CALC_PAGES(entries, 2)}
-              
               number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
             />
           </>
