@@ -22,6 +22,7 @@ const Leaderboard = (props) => {
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
+  const [descriptionSorted, setDescriptionSorted] = React.useState(false);
   const [entriesSorted, setEntriesSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
@@ -104,6 +105,27 @@ const Leaderboard = (props) => {
               : 0
           );
           setSubmitterSorted(true);
+        }
+        break;
+      case 'description':
+        if (descriptionSorted) {
+          newEntries = newEntries.sort((a, b) =>
+            a.description.toLowerCase() < b.description.toLowerCase()
+              ? 1
+              : b.description.toLowerCase() < a.description.toLowerCase()
+              ? -1
+              : 0
+          );
+          setDescriptionSorted(false);
+        } else {
+          newEntries = newEntries.sort((a, b) =>
+            a.description.toLowerCase() > b.description.toLowerCase()
+              ? 1
+              : b.description.toLowerCase() > a.description.toLowerCase()
+              ? -1
+              : 0
+          );
+          setDescriptionSorted(true);
         }
         break;
       case 'entries':
