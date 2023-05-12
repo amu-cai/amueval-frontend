@@ -33,6 +33,7 @@ const Button = (props) => {
       onClick={() => props.handler()}
       width={props.width}
       height={props.height}
+      margin={props.margin}
       color={props.color}
       backgroundColor={props.backgroundColor}
       to={props.to}

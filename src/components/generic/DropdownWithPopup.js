@@ -7,6 +7,8 @@ import pencilIco from '../../assets/pencil_ico.svg';
 import styled from 'styled-components';
 import PopUp from './PopUp';
 import { createPortal } from 'react-dom';
+import Search from './Search';
+import Button from './Button';
 
 const DropdownWithPopupStyle = styled(FlexColumn)`
   cursor: pointer;
@@ -50,7 +52,67 @@ const DropdownWithPopup = (props) => {
       </Grid>
       {tagsPopUp &&
         createPortal(
-          <PopUp closeHandler={() => setTagsPopUp(false)}></PopUp>,
+          <PopUp
+            width="50%"
+            height="80vh"
+            padding="36px 32px 0"
+            closeHandler={() => setTagsPopUp(false)}
+          >
+            <FlexColumn
+              width="100%"
+              alignmentY="flex-start"
+              height="100%"
+              gap="24px"
+            >
+              <Search />
+              <FlexColumn
+                as="list"
+                alignmentY="flex-start"
+                height="80%"
+                width="100%"
+                overflowY="scroll"
+              >
+                {props.tags.map((tag, index) => {
+                  return (
+                    <FlexRow
+                      key={`tag-${index}`}
+                      height="48px"
+                      width="100%"
+                      alignmentX="flex-start"
+                      backgroundColor={
+                        index % 2 === 0
+                          ? theme.colors.dark01
+                          : theme.colors.white
+                      }
+                      padding="12px"
+                    >
+                      {tag.name}
+                    </FlexRow>
+                  );
+                })}
+              </FlexColumn>
+              <FlexRow width="100%" gap="20px" alignmentX="flex-start">
+                <Button height="32px" width="76px">
+                  Done
+                </Button>
+                <Button
+                  height="32px"
+                  width="76px"
+                  backgroundColor={theme.colors.dark08}
+                >
+                  Clear
+                </Button>
+                <Button
+                  height="32px"
+                  width="76px"
+                  backgroundColor={theme.colors.dark}
+                  margin="0 0 0 auto"
+                >
+                  Cancel
+                </Button>
+              </FlexRow>
+            </FlexColumn>
+          </PopUp>,
           document.body
         )}
     </DropdownWithPopupStyle>

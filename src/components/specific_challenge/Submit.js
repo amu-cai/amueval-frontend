@@ -35,7 +35,6 @@ const Submit = (props) => {
   };
 
   if (!loading) {
-    console.log(tags);
     return (
       <FlexColumn
         margin="40px 0 0 0"
@@ -59,6 +58,7 @@ const Submit = (props) => {
           <DropdownWithPopup
             label="Submission tags"
             handler={setSubmissionTags}
+            tags={tags}
           />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>

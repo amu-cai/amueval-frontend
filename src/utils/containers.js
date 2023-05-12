@@ -37,6 +37,7 @@ const Container = styled.div`
   list-style: ${({ listStyle }) => (listStyle ? listStyle : 'none')};
   overflow-wrap: ${({ overflowWrap }) =>
     overflowWrap ? overflowWrap : 'normal'};
+  overflow-y: ${({ overflowY }) => (overflowY ? overflowY : 'none')};
 `;
 
 const FlexRow = styled(Container)`
