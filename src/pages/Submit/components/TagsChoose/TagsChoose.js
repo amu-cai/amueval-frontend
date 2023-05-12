@@ -3,7 +3,7 @@ import { FlexRow, Grid } from '../../../../utils/containers';
 import { Medium } from '../../../../utils/fonts';
 import ImageButton from '../../../../components/generic/ImageButton';
 import pencilIco from '../../../../assets/pencil_ico.svg';
-import TagsChoosePopUp from '../TagsChoosePopUp';
+import TagsChoosePopUp from '../TagsChoosePopup/TagsChoosePopUp';
 import { createPortal } from 'react-dom';
 import TagsChooseStyle from './TagsChooseStyle';
 
