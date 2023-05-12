@@ -1,5 +1,5 @@
 import { ELEMENTS_PER_PAGE } from '../../../utils/globals';
-import MiniChallenge from '../../../components/challenges_list/MiniChallenge';
+import MiniChallenge from '../components/MiniChallenge';
 import { Grid } from '../../../utils/containers';
 import styled from 'styled-components';
 

@@ -1,20 +1,20 @@
 import React from 'react';
 import Media from 'react-media';
-import theme from '../../../utils/theme';
-import { FlexColumn } from '../../../utils/containers';
-import { H2 } from '../../../utils/fonts';
-import Table from '../Table';
+import theme from '../../utils/theme';
+import { FlexColumn } from '../../utils/containers';
+import { H2 } from '../../utils/fonts';
+import Table from '../../components/generic/Table';
 import PropsTypes from 'prop-types';
-import getChallengeLeaderboard from '../../../api/getChallengeLeaderboard';
+import getChallengeLeaderboard from '../../api/getChallengeLeaderboard';
 import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';
 import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
-} from '../../../utils/globals';
-import Search from '../../generic/Search';
-import Pager from '../../generic/Pager';
-import Loading from '../../generic/Loading';
+} from '../../utils/globals';
+import Search from '../../components/generic/Search';
+import Pager from '../../components/generic/Pager';
+import Loading from '../../components/generic/Loading';
 
 const Leaderboard = (props) => {
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);

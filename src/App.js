@@ -21,7 +21,7 @@ import Loading from './components/generic/Loading';
 import { FlexColumn } from './utils/containers';
 import PopupMessage from './components/generic/PopupMessage';
 import PolicyPrivacy from './pages/PolicyPrivacy';
-import Challenge from './components/specific_challenge/Challenge';
+import Challenge from './pages/Challenge';
 
 const App = () => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');

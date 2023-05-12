@@ -1,9 +1,9 @@
 import React from 'react';
-import { IS_MOBILE } from '../../../../utils/globals';
-import { Body, H2, Medium } from '../../../../utils/fonts';
-import { FlexColumn, Grid } from '../../../../utils/containers';
-import CircleNumber from '../../../generic/CircleNumber';
-import CodeShell from '../../../generic/CodeShell';
+import { IS_MOBILE } from '../../../utils/globals';
+import { Body, H2, Medium } from '../../../utils/fonts';
+import { FlexColumn, Grid } from '../../../utils/containers';
+import CircleNumber from '../../../components/generic/CircleNumber';
+import CodeShell from '../../../components/generic/CodeShell';
 
 const HowToContent = (props) => {
   const pullCodeLineRender = () => {

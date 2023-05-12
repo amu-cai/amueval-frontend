@@ -1,14 +1,14 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { FlexColumn } from '../../utils/containers';
-import { H2, Menu } from '../../utils/fonts';
-import SubmitInput from '../generic/SubmitInput';
-import Button from '../generic/Button';
-import theme from '../../utils/theme';
-import challengeSubmission from '../../api/challengeSubmissionPost';
-import Loading from '../generic/Loading';
-import getTags from '../../api/getTags';
-import DropdownWithPopup from '../generic/DropdownWithPopup';
+import { FlexColumn } from '../utils/containers';
+import { H2, Menu } from '../utils/fonts';
+import SubmitInput from '../components/generic/SubmitInput';
+import Button from '../components/generic/Button';
+import theme from '../utils/theme';
+import challengeSubmission from '../api/challengeSubmissionPost';
+import Loading from '../components/generic/Loading';
+import getTags from '../api/getTags';
+import DropdownWithPopup from '../components/generic/DropdownWithPopup';
 
 const Submit = (props) => {
   const [description, setDescription] = React.useState('');

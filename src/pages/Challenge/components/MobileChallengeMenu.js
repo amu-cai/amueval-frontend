@@ -1,14 +1,14 @@
 import React from 'react';
-import { FlexRow } from '../../utils/containers';
+import { FlexRow } from '../../../utils/containers';
 import styled from 'styled-components';
-import { Medium } from '../../utils/fonts';
+import { Medium } from '../../../utils/fonts';
 import PropsTypes from 'prop-types';
-import KeyCloakService from '../../services/KeyCloakService';
+import KeyCloakService from '../../../services/KeyCloakService';
 import {
   CHALLENGE_SECTIONS,
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
-} from '../../utils/globals';
+} from '../../../utils/globals';
 import { Link } from 'react-router-dom';
 
 const MenuOption = styled(Medium)`

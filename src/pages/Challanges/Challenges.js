@@ -3,7 +3,7 @@ import Media from 'react-media';
 import theme from '../../utils/theme';
 import getChallenges from '../../api/getChallenges';
 import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
-import FiltersMenu from '../../components/challenges_list/FiltersMenu';
+import FiltersMenu from './components/FiltersMenu';
 import statusFilterHandle from './functions/statusFilterHandle';
 import ChallengesMobile from './components/ChallengesMobile';
 import ChallengesDesktop from './components/ChallengesDesktop';

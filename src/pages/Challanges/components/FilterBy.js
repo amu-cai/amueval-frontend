@@ -1,10 +1,10 @@
 import React from 'react';
-import { FlexColumn, Grid, Svg } from '../../utils/containers';
-import Filter from '../generic/Filter';
-import { Body, H3, Medium } from '../../utils/fonts';
-import arrow from '../../assets/arrow.svg';
+import { FlexColumn, Grid, Svg } from '../../../utils/containers';
+import Filter from '../../../components/generic/Filter';
+import { Body, H3, Medium } from '../../../utils/fonts';
+import arrow from '../../../assets/arrow.svg';
 import Media from 'react-media';
-import theme from '../../utils/theme';
+import theme from '../../../utils/theme';
 
 const FilterBy = (props) => {
   const renderFilterOptions = () => {

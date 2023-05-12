@@ -1,9 +1,9 @@
 import React from 'react';
-import getFullUser from '../../../api/getFullUserInfo';
-import KeyCloakService from '../../../services/KeyCloakService';
-import { FlexColumn } from '../../../utils/containers';
-import { IS_MOBILE } from '../../../utils/globals';
-import HowToContent from './sections/HowToContent';
+import getFullUser from '../../api/getFullUserInfo';
+import KeyCloakService from '../../services/KeyCloakService';
+import { FlexColumn } from '../../utils/containers';
+import { IS_MOBILE } from '../../utils/globals';
+import HowToContent from './components/HowToContent';
 
 const HowTo = (props) => {
   const [userFullInfo, setUserFullInfo] = React.useState(null);
