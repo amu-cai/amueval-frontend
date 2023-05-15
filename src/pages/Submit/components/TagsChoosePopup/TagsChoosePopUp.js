@@ -5,6 +5,7 @@ import Search from '../../../../components/generic/Search';
 import theme from '../../../../utils/theme';
 import Button from '../../../../components/generic/Button';
 import TagsChoosePopUpStyle from './TagsChoosePopUpStyle';
+import tagColorHandle from './functions/tagColorHandle';
 
 const TagsChoosePopUp = (props) => {
   return (
@@ -21,10 +22,14 @@ const TagsChoosePopUp = (props) => {
             return (
               <FlexRow
                 key={`tag-${index}`}
+                onClick={() => props.addSubmissionTag(tag.name)}
                 className="TagsChoosePopUpStyle__tag-item"
-                backgroundColor={
-                  index % 2 === 0 ? theme.colors.dark01 : theme.colors.white
-                }
+                backgroundColor={tagColorHandle(
+                  theme,
+                  index,
+                  tag,
+                  props.submissionTags
+                )}
               >
                 {tag.name}
               </FlexRow>

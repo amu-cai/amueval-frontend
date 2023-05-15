@@ -9,7 +9,7 @@ import ChallengesMobile from './components/ChallengesMobile';
 import ChallengesDesktop from './components/ChallengesDesktop';
 import challengeSearchQueryHandler from './functions/challengeSearchQueryHandler';
 import ChallengesReducer from './model/ChallengesReducer';
-import CHALLENGES_ACTION from './model/ChallengesActionEnum';
+import CHALLENGES_ACTION from './model/ChallengesActions';
 
 const Challenges = () => {
   const [state, dispatch] = React.useReducer(ChallengesReducer, {

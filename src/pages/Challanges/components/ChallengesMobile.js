@@ -7,7 +7,7 @@ import Search from '../../../components/generic/Search';
 import { CALC_PAGES } from '../../../utils/globals';
 import renderChallenges from '../functions/renderChallenges';
 import Loading from '../../../components/generic/Loading';
-import CHALLENGES_ACTION from '../model/ChallengesActionEnum';
+import CHALLENGES_ACTION from '../model/ChallengesActions';
 
 const ChallengesMobile = (props) => {
   return (

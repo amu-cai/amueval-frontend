@@ -28,7 +28,12 @@ const TagsChoose = (props) => {
       </Grid>
       {tagsPopUp &&
         createPortal(
-          <TagsChoosePopUp tags={props.tags} setTagsPopUp={setTagsPopUp} />,
+          <TagsChoosePopUp
+            tags={props.tags}
+            submissionTags={props.submissionTags}
+            addSubmissionTag={props.addSubmissionTag}
+            setTagsPopUp={setTagsPopUp}
+          />,
           document.body
         )}
     </TagsChooseStyle>

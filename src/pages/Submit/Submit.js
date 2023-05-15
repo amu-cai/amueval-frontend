@@ -9,32 +9,51 @@ import challengeSubmission from '../../api/challengeSubmissionPost';
 import Loading from '../../components/generic/Loading';
 import getTags from '../../api/getTags';
 import TagsChoose from './components/TagsChoose';
+import SubmitReducer from './model/SubmitReducer';
+import SUBMIT_ACTION from './model/SubmitActionEnum';
 
 const Submit = (props) => {
-  const [description, setDescription] = React.useState('');
-  const [repoUrl, setRepoUrl] = React.useState('');
-  const [repoBranch, setRepoBranch] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
-  const [tags, setTags] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [submissionTags, setSubmissionTags] = React.useState([]);
+  const [state, dispatch] = React.useReducer(SubmitReducer, {
+    description: '',
+    repoUrl: '',
+    repoBranch: '',
+    submissionLoading: false,
+    tags: [],
+    submissionTags: [],
+  });
 
   React.useMemo(() => {
-    getTags(setTags);
+    getTags(dispatch);
   }, []);
 
   const challengeSubmissionSubmit = () => {
-    setLoading(true);
+    dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
     challengeSubmission(
       props.challengeName,
-      repoUrl,
-      repoBranch,
-      description,
-      setLoading
+      state.repoUrl,
+      state.repoBranch,
+      state.description,
+      dispatch
     );
   };
 
-  if (!loading) {
+  const setDescription = (value) => {
+    dispatch({ type: SUBMIT_ACTION.SET_DESCRIPTION, payload: value });
+  };
+
+  const setRepoUrl = (value) => {
+    dispatch({ type: SUBMIT_ACTION.SET_REPO_URL, payload: value });
+  };
+
+  const setRepoBranch = (value) => {
+    dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
+  };
+
+  const addSubmissionTag = React.useCallback((value) => {
+    dispatch({ type: SUBMIT_ACTION.ADD_SUBMISSION_TAG, payload: value });
+  }, []);
+
+  if (!state.submissionLoading) {
     return (
       <FlexColumn
         margin="40px 0 0 0"
@@ -57,8 +76,9 @@ const Submit = (props) => {
           <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
           <TagsChoose
             label="Submission tags"
-            handler={setSubmissionTags}
-            tags={tags}
+            addSubmissionTag={addSubmissionTag}
+            tags={state.tags}
+            submissionTags={state.submissionTags}
           />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>

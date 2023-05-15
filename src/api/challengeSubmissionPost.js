@@ -1,12 +1,13 @@
 import KeyCloakService from '../services/KeyCloakService';
 import { API } from '../utils/globals';
+import SUBMIT_ACTION from '../pages/Submit/model/SubmitActionEnum';
 
 const challengeSubmission = (
   challengeName,
   repoUrl,
   repoBranch,
   description,
-  setLoading
+  dispatch
 ) => {
   const details = {
     f1: description,
@@ -30,7 +31,7 @@ const challengeSubmission = (
   })
     .then((resp) => resp.json())
     .then((data) => {
-      setLoading(true);
+      dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
       const processUrl = API.replace('/api', '');
       window.location.replace(`${processUrl}/open-view-progress/${data}#form`);
       // console.log(data);
