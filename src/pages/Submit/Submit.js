@@ -6,12 +6,12 @@ import SubmitInput from '../../components/generic/SubmitInput';
 import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
 import challengeSubmission from '../../api/challengeSubmissionPost';
-import Loading from '../../components/generic/Loading';
 import getTags from '../../api/getTags';
 import TagsChoose from './components/TagsChoose';
 import SubmitReducer from './model/SubmitReducer';
 import SUBMIT_ACTION from './model/SubmitActionEnum';
 import SubmitStyle from './SubmitStyle';
+import SubmissionLoadingStyle from './components/SubmissionLoading/SubmissionLoadingStyle';
 
 const Submit = (props) => {
   const [state, dispatch] = React.useReducer(SubmitReducer, {
@@ -93,21 +93,7 @@ const Submit = (props) => {
       </SubmitStyle>
     );
   } else {
-    return createPortal(
-      <FlexColumn
-        position="fixed"
-        top="0"
-        left="0"
-        width="100%"
-        height="100vh"
-        zIndex="100"
-        backgroundColor={theme.colors.white}
-      >
-        <H2 as="h1">Submission processing...</H2>
-        <Loading />
-      </FlexColumn>,
-      document.body
-    );
+    return createPortal(<SubmissionLoadingStyle />, document.body);
   }
 };
 

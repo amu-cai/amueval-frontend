@@ -33,6 +33,7 @@ const challengeSubmission = (
   })
     .then((resp) => resp.json())
     .then((data) => {
+      console.log(data);
       dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
       const processUrl = API.replace('/api', '');
       window.location.replace(`${processUrl}/open-view-progress/${data}#form`);
