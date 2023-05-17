@@ -1,4 +1,4 @@
-import CHALLENGES_ACTION from './ChallengesActionEnum';
+import CHALLENGES_ACTION from './ChallengesActions';
 
 const ChallengesReducer = (state, action) => {
   switch (action.type) {

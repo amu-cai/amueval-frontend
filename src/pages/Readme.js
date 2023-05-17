@@ -1,14 +1,12 @@
 import React from 'react';
-import { FlexColumn } from '../../utils/containers';
-import { Body, H2 } from '../../utils/fonts';
+import { FlexColumn } from '../utils/containers';
+import { Body, H2 } from '../utils/fonts';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-import getChallengeFullDescription from '../../api/getChallengeFullDescription';
+import theme from '../utils/theme';
+import getChallengeFullDescription from '../api/getChallengeFullDescription';
 import styled from 'styled-components';
-import InfoList from '../generic/InfoList';
-import Loading from '../generic/Loading';
-import PropsTypes from 'prop-types';
-import MiniChallenge from '../challenges_list/MiniChallenge';
+import InfoList from '../components/generic/InfoList';
+import Loading from '../components/generic/Loading';
 import { marked } from 'marked';
 
 const ReadmeStyle = styled(Body)`
@@ -152,16 +150,6 @@ const Readme = (props) => {
       </Media>
     </>
   );
-};
-
-MiniChallenge.propTypes = {
-  challengeName: PropsTypes.string,
-  description: PropsTypes.string,
-};
-
-MiniChallenge.defaultProps = {
-  challengeName: '',
-  description: '',
 };
 
 export default Readme;

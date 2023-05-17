@@ -1,4 +1,4 @@
-import CHALLENGES_ACTION from '../model/ChallengesActionEnum';
+import CHALLENGES_ACTION from '../model/ChallengesActions';
 
 const challengeSearchQueryHandler = (event, challengesFromAPI, dispatch) => {
   let searchQuery = event.target.value;

@@ -8,11 +8,7 @@ import HttpService from './services/HttpService';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const renderApp = () => root.render(
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>
-);
+const renderApp = () => root.render(<App />);
 
 KeyCloakService.initKeycloak(renderApp);
 HttpService.configure();

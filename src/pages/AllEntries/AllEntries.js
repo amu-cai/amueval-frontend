@@ -1,20 +1,20 @@
 import React from 'react';
-import theme from '../../../utils/theme';
+import theme from '../../utils/theme';
 import Media from 'react-media';
-import { FlexColumn } from '../../../utils/containers';
-import { H2 } from '../../../utils/fonts';
+import { FlexColumn } from '../../utils/containers';
+import { H2 } from '../../utils/fonts';
 import {
   CALC_PAGES,
   EVALUATIONS_FORMAT,
   RENDER_WHEN,
   IS_MOBILE,
-} from '../../../utils/globals';
-import Loading from '../../generic/Loading';
-import Pager from '../../generic/Pager';
-import Table from '../Table';
-import Search from '../../generic/Search';
+} from '../../utils/globals';
+import Loading from '../../components/generic/Loading';
+import Pager from '../../components/generic/Pager';
+import Table from '../../components/generic/Table';
+import Search from '../../components/generic/Search';
 import allEntriesSearchQueryHandler from './allEntriesSearchQueryHandler';
-import getAllEntries from '../../../api/getAllEntries';
+import getAllEntries from '../../api/getAllEntries';
 
 const AllEntries = (props) => {
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);

@@ -1,12 +1,12 @@
 import React from 'react';
-import { FlexColumn, FlexRow, TransBack } from '../../../utils/containers';
-import Button from '../../generic/Button';
-import theme from '../../../utils/theme';
+import { FlexColumn, FlexRow, TransBack } from '../../../../utils/containers';
+import Button from '../../../../components/generic/Button';
+import theme from '../../../../utils/theme';
 import styled from 'styled-components';
 import FilterBy from '../FilterBy';
 import filterOptions from './filterOptions';
 import Media from 'react-media';
-import CHALLENGES_ACTION from '../../../pages/Challanges/model/ChallengesActionEnum';
+import CHALLENGES_ACTION from '../../model/ChallengesActions';
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
