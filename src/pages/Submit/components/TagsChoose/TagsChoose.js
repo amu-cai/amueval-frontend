@@ -23,7 +23,16 @@ const TagsChoose = (props) => {
         className="TagsChooseStyle__grid"
         onChange={(e) => props.handler(e.target.value)}
       >
-        <FlexRow className="TagsChooseStyle__tags-container">tags</FlexRow>
+        <FlexRow
+          width="100%"
+          height="100%"
+          className="TagsChooseStyle__tags-container"
+          gap="16px"
+        >
+          {props.submissionTags.map((tag, i) =>
+            i === 0 ? tag.name : `, ${tag.name}`
+          )}
+        </FlexRow>
         <ImageButton src={pencilIco} width="20px" height="20px" />
       </Grid>
       {tagsPopUp &&
@@ -31,8 +40,9 @@ const TagsChoose = (props) => {
           <TagsChoosePopUp
             tags={props.tags}
             submissionTags={props.submissionTags}
-            addSubmissionTag={props.addSubmissionTag}
+            toggleSubmissionTag={props.toggleSubmissionTag}
             setTagsPopUp={setTagsPopUp}
+            clearSubmissionTags={props.clearSubmissionTags}
           />,
           document.body
         )}

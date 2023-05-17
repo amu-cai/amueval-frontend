@@ -7,10 +7,12 @@ const challengeSubmission = (
   repoUrl,
   repoBranch,
   description,
+  submissionTags,
   dispatch
 ) => {
   const details = {
     f1: description,
+    f2: submissionTags,
     f3: repoUrl,
     f4: repoBranch,
   };

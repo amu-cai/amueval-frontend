@@ -4,8 +4,8 @@ const SUBMIT_ACTION = {
   SET_REPO_BRANCH: 'set_repo_branch',
   TOGGLE_SUBMISSION_LOADING: 'toggle_submission_loading',
   LOAD_TAGS: 'load_tags',
-  ADD_SUBMISSION_TAGS: 'add_submission_tag',
-  REMOVE_SUBMISSION_TAGS: 'remove_submission_tag',
+  ADD_SUBMISSION_TAG: 'add_submission_tag',
+  REMOVE_SUBMISSION_TAG: 'remove_submission_tag',
   CLEAR_SUBMISSION_TAGS: 'clear_submission_tags',
 };
 

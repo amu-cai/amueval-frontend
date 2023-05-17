@@ -5,7 +5,7 @@ import Search from '../../../../components/generic/Search';
 import theme from '../../../../utils/theme';
 import Button from '../../../../components/generic/Button';
 import TagsChoosePopUpStyle from './TagsChoosePopUpStyle';
-import tagColorHandle from './functions/tagColorHandle';
+import renderTagItems from './functions/renderTagItems';
 
 const TagsChoosePopUp = (props) => {
   return (
@@ -17,24 +17,15 @@ const TagsChoosePopUp = (props) => {
     >
       <TagsChoosePopUpStyle>
         <Search />
-        <FlexColumn as="list" className="TagsChoosePopUpStyle__tags-list">
-          {props.tags.map((tag, index) => {
-            return (
-              <FlexRow
-                key={`tag-${index}`}
-                onClick={() => props.addSubmissionTag(tag.name)}
-                className="TagsChoosePopUpStyle__tag-item"
-                backgroundColor={tagColorHandle(
-                  theme,
-                  index,
-                  tag,
-                  props.submissionTags
-                )}
-              >
-                {tag.name}
-              </FlexRow>
-            );
-          })}
+        <FlexColumn as="ul" className="TagsChoosePopUpStyle__tags-list">
+          {renderTagItems(
+            props.submissionTags,
+            props.toggleSubmissionTag,
+            `1px dotted ${theme.colors.green}`,
+            theme.colors.green03,
+            true
+          )}
+          {renderTagItems(props.tags, props.toggleSubmissionTag, 'none')}
         </FlexColumn>
         <FlexRow width="100%" gap="20px" alignmentX="flex-start">
           <Button height="32px" width="76px">
@@ -44,6 +35,7 @@ const TagsChoosePopUp = (props) => {
             height="32px"
             width="76px"
             backgroundColor={theme.colors.dark08}
+            handler={() => props.clearSubmissionTags()}
           >
             Clear
           </Button>
@@ -52,6 +44,7 @@ const TagsChoosePopUp = (props) => {
             width="76px"
             backgroundColor={theme.colors.dark}
             margin="0 0 0 auto"
+            handler={() => props.setTagsPopUp(false)}
           >
             Cancel
           </Button>

@@ -17,7 +17,7 @@ const TagsChoosePopUpStyle = styled(FlexColumn)`
   .TagsChoosePopUpStyle__tag-item {
     height: 42px;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;

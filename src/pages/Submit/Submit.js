@@ -11,6 +11,7 @@ import getTags from '../../api/getTags';
 import TagsChoose from './components/TagsChoose';
 import SubmitReducer from './model/SubmitReducer';
 import SUBMIT_ACTION from './model/SubmitActionEnum';
+import SubmitStyle from './SubmitStyle';
 
 const Submit = (props) => {
   const [state, dispatch] = React.useReducer(SubmitReducer, {
@@ -33,6 +34,7 @@ const Submit = (props) => {
       state.repoUrl,
       state.repoBranch,
       state.description,
+      state.submissionTags,
       dispatch
     );
   };
@@ -49,25 +51,28 @@ const Submit = (props) => {
     dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
   };
 
-  const addSubmissionTag = React.useCallback((value) => {
-    dispatch({ type: SUBMIT_ACTION.ADD_SUBMISSION_TAG, payload: value });
-  }, []);
+  const toggleSubmissionTag = React.useCallback(
+    (tag) => {
+      let actionType = '';
+      if (state.submissionTags.includes(tag))
+        actionType = SUBMIT_ACTION.REMOVE_SUBMISSION_TAG;
+      else actionType = SUBMIT_ACTION.ADD_SUBMISSION_TAG;
+      dispatch({ type: actionType, payload: tag });
+    },
+    [state.submissionTags]
+  );
+
+  const clearSubmissionTags = () => {
+    dispatch({ type: SUBMIT_ACTION.CLEAR_SUBMISSION_TAGS });
+  };
 
   if (!state.submissionLoading) {
     return (
-      <FlexColumn
-        margin="40px 0 0 0"
-        padding="24px"
-        as="section"
-        gap="64px"
-        maxWidth="624px"
-        width="100%"
-        alignmentX="flex-start"
-      >
-        <H2 as="h2" width="100%" textAlign="center">
+      <SubmitStyle as="section">
+        <H2 as="h2" className="SubmitStyle__header">
           Submit a solution to the challenge
         </H2>
-        <FlexColumn width="100%" gap="32px">
+        <FlexColumn className="SubmitStyle__form">
           <SubmitInput
             label="Submission description"
             handler={setDescription}
@@ -76,15 +81,16 @@ const Submit = (props) => {
           <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
           <TagsChoose
             label="Submission tags"
-            addSubmissionTag={addSubmissionTag}
+            toggleSubmissionTag={toggleSubmissionTag}
             tags={state.tags}
             submissionTags={state.submissionTags}
+            clearSubmissionTags={clearSubmissionTags}
           />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>
           <Menu color={theme.colors.white}>Submit</Menu>
         </Button>
-      </FlexColumn>
+      </SubmitStyle>
     );
   } else {
     return createPortal(

@@ -24,6 +24,7 @@ const TagsChooseStyle = styled(FlexColumn)`
     height: 100%;
     justify-content: flex-start;
     align-items: flex-start;
+    overflow-y: scroll;
   }
 `;
 
