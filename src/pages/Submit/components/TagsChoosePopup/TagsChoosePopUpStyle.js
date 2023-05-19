@@ -26,6 +26,12 @@ const TagsChoosePopUpStyle = styled(FlexColumn)`
       background-color: ${({ theme }) => theme.colors.green03};
     }
   }
+
+  .TagsChoosePopUpStyle__buttons-container {
+    width: 100%;
+    gap: 20px;
+    justify-content: flex-start;
+  }
 `;
 
 export default TagsChoosePopUpStyle;

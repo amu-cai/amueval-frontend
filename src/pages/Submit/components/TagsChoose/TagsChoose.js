@@ -23,12 +23,7 @@ const TagsChoose = (props) => {
         className="TagsChooseStyle__grid"
         onChange={(e) => props.handler(e.target.value)}
       >
-        <FlexRow
-          width="100%"
-          height="100%"
-          className="TagsChooseStyle__tags-container"
-          gap="16px"
-        >
+        <FlexRow className="TagsChooseStyle__tags-container">
           {props.submissionTags.map((tag, i) =>
             i === 0 ? tag.name : `, ${tag.name}`
           )}

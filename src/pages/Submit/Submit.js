@@ -27,7 +27,7 @@ const Submit = (props) => {
     getTags(dispatch);
   }, []);
 
-  const challengeSubmissionSubmit = () => {
+  const challengeSubmissionSubmit = React.useCallback(() => {
     dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
     challengeSubmission(
       props.challengeName,
@@ -37,26 +37,13 @@ const Submit = (props) => {
       state.submissionTags,
       dispatch
     );
-  };
-
-  const setDescription = (value) => {
-    dispatch({ type: SUBMIT_ACTION.SET_DESCRIPTION, payload: value });
-  };
-
-  const setRepoUrl = (value) => {
-    dispatch({ type: SUBMIT_ACTION.SET_REPO_URL, payload: value });
-  };
-
-  const setRepoBranch = (value) => {
-    dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
-  };
-
-  const updateTags = (submissionTags, tags) => {
-    dispatch({
-      type: SUBMIT_ACTION.UPDATE_TAGS,
-      payload: { submissionTags: submissionTags, tags: tags },
-    });
-  };
+  }, [
+    props.challengeName,
+    state.description,
+    state.repoBranch,
+    state.repoUrl,
+    state.submissionTags,
+  ]);
 
   if (!state.submissionLoading) {
     return (
@@ -67,13 +54,30 @@ const Submit = (props) => {
         <FlexColumn className="SubmitStyle__form">
           <SubmitInput
             label="Submission description"
-            handler={setDescription}
+            handler={(value) => {
+              dispatch({ type: SUBMIT_ACTION.SET_DESCRIPTION, payload: value });
+            }}
           />
-          <SubmitInput label="Submission repo URL" handler={setRepoUrl} />
-          <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
+          <SubmitInput
+            label="Submission repo URL"
+            handler={(value) => {
+              dispatch({ type: SUBMIT_ACTION.SET_REPO_URL, payload: value });
+            }}
+          />
+          <SubmitInput
+            label="Submission repo branch"
+            handler={(value) => {
+              dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
+            }}
+          />
           <TagsChoose
             label="Submission tags"
-            updateTags={updateTags}
+            updateTags={(submissionTags, tags) => {
+              dispatch({
+                type: SUBMIT_ACTION.UPDATE_TAGS,
+                payload: { submissionTags: submissionTags, tags: tags },
+              });
+            }}
             tags={state.tags}
             submissionTags={state.submissionTags}
           />

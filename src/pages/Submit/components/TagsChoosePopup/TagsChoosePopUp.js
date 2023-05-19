@@ -52,7 +52,7 @@ const TagsChoosePopUp = (props) => {
           )}
           {renderTagItems(tags, toggleTagChoose, 'none')}
         </FlexColumn>
-        <FlexRow width="100%" gap="20px" alignmentX="flex-start">
+        <FlexRow className="TagsChoosePopUpStyle__buttons-container">
           <Button
             height="32px"
             width="76px"

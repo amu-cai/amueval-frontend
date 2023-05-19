@@ -21,6 +21,7 @@ const TagsChooseStyle = styled(FlexColumn)`
   }
 
   .TagsChooseStyle__tags-container {
+    width: 100%;
     height: 100%;
     justify-content: flex-start;
     align-items: flex-start;
