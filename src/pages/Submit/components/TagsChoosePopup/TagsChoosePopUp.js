@@ -8,6 +8,31 @@ import TagsChoosePopUpStyle from './TagsChoosePopUpStyle';
 import renderTagItems from './functions/renderTagItems';
 
 const TagsChoosePopUp = (props) => {
+  const [tagsChoosed, setTagsChoosed] = React.useState([]);
+  const [tags, setTags] = React.useState([]);
+
+  React.useEffect(() => {
+    setTags(props.tags.slice());
+    setTagsChoosed(props.submissionTags.slice());
+  }, [props.tags, props.submissionTags]);
+
+  const toggleTagChoose = (clickedTag) => {
+    let newTagsChoosed = tagsChoosed;
+    let newTags = tags;
+    if (tagsChoosed.includes(clickedTag)) {
+      newTagsChoosed = newTagsChoosed.filter(
+        (tag) => tag.name !== clickedTag.name
+      );
+      newTags.push(clickedTag);
+      newTags = newTags.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      newTagsChoosed.push(clickedTag);
+      newTags = newTags.filter((tag) => tag.name !== clickedTag.name);
+    }
+    setTagsChoosed(newTagsChoosed);
+    setTags(newTags);
+  };
+
   return (
     <PopUp
       width="50%"
@@ -19,23 +44,30 @@ const TagsChoosePopUp = (props) => {
         <Search />
         <FlexColumn as="ul" className="TagsChoosePopUpStyle__tags-list">
           {renderTagItems(
-            props.submissionTags,
-            props.toggleSubmissionTag,
+            tagsChoosed,
+            toggleTagChoose,
             `1px dotted ${theme.colors.green}`,
             theme.colors.green03,
             true
           )}
-          {renderTagItems(props.tags, props.toggleSubmissionTag, 'none')}
+          {renderTagItems(tags, toggleTagChoose, 'none')}
         </FlexColumn>
         <FlexRow width="100%" gap="20px" alignmentX="flex-start">
-          <Button height="32px" width="76px">
+          <Button
+            height="32px"
+            width="76px"
+            handler={() => {
+              props.updateTags(tagsChoosed, tags);
+              props.setTagsPopUp(false);
+            }}
+          >
             Done
           </Button>
           <Button
             height="32px"
             width="76px"
             backgroundColor={theme.colors.dark08}
-            handler={() => props.clearSubmissionTags()}
+            handler={() => setTagsChoosed([])}
           >
             Clear
           </Button>

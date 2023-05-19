@@ -51,19 +51,11 @@ const Submit = (props) => {
     dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
   };
 
-  const toggleSubmissionTag = React.useCallback(
-    (tag) => {
-      let actionType = '';
-      if (state.submissionTags.includes(tag))
-        actionType = SUBMIT_ACTION.REMOVE_SUBMISSION_TAG;
-      else actionType = SUBMIT_ACTION.ADD_SUBMISSION_TAG;
-      dispatch({ type: actionType, payload: tag });
-    },
-    [state.submissionTags]
-  );
-
-  const clearSubmissionTags = () => {
-    dispatch({ type: SUBMIT_ACTION.CLEAR_SUBMISSION_TAGS });
+  const updateTags = (submissionTags, tags) => {
+    dispatch({
+      type: SUBMIT_ACTION.UPDATE_TAGS,
+      payload: { submissionTags: submissionTags, tags: tags },
+    });
   };
 
   if (!state.submissionLoading) {
@@ -81,10 +73,9 @@ const Submit = (props) => {
           <SubmitInput label="Submission repo branch" handler={setRepoBranch} />
           <TagsChoose
             label="Submission tags"
-            toggleSubmissionTag={toggleSubmissionTag}
+            updateTags={updateTags}
             tags={state.tags}
             submissionTags={state.submissionTags}
-            clearSubmissionTags={clearSubmissionTags}
           />
         </FlexColumn>
         <Button width="122px" height="44px" handler={challengeSubmissionSubmit}>

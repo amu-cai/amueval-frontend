@@ -40,9 +40,8 @@ const TagsChoose = (props) => {
           <TagsChoosePopUp
             tags={props.tags}
             submissionTags={props.submissionTags}
-            toggleSubmissionTag={props.toggleSubmissionTag}
+            updateTags={props.updateTags}
             setTagsPopUp={setTagsPopUp}
-            clearSubmissionTags={props.clearSubmissionTags}
           />,
           document.body
         )}
