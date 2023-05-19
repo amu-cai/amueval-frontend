@@ -11,7 +11,7 @@ import TagsChoose from './components/TagsChoose';
 import SubmitReducer from './model/SubmitReducer';
 import SUBMIT_ACTION from './model/SubmitActionEnum';
 import SubmitStyle from './SubmitStyle';
-import SubmissionLoadingStyle from './components/SubmissionLoading/SubmissionLoadingStyle';
+import SubmissionLoading from './components/SubmissionLoading/SubmissionLoading';
 
 const Submit = (props) => {
   const [state, dispatch] = React.useReducer(SubmitReducer, {
@@ -93,7 +93,7 @@ const Submit = (props) => {
       </SubmitStyle>
     );
   } else {
-    return createPortal(<SubmissionLoadingStyle />, document.body);
+    return createPortal(<SubmissionLoading />, document.body);
   }
 };
 

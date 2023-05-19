@@ -10,9 +10,10 @@ const challengeSubmission = (
   submissionTags,
   dispatch
 ) => {
+  const tagNames = submissionTags.map((tag) => tag.name).join(',');
   const details = {
     f1: description,
-    f2: submissionTags,
+    f2: tagNames,
     f3: repoUrl,
     f4: repoBranch,
   };
@@ -20,6 +21,8 @@ const challengeSubmission = (
   for (let property in details) {
     let encodedKey = encodeURIComponent(property);
     let encodedValue = encodeURIComponent(details[property]);
+    if (property === 'f2')
+      encodedValue = encodedValue.replaceAll('%2C', '%2C+');
     formBody.push(encodedKey + '=' + encodedValue);
   }
   formBody = formBody.join('&');
@@ -33,7 +36,6 @@ const challengeSubmission = (
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
       const processUrl = API.replace('/api', '');
       window.location.replace(`${processUrl}/open-view-progress/${data}#form`);
