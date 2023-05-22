@@ -30,7 +30,7 @@ const App = () => {
   const [popUpMessage, setPopUpMessage] = React.useState('');
   const [confirmPopUpHandler, setConfirmPopUpHandler] = React.useState(null);
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     if (sessionStorage.getItem('logout') === 'yes') {
       const pageName = window.location.pathname.split('/').at(-1);
       if (LOGIN_REQUIRED_PAGES.includes(pageName)) {
@@ -60,7 +60,7 @@ const App = () => {
         }
       }
     }, 1500);
-  });
+  }, []);
 
   const popUpMessageHandler = (header, message, confirmHandler) => {
     setPopUpHeader(header);
@@ -85,19 +85,11 @@ const App = () => {
     }
   };
 
-  const loggedBarVisibleHandler = () => {
+  const loggedBarVisibleHandler = React.useCallback(() => {
     if (loggedBarVisible === '0' && !loggedBarHover)
       setLoggedBarVisible('100vw');
     else setLoggedBarVisible('0');
-  };
-
-  const loggedBarHoverTrue = () => {
-    setLoggedBarHover(true);
-  };
-
-  const loggedBarHoverFalse = () => {
-    setLoggedBarHover(false);
-  };
+  }, [loggedBarHover, loggedBarVisible]);
 
   const renderApp = () => {
     return (
@@ -112,8 +104,8 @@ const App = () => {
             <LoggedBar
               visible={loggedBarVisible}
               loggedBarVisibleHandler={loggedBarVisibleHandler}
-              loggedBarHoverTrue={loggedBarHoverTrue}
-              loggedBarHoverFalse={loggedBarHoverFalse}
+              loggedBarHoverTrue={() => setLoggedBarHover(true)}
+              loggedBarHoverFalse={() => setLoggedBarHover(false)}
               username={KeyCloakService.getUsername()}
             />
           ) : (
