@@ -69,6 +69,16 @@ const MiniChallenge = (props) => {
     }
   };
 
+  const baselineRender = () => {
+    if (props.baseline) {
+      return (
+        <IconLabel size="24px" gap="8px" type="baseline">
+          {props.baseline}
+        </IconLabel>
+      );
+    }
+  };
+
   return (
     <ChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.name}`}>
       <FlexColumn as="article">
@@ -102,9 +112,7 @@ const MiniChallenge = (props) => {
             {props.bestScore ? props.bestScore.slice(0, 6) : 'xxx'}
           </IconLabel>
           {deadlineRender()}
-          <IconLabel size="24px" gap="8px" type="baseline">
-            {props.baseline ? props.baseline : 'xxx'}
-          </IconLabel>
+          {baselineRender()}
           {props.prize ? (
             <IconLabel size="24px" gap="8px" type="prize">
               {props.prize}
