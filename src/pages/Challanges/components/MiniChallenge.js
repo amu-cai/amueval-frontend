@@ -99,7 +99,7 @@ const MiniChallenge = (props) => {
             {props.metric ? props.metric : 'xxx'}
           </IconLabel>
           <IconLabel size="24px" gap="8px" type="bestScore">
-            {props.bestScore ? props.bestScore : 'xxx'}
+            {props.bestScore ? props.bestScore.slice(0, 6) : 'xxx'}
           </IconLabel>
           {deadlineRender()}
           <IconLabel size="24px" gap="8px" type="baseline">
