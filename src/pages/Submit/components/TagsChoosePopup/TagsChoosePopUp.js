@@ -6,13 +6,16 @@ import theme from '../../../../utils/theme';
 import Button from '../../../../components/generic/Button';
 import TagsChoosePopUpStyle from './TagsChoosePopUpStyle';
 import renderTagItems from './functions/renderTagItems';
+import tagsSearchQueryHandler from './functions/tagsSearchQueryHandler';
 
 const TagsChoosePopUp = (props) => {
   const [tagsChoosed, setTagsChoosed] = React.useState([]);
+  const [tagsInit, setTagsInit] = React.useState([]);
   const [tags, setTags] = React.useState([]);
 
   React.useEffect(() => {
     setTags(props.tags.slice());
+    setTagsInit(props.tags.slice());
     setTagsChoosed(props.submissionTags.slice());
   }, [props.tags, props.submissionTags]);
 
@@ -41,7 +44,11 @@ const TagsChoosePopUp = (props) => {
       closeHandler={() => props.setTagsPopUp(false)}
     >
       <TagsChoosePopUpStyle>
-        <Search />
+        <Search
+          searchQueryHandler={(e) =>
+            tagsSearchQueryHandler(e, tagsInit, tagsChoosed, setTags)
+          }
+        />
         <FlexColumn as="ul" className="TagsChoosePopUpStyle__tags-list">
           {renderTagItems(
             tagsChoosed,
