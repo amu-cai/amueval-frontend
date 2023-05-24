@@ -2,7 +2,6 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { FlexColumn } from '../../utils/containers';
 import { H2, Menu } from '../../utils/fonts';
-import SubmitInput from '../../components/generic/SubmitInput';
 import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
 import challengeSubmission from '../../api/challengeSubmissionPost';
@@ -12,6 +11,7 @@ import SubmitReducer from './model/SubmitReducer';
 import SUBMIT_ACTION from './model/SubmitActionEnum';
 import SubmitStyle from './SubmitStyle';
 import SubmissionLoading from './components/SubmissionLoading/SubmissionLoading';
+import renderSubmitInputs from './functions/renderSubmitInputs';
 
 const Submit = (props) => {
   const [state, dispatch] = React.useReducer(SubmitReducer, {
@@ -52,24 +52,7 @@ const Submit = (props) => {
           Submit a solution to the challenge
         </H2>
         <FlexColumn className="SubmitStyle__form">
-          <SubmitInput
-            label="Submission description"
-            handler={(value) => {
-              dispatch({ type: SUBMIT_ACTION.SET_DESCRIPTION, payload: value });
-            }}
-          />
-          <SubmitInput
-            label="Submission repo URL"
-            handler={(value) => {
-              dispatch({ type: SUBMIT_ACTION.SET_REPO_URL, payload: value });
-            }}
-          />
-          <SubmitInput
-            label="Submission repo branch"
-            handler={(value) => {
-              dispatch({ type: SUBMIT_ACTION.SET_REPO_BRANCH, payload: value });
-            }}
-          />
+          {renderSubmitInputs(dispatch)}
           <TagsChoose
             label="Submission tags"
             updateTags={(submissionTags, tags) => {
