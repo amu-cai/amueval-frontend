@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlexColumn, FlexRow, Svg } from '../../utils/containers';
-import { Body, H2, Medium } from '../../utils/fonts';
+import { FlexColumn, FlexRow, Svg } from '../../../utils/containers';
+import { Body, H2, Medium } from '../../../utils/fonts';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-import uamLogo from '../../assets/uam-logo.svg';
+import theme from '../../../utils/theme';
+import csiLogo from '../../../assets/csi_full_logo.svg';
 
 const Csi = () => {
   const mobileRender = () => {
@@ -62,7 +62,7 @@ const Csi = () => {
             solutions to be implemented in enterprises.
           </Medium>
         </FlexColumn>
-        <Svg src={uamLogo} width="200px" height="242px" size="contain" />
+        <Svg src={csiLogo} width="400px" height="242px" />
       </FlexRow>
     );
   };

@@ -9,7 +9,7 @@ const H1 = styled(Container)`
   line-height: 24px;
   letter-spacing: 0.1px;
   @media (min-width: ${({ theme }) => theme.overMobile}) {
-    font-size: 48px;
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '60px')};
     line-height: 52px;
   }
 `;
@@ -69,6 +69,7 @@ const Label = styled(Menu)`
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     font-size: 22px;
     line-height: 24px;
+    font-weight: 400;
   }
 `;
 
