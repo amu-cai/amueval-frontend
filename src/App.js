@@ -22,6 +22,7 @@ import { FlexColumn } from './utils/containers';
 import PopupMessage from './components/generic/PopupMessage';
 import PolicyPrivacy from './pages/PolicyPrivacy';
 import Challenge from './pages/Challenge';
+import SESSION_STORAGE from './utils/sessionStorage';
 
 const App = () => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
@@ -31,22 +32,32 @@ const App = () => {
   const [confirmPopUpHandler, setConfirmPopUpHandler] = React.useState(null);
 
   React.useMemo(() => {
-    if (sessionStorage.getItem('logout') === 'yes') {
+    if (
+      sessionStorage.getItem(SESSION_STORAGE.LOGOUT) ===
+      SESSION_STORAGE.STATIC_VALUE.YES
+    ) {
       const pageName = window.location.pathname.split('/').at(-1);
       if (LOGIN_REQUIRED_PAGES.includes(pageName)) {
         window.location.replace(`${ROOT_URL}/challenges`);
       }
     }
 
-    if (sessionStorage.getItem('logged') !== 'yes') {
+    if (
+      sessionStorage.getItem(SESSION_STORAGE.LOGGED) !==
+      SESSION_STORAGE.STATIC_VALUE.YES
+    ) {
       if (KeyCloakService.isLoggedIn()) {
-        sessionStorage.setItem('logged', 'yes');
+        sessionStorage.setItem(
+          SESSION_STORAGE.LOGGED,
+          SESSION_STORAGE.STATIC_VALUE.YES
+        );
         addUser();
       }
     }
 
     if (
-      sessionStorage.getItem('logged') === 'yes' &&
+      sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
+        SESSION_STORAGE.STATIC_VALUE.YES &&
       (window.location.pathname === `${POLICY_PRIVACY_PAGE}/login` ||
         window.location.pathname === `${POLICY_PRIVACY_PAGE}/register`)
     ) {
@@ -54,7 +65,10 @@ const App = () => {
     }
 
     setTimeout(() => {
-      if (sessionStorage.getItem('logged') === 'yes') {
+      if (
+        sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
+        SESSION_STORAGE.STATIC_VALUE.YES
+      ) {
         if (!KeyCloakService.isLoggedIn()) {
           KeyCloakService.doLogin();
         }
@@ -195,7 +209,10 @@ const App = () => {
     );
   };
 
-  if (sessionStorage.getItem('logged') === 'yes') {
+  if (
+    sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
+    SESSION_STORAGE.STATIC_VALUE.YES
+  ) {
     if (KeyCloakService.isLoggedIn()) {
       return renderApp();
     } else {
