@@ -100,7 +100,7 @@ const App = () => {
             loggedBarVisibleHandler={loggedBarVisibleHandler}
             popUpMessageHandler={popUpMessageHandler}
           />
-          {!IS_MOBILE() ? (
+          {!IS_MOBILE() && (
             <LoggedBar
               visible={loggedBarVisible}
               loggedBarVisibleHandler={loggedBarVisibleHandler}
@@ -108,8 +108,6 @@ const App = () => {
               loggedBarHoverFalse={() => setLoggedBarHover(false)}
               username={KeyCloakService.getUsername()}
             />
-          ) : (
-            ''
           )}
           <Routes>
             <Route

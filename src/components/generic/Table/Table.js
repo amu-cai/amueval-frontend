@@ -1,79 +1,19 @@
 import React from 'react';
-import { Container, FlexColumn, FlexRow, Grid } from '../../utils/containers';
+import {
+  Container,
+  FlexColumn,
+  FlexRow,
+  Grid,
+} from '../../../utils/containers';
 import Media from 'react-media';
-import theme from '../../utils/theme';
-import { ELEMENTS_PER_PAGE, IS_MOBILE } from '../../utils/globals';
-import { Body, Medium } from '../../utils/fonts';
-import styled from 'styled-components';
-import ColumnFilterIcon from './ColumnFilterIcon';
-
-const TableStyle = styled(FlexColumn)`
-  overflow-x: ${({metrics}) => metrics > 10 ? 'scroll' : 'auto'};
-`;
-
-const Line = styled(FlexRow)`
-  position: absolute;
-  top: ${({ top }) => (top ? top : 'auto')};
-  bottom: ${({ bottom }) => (bottom ? bottom : 'auto')};
-  left: 0;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.dark04};
-  height: ${({ height }) => (height ? height : '1px')};
-`;
-
-const MobileTableStyle = styled(Container)`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 32px 0;
-
-  tr:nth-of-type(odd) {
-    background: ${({ theme }) => theme.colors.dark03};
-  }
-
-  th {
-    background: ${({ theme }) => theme.colors.dark05};
-    color: ${({ theme }) => theme.colors.white};
-  }
-
-  td,
-  th {
-    padding: 6px;
-    border: 1px solid ${({ theme }) => theme.colors.white};
-    text-align: left;
-  }
-
-  display: block;
-
-  thead,
-  tbody,
-  th,
-  td {
-    display: block;
-  }
-
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  td {
-    border: none;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.dark01};
-    position: relative;
-    padding-left: 50%;
-  }
-
-  .mobile-table-header {
-    font-weight: 400;
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-  }
-`;
+import theme from '../../../utils/theme';
+import { ELEMENTS_PER_PAGE, IS_MOBILE } from '../../../utils/globals';
+import { Body, Medium } from '../../../utils/fonts';
+import ColumnFilterIcon from '../ColumnFilterIcon';
+// import deleteSubmission from '../../api/deleteSubmission';
+import TableStyle from './styles/TableStyle';
+import TableLine from './styles/TableLine';
+import MobileTableStyle from './styles/MobileTableStyle';
 
 const Table = (props) => {
   const [, updateState] = React.useState();
@@ -128,6 +68,7 @@ const Table = (props) => {
 
   const rowRender = (elem) => {
     let RowStyle = Body;
+    console.log(elem);
     if (elem.submitter === props.user) RowStyle = Medium;
     return props.staticColumnElements.map((elemName, i) => {
       return (
@@ -139,6 +80,8 @@ const Table = (props) => {
           margin="auto 0"
           minWidth="88px"
           overflowWrap="anywhere"
+          cursor="pointer"
+          // onClick={props.myEntries && (() => deleteSubmission(elem.id))}
         >
           {IS_MOBILE() && (
             <Container className="mobile-table-header">
@@ -196,8 +139,6 @@ const Table = (props) => {
                       padding="0 4px 0 0"
                       overflowWrap="anywhere"
                       minWidth="72px"
-
-                      // minWidth={elem === 'result' ? '72px' : 'none'}
                     >
                       {elem.replace('.', ' ')}
                     </Medium>
@@ -212,7 +153,7 @@ const Table = (props) => {
                   </FlexRow>
                 );
               })}
-              <Line
+              <TableLine
                 height="2px"
                 top="calc(100% + 2px)"
                 as="td"

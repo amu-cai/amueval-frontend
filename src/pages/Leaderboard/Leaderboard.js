@@ -3,7 +3,7 @@ import Media from 'react-media';
 import theme from '../../utils/theme';
 import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
-import Table from '../../components/generic/Table';
+import Table from '../../components/generic/Table/Table';
 import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../api/getChallengeLeaderboard';
 import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';

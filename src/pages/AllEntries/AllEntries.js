@@ -11,7 +11,7 @@ import {
 } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
 import Pager from '../../components/generic/Pager';
-import Table from '../../components/generic/Table';
+import Table from '../../components/generic/Table/Table';
 import Search from '../../components/generic/Search';
 import allEntriesSearchQueryHandler from './allEntriesSearchQueryHandler';
 import getAllEntries from '../../api/getAllEntries';

@@ -12,7 +12,7 @@ import {
 import Media from 'react-media';
 import theme from '../../utils/theme';
 import Loading from '../../components/generic/Loading';
-import Table from '../../components/generic/Table';
+import Table from '../../components/generic/Table/Table';
 import myEntriesSearchQueryHandler from './myEntriesSearchQueryHandler';
 import Search from '../../components/generic/Search';
 
@@ -190,6 +190,7 @@ const MyEntries = (props) => {
               pageNr={pageNr}
               elements={myEntries}
               sortByUpdate={sortByUpdate}
+              myEntries
             />
             <Pager
               pageNr={pageNr}
