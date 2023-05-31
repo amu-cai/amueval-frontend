@@ -3,12 +3,12 @@ import {
   FlexColumn,
   FlexRow,
   ImageBackground,
-} from '../../../utils/containers';
-import { Body, H2, Medium } from '../../../utils/fonts';
-import CircleNumber from '../../../components/generic/CircleNumber';
+} from '../../../../utils/containers';
+import { Body, H2, Medium } from '../../../../utils/fonts';
+import CircleNumber from '../../../../components/generic/CircleNumber';
 import Media from 'react-media';
-import theme from '../../../utils/theme';
-import commercialImage from '../../../assets/commercial-image.svg';
+import theme from '../../../../utils/theme';
+import commercialImage from '../../../../assets/commercial-image.svg';
 
 const Commercial = () => {
   const listItemsContent = [
@@ -96,8 +96,8 @@ const Commercial = () => {
         </FlexColumn>
         <ImageBackground
           image={commercialImage}
-          width="200px"
-          height="284px"
+          width="180px"
+          height="274px"
           size="contain"
         />
       </FlexRow>

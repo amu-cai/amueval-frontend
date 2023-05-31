@@ -11,7 +11,12 @@ import HeroStyle from './HeroStyle';
 const Hero = (props) => {
   const mobileRender = () => {
     return (
-      <FlexColumn alignmentX="flex-start" gap="24px" maxWidth="452px">
+      <FlexColumn
+        alignmentX="flex-start"
+        gap="24px"
+        margin="80px 0 48px 0"
+        maxWidth="452px"
+      >
         <H1 as="h1">
           Welcome to
           <Container display="inline" color={theme.colors.green}>

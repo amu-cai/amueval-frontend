@@ -1,10 +1,10 @@
 import React from 'react';
 import { FlexColumn } from '../../utils/containers';
-import Motivation from './components/Motivation';
-import Csi from './components/Csi';
-import Commercial from './components/Commercial';
+import Motivation from './components/Motivation/Motivation';
+import Csi from './components/Csi/Csi';
+import Commercial from './components/Commercial/Commercial';
 import Hero from './components/Hero/Hero';
-import Partnerships from './components/Partnerships';
+import Partnerships from './components/Partnerships/Partnerships';
 import LandingPageStyle from './LandingPageStyle';
 // import MadeByCsi from './components/MadeByCsi/MadeByCsi';
 
