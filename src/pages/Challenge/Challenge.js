@@ -17,6 +17,7 @@ import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
 import getUser from '../../api/getUser';
 import AllEntries from '../AllEntries/AllEntries';
+import NewTablePageTest from '../NewTable/NewTablePageTest';
 
 const Challenge = (props) => {
   const challengeName = useParams().challengeId;
@@ -64,6 +65,8 @@ const Challenge = (props) => {
         return <MyEntries challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
+      case 7:
+        return <NewTablePageTest challengeName={challengeName} />;
       default:
         return (
           <Leaderboard

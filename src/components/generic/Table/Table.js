@@ -68,7 +68,6 @@ const Table = (props) => {
 
   const rowRender = (elem) => {
     let RowStyle = Body;
-    console.log(elem);
     if (elem.submitter === props.user) RowStyle = Medium;
     return props.staticColumnElements.map((elemName, i) => {
       return (
