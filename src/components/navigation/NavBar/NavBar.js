@@ -43,6 +43,7 @@ const NavBar = (props) => {
   const mobileMenuHoverFalse = () => {
     setMobileMenuHover(false);
   };
+
   const toggleNavMenu = () => {
     if (navMenuTranslateY === 'calc(-100vh - 42px)') setNavMenuTranslateY('0');
     else if (!mobileMenuHover) setNavMenuTranslateY('calc(-100vh - 42px)');
@@ -51,51 +52,57 @@ const NavBar = (props) => {
   return (
     <NavBarStyle as="header">
       <FlexRow height="100%" alignmentX="space-between" as="nav">
-        <Logo />
-        <MenuButton as="button" onClick={toggleNavMenu} />
-        <FlexRow as="ul" className="ul-desktop" gap="32px">
-          <FlexRow as={Link} to={CHALLENGES_PAGE} gap="16px">
-            <Svg width="16px" height="16px" src={cupIco} />
-            <Menu as="li">Challenges</Menu>
-          </FlexRow>
-          <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="12px">
-            <Svg size="cover" width="16px" height="16px" src={policyIco} />
-            <Menu as="li">Privacy policy</Menu>
-          </FlexRow>
-          {!KeyCloakService.isLoggedIn() ? (
-            <FlexRow
-              as="button"
-              onClick={() =>
-                props.popUpMessageHandler(
-                  'Reminder',
-                  'Remember to check your spam mailbox to confirm your account.',
-                  () => KeyCloakService.doRegister
-                )
-              }
-              gap="16px"
-            >
-              <Svg width="16px" height="16px" src={registerIco} />
-              <Menu as="li">Register</Menu>
+        <Logo navOptions={props.navOptions} />
+        {props.navOptions && (
+          <>
+            <MenuButton as="button" onClick={toggleNavMenu} />
+            <FlexRow as="ul" className="ul-desktop" gap="32px">
+              <FlexRow as={Link} to={CHALLENGES_PAGE} gap="16px">
+                <Svg width="16px" height="16px" src={cupIco} />
+                <Menu as="li">Challenges</Menu>
+              </FlexRow>
+              <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="12px">
+                <Svg size="cover" width="16px" height="16px" src={policyIco} />
+                <Menu as="li">Privacy policy</Menu>
+              </FlexRow>
+              {!KeyCloakService.isLoggedIn() && (
+                <FlexRow
+                  as="button"
+                  onClick={() =>
+                    props.popUpMessageHandler(
+                      'Reminder',
+                      'Remember to check your spam mailbox to confirm your account.',
+                      () => KeyCloakService.doRegister
+                    )
+                  }
+                  gap="16px"
+                >
+                  <Svg width="16px" height="16px" src={registerIco} />
+                  <Menu as="li">Register</Menu>
+                </FlexRow>
+              )}
+              {KeyCloakService.isLoggedIn() ? (
+                <Svg
+                  as="button"
+                  onClick={props.loggedBarVisibleHandler}
+                  width="32px"
+                  height="32px"
+                  src={userIco}
+                  margin="0 16px 0 0"
+                />
+              ) : (
+                <FlexRow
+                  as="button"
+                  onClick={KeyCloakService.doLogin}
+                  gap="16px"
+                >
+                  <Svg width="16px" height="16px" src={loginIco} />
+                  <Menu as="li">Sign in</Menu>
+                </FlexRow>
+              )}
             </FlexRow>
-          ) : (
-            ''
-          )}
-          {KeyCloakService.isLoggedIn() ? (
-            <Svg
-              as="button"
-              onClick={props.loggedBarVisibleHandler}
-              width="32px"
-              height="32px"
-              src={userIco}
-              margin="0 16px 0 0"
-            />
-          ) : (
-            <FlexRow as="button" onClick={KeyCloakService.doLogin} gap="16px">
-              <Svg width="16px" height="16px" src={loginIco} />
-              <Menu as="li">Sign in</Menu>
-            </FlexRow>
-          )}
-        </FlexRow>
+          </>
+        )}
       </FlexRow>
       <MobileNavMenu
         mobileMenuHoverTrue={mobileMenuHoverTrue}

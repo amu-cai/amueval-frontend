@@ -6,6 +6,7 @@ import cupIco from '../assets/cup_ico.svg';
 import textIco from '../assets/text_ico.svg';
 import imageIco from '../assets/image_ico.svg';
 import tabularIco from '../assets/tabular_ico.svg';
+import React from 'react';
 
 const ELEMENTS_PER_PAGE = 12;
 const MINI_DESCRIPTION_LENGTH = 70;
@@ -119,6 +120,14 @@ const IS_MOBILE = () => {
   return document.body.clientWidth <= 1024;
 };
 
+const CHILDREN_WITH_PROPS = (propsChildren, props) =>
+  React.Children.map(propsChildren, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, props);
+    }
+    return child;
+  });
+
 export {
   ELEMENTS_PER_PAGE,
   API,
@@ -142,4 +151,5 @@ export {
   EVALUATIONS_FORMAT,
   PREVIOUS_PAGE,
   NEXT_PAGE,
+  CHILDREN_WITH_PROPS,
 };
