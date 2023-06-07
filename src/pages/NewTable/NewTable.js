@@ -1,82 +1,76 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FlexRow } from '../../utils/containers';
+import { FlexRow, Svg } from '../../utils/containers';
 import theme from '../../utils/theme';
-// lista json elementów (headery to keys)
-// lista keys w celu zachowania kolejności
-
-const Table = styled.table`
-  border-collapse: separate;
-  width: 100%;
-`;
-
-const TrHeader = styled.tr`
-  height: 48px;
-  position: relative;
-`;
-
-const Tr = styled.tr`
-  position: relative;
-  height: 72px;
-  /* background-color: ${({ theme, backgroundColor }) =>
-    backgroundColor ? backgroundColor : theme.colors.white}; */
-`;
-
-const Td = styled.td`
-  padding: 0 0 32px 0;
-  /* background-color: ${({ theme, backgroundColor }) =>
-    backgroundColor ? backgroundColor : theme.colors.white}; */
-`;
-
-const TableLine = styled(FlexRow)`
-  position: absolute;
-  top: ${({ top }) => (top ? top : 'auto')};
-  bottom: ${({ bottom }) => (bottom ? bottom : 'auto')};
-  left: 0;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.dark04};
-  height: ${({ height }) => (height ? height : '1px')};
-`;
+import ColumnFilterIcon from '../../components/generic/ColumnFilterIcon';
+import pensilIco from '../../assets/pencil_ico.svg';
+import deleteIco from '../../assets/delete_ico.svg';
+import NewTableStyle from './styles/NewTableStyle';
+import RowsBackgroundStyle from './styles/RowsBackgroundStyle';
+import SortButtonContainerStyle from './styles/SortButtonContainerStyle';
 
 const NewTable = ({ items, orderedKeys }) => {
   return (
-    <Table>
-      <TrHeader>
-        {orderedKeys.map((key) => {
-          return <th>{key}</th>;
+    <NewTableStyle>
+      <tr className="NewTableStyle__tr-header">
+        {orderedKeys.map((keyValue, i) => {
+          return (
+            <th key={`table-header-${i}`} className="NewTableStyle__th">
+              {keyValue}
+              <SortButtonContainerStyle as="span" column={keyValue}>
+                <ColumnFilterIcon index={1} active={2} rotateIcon={false} />
+              </SortButtonContainerStyle>
+            </th>
+          );
         })}
-        <TableLine height="2px" top="94%" as="td" shadow={theme.shadow} />
-      </TrHeader>
+        <FlexRow className="NewTableStyle__line" as="td" />
+      </tr>
       {items.map((item, i) => {
         return (
-          <Tr>
-            {orderedKeys.map((key) => {
-              return <Td>{item[key]}</Td>;
+          <tr className="NewTableStyle__tr">
+            {orderedKeys.map((keyValue, j) => {
+              return (
+                <td key={`table-item-${i}-${j}`} className="NewTableStyle__td">
+                  {item[keyValue]}
+                </td>
+              );
             })}
-            <FlexRow
-              width="100%"
-              alignmentX="space-between"
-              position="absolute"
-              top="55%"
-              left="0"
-            >
-              <FlexRow>tagi tagi tagi tagi</FlexRow>
-              <FlexRow>edytuj usuń</FlexRow>
+            <FlexRow className="NewTableStyle__row-footer">
+              <FlexRow className="NewTableStyle__tags-container">
+                {item.tags.map((tag, j) => {
+                  return (
+                    <FlexRow
+                      className="NewTableStyle__tag"
+                      key={`submissionTag-${i}-${j}`}
+                    >
+                      {tag}
+                    </FlexRow>
+                  );
+                })}
+              </FlexRow>
+              <FlexRow gap="12px">
+                <Svg
+                  src={pensilIco}
+                  backgroundColor={theme.colors.dark}
+                  cursor="pointer"
+                  size="cover"
+                  width="16px"
+                  height="16px"
+                />
+                <Svg
+                  src={deleteIco}
+                  backgroundColor={theme.colors.dark}
+                  cursor="pointer"
+                  size="cover"
+                  width="16px"
+                  height="16px"
+                />
+              </FlexRow>
             </FlexRow>
-            <FlexRow
-              width="100%"
-              position="absolute"
-              top="0"
-              left="0"
-              height="100%"
-              backgroundColor={
-                i % 2 === 0 ? theme.colors.dark01 : 'transparent'
-              }
-            />
-          </Tr>
+            <RowsBackgroundStyle i={i} />
+          </tr>
         );
       })}
-    </Table>
+    </NewTableStyle>
   );
 };
 

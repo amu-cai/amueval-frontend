@@ -29,6 +29,7 @@ const tableItems = [
     'Accuracy-test-A': '0.65503',
     'Likelihood-test-A': '0.00000',
     when: '2023-01-05 21:47',
+    tags: ['tag1', 'siema siema', 'dluuuuuggiiiiiiiiiiiiiii tag', 'eloelo'],
   },
   {
     id: '7371',
@@ -40,6 +41,7 @@ const tableItems = [
     'Accuracy-test-A': '0.67034',
     'Likelihood-test-A': '0.00000',
     when: '2023-01-05 21:47',
+    tags: ['tag2', 'siema2 siem2', 'looooooooooonggggg tag_tag', 'eloelo3'],
   },
 ];
 

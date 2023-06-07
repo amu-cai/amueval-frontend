@@ -4,6 +4,7 @@ const colors = {
   blue: '#4B8FF0',
   green03: 'rgba(27, 153, 139, 0.3)',
   green05: 'rgba(27, 153, 139, 0.5)',
+  green08: 'rgba(27, 153, 139, 0.8)',
   dark: '#343434',
   dark01: 'rgba(52, 52, 52, 0.1)',
   dark03: 'rgba(52, 52, 52, 0.3)',
