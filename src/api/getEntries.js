@@ -1,13 +1,14 @@
 import { API } from '../utils/globals';
 import KeyCloakService from '../services/KeyCloakService';
 
-const getAllEntries = (
+const getEntries = (
+  endpoint,
   challengeName,
   setDataStates,
   setLoadingState,
   setScoreSorted
 ) => {
-  fetch(`${API}/challenge-all-submissions/${challengeName}`, {
+  fetch(`${API}/${endpoint}/${challengeName}`, {
     headers: { Authorization: `Bearer ${KeyCloakService.getToken()}` },
   })
     .then((response) => response.json())
@@ -61,4 +62,4 @@ const getAllEntries = (
     });
 };
 
-export default getAllEntries;
+export default getEntries;

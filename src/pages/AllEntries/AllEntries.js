@@ -3,7 +3,7 @@ import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
 import Pager from '../../components/generic/Pager';
 import Search from '../../components/generic/Search';
-import getAllEntries from '../../api/getAllEntries';
+import getEntries from '../../api/getEntries';
 import Table from '../../components/generic/Table';
 import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
@@ -22,7 +22,8 @@ const NewTablePageTest = (props) => {
 
   React.useMemo(() => {
     if (props.challengeName) {
-      getAllEntries(
+      getEntries(
+        'challenge-all-submissions',
         props.challengeName,
         [setEntries, setEntriesAll],
         setLoading,

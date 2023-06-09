@@ -1,220 +1,132 @@
 import React from 'react';
 import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
-import getMyEntries from '../../api/getMyEntries';
 import Pager from '../../components/generic/Pager';
-import {
-  CALC_PAGES,
-  EVALUATIONS_FORMAT,
-  IS_MOBILE,
-  RENDER_WHEN,
-} from '../../utils/globals';
-import Media from 'react-media';
-import theme from '../../utils/theme';
+import { CALC_PAGES } from '../../utils/globals';
 import Loading from '../../components/generic/Loading';
 import Table from '../../components/generic/Table/Table';
-import myEntriesSearchQueryHandler from './myEntriesSearchQueryHandler';
 import Search from '../../components/generic/Search';
+import orderKeys from './orderKeys';
+import { ELEMENTS_PER_PAGE } from '../../utils/globals';
+import getEntries from '../../api/getEntries';
+import searchHandler from './searchHandler';
 
 const MyEntries = (props) => {
-  const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
-  const [myEntriesAll, setMyEntriesAll] = React.useState({});
-  const [myEntries, setMyEntries] = React.useState({});
+  // const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
+  const [myEntriesAll, setMyEntriesAll] = React.useState([]);
+  const [myEntries, setMyEntries] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [pageNr, setPageNr] = React.useState(1);
+  const [idSorted, setIdSorted] = React.useState([]);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
 
-  React.useEffect(() => {
-    challengesRequest();
-    // eslint-disable-next-line
-  }, []);
-
-  const searchQueryHandler = (event) => {
-    myEntriesSearchQueryHandler(event, myEntriesAll, setPageNr, setMyEntries);
-  };
-
-  const getPossibleMetrics = () => {
-    let metrics = [];
-    for (let test of myEntriesFromAPI.tests) {
-      let myEval = `${test.metric}.${test.name}`;
-      if (myEval && !metrics.includes(myEval)) {
-        metrics.push(myEval);
-      }
-    }
-    return metrics;
-  };
-
-  const getMyEntriesHeader = () => {
-    let header = ['#'];
-    if (IS_MOBILE()) header.push('when');
-    for (let myEval of getPossibleMetrics()) {
-      header.push(myEval);
-    }
-    if (!IS_MOBILE()) header.push('when');
-    return header;
-  };
-
-  const challengesRequest = () => {
-    getMyEntries(
+  React.useMemo(() => {
+    getEntries(
+      'challenge-my-submissions',
       props.challengeName,
-      setMyEntriesFromAPI,
-      setMyEntriesAll,
-      setMyEntries,
+      [setMyEntries, setMyEntriesAll],
       setLoading,
       setScoresSorted
     );
-  };
+  }, [props.challengeName]);
 
-  const sortByUpdate = (elem, i) => {
-    let newEntries = myEntries;
-    switch (elem) {
-      case '#':
-        break;
-      case 'when':
-        if (whenSorted) {
-          newEntries = newEntries.sort((a, b) =>
-            a.when < b.when ? 1 : b.when < a.when ? -1 : 0
-          );
-          setWhenSorted(false);
-        } else {
-          newEntries = newEntries.sort((a, b) =>
-            a.when > b.when ? 1 : b.when > a.when ? -1 : 0
-          );
-          setWhenSorted(true);
-        }
-        break;
-      default:
-        // eslint-disable-next-line no-case-declarations
-        let metricIndex = getPossibleMetrics().indexOf(elem);
-        // eslint-disable-next-line no-case-declarations
-        let newScoresSorted = scoresSorted;
-        if (scoresSorted[metricIndex]) {
-          newEntries = newEntries.sort(
-            (a, b) =>
-              (b.evaluations ? b.evaluations[elem] : -1) -
-              (a.evaluations ? a.evaluations[elem] : -1)
-          );
-          newScoresSorted[metricIndex] = false;
-          setScoresSorted(newScoresSorted);
-        } else {
-          newEntries = newEntries.sort(
-            (a, b) =>
-              (a.evaluations ? a.evaluations[elem] : -1) -
-              (b.evaluations ? b.evaluations[elem] : -1)
-          );
-          newScoresSorted[metricIndex] = true;
-          setScoresSorted(newScoresSorted);
-        }
-        break;
-    }
-    setMyEntries(newEntries);
-  };
+  const sortByUpdate = React.useCallback(
+    (elem) => {
+      let newEntries = myEntries.slice();
+      const possibleMetrics = orderKeys(myEntries[0]).filter(
+        (key) => !['id', 'submitter', 'when'].includes(key)
+      );
+      let metricIndex = possibleMetrics.indexOf(elem);
+      let newScoresSorted = scoresSorted.slice();
+      switch (elem) {
+        case 'id':
+          if (idSorted) {
+            setIdSorted(false);
+            newEntries = newEntries.sort((a, b) =>
+              a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+            );
+          } else {
+            setIdSorted(true);
+            newEntries = newEntries.sort((a, b) =>
+              a.id < b.id ? 1 : b.id < a.id ? -1 : 0
+            );
+          }
+          break;
+        case 'when':
+          if (whenSorted) {
+            setWhenSorted(false);
+            newEntries = newEntries.sort((a, b) =>
+              a.when < b.when ? 1 : b.when < a.when ? -1 : 0
+            );
+          } else {
+            setWhenSorted(true);
+            newEntries = newEntries.sort((a, b) =>
+              a.when > b.when ? 1 : b.when > a.when ? -1 : 0
+            );
+          }
+          break;
+        default:
+          if (scoresSorted[metricIndex]) {
+            newEntries = newEntries.sort(
+              (a, b) => (b ? b[elem] : -1) - (a ? a[elem] : -1)
+            );
+            newScoresSorted[metricIndex] = false;
+            setScoresSorted(newScoresSorted);
+          } else {
+            newEntries = newEntries.sort(
+              (a, b) => (a ? a[elem] : -1) - (b ? b[elem] : -1)
+            );
+            newScoresSorted[metricIndex] = true;
+            setScoresSorted(newScoresSorted);
+          }
+          break;
+      }
+      setMyEntries(newEntries);
+    },
+    [idSorted, myEntries, scoresSorted, whenSorted]
+  );
 
-  const mobileRender = () => {
-    return (
-      <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-        <H2 as="h2" margin="0 0 12px 0">
-          My Entries
-        </H2>
-        {!loading ? (
-          <>
-            <Search searchQueryHandler={searchQueryHandler} />
-            <Table
-              challengeName={props.challengeName}
-              headerElements={getMyEntriesHeader()}
-              possibleMetrics={getPossibleMetrics()}
-              tableType="myEntries"
-              gridTemplateColumns={
-                '1fr ' + '4fr '.repeat(getMyEntriesHeader().length - 1)
-              }
-              staticColumnElements={[
-                { name: 'id', format: null, order: 1, align: 'left' },
-                { name: 'when', format: RENDER_WHEN, order: 3, align: 'right' },
-              ]}
-              iterableColumnElement={{
-                name: 'evaluations',
-                format: EVALUATIONS_FORMAT,
-                order: 2,
-                align: 'left',
-              }}
-              pageNr={pageNr}
-              elements={myEntries}
-              sortByUpdate={sortByUpdate}
-            />
-            <Pager
-              pageNr={pageNr}
-              elements={myEntries}
-              setPageNr={setPageNr}
-              width="48px"
-              borderRadius="64px"
-              pages={CALC_PAGES(myEntries)}
-              number={`${pageNr} / ${CALC_PAGES(myEntries)}`}
-            />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </FlexColumn>
-    );
-  };
-
-  const desktopRender = () => {
-    return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
-        <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-          <H2 as="h2" margin="0 0 32px 0">
-            My Entries
-          </H2>
-        </FlexColumn>
-        {myEntries && !loading ? (
-          <>
-            <Search searchQueryHandler={searchQueryHandler} />
-            <Table
-              challengeName={props.challengeName}
-              headerElements={getMyEntriesHeader()}
-              possibleMetrics={getPossibleMetrics()}
-              gridTemplateColumns={
-                '1fr ' + '3fr '.repeat(getMyEntriesHeader().length - 2) + ' 4fr'
-              }
-              staticColumnElements={[
-                { name: 'id', format: null, order: 1, align: 'left' },
-                { name: 'when', format: RENDER_WHEN, order: 3, align: 'right' },
-              ]}
-              iterableColumnElement={{
-                name: 'evaluations',
-                format: EVALUATIONS_FORMAT,
-                order: 2,
-                align: 'left',
-              }}
-              pageNr={pageNr}
-              elements={myEntries}
-              sortByUpdate={sortByUpdate}
-              myEntries
-            />
-            <Pager
-              pageNr={pageNr}
-              elements={myEntries}
-              setPageNr={setPageNr}
-              width="72px"
-              mobileRender
-              borderRadius="64px"
-              pages={CALC_PAGES(myEntries, 2)}
-              number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
-            />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </FlexColumn>
-    );
-  };
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  let elements = myEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   return (
-    <>
-      <Media query={theme.mobile}>{mobileRender()}</Media>
-      <Media query={theme.desktop}>{desktopRender()}</Media>
-    </>
+    <FlexColumn
+      padding="24px"
+      gap="32px"
+      as="section"
+      width="100%"
+      maxWidth="1600px"
+    >
+      <H2 as="h2">My Entries</H2>
+      {!loading ? (
+        <>
+          <Search
+            searchQueryHandler={(event) =>
+              searchHandler(event, myEntriesAll, setPageNr, setMyEntries)
+            }
+          />
+          {elements.length > 0 && myEntries[0] && (
+            <Table
+              items={elements}
+              orderedKeys={orderKeys(myEntries[0])}
+              sortByUpdate={sortByUpdate}
+            />
+          )}
+          <Pager
+            pageNr={pageNr}
+            elements={myEntries}
+            setPageNr={setPageNr}
+            width="72px"
+            borderRadius="64px"
+            pages={CALC_PAGES(myEntries, 2)}
+            number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
+          />
+        </>
+      ) : (
+        <Loading />
+      )}
+    </FlexColumn>
   );
 };
 

@@ -3,9 +3,7 @@ import KeyCloakService from '../services/KeyCloakService';
 
 const getMyEntries = (
   challengeName,
-  setDataOriginalState,
-  setDataStateForSearch,
-  setDataState,
+  setDataStates,
   setLoadingState,
   setScoreSorted
 ) => {
@@ -14,7 +12,6 @@ const getMyEntries = (
   })
     .then((response) => response.json())
     .then((data) => {
-      setDataOriginalState(data);
       let item = {};
       let result = [];
       let initSetScoreSorted = [];
@@ -31,18 +28,17 @@ const getMyEntries = (
           };
         }
         for (let test of tests) {
-          if (item.evaluations) {
-            if (
-              !Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)
-            ) {
-              item = {
-                ...item,
-                evaluations: {
-                  ...item.evaluations,
-                  [`${test.metric}.${test.name}`]: '_',
-                },
-              };
-            }
+          if (!item.evaluations) {
+            item.evaluations = {};
+          }
+          if (!Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)) {
+            item = {
+              ...item,
+              evaluations: {
+                ...item.evaluations,
+                [`${test.metric}.${test.name}`]: -999999999,
+              },
+            };
           }
         }
         item = {
@@ -50,6 +46,7 @@ const getMyEntries = (
           id: submission.id,
           submitter: submission.submitter,
           when: submission.when,
+          tags: submission.tags,
         };
         result.push(item);
         item = {};
@@ -58,10 +55,9 @@ const getMyEntries = (
       for (let _ of tests) {
         initSetScoreSorted.push(false);
       }
-      setScoreSorted(initSetScoreSorted);
-      setDataStateForSearch(result);
-      setDataState(result);
-      setLoadingState(false);
+      for (let setDataState of setDataStates) setDataState(result);
+      if (setScoreSorted) setScoreSorted(initSetScoreSorted);
+      if (setLoadingState) setLoadingState(false);
     });
 };
 
