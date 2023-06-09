@@ -1,9 +1,9 @@
-import { FlexRow } from '../../../../utils/containers';
 import renderTags from './renderTags';
+import { FlexRow } from '../../../../../utils/containers';
 
 const TableRowTags = ({ item, i }) => {
   return (
-    <FlexRow className="NewTableStyle__tags-container">
+    <FlexRow className="TableStyle__tags-container">
       {renderTags(item.tags)}
     </FlexRow>
   );

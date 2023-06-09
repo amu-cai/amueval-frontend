@@ -3,8 +3,7 @@ import KeyCloakService from '../services/KeyCloakService';
 
 const getAllEntries = (
   challengeName,
-  setDataOriginalState,
-  setDataState,
+  setDataStates,
   setLoadingState,
   setScoreSorted
 ) => {
@@ -13,7 +12,6 @@ const getAllEntries = (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (setDataOriginalState) setDataOriginalState(data);
       let item = {};
       let result = [];
       let initSetScoreSorted = [];
@@ -57,7 +55,7 @@ const getAllEntries = (
       for (let _ of tests) {
         initSetScoreSorted.push(false);
       }
-      setDataState(result);
+      for (let setDataState of setDataStates) setDataState(result);
       if (setScoreSorted) setScoreSorted(initSetScoreSorted);
       if (setLoadingState) setLoadingState(false);
     });

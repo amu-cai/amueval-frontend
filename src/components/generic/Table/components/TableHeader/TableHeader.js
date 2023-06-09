@@ -1,19 +1,18 @@
 import React from 'react';
-import SortButtonContainerStyle from '../../styles/SortButtonContainerStyle';
-import ColumnFilterIcon from '../../../../components/generic/ColumnFilterIcon';
-import { FlexRow } from '../../../../utils/containers';
+import { FlexRow } from '../../../../../utils/containers';
+import ColumnFilterIcon from '../../../ColumnFilterIcon';
 
 const TableHeader = (props) => {
   const [activeIcon, setActiveIcon] = React.useState(null);
   const [rotateActiveIcon, setRotateActiveIcon] = React.useState(false);
 
   return (
-    <tr className="NewTableStyle__tr-header">
+    <tr className="TableStyle__tr-header">
       {props.orderedKeys.map((keyValue, i) => {
         return (
           <th
             key={`table-header-${i}`}
-            className="NewTableStyle__th"
+            className="TableStyle__th"
             onClick={() => {
               if (activeIcon === i) {
                 let newRotateActiveIcon = !rotateActiveIcon;
@@ -27,17 +26,21 @@ const TableHeader = (props) => {
             }}
           >
             {keyValue}
-            <SortButtonContainerStyle as="span" column={keyValue}>
+            <FlexRow
+              as="span"
+              className="TableStyle__sort-button"
+              column={keyValue}
+            >
               <ColumnFilterIcon
                 index={i}
                 active={activeIcon}
                 rotateIcon={rotateActiveIcon}
               />
-            </SortButtonContainerStyle>
+            </FlexRow>
           </th>
         );
       })}
-      <FlexRow className="NewTableStyle__line" as="td" />
+      <FlexRow className="TableStyle__line" as="td" />
     </tr>
   );
 };

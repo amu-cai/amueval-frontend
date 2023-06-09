@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlexRow, Svg } from '../../../../utils/containers';
-import theme from '../../../../utils/theme';
+import { FlexRow, Svg } from '../../../../../utils/containers';
+import theme from '../../../../../utils/theme';
 
 const TableRowButtons = ({ buttons, i }) => {
   return (

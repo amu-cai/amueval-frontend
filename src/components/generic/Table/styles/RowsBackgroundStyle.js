@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexRow } from '../../../utils/containers';
+import { FlexRow } from '../../../../utils/containers';
 
 const RowsBackgroundStyle = styled(FlexRow)`
   width: calc(100% + 12px);
