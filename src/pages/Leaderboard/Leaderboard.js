@@ -1,20 +1,15 @@
 import React from 'react';
-import Media from 'react-media';
-import theme from '../../utils/theme';
 import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
 import Table from '../../components/generic/Table/Table';
-import PropsTypes from 'prop-types';
 import getChallengeLeaderboard from '../../api/getChallengeLeaderboard';
 import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';
-import {
-  CALC_PAGES,
-  EVALUATIONS_FORMAT,
-  RENDER_WHEN,
-} from '../../utils/globals';
+import { CALC_PAGES } from '../../utils/globals';
 import Search from '../../components/generic/Search';
 import Pager from '../../components/generic/Pager';
 import Loading from '../../components/generic/Loading';
+import orderKeys from './orderKeys';
+import { ELEMENTS_PER_PAGE } from '../../utils/globals';
 
 const Leaderboard = (props) => {
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);
@@ -22,286 +17,175 @@ const Leaderboard = (props) => {
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
-  const [descriptionSorted, setDescriptionSorted] = React.useState(false);
-  const [entriesSorted, setEntriesSorted] = React.useState(false);
+  // const [descriptionSorted, setDescriptionSorted] = React.useState(false);
+  // const [entriesSorted, setEntriesSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
+  const [idSorted, setIdSorted] = React.useState([]);
 
   React.useEffect(() => {
-    challengeDataRequest(props.challengeName);
+    getChallengeLeaderboard(
+      'leaderboard',
+      props.challengeName,
+      [setEntries, setEntriesFromApi],
+      setLoading,
+      setScoresSorted
+    );
   }, [props.challengeName]);
-
-  const challengeDataRequest = (challengeName) => {
-    getChallengeLeaderboard(setEntriesFromApi, challengeName);
-    getChallengeLeaderboard(setEntries, challengeName, setLoading);
-  };
-
-  const getMetricIndex = (metricName) => {
-    let i = 0;
-    for (let evaluation of entriesFromApi[0].evaluations) {
-      if (`${evaluation.test.metric}.${evaluation.test.name}` === metricName) {
-        return i;
-      }
-      i++;
-    }
-  };
 
   const searchQueryHandler = (event) => {
     leaderboardSearchQueryHandler(event, entriesFromApi, setPageNr, setEntries);
   };
 
-  const getPossibleMetrics = () => {
-    let metrics = [];
-    for (let entry of entriesFromApi) {
-      for (let evaluation of entry.evaluations) {
-        let metric = evaluation.test.metric;
-        let name = evaluation.test.name;
-        if (metric && !metrics.includes(`${metric}.${name}`)) {
-          metrics.push(`${metric}.${name}`);
-        }
+  const sortByUpdate = React.useCallback(
+    (elem) => {
+      let newEntries = entries.slice();
+      const possibleMetrics = orderKeys(entries[0]).filter(
+        (key) => !['id', 'submitter', 'when'].includes(key)
+      );
+      let metricIndex = possibleMetrics.indexOf(elem);
+      let newScoresSorted = scoresSorted.slice();
+      switch (elem) {
+        case 'id':
+          if (idSorted) {
+            setIdSorted(false);
+            newEntries = newEntries.sort((a, b) =>
+              a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+            );
+          } else {
+            setIdSorted(true);
+            newEntries = newEntries.sort((a, b) =>
+              a.id < b.id ? 1 : b.id < a.id ? -1 : 0
+            );
+          }
+          break;
+        case 'submitter':
+          if (submitterSorted) {
+            setSubmitterSorted(false);
+            newEntries = newEntries.sort((a, b) =>
+              a.submitter.toLowerCase() < b.submitter.toLowerCase()
+                ? 1
+                : b.submitter.toLowerCase() < a.submitter.toLowerCase()
+                ? -1
+                : 0
+            );
+          } else {
+            setSubmitterSorted(true);
+            newEntries = newEntries.sort((a, b) =>
+              a.submitter.toLowerCase() > b.submitter.toLowerCase()
+                ? 1
+                : b.submitter.toLowerCase() > a.submitter.toLowerCase()
+                ? -1
+                : 0
+            );
+          }
+          break;
+        case 'when':
+          if (whenSorted) {
+            setWhenSorted(false);
+            newEntries = newEntries.sort((a, b) =>
+              a.when < b.when ? 1 : b.when < a.when ? -1 : 0
+            );
+          } else {
+            setWhenSorted(true);
+            newEntries = newEntries.sort((a, b) =>
+              a.when > b.when ? 1 : b.when > a.when ? -1 : 0
+            );
+          }
+          break;
+        default:
+          if (scoresSorted[metricIndex]) {
+            newEntries = newEntries.sort(
+              (a, b) => (b ? b[elem] : -1) - (a ? a[elem] : -1)
+            );
+            newScoresSorted[metricIndex] = false;
+            setScoresSorted(newScoresSorted);
+          } else {
+            newEntries = newEntries.sort(
+              (a, b) => (a ? a[elem] : -1) - (b ? b[elem] : -1)
+            );
+            newScoresSorted[metricIndex] = true;
+            setScoresSorted(newScoresSorted);
+          }
+          break;
       }
-    }
-    return metrics;
-  };
+      setEntries(newEntries);
+    },
+    [entries, idSorted, scoresSorted, submitterSorted, whenSorted]
+  );
 
-  const getLeaderboardHeader = () => {
-    let header = ['#', 'submitter', 'description'];
-    for (let metric of getPossibleMetrics()) {
-      header.push(metric);
-    }
-    header.push('entries');
-    header.push('when');
-    return header;
-  };
-
-  const getLeaderboardHeaderMobile = () => {
-    let header = ['#', 'submitter', 'description', 'entries', 'when'];
-    for (let metric of getPossibleMetrics()) {
-      header.push(metric);
-    }
-    return header;
-  };
-
-  const sortByUpdate = (elem) => {
-    let metricIndex = 0;
-    let newEntries = entries;
-    switch (elem) {
-      case 'submitter':
-        if (submitterSorted) {
-          newEntries = newEntries.sort((a, b) =>
-            a.submitter.toLowerCase() < b.submitter.toLowerCase()
-              ? 1
-              : b.submitter.toLowerCase() < a.submitter.toLowerCase()
-              ? -1
-              : 0
-          );
-          setSubmitterSorted(false);
-        } else {
-          newEntries = newEntries.sort((a, b) =>
-            a.submitter.toLowerCase() > b.submitter.toLowerCase()
-              ? 1
-              : b.submitter.toLowerCase() > a.submitter.toLowerCase()
-              ? -1
-              : 0
-          );
-          setSubmitterSorted(true);
-        }
-        break;
-      case 'description':
-        if (descriptionSorted) {
-          newEntries = newEntries.sort((a, b) =>
-            a.description.toLowerCase() < b.description.toLowerCase()
-              ? 1
-              : b.description.toLowerCase() < a.description.toLowerCase()
-              ? -1
-              : 0
-          );
-          setDescriptionSorted(false);
-        } else {
-          newEntries = newEntries.sort((a, b) =>
-            a.description.toLowerCase() > b.description.toLowerCase()
-              ? 1
-              : b.description.toLowerCase() > a.description.toLowerCase()
-              ? -1
-              : 0
-          );
-          setDescriptionSorted(true);
-        }
-        break;
-      case 'entries':
-        if (entriesSorted) {
-          newEntries = newEntries.sort((a, b) => b.times - a.times);
-          setEntriesSorted(false);
-        } else {
-          newEntries = newEntries.sort((a, b) => a.times - b.times);
-          setEntriesSorted(true);
-        }
-        break;
-      case 'when':
-        if (whenSorted) {
-          newEntries = newEntries.sort((a, b) =>
-            a.when < b.when ? 1 : b.when < a.when ? -1 : 0
-          );
-          setWhenSorted(false);
-        } else {
-          newEntries = newEntries.sort((a, b) =>
-            a.when > b.when ? 1 : b.when > a.when ? -1 : 0
-          );
-          setWhenSorted(true);
-        }
-        break;
-      default:
-        metricIndex = getMetricIndex(elem);
-        // eslint-disable-next-line no-case-declarations
-        let newScoresSorted = scoresSorted;
-        if (scoresSorted[metricIndex]) {
-          newEntries = newEntries.sort(
-            (a, b) =>
-              b.evaluations[metricIndex].score -
-              a.evaluations[metricIndex].score
-          );
-          newScoresSorted[metricIndex] = false;
-          setScoresSorted(newScoresSorted);
-        } else {
-          newEntries = newEntries.sort(
-            (a, b) =>
-              a.evaluations[metricIndex].score -
-              b.evaluations[metricIndex].score
-          );
-          newScoresSorted[metricIndex] = true;
-          setScoresSorted(newScoresSorted);
-        }
-        break;
-    }
-    setEntries(newEntries);
-  };
-
-  const mobileRender = () => {
-    return (
-      <FlexColumn padding="24px 12px" width="70%" as="section" id="start">
-        <H2 as="h2" margin="0 0 12px 0">
-          Leaderboard
-        </H2>
-        {!loading ? (
-          <>
-            <Search searchQueryHandler={searchQueryHandler} />
-            <Table
-              challengeName={props.challengeName}
-              headerElements={getLeaderboardHeaderMobile()}
-              tableType="leaderboard"
-              gridTemplateColumns={
-                entries[0]
-                  ? '1fr 2fr 3fr ' +
-                    '2fr '.repeat(entries[0].evaluations.length) +
-                    '1fr 2fr'
-                  : ''
-              }
-              user={props.user}
-              staticColumnElements={[
-                { name: 'id', format: null, order: 1, align: 'left' },
-                { name: 'submitter', format: null, order: 2, align: 'left' },
-                { name: 'description', format: null, order: 3, align: 'left' },
-                { name: 'times', format: null, order: 4, align: 'left' },
-                { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
-              ]}
-              metrics={getPossibleMetrics()}
-              iterableColumnElement={{
-                name: 'evaluations',
-                format: EVALUATIONS_FORMAT,
-                order: 3,
-                align: 'left',
-              }}
-              pageNr={pageNr}
-              elements={entries}
-              sortByUpdate={sortByUpdate}
-            />
-            <Pager
-              pageNr={pageNr}
-              elements={entries}
-              setPageNr={setPageNr}
-              width="48px"
-              borderRadius="64px"
-              pages={CALC_PAGES(entries)}
-              number={`${pageNr} / ${CALC_PAGES(entries)}`}
-            />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </FlexColumn>
-    );
-  };
-
-  const desktopRender = () => {
-    return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
-        <H2 as="h2" margin="0 0 32px 0">
-          Leaderboard
-        </H2>
-        {!loading ? (
-          <>
-            <Search searchQueryHandler={searchQueryHandler} />
-            <Table
-              challengeName={props.challengeName}
-              headerElements={getLeaderboardHeader()}
-              gridTemplateColumns={
-                entries[0]
-                  ? '1fr 2fr 3fr ' +
-                    '2fr '.repeat(entries[0].evaluations.length) +
-                    '1fr 2fr'
-                  : ''
-              }
-              user={props.user}
-              staticColumnElements={[
-                { name: 'id', format: null, order: 1, align: 'left' },
-                { name: 'submitter', format: null, order: 2, align: 'left' },
-                { name: 'description', format: null, order: 3, align: 'left' },
-                { name: 'times', format: null, order: 4, align: 'left' },
-                { name: 'when', format: RENDER_WHEN, order: 5, align: 'right' },
-              ]}
-              metrics={getPossibleMetrics()}
-              iterableColumnElement={{
-                name: 'evaluations',
-                format: EVALUATIONS_FORMAT,
-                order: 3,
-                align: 'left',
-              }}
-              pageNr={pageNr}
-              elements={entries}
-              setPageNr={setPageNr}
-              sortByUpdate={sortByUpdate}
-            />
-            <Pager
-              pageNr={pageNr}
-              elements={entries}
-              setPageNr={setPageNr}
-              width="72px"
-              borderRadius="64px"
-              pages={CALC_PAGES(entries, 2)}
-              number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
-            />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </FlexColumn>
-    );
-  };
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  let elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   return (
-    <>
-      <Media query={theme.mobile}>{mobileRender()}</Media>
-      <Media query={theme.desktop}>{desktopRender()}</Media>
-    </>
+    <FlexColumn
+      padding="24px"
+      gap="32px"
+      as="section"
+      width="100%"
+      maxWidth="1600px"
+    >
+      <H2 as="h2">Leaderboard</H2>
+      {!loading ? (
+        <>
+          <Search
+            searchQueryHandler={(event) =>
+              searchQueryHandler(event, entries, setPageNr, setEntries)
+            }
+          />
+          {elements.length > 0 && entries[0] && (
+            <Table
+              items={elements}
+              orderedKeys={orderKeys(entries[0])}
+              sortByUpdate={sortByUpdate}
+            />
+          )}
+          <Pager
+            pageNr={pageNr}
+            elements={entries}
+            setPageNr={setPageNr}
+            width="72px"
+            borderRadius="64px"
+            pages={CALC_PAGES(entries, 2)}
+            number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
+          />
+        </>
+      ) : (
+        <Loading />
+      )}
+    </FlexColumn>
   );
 };
 
-Leaderboard.propsTypes = {
-  challengeName: PropsTypes.string,
-};
-
-Leaderboard.defaultProps = {
-  challengeName: '',
-};
-
 export default Leaderboard;
+
+// case 'description':
+//   if (descriptionSorted) {
+//     newEntries = newEntries.sort((a, b) =>
+//       a.description.toLowerCase() < b.description.toLowerCase()
+//         ? 1
+//         : b.description.toLowerCase() < a.description.toLowerCase()
+//         ? -1
+//         : 0
+//     );
+//     setDescriptionSorted(false);
+//   } else {
+//     newEntries = newEntries.sort((a, b) =>
+//       a.description.toLowerCase() > b.description.toLowerCase()
+//         ? 1
+//         : b.description.toLowerCase() > a.description.toLowerCase()
+//         ? -1
+//         : 0
+//     );
+//     setDescriptionSorted(true);
+//   }
+//   break;
+// case 'entries':
+//   if (entriesSorted) {
+//     newEntries = newEntries.sort((a, b) => b.times - a.times);
+//     setEntriesSorted(false);
+//   } else {
+//     newEntries = newEntries.sort((a, b) => a.times - b.times);
+//     setEntriesSorted(true);
+//   }
+//   break;
