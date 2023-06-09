@@ -11,7 +11,6 @@ const allEntriesSearchQueryHandler = (
   else {
     for (let entry of entriesFromApi) {
       const { id, when, submitter } = entry;
-      console.log(entry);
       let evaluations = '';
       if (entry.evaluations) {
         for (let evaluation of Object.values(entry.evaluations)) {

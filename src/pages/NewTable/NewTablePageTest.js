@@ -5,45 +5,8 @@ import Pager from '../../components/generic/Pager';
 import Search from '../../components/generic/Search';
 import getAllEntries from '../../api/getAllEntries';
 import NewTable from './NewTable';
-
-// const orderedKeys = [
-//   'id',
-//   'submitter',
-//   'Accuracy-dev-0',
-//   'Likelihood-dev-0',
-//   'Accuracy-dev-1',
-//   'Likelihood-dev-1',
-//   'Accuracy-test-A',
-//   'Likelihood-test-A',
-//   'when',
-// ];
-
-// const tableItems = [
-//   {
-//     id: '7962',
-//     submitter: 'wirus wirus',
-//     'Accuracy-dev-0': '0.68248',
-//     'Likelihood-dev-0': '0.00000',
-//     'Accuracy-dev-1': '0.65028',
-//     'Likelihood-dev-1': '0.00000',
-//     'Accuracy-test-A': '0.65503',
-//     'Likelihood-test-A': '0.00000',
-//     when: '2023-01-05 21:47',
-//     tags: ['tag1', 'siema siema', 'dluuuuuggiiiiiiiiiiiiiii tag', 'eloelo'],
-//   },
-//   {
-//     id: '7371',
-//     submitter: 'Kamil Guttmann',
-//     'Accuracy.dev-0': '0.68248',
-//     'Likelihood.dev-0': '0.00000',
-//     'Accuracy.dev-1': '0.67544',
-//     'Likelihood.dev-1': '0.00000',
-//     'Accuracy.test-A': '0.67034',
-//     'Likelihood-test-A': '0.00000',
-//     when: '2023-01-05 21:47',
-//     tags: ['tag2', 'siema2 siem2', 'looooooooooonggggg tag_tag', 'eloelo3'],
-//   },
-// ];
+import Loading from '../../components/generic/Loading';
+import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
 
 const NewTablePageTest = (props) => {
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);
@@ -100,20 +63,32 @@ const NewTablePageTest = (props) => {
   console.log(entriesFromApi);
   console.log(entriesAll);
   console.log(entries);
-  if (entries[0]) console.log(entries[0].keys);
 
-  return (
-    <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
-      <H2 as="h2" margin="0 0 32px 0">
-        New Table Test
-      </H2>
-      <Search searchQueryHandler={() => console.log('siema')} />
-      {entries.length > 0 && (
-        <NewTable items={entries} orderedKeys={orderKeys(entries[0])} />
-      )}
-      <Pager />
-    </FlexColumn>
-  );
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  let elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+
+  if (!loading) {
+    return (
+      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
+        <H2 as="h2" margin="0 0 32px 0">
+          New Table Test
+        </H2>
+        <Search searchQueryHandler={() => console.log('siema')} />
+        {elements.length > 0 && entries[0] && (
+          <NewTable items={elements} orderedKeys={orderKeys(entries[0])} />
+        )}
+        <Pager
+          pageNr={pageNr}
+          elements={entries}
+          setPageNr={setPageNr}
+          width="72px"
+          borderRadius="64px"
+          pages={CALC_PAGES(entries, 2)}
+          number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
+        />
+      </FlexColumn>
+    );
+  } else return <Loading />;
 };
 
 export default NewTablePageTest;

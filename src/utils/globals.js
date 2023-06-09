@@ -8,7 +8,7 @@ import imageIco from '../assets/image_ico.svg';
 import tabularIco from '../assets/tabular_ico.svg';
 import React from 'react';
 
-const ELEMENTS_PER_PAGE = 12;
+const ELEMENTS_PER_PAGE = 10;
 const MINI_DESCRIPTION_LENGTH = 70;
 const API = process.env.REACT_APP_API;
 const CHALLENGES_PAGE = '/challenges';
