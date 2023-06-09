@@ -16,11 +16,9 @@ const NewTablePageTest = (props) => {
   const [entries, setEntries] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
-  // eslint-disable-next-line
+  const [idSorted, setIdSorted] = React.useState([]);
   const [scoresSorted, setScoresSorted] = React.useState([]);
-  // eslint-disable-next-line
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
-  // eslint-disable-next-line
   const [whenSorted, setWhenSorted] = React.useState(false);
 
   React.useEffect(() => {
@@ -36,6 +34,80 @@ const NewTablePageTest = (props) => {
       setLoading,
       setScoresSorted
     );
+  };
+
+  const sortByUpdate = (elem) => {
+    let newEntries = entries.slice();
+    const possibleMetrics = orderKeys(entries[0]).filter(
+      (key) => !['id', 'submitter', 'when'].includes(key)
+    );
+    let metricIndex = possibleMetrics.indexOf(elem);
+    let newScoresSorted = scoresSorted.slice();
+    switch (elem) {
+      case 'id':
+        if (idSorted) {
+          setIdSorted(false);
+          newEntries = newEntries.sort((a, b) =>
+            a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+          );
+        } else {
+          setIdSorted(true);
+          newEntries = newEntries.sort((a, b) =>
+            a.id < b.id ? 1 : b.id < a.id ? -1 : 0
+          );
+        }
+        break;
+      case 'submitter':
+        if (submitterSorted) {
+          setSubmitterSorted(false);
+          newEntries = newEntries.sort((a, b) =>
+            a.submitter.toLowerCase() < b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() < a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        } else {
+          setSubmitterSorted(true);
+          newEntries = newEntries.sort((a, b) =>
+            a.submitter.toLowerCase() > b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() > a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        }
+        break;
+      case 'when':
+        if (whenSorted) {
+          setWhenSorted(false);
+          newEntries = newEntries.sort((a, b) =>
+            a.when < b.when ? 1 : b.when < a.when ? -1 : 0
+          );
+        } else {
+          setWhenSorted(true);
+          newEntries = newEntries.sort((a, b) =>
+            a.when > b.when ? 1 : b.when > a.when ? -1 : 0
+          );
+        }
+        break;
+      default:
+        if (scoresSorted[metricIndex]) {
+          newEntries = newEntries.sort(
+            (a, b) => (b ? b[elem] : -1) - (a ? a[elem] : -1)
+          );
+          newScoresSorted[metricIndex] = false;
+          setScoresSorted(newScoresSorted);
+        } else {
+          newEntries = newEntries.sort(
+            (a, b) => (a ? a[elem] : -1) - (b ? b[elem] : -1)
+          );
+          newScoresSorted[metricIndex] = true;
+          setScoresSorted(newScoresSorted);
+        }
+        break;
+    }
+    setEntries(newEntries);
   };
 
   const orderKeys = (elem) => {
@@ -79,7 +151,11 @@ const NewTablePageTest = (props) => {
           }
         />
         {elements.length > 0 && entries[0] && (
-          <NewTable items={elements} orderedKeys={orderKeys(entries[0])} />
+          <NewTable
+            items={elements}
+            orderedKeys={orderKeys(entries[0])}
+            sortByUpdate={sortByUpdate}
+          />
         )}
         <Pager
           pageNr={pageNr}

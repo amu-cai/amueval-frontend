@@ -38,7 +38,7 @@ const getAllEntries = (
               ...item,
               evaluations: {
                 ...item.evaluations,
-                [`${test.metric}.${test.name}`]: 'N/A',
+                [`${test.metric}.${test.name}`]: -999999999,
               },
             };
           }

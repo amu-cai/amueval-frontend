@@ -111,6 +111,11 @@ const RENDER_WHEN = (when) => {
   return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
 
+const RENDER_METRIC_VALUE = (value) => {
+  if (value <= -999999999) return 'N/A';
+  else return value;
+};
+
 const EVALUATIONS_FORMAT = (evaluate) => {
   if (Object.hasOwn(evaluate, 'score')) return evaluate.score.slice(0, 7);
   return evaluate.slice(0, 7);
@@ -146,6 +151,7 @@ export {
   RENDER_ICO,
   CALC_PAGES,
   RENDER_DEADLINE_TIME,
+  RENDER_METRIC_VALUE,
   IS_MOBILE,
   RENDER_WHEN,
   EVALUATIONS_FORMAT,

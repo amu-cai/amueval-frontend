@@ -1,5 +1,5 @@
 import React from 'react';
-import { RENDER_WHEN } from '../../../../utils/globals';
+import { RENDER_WHEN, RENDER_METRIC_VALUE } from '../../../../utils/globals';
 
 const TableRowItems = ({ orderedKeys, item, i }) => {
   return (
@@ -7,7 +7,9 @@ const TableRowItems = ({ orderedKeys, item, i }) => {
       {orderedKeys.map((keyValue, j) => {
         return (
           <td key={`table-item-${i}-${j}`} className="NewTableStyle__td">
-            {keyValue === 'when' ? RENDER_WHEN(item[keyValue]) : item[keyValue]}
+            {keyValue === 'when'
+              ? RENDER_WHEN(item[keyValue])
+              : RENDER_METRIC_VALUE(item[keyValue])}
           </td>
         );
       })}

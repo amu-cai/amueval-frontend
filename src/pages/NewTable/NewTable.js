@@ -9,10 +9,17 @@ import TableRowTags from './components/TableRowTags';
 import TableRowItems from './components/TableRowItems';
 import TableRowButtons from './components/TableRowButtons';
 
-const NewTable = ({ items, orderedKeys }) => {
+const NewTable = ({ items, orderedKeys, sortByUpdate }) => {
+  const [, updateState] = React.useState();
+  const tableUpdate = React.useCallback(() => updateState({}), []);
+
   return (
     <NewTableStyle>
-      <TableHeader orderedKeys={orderedKeys} />
+      <TableHeader
+        orderedKeys={orderedKeys}
+        sortByUpdate={sortByUpdate}
+        tableUpdate={tableUpdate}
+      />
       {items.map((item, i) => {
         return (
           <tr key={`table-row-${i}`} className="NewTableStyle__tr">
