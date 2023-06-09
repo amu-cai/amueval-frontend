@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FlexRow } from '../../../utils/containers';
 
 const getRightAttribute = (column) => {
-  const staticColumns = ['id', 'when', 'submitter'];
+  const staticColumns = ['id', 'when'];
   if (staticColumns.includes(column)) return '32%';
   return '16%';
 };

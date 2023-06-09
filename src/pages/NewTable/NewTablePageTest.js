@@ -7,14 +7,14 @@ import getAllEntries from '../../api/getAllEntries';
 import NewTable from './NewTable';
 import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
+import searchQueryHandler from './searchHandler';
 
 const NewTablePageTest = (props) => {
+  // eslint-disable-next-line
   const [entriesFromApi, setEntriesFromApi] = React.useState([]);
   const [entriesAll, setEntriesAll] = React.useState([]);
   const [entries, setEntries] = React.useState([]);
-  // eslint-disable-next-line
   const [pageNr, setPageNr] = React.useState(1);
-  // eslint-disable-next-line
   const [loading, setLoading] = React.useState(true);
   // eslint-disable-next-line
   const [scoresSorted, setScoresSorted] = React.useState([]);
@@ -60,20 +60,24 @@ const NewTablePageTest = (props) => {
     return null;
   };
 
-  console.log(entriesFromApi);
-  console.log(entriesAll);
-  console.log(entries);
-
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
   let elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   if (!loading) {
     return (
-      <FlexColumn padding="24px" as="section" width="100%" maxWidth="1600px">
-        <H2 as="h2" margin="0 0 32px 0">
-          New Table Test
-        </H2>
-        <Search searchQueryHandler={() => console.log('siema')} />
+      <FlexColumn
+        padding="24px"
+        gap="32px"
+        as="section"
+        width="100%"
+        maxWidth="1600px"
+      >
+        <H2 as="h2">New Table Test</H2>
+        <Search
+          searchQueryHandler={(event) =>
+            searchQueryHandler(event, entriesAll, setPageNr, setEntries)
+          }
+        />
         {elements.length > 0 && entries[0] && (
           <NewTable items={elements} orderedKeys={orderKeys(entries[0])} />
         )}
