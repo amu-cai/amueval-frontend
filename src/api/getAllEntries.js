@@ -30,25 +30,25 @@ const getAllEntries = (
           };
         }
         for (let test of tests) {
-          if (item.evaluations) {
-            if (
-              !Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)
-            ) {
-              item = {
-                ...item,
-                evaluations: {
-                  ...item.evaluations,
-                  [`${test.metric}.${test.name}`]: '-1',
-                },
-              };
-            }
+          if (!item.evaluations) {
+            item.evaluations = {};
+          }
+          if (!Object.hasOwn(item.evaluations, `${test.metric}.${test.name}`)) {
+            item = {
+              ...item,
+              evaluations: {
+                ...item.evaluations,
+                [`${test.metric}.${test.name}`]: 'N/A',
+              },
+            };
           }
         }
         item = {
-          ...item,
+          ...item.evaluations,
           id: submission.id,
           submitter: submission.submitter,
           when: submission.when,
+          tags: submission.tags,
         };
         result.push(item);
         item = {};

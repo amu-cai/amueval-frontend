@@ -29,7 +29,7 @@ const Table = (props) => {
       let newElem = [];
       for (let metric of props.possibleMetrics) {
         if (Object.hasOwn(elem, props.iterableColumnElement.name)) {
-          if (elem[props.iterableColumnElement.name][metric] === '-1')
+          if (elem[props.iterableColumnElement.name][metric] === '_')
             newElem.push('N/A');
           else newElem.push(elem[props.iterableColumnElement.name][metric]);
         } else {

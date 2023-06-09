@@ -63,7 +63,7 @@ const Pager = (props) => {
         as="a"
         href="#start"
         src={polygon}
-        onClick={() => PREVIOUS_PAGE(props.pageNr, props.setPage)}
+        onClick={() => PREVIOUS_PAGE(props.pageNr, props.setPageNr)}
         size="cover"
         backgroundColor={leftArrowVisible()}
       />
@@ -76,7 +76,7 @@ const Pager = (props) => {
         as="a"
         href="#start"
         src={polygon}
-        onClick={() => NEXT_PAGE(props.elements, props.pageNr, props.setPage)}
+        onClick={() => NEXT_PAGE(props.elements, props.pageNr, props.setPageNr)}
         size="cover"
         backgroundColor={rightArrowVisible()}
       />

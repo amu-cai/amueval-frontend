@@ -39,14 +39,14 @@ const getMyEntries = (
                 ...item,
                 evaluations: {
                   ...item.evaluations,
-                  [`${test.metric}.${test.name}`]: '-1',
+                  [`${test.metric}.${test.name}`]: '_',
                 },
               };
             }
           }
         }
         item = {
-          ...item,
+          ...item.evaluations,
           id: submission.id,
           submitter: submission.submitter,
           when: submission.when,
