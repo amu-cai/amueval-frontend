@@ -1,7 +1,7 @@
 import KeyCloakService from '../services/KeyCloakService';
 import { API } from '../utils/globals';
 
-const deleteSubmission = (submissionId) => {
+const deleteSubmission = async (submissionId) => {
   fetch(`${API}/delete-submission/${submissionId}`, {
     method: 'POST',
     headers: {

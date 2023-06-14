@@ -129,11 +129,13 @@ const NewTablePageTest = (props) => {
             }
           />
           {elements.length > 0 && entries[0] && (
+            // <div style={{ width: '100%', overflowX: 'scroll' }}>
             <Table
               items={elements}
               orderedKeys={orderKeys(entries[0])}
               sortByUpdate={sortByUpdate}
             />
+            // </div>
           )}
           <Pager
             pageNr={pageNr}

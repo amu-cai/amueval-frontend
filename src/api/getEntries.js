@@ -44,14 +44,12 @@ const getEntries = (
         }
         item = {
           ...item.evaluations,
-          id: submission.id,
-          submitter: submission.submitter,
-          when: submission.when,
-          tags: submission.tags,
+          ...submission,
         };
         result.push(item);
         item = {};
       }
+      result = result.filter((item) => !item.deleted);
       // eslint-disable-next-line no-unused-vars
       for (let _ of tests) {
         initSetScoreSorted.push(false);

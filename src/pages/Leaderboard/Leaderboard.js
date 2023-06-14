@@ -23,7 +23,7 @@ const Leaderboard = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [idSorted, setIdSorted] = React.useState([]);
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     getChallengeLeaderboard(
       'leaderboard',
       props.challengeName,
@@ -41,7 +41,8 @@ const Leaderboard = (props) => {
     (elem) => {
       let newEntries = entries.slice();
       const possibleMetrics = orderKeys(entries[0]).filter(
-        (key) => !['id', 'submitter', 'when'].includes(key)
+        (key) =>
+          !['id', 'submitter', 'when', 'description', 'times'].includes(key)
       );
       let metricIndex = possibleMetrics.indexOf(elem);
       let newScoresSorted = scoresSorted.slice();

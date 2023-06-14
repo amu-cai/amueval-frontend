@@ -14,7 +14,7 @@ const orderKeys = (elem) => {
     result = result.concat(dev0keys);
     result = result.concat(dev1keys);
     result = result.concat(testAkeys);
-    result.push('entries', 'when');
+    result.push('times', 'when');
     return result;
   }
   return null;

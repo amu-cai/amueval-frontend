@@ -44,12 +44,7 @@ const getChallengeLeaderboard = (
         }
         item = {
           ...item.evaluations,
-          id: submission.id,
-          submitter: submission.submitter,
-          when: submission.when,
-          description: submission.description,
-          entries: submission.times,
-          tags: submission.tags,
+          ...submission,
         };
         result.push(item);
         item = {};
