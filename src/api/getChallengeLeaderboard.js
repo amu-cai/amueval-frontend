@@ -47,6 +47,8 @@ const getChallengeLeaderboard = (
           id: submission.id,
           submitter: submission.submitter,
           when: submission.when,
+          description: submission.description,
+          entries: submission.times,
           tags: submission.tags,
         };
         result.push(item);

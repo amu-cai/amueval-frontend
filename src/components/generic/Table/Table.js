@@ -1,20 +1,16 @@
 import React from 'react';
-import pensilIco from '../../../assets/pencil_ico.svg';
-import deleteIco from '../../../assets/delete_ico.svg';
 import TableStyle from './styles/TableStyle';
 import TableHeader from './components/TableHeader';
-import TableRowTags from './components/TableRowTags';
 import TableRowItems from './components/TableRowItems';
-import TableRowButtons from './components/TableRowButtons';
 import RowsBackgroundStyle from './styles/RowsBackgroundStyle';
-import { FlexRow } from '../../../utils/containers';
+import TableRowFooter from './components/TableRowFooter';
 
-const Table = ({ items, orderedKeys, sortByUpdate }) => {
+const Table = ({ items, orderedKeys, sortByUpdate, rowFooter = true }) => {
   const [, updateState] = React.useState();
   const tableUpdate = React.useCallback(() => updateState({}), []);
 
   return (
-    <TableStyle>
+    <TableStyle rowFooter={rowFooter}>
       <TableHeader
         orderedKeys={orderedKeys}
         sortByUpdate={sortByUpdate}
@@ -24,15 +20,7 @@ const Table = ({ items, orderedKeys, sortByUpdate }) => {
         return (
           <tr key={`table-row-${i}`} className="TableStyle__tr">
             <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
-            <FlexRow className="TableStyle__row-footer">
-              <TableRowTags item={item} i={i} />
-              <TableRowButtons
-                buttons={[
-                  { icon: pensilIco, handler: () => console.log('edit') },
-                  { icon: deleteIco, handler: () => console.log('delete') },
-                ]}
-              />
-            </FlexRow>
+            <TableRowFooter rowFooter={rowFooter} item={item} i={i} />
             <RowsBackgroundStyle i={i} />
           </tr>
         );

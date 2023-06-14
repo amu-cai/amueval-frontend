@@ -17,8 +17,8 @@ const Leaderboard = (props) => {
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
-  // const [descriptionSorted, setDescriptionSorted] = React.useState(false);
-  // const [entriesSorted, setEntriesSorted] = React.useState(false);
+  const [descriptionSorted, setDescriptionSorted] = React.useState(false);
+  const [entriesSorted, setEntriesSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [idSorted, setIdSorted] = React.useState([]);
@@ -80,6 +80,40 @@ const Leaderboard = (props) => {
             );
           }
           break;
+        case 'description':
+          if (descriptionSorted) {
+            newEntries = newEntries.sort((a, b) =>
+              a.description.toLowerCase() < b.description.toLowerCase()
+                ? 1
+                : b.description.toLowerCase() < a.description.toLowerCase()
+                ? -1
+                : 0
+            );
+            setDescriptionSorted(false);
+          } else {
+            newEntries = newEntries.sort((a, b) =>
+              a.description.toLowerCase() > b.description.toLowerCase()
+                ? 1
+                : b.description.toLowerCase() > a.description.toLowerCase()
+                ? -1
+                : 0
+            );
+            setDescriptionSorted(true);
+          }
+          break;
+        case 'times':
+          if (entriesSorted) {
+            newEntries = newEntries.sort((a, b) =>
+              a.times > b.times ? 1 : b.times > a.times ? -1 : 0
+            );
+            setEntriesSorted(false);
+          } else {
+            newEntries = newEntries.sort((a, b) =>
+              a.times < b.times ? 1 : b.times < a.times ? -1 : 0
+            );
+            setEntriesSorted(true);
+          }
+          break;
         case 'when':
           if (whenSorted) {
             setWhenSorted(false);
@@ -111,11 +145,19 @@ const Leaderboard = (props) => {
       }
       setEntries(newEntries);
     },
-    [entries, idSorted, scoresSorted, submitterSorted, whenSorted]
+    [
+      descriptionSorted,
+      entries,
+      entriesSorted,
+      idSorted,
+      scoresSorted,
+      submitterSorted,
+      whenSorted,
+    ]
   );
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  let elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  const elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   return (
     <FlexColumn
@@ -138,11 +180,12 @@ const Leaderboard = (props) => {
               items={elements}
               orderedKeys={orderKeys(entries[0])}
               sortByUpdate={sortByUpdate}
+              rowFooter={false}
             />
           )}
           <Pager
             pageNr={pageNr}
-            elements={entries}
+            elements={elements}
             setPageNr={setPageNr}
             width="72px"
             borderRadius="64px"
@@ -158,34 +201,3 @@ const Leaderboard = (props) => {
 };
 
 export default Leaderboard;
-
-// case 'description':
-//   if (descriptionSorted) {
-//     newEntries = newEntries.sort((a, b) =>
-//       a.description.toLowerCase() < b.description.toLowerCase()
-//         ? 1
-//         : b.description.toLowerCase() < a.description.toLowerCase()
-//         ? -1
-//         : 0
-//     );
-//     setDescriptionSorted(false);
-//   } else {
-//     newEntries = newEntries.sort((a, b) =>
-//       a.description.toLowerCase() > b.description.toLowerCase()
-//         ? 1
-//         : b.description.toLowerCase() > a.description.toLowerCase()
-//         ? -1
-//         : 0
-//     );
-//     setDescriptionSorted(true);
-//   }
-//   break;
-// case 'entries':
-//   if (entriesSorted) {
-//     newEntries = newEntries.sort((a, b) => b.times - a.times);
-//     setEntriesSorted(false);
-//   } else {
-//     newEntries = newEntries.sort((a, b) => a.times - b.times);
-//     setEntriesSorted(true);
-//   }
-//   break;

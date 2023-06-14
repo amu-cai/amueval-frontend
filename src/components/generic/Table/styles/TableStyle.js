@@ -19,12 +19,13 @@ const TableStyle = styled.table`
 
   .TableStyle__tr {
     position: relative;
-    height: 72px;
+    height: ${({ rowFooter }) => (rowFooter ? '72px' : 'auto')};
   }
 
   .TableStyle__td {
-    padding: 0 0 32px 0;
+    padding: ${({ rowFooter }) => (rowFooter ? '0 0 32px 0' : '12px 0')};
     margin: 0 0 0 2px;
+    min-width: 80px;
   }
 
   .TableStyle_line {
