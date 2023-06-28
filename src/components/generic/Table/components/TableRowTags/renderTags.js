@@ -10,7 +10,6 @@ const renderTags = (tags, i) => {
       );
     });
   }
-  return <FlexRow className="TableStyle__tag">submission without tags</FlexRow>;
 };
 
 export default renderTags;

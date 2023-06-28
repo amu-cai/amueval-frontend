@@ -7,6 +7,7 @@ import HowToContent from './components/HowToContent';
 
 const HowTo = (props) => {
   const [userFullInfo, setUserFullInfo] = React.useState(null);
+  const username = KeyCloakService.getUsername();
 
   React.useEffect(() => {
     getFullUser(setUserFullInfo);
@@ -31,7 +32,7 @@ const HowTo = (props) => {
       <FlexColumn maxWidth="680px" alignmentX="flex-start" gap="48px">
         <HowToContent
           userFullInfo={userFullInfo}
-          user={props.user ? props.user : 'yourID'}
+          user={username ? username : 'yourID'}
           challengeName={props.challengeName}
         />
       </FlexColumn>

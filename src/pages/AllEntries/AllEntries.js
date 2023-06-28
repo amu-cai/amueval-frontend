@@ -10,7 +10,7 @@ import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
 import searchQueryHandler from './searchHandler';
 import orderKeys from './orderKeys';
 
-const NewTablePageTest = (props) => {
+const AllEntries = (props) => {
   const [entriesAll, setEntriesAll] = React.useState([]);
   const [entries, setEntries] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
@@ -134,6 +134,7 @@ const NewTablePageTest = (props) => {
               items={elements}
               orderedKeys={orderKeys(entries[0])}
               sortByUpdate={sortByUpdate}
+              popUpMessageHandler={props.popUpMessageHandler}
             />
             // </div>
           )}
@@ -154,4 +155,4 @@ const NewTablePageTest = (props) => {
   );
 };
 
-export default NewTablePageTest;
+export default AllEntries;

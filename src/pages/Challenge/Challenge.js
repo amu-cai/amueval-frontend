@@ -15,18 +15,15 @@ import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
 import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
-import getUser from '../../api/getUser';
 import AllEntries from '../AllEntries/AllEntries';
 
 const Challenge = (props) => {
   const challengeName = useParams().challengeId;
   const [challenge, setChallenge] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [user, setUser] = React.useState('');
 
   React.useEffect(() => {
     getChallengeInfo(setChallenge, setLoading, challengeName);
-    getUser(setUser);
   }, [challengeName]);
 
   const sectionRender = () => {
@@ -36,12 +33,11 @@ const Challenge = (props) => {
           <Leaderboard
             challengeName={challengeName}
             mainMetric={challenge.mainMetric}
-            user={user}
           />
         );
       case CHALLENGE_SECTIONS.ALL_ENTRIES:
         return (
-          <AllEntries challengeName={challengeName} setLoading={setLoading} />
+          <AllEntries challengeName={challengeName}  setLoading={setLoading} popUpMessageHandler={props.popUpMessageHandler} />
         );
       case CHALLENGE_SECTIONS.README:
         return (
@@ -57,11 +53,10 @@ const Challenge = (props) => {
           <HowTo
             popUpMessageHandler={props.popUpMessageHandler}
             challengeName={challengeName}
-            user={user}
           />
         );
       case CHALLENGE_SECTIONS.MY_ENTRIES:
-        return <MyEntries challengeName={challengeName} />;
+        return <MyEntries challengeName={challengeName} popUpMessageHandler={props.popUpMessageHandler} />;
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
       default:

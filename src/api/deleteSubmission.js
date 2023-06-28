@@ -9,7 +9,7 @@ const deleteSubmission = async (submissionId) => {
       Authorization: `Bearer ${KeyCloakService.getToken()}`,
     },
   })
-    .then((resp) => resp.json())
+    .then((resp) => resp.text())
     .then((data) => {
       console.log(data);
     });

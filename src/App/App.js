@@ -16,13 +16,14 @@ const App = () => {
   const renderApp = React.useCallback(() => {
     return (
       <ThemeProvider theme={theme}>
-        <PopUpMessageManager>
           <BrowserRouter>
+        <PopUpMessageManager>
+
             <NavigationManager>
               <RoutingManager />
             </NavigationManager>
+            </PopUpMessageManager>
           </BrowserRouter>
-        </PopUpMessageManager>
       </ThemeProvider>
     );
   }, []);
