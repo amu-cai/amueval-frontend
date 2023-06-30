@@ -177,12 +177,14 @@ const Leaderboard = (props) => {
             }
           />
           {elements.length > 0 && entries[0] && (
-            <Table
-              items={elements}
-              orderedKeys={orderKeys(entries[0])}
-              sortByUpdate={sortByUpdate}
-              rowFooter={false}
-            />
+            <div style={{ width: '100%', overflowX: 'auto' }}>
+              <Table
+                items={elements}
+                orderedKeys={orderKeys(entries[0])}
+                sortByUpdate={sortByUpdate}
+                rowFooter={false}
+              />
+            </div>
           )}
           <Pager
             pageNr={pageNr}

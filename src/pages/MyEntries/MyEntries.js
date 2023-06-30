@@ -107,11 +107,13 @@ const MyEntries = (props) => {
             }
           />
           {elements.length > 0 && myEntries[0] && (
-            <Table
-              items={elements}
-              orderedKeys={orderKeys(myEntries[0])}
-              sortByUpdate={sortByUpdate}
-            />
+            <div style={{ width: '100%', overflowX: 'auto' }}>
+              <Table
+                items={elements}
+                orderedKeys={orderKeys(myEntries[0])}
+                sortByUpdate={sortByUpdate}
+              />
+            </div>
           )}
           <Pager
             pageNr={pageNr}

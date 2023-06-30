@@ -9,16 +9,17 @@ const HowTo = (props) => {
   const [userFullInfo, setUserFullInfo] = React.useState(null);
   const username = KeyCloakService.getUsername();
 
-  React.useEffect(() => {
-    getFullUser(setUserFullInfo);
-
-    if (!KeyCloakService.isLoggedIn()) {
-      props.popUpMessageHandler(
-        'Please log in',
-        'To see everything you must log in',
-        () => KeyCloakService.doLogin
-      );
-    }
+  React.useMemo(async () => {
+    await getFullUser(setUserFullInfo);
+    setTimeout(() => {
+      if (!KeyCloakService.isLoggedIn()) {
+        props.popUpMessageHandler(
+          'Please log in',
+          'To see everything you must log in',
+          () => KeyCloakService.doLogin
+        );
+      }
+    }, 1000);
   }, [props]);
 
   return (
