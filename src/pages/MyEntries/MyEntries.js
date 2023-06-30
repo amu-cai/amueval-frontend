@@ -112,6 +112,7 @@ const MyEntries = (props) => {
                 items={elements}
                 orderedKeys={orderKeys(myEntries[0])}
                 sortByUpdate={sortByUpdate}
+                popUpMessageHandler={props.popUpMessageHandler}
               />
             </div>
           )}

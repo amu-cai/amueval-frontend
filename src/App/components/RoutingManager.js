@@ -16,15 +16,30 @@ const RoutingManager = (props) => {
     <Routes>
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId`}
-        element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.LEADERBOARD}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
-        element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.LEADERBOARD}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/allentries`}
-        element={<Challenge section={CHALLENGE_SECTIONS.ALL_ENTRIES} popUpMessageHandler={props.popUpMessageHandler} />}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.ALL_ENTRIES}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/readme`}
@@ -41,13 +56,26 @@ const RoutingManager = (props) => {
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
-        element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} popUpMessageHandler={props.popUpMessageHandler} />}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.MY_ENTRIES}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-        element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.SUBMIT}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
       />
-      <Route path={CHALLENGES_PAGE} element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />} />
+      <Route
+        path={CHALLENGES_PAGE}
+        element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />}
+      />
       <Route
         path={POLICY_PRIVACY_PAGE}
         element={
@@ -74,8 +102,18 @@ const RoutingManager = (props) => {
       />
       {KeyCloakService.isLoggedIn() ? (
         <>
-          <Route exact path="/" element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />} />
-          <Route element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
+            }
+          />
+          <Route
+            element={
+              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
+            }
+          />
         </>
       ) : (
         <>
