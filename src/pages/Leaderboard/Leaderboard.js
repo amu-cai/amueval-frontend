@@ -189,7 +189,7 @@ const Leaderboard = (props) => {
           )}
           <Pager
             pageNr={pageNr}
-            elements={elements}
+            elements={entries}
             setPageNr={setPageNr}
             width="72px"
             borderRadius="64px"

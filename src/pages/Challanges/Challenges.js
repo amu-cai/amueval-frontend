@@ -33,7 +33,7 @@ const Challenges = () => {
     statusFilterHandle(state.statusFilter, state.challenges, dispatch);
   }, [state.statusFilter, state.challenges]);
 
-  const setPage = React.useCallback((value) => {
+  const setPageNr = React.useCallback((value) => {
     dispatch({ type: CHALLENGES_ACTION.SET_PAGE, payload: value });
   }, []);
 
@@ -73,7 +73,7 @@ const Challenges = () => {
           dispatch={dispatch}
           filtersMenuRender={filtersMenuRender}
           searchQueryHandler={searchQueryHandler}
-          setPage={setPage}
+          setPageNr={setPageNr}
           filtersMenu={state.filtersMenu}
           loading={state.loading}
           pageNr={state.pageNr}
@@ -85,7 +85,7 @@ const Challenges = () => {
           dispatch={dispatch}
           filtersMenuRender={filtersMenuRender}
           searchQueryHandler={searchQueryHandler}
-          setPage={setPage}
+          setPageNr={setPageNr}
           filtersMenu={state.filtersMenu}
           loading={state.loading}
           pageNr={state.pageNr}
