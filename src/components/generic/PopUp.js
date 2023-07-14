@@ -14,7 +14,6 @@ const PopUpStyle = styled(FlexColumn)`
   .PopUpStyle__body {
     width: ${({ width }) => (width ? width : '60%')};
     height: ${({ height }) => (height ? height : '50%')};
-    min-height: ${({ minHeight }) => (minHeight ? minHeight : '50%')};
     padding: ${({ padding }) => (padding ? padding : '48px')};
     margin: ${({ margin }) => (margin ? margin : '0')};
     border-radius: 12px;
