@@ -7,6 +7,8 @@ import TableRowFooter from './components/TableRowFooter';
 import deleteSubmission from '../../../api/deleteSubmission';
 import theme from '../../../utils/theme';
 import DeletePopUp from './components/DeletePopUp/DeletePopUp';
+import MobileTable from './components/MobileTable/MobileTable';
+import Media from 'react-media';
 
 const Table = ({
   items,
@@ -31,34 +33,52 @@ const Table = ({
     );
   };
 
+  const desktopRender = () => {
+    return (
+      <TableStyle rowFooter={rowFooter}>
+        <TableHeader
+          orderedKeys={orderedKeys}
+          sortByUpdate={sortByUpdate}
+          tableUpdate={tableUpdate}
+        />
+        {itemsToRender.map((item, i) => {
+          return (
+            <tr key={`table-row-${i}`} className="TableStyle__tr">
+              <DeletePopUp
+                item={item}
+                setDeletePopUp={setDeletePopUp}
+                deletePopUp={deletePopUp}
+                deleteItem={deleteItem}
+              />
+              <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
+              <TableRowFooter
+                deleteItem={() => setDeletePopUp(true)}
+                rowFooter={rowFooter}
+                item={item}
+                i={i}
+              />
+              <RowsBackgroundStyle i={i} />
+            </tr>
+          );
+        })}
+      </TableStyle>
+    );
+  };
+
   return (
-    <TableStyle rowFooter={rowFooter}>
-      <TableHeader
-        orderedKeys={orderedKeys}
-        sortByUpdate={sortByUpdate}
-        tableUpdate={tableUpdate}
-      />
-      {itemsToRender.map((item, i) => {
-        return (
-          <tr key={`table-row-${i}`} className="TableStyle__tr">
-            <DeletePopUp
-              item={item}
-              setDeletePopUp={setDeletePopUp}
-              deletePopUp={deletePopUp}
-              deleteItem={deleteItem}
-            />
-            <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
-            <TableRowFooter
-              deleteItem={() => setDeletePopUp(true)}
-              rowFooter={rowFooter}
-              item={item}
-              i={i}
-            />
-            <RowsBackgroundStyle i={i} />
-          </tr>
-        );
-      })}
-    </TableStyle>
+    <>
+      <Media query={theme.mobile}>
+        <MobileTable
+          elements={itemsToRender}
+          setDeletePopUp={setDeletePopUp}
+          deletePopUp={deletePopUp}
+          deleteItem={deleteItem}
+          orderedKeys={orderedKeys}
+          rowFooter={rowFooter}
+        />
+      </Media>
+      <Media query={theme.desktop}>{desktopRender()}</Media>
+    </>
   );
 };
 

@@ -1,7 +1,6 @@
 import SUBMIT_ACTION from './SubmitActionEnum';
 
 const SubmitReducer = (state, action) => {
-  console.log(`SubmitReducer: ${action.type}`);
   let newTags = state.tags;
   switch (action.type) {
     case SUBMIT_ACTION.SET_DESCRIPTION:

@@ -159,7 +159,6 @@ const Leaderboard = (props) => {
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
   const elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
-  console.log(entries);
 
   return (
     <FlexColumn

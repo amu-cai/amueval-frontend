@@ -53,7 +53,6 @@ const getChallengeLeaderboard = (
       for (let _ of tests) {
         initSetScoreSorted.push(false);
       }
-      console.log(result);
       for (let setDataState of setDataStates) setDataState(result);
       if (setScoreSorted) setScoreSorted(initSetScoreSorted);
       if (setLoadingState) setLoadingState(false);
