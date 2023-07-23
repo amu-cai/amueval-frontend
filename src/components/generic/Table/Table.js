@@ -9,6 +9,7 @@ import theme from '../../../utils/theme';
 import DeletePopUp from './components/DeletePopUp/DeletePopUp';
 import MobileTable from './components/MobileTable/MobileTable';
 import Media from 'react-media';
+import editSubmission from '../../../api/editSubmission';
 
 const Table = ({
   items,
@@ -48,7 +49,7 @@ const Table = ({
                 item={item}
                 setDeletePopUp={setDeletePopUp}
                 deletePopUp={deletePopUp}
-                deleteItem={deleteItem}
+                deleteItem={() => editSubmission(7355, '1,2,3', 'ssiema siema')}
               />
               <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
               <TableRowFooter
