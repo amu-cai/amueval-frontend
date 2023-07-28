@@ -12,6 +12,7 @@ const DeletePopUp = ({ deletePopUp, setDeletePopUp, deleteItem, item }) => {
         width="30%"
         height="30vh"
         padding="32px"
+        backgroundColor={theme.colors.dark003}
         closeHandler={() => setDeletePopUp(false)}
       >
         <FlexColumn width="100%" height="100%" gap="48px">

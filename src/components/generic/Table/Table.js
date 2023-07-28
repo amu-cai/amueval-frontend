@@ -6,10 +6,11 @@ import RowsBackgroundStyle from './styles/RowsBackgroundStyle';
 import TableRowFooter from './components/TableRowFooter';
 import deleteSubmission from '../../../api/deleteSubmission';
 import theme from '../../../utils/theme';
-import DeletePopUp from './components/DeletePopUp/DeletePopUp';
-import MobileTable from './components/MobileTable/MobileTable';
+import DeletePopUp from './components/DeletePopUp';
+import MobileTable from './components/MobileTable';
 import Media from 'react-media';
 import editSubmission from '../../../api/editSubmission';
+import EditPopUp from './components/EditPopUp';
 
 const Table = ({
   items,
@@ -22,6 +23,8 @@ const Table = ({
   const tableUpdate = React.useCallback(() => updateState({}), []);
   const [deletedItems, setDeletedItems] = React.useState([]);
   const [deletePopUp, setDeletePopUp] = React.useState(false);
+  const [editPopUp, setEditPopUp] = React.useState(false);
+
   const itemsToRender = items.filter((item) => !deletedItems.includes(item));
 
   const deleteItem = async (item) => {
@@ -32,6 +35,10 @@ const Table = ({
       popUpMessageHandler,
       theme
     );
+  };
+
+  const editItem = async (item) => {
+    editSubmission(7355, '1,2,3', 'ssiema siema');
   };
 
   const desktopRender = () => {
@@ -49,11 +56,18 @@ const Table = ({
                 item={item}
                 setDeletePopUp={setDeletePopUp}
                 deletePopUp={deletePopUp}
-                deleteItem={() => editSubmission(7355, '1,2,3', 'ssiema siema')}
+                deleteItem={deleteItem}
+              />
+              <EditPopUp
+                item={item}
+                setEditPopUp={setEditPopUp}
+                editPopUp={editPopUp}
+                editItem={editItem}
               />
               <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
               <TableRowFooter
                 deleteItem={() => setDeletePopUp(true)}
+                editItem={() => setEditPopUp(true)}
                 rowFooter={rowFooter}
                 item={item}
                 i={i}

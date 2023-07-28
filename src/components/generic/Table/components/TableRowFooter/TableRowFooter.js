@@ -5,14 +5,14 @@ import TableRowButtons from '../TableRowButtons/TableRowButtons';
 import pensilIco from '../../../../../assets/pencil_ico.svg';
 import deleteIco from '../../../../../assets/delete_ico.svg';
 
-const TableRowFooter = ({ rowFooter, item, i, deleteItem }) => {
+const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
   if (rowFooter) {
     return (
       <FlexRow className="TableStyle__row-footer">
         <TableRowTags item={item} i={i} />
         <TableRowButtons
           buttons={[
-            { icon: pensilIco, handler: () => console.log('edit') },
+            { icon: pensilIco, handler: () => editItem(item) },
             { icon: deleteIco, handler: () => deleteItem(item) },
           ]}
         />

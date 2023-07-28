@@ -9,7 +9,8 @@ const PopUpStyle = styled(FlexColumn)`
   z-index: 100;
   width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.dark01};
+  background-color: ${({ theme, backgroundColor }) =>
+    backgroundColor ? backgroundColor : theme.colors.dark01};
 
   .PopUpStyle__body {
     width: ${({ width }) => (width ? width : '60%')};
@@ -31,6 +32,7 @@ const PopUp = (props) => {
 
   return (
     <PopUpStyle
+      backgroundColor={props.backgroundColor}
       padding={props.padding}
       width={props.width}
       height={props.height}

@@ -61,6 +61,11 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
+const goToProfile = () => {
+  console.log(_kc.loadUserProfile());
+  _kc.accountManagement();
+};
+
 const KeyCloakService = {
   initKeycloak,
   doLogin,
@@ -71,6 +76,7 @@ const KeyCloakService = {
   getUsername,
   hasRole,
   doRegister,
+  goToProfile,
 };
 
 export default KeyCloakService;
