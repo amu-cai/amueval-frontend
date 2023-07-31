@@ -18,6 +18,7 @@ const SubmitInput = (props) => {
         height="36px"
         border={`1px solid ${theme.colors.dark}`}
         shadow={theme.shadow}
+        defaultValue={props.defaultValue}
         onChange={(e) => props.handler(e.target.value)}
         padding="4px"
       />

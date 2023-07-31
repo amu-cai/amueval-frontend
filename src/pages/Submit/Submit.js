@@ -24,7 +24,7 @@ const Submit = (props) => {
   });
 
   React.useMemo(() => {
-    getTags(dispatch);
+    getTags((data) => dispatch({ type: SUBMIT_ACTION.LOAD_TAGS, payload: data }));
   }, []);
 
   const challengeSubmissionSubmit = React.useCallback(() => {

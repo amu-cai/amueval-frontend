@@ -9,7 +9,6 @@ import theme from '../../../utils/theme';
 import DeletePopUp from './components/DeletePopUp';
 import MobileTable from './components/MobileTable';
 import Media from 'react-media';
-import editSubmission from '../../../api/editSubmission';
 import EditPopUp from './components/EditPopUp';
 
 const Table = ({
@@ -24,6 +23,7 @@ const Table = ({
   const [deletedItems, setDeletedItems] = React.useState([]);
   const [deletePopUp, setDeletePopUp] = React.useState(false);
   const [editPopUp, setEditPopUp] = React.useState(false);
+  const [itemToHandle, setItemToHandle] = React.useState(null);
 
   const itemsToRender = items.filter((item) => !deletedItems.includes(item));
 
@@ -37,46 +37,49 @@ const Table = ({
     );
   };
 
-  const editItem = async (item) => {
-    editSubmission(7355, '1,2,3', 'ssiema siema');
-  };
-
   const desktopRender = () => {
     return (
-      <TableStyle rowFooter={rowFooter}>
-        <TableHeader
-          orderedKeys={orderedKeys}
-          sortByUpdate={sortByUpdate}
-          tableUpdate={tableUpdate}
+      <>
+        <DeletePopUp
+          item={itemToHandle}
+          setDeletePopUp={setDeletePopUp}
+          deletePopUp={deletePopUp}
+          deleteItem={deleteItem}
         />
-        {itemsToRender.map((item, i) => {
-          return (
-            <tr key={`table-row-${i}`} className="TableStyle__tr">
-              <DeletePopUp
-                item={item}
-                setDeletePopUp={setDeletePopUp}
-                deletePopUp={deletePopUp}
-                deleteItem={deleteItem}
-              />
-              <EditPopUp
-                item={item}
-                setEditPopUp={setEditPopUp}
-                editPopUp={editPopUp}
-                editItem={editItem}
-              />
-              <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
-              <TableRowFooter
-                deleteItem={() => setDeletePopUp(true)}
-                editItem={() => setEditPopUp(true)}
-                rowFooter={rowFooter}
-                item={item}
-                i={i}
-              />
-              <RowsBackgroundStyle i={i} />
-            </tr>
-          );
-        })}
-      </TableStyle>
+        <EditPopUp
+          item={itemToHandle}
+          setEditPopUp={setEditPopUp}
+          editPopUp={editPopUp}
+        />
+        <TableStyle rowFooter={rowFooter}>
+          <TableHeader
+            orderedKeys={orderedKeys}
+            sortByUpdate={sortByUpdate}
+            tableUpdate={tableUpdate}
+          />
+          {itemsToRender.map((item, i) => {
+            return (
+              <tr key={`table-row-${i}`} className="TableStyle__tr">
+                <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
+                <TableRowFooter
+                  deleteItem={() => {
+                    setItemToHandle(item);
+                    setDeletePopUp(true);
+                  }}
+                  editItem={() => {
+                    setItemToHandle(item);
+                    setEditPopUp(true);
+                  }}
+                  rowFooter={rowFooter}
+                  item={item}
+                  i={i}
+                />
+                <RowsBackgroundStyle i={i} />
+              </tr>
+            );
+          })}
+        </TableStyle>
+      </>
     );
   };
 

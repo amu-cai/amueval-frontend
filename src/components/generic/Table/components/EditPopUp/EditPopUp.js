@@ -6,8 +6,19 @@ import { FlexColumn, FlexRow } from '../../../../../utils/containers';
 import theme from '../../../../../utils/theme';
 import SubmitInput from '../../../SubmitInput';
 import TagsChoose from '../../../../../pages/Submit/components/TagsChoose/TagsChoose';
+import editSubmission from '../../../../../api/editSubmission';
+import getTags from '../../../../../api/getTags';
+import React from 'react';
 
-const EditPopUp = ({ editPopUp, setEditPopUp, editItem, item }) => {
+const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
+  const [tags, setTags] = React.useState([]);
+  const [tagsToEdit, setTagsToEdit] = React.useState(item?.tags?.slice());
+  const [description, setDescription] = React.useState(item?.description?.slice());
+
+  React.useMemo(() => {
+    getTags(setTags);
+  }, []);
+
   if (editPopUp) {
     return createPortal(
       <PopUp
@@ -21,15 +32,19 @@ const EditPopUp = ({ editPopUp, setEditPopUp, editItem, item }) => {
           <H3>Editing submission</H3>
           <SubmitInput
             label="Description"
+            defaultValue={item.description}
             handler={(value) => {
-              console.log(value);
+              setDescription(value);
             }}
           />
           <TagsChoose
             label="Submission tags"
-            updateTags={() => console.log('siema')}
-            tags={[]}
-            submissionTags={[]}
+            updateTags={(submissionTags, globalTags) => {
+              setTagsToEdit(submissionTags);
+              setTags(globalTags);
+            }}
+            tags={tags ? tags : []}
+            submissionTags={tagsToEdit?.length ? tagsToEdit : item.tags}
           />
           <FlexRow gap="48px">
             <Button
@@ -37,7 +52,7 @@ const EditPopUp = ({ editPopUp, setEditPopUp, editItem, item }) => {
               height="32px"
               handler={() => {
                 setEditPopUp(false);
-                editItem(item);
+                editSubmission(item.id, tagsToEdit.join(','), description);
               }}
             >
               Confirm
@@ -45,7 +60,10 @@ const EditPopUp = ({ editPopUp, setEditPopUp, editItem, item }) => {
             <Button
               width="100px"
               height="32px"
-              handler={() => setEditPopUp(false)}
+              handler={() => {
+                setTagsToEdit([]); 
+                setEditPopUp(false);
+              }}
               backgroundColor={theme.colors.dark}
             >
               Cancel

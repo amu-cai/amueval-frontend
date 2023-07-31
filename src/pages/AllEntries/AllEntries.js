@@ -111,13 +111,12 @@ const AllEntries = (props) => {
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
   let elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
-  console.log(elements);
 
   return (
     <FlexColumn
+      as="section"
       padding="24px"
       gap="32px"
-      as="section"
       width="100%"
       maxWidth="1600px"
     >

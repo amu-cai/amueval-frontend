@@ -12,8 +12,8 @@ const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
         <TableRowTags item={item} i={i} />
         <TableRowButtons
           buttons={[
-            { icon: pensilIco, handler: () => editItem(item) },
-            { icon: deleteIco, handler: () => deleteItem(item) },
+            { icon: pensilIco, handler: () => editItem() },
+            { icon: deleteIco, handler: () => deleteItem() },
           ]}
         />
       </FlexRow>
