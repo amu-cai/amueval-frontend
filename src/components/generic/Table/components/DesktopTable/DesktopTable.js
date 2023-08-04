@@ -1,11 +1,18 @@
 import React from 'react';
+import TableStyle from '../../styles/TableStyle';
+import TableHeader from '../TableHeader/TableHeader';
 import TableRowItems from '../TableRowItems/TableRowItems';
 import TableRowFooter from '../TableRowFooter/TableRowFooter';
-import MobileTableStyle from './MobileTableStyle';
+import RowsBackgroundStyle from '../../styles/RowsBackgroundStyle';
 
-const MobileTable = (props) => {
+const DesktopTable = (props) => {
   return (
-    <MobileTableStyle as="table">
+    <TableStyle rowFooter={props.rowFooter}>
+      <TableHeader
+        orderedKeys={props.orderedKeys}
+        sortByUpdate={props.sortByUpdate}
+        tableUpdate={props.tableUpdate}
+      />
       {props.elements.map((item, i) => {
         return (
           <tr key={`table-row-${i}`} className="TableStyle__tr">
@@ -23,11 +30,12 @@ const MobileTable = (props) => {
               item={item}
               i={i}
             />
+            <RowsBackgroundStyle i={i} />
           </tr>
         );
       })}
-    </MobileTableStyle>
+    </TableStyle>
   );
 };
 
-export default MobileTable;
+export default DesktopTable;

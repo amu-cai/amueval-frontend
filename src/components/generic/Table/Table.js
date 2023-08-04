@@ -1,15 +1,10 @@
 import React from 'react';
-import TableStyle from './styles/TableStyle';
-import TableHeader from './components/TableHeader';
-import TableRowItems from './components/TableRowItems';
-import RowsBackgroundStyle from './styles/RowsBackgroundStyle';
-import TableRowFooter from './components/TableRowFooter';
-import deleteSubmission from '../../../api/deleteSubmission';
-import theme from '../../../utils/theme';
-import DeletePopUp from './components/DeletePopUp';
-import MobileTable from './components/MobileTable';
 import Media from 'react-media';
+import theme from '../../../utils/theme';
+import MobileTable from './components/MobileTable';
+import DesktopTable from './components/DesktopTable';
 import EditPopUp from './components/EditPopUp';
+import DeletePopUp from './components/DeletePopUp';
 
 const Table = ({
   items,
@@ -24,78 +19,58 @@ const Table = ({
   const [deletePopUp, setDeletePopUp] = React.useState(false);
   const [editPopUp, setEditPopUp] = React.useState(false);
   const [itemToHandle, setItemToHandle] = React.useState(null);
-
   const itemsToRender = items.filter((item) => !deletedItems.includes(item));
-
-  const deleteItem = async (item) => {
-    await deleteSubmission(
-      item,
-      deletedItems,
-      setDeletedItems,
-      popUpMessageHandler,
-      theme
-    );
-  };
-
-  const desktopRender = () => {
-    return (
-      <>
-        <DeletePopUp
-          item={itemToHandle}
-          setDeletePopUp={setDeletePopUp}
-          deletePopUp={deletePopUp}
-          deleteItem={deleteItem}
-        />
-        <EditPopUp
-          item={itemToHandle}
-          setEditPopUp={setEditPopUp}
-          editPopUp={editPopUp}
-        />
-        <TableStyle rowFooter={rowFooter}>
-          <TableHeader
-            orderedKeys={orderedKeys}
-            sortByUpdate={sortByUpdate}
-            tableUpdate={tableUpdate}
-          />
-          {itemsToRender.map((item, i) => {
-            return (
-              <tr key={`table-row-${i}`} className="TableStyle__tr">
-                <TableRowItems orderedKeys={orderedKeys} item={item} i={i} />
-                <TableRowFooter
-                  deleteItem={() => {
-                    setItemToHandle(item);
-                    setDeletePopUp(true);
-                  }}
-                  editItem={() => {
-                    setItemToHandle(item);
-                    setEditPopUp(true);
-                  }}
-                  rowFooter={rowFooter}
-                  item={item}
-                  i={i}
-                />
-                <RowsBackgroundStyle i={i} />
-              </tr>
-            );
-          })}
-        </TableStyle>
-      </>
-    );
-  };
 
   return (
     <>
+      <DeletePopUp
+        item={itemToHandle}
+        setDeletePopUp={setDeletePopUp}
+        deletePopUp={deletePopUp}
+        setDeletedItems={setDeletedItems}
+        deletedItems={deletedItems}
+        popUpMessageHandler={popUpMessageHandler}
+      />
+      <EditPopUp
+        item={itemToHandle}
+        setEditPopUp={setEditPopUp}
+        editPopUp={editPopUp}
+        popUpMessageHandler={popUpMessageHandler}
+      />
       <Media query={theme.mobile}>
         <MobileTable
           elements={itemsToRender}
-          setDeletePopUp={setDeletePopUp}
           deletePopUp={deletePopUp}
-          deleteItem={deleteItem}
           orderedKeys={orderedKeys}
           rowFooter={rowFooter}
+          deletedItems={deletedItems}
+          popUpMessageHandler={popUpMessageHandler}
+          itemToHandle={itemToHandle}
+          sortByUpdate={sortByUpdate}
+          tableUpdate={tableUpdate}
+          setItemToHandle={setItemToHandle}
+          setEditPopUp={setEditPopUp}
+          setDeletePopUp={setDeletePopUp}
+          setDeletedItems={setDeletedItems}
         />
       </Media>
-      <Media query={theme.desktop}>{desktopRender()}</Media>
+      <Media query={theme.desktop}>
+        <DesktopTable
+          elements={itemsToRender}
+          deletePopUp={deletePopUp}
+          orderedKeys={orderedKeys}
+          rowFooter={rowFooter}
+          deletedItems={deletedItems}
+          popUpMessageHandler={popUpMessageHandler}
+          itemToHandle={itemToHandle}
+          sortByUpdate={sortByUpdate}
+          tableUpdate={tableUpdate}
+          setItemToHandle={setItemToHandle}
+          setEditPopUp={setEditPopUp}
+          setDeletePopUp={setDeletePopUp}
+          setDeletedItems={setDeletedItems}
+        />
+      </Media>
     </>
   );
 };

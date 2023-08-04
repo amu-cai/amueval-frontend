@@ -4,8 +4,32 @@ import Button from '../../../Button';
 import { Medium, H3 } from '../../../../../utils/fonts';
 import { FlexColumn, FlexRow } from '../../../../../utils/containers';
 import theme from '../../../../../utils/theme';
+import deleteSubmission from '../../../../../api/deleteSubmission';
 
-const DeletePopUp = ({ deletePopUp, setDeletePopUp, deleteItem, item }) => {
+const deleteItem = async (
+  item,
+  setDeletePopUp,
+  deletedItems,
+  setDeletedItems,
+  popUpMessageHandler
+) => {
+  setDeletePopUp(false);
+  await deleteSubmission(
+    item,
+    deletedItems,
+    setDeletedItems,
+    popUpMessageHandler
+  );
+};
+
+const DeletePopUp = ({
+  deletePopUp,
+  setDeletePopUp,
+  item,
+  deletedItems,
+  setDeletedItems,
+  popUpMessageHandler,
+}) => {
   if (deletePopUp) {
     return createPortal(
       <PopUp
@@ -22,10 +46,14 @@ const DeletePopUp = ({ deletePopUp, setDeletePopUp, deleteItem, item }) => {
           </Medium>
           <FlexRow gap="48px">
             <Button
-              handler={() => {
-                setDeletePopUp(false);
-                deleteItem(item);
-              }}
+              handler={() =>
+                deleteItem(
+                  item,
+                  deletedItems,
+                  setDeletedItems,
+                  popUpMessageHandler
+                )
+              }
             >
               Yes
             </Button>

@@ -1,12 +1,12 @@
 import KeyCloakService from '../services/KeyCloakService';
 import { API } from '../utils/globals';
+import theme from '../utils/theme';
 
 const deleteSubmission = async (
   item,
   deletedItems,
   setDeletedItems,
-  popUpMessageHandler,
-  theme
+  popUpMessageHandler
 ) => {
   fetch(`${API}/delete-submission/${item.id}`, {
     method: 'POST',
@@ -22,6 +22,13 @@ const deleteSubmission = async (
         newDeletedItems.push(item);
         setDeletedItems(newDeletedItems);
         popUpMessageHandler('Complete', `Submission "${item.id}" deleted`);
+      } else if (data.includes('<!doctype html>') && data.includes('Login')) {
+        popUpMessageHandler(
+          'Error',
+          'You have to be login in to edit submission!',
+          null,
+          theme.colors.red
+        );
       } else {
         popUpMessageHandler(
           'Error',

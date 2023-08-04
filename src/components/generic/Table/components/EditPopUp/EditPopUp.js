@@ -10,10 +10,31 @@ import editSubmission from '../../../../../api/editSubmission';
 import getTags from '../../../../../api/getTags';
 import React from 'react';
 
-const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
+const editSubmissionHandler = async (
+  item,
+  setEditPopUp,
+  tagsToEdit,
+  description,
+  popUpMessageHandler
+) => {
+  setEditPopUp(false);
+  let tags = '';
+  if (tagsToEdit) {
+    tags = tagsToEdit.join(',');
+  } else {
+    if (item?.tags) {
+      tags = item.tags.map((tag) => tag.name).join(',');
+    }
+  }
+  await editSubmission(item.id, tags, description, popUpMessageHandler);
+};
+
+const EditPopUp = ({ editPopUp, setEditPopUp, item, popUpMessageHandler }) => {
   const [tags, setTags] = React.useState([]);
   const [tagsToEdit, setTagsToEdit] = React.useState(item?.tags?.slice());
-  const [description, setDescription] = React.useState(item?.description?.slice());
+  const [description, setDescription] = React.useState(
+    item?.description?.slice()
+  );
 
   React.useMemo(() => {
     getTags(setTags);
@@ -50,10 +71,15 @@ const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
             <Button
               width="100px"
               height="32px"
-              handler={() => {
-                setEditPopUp(false);
-                editSubmission(item.id, tagsToEdit.join(','), description);
-              }}
+              handler={() =>
+                editSubmissionHandler(
+                  item,
+                  setEditPopUp,
+                  tagsToEdit,
+                  description,
+                  popUpMessageHandler
+                )
+              }
             >
               Confirm
             </Button>
@@ -61,7 +87,7 @@ const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
               width="100px"
               height="32px"
               handler={() => {
-                setTagsToEdit([]); 
+                setTagsToEdit([]);
                 setEditPopUp(false);
               }}
               backgroundColor={theme.colors.dark}

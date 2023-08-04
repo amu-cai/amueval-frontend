@@ -38,7 +38,12 @@ const challengeSubmission = (
     .then((data) => {
       dispatch({ type: SUBMIT_ACTION.TOGGLE_SUBMISSION_LOADING });
       const processUrl = API.replace('/api', '');
-      window.location.replace(`${processUrl}/open-view-progress/${data}#form`);
+      if (Number.isInteger(Number(data))) {
+        console.log(`${processUrl}/open-view-progress/${data}#form`);
+        window.location.replace(
+          `${processUrl}/open-view-progress/${data}#form`
+        );
+      }
       // console.log(data);
 
       // fetch(`${API}/view-progress-with-web-sockets/${data}`)

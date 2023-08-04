@@ -1,25 +1,47 @@
 import KeyCloakService from '../services/KeyCloakService';
 import { API } from '../utils/globals';
+import theme from '../utils/theme';
 
-const editSubmission = (
+const editSubmission = async (
   submisssion,
   tags,
-  description
+  description,
+  popUpMessageHandler
 ) => {
-  // tags = tags.map((tag) => tag.name).join(',');
   tags = tags.replaceAll(',', '%2C');
   fetch(`${API}/edit-submission/${submisssion}/${tags}/${description}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       Authorization: `Bearer ${KeyCloakService.getToken()}`,
-    }
+    },
   })
     .then((resp) => resp.text())
     .then((data) => {
       console.log(data);
+      if (data === 'Submission changed') {
+        popUpMessageHandler(
+          'Submission changed!',
+          `Submission ${submisssion} edited`,
+          null,
+          theme.colors.green
+        );
+      } else if (data === 'Only owner can edit a submission!') {
+        popUpMessageHandler('Error', data, null, theme.colors.red);
+      } else if (data.includes('<!doctype html>') && data.includes('Login')) {
+        popUpMessageHandler(
+          'Error',
+          'You have to be login in to edit submission!',
+          null,
+          theme.colors.red
+        );
+      } else {
+        if (data.length > 650) {
+          data = `${data.slice(0, 650)}...`;
+        }
+        popUpMessageHandler('Error', data, null, theme.colors.red);
+      }
     });
 };
 
 export default editSubmission;
-// http://localhost:3000/api/edit-submission/4/1%2C2/abc
