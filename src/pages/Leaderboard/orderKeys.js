@@ -1,6 +1,6 @@
 const orderKeys = (elem) => {
   if (elem) {
-    let result = ['id', 'submitter', 'description'];
+    let result = ['#', 'submitter', 'description'];
     const elemKeys = Object.keys(elem);
     const dev0keys = elemKeys
       .filter((key) => key.split('.')[1] === 'dev-0')

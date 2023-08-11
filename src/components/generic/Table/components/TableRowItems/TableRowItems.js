@@ -24,6 +24,7 @@ const TableRowItems = ({ orderedKeys, item, i }) => {
               <Container className="mobile-table-header">{keyValue}</Container>
             )}
             {renderValue(keyValue)}
+            {keyValue === '#' && i + 1}
           </td>
         );
       })}

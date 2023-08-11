@@ -4,6 +4,7 @@ import TableRowTags from '../TableRowTags/TableRowTags';
 import TableRowButtons from '../TableRowButtons/TableRowButtons';
 import pensilIco from '../../../../../assets/pencil_ico.svg';
 import deleteIco from '../../../../../assets/delete_ico.svg';
+import KeyCloakService from '../../../../../services/KeyCloakService';
 
 const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
   if (rowFooter) {
@@ -15,6 +16,8 @@ const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
             { icon: pensilIco, handler: () => editItem() },
             { icon: deleteIco, handler: () => deleteItem() },
           ]}
+          active={KeyCloakService.isLoggedIn()}
+          i={i}
         />
       </FlexRow>
     );
