@@ -6,7 +6,6 @@ const TableStyle = styled.table`
   width: 100%;
 
   .TableStyle__th {
-    position: relative;
     cursor: pointer;
     * {
       cursor: pointer;
@@ -61,12 +60,6 @@ const TableStyle = styled.table`
   .TableStyle__tags-container {
     gap: 4px;
     padding: 0 2px;
-  }
-
-  .TableStyle__sort-button {
-    position: absolute;
-    top: 15px;
-    right: 16%;
   }
 `;
 

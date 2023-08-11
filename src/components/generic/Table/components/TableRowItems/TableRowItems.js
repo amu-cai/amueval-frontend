@@ -21,7 +21,9 @@ const TableRowItems = ({ orderedKeys, item, i }) => {
         return (
           <td key={`table-item-${i}-${j}`} className="TableStyle__td">
             {IS_MOBILE() && (
-              <Container className="mobile-table-header">{keyValue}</Container>
+              <Container as="span" className="mobile-table-header">
+                {keyValue}
+              </Container>
             )}
             {renderValue(keyValue)}
             {keyValue === '#' && i + 1}

@@ -8,32 +8,38 @@ import RowsBackgroundStyle from '../../styles/RowsBackgroundStyle';
 const DesktopTable = (props) => {
   return (
     <TableStyle rowFooter={props.rowFooter}>
-      <TableHeader
-        orderedKeys={props.orderedKeys}
-        sortByUpdate={props.sortByUpdate}
-        tableUpdate={props.tableUpdate}
-      />
-      {props.elements.map((item, i) => {
-        return (
-          <tr key={`table-row-${i}`} className="TableStyle__tr">
-            <TableRowItems orderedKeys={props.orderedKeys} item={item} i={i} />
-            <TableRowFooter
-              deleteItem={() => {
-                props.setItemToHandle(item);
-                props.setDeletePopUp(true);
-              }}
-              editItem={() => {
-                props.setItemToHandle(item);
-                props.setEditPopUp(true);
-              }}
-              rowFooter={props.rowFooter}
-              item={item}
-              i={i}
-            />
-            <RowsBackgroundStyle i={i} />
-          </tr>
-        );
-      })}
+      <tbody>
+        <TableHeader
+          orderedKeys={props.orderedKeys}
+          sortByUpdate={props.sortByUpdate}
+          tableUpdate={props.tableUpdate}
+        />
+        {props.elements.map((item, i) => {
+          return (
+            <tr key={`table-row-${i}`} className="TableStyle__tr">
+              <TableRowItems
+                orderedKeys={props.orderedKeys}
+                item={item}
+                i={i}
+              />
+              <TableRowFooter
+                deleteItem={() => {
+                  props.setItemToHandle(item);
+                  props.setDeletePopUp(true);
+                }}
+                editItem={() => {
+                  props.setItemToHandle(item);
+                  props.setEditPopUp(true);
+                }}
+                rowFooter={props.rowFooter}
+                item={item}
+                i={i}
+              />
+              <RowsBackgroundStyle i={i} as="td" />
+            </tr>
+          );
+        })}
+      </tbody>
     </TableStyle>
   );
 };

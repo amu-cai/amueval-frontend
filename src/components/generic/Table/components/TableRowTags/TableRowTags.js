@@ -3,7 +3,7 @@ import { FlexRow } from '../../../../../utils/containers';
 
 const TableRowTags = ({ item, i }) => {
   return (
-    <FlexRow className="TableStyle__tags-container">
+    <FlexRow as="span" className="TableStyle__tags-container">
       {renderTags(item.tags)}
     </FlexRow>
   );
