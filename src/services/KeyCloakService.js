@@ -1,5 +1,6 @@
 import Keycloak from 'keycloak-js';
 import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../utils/globals';
+import SESSION_STORAGE from '../utils/sessionStorage';
 
 const _kc = new Keycloak({
   url: process.env.REACT_APP_KC_URL,
@@ -30,14 +31,17 @@ const doLogin = () => {
   if (privacyPolicyAccept !== 'accept') {
     window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`);
   } else {
-    sessionStorage.setItem('logout', '');
+    sessionStorage.setItem(SESSION_STORAGE.LOGOUT, '');
     _kc.login();
   }
 };
 
 const doLogout = () => {
   sessionStorage.clear();
-  sessionStorage.setItem('logout', 'yes');
+  sessionStorage.setItem(
+    SESSION_STORAGE.LOGOUT,
+    SESSION_STORAGE.STATIC_VALUE.YES
+  );
   _kc.logout();
 };
 
@@ -62,8 +66,11 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
 const goToProfile = () => {
-  console.log(_kc.loadUserProfile());
   _kc.accountManagement();
+};
+
+const getProfileInfo = async (setProfileInfo) => {
+  _kc.loadUserInfo().then((response) => setProfileInfo(response));
 };
 
 const KeyCloakService = {
@@ -77,6 +84,7 @@ const KeyCloakService = {
   hasRole,
   doRegister,
   goToProfile,
+  getProfileInfo,
 };
 
 export default KeyCloakService;

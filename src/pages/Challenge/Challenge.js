@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import { H1, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import MobileChallengeMenu from './components/MobileChallengeMenu';
-import Leaderboard from '../Leaderboard/Leaderboard';
+import Leaderboard from '../Leaderboard';
 import Readme from '../Readme';
-import HowTo from '../HowTo/HowTo';
-import MyEntries from '../MyEntries/MyEntries';
+import HowTo from '../HowTo';
+import MyEntries from '../MyEntries';
 import Submit from '../Submit';
 import Media from 'react-media';
 import DesktopChallengeMenu from './components/DesktopChallengeMenu';
@@ -15,7 +15,7 @@ import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
 import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
-import AllEntries from '../AllEntries/AllEntries';
+import AllEntries from '../AllEntries';
 
 const Challenge = (props) => {
   const challengeName = useParams().challengeId;
@@ -37,7 +37,11 @@ const Challenge = (props) => {
         );
       case CHALLENGE_SECTIONS.ALL_ENTRIES:
         return (
-          <AllEntries challengeName={challengeName}  setLoading={setLoading} popUpMessageHandler={props.popUpMessageHandler} />
+          <AllEntries
+            challengeName={challengeName}
+            setLoading={setLoading}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
         );
       case CHALLENGE_SECTIONS.README:
         return (
@@ -56,7 +60,12 @@ const Challenge = (props) => {
           />
         );
       case CHALLENGE_SECTIONS.MY_ENTRIES:
-        return <MyEntries challengeName={challengeName} popUpMessageHandler={props.popUpMessageHandler} />;
+        return (
+          <MyEntries
+            challengeName={challengeName}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        );
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
       default:

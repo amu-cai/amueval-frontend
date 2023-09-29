@@ -1,65 +1,13 @@
 import React from 'react';
-import { FlexColumn } from '../utils/containers';
-import { Body, H2 } from '../utils/fonts';
+import { FlexColumn } from '../../utils/containers';
+import { H2 } from '../../utils/fonts';
 import Media from 'react-media';
-import theme from '../utils/theme';
-import getChallengeFullDescription from '../api/getChallengeFullDescription';
-import styled from 'styled-components';
-import InfoList from '../components/generic/InfoList';
-import Loading from '../components/generic/Loading';
+import theme from '../../utils/theme';
+import getChallengeFullDescription from '../../api/getChallengeFullDescription';
+import InfoList from '../../components/generic/InfoList';
+import Loading from '../../components/generic/Loading';
 import { marked } from 'marked';
-
-const ReadmeStyle = styled(Body)`
-  * {
-    font-weight: inherit;
-  }
-
-  h2 {
-    font-family: 'Kanit', sans-serif;
-    margin: 32px 0;
-  }
-
-  h3 {
-    font-family: 'Kanit', sans-serif;
-    font-weight: inherit;
-    font-size: 18px;
-    line-height: 22px;
-    margin: 24px 0;
-
-    @media (min-width: ${({ theme }) => theme.overMobile}) {
-      font-size: 22px;
-      line-height: 26px;
-    }
-  }
-
-  p {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 20px;
-
-    @media (min-width: ${({ theme }) => theme.overMobile}) {
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 22px;
-    }
-  }
-
-  a {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: ${({ theme }) => theme.colors.dark};
-    text-decoration: none;
-
-    @media (min-width: ${({ theme }) => theme.overMobile}) {
-      font-size: 16px;
-      line-height: 22px;
-      font-weight: 500;
-    }
-  }
-`;
+import ReadmeStyle from './ReadmeStyle';
 
 const Readme = (props) => {
   const [fullDescription, setFullDescription] = React.useState('');
@@ -117,8 +65,13 @@ const Readme = (props) => {
 
   const desktopRender = () => {
     return (
-      <FlexColumn as="section" padding="20px" gap="64px">
-        <FlexColumn gap="32px">
+      <FlexColumn
+        as="section"
+        className="Readme__section"
+        padding="20px"
+        gap="64px"
+      >
+        <FlexColumn className="Readme__info" gap="32px">
           <H2 as="h2">Info</H2>
           <InfoList
             iconsSize="32px"
@@ -126,7 +79,12 @@ const Readme = (props) => {
             deadline={props.deadline}
           />
         </FlexColumn>
-        <FlexColumn alignmentX="flex-start" width="80%" maxWidth="1200px">
+        <FlexColumn
+          className="Readme__container"
+          alignmentX="flex-start"
+          width="80%"
+          maxWidth="1200px"
+        >
           <ReadmeStyle
             as={fullDescription ? 'section' : 'p'}
             dangerouslySetInnerHTML={{

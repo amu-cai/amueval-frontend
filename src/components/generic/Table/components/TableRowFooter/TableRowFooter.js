@@ -7,6 +7,24 @@ import deleteIco from '../../../../../assets/delete_ico.svg';
 import KeyCloakService from '../../../../../services/KeyCloakService';
 
 const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
+  const [profileInfo, setProfileInfo] = React.useState(null);
+
+  React.useEffect(() => {
+    KeyCloakService.getProfileInfo(setProfileInfo);
+  }, []);
+
+  const isActive = () => {
+    if (!KeyCloakService.isLoggedIn()) return false;
+    if (profileInfo) {
+      if (
+        profileInfo?.preferred_username !== item.submitter &&
+        profileInfo?.name !== item.submitter
+      )
+        return false;
+    }
+    return true;
+  };
+
   if (rowFooter) {
     return (
       <FlexRow className="TableStyle__row-footer">
@@ -16,7 +34,7 @@ const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
             { icon: pensilIco, handler: () => editItem() },
             { icon: deleteIco, handler: () => deleteItem() },
           ]}
-          active={KeyCloakService.isLoggedIn()}
+          active={isActive()}
           i={i}
         />
       </FlexRow>
