@@ -6,23 +6,23 @@ import pensilIco from '../../../../../assets/pencil_ico.svg';
 import deleteIco from '../../../../../assets/delete_ico.svg';
 import KeyCloakService from '../../../../../services/KeyCloakService';
 
-const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
-  const [profileInfo, setProfileInfo] = React.useState(null);
-
-  React.useEffect(() => {
-    KeyCloakService.getProfileInfo(setProfileInfo);
-  }, []);
-
-  const isActive = () => {
+const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem, profileInfo }) => {
+  const buttonsActive = () => {
     if (!KeyCloakService.isLoggedIn()) return false;
-    if (profileInfo) {
-      if (
+    else if (
         profileInfo?.preferred_username !== item.submitter &&
         profileInfo?.name !== item.submitter
-      )
-        return false;
-    }
+      ) return false;
     return true;
+  };
+
+  const getButtonAccessMessage = () => {
+    if (!KeyCloakService.isLoggedIn()) {
+      return "You must be logged in to use this option.";
+    } else if (profileInfo?.preferred_username !== item.submitter &&
+      profileInfo?.name !== item.submitter) {
+      return "You don't have permission to use this option.";
+    } return "default";
   };
 
   if (rowFooter) {
@@ -31,10 +31,11 @@ const TableRowFooter = ({ rowFooter, item, i, deleteItem, editItem }) => {
         <TableRowTags item={item} i={i} />
         <TableRowButtons
           buttons={[
-            { icon: pensilIco, handler: () => editItem() },
-            { icon: deleteIco, handler: () => deleteItem() },
+            { title: "edit", icon: pensilIco, handler: () => editItem() },
+            { title: "delete", icon: deleteIco, handler: () => deleteItem() },
           ]}
-          active={isActive()}
+          active={buttonsActive()}
+          buttonAccessMessage={getButtonAccessMessage()}
           i={i}
         />
       </FlexRow>

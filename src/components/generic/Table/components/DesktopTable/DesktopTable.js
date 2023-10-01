@@ -32,6 +32,7 @@ const DesktopTable = (props) => {
                   props.setEditPopUp(true);
                 }}
                 rowFooter={props.rowFooter}
+                profileInfo={props.profileInfo}
                 item={item}
                 i={i}
               />

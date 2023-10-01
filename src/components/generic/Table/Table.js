@@ -11,6 +11,7 @@ const Table = ({
   orderedKeys,
   popUpMessageHandler,
   sortByUpdate,
+  profileInfo,
   rowFooter = true,
 }) => {
   const [, updateState] = React.useState();
@@ -47,6 +48,7 @@ const Table = ({
           popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
+          profileInfo={profileInfo}
           tableUpdate={tableUpdate}
           setItemToHandle={setItemToHandle}
           setEditPopUp={setEditPopUp}
@@ -64,6 +66,7 @@ const Table = ({
           popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
+          profileInfo={profileInfo}
           tableUpdate={tableUpdate}
           setItemToHandle={setItemToHandle}
           setEditPopUp={setEditPopUp}

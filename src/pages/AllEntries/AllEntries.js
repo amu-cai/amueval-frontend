@@ -9,6 +9,7 @@ import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
 import searchQueryHandler from './searchHandler';
 import orderKeys from './orderKeys';
+import KeyCloakService from '../../services/KeyCloakService';
 
 const AllEntries = (props) => {
   const [entriesAll, setEntriesAll] = React.useState([]);
@@ -19,6 +20,15 @@ const AllEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
+  const [profileInfo, setProfileInfo] = React.useState(null);
+
+  const getProfileInfo = () => {
+    if (KeyCloakService.isLoggedIn()) {
+      KeyCloakService.getProfileInfo(setProfileInfo);
+    } else {
+      setProfileInfo(false);
+    }
+  };
 
   React.useMemo(() => {
     if (props.challengeName) {
@@ -30,6 +40,7 @@ const AllEntries = (props) => {
         setScoresSorted
       );
     }
+    getProfileInfo();
   }, [props.challengeName]);
 
   const sortByUpdate = React.useCallback(
@@ -121,7 +132,7 @@ const AllEntries = (props) => {
       maxWidth="1600px"
     >
       <H2 as="h2">All Entries</H2>
-      {!loading ? (
+      {!loading && (profileInfo !== null) ? (
         <>
           <Search
             searchQueryHandler={(event) =>
@@ -135,6 +146,7 @@ const AllEntries = (props) => {
                 orderedKeys={orderKeys(entries[0])}
                 sortByUpdate={sortByUpdate}
                 popUpMessageHandler={props.popUpMessageHandler}
+                profileInfo={profileInfo}
               />
             </div>
           )}
