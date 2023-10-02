@@ -113,6 +113,7 @@ const MyEntries = (props) => {
                 orderedKeys={orderKeys(myEntries[0])}
                 sortByUpdate={sortByUpdate}
                 popUpMessageHandler={props.popUpMessageHandler}
+                subpage={"MY_ENTRIES"}
               />
             </div>
           )}

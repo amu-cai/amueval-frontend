@@ -26,6 +26,12 @@ const TagsChooseStyle = styled(FlexColumn)`
     justify-content: flex-start;
     align-items: flex-start;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .TagsChooseStyle__tags-container::-webkit-scrollbar {
+    display: none;
   }
 `;
 
