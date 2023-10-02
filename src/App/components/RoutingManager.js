@@ -10,6 +10,7 @@ import Challenges from '../../pages/Challanges';
 import PolicyPrivacy from '../../pages/PolicyPrivacy';
 import LandingPage from '../../pages/LandingPage';
 import KeyCloakService from '../../services/KeyCloakService';
+import Submission from '../../pages/Submission';
 
 const RoutingManager = (props) => {
   return (
@@ -21,6 +22,12 @@ const RoutingManager = (props) => {
             section={CHALLENGE_SECTIONS.LEADERBOARD}
             popUpMessageHandler={props.popUpMessageHandler}
           />
+        }
+      />
+      <Route
+        path={`/submission/:challengeId/:submissionId`}
+        element={
+          <Submission/>
         }
       />
       <Route

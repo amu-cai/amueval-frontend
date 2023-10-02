@@ -4,6 +4,7 @@ import TableHeader from '../TableHeader/TableHeader';
 import TableRowItems from '../TableRowItems/TableRowItems';
 import TableRowFooter from '../TableRowFooter/TableRowFooter';
 import RowsBackgroundStyle from '../../styles/RowsBackgroundStyle';
+import { Link } from 'react-router-dom';
 
 const DesktopTable = (props) => {
   return (
@@ -37,7 +38,10 @@ const DesktopTable = (props) => {
                 item={item}
                 i={i}
               />
-              <RowsBackgroundStyle i={i} as="td" />
+              <RowsBackgroundStyle 
+                as={Link} 
+                to={props.subpage === "MY_ENTRIES" ? `/submission/${props.challengeName}/${item.id}` : ''} 
+                i={i} />
             </tr>
           );
         })}

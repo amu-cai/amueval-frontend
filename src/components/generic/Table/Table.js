@@ -13,6 +13,7 @@ const Table = ({
   sortByUpdate,
   profileInfo,
   subpage,
+  challengeName,
   rowFooter = true,
 }) => {
   const [, updateState] = React.useState();
@@ -70,6 +71,7 @@ const Table = ({
           sortByUpdate={sortByUpdate}
           profileInfo={profileInfo}
           subpage={subpage}
+          challengeName={challengeName}
           tableUpdate={tableUpdate}
           setItemToHandle={setItemToHandle}
           setEditPopUp={setEditPopUp}
