@@ -49,6 +49,7 @@ const DeletePopUp = ({
               handler={() =>
                 deleteItem(
                   item,
+                  setDeletePopUp,
                   deletedItems,
                   setDeletedItems,
                   popUpMessageHandler
