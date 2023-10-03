@@ -31,7 +31,9 @@ const DesktopTable = (props) => {
                   props.setItemToHandle(item);
                   props.setEditPopUp(true);
                 }}
+                subpage={props.subpage}
                 rowFooter={props.rowFooter}
+                profileInfo={props.profileInfo}
                 item={item}
                 i={i}
               />
