@@ -2,8 +2,8 @@ import React from 'react';
 import { H1 } from '../../../../utils/fonts';
 import { Container, FlexRow, Svg } from '../../../../utils/containers';
 import theme from '../../../../utils/theme';
-import csiLogo from '../../../../assets/csi_logo.svg';
-import csiLogoContent from '../../../../assets/csi_logo_content.svg';
+import csiLogo from '../../../../assets/icons/csi_logo.svg';
+import csiLogoContent from '../../../../assets/icons/csi_logo_content.svg';
 
 import MadeByCsiStyle from './MadeByCsiStyle';
 

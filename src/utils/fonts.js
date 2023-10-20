@@ -109,4 +109,22 @@ const CodeMedium = styled(Code)`
   }
 `;
 
-export { H1, H2, H3, Body, Medium, Menu, Label, Code, CodeMedium };
+const NewNavRegular = styled(Container)`
+  font-family: 'coolvetica-condensed-regular';
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? letterSpacing : '0.02em'};
+  font-size: 19px;
+`;
+
+export {
+  H1,
+  H2,
+  H3,
+  Body,
+  Medium,
+  Menu,
+  Label,
+  Code,
+  CodeMedium,
+  NewNavRegular,
+};

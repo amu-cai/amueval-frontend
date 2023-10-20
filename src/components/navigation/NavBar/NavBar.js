@@ -2,18 +2,18 @@ import React from 'react';
 import { Container, FlexRow, Svg } from '../../../utils/containers';
 import Logo from '../../generic/Logo';
 import styled from 'styled-components';
-import menuButtonIcon from '../../../assets/menu-button.svg';
+import menuButtonIcon from '../../../assets/icons/menu-button.svg';
 import MobileNavMenu from '../MobileNavMenu';
 import { Link } from 'react-router-dom';
-import loginIco from '../../../assets/login_ico.svg';
-import userIco from '../../../assets/user_ico.svg';
+import loginIco from '../../../assets/icons/login_ico.svg';
+import userIco from '../../../assets/icons/user_ico.svg';
 import { Menu } from '../../../utils/fonts';
-import registerIco from '../../../assets/register_ico.svg';
+import registerIco from '../../../assets/icons/register_ico.svg';
 import { CHALLENGES_PAGE, POLICY_PRIVACY_PAGE } from '../../../utils/globals';
-import cupIco from '../../../assets/cup_ico.svg';
+import cupIco from '../../../assets/icons/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
 import KeyCloakService from '../../../services/KeyCloakService';
-import policyIco from '../../../assets/policy_ico.svg';
+import policyIco from '../../../assets/icons/policy_ico.svg';
 
 const MenuButton = styled(Container)`
   width: 20px;

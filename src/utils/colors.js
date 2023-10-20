@@ -15,6 +15,12 @@ const colors = {
   dark05: 'rgba(52, 52, 52, 0.5)',
   dark07: 'rgba(52, 52, 52, 0.7)',
   dark08: 'rgba(52, 52, 52, 0.8)',
+
+  // new colors
+  white100: '#fff',
+  black700: '#5e5e5e',
+  green700: '#188F82',
+  green500: '#1B998B',
 };
 
 export default colors;

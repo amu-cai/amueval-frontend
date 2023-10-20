@@ -3,7 +3,7 @@ import { FlexColumn, FlexRow, Svg } from '../../../../utils/containers';
 import { Body, H2, Medium } from '../../../../utils/fonts';
 import Media from 'react-media';
 import theme from '../../../../utils/theme';
-import csiLogo from '../../../../assets/csi_logo.svg';
+import csiLogo from '../../../../assets/icons/csi_logo.svg';
 
 const Csi = () => {
   const mobileRender = () => {

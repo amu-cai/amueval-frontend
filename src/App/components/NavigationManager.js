@@ -3,8 +3,9 @@ import NavBar from '../../components/navigation/NavBar/NavBar';
 import LoggedBar from '../../components/navigation/LoggedBar';
 import KeyCloakService from '../../services/KeyCloakService';
 import { CHILDREN_WITH_PROPS, IS_MOBILE } from '../../utils/globals';
+import LandingPageNavBar from '../../components/navigation/LandingPageNavBar';
 
-const NavigationManager = ({children, popUpMessageHandler}) => {
+const NavigationManager = ({ children, popUpMessageHandler }) => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
   const [loggedBarHover, setLoggedBarHover] = React.useState(false);
   const [navOptions, setNavOptions] = React.useState(true);
@@ -23,13 +24,25 @@ const NavigationManager = ({children, popUpMessageHandler}) => {
     setNavOptions(true);
   }, []);
 
-  return (
-    <>
+  console.log(window.location.href);
+  console.log(window.location.pathname);
+
+  const navBarRender = () => {
+    if (!KeyCloakService.isLoggedIn() && window.location.pathname === '/') {
+      return <LandingPageNavBar />;
+    }
+    return (
       <NavBar
         loggedBarVisibleHandler={loggedBarVisibleHandler}
         popUpMessageHandler={popUpMessageHandler}
         navOptions={navOptions}
       />
+    );
+  };
+
+  return (
+    <>
+      {navBarRender()}
       {!IS_MOBILE() && (
         <LoggedBar
           visible={loggedBarVisible}
@@ -39,7 +52,11 @@ const NavigationManager = ({children, popUpMessageHandler}) => {
           username={KeyCloakService.getUsername()}
         />
       )}
-      {CHILDREN_WITH_PROPS(children, { hideNavOptions, showNavOptions, popUpMessageHandler })}
+      {CHILDREN_WITH_PROPS(children, {
+        hideNavOptions,
+        showNavOptions,
+        popUpMessageHandler,
+      })}
     </>
   );
 };

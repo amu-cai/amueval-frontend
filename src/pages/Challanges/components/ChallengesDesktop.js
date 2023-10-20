@@ -7,7 +7,7 @@ import Search from '../../../components/generic/Search';
 import { CALC_PAGES } from '../../../utils/globals';
 import renderChallenges from '../functions/renderChallenges';
 import Loading from '../../../components/generic/Loading';
-import cupIco from '../../../assets/cup_ico.svg';
+import cupIco from '../../../assets/icons/cup_ico.svg';
 import { Svg } from '../../../utils/containers';
 
 const ChallengesDesktop = (props) => {

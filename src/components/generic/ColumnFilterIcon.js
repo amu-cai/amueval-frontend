@@ -1,7 +1,7 @@
 import React from 'react';
 import { Svg } from '../../utils/containers';
-import arrow from '../../assets/arrow.svg';
-import filterIco from '../../assets/filter_direction.svg';
+import arrow from '../../assets/icons/arrow.svg';
+import filterIco from '../../assets/icons/filter_direction.svg';
 import theme from '../../utils/theme';
 
 const ColumnFilterIcon = (props) => {

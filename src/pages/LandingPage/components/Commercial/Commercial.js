@@ -8,7 +8,7 @@ import { Body, H2, Medium } from '../../../../utils/fonts';
 import CircleNumber from '../../../../components/generic/CircleNumber';
 import Media from 'react-media';
 import theme from '../../../../utils/theme';
-import commercialImage from '../../../../assets/commercial-image.svg';
+import commercialImage from '../../../../assets/icons/commercial-image.svg';
 
 const Commercial = () => {
   const listItemsContent = [

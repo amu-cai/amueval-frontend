@@ -15,3 +15,11 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #FCFCFC;
 }
+
+@font-face {
+    font-family: 'coolvetica-condensed-regular';
+    src: local('coolvetica-condensed-regular'), url(./assets/fonts/coolvetica/coolvetica_condensed_rg.otf) format('opentype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+  

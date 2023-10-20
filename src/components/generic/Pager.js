@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlexRow, Svg } from '../../utils/containers';
 import CircleNumber from './CircleNumber';
-import polygon from '../../assets/polygon.svg';
+import polygon from '../../assets/icons/polygon.svg';
 import styled from 'styled-components';
 import theme from '../../utils/theme';
 import { NEXT_PAGE, PREVIOUS_PAGE } from '../../utils/globals';

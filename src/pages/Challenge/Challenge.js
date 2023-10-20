@@ -12,7 +12,7 @@ import Submit from '../Submit';
 import Media from 'react-media';
 import DesktopChallengeMenu from './components/DesktopChallengeMenu';
 import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
-import textIco from '../../assets/text_ico.svg';
+import textIco from '../../assets/icons/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
 import AllEntries from '../AllEntries';

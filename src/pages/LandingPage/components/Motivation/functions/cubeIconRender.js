@@ -1,4 +1,4 @@
-import cubeIcon from '../../../../../assets/cube_ico.svg';
+import cubeIcon from '../../../../../assets/icons/cube_ico.svg';
 import theme from '../../../../../utils/theme';
 import { IS_MOBILE } from '../../../../../utils/globals';
 import { Svg } from '../../../../../utils/containers';

@@ -8,9 +8,9 @@ import {
 } from '../../utils/containers';
 import { Body, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
-import userIco from '../../assets/user_ico.svg';
+import userIco from '../../assets/icons/user_ico.svg';
 import KeyCloakService from '../../services/KeyCloakService';
-import loginIco from '../../assets/login_ico.svg';
+import loginIco from '../../assets/icons/login_ico.svg';
 import styled from 'styled-components';
 
 const LoggedBarStyle = styled(FlexColumn)`

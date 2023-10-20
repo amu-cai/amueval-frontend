@@ -2,8 +2,8 @@ import React from 'react';
 import { FlexColumn, Svg } from '../../utils/containers';
 import styled from 'styled-components';
 import theme from '../../utils/theme';
-import copyIco from '../../assets/copy_ico.svg';
-import checkIco from '../../assets/check_ico.svg';
+import copyIco from '../../assets/icons/copy_ico.svg';
+import checkIco from '../../assets/icons/check_ico.svg';
 import { Body, Code } from '../../utils/fonts';
 
 const CodeShellStyle = styled(FlexColumn)`

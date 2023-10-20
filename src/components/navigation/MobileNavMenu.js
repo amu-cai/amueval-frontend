@@ -1,16 +1,16 @@
 import React from 'react';
 import { FlexColumn, FlexRow, Svg, TransBack } from '../../utils/containers';
 import { Menu } from '../../utils/fonts';
-import loginIco from '../../assets/login_ico.svg';
-import userIco from '../../assets/user_ico.svg';
-import registerIco from '../../assets/register_ico.svg';
-import cupIco from '../../assets/cup_ico.svg';
+import loginIco from '../../assets/icons/login_ico.svg';
+import userIco from '../../assets/icons/user_ico.svg';
+import registerIco from '../../assets/icons/register_ico.svg';
+import cupIco from '../../assets/icons/cup_ico.svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { CHALLENGES_PAGE, POLICY_PRIVACY_PAGE } from '../../utils/globals';
 import PropsTypes from 'prop-types';
 import KeyCloakService from '../../services/KeyCloakService';
-import policyIco from '../../assets/policy_ico.svg';
+import policyIco from '../../assets/icons/policy_ico.svg';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;

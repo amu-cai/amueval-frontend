@@ -1,7 +1,7 @@
 import theme from '../../../../../utils/theme';
 import tagBackgroundColorHandle from './tagBackgroundColorHandle';
 import { FlexRow } from '../../../../../utils/containers';
-import removeIco from '../../../../../assets/remove_ico.svg';
+import removeIco from '../../../../../assets/icons/remove_ico.svg';
 import { Svg } from '../../../../../utils/containers';
 
 const renderTagItems = (

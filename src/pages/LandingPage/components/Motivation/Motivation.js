@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexColumn, FlexRow } from '../../../../utils/containers';
 import { Body, H2 } from '../../../../utils/fonts';
 import cubeIconRender from './functions/cubeIconRender';
-import ellipse from '../../../../assets/ellipse.svg';
+import ellipse from '../../../../assets/icons/ellipse.svg';
 import MotivationStyle from './MotivationStyle';
 import { IS_MOBILE } from '../../../../utils/globals';
 import { MOTIVATION__CONTENT } from './utils';
