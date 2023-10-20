@@ -21,6 +21,7 @@ const colors = {
   black700: '#5e5e5e',
   green700: '#188F82',
   green500: '#1B998B',
+  grey300: '#F9F8F8',
 };
 
 export default colors;

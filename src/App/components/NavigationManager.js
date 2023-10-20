@@ -4,6 +4,7 @@ import LoggedBar from '../../components/navigation/LoggedBar';
 import KeyCloakService from '../../services/KeyCloakService';
 import { CHILDREN_WITH_PROPS, IS_MOBILE } from '../../utils/globals';
 import LandingPageNavBar from '../../components/navigation/LandingPageNavBar';
+import NewNavMenu from '../../components/navigation/NewNavMenu';
 
 const NavigationManager = ({ children, popUpMessageHandler }) => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
@@ -43,6 +44,7 @@ const NavigationManager = ({ children, popUpMessageHandler }) => {
   return (
     <>
       {navBarRender()}
+      <NewNavMenu />
       {!IS_MOBILE() && (
         <LoggedBar
           visible={loggedBarVisible}

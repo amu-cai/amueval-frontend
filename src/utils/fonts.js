@@ -113,7 +113,7 @@ const NewNavRegular = styled(Container)`
   font-family: 'coolvetica-condensed-regular';
   letter-spacing: ${({ letterSpacing }) =>
     letterSpacing ? letterSpacing : '0.02em'};
-  font-size: 19px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '19px')};
 `;
 
 export {
