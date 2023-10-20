@@ -114,6 +114,7 @@ const MyEntries = (props) => {
                 sortByUpdate={sortByUpdate}
                 popUpMessageHandler={props.popUpMessageHandler}
                 subpage={"MY_ENTRIES"}
+                challengeName={props.challengeName}
               />
             </div>
           )}
