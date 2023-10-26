@@ -22,13 +22,17 @@ const startManage = () => {
     sessionStorage.getItem(SESSION_STORAGE.LOGGED) !==
     SESSION_STORAGE.STATIC_VALUE.YES
   ) {
-    if (KeyCloakService.isLoggedIn()) {
-      sessionStorage.setItem(
-        SESSION_STORAGE.LOGGED,
-        SESSION_STORAGE.STATIC_VALUE.YES
-      );
-      addUser();
-    }
+    console.log('1');
+    setTimeout(() => {
+      if (KeyCloakService.isLoggedIn()) {
+        console.log('2');
+        sessionStorage.setItem(
+          SESSION_STORAGE.LOGGED,
+          SESSION_STORAGE.STATIC_VALUE.YES
+        );
+        addUser();
+      }
+    }, 1500);
   }
 
   if (
