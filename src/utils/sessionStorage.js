@@ -1,5 +1,4 @@
 const SESSION_STORAGE = {
-  LOGOUT: 'logout',
   LOGGED: 'logged',
   STATIC_VALUE: {
     YES: 'yes',

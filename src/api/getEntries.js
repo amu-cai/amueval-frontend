@@ -49,6 +49,7 @@ const getEntries = (
         result.push(item);
         item = {};
       }
+      console.log(result);
       result = result.filter((item) => !item.deleted);
       // eslint-disable-next-line no-unused-vars
       for (let _ of tests) {

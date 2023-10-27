@@ -5,6 +5,7 @@ import { Body, H1, H2, Medium } from '../utils/fonts';
 import CircleNumber from '../components/generic/CircleNumber';
 import Button from '../components/generic/Button';
 import KeyCloakService from '../services/KeyCloakService';
+import LOCAL_STORAGE from '../utils/localStorage';
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -39,8 +40,10 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
 
 const PolicyPrivacy = (props) => {
   React.useEffect(() => {
-    const privacyPolicyAccept = localStorage.getItem('privacyPolicy');
-    if (privacyPolicyAccept !== 'accept') {
+    const privacyPolicyAccept = localStorage.getItem(
+      LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
+    );
+    if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
       props.popUpMessageHandler(
         'Policy privacy',
         'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.'
@@ -60,12 +63,18 @@ const PolicyPrivacy = (props) => {
   ];
 
   const doRegister = () => {
-    localStorage.setItem('privacyPolicy', 'accept');
+    localStorage.setItem(
+      LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT,
+      LOCAL_STORAGE.STATIC_VALUE.YES
+    );
     KeyCloakService.doRegister();
   };
 
   const doLogin = () => {
-    localStorage.setItem('privacyPolicy', 'accept');
+    localStorage.setItem(
+      LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT,
+      LOCAL_STORAGE.STATIC_VALUE.YES
+    );
     KeyCloakService.doLogin();
   };
 
