@@ -1,4 +1,4 @@
-import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../../utils/globals';
+import { ROOT_URL } from '../../utils/globals';
 import addUser from '../../api/addUser';
 import SESSION_STORAGE from '../../utils/sessionStorage';
 import LOCAL_STORAGE from '../../utils/localStorage';
@@ -37,26 +37,26 @@ const addUserToServer = () => {
   }
 };
 
-const redirectAfterAcceptPolicyPrivacy = () => {
-  if (
-    (sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
-      SESSION_STORAGE.STATIC_VALUE.YES ||
-      KeyCloakService.isLoggedIn()) &&
-    (window.location.pathname === `${POLICY_PRIVACY_PAGE}/login` ||
-      window.location.pathname === `${POLICY_PRIVACY_PAGE}/register`)
-  ) {
-    redirectToRootPage();
-  }
-};
+// const redirectAfterAcceptPolicyPrivacy = () => {
+//   if (
+//     (sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
+//       SESSION_STORAGE.STATIC_VALUE.YES ||
+//       KeyCloakService.isLoggedIn()) &&
+//     (window.location.pathname === `${POLICY_PRIVACY_PAGE}/login` ||
+//       window.location.pathname === `${POLICY_PRIVACY_PAGE}/register`)
+//   ) {
+//     redirectToRootPage();
+//   }
+// };
 
 const startManage = () => {
   redirectAfterLogout();
   setTimeout(() => {
     addUserToServer();
   }, timeoutValue);
-  setTimeout(() => {
-    redirectAfterAcceptPolicyPrivacy();
-  }, timeoutValue);
+  // setTimeout(() => {
+  //   redirectAfterAcceptPolicyPrivacy();
+  // }, timeoutValue);
 };
 
 export default startManage;
