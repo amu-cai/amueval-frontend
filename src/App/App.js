@@ -5,18 +5,15 @@ import PopUpMessageManager from './components/PopUpMessageManager';
 import RoutingManager from './components/RoutingManager';
 import NavigationManager from './components/NavigationManager';
 import { BrowserRouter } from 'react-router-dom';
-import startManage from './functions/startManage';
+import StartManage from './components/StartManage';
 
 const App = () => {
-  React.useMemo(() => {
-    startManage();
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <PopUpMessageManager>
           <NavigationManager>
+            <StartManage />
             <RoutingManager />
           </NavigationManager>
         </PopUpMessageManager>
