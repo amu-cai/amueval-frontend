@@ -6,28 +6,23 @@ import RoutingManager from './components/RoutingManager';
 import NavigationManager from './components/NavigationManager';
 import { BrowserRouter } from 'react-router-dom';
 import startManage from './functions/startManage';
-import startApp from './functions/startApp';
 
 const App = () => {
   React.useMemo(() => {
     startManage();
   }, []);
 
-  const renderApp = React.useCallback(() => {
-    return (
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <PopUpMessageManager>
-            <NavigationManager>
-              <RoutingManager />
-            </NavigationManager>
-          </PopUpMessageManager>
-        </BrowserRouter>
-      </ThemeProvider>
-    );
-  }, []);
-
-  return startApp(renderApp);
+  return (
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <PopUpMessageManager>
+          <NavigationManager>
+            <RoutingManager />
+          </NavigationManager>
+        </PopUpMessageManager>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 };
 
 export default App;
