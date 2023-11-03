@@ -11,12 +11,14 @@ import React from 'react';
 const ELEMENTS_PER_PAGE = 10;
 const MINI_DESCRIPTION_LENGTH = 70;
 const API = process.env.REACT_APP_API;
+const ROOT_PAGE = '/';
 const CHALLENGES_PAGE = '/challenges';
 const CHALLENGE_PAGE = '/challenge';
 const POLICY_PRIVACY_PAGE = '/policy-privacy';
+const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
+const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
 const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
-
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
 const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
@@ -136,11 +138,14 @@ const CHILDREN_WITH_PROPS = (propsChildren, props) =>
 export {
   ELEMENTS_PER_PAGE,
   API,
+  ROOT_PAGE,
   CHALLENGES_PAGE,
   CHALLENGE_PAGE,
   MINI_DESCRIPTION_LENGTH,
   CSI_LINK,
   POLICY_PRIVACY_PAGE,
+  POLICY_PRIVACY_LOGIN_PAGE,
+  POLICY_PRIVACY_REGISTER_PAGE,
   ROOT_URL,
   LOGIN_REQUIRED_PAGES,
   CHALLENGE_SECTIONS,
