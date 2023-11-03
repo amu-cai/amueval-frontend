@@ -29,6 +29,7 @@ const StartManage = () => {
       SESSION_STORAGE.STATIC_VALUE.NO
     ) {
       redirectToRootPage();
+      sessionStorage.clear();
     }
   }, [redirectToRootPage]);
 
@@ -76,11 +77,7 @@ const StartManage = () => {
     reloadSession();
     setTimeout(() => {
       addUserToServer();
-    }, timeoutValue);
-    setTimeout(() => {
       redirectAfterAcceptPolicyPrivacy();
-    }, timeoutValue);
-    setTimeout(() => {
       setEntireScreenLoading(false);
     }, timeoutValue);
   }, [

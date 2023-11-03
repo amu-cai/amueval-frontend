@@ -132,7 +132,7 @@ const AllEntries = (props) => {
       maxWidth="1600px"
     >
       <H2 as="h2">All Entries</H2>
-      {!loading && (profileInfo !== null) ? (
+      {!loading && profileInfo !== null ? (
         <>
           <Search
             searchQueryHandler={(event) =>

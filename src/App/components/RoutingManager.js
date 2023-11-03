@@ -26,9 +26,7 @@ const RoutingManager = (props) => {
       />
       <Route
         path={`/submission/:challengeId/:submissionId`}
-        element={
-          <Submission/>
-        }
+        element={<Submission />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
