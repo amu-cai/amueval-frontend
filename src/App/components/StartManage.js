@@ -9,10 +9,12 @@ import SESSION_STORAGE from '../../utils/sessionStorage';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import addUser from '../../api/addUser';
 import KeyCloakService from '../../services/KeyCloakService';
+import EntireScreenLoading from '../../components/generic/EntireScreenLoading/EntrieScreenLoading';
 
 const StartManage = () => {
   const timeoutValue = 1500;
   const navigate = useNavigate();
+  const [entireScreenLoading, setEntireScreenLoading] = React.useState(true);
 
   const redirectToRootPage = React.useCallback(() => {
     const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
@@ -78,6 +80,9 @@ const StartManage = () => {
     setTimeout(() => {
       redirectAfterAcceptPolicyPrivacy();
     }, timeoutValue);
+    setTimeout(() => {
+      setEntireScreenLoading(false);
+    }, timeoutValue);
   }, [
     reloadSession,
     redirectAfterLogout,
@@ -85,6 +90,9 @@ const StartManage = () => {
     addUserToServer,
   ]);
 
+  if (entireScreenLoading) {
+    return <EntireScreenLoading />;
+  }
   return <></>;
 };
 
