@@ -9,7 +9,6 @@ import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
 import searchQueryHandler from './searchHandler';
 import orderKeys from './orderKeys';
-import KeyCloakService from '../../services/KeyCloakService';
 
 const AllEntries = (props) => {
   const [entriesAll, setEntriesAll] = React.useState([]);
@@ -20,22 +19,11 @@ const AllEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
-  const [profileInfo, setProfileInfo] = React.useState(null);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
   const elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
-  const getProfileInfo = () => {
-    setTimeout(() => {
-      if (KeyCloakService.isLoggedIn()) {
-        KeyCloakService.getProfileInfo(setProfileInfo);
-      } else {
-        setProfileInfo(false);
-      }
-    }, 1500);
-  };
-
-  React.useMemo(() => {
+  React.useEffect(() => {
     if (props.challengeName) {
       getEntries(
         'challenge-all-submissions',
@@ -45,8 +33,7 @@ const AllEntries = (props) => {
         setScoresSorted
       );
     }
-    getProfileInfo();
-  }, [props.challengeName]);
+  }, [props]);
 
   const sortByUpdate = React.useCallback(
     (elem) => {
@@ -126,9 +113,8 @@ const AllEntries = (props) => {
   );
 
   const allEntriesTableRender = () => {
-    const tableReady = !loading && profileInfo !== null;
     const tableNotEmpty = elements.length && entries[0];
-    if (tableReady) {
+    if (!loading) {
       if (tableNotEmpty) {
         return (
           <>
@@ -143,7 +129,6 @@ const AllEntries = (props) => {
                 orderedKeys={orderKeys(entries[0])}
                 sortByUpdate={sortByUpdate}
                 popUpMessageHandler={props.popUpMessageHandler}
-                profileInfo={profileInfo}
               />
             </Container>
             <Pager

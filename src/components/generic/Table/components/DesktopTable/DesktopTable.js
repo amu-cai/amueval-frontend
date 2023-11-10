@@ -20,6 +20,7 @@ const DesktopTable = (props) => {
             <tr key={`table-row-${i}`} className="TableStyle__tr">
               <TableRowItems
                 orderedKeys={props.orderedKeys}
+                subpage={props.subpage}
                 item={item}
                 i={i}
               />
@@ -34,14 +35,18 @@ const DesktopTable = (props) => {
                 }}
                 subpage={props.subpage}
                 rowFooter={props.rowFooter}
-                profileInfo={props.profileInfo}
                 item={item}
                 i={i}
               />
-              <RowsBackgroundStyle 
-                as={Link} 
-                to={props.subpage === "MY_ENTRIES" ? `/submission/${props.challengeName}/${item.id}` : ''} 
-                i={i} />
+              <RowsBackgroundStyle
+                as={Link}
+                to={
+                  props.subpage === 'MY_ENTRIES'
+                    ? `/submission/${props.challengeName}/${item.id}`
+                    : ''
+                }
+                i={i}
+              />
             </tr>
           );
         })}

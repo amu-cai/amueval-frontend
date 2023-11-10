@@ -11,7 +11,6 @@ const Table = ({
   orderedKeys,
   popUpMessageHandler,
   sortByUpdate,
-  profileInfo,
   subpage,
   challengeName,
   rowFooter = true,
@@ -50,7 +49,6 @@ const Table = ({
           popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
-          profileInfo={profileInfo}
           subpage={subpage}
           tableUpdate={tableUpdate}
           setItemToHandle={setItemToHandle}
@@ -69,7 +67,6 @@ const Table = ({
           popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
-          profileInfo={profileInfo}
           subpage={subpage}
           challengeName={challengeName}
           tableUpdate={tableUpdate}

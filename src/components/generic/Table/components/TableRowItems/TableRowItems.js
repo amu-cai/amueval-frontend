@@ -5,14 +5,23 @@ import {
   IS_MOBILE,
 } from '../../../../../utils/globals';
 import { Container } from '../../../../../utils/containers';
+import { Medium } from '../../../../../utils/fonts';
 
-const TableRowItems = ({ orderedKeys, item, i }) => {
+const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
   const renderValue = (keyValue) => {
     if (keyValue === 'when') {
       return RENDER_WHEN(item[keyValue]);
     } else {
       return RENDER_METRIC_VALUE(item[keyValue]);
     }
+  };
+
+  const renderItem = (keyValue) => {
+    const notMyEntriesPage = subpage !== 'MY_ENTRIES';
+    if (item.isOwner && notMyEntriesPage) {
+      return <Medium>{renderValue(keyValue)}</Medium>;
+    }
+    return renderValue(keyValue);
   };
 
   return (
@@ -25,7 +34,7 @@ const TableRowItems = ({ orderedKeys, item, i }) => {
                 {keyValue}
               </Container>
             )}
-            {renderValue(keyValue)}
+            {renderItem(keyValue)}
             {keyValue === '#' && i + 1}
           </td>
         );
