@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlexColumn } from '../../utils/containers';
-import { H2 } from '../../utils/fonts';
+import { FlexColumn, Container } from '../../utils/containers';
+import { H2, Medium } from '../../utils/fonts';
 import Table from '../../components/generic/Table/Table';
 import getChallengeLeaderboard from '../../api/getChallengeLeaderboard';
 import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';
@@ -22,6 +22,9 @@ const Leaderboard = (props) => {
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [idSorted, setIdSorted] = React.useState([]);
+
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  const elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   React.useMemo(() => {
     getChallengeLeaderboard(
@@ -157,8 +160,43 @@ const Leaderboard = (props) => {
     ]
   );
 
-  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  const elements = entries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  const leaderboardTableRender = () => {
+    const tableNotEmpty = elements.length && entries[0];
+    if (!loading) {
+      if (tableNotEmpty) {
+        return (
+          <>
+            <Search
+              searchQueryHandler={(event) =>
+                searchQueryHandler(event, entries, setPageNr, setEntries)
+              }
+            />
+            {elements.length > 0 && entries[0] && (
+              <Container width="100%" overflowX="auto">
+                <Table
+                  items={elements}
+                  orderedKeys={orderKeys(entries[0])}
+                  sortByUpdate={sortByUpdate}
+                  rowFooter={false}
+                />
+              </Container>
+            )}
+            <Pager
+              pageNr={pageNr}
+              elements={entries}
+              setPageNr={setPageNr}
+              width="72px"
+              borderRadius="64px"
+              pages={CALC_PAGES(entries, 2)}
+              number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
+            />
+          </>
+        );
+      }
+      return <Medium margin="72px 0">No results in Leaderboard ;c</Medium>;
+    }
+    return <Loading />;
+  };
 
   return (
     <FlexColumn
@@ -169,36 +207,7 @@ const Leaderboard = (props) => {
       maxWidth="1600px"
     >
       <H2 as="h2">Leaderboard</H2>
-      {!loading ? (
-        <>
-          <Search
-            searchQueryHandler={(event) =>
-              searchQueryHandler(event, entries, setPageNr, setEntries)
-            }
-          />
-          {elements.length > 0 && entries[0] && (
-            <div style={{ width: '100%', overflowX: 'auto' }}>
-              <Table
-                items={elements}
-                orderedKeys={orderKeys(entries[0])}
-                sortByUpdate={sortByUpdate}
-                rowFooter={false}
-              />
-            </div>
-          )}
-          <Pager
-            pageNr={pageNr}
-            elements={entries}
-            setPageNr={setPageNr}
-            width="72px"
-            borderRadius="64px"
-            pages={CALC_PAGES(entries, 2)}
-            number={`${pageNr} / ${CALC_PAGES(entries, 2)}`}
-          />
-        </>
-      ) : (
-        <Loading />
-      )}
+      {leaderboardTableRender()}
     </FlexColumn>
   );
 };

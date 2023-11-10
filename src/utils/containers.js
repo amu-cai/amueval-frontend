@@ -38,6 +38,7 @@ const Container = styled.div`
   overflow-wrap: ${({ overflowWrap }) =>
     overflowWrap ? overflowWrap : 'normal'};
   overflow-y: ${({ overflowY }) => (overflowY ? overflowY : 'none')};
+  overflow-x: ${({ overflowX }) => (overflowX ? overflowX : 'none')};
 `;
 
 const FlexRow = styled(Container)`

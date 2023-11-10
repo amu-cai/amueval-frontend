@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexColumn } from '../../utils/containers';
+import { Container, FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
 import Pager from '../../components/generic/Pager';
 import { CALC_PAGES } from '../../utils/globals';
@@ -10,9 +10,9 @@ import orderKeys from './orderKeys';
 import { ELEMENTS_PER_PAGE } from '../../utils/globals';
 import getEntries from '../../api/getEntries';
 import searchHandler from './searchHandler';
+import { Medium } from '../../utils/fonts';
 
 const MyEntries = (props) => {
-  // const [myEntriesFromAPI, setMyEntriesFromAPI] = React.useState({});
   const [myEntriesAll, setMyEntriesAll] = React.useState([]);
   const [myEntries, setMyEntries] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -20,6 +20,9 @@ const MyEntries = (props) => {
   const [idSorted, setIdSorted] = React.useState([]);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [scoresSorted, setScoresSorted] = React.useState([]);
+
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  let elements = myEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   React.useMemo(() => {
     getEntries(
@@ -87,8 +90,43 @@ const MyEntries = (props) => {
     [idSorted, myEntries, scoresSorted, whenSorted]
   );
 
-  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  let elements = myEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  const myEntriesTableRender = () => {
+    const tableNotEmpty = elements.length && myEntries[0];
+    if (!loading) {
+      if (tableNotEmpty) {
+        return (
+          <>
+            <Search
+              searchQueryHandler={(event) =>
+                searchHandler(event, myEntriesAll, setPageNr, setMyEntries)
+              }
+            />
+            <Container width="100%" overflowX="auto">
+              <Table
+                items={elements}
+                orderedKeys={orderKeys(myEntries[0])}
+                sortByUpdate={sortByUpdate}
+                popUpMessageHandler={props.popUpMessageHandler}
+                subpage={'MY_ENTRIES'}
+                challengeName={props.challengeName}
+              />
+            </Container>
+            <Pager
+              pageNr={pageNr}
+              elements={myEntries}
+              setPageNr={setPageNr}
+              width="72px"
+              borderRadius="64px"
+              pages={CALC_PAGES(myEntries, 2)}
+              number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
+            />
+          </>
+        );
+      }
+      return <Medium margin="72px 0">No results in AllEntries ;c</Medium>;
+    }
+    return <Loading />;
+  };
 
   return (
     <FlexColumn
@@ -99,38 +137,7 @@ const MyEntries = (props) => {
       maxWidth="1600px"
     >
       <H2 as="h2">My Entries</H2>
-      {!loading ? (
-        <>
-          <Search
-            searchQueryHandler={(event) =>
-              searchHandler(event, myEntriesAll, setPageNr, setMyEntries)
-            }
-          />
-          {elements.length > 0 && myEntries[0] && (
-            <div style={{ width: '100%', overflowX: 'auto' }}>
-              <Table
-                items={elements}
-                orderedKeys={orderKeys(myEntries[0])}
-                sortByUpdate={sortByUpdate}
-                popUpMessageHandler={props.popUpMessageHandler}
-                subpage={"MY_ENTRIES"}
-                challengeName={props.challengeName}
-              />
-            </div>
-          )}
-          <Pager
-            pageNr={pageNr}
-            elements={myEntries}
-            setPageNr={setPageNr}
-            width="72px"
-            borderRadius="64px"
-            pages={CALC_PAGES(myEntries, 2)}
-            number={`${pageNr} / ${CALC_PAGES(myEntries, 2)}`}
-          />
-        </>
-      ) : (
-        <Loading />
-      )}
+      {myEntriesTableRender()}
     </FlexColumn>
   );
 };
