@@ -42,7 +42,8 @@ const doLogin = () => {
   }
 };
 
-const doLogout = (reset) => {
+const doLogout = (event, reset) => {
+  event.preventDefault();
   sessionStorage.clear();
   if (reset) {
     localStorage.clear();

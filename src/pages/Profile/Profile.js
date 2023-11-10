@@ -46,8 +46,8 @@ const Profile = () => {
               })}
             </FlexColumn>
             <Button
-              handler={() => {
-                KeyCloakService.doLogout(true);
+              handler={(e) => {
+                KeyCloakService.doLogout(e, true);
               }}
               width="232px"
               height="36px"
