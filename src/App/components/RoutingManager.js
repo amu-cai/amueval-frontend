@@ -4,6 +4,7 @@ import {
   CHALLENGE_PAGE,
   CHALLENGE_SECTIONS,
   POLICY_PRIVACY_PAGE,
+  PROFILE_PAGE,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
@@ -11,6 +12,7 @@ import PolicyPrivacy from '../../pages/PolicyPrivacy';
 import LandingPage from '../../pages/LandingPage';
 import KeyCloakService from '../../services/KeyCloakService';
 import Submission from '../../pages/Submission';
+import Profile from '../../pages/Profile/Profile';
 
 const RoutingManager = (props) => {
   return (
@@ -104,6 +106,10 @@ const RoutingManager = (props) => {
             beforeRegister
           />
         }
+      />
+      <Route
+        path={PROFILE_PAGE}
+        element={<Profile popUpMessageHandler={props.popUpMessageHandler} />}
       />
       {KeyCloakService.isLoggedIn() ? (
         <>

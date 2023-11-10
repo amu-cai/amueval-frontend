@@ -42,7 +42,7 @@ const Body = styled(Container)`
   line-height: 20px;
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '16px')};
     line-height: 22px;
   }
 `;

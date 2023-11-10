@@ -1,11 +1,11 @@
-import { FlexColumn, FlexRow } from '../utils/containers';
+import { FlexColumn, FlexRow } from '../../utils/containers';
 import React from 'react';
 import styled from 'styled-components';
-import { Body, H1, H2, Medium } from '../utils/fonts';
-import CircleNumber from '../components/generic/CircleNumber';
-import Button from '../components/generic/Button';
-import KeyCloakService from '../services/KeyCloakService';
-import LOCAL_STORAGE from '../utils/localStorage';
+import { Body, H1, H2, Medium } from '../../utils/fonts';
+import CircleNumber from '../../components/generic/CircleNumber';
+import Button from '../../components/generic/Button';
+import KeyCloakService from '../../services/KeyCloakService';
+import LOCAL_STORAGE from '../../utils/localStorage';
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;

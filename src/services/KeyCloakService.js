@@ -42,8 +42,11 @@ const doLogin = () => {
   }
 };
 
-const doLogout = () => {
+const doLogout = (reset) => {
   sessionStorage.clear();
+  if (reset) {
+    localStorage.clear();
+  }
   sessionStorage.setItem(
     SESSION_STORAGE.LOGGED,
     SESSION_STORAGE.STATIC_VALUE.NO

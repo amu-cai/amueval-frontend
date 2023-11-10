@@ -12,6 +12,8 @@ import userIco from '../../assets/user_ico.svg';
 import KeyCloakService from '../../services/KeyCloakService';
 import loginIco from '../../assets/login_ico.svg';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { PROFILE_PAGE } from '../../utils/globals';
 
 const LoggedBarStyle = styled(FlexColumn)`
   width: 360px;
@@ -25,7 +27,8 @@ const LoggedBarStyle = styled(FlexColumn)`
   box-shadow: ${({ theme }) => theme.shadow};
   z-index: 3;
 
-  button {
+  button,
+  a {
     cursor: pointer;
 
     li {
@@ -87,12 +90,11 @@ const LoggedBar = (props) => {
         />
         <FlexColumn
           as="ul"
-          onClick={KeyCloakService.goToProfile}
           gap="24px"
           padding="32px 24px"
           alignmentX="flex-start"
         >
-          <FlexRow as="button" gap="16px">
+          <FlexRow as={Link} to={PROFILE_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={userIco} size="cover" />
             <Body as="li">Profile</Body>
           </FlexRow>
