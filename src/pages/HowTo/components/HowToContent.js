@@ -16,17 +16,7 @@ const HowToContent = (props) => {
       return `git pull git://gonito.net/${props.challengeName}.git`;
     }
   };
-
-  const repoKeyRender = () => {
-    if (props.userFullInfo) {
-      return (
-        <CodeShell
-          codeBlockIndex={0}
-          commands={[props.userFullInfo.individualKey]}
-        />
-      );
-    }
-  };
+  const subpointsGridGap = IS_MOBILE() ? '8px' : '16px';
 
   return (
     <FlexColumn
@@ -41,7 +31,7 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
         <CircleNumber number="1" />
         <Body as="p" margin="auto 0">
@@ -53,22 +43,9 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
         <CircleNumber number="2" />
-        <Body as="p" margin="auto 0">
-          Add the following ssh key{' '}
-          <Medium as="span">{props.userFullInfo ? '' : 'REPO_KEY_HERE'}</Medium>{' '}
-          to your deploy keys in your git repository settings.
-        </Body>
-      </Grid>
-      {repoKeyRender()}
-      <Grid
-        width="100%"
-        gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
-      >
-        <CircleNumber number="3" />
         <Body as="p" margin="auto 0">
           Clone your repository and pull from the challenge mother repository
         </Body>
@@ -84,9 +61,9 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
-        <CircleNumber number="4" />
+        <CircleNumber number="3" />
         <Body as="p" margin="auto 0">
           You need to generate your solution for the test set as{' '}
           <Medium as="span">test-A/out.tsv</Medium>. You may also create the
@@ -96,9 +73,9 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
-        <CircleNumber number="5" />
+        <CircleNumber number="4" />
         <Body as="p" margin="auto 0">
           (This step is optional.) You can evaluate results for the dev set
           locally by <Medium as="span">geval</Medium>.
@@ -116,9 +93,9 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
-        <CircleNumber number="6" />
+        <CircleNumber number="5" />
         <Body as="p" margin="auto 0">
           Commit and push at least <Medium>*/out.tsv</Medium> files to your
           repo. It is also recommended to push your source code files.
@@ -127,12 +104,22 @@ const HowToContent = (props) => {
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
-        gridGap={IS_MOBILE() ? '8px' : '16px'}
+        gridGap={subpointsGridGap}
       >
-        <CircleNumber number="7" />
+        <CircleNumber number="6" />
         <Body as="p" margin="auto 0">
           Submit your solution to Gonito using <Medium>SUBMIT</Medium> on the
           panel on the left.
+        </Body>
+      </Grid>
+      <Grid
+        width="100%"
+        gridTemplateColumns="auto 1fr"
+        gridGap={subpointsGridGap}
+      >
+        <CircleNumber number="7" />
+        <Body as="p" margin="auto 0">
+          Your repository must be public.
         </Body>
       </Grid>
     </FlexColumn>

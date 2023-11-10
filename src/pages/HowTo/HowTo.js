@@ -1,26 +1,24 @@
 import React from 'react';
-import getFullUser from '../../api/getFullUserInfo';
 import KeyCloakService from '../../services/KeyCloakService';
 import { FlexColumn } from '../../utils/containers';
 import { IS_MOBILE } from '../../utils/globals';
 import HowToContent from './components/HowToContent';
 
 const HowTo = (props) => {
-  const [userFullInfo, setUserFullInfo] = React.useState(null);
-  const username = KeyCloakService.getUsername();
+  const { popUpMessageHandler, challengeName } = props;
+  const [logInReminder, setLogInReminder] = React.useState(true);
 
-  React.useMemo(async () => {
-    await getFullUser(setUserFullInfo);
-    setTimeout(() => {
+  React.useEffect(() => {
+    if (logInReminder) {
       if (!KeyCloakService.isLoggedIn()) {
-        props.popUpMessageHandler(
-          'Please log in',
-          'To see everything you must log in',
-          () => KeyCloakService.doLogin
+        popUpMessageHandler(
+          'Please create an account or log in',
+          'To see all options you need to be logged in'
         );
       }
-    }, 1000);
-  }, [props]);
+      setLogInReminder(false);
+    }
+  }, [logInReminder, popUpMessageHandler]);
 
   return (
     <FlexColumn
@@ -31,11 +29,7 @@ const HowTo = (props) => {
       maxWidth={IS_MOBILE() ? '668px' : 'none'}
     >
       <FlexColumn maxWidth="680px" alignmentX="flex-start" gap="48px">
-        <HowToContent
-          userFullInfo={userFullInfo}
-          user={username ? username : 'yourID'}
-          challengeName={props.challengeName}
-        />
+        <HowToContent challengeName={challengeName} />
       </FlexColumn>
     </FlexColumn>
   );
