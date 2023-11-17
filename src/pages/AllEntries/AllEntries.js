@@ -128,6 +128,7 @@ const AllEntries = (props) => {
                 items={elements}
                 orderedKeys={orderKeys(entries[0])}
                 sortByUpdate={sortByUpdate}
+                challengeName={props.challengeName}
                 popUpMessageHandler={props.popUpMessageHandler}
               />
             </Container>

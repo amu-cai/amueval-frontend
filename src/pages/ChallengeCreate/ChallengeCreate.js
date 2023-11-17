@@ -18,7 +18,7 @@ const ChallengeCreate = () => {
         alignmentX="flex-start"
       >
         <H2 as="h2" margin={IS_MOBILE() ? '0 0 4px 0' : '0 0 8px 0'}>
-          Challenge create instruction
+          How to create challenge
         </H2>
         <Grid
           width="100%"

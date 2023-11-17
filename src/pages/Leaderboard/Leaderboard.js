@@ -177,6 +177,7 @@ const Leaderboard = (props) => {
                   items={elements}
                   orderedKeys={orderKeys(entries[0])}
                   sortByUpdate={sortByUpdate}
+                  challengeName={props.challengeName}
                   rowFooter={false}
                 />
               </Container>

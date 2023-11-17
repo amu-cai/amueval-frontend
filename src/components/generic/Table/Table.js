@@ -50,6 +50,7 @@ const Table = ({
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
           subpage={subpage}
+          challengeName={challengeName}
           tableUpdate={tableUpdate}
           setItemToHandle={setItemToHandle}
           setEditPopUp={setEditPopUp}

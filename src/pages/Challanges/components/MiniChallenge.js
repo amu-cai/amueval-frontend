@@ -91,11 +91,7 @@ const MiniChallenge = (props) => {
           <H3 as="h3" width="85%">
             {props.title}
           </H3>
-          {props.type ? (
-            <IconLabel type={props.type} size="36px" maskSize="cover" />
-          ) : (
-            <IconLabel type="text" size="36px" maskSize="cover" />
-          )}
+          <IconLabel type={props.type ?? 'text'} size="36px" maskSize="cover" />
         </FlexRow>
         <Container
           margin="0 0 14px 0"

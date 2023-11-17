@@ -40,11 +40,8 @@ const DesktopTable = (props) => {
               />
               <RowsBackgroundStyle
                 as={Link}
-                to={
-                  props.subpage === 'MY_ENTRIES'
-                    ? `/submission/${props.challengeName}/${item.id}`
-                    : ''
-                }
+                state={item}
+                to={`/submission/${props.challengeName}/${item.id}`}
                 i={i}
               />
             </tr>
