@@ -11,9 +11,10 @@ import theme from '../../utils/theme';
 import userIco from '../../assets/user_ico.svg';
 import KeyCloakService from '../../services/KeyCloakService';
 import loginIco from '../../assets/login_ico.svg';
+import privacyIco from '../../assets/policy_ico.svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { PROFILE_PAGE } from '../../utils/globals';
+import { POLICY_PRIVACY_PAGE, PROFILE_PAGE } from '../../utils/globals';
 
 const LoggedBarStyle = styled(FlexColumn)`
   width: 360px;
@@ -97,6 +98,10 @@ const LoggedBar = (props) => {
           <FlexRow as={Link} to={PROFILE_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={userIco} size="cover" />
             <Body as="li">Profile</Body>
+          </FlexRow>
+          <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">
+            <Svg width="16px" height="16px" src={privacyIco} size="cover" />
+            <Body as="li">Privacy policy</Body>
           </FlexRow>
           <FlexRow
             as="button"

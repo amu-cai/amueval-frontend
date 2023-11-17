@@ -9,11 +9,11 @@ import loginIco from '../../../assets/login_ico.svg';
 import userIco from '../../../assets/user_ico.svg';
 import { Menu } from '../../../utils/fonts';
 import registerIco from '../../../assets/register_ico.svg';
-import { CHALLENGES_PAGE, POLICY_PRIVACY_PAGE } from '../../../utils/globals';
+import { CHALLENGES_PAGE, CHALLENGE_CREATE_PAGE } from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
 import KeyCloakService from '../../../services/KeyCloakService';
-import policyIco from '../../../assets/policy_ico.svg';
+import createIco from '../../../assets/create_ico.svg';
 
 const MenuButton = styled(Container)`
   width: 20px;
@@ -57,13 +57,13 @@ const NavBar = (props) => {
           <>
             <MenuButton as="button" onClick={toggleNavMenu} />
             <FlexRow as="ul" className="ul-desktop" gap="32px">
-              <FlexRow as={Link} to={CHALLENGES_PAGE} gap="16px">
+              <FlexRow as={Link} to={CHALLENGES_PAGE} gap="12px">
                 <Svg width="16px" height="16px" src={cupIco} />
                 <Menu as="li">Challenges</Menu>
               </FlexRow>
-              <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="12px">
-                <Svg size="cover" width="16px" height="16px" src={policyIco} />
-                <Menu as="li">Privacy policy</Menu>
+              <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
+                <Svg size="cover" width="16px" height="16px" src={createIco} />
+                <Menu as="li">Challenge create</Menu>
               </FlexRow>
               {!KeyCloakService.isLoggedIn() && (
                 <FlexRow
@@ -75,7 +75,7 @@ const NavBar = (props) => {
                       () => KeyCloakService.doRegister
                     )
                   }
-                  gap="16px"
+                  gap="12px"
                 >
                   <Svg width="16px" height="16px" src={registerIco} />
                   <Menu as="li">Register</Menu>
@@ -94,7 +94,7 @@ const NavBar = (props) => {
                 <FlexRow
                   as="button"
                   onClick={KeyCloakService.doLogin}
-                  gap="16px"
+                  gap="12px"
                 >
                   <Svg width="16px" height="16px" src={loginIco} />
                   <Menu as="li">Sign in</Menu>

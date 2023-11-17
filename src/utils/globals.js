@@ -14,6 +14,7 @@ const API = process.env.REACT_APP_API;
 const ROOT_PAGE = '/';
 const CHALLENGES_PAGE = '/challenges';
 const CHALLENGE_PAGE = '/challenge';
+const CHALLENGE_CREATE_PAGE = '/challenge-create';
 const PROFILE_PAGE = '/profile';
 const POLICY_PRIVACY_PAGE = '/policy-privacy';
 const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
@@ -154,6 +155,7 @@ export {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   CHALLENGES_STATUS_FILTER,
   PROFILE_PAGE,
+  CHALLENGE_CREATE_PAGE,
   MINI_DESCRIPTION_RENDER,
   RENDER_ICO,
   CALC_PAGES,

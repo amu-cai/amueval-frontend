@@ -7,10 +7,16 @@ import registerIco from '../../assets/register_ico.svg';
 import cupIco from '../../assets/cup_ico.svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { CHALLENGES_PAGE, POLICY_PRIVACY_PAGE } from '../../utils/globals';
+import {
+  CHALLENGES_PAGE,
+  CHALLENGE_CREATE_PAGE,
+  POLICY_PRIVACY_PAGE,
+  PROFILE_PAGE,
+} from '../../utils/globals';
 import PropsTypes from 'prop-types';
 import KeyCloakService from '../../services/KeyCloakService';
 import policyIco from '../../assets/policy_ico.svg';
+import createIco from '../../assets/create_ico.svg';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -68,9 +74,9 @@ const MobileNavMenu = (props) => {
           <Svg width="16px" height="16px" src={cupIco} />
           <Menu as="li">Challenges</Menu>
         </FlexRow>
-        <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="12px">
-          <Svg size="cover" width="16px" height="16px" src={policyIco} />
-          <Menu as="li">Privacy policy</Menu>
+        <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
+          <Svg size="cover" width="16px" height="16px" src={createIco} />
+          <Menu as="li">Challenge create</Menu>
         </FlexRow>
         {!KeyCloakService.isLoggedIn() ? (
           <FlexRow
@@ -92,9 +98,13 @@ const MobileNavMenu = (props) => {
         )}
         {KeyCloakService.isLoggedIn() ? (
           <>
-            <FlexRow as="button" gap="16px">
+            <FlexRow as={Link} to={PROFILE_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={userIco} size="cover" />
               <Menu as="li">Profile</Menu>
+            </FlexRow>
+            <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">
+              <Svg width="16px" height="16px" src={policyIco} size="cover" />
+              <Menu as="li">Privacy policy</Menu>
             </FlexRow>
             <FlexRow as="button" onClick={KeyCloakService.doLogout} gap="16px">
               <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />

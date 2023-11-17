@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Container} from '../../../utils/containers';
+import { Container } from '../../../utils/containers';
 
 const NavBarStyle = styled(Container)`
   position: fixed;
@@ -7,32 +7,24 @@ const NavBarStyle = styled(Container)`
   left: 0;
   width: 100%;
   height: 42px;
-  background-color: ${({theme}) => theme.colors.white};
-  box-shadow: ${({theme}) => theme.navShadow};
-  padding: 0;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.navShadow};
+  padding: 0 16px;
   z-index: 2;
 
   .ul-desktop {
     display: none;
   }
 
-  nav {
-    a {
-      margin: 0 0 0 10px;
-    }
-    button {
-      margin: 0 10px 0 0;
-    }
-  }
-
-  @media (min-width: ${({theme}) => theme.overMobile}) {
+  @media (min-width: ${({ theme }) => theme.overMobile}) {
     height: 48px;
-    padding: 0 16px;
+    padding: 0 26px;
 
     .ul-desktop {
       display: flex;
 
-      a, button {
+      a,
+      button {
         cursor: pointer;
 
         div {
@@ -47,11 +39,11 @@ const NavBarStyle = styled(Container)`
 
         &:hover {
           div {
-            background-color: ${({theme}) => theme.colors.green};
+            background-color: ${({ theme }) => theme.colors.green};
           }
 
           li {
-            color: ${({theme}) => theme.colors.green};
+            color: ${({ theme }) => theme.colors.green};
           }
         }
       }

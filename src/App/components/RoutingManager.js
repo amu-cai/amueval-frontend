@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import {
   CHALLENGES_PAGE,
+  CHALLENGE_CREATE_PAGE,
   CHALLENGE_PAGE,
   CHALLENGE_SECTIONS,
   POLICY_PRIVACY_PAGE,
@@ -13,8 +14,94 @@ import LandingPage from '../../pages/LandingPage';
 import KeyCloakService from '../../services/KeyCloakService';
 import Submission from '../../pages/Submission';
 import Profile from '../../pages/Profile/Profile';
+import PageNotFound from '../../pages/PageNotFound/PageNotFound';
+import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
 
 const RoutingManager = (props) => {
+  const loggedIn = KeyCloakService.isLoggedIn();
+
+  const logInRoutesRender = () => {
+    if (loggedIn) {
+      return (
+        <>
+          <Route
+            path={`/submission/:challengeId/:submissionId`}
+            element={<Submission />}
+          />
+          <Route
+            path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
+            element={
+              <Challenge
+                section={CHALLENGE_SECTIONS.MY_ENTRIES}
+                popUpMessageHandler={props.popUpMessageHandler}
+              />
+            }
+          />
+          <Route
+            path={`${CHALLENGE_PAGE}/:challengeId/submit`}
+            element={
+              <Challenge
+                section={CHALLENGE_SECTIONS.SUBMIT}
+                popUpMessageHandler={props.popUpMessageHandler}
+              />
+            }
+          />
+          <Route
+            path={PROFILE_PAGE}
+            element={
+              <Profile popUpMessageHandler={props.popUpMessageHandler} />
+            }
+          />
+        </>
+      );
+    }
+  };
+
+  const rootPageRender = () => {
+    if (loggedIn) {
+      return (
+        <>
+          <Route
+            exact
+            path="/"
+            element={
+              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
+            }
+          />
+          <Route
+            element={
+              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
+            }
+          />
+        </>
+      );
+    }
+    return (
+      <>
+        <Route
+          exact
+          path="/"
+          element={
+            <LandingPage
+              popUpMessageHandler={props.popUpMessageHandler}
+              showNavOptions={props.showNavOptions}
+              hideNavOptions={props.hideNavOptions}
+            />
+          }
+        />
+        <Route
+          element={
+            <LandingPage
+              popUpMessageHandler={props.popUpMessageHandler}
+              showNavOptions={props.showNavOptions}
+              hideNavOptions={props.hideNavOptions}
+            />
+          }
+        />
+      </>
+    );
+  };
+
   return (
     <Routes>
       <Route
@@ -25,10 +112,6 @@ const RoutingManager = (props) => {
             popUpMessageHandler={props.popUpMessageHandler}
           />
         }
-      />
-      <Route
-        path={`/submission/:challengeId/:submissionId`}
-        element={<Submission />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
@@ -62,24 +145,6 @@ const RoutingManager = (props) => {
         }
       />
       <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.MY_ENTRIES}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
-      />
-      <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.SUBMIT}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
-      />
-      <Route
         path={CHALLENGES_PAGE}
         element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />}
       />
@@ -108,48 +173,14 @@ const RoutingManager = (props) => {
         }
       />
       <Route
-        path={PROFILE_PAGE}
-        element={<Profile popUpMessageHandler={props.popUpMessageHandler} />}
+        path={CHALLENGE_CREATE_PAGE}
+        element={
+          <ChallengeCreate popUpMessageHandler={props.popUpMessageHandler} />
+        }
       />
-      {KeyCloakService.isLoggedIn() ? (
-        <>
-          <Route
-            exact
-            path="/"
-            element={
-              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
-            }
-          />
-          <Route
-            element={
-              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
-            }
-          />
-        </>
-      ) : (
-        <>
-          <Route
-            exact
-            path="/"
-            element={
-              <LandingPage
-                popUpMessageHandler={props.popUpMessageHandler}
-                showNavOptions={props.showNavOptions}
-                hideNavOptions={props.hideNavOptions}
-              />
-            }
-          />
-          <Route
-            element={
-              <LandingPage
-                popUpMessageHandler={props.popUpMessageHandler}
-                showNavOptions={props.showNavOptions}
-                hideNavOptions={props.hideNavOptions}
-              />
-            }
-          />
-        </>
-      )}
+      <Route path={'*'} element={<PageNotFound />} />
+      {logInRoutesRender()}
+      {rootPageRender()}
     </Routes>
   );
 };
