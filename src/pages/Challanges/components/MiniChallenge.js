@@ -91,7 +91,11 @@ const MiniChallenge = (props) => {
           <H3 as="h3" width="85%">
             {props.title}
           </H3>
-          {props.type ? <IconLabel type={props.type} size="30px" /> : 'xxx'}
+          {props.type ? (
+            <IconLabel type={props.type} size="36px" maskSize="cover" />
+          ) : (
+            <IconLabel type="text" size="36px" maskSize="cover" />
+          )}
         </FlexRow>
         <Container
           margin="0 0 14px 0"
@@ -113,12 +117,10 @@ const MiniChallenge = (props) => {
           </IconLabel>
           {deadlineRender()}
           {baselineRender()}
-          {props.prize ? (
+          {props.prize && (
             <IconLabel size="24px" gap="8px" type="prize">
               {props.prize}
             </IconLabel>
-          ) : (
-            ''
           )}
         </IconsGrid>
       </FlexColumn>
