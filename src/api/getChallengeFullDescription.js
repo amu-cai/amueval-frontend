@@ -1,4 +1,4 @@
-// import { API } from '../utils/globals';
+import { API } from '../utils/globals';
 
 const getChallengeFullDescription = (
   setDataState,
@@ -6,7 +6,7 @@ const getChallengeFullDescription = (
   challengeName
 ) => {
   // TODO: insert challenge repos on our server to use API variable
-  fetch(`https://gonito.net/api/challenge-readme/${challengeName}/markdown`)
+  fetch(`${API}/challenge-readme/${challengeName}/markdown`)
     .then((response) => response.text())
     .then((data) => {
       setDataState(data);
