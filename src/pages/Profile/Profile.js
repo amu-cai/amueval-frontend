@@ -5,6 +5,7 @@ import KeyCloakService from '../../services/KeyCloakService';
 import Loading from '../../components/generic/Loading';
 import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
+import getPublicKey from '../../api/getPublicKey';
 
 const Profile = () => {
   const [profileInfo, setProfileInfo] = React.useState(null);
@@ -28,6 +29,7 @@ const Profile = () => {
 
   React.useEffect(() => {
     getProfileInfo();
+    getPublicKey();
   }, []);
 
   const profileInfoRender = () => {
