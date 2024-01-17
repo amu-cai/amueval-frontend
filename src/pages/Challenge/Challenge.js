@@ -89,7 +89,7 @@ const Challenge = (props) => {
         >
           <Loading visible={loading} />
           <H1 as="h1" margin="0 0 8px 0" textAlign="center">
-            {challenge.title}
+            {challenge.name}
           </H1>
           <MobileChallengeMenu
             challengeName={challengeName}

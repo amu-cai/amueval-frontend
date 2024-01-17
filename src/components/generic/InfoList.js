@@ -32,7 +32,7 @@ const InfoList = (props) => {
                     Deadline: {props.deadline ? RENDER_DEADLINE_TIME(props.deadline) : 'xxx'}
                 </InfoItem>
                 <InfoItem icon={coinsIco} gap={gap} size={iconsSize}>
-                    Prize: {props.prize ? props.prize : 'xxx'}
+                    Award: {props.award ? props.award : 'xxx'}
                 </InfoItem>
             </>
         );
@@ -61,7 +61,7 @@ InfoList.propTypes = {
     bestScore: PropsTypes.string,
     baseline: PropsTypes.string,
     deadline: PropsTypes.string,
-    prize: PropsTypes.string,
+    award: PropsTypes.string,
 };
 
 InfoList.defaultProps = {
@@ -70,7 +70,7 @@ InfoList.defaultProps = {
     bestScore: '',
     baseline: '',
     deadline: '',
-    prize: '',
+    award: '',
 };
 
 export default InfoList;

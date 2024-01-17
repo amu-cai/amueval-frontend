@@ -30,8 +30,8 @@ const renderHoverLabel = (type, time) => {
   switch (type) {
     case 'metric':
       return hoverLabel('metric');
-    case 'prize':
-      return hoverLabel('prize');
+    case 'award':
+      return hoverLabel('award');
     case 'baseline':
       return hoverLabel('baseline');
     case 'deadline':

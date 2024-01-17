@@ -34,7 +34,7 @@ const renderChallenges = (pageNr, challenges) => {
                 mainMetric,
                 bestScore,
                 baseline,
-                prize,
+                award,
                 deadline,
                 name,
               },
@@ -49,7 +49,7 @@ const renderChallenges = (pageNr, challenges) => {
                   metric={mainMetric}
                   bestScore={bestScore}
                   baseline={baseline}
-                  prize={prize}
+                  award={award}
                   deadline={deadline}
                   name={name}
                 />

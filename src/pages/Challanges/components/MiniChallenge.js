@@ -113,9 +113,9 @@ const MiniChallenge = (props) => {
           </IconLabel>
           {deadlineRender()}
           {baselineRender()}
-          {props.prize && (
-            <IconLabel size="24px" gap="8px" type="prize">
-              {props.prize}
+          {props.award && (
+            <IconLabel size="24px" gap="8px" type="award">
+              {props.award}
             </IconLabel>
           )}
         </IconsGrid>

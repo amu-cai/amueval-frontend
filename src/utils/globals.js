@@ -65,7 +65,7 @@ const RENDER_ICO = (type) => {
   switch (type) {
     case 'metric':
       return metricIco;
-    case 'prize':
+    case 'award':
       return coinsIco;
     case 'baseline':
       return baselineIco;

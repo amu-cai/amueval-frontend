@@ -13,13 +13,15 @@ const SubmitInput = (props) => {
         as="input"
         id={props.label}
         name={props.label}
+        type={props?.type ? props.type : 'text'}
+        accept={props?.accept ? props.accept : null}
         borderRadius="4px"
         width="100%"
         height="36px"
         border={`1px solid ${theme.colors.dark}`}
         shadow={theme.shadow}
         defaultValue={props.defaultValue}
-        onChange={(e) => props.handler(e.target.value)}
+        onChange={(e) => props.handler(props.type === "file" ? e : e.target.value)}
         padding="4px"
       />
     </FlexColumn>

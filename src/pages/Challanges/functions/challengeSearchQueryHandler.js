@@ -19,12 +19,12 @@ const challengeSearchQueryHandler = (event, challengesFromAPI, dispatch) => {
         bestScore,
         deadline,
         baseline,
-        prize,
+        award,
       } = challenge;
       const str = `${title} ${description} ${type} ${mainMetric} ${bestScore} 
             ${deadline ? deadline.slice(11, 16) : ''} ${
         deadline ? deadline.slice(0, 10) : ''
-      } ${baseline} ${prize}`;
+      } ${baseline} ${award}`;
       if (str.toLowerCase().includes(searchQuery.toLowerCase()))
         challengesToRender.push(challenge);
     }
