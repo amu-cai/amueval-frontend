@@ -8,12 +8,12 @@ import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
 
 const ChallengeCreate = () => {
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [type, setType] = React.useState("");
-  const [mainMetric, setMainMetric] = React.useState("");
-  const [award, setAward] = React.useState("");
-  const [deadline, setDeadline] = React.useState("");
+  const [title, setTitle] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [type, setType] = React.useState('');
+  const [mainMetric, setMainMetric] = React.useState('');
+  const [award, setAward] = React.useState('');
+  const [deadline, setDeadline] = React.useState('');
   const [challengeFile, setChallengeFile] = React.useState(null);
 
   const [result, setResult] = React.useState(null);
@@ -29,21 +29,19 @@ const ChallengeCreate = () => {
 
   const challengeCreateSubmit = (setResult) => {
     const challengeInput = {
-      "title": title,
-      "description": description,
-      "type": type,
-      "main_metric": mainMetric,
-      "award": award,
-      "deadline": deadline
+      title: title,
+      description: description,
+      type: type,
+      main_metric: mainMetric,
+      award: award,
+      deadline: deadline,
     };
-    const formData = new FormData();
-    formData.append('challenge_file', challengeFile);
 
     fetch(`http://localhost:8000/challenges/create-challenge`, {
       method: 'post',
       body: JSON.stringify(challengeInput),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(
@@ -67,6 +65,38 @@ const ChallengeCreate = () => {
         setResult(json);
       });
   };
+
+  const challengeDetailsCreateSubmit = () => {
+    const formData = new FormData();
+    formData.append('challenge_file', challengeFile);
+
+    fetch(`http://localhost:8000/challenges/create-challenge-details`, {
+      method: 'post',
+      body: formData,
+    })
+      .then(
+        (res) => {
+          if (res.ok) {
+            console.log('sending pdf ok');
+            return res.json();
+          } else {
+            console.log('something went wrong');
+            console.log(res);
+          }
+        },
+        (error) => {
+          console.log(error);
+          console.error('failed due to network error or cross domain');
+        }
+      )
+      .then((json) => {
+        console.log('json response processing');
+        console.log(json);
+        setResult(json);
+      });
+  };
+
+  console.log(challengeCreateSubmit);
 
   return (
     <FlexColumn width="100%" minHeight="100vh" gap="32px">
@@ -122,11 +152,15 @@ const ChallengeCreate = () => {
           type="file"
           accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
           handler={(e) => {
-            console.log(e.target.files[0]);
             setChallengeFile(e.target.files[0]);
           }}
         />
-        <Button width="122px" height="44px" margin="16px auto 0 0" handler={() => challengeCreateSubmit(setResult)}>
+        <Button
+          width="122px"
+          height="44px"
+          margin="16px auto 0 0"
+          handler={() => challengeDetailsCreateSubmit()}
+        >
           <Menu color={theme.colors.white}>Submit</Menu>
         </Button>
       </FlexColumn>
