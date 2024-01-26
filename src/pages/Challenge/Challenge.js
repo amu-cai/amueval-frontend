@@ -47,8 +47,9 @@ const Challenge = (props) => {
         return (
           <Readme
             challengeName={challengeName}
-            metric={challenge.mainMetric}
+            metric={challenge.metric}
             description={challenge.description}
+            readme={challenge.readme}
             deadline={challenge.deadline}
           />
         );

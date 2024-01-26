@@ -1,7 +1,5 @@
-import {API} from '../utils/globals';
-
-const getChallengeInfo = (setDataState, setLoadingState, challengeName) => {
-    fetch(`${API}/challenge-info/${challengeName}`)
+const getChallengeInfo = (setDataState, setLoadingState, challengeTitle) => {
+    fetch(`http://localhost:8000/challenges/challenge/${challengeTitle}`)
         .then(response => response.json())
         .then(data => {
             setDataState(data);

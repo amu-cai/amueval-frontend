@@ -7,6 +7,7 @@ import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
 import challengeMetaDataSubmit from '../../api/challengeMetaDataSubmit';
 import challengeUpload from '../../api/challengeUpload';
+import getMetrics from '../../api/getMetrics';
 
 const ChallengeCreate = () => {
   const [title, setTitle] = React.useState('');
@@ -17,6 +18,12 @@ const ChallengeCreate = () => {
   const [metric, setMetric] = React.useState('');
   const [challengeFile, setChallengeFile] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
+
+  const [metrics, setMetrics] = React.useState(null);
+
+  React.useEffect(() => {
+    getMetrics(setMetrics);
+  }, []);
 
   React.useEffect(() => {
     if (uploadResult) {
@@ -76,7 +83,7 @@ const ChallengeCreate = () => {
         <SubmitInput
           label="Metric"
           type="select"
-          options={["Accuracy", "Recall", "Precision", "F-Score"]}
+          options={metrics ? metrics.map(m => m.name) : []}
           handler={(value) => {
             setMetric(value); // TODO: ToggleTags component refactor and use
           }}

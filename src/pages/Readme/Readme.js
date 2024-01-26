@@ -3,24 +3,11 @@ import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
 import Media from 'react-media';
 import theme from '../../utils/theme';
-import getChallengeFullDescription from '../../api/getChallengeFullDescription';
 import InfoList from '../../components/generic/InfoList';
-import Loading from '../../components/generic/Loading';
 import { marked } from 'marked';
 import ReadmeStyle from './ReadmeStyle';
 
 const Readme = (props) => {
-  const [fullDescription, setFullDescription] = React.useState('');
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    getChallengeFullDescription(
-      setFullDescription,
-      setLoading,
-      props.challengeName
-    );
-  }, [props.challengeName]);
-
   const parseMarkdownResponse = (response) => {
     let result = marked.parse(response);
     let regex = /<h3 /g;
@@ -51,10 +38,10 @@ const Readme = (props) => {
         </FlexColumn>
         <FlexColumn alignmentX="flex-start" maxWidth="260px">
           <ReadmeStyle
-            as={fullDescription ? 'article' : 'p'}
+            as={props.readme ? 'article' : 'p'}
             dangerouslySetInnerHTML={{
-              __html: fullDescription
-                ? parseMarkdownResponse(fullDescription)
+              __html: props.readme
+                ? parseMarkdownResponse(props.readme)
                 : props.description,
             }}
           />
@@ -71,14 +58,14 @@ const Readme = (props) => {
         padding="20px"
         gap="64px"
       >
-        <FlexColumn className="Readme__info" gap="32px">
+        {/* <FlexColumn className="Readme__info" gap="32px">
           <H2 as="h2">Info</H2>
           <InfoList
             iconsSize="32px"
             metric={props.metric}
             deadline={props.deadline}
           />
-        </FlexColumn>
+        </FlexColumn> */}
         <FlexColumn
           className="Readme__container"
           alignmentX="flex-start"
@@ -86,10 +73,10 @@ const Readme = (props) => {
           maxWidth="1200px"
         >
           <ReadmeStyle
-            as={fullDescription ? 'section' : 'p'}
+            as={props.readme ? 'section' : 'p'}
             dangerouslySetInnerHTML={{
-              __html: fullDescription
-                ? parseMarkdownResponse(fullDescription)
+              __html: props.readme
+                ? parseMarkdownResponse(props.readme)
                 : props.description,
             }}
           />
@@ -101,10 +88,10 @@ const Readme = (props) => {
   return (
     <>
       <Media query={theme.mobile}>
-        {!loading ? mobileRender() : <Loading visible={loading} />}
+        {mobileRender()}
       </Media>
       <Media query={theme.desktop}>
-        {!loading ? desktopRender() : <Loading visible={loading} />}
+        {desktopRender()}
       </Media>
     </>
   );

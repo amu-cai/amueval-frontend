@@ -80,7 +80,7 @@ const MiniChallenge = (props) => {
   };
 
   return (
-    <ChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.name}`}>
+    <ChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.title}`}>
       <FlexColumn as="article">
         <FlexRow
           margin="0 0 14px 0"
