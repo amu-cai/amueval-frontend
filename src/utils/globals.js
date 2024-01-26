@@ -28,6 +28,8 @@ const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
   'All entries',
   'Readme',
   'How to',
+  'My entries',
+  'Submit',
 ];
 const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Leaderboard',
@@ -35,7 +37,7 @@ const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Readme',
   'How to',
   'My entries',
-  'Submit',
+  // 'Submit',
 ];
 
 const CHALLENGE_SECTIONS = {

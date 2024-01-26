@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { FlexColumn } from '../../../utils/containers';
 import { H3 } from '../../../utils/fonts';
 import PropsTypes from 'prop-types';
-import KeyCloakService from '../../../services/KeyCloakService';
 import { Link } from 'react-router-dom';
 import {
-  MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
+  // MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
   IS_MOBILE,
 } from '../../../utils/globals';
@@ -45,8 +44,8 @@ const Option = styled(FlexColumn)`
 
 const DesktopChallengeMenu = (props) => {
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
-  if (KeyCloakService.isLoggedIn())
-    options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
+  // if (KeyCloakService.isLoggedIn())
+  //   options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   return (
     <DesktopChallengeMenuStyle>
       {options.map((option, index) => {

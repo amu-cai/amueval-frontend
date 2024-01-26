@@ -37,7 +37,7 @@ const RoutingManager = (props) => {
               />
             }
           />
-          <Route
+          {/* <Route
             path={`${CHALLENGE_PAGE}/:challengeId/submit`}
             element={
               <Challenge
@@ -45,7 +45,7 @@ const RoutingManager = (props) => {
                 popUpMessageHandler={props.popUpMessageHandler}
               />
             }
-          />
+          /> */}
           <Route
             path={PROFILE_PAGE}
             element={
@@ -127,6 +127,15 @@ const RoutingManager = (props) => {
         element={
           <Challenge
             section={CHALLENGE_SECTIONS.ALL_ENTRIES}
+            popUpMessageHandler={props.popUpMessageHandler}
+          />
+        }
+      />
+      <Route
+        path={`${CHALLENGE_PAGE}/:challengeId/submit`}
+        element={
+          <Challenge
+            section={CHALLENGE_SECTIONS.SUBMIT}
             popUpMessageHandler={props.popUpMessageHandler}
           />
         }
