@@ -1,9 +1,10 @@
-const challengeSubmissionSubmit = (challengeFile, setResult) => {
-    const formData = new FormData();
-    formData.append('submission_file', challengeFile);
+const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
     fetch(`http://localhost:8000/evaluation/submit`, {
         method: 'post',
-        body: formData,
+        body: JSON.stringify(submissionInputModel),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     })
         .then(
             (res) => {
