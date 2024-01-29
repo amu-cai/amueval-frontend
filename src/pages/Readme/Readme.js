@@ -57,6 +57,7 @@ const Readme = (props) => {
         className="Readme__section"
         padding="20px"
         gap="64px"
+        width="80%"
       >
         {/* <FlexColumn className="Readme__info" gap="32px">
           <H2 as="h2">Info</H2>
@@ -68,8 +69,7 @@ const Readme = (props) => {
         </FlexColumn> */}
         <FlexColumn
           className="Readme__container"
-          alignmentX="flex-start"
-          width="80%"
+          width="100%"
           maxWidth="1200px"
         >
           <ReadmeStyle
@@ -87,12 +87,8 @@ const Readme = (props) => {
 
   return (
     <>
-      <Media query={theme.mobile}>
-        {mobileRender()}
-      </Media>
-      <Media query={theme.desktop}>
-        {desktopRender()}
-      </Media>
+      <Media query={theme.mobile}>{mobileRender()}</Media>
+      <Media query={theme.desktop}>{desktopRender()}</Media>
     </>
   );
 };

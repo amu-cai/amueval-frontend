@@ -56,6 +56,7 @@ const ChallengeCreate = () => {
         />
         <SubmitInput
           label="Description"
+          type="textarea"
           handler={(value) => {
             setDescription(value);
           }}
@@ -75,7 +76,7 @@ const ChallengeCreate = () => {
         <SubmitInput
           label="Type"
           type="select"
-          options={["image", "text", "tabular"]}
+          options={['image', 'text', 'tabular']}
           handler={(value) => {
             setType(value);
           }}
@@ -83,7 +84,7 @@ const ChallengeCreate = () => {
         <SubmitInput
           label="Metric"
           type="select"
-          options={metrics ? metrics.map(m => m.name) : []}
+          options={metrics ? metrics.map((m) => m.name) : []}
           handler={(value) => {
             setMetric(value); // TODO: ToggleTags component refactor and use
           }}

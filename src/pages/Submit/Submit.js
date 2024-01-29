@@ -1,10 +1,10 @@
-import React from "react";
-import { H2, Menu } from "../../utils/fonts";
-import Button from "../../components/generic/Button";
-import theme from "../../utils/theme";
-import SubmitStyle from "./SubmitStyle";
-import challengeSubmissionSubmit from "../../api/challengeSubmissionSubmit";
-import SubmitInput from "../../components/generic/SubmitInput";
+import React from 'react';
+import { H2, Menu } from '../../utils/fonts';
+import Button from '../../components/generic/Button';
+import theme from '../../utils/theme';
+import SubmitStyle from './SubmitStyle';
+import challengeSubmissionSubmit from '../../api/challengeSubmissionSubmit';
+import SubmitInput from '../../components/generic/SubmitInput';
 
 const Submit = (props) => {
   const [description, setDescription] = React.useState();
@@ -14,7 +14,6 @@ const Submit = (props) => {
 
   React.useEffect(() => {
     if (submissionResult) {
-      alert(submissionResult);
       alert(`${submissionResult.submission}: ${submissionResult.message}`);
     }
   }, [submissionResult]);
@@ -26,6 +25,7 @@ const Submit = (props) => {
       </H2>
       <SubmitInput
         label="Submission description"
+        type="textarea"
         handler={(value) => {
           setDescription(value);
         }}
@@ -42,7 +42,7 @@ const Submit = (props) => {
         handler={() =>
           challengeSubmissionSubmit(
             {
-              submitter: "",
+              submitter: '',
               description: description,
               repo_url: repoUrl,
               challenge_title: props.challengeName,
