@@ -25,7 +25,7 @@ const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
 const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
   'Leaderboard',
-  'All entries',
+  'All submissions',
   'Readme',
   'How to',
   'My entries',
@@ -33,7 +33,7 @@ const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
 ];
 const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Leaderboard',
-  'All entries',
+  'All submissions',
   'Readme',
   'How to',
   'My entries',

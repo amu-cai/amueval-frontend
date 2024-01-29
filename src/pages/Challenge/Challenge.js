@@ -15,7 +15,7 @@ import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
 import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
-import AllEntries from '../AllEntries';
+import AllEntries from '../AllEntries/AllEntries';
 
 const Challenge = (props) => {
   const challengeName = useParams().challengeId;

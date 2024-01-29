@@ -1,6 +1,6 @@
 // import { API } from '../utils/globals';
 
-const getAllEntriesNew = (challenge, setResult) => {
+const getAllSubmissions = (challenge, setResult) => {
   fetch(`http://localhost:8000/evaluation/${challenge}/all-submissions`)
     .then((response) => response.json())
     .then((data) => {
@@ -8,4 +8,4 @@ const getAllEntriesNew = (challenge, setResult) => {
     });
 };
 
-export default getAllEntriesNew;
+export default getAllSubmissions;

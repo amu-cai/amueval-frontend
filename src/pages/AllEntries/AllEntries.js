@@ -20,9 +20,10 @@ const AllEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
-  const [newEntries, setNewEntries] =  React.useState([]);
+  const [newEntries, setNewEntries] = React.useState([]);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  console.log(newEntries);
   const elements = newEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   React.useEffect(() => {
@@ -130,7 +131,14 @@ const AllEntries = (props) => {
             <Container width="100%" overflowX="auto">
               <Table
                 items={elements}
-                orderedKeys={['id', 'submitter', 'description', "dev_result", "test_result", "when"]}
+                orderedKeys={[
+                  'id',
+                  'submitter',
+                  'description',
+                  'dev_result',
+                  'test_result',
+                  'when',
+                ]}
                 sortByUpdate={sortByUpdate}
                 challengeName={props.challengeName}
                 popUpMessageHandler={props.popUpMessageHandler}
@@ -161,7 +169,7 @@ const AllEntries = (props) => {
       width="100%"
       maxWidth="1600px"
     >
-      <H2 as="h2">All Entries</H2>
+      <H2 as="h2">All Submissions</H2>
       {allEntriesTableRender()}
     </FlexColumn>
   );
