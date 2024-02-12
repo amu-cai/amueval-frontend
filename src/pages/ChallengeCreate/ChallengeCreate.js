@@ -27,8 +27,20 @@ const ChallengeCreate = () => {
   }, []);
 
   React.useEffect(() => {
+    if (metaDataResult) {
+      if (metaDataResult?.detail) {
+        alert(`Error: ${metaDataResult.detail}`);
+      }
+    }
+  }, [metaDataResult]);
+
+  React.useEffect(() => {
     if (uploadResult) {
-      alert(`${uploadResult.challenge}: ${uploadResult.message}`);
+      if (uploadResult?.detail) {
+        alert(`Error: ${uploadResult.detail}`);
+      } else {
+        alert(`${uploadResult.challenge}: ${uploadResult.message}`);
+      }
     }
   }, [uploadResult]);
 
@@ -53,7 +65,7 @@ const ChallengeCreate = () => {
   );
 
   return (
-    <FlexColumn width="100%" minHeight="100vh" gap="32px">
+    <FlexColumn margin="80px 0" width="100%" minHeight="100vh" gap="32px">
       <H2 as="h1">Challenge Create</H2>
       <FlexColumn maxWidth="600px" width="100%" gap="20px">
         <FlexColumn gap="10px" width="100%">
@@ -69,7 +81,6 @@ const ChallengeCreate = () => {
             </Medium>
           )}
         </FlexColumn>
-
         <SubmitInput
           label="Description"
           type="textarea"
@@ -84,7 +95,7 @@ const ChallengeCreate = () => {
               setDeadline(value);
             }}
           />
-          {!deadlineFormat.test(deadline) && (
+          {deadline.length > 0 && !deadlineFormat.test(deadline) && (
             <Medium fontSize="14px" width="100%" color={theme.colors.red}>
               Deadline format: dd.mm.yyyy
             </Medium>
@@ -132,7 +143,11 @@ const ChallengeCreate = () => {
           height="44px"
           margin="16px auto 0 0"
           handler={() => challengeCreateSubmit()}
-          disabled={!challengeFile || !title || !deadlineFormat.test(deadline)}
+          disabled={
+            !challengeFile ||
+            !title ||
+            (!deadlineFormat.test(deadline) && deadline.length > 0)
+          }
         >
           <Menu color={theme.colors.white}>Submit</Menu>
         </Button>

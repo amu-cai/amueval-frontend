@@ -13,7 +13,7 @@ const challengeMetaDataSubmit = async (challengeInput, setResult) => {
           return res.json();
         } else {
           console.log('something went wrong');
-          console.log(res);
+          return res.json();
         }
       },
       (error) => {
