@@ -3,6 +3,15 @@ import styled from 'styled-components';
 import { Medium } from '../../utils/fonts';
 import PropsTypes from 'prop-types';
 
+const getBackgroundColor = (theme, backgroundColor, disabled) => {
+  if (disabled) {
+    return theme.colors.dark08;
+  } else if (backgroundColor) {
+    return backgroundColor;
+  }
+  return theme.colors.green;
+};
+
 const ButtonStyle = styled(Medium)`
   display: flex;
   justify-content: center;
@@ -10,19 +19,19 @@ const ButtonStyle = styled(Medium)`
   width: ${({ width }) => (width ? width : '64px')};
   height: ${({ height }) => (height ? height : '28px')};
   border-radius: 12px;
-  background-color: ${({ theme, backgroundColor }) =>
-    backgroundColor ? backgroundColor : theme.colors.green};
+  background-color: ${({ theme, backgroundColor, disabled }) =>
+    getBackgroundColor(theme, backgroundColor, disabled)};
   color: ${({ theme, color }) => (color ? color : theme.colors.white)};
   box-shadow: ${({ theme }) => theme.buttonShadow};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   transition: transform 0.3s ease-in-out;
 
   * {
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   }
 
   &:hover {
-    transform: scale(1.15);
+    transform: ${({ disabled }) => (disabled ? 'none' : 'scale(1.15)')};
   }
 `;
 
@@ -37,6 +46,7 @@ const Button = (props) => {
       color={props.color}
       backgroundColor={props.backgroundColor}
       to={props.to}
+      disabled={props.disabled}
     >
       {props.children}
     </ButtonStyle>

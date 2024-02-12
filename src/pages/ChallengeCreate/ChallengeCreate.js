@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlexColumn } from '../../utils/containers';
 import SubmitInput from '../../components/generic/SubmitInput';
-import { H2 } from '../../utils/fonts';
+import { H2, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
@@ -17,6 +17,7 @@ const ChallengeCreate = () => {
   const [type, setType] = React.useState('');
   const [metric, setMetric] = React.useState('');
   const [challengeFile, setChallengeFile] = React.useState(null);
+  const [metaDataResult, setMetaDataResult] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
 
   const [metrics, setMetrics] = React.useState(null);
@@ -31,6 +32,10 @@ const ChallengeCreate = () => {
     }
   }, [uploadResult]);
 
+  React.useEffect(() => {
+    challengeUpload(challengeFile, setUploadResult);
+  }, [challengeFile, metaDataResult]);
+
   const challengeCreateSubmit = async () => {
     const challengeInput = {
       title: title,
@@ -40,20 +45,31 @@ const ChallengeCreate = () => {
       award: award,
       deadline: deadline,
     };
-    await challengeMetaDataSubmit(challengeInput);
-    await challengeUpload(challengeFile, setUploadResult);
+    await challengeMetaDataSubmit(challengeInput, setMetaDataResult);
   };
+
+  const deadlineFormat = new RegExp(
+    '[0-3][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]'
+  );
 
   return (
     <FlexColumn width="100%" minHeight="100vh" gap="32px">
       <H2 as="h1">Challenge Create</H2>
       <FlexColumn maxWidth="600px" width="100%" gap="20px">
-        <SubmitInput
-          label="Title"
-          handler={(value) => {
-            setTitle(value);
-          }}
-        />
+        <FlexColumn gap="10px" width="100%">
+          <SubmitInput
+            label="Title"
+            handler={(value) => {
+              setTitle(value);
+            }}
+          />
+          {!title && (
+            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
+              Title required
+            </Medium>
+          )}
+        </FlexColumn>
+
         <SubmitInput
           label="Description"
           type="textarea"
@@ -61,12 +77,19 @@ const ChallengeCreate = () => {
             setDescription(value);
           }}
         />
-        <SubmitInput
-          label="Deadline"
-          handler={(value) => {
-            setDeadline(value);
-          }}
-        />
+        <FlexColumn gap="10px" width="100%">
+          <SubmitInput
+            label="Deadline"
+            handler={(value) => {
+              setDeadline(value);
+            }}
+          />
+          {!deadlineFormat.test(deadline) && (
+            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
+              Deadline format: dd.mm.yyyy
+            </Medium>
+          )}
+        </FlexColumn>
         <SubmitInput
           label="Award"
           handler={(value) => {
@@ -89,19 +112,27 @@ const ChallengeCreate = () => {
             setMetric(value); // TODO: ToggleTags component refactor and use
           }}
         />
-        <SubmitInput
-          label="Challenge Zip File"
-          type="file"
-          accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
-          handler={(e) => {
-            setChallengeFile(e.target.files[0]);
-          }}
-        />
+        <FlexColumn gap="10px" width="100%">
+          <SubmitInput
+            label="Challenge Zip File"
+            type="file"
+            accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
+            handler={(e) => {
+              setChallengeFile(e.target.files[0]);
+            }}
+          />
+          {!challengeFile && (
+            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
+              Challenge file required
+            </Medium>
+          )}
+        </FlexColumn>
         <Button
           width="122px"
           height="44px"
           margin="16px auto 0 0"
           handler={() => challengeCreateSubmit()}
+          disabled={!challengeFile || !title || !deadlineFormat.test(deadline)}
         >
           <Menu color={theme.colors.white}>Submit</Menu>
         </Button>
