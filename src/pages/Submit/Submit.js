@@ -8,7 +8,8 @@ import SubmitInput from '../../components/generic/SubmitInput';
 
 const Submit = (props) => {
   const [description, setDescription] = React.useState();
-  const [repoUrl, setRepoUrl] = React.useState();
+  // const [repoUrl, setRepoUrl] = React.useState();
+  const [submissionZip, setSubmissionZip] = React.useState();
 
   const [submissionResult, setSubmissionResult] = React.useState();
 
@@ -30,10 +31,18 @@ const Submit = (props) => {
           setDescription(value);
         }}
       />
-      <SubmitInput
+      {/* <SubmitInput
         label="Submission repo URL"
         handler={(value) => {
           setRepoUrl(value);
+        }}
+      /> */}
+      <SubmitInput
+        label="Submission Zip File"
+        type="file"
+        accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
+        handler={(e) => {
+          setSubmissionZip(e.target.files[0]);
         }}
       />
       <Button
@@ -44,7 +53,7 @@ const Submit = (props) => {
             {
               submitter: '',
               description: description,
-              repo_url: repoUrl,
+              submission_zip: submissionZip,
               challenge_title: props.challengeName,
             },
             setSubmissionResult
