@@ -1,7 +1,15 @@
-const challengeUpload = async (challengeFile, setResult) => {
+const challengeUpload = async (challengeFile, challengeInput, setResult) => {
   const formData = new FormData();
   formData.append('challenge_file', challengeFile);
-  fetch(`http://localhost:8000/challenges/create-challenge-details`, {
+
+  formData.append('challenge_title', challengeInput.title);
+  formData.append('description', challengeInput.description);
+  formData.append('deadline', challengeInput.deadline);
+  formData.append('award', challengeInput.award);
+  formData.append('type', challengeInput.type);
+  formData.append('metric', challengeInput.main_metric);
+
+  fetch(`http://localhost:8000/challenges/create-challenge`, {
     method: 'post',
     body: formData,
   })

@@ -5,7 +5,6 @@ import { H2, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
-import challengeMetaDataSubmit from '../../api/challengeMetaDataSubmit';
 import challengeUpload from '../../api/challengeUpload';
 import getMetrics from '../../api/getMetrics';
 
@@ -14,10 +13,9 @@ const ChallengeCreate = () => {
   const [description, setDescription] = React.useState('');
   const [award, setAward] = React.useState('');
   const [deadline, setDeadline] = React.useState('');
-  const [type, setType] = React.useState('');
-  const [metric, setMetric] = React.useState('');
+  const [type, setType] = React.useState('image');
+  const [metric, setMetric] = React.useState('Accuracy');
   const [challengeFile, setChallengeFile] = React.useState(null);
-  const [metaDataResult, setMetaDataResult] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
 
   const [metrics, setMetrics] = React.useState(null);
@@ -25,14 +23,6 @@ const ChallengeCreate = () => {
   React.useEffect(() => {
     getMetrics(setMetrics);
   }, []);
-
-  React.useEffect(() => {
-    if (metaDataResult) {
-      if (metaDataResult?.detail) {
-        alert(`Error: ${metaDataResult.detail}`);
-      }
-    }
-  }, [metaDataResult]);
 
   React.useEffect(() => {
     if (uploadResult) {
@@ -44,10 +34,6 @@ const ChallengeCreate = () => {
     }
   }, [uploadResult]);
 
-  React.useEffect(() => {
-    challengeUpload(challengeFile, setUploadResult);
-  }, [challengeFile, metaDataResult]);
-
   const challengeCreateSubmit = async () => {
     const challengeInput = {
       title: title,
@@ -57,7 +43,7 @@ const ChallengeCreate = () => {
       award: award,
       deadline: deadline,
     };
-    await challengeMetaDataSubmit(challengeInput, setMetaDataResult);
+    await challengeUpload(challengeFile, challengeInput, setUploadResult);
   };
 
   const deadlineFormat = new RegExp(

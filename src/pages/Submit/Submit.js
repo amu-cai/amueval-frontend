@@ -51,7 +51,7 @@ const Submit = (props) => {
         handler={() =>
           challengeSubmissionSubmit(
             {
-              submitter: '',
+              submitter: 'x',
               description: description,
               submission_zip: submissionZip,
               challenge_title: props.challengeName,

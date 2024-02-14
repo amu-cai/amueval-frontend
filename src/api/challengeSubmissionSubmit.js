@@ -2,13 +2,12 @@ const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
   const formData = new FormData();
   formData.append('submission_file', submissionInputModel.submission_zip);
   formData.append('description', submissionInputModel.description);
+  formData.append('challenge_title', submissionInputModel.challenge_title);
+  formData.append('submitter', submissionInputModel.submitter);
 
   fetch(`http://localhost:8000/evaluation/submit`, {
     method: 'post',
-    body: formData,
-    headers: {
-      'Submission-Description': submissionInputModel.description,
-    },
+    body: formData
   })
     .then(
       (res) => {
