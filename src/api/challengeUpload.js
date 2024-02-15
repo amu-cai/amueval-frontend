@@ -1,3 +1,5 @@
+import { API } from "../utils/globals";
+
 const challengeUpload = async (challengeFile, challengeInput, setResult) => {
   const formData = new FormData();
   formData.append('challenge_file', challengeFile);
@@ -9,7 +11,7 @@ const challengeUpload = async (challengeFile, challengeInput, setResult) => {
   formData.append('type', challengeInput.type);
   formData.append('metric', challengeInput.main_metric);
 
-  fetch(`http://localhost:8000/challenges/create-challenge`, {
+  fetch(`${API}/challenges/create-challenge`, {
     method: 'post',
     body: formData,
   })

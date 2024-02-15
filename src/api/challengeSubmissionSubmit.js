@@ -1,3 +1,5 @@
+import { API } from "../utils/globals";
+
 const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
   const formData = new FormData();
   formData.append('submission_file', submissionInputModel.submission_zip);
@@ -5,7 +7,7 @@ const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
   formData.append('challenge_title', submissionInputModel.challenge_title);
   formData.append('submitter', submissionInputModel.submitter);
 
-  fetch(`http://localhost:8000/evaluation/submit`, {
+  fetch(`${API}/evaluation/submit`, {
     method: 'post',
     body: formData
   })

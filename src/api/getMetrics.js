@@ -1,5 +1,7 @@
+import { API } from "../utils/globals";
+
 const getMetrics = (setState) => {
-  fetch(`http://localhost:8000/evaluation/get-metrics`)
+  fetch(`${API}/evaluation/get-metrics`)
     .then((response) => response.json())
     .then((data) => {
       setState(data);

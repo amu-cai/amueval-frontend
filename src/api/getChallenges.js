@@ -1,8 +1,8 @@
 import CHALLENGES_ACTION from '../pages/Challanges/model/ChallengesActions';
-// import { API } from '../utils/globals';
+import { API } from '../utils/globals';
 
 const getChallenges = (dispatch) => {
-  fetch(`http://localhost:8000/challenges/get-challenges`)
+  fetch(`${API}/challenges/get-challenges`)
     .then((response) => response.json())
     .then((data) => {
       dispatch({
