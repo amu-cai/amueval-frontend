@@ -3,7 +3,6 @@ import { Container, FlexColumn } from '../../utils/containers';
 import { H2, Medium } from '../../utils/fonts';
 import Pager from '../../components/generic/Pager';
 import Search from '../../components/generic/Search';
-import getEntries from '../../api/getEntries';
 import getAllEntriesNew from '../../api/getAllEntriesNew';
 import Table from '../../components/generic/Table';
 import Loading from '../../components/generic/Loading';
@@ -28,15 +27,8 @@ const AllEntries = (props) => {
 
   React.useEffect(() => {
     if (props.challengeName) {
-      getEntries(
-        'challenge-all-submissions',
-        props.challengeName,
-        [setEntries, setEntriesAll],
-        setLoading,
-        setScoresSorted
-      );
-
-      getAllEntriesNew(props.challengeName, setNewEntries);
+      getAllEntriesNew(props.challengeName, setEntriesAll, setLoading);
+      getAllEntriesNew(props.challengeName, setNewEntries, setLoading);
     }
   }, [props]);
 
@@ -118,7 +110,7 @@ const AllEntries = (props) => {
   );
 
   const allEntriesTableRender = () => {
-    const tableNotEmpty = elements.length && entries[0];
+    const tableNotEmpty = elements.length && elements[0];
     if (!loading) {
       if (tableNotEmpty) {
         return (
@@ -137,7 +129,7 @@ const AllEntries = (props) => {
                   'description',
                   'dev_result',
                   'test_result',
-                  'when',
+                  'timestamp',
                 ]}
                 sortByUpdate={sortByUpdate}
                 challengeName={props.challengeName}
