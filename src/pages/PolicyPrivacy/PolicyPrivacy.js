@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { Body, H1, H2, Medium } from '../../utils/fonts';
 import CircleNumber from '../../components/generic/CircleNumber';
 import Button from '../../components/generic/Button';
-import KeyCloakService from '../../services/KeyCloakService';
 import LOCAL_STORAGE from '../../utils/localStorage';
+import { Link } from 'react-router-dom';
+import { LOGIN_PAGE } from '../../utils/globals';
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -62,45 +63,14 @@ const PolicyPrivacy = (props) => {
     'The right to lodge a complaint with the supervisory authority (President of the Office for Personal Data Protection),',
   ];
 
-  const doRegister = () => {
-    localStorage.setItem(
-      LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT,
-      LOCAL_STORAGE.STATIC_VALUE.YES
-    );
-    KeyCloakService.doRegister();
-  };
-
-  const doLogin = () => {
-    localStorage.setItem(
-      LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT,
-      LOCAL_STORAGE.STATIC_VALUE.YES
-    );
-    KeyCloakService.doLogin();
-  };
-
   const renderButtons = () => {
-    let acceptHandler = null;
-    let buttonHandler = null;
-    if (props.beforeLogin) buttonHandler = doLogin;
-    if (props.beforeRegister) {
-      acceptHandler = () => doRegister;
-      buttonHandler = () => {
-        props.popUpMessageHandler(
-          'Reminder',
-          'Remember to check your spam mailbox to confirm your account.',
-          acceptHandler
-        );
-      };
-    }
-    if (props.beforeLogin || props.beforeRegister) {
-      return (
-        <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
-          <Button handler={buttonHandler} width="72px" height="32px">
-            Accept
-          </Button>
-        </FlexRow>
-      );
-    }
+    return (
+      <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
+        <Button as={Link} to={LOGIN_PAGE} width="72px" height="32px">
+          Accept
+        </Button>
+      </FlexRow>
+    );
   };
 
   return (

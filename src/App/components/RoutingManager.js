@@ -4,21 +4,25 @@ import {
   CHALLENGE_CREATE_PAGE,
   CHALLENGE_PAGE,
   CHALLENGE_SECTIONS,
+  IS_LOGGED_IN,
+  LOGIN_PAGE,
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
+  REGISTER_PAGE,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
 import PolicyPrivacy from '../../pages/PolicyPrivacy';
 import LandingPage from '../../pages/LandingPage';
-import KeyCloakService from '../../services/KeyCloakService';
 import Submission from '../../pages/Submission';
 import Profile from '../../pages/Profile/Profile';
 import PageNotFound from '../../pages/PageNotFound/PageNotFound';
 import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
+import LoginPage from '../../pages/auth/LoginPage';
+import RegisterPage from '../../pages/auth/RegisterPage';
 
 const RoutingManager = (props) => {
-  const loggedIn = KeyCloakService.isLoggedIn();
+  const loggedIn = IS_LOGGED_IN();
 
   const logInRoutesRender = () => {
     if (loggedIn) {
@@ -104,6 +108,8 @@ const RoutingManager = (props) => {
 
   return (
     <Routes>
+      <Route path={LOGIN_PAGE} element={<LoginPage />} />
+      <Route path={REGISTER_PAGE} element={<RegisterPage />} />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId`}
         element={

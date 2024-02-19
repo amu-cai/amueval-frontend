@@ -10,11 +10,12 @@ import { Link } from 'react-router-dom';
 import {
   CHALLENGES_PAGE,
   CHALLENGE_CREATE_PAGE,
+  LOGIN_PAGE,
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
+  REGISTER_PAGE,
+  IS_LOGGED_IN,
 } from '../../utils/globals';
-import PropsTypes from 'prop-types';
-import KeyCloakService from '../../services/KeyCloakService';
 import policyIco from '../../assets/policy_ico.svg';
 import createIco from '../../assets/create_ico.svg';
 
@@ -78,25 +79,13 @@ const MobileNavMenu = (props) => {
           <Svg size="cover" width="16px" height="16px" src={createIco} />
           <Menu as="li">Challenge create</Menu>
         </FlexRow>
-        {!KeyCloakService.isLoggedIn() ? (
-          <FlexRow
-            as="button"
-            onClick={() =>
-              props.popUpMessageHandler(
-                'Reminder',
-                'Remember to check your spam mailbox to confirm your account.',
-                () => KeyCloakService.doRegister
-              )
-            }
-            gap="16px"
-          >
+        {IS_LOGGED_IN() && (
+          <FlexRow as={Link} to={REGISTER_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={registerIco} />
             <Menu as="li">Register</Menu>
           </FlexRow>
-        ) : (
-          ''
         )}
-        {KeyCloakService.isLoggedIn() ? (
+        {IS_LOGGED_IN() ? (
           <>
             <FlexRow as={Link} to={PROFILE_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={userIco} size="cover" />
@@ -106,13 +95,17 @@ const MobileNavMenu = (props) => {
               <Svg width="16px" height="16px" src={policyIco} size="cover" />
               <Menu as="li">Privacy policy</Menu>
             </FlexRow>
-            <FlexRow as="button" onClick={KeyCloakService.doLogout} gap="16px">
+            <FlexRow
+              as="button"
+              onClick={() => console.log('Do logout')}
+              gap="16px"
+            >
               <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />
               <Menu as="li">Sign out</Menu>
             </FlexRow>
           </>
         ) : (
-          <FlexRow as="button" onClick={KeyCloakService.doLogin} gap="16px">
+          <FlexRow as={Link} to={LOGIN_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={loginIco} />
             <Menu as="li">Sign in</Menu>
           </FlexRow>
@@ -120,16 +113,6 @@ const MobileNavMenu = (props) => {
       </MobileNavMenuStyle>
     </TransBack>
   );
-};
-
-MobileNavMenu.propTypes = {
-  translateY: PropsTypes.string,
-  toggleNavMenu: PropsTypes.func,
-};
-
-MobileNavMenu.defaultProps = {
-  translateY: 'calc(-100vh - 42px)',
-  toggleNavMenu: null,
 };
 
 export default MobileNavMenu;

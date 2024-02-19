@@ -9,10 +9,15 @@ import loginIco from '../../../assets/login_ico.svg';
 import userIco from '../../../assets/user_ico.svg';
 import { Menu } from '../../../utils/fonts';
 import registerIco from '../../../assets/register_ico.svg';
-import { CHALLENGES_PAGE, CHALLENGE_CREATE_PAGE } from '../../../utils/globals';
+import {
+  CHALLENGES_PAGE,
+  CHALLENGE_CREATE_PAGE,
+  IS_LOGGED_IN,
+  LOGIN_PAGE,
+  REGISTER_PAGE,
+} from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
-import KeyCloakService from '../../../services/KeyCloakService';
 import createIco from '../../../assets/create_ico.svg';
 
 const MenuButton = styled(Container)`
@@ -65,23 +70,13 @@ const NavBar = (props) => {
                 <Svg size="cover" width="16px" height="16px" src={createIco} />
                 <Menu as="li">Challenge create</Menu>
               </FlexRow>
-              {!KeyCloakService.isLoggedIn() && (
-                <FlexRow
-                  as="button"
-                  onClick={() =>
-                    props.popUpMessageHandler(
-                      'Reminder',
-                      'Remember to check your spam mailbox to confirm your account.',
-                      () => KeyCloakService.doRegister
-                    )
-                  }
-                  gap="12px"
-                >
+              {!IS_LOGGED_IN() && (
+                <FlexRow as={Link} to={REGISTER_PAGE} gap="12px">
                   <Svg width="16px" height="16px" src={registerIco} />
                   <Menu as="li">Register</Menu>
                 </FlexRow>
               )}
-              {KeyCloakService.isLoggedIn() ? (
+              {IS_LOGGED_IN() ? (
                 <Svg
                   as="button"
                   onClick={props.loggedBarVisibleHandler}
@@ -91,11 +86,7 @@ const NavBar = (props) => {
                   margin="0 16px 0 0"
                 />
               ) : (
-                <FlexRow
-                  as="button"
-                  onClick={KeyCloakService.doLogin}
-                  gap="12px"
-                >
+                <FlexRow as={Link} to={LOGIN_PAGE} gap="12px">
                   <Svg width="16px" height="16px" src={loginIco} />
                   <Menu as="li">Sign in</Menu>
                 </FlexRow>

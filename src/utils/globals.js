@@ -19,6 +19,9 @@ const PROFILE_PAGE = '/profile';
 const POLICY_PRIVACY_PAGE = '/policy-privacy';
 const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
 const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
+const LOGIN_PAGE = `/login`;
+const REGISTER_PAGE = `/register`;
+
 const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
@@ -131,6 +134,11 @@ const IS_MOBILE = () => {
   return document.body.clientWidth <= 1024;
 };
 
+const IS_LOGGED_IN = () => {
+  console.log('TO DO');
+  return false;
+};
+
 const CHILDREN_WITH_PROPS = (propsChildren, props) =>
   React.Children.map(propsChildren, (child) => {
     if (React.isValidElement(child)) {
@@ -150,6 +158,8 @@ export {
   POLICY_PRIVACY_PAGE,
   POLICY_PRIVACY_LOGIN_PAGE,
   POLICY_PRIVACY_REGISTER_PAGE,
+  LOGIN_PAGE,
+  REGISTER_PAGE,
   ROOT_URL,
   LOGIN_REQUIRED_PAGES,
   CHALLENGE_SECTIONS,
@@ -169,4 +179,5 @@ export {
   PREVIOUS_PAGE,
   NEXT_PAGE,
   CHILDREN_WITH_PROPS,
+  IS_LOGGED_IN,
 };

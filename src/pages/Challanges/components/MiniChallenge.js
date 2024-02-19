@@ -100,16 +100,14 @@ const MiniChallenge = (props) => {
           backgroundColor={theme.colors.dark05}
         />
         <Body as="p" margin="0 0 14px 0">
-          {props.description
-            ? MINI_DESCRIPTION_RENDER(props.description)
-            : 'xxx'}
+          {props.description ? MINI_DESCRIPTION_RENDER(props.description) : ''}
         </Body>
         <IconsGrid>
           <IconLabel size="24px" gap="8px" type="metric">
-            {props.metric ? props.metric : 'xxx'}
+            {props.metric ? props.metric : ''}
           </IconLabel>
           <IconLabel size="24px" gap="8px" type="bestScore">
-            {props.bestScore ? props.bestScore.slice(0, 6) : 'xxx'}
+            {props.bestScore ? props.bestScore.slice(0, 6) : ''}
           </IconLabel>
           {deadlineRender()}
           {baselineRender()}

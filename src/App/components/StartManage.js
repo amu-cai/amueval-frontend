@@ -7,8 +7,6 @@ import {
 } from '../../utils/globals';
 import SESSION_STORAGE from '../../utils/sessionStorage';
 import LOCAL_STORAGE from '../../utils/localStorage';
-import addUser from '../../api/addUser';
-import KeyCloakService from '../../services/KeyCloakService';
 import EntireScreenLoading from '../../components/generic/EntireScreenLoading/EntrieScreenLoading';
 
 const StartManage = () => {
@@ -33,21 +31,6 @@ const StartManage = () => {
     }
   }, [redirectToRootPage]);
 
-  const addUserToServer = React.useCallback(() => {
-    if (
-      localStorage.getItem(LOCAL_STORAGE.USER_ADDED_TO_SERVER) !==
-      SESSION_STORAGE.STATIC_VALUE.YES
-    ) {
-      if (
-        sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
-          SESSION_STORAGE.STATIC_VALUE.YES ||
-        KeyCloakService.isLoggedIn()
-      ) {
-        addUser();
-      }
-    }
-  }, []);
-
   const redirectAfterAcceptPolicyPrivacy = React.useCallback(() => {
     if (
       localStorage.getItem(LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT) ===
@@ -59,33 +42,13 @@ const StartManage = () => {
     }
   }, [redirectToRootPage]);
 
-  const reloadSession = React.useCallback(() => {
-    setTimeout(() => {
-      if (
-        sessionStorage.getItem(SESSION_STORAGE.LOGGED) ===
-        SESSION_STORAGE.STATIC_VALUE.YES
-      ) {
-        if (!KeyCloakService.isLoggedIn()) {
-          KeyCloakService.doLogin();
-        }
-      }
-    }, timeoutValue);
-  }, []);
-
   React.useEffect(() => {
     redirectAfterLogout();
-    reloadSession();
     setTimeout(() => {
-      addUserToServer();
       redirectAfterAcceptPolicyPrivacy();
       setEntireScreenLoading(false);
     }, timeoutValue);
-  }, [
-    reloadSession,
-    redirectAfterLogout,
-    redirectAfterAcceptPolicyPrivacy,
-    addUserToServer,
-  ]);
+  }, [redirectAfterLogout, redirectAfterAcceptPolicyPrivacy]);
 
   if (entireScreenLoading) {
     return <EntireScreenLoading />;
