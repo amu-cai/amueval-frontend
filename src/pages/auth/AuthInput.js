@@ -39,7 +39,14 @@ const AuthInput = (props) => {
       <AuthLabel as="label" htmlFor={props.label}>
         {props.label}
       </AuthLabel>
-      <AuthInputStyle as="input" id={props.label} name={props.label} />
+      <AuthInputStyle
+        as="input"
+        id={props.label}
+        name={props.label}
+        onChange={(e) => props.handler(e)}
+        value={props.value}
+        type={props.type ? props.type : 'text'}
+      />
     </FlexColumn>
   );
 };
