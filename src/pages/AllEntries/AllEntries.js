@@ -3,7 +3,7 @@ import { Container, FlexColumn } from '../../utils/containers';
 import { H2, Medium } from '../../utils/fonts';
 import Pager from '../../components/generic/Pager';
 import Search from '../../components/generic/Search';
-import getAllEntriesNew from '../../api/getAllEntriesNew';
+import getAllSubmissions from '../../api/getAllSubmissions';
 import Table from '../../components/generic/Table';
 import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
@@ -11,7 +11,6 @@ import searchQueryHandler from './searchHandler';
 import orderKeys from './orderKeys';
 
 const AllEntries = (props) => {
-  const [entriesAll, setEntriesAll] = React.useState([]);
   const [entries, setEntries] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
@@ -19,18 +18,23 @@ const AllEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
-  const [newEntries, setNewEntries] = React.useState([]);
+  const [newEntries, setNewEntries] = React.useState(null);
+  const [entriesAll, setEntriesAll] = React.useState(null);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  console.log(newEntries);
-  const elements = newEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  const elements = newEntries?.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   React.useEffect(() => {
     if (props.challengeName) {
-      getAllEntriesNew(props.challengeName, setEntriesAll, setLoading);
-      getAllEntriesNew(props.challengeName, setNewEntries, setLoading);
+      getAllSubmissions(props.challengeName, setEntriesAll, setLoading);
     }
-  }, [props]);
+  }, [props.challengeName]);
+
+  React.useEffect(() => {
+    if (newEntries === null) {
+      setNewEntries(entriesAll);
+    }
+  }, [entriesAll, newEntries]);
 
   const sortByUpdate = React.useCallback(
     (elem) => {
@@ -110,7 +114,7 @@ const AllEntries = (props) => {
   );
 
   const allEntriesTableRender = () => {
-    const tableNotEmpty = elements.length && elements[0];
+    const tableNotEmpty = elements?.length;
     if (!loading) {
       if (tableNotEmpty) {
         return (

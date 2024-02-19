@@ -1,9 +1,9 @@
-import { API } from "../utils/globals";
+import { API } from '../utils/globals';
 
-const challengeUpload = async (challengeFile, challengeInput, setResult) => {
+const challengeCreate = async (challengeFile, challengeInput, setResult) => {
   const formData = new FormData();
-  formData.append('challenge_file', challengeFile);
 
+  formData.append('challenge_file', challengeFile);
   formData.append('challenge_title', challengeInput.title);
   formData.append('description', challengeInput.description);
   formData.append('deadline', challengeInput.deadline);
@@ -37,4 +37,4 @@ const challengeUpload = async (challengeFile, challengeInput, setResult) => {
     });
 };
 
-export default challengeUpload;
+export default challengeCreate;

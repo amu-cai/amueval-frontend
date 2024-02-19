@@ -5,7 +5,7 @@ import { H2, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
-import challengeUpload from '../../api/challengeUpload';
+import challengeCreate from '../../api/challengeCreate';
 import getMetrics from '../../api/getMetrics';
 
 const ChallengeCreate = () => {
@@ -43,7 +43,7 @@ const ChallengeCreate = () => {
       award: award,
       deadline: deadline,
     };
-    await challengeUpload(challengeFile, challengeInput, setUploadResult);
+    await challengeCreate(challengeFile, challengeInput, setUploadResult);
   };
 
   const deadlineFormat = new RegExp(
