@@ -137,7 +137,6 @@ const AllEntries = (props) => {
                 ]}
                 sortByUpdate={sortByUpdate}
                 challengeName={props.challengeName}
-                popUpMessageHandler={props.popUpMessageHandler}
               />
             </Container>
             <Pager

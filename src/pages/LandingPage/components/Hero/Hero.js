@@ -4,9 +4,10 @@ import { Container, FlexColumn, FlexRow } from '../../../../utils/containers';
 import theme from '../../../../utils/theme';
 import ButtonLink from '../../../../components/generic/ButtonLink';
 import Media from 'react-media';
-import KeyCloakService from '../../../../services/KeyCloakService';
 import MadeByCsi from '../MadeByCsi/MadeByCsi';
 import HeroStyle from './HeroStyle';
+import { REGISTER_PAGE } from '../../../../utils/globals';
+import { Link } from 'react-router-dom';
 
 const Hero = (props) => {
   const mobileRender = () => {
@@ -27,16 +28,7 @@ const Hero = (props) => {
           A data challenge platform for machine learning research, competition,
           cooperation and reproducibility.
         </Body>
-        <ButtonLink
-          as="button"
-          onClick={() =>
-            props.popUpMessageHandler(
-              'Reminder',
-              'Remember to check your spam mailbox to confirm your account.',
-              () => KeyCloakService.doRegister
-            )
-          }
-        >
+        <ButtonLink as={Link} to={REGISTER_PAGE}>
           Join us!
         </ButtonLink>
       </FlexColumn>
@@ -58,16 +50,7 @@ const Hero = (props) => {
             competition, cooperation and reproducibility.
           </Medium>
           <MadeByCsi position="horizontal" />
-          <ButtonLink
-            as="button"
-            onClick={() =>
-              props.popUpMessageHandler(
-                'Reminder',
-                'Remember to check your spam mailbox to confirm your account.',
-                () => KeyCloakService.doRegister
-              )
-            }
-          >
+          <ButtonLink as={Link} to={REGISTER_PAGE}>
             Join us!
           </ButtonLink>
         </FlexColumn>
@@ -90,16 +73,7 @@ const Hero = (props) => {
               A data challenge platform for machine learning research,
               competition, cooperation and reproducibility.
             </Medium>
-            <ButtonLink
-              as="button"
-              onClick={() =>
-                props.popUpMessageHandler(
-                  'Reminder',
-                  'Remember to check your spam mailbox to confirm your account.',
-                  () => KeyCloakService.doRegister
-                )
-              }
-            >
+            <ButtonLink as={Link} to={REGISTER_PAGE}>
               Join us!
             </ButtonLink>
           </FlexColumn>

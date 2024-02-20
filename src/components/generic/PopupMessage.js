@@ -9,7 +9,7 @@ const PopupMessage = (props) => {
     if (props.confirmHandler) {
       props.confirmHandler();
     }
-    props.popUpMessageHandler('', '');
+    props.popUpMessageHandler('', '', null, null);
   };
 
   return (
@@ -28,13 +28,22 @@ const PopupMessage = (props) => {
         borderRadius="12px"
         backgroundColor={theme.colors.white}
         padding="56px"
-        border={`4px solid ${props.borderColor ? props.borderColor : theme.colors.green}`}
+        border={`4px solid ${
+          props.borderColor ? props.borderColor : theme.colors.green
+        }`}
       >
         <FlexColumn gap="48px" margin="0 0 48px 0">
           <H3>{props.header}</H3>
           <Body>{props.message}</Body>
         </FlexColumn>
-        <Button backgroundColor={props.borderColor ? props.borderColor : theme.colors.green} handler={confirmPopUp}>Ok</Button>
+        <Button
+          backgroundColor={
+            props.borderColor ? props.borderColor : theme.colors.green
+          }
+          handler={confirmPopUp}
+        >
+          Ok
+        </Button>
       </FlexColumn>
     </FlexColumn>
   );

@@ -100,7 +100,6 @@ const NavBar = (props) => {
         mobileMenuHoverFalse={mobileMenuHoverFalse}
         translateY={navMenuTranslateY}
         toggleNavMenu={toggleNavMenu}
-        popUpMessageHandler={props.popUpMessageHandler}
       />
     </NavBarStyle>
   );

@@ -21,7 +21,12 @@ const deleteSubmission = async (
         let newDeletedItems = deletedItems.slice();
         newDeletedItems.push(item);
         setDeletedItems(newDeletedItems);
-        popUpMessageHandler('Complete', `Submission "${item.id}" deleted`);
+        popUpMessageHandler(
+          'Complete',
+          `Submission "${item.id}" deleted`,
+          null,
+          null
+        );
       } else if (data.includes('<!doctype html>') && data.includes('Login')) {
         popUpMessageHandler(
           'Error',

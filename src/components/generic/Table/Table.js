@@ -9,7 +9,6 @@ import DeletePopUp from './components/DeletePopUp';
 const Table = ({
   items,
   orderedKeys,
-  popUpMessageHandler,
   sortByUpdate,
   subpage,
   challengeName,
@@ -31,13 +30,11 @@ const Table = ({
         deletePopUp={deletePopUp}
         setDeletedItems={setDeletedItems}
         deletedItems={deletedItems}
-        popUpMessageHandler={popUpMessageHandler}
       />
       <EditPopUp
         item={itemToHandle}
         setEditPopUp={setEditPopUp}
         editPopUp={editPopUp}
-        popUpMessageHandler={popUpMessageHandler}
       />
       <Media query={theme.mobile}>
         <MobileTable
@@ -46,7 +43,6 @@ const Table = ({
           orderedKeys={orderedKeys}
           rowFooter={rowFooter}
           deletedItems={deletedItems}
-          popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
           subpage={subpage}
@@ -65,7 +61,6 @@ const Table = ({
           orderedKeys={orderedKeys}
           rowFooter={rowFooter}
           deletedItems={deletedItems}
-          popUpMessageHandler={popUpMessageHandler}
           itemToHandle={itemToHandle}
           sortByUpdate={sortByUpdate}
           subpage={subpage}

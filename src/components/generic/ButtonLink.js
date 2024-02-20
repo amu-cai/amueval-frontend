@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Label } from '../../utils/fonts';
-import PropsTypes from 'prop-types';
 
 const ButtonLinkStyle = styled(Label)`
   background-color: ${({ theme }) => theme.colors.green};
@@ -28,22 +27,10 @@ const ButtonLinkStyle = styled(Label)`
 
 const ButtonLink = (props) => {
   return (
-    <ButtonLinkStyle as={props.as} onClick={props.onClick}>
+    <ButtonLinkStyle as={props.as} onClick={props.onClick} to={props.to}>
       {props.children}
     </ButtonLinkStyle>
   );
-};
-
-ButtonLink.propTypes = {
-  as: PropsTypes.string,
-  onClick: PropsTypes.func,
-  children: PropsTypes.node,
-};
-
-ButtonLink.defaultProps = {
-  children: '',
-  as: 'div',
-  onClick: null,
 };
 
 export default ButtonLink;

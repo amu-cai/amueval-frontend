@@ -1,23 +1,12 @@
 import React from 'react';
 import PopupMessage from '../../components/generic/PopupMessage';
-import { CHILDREN_WITH_PROPS } from '../../utils/globals';
+import { useSelector, useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const PopUpMessageManager = (props) => {
-  const [popUpHeader, setPopUpHeader] = React.useState('');
-  const [popUpMessage, setPopUpMessage] = React.useState('');
-  const [borderColor, setBorderColor] = React.useState(null);
-  const [confirmPopUpHandler, setConfirmPopUpHandler] = React.useState(null);
-
-  const popUpMessageHandler = (header, message, confirmHandler=null, borderColor=null) => {
-    setPopUpHeader(header);
-    setPopUpMessage(message);
-    setBorderColor(borderColor);
-    if (confirmHandler !== null && confirmHandler !== undefined) {
-      setConfirmPopUpHandler(() => confirmHandler());
-    } else {
-      setConfirmPopUpHandler(null);
-    }
-  };
+  const dispatch = useDispatch();
+  const { popUpHeader, popUpMessage, borderColor, confirmPopUpHandler } =
+    useSelector((state) => state.popUpMessage);
 
   const popUpMessageRender = () => {
     if (popUpHeader !== '' || popUpMessage !== '') {
@@ -27,7 +16,16 @@ const PopUpMessageManager = (props) => {
           message={popUpMessage}
           confirmHandler={confirmPopUpHandler}
           borderColor={borderColor}
-          popUpMessageHandler={popUpMessageHandler}
+          popUpMessageHandler={(header, message, borderColor, confirmHandler) =>
+            dispatch(
+              popUpMessageHandler({
+                header: header,
+                message: message,
+                borderColor: borderColor,
+                confirmHandler: confirmHandler,
+              })
+            )
+          }
         />
       );
     }
@@ -36,7 +34,7 @@ const PopUpMessageManager = (props) => {
   return (
     <>
       {popUpMessageRender()}
-      {CHILDREN_WITH_PROPS(props.children, { popUpMessageHandler })}
+      {props.children}
     </>
   );
 };

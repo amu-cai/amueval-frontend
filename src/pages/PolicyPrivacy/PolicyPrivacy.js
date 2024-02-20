@@ -7,6 +7,8 @@ import Button from '../../components/generic/Button';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import { Link } from 'react-router-dom';
 import { LOGIN_PAGE } from '../../utils/globals';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -39,15 +41,20 @@ const PolicyPrivacyStyle = styled(FlexColumn)`
   }
 `;
 
-const PolicyPrivacy = (props) => {
+const PolicyPrivacy = () => {
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     const privacyPolicyAccept = localStorage.getItem(
       LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
     );
     if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
-      props.popUpMessageHandler(
-        'Policy privacy',
-        'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.'
+      dispatch(
+        popUpMessageHandler({
+          header: 'Policy privacy',
+          message:
+            'Please read the service policy below and accept its terms and conditions to create an account using the button at the bottom of the page.',
+        })
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

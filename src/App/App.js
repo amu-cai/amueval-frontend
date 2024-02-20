@@ -5,7 +5,7 @@ import PopUpMessageManager from './components/PopUpMessageManager';
 import RoutingManager from './components/RoutingManager';
 import NavigationManager from './components/NavigationManager';
 import { BrowserRouter } from 'react-router-dom';
-import StartManage from './components/StartManage';
+// import StartManage from './components/StartManage';
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
       <BrowserRouter>
         <PopUpMessageManager>
           <NavigationManager>
-            <StartManage />
+            {/* <StartManage /> */}
             <RoutingManager />
           </NavigationManager>
         </PopUpMessageManager>

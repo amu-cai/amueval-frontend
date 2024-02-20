@@ -4,7 +4,7 @@ import LoggedBar from '../../components/navigation/LoggedBar';
 import KeyCloakService from '../../services/KeyCloakService';
 import { CHILDREN_WITH_PROPS, IS_MOBILE } from '../../utils/globals';
 
-const NavigationManager = ({children, popUpMessageHandler}) => {
+const NavigationManager = ({ children }) => {
   const [loggedBarVisible, setLoggedBarVisible] = React.useState('100vw');
   const [loggedBarHover, setLoggedBarHover] = React.useState(false);
   const [navOptions, setNavOptions] = React.useState(true);
@@ -27,7 +27,6 @@ const NavigationManager = ({children, popUpMessageHandler}) => {
     <>
       <NavBar
         loggedBarVisibleHandler={loggedBarVisibleHandler}
-        popUpMessageHandler={popUpMessageHandler}
         navOptions={navOptions}
       />
       {!IS_MOBILE() && (
@@ -39,7 +38,7 @@ const NavigationManager = ({children, popUpMessageHandler}) => {
           username={KeyCloakService.getUsername()}
         />
       )}
-      {CHILDREN_WITH_PROPS(children, { hideNavOptions, showNavOptions, popUpMessageHandler })}
+      {CHILDREN_WITH_PROPS(children, { hideNavOptions, showNavOptions })}
     </>
   );
 };

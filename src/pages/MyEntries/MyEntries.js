@@ -106,7 +106,6 @@ const MyEntries = (props) => {
                 items={elements}
                 orderedKeys={orderKeys(myEntries[0])}
                 sortByUpdate={sortByUpdate}
-                popUpMessageHandler={props.popUpMessageHandler}
                 subpage={'MY_ENTRIES'}
                 challengeName={props.challengeName}
               />

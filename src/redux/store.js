@@ -3,9 +3,12 @@ import {
   createStateSyncMiddleware,
   initMessageListener,
 } from 'redux-state-sync';
+import popUpMessegeSlice from './popUpMessegeSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    popUpMessage: popUpMessegeSlice,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(createStateSyncMiddleware({})),
 });

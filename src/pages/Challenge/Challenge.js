@@ -37,11 +37,7 @@ const Challenge = (props) => {
         );
       case CHALLENGE_SECTIONS.ALL_ENTRIES:
         return (
-          <AllEntries
-            challengeName={challengeName}
-            setLoading={setLoading}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
+          <AllEntries challengeName={challengeName} setLoading={setLoading} />
         );
       case CHALLENGE_SECTIONS.README:
         return (
@@ -54,19 +50,9 @@ const Challenge = (props) => {
           />
         );
       case CHALLENGE_SECTIONS.HOW_TO:
-        return (
-          <HowTo
-            popUpMessageHandler={props.popUpMessageHandler}
-            challengeName={challengeName}
-          />
-        );
+        return <HowTo challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.MY_ENTRIES:
-        return (
-          <MyEntries
-            challengeName={challengeName}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        );
+        return <MyEntries challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
       default:

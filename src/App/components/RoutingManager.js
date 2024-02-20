@@ -34,28 +34,17 @@ const RoutingManager = (props) => {
           />
           <Route
             path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
-            element={
-              <Challenge
-                section={CHALLENGE_SECTIONS.MY_ENTRIES}
-                popUpMessageHandler={props.popUpMessageHandler}
-              />
-            }
+            element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
           />
           {/* <Route
             path={`${CHALLENGE_PAGE}/:challengeId/submit`}
             element={
               <Challenge
                 section={CHALLENGE_SECTIONS.SUBMIT}
-                popUpMessageHandler={props.popUpMessageHandler}
               />
             }
           /> */}
-          <Route
-            path={PROFILE_PAGE}
-            element={
-              <Profile popUpMessageHandler={props.popUpMessageHandler} />
-            }
-          />
+          <Route path={PROFILE_PAGE} element={<Profile />} />
         </>
       );
     }
@@ -65,18 +54,8 @@ const RoutingManager = (props) => {
     if (loggedIn) {
       return (
         <>
-          <Route
-            exact
-            path="/"
-            element={
-              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
-            }
-          />
-          <Route
-            element={
-              <Challenges popUpMessageHandler={props.popUpMessageHandler} />
-            }
-          />
+          <Route exact path="/" element={<Challenges />} />
+          <Route element={<Challenges />} />
         </>
       );
     }
@@ -87,7 +66,6 @@ const RoutingManager = (props) => {
           path="/"
           element={
             <LandingPage
-              popUpMessageHandler={props.popUpMessageHandler}
               showNavOptions={props.showNavOptions}
               hideNavOptions={props.hideNavOptions}
             />
@@ -96,7 +74,6 @@ const RoutingManager = (props) => {
         <Route
           element={
             <LandingPage
-              popUpMessageHandler={props.popUpMessageHandler}
               showNavOptions={props.showNavOptions}
               hideNavOptions={props.hideNavOptions}
             />
@@ -112,39 +89,19 @@ const RoutingManager = (props) => {
       <Route path={REGISTER_PAGE} element={<RegisterPage />} />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.LEADERBOARD}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
+        element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.LEADERBOARD}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
+        element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/allsubmissions`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.ALL_ENTRIES}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
+        element={<Challenge section={CHALLENGE_SECTIONS.ALL_ENTRIES} />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-        element={
-          <Challenge
-            section={CHALLENGE_SECTIONS.SUBMIT}
-            popUpMessageHandler={props.popUpMessageHandler}
-          />
-        }
+        element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/readme`}
@@ -152,47 +109,19 @@ const RoutingManager = (props) => {
       />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/howto`}
-        element={
-          <Challenge
-            popUpMessageHandler={props.popUpMessageHandler}
-            section={CHALLENGE_SECTIONS.HOW_TO}
-          />
-        }
+        element={<Challenge section={CHALLENGE_SECTIONS.HOW_TO} />}
       />
-      <Route
-        path={CHALLENGES_PAGE}
-        element={<Challenges popUpMessageHandler={props.popUpMessageHandler} />}
-      />
-      <Route
-        path={POLICY_PRIVACY_PAGE}
-        element={
-          <PolicyPrivacy popUpMessageHandler={props.popUpMessageHandler} />
-        }
-      />
+      <Route path={CHALLENGES_PAGE} element={<Challenges />} />
+      <Route path={POLICY_PRIVACY_PAGE} element={<PolicyPrivacy />} />
       <Route
         path={`${POLICY_PRIVACY_PAGE}/login`}
-        element={
-          <PolicyPrivacy
-            popUpMessageHandler={props.popUpMessageHandler}
-            beforeLogin
-          />
-        }
+        element={<PolicyPrivacy beforeLogin />}
       />
       <Route
         path={`${POLICY_PRIVACY_PAGE}/register`}
-        element={
-          <PolicyPrivacy
-            popUpMessageHandler={props.popUpMessageHandler}
-            beforeRegister
-          />
-        }
+        element={<PolicyPrivacy beforeRegister />}
       />
-      <Route
-        path={CHALLENGE_CREATE_PAGE}
-        element={
-          <ChallengeCreate popUpMessageHandler={props.popUpMessageHandler} />
-        }
-      />
+      <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
       <Route path={'*'} element={<PageNotFound />} />
       {logInRoutesRender()}
       {rootPageRender()}

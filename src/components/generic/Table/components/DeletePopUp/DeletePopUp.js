@@ -5,6 +5,8 @@ import { Medium, H3 } from '../../../../../utils/fonts';
 import { FlexColumn, FlexRow } from '../../../../../utils/containers';
 import theme from '../../../../../utils/theme';
 import deleteSubmission from '../../../../../api/deleteSubmission';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../../../../redux/popUpMessegeSlice';
 
 const deleteItem = async (
   item,
@@ -28,8 +30,9 @@ const DeletePopUp = ({
   item,
   deletedItems,
   setDeletedItems,
-  popUpMessageHandler,
 }) => {
+  const dispatch = useDispatch();
+
   if (deletePopUp) {
     return createPortal(
       <PopUp
@@ -52,7 +55,16 @@ const DeletePopUp = ({
                   setDeletePopUp,
                   deletedItems,
                   setDeletedItems,
-                  popUpMessageHandler
+                  (header, message, borderColor, confirmHandler) => {
+                    dispatch(
+                      popUpMessageHandler({
+                        header: header,
+                        message: message,
+                        borderColor: borderColor,
+                        confirmHandler: confirmHandler,
+                      })
+                    );
+                  }
                 )
               }
             >

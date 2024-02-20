@@ -8,7 +8,7 @@ import Partnerships from './components/Partnerships/Partnerships';
 import LandingPageStyle from './LandingPageStyle';
 import EntireScreenLoading from '../../components/generic/EntireScreenLoading/EntrieScreenLoading';
 
-const LandingPage = (props) => {
+const LandingPage = () => {
   const [show, setShow] = React.useState(false);
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const LandingPage = (props) => {
   if (show) {
     return (
       <LandingPageStyle as="main">
-        <Hero popUpMessageHandler={props.popUpMessageHandler} />
+        <Hero />
         <FlexColumn className="LandingPageStyle__main-container">
           <Motivation />
           <Csi />

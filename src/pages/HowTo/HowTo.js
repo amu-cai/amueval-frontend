@@ -3,22 +3,29 @@ import KeyCloakService from '../../services/KeyCloakService';
 import { FlexColumn } from '../../utils/containers';
 import { IS_MOBILE } from '../../utils/globals';
 import HowToContent from './components/HowToContent';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const HowTo = (props) => {
-  const { popUpMessageHandler, challengeName } = props;
+  const { challengeName } = props;
   const [logInReminder, setLogInReminder] = React.useState(true);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (logInReminder) {
       if (!KeyCloakService.isLoggedIn()) {
-        popUpMessageHandler(
-          'Please create an account or log in',
-          'To see all options you need to be logged in'
+        dispatch(
+          popUpMessageHandler({
+            header: 'Please create an account or log in',
+            message: 'To see all options you need to be logged in',
+            borderColor: null,
+            confirmHandler: null,
+          })
         );
       }
       setLogInReminder(false);
     }
-  }, [logInReminder, popUpMessageHandler]);
+  }, [logInReminder, dispatch]);
 
   return (
     <FlexColumn

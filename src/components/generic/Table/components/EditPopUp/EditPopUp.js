@@ -1,3 +1,4 @@
+import React from 'react';
 import { createPortal } from 'react-dom';
 import PopUp from '../../../PopUp';
 import Button from '../../../Button';
@@ -8,7 +9,8 @@ import SubmitInput from '../../../SubmitInput';
 import TagsChoose from '../../../../../pages/Submit/components/TagsChoose/TagsChoose';
 import editSubmission from '../../../../../api/editSubmission';
 import getTags from '../../../../../api/getTags';
-import React from 'react';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../../../../redux/popUpMessegeSlice';
 
 const editSubmissionHandler = async (
   item,
@@ -29,7 +31,8 @@ const editSubmissionHandler = async (
   await editSubmission(item.id, tags, description, popUpMessageHandler);
 };
 
-const EditPopUp = ({ editPopUp, setEditPopUp, item, popUpMessageHandler }) => {
+const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
+  const dispatch = useDispatch();
   const [tags, setTags] = React.useState([]);
   const [tagsToEdit, setTagsToEdit] = React.useState(item?.tags?.slice());
   const [description, setDescription] = React.useState(
@@ -77,7 +80,16 @@ const EditPopUp = ({ editPopUp, setEditPopUp, item, popUpMessageHandler }) => {
                   setEditPopUp,
                   tagsToEdit,
                   description,
-                  popUpMessageHandler
+                  (header, message, borderColor, confirmHandler) => {
+                    dispatch(
+                      popUpMessageHandler({
+                        header: header,
+                        message: message,
+                        borderColor: borderColor,
+                        confirmHandler: confirmHandler,
+                      })
+                    );
+                  }
                 )
               }
             >
