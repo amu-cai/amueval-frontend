@@ -22,7 +22,15 @@ const AllEntries = (props) => {
   const [entriesAll, setEntriesAll] = React.useState(null);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  const elements = newEntries?.slice(n, n + ELEMENTS_PER_PAGE * 2);
+
+  let elements = newEntries?.map((item) => {
+    return {
+      ...item,
+      dev_result: parseFloat(item.dev_result).toFixed(2),
+      test_result: parseFloat(item.test_result).toFixed(2),
+    };
+  });
+  elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
   React.useEffect(() => {
     if (props.challengeName) {
