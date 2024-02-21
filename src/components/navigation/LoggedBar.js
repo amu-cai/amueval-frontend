@@ -9,7 +9,6 @@ import {
 import { Body, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import userIco from '../../assets/user_ico.svg';
-import KeyCloakService from '../../services/KeyCloakService';
 import loginIco from '../../assets/login_ico.svg';
 import privacyIco from '../../assets/policy_ico.svg';
 import styled from 'styled-components';
@@ -20,6 +19,8 @@ import {
   CHALLENGE_CREATE_PAGE,
 } from '../../utils/globals';
 import createIco from '../../assets/create_ico.svg';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../redux/authSlice';
 
 const LoggedBarStyle = styled(FlexColumn)`
   width: 360px;
@@ -62,6 +63,8 @@ const LoggedBarStyle = styled(FlexColumn)`
 `;
 
 const LoggedBar = (props) => {
+  const dispatch = useDispatch();
+
   return (
     <TransBack
       transition="transform"
@@ -114,7 +117,7 @@ const LoggedBar = (props) => {
           </FlexRow>
           <FlexRow
             as="button"
-            onClick={props.visible === '0' ? KeyCloakService.doLogout : null}
+            onClick={props.visible === '0' ? () => dispatch(logOut()) : null}
             gap="16px"
           >
             <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />

@@ -17,7 +17,8 @@ import {
 } from '../../utils/globals';
 import policyIco from '../../assets/policy_ico.svg';
 import createIco from '../../assets/create_ico.svg';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../../redux/authSlice';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -58,6 +59,7 @@ const MobileNavMenuStyle = styled(FlexColumn)`
 `;
 
 const MobileNavMenu = (props) => {
+  const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
@@ -98,11 +100,7 @@ const MobileNavMenu = (props) => {
               <Svg width="16px" height="16px" src={policyIco} size="cover" />
               <Menu as="li">Privacy policy</Menu>
             </FlexRow>
-            <FlexRow
-              as="button"
-              onClick={() => console.log('Do logout')}
-              gap="16px"
-            >
+            <FlexRow as="button" onClick={() => dispatch(logOut())} gap="16px">
               <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />
               <Menu as="li">Sign out</Menu>
             </FlexRow>

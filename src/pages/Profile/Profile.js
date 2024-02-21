@@ -6,8 +6,11 @@ import Loading from '../../components/generic/Loading';
 import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
 import getPublicKey from '../../api/getPublicKey';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../redux/authSlice';
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const [profileInfo, setProfileInfo] = React.useState(null);
   const profileInfoAttributes = [
     { label: 'Username:', key: 'preferred_username' },
@@ -48,8 +51,8 @@ const Profile = () => {
               })}
             </FlexColumn>
             <Button
-              handler={(e) => {
-                KeyCloakService.doLogout(e, true);
+              handler={() => {
+                dispatch(logOut());
               }}
               width="232px"
               height="36px"
