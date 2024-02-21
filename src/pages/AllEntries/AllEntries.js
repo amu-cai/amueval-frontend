@@ -26,8 +26,8 @@ const AllEntries = (props) => {
   let elements = newEntries?.map((item) => {
     return {
       ...item,
-      dev_result: parseFloat(item.dev_result).toFixed(5),
-      test_result: parseFloat(item.test_result).toFixed(5),
+      [`dev_${props.mainMetric}`]: parseFloat(item.dev_result).toFixed(5),
+      [`test_${props.mainMetric}`]: parseFloat(item.test_result).toFixed(5),
     };
   });
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
@@ -139,8 +139,8 @@ const AllEntries = (props) => {
                   'id',
                   'submitter',
                   'description',
-                  'dev_result',
-                  'test_result',
+                  `dev_${props.mainMetric}`,
+                  `test_${props.mainMetric}`,
                   'timestamp',
                 ]}
                 sortByUpdate={sortByUpdate}

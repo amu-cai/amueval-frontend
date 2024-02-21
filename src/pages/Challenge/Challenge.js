@@ -37,7 +37,11 @@ const Challenge = (props) => {
         );
       case CHALLENGE_SECTIONS.ALL_ENTRIES:
         return (
-          <AllEntries challengeName={challengeName} setLoading={setLoading} />
+          <AllEntries
+            challengeName={challengeName}
+            mainMetric={challenge.mainMetric}
+            setLoading={setLoading}
+          />
         );
       case CHALLENGE_SECTIONS.README:
         return (
