@@ -26,13 +26,14 @@ const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
+const RESET_TOKEN_TIME = 10000;
+const CHECK_TOKEN_TIME = 1000;
+
 const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
   'Leaderboard',
   'All submissions',
   'Readme',
   'How to',
-  'My entries',
-  'Submit',
 ];
 const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Leaderboard',
@@ -40,7 +41,7 @@ const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Readme',
   'How to',
   'My entries',
-  // 'Submit',
+  'Submit',
 ];
 
 const CHALLENGE_SECTIONS = {
@@ -134,11 +135,6 @@ const IS_MOBILE = () => {
   return document.body.clientWidth <= 1024;
 };
 
-const IS_LOGGED_IN = () => {
-  console.log('TO DO');
-  return false;
-};
-
 const CHILDREN_WITH_PROPS = (propsChildren, props) =>
   React.Children.map(propsChildren, (child) => {
     if (React.isValidElement(child)) {
@@ -168,6 +164,8 @@ export {
   CHALLENGES_STATUS_FILTER,
   PROFILE_PAGE,
   CHALLENGE_CREATE_PAGE,
+  RESET_TOKEN_TIME,
+  CHECK_TOKEN_TIME,
   MINI_DESCRIPTION_RENDER,
   RENDER_ICO,
   CALC_PAGES,
@@ -179,5 +177,4 @@ export {
   PREVIOUS_PAGE,
   NEXT_PAGE,
   CHILDREN_WITH_PROPS,
-  IS_LOGGED_IN,
 };

@@ -51,7 +51,7 @@ const ChallengeCreate = () => {
   );
 
   return (
-    <FlexColumn margin="80px 0" width="100%" minHeight="100vh" gap="32px">
+    <FlexColumn padding="80px 0" width="100%" minHeight="100vh" gap="32px">
       <H2 as="h1">Challenge Create</H2>
       <FlexColumn maxWidth="600px" width="100%" gap="20px">
         <FlexColumn gap="10px" width="100%">

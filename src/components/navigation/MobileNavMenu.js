@@ -14,10 +14,10 @@ import {
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
   REGISTER_PAGE,
-  IS_LOGGED_IN,
 } from '../../utils/globals';
 import policyIco from '../../assets/policy_ico.svg';
 import createIco from '../../assets/create_ico.svg';
+import { useSelector } from 'react-redux';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -58,6 +58,8 @@ const MobileNavMenuStyle = styled(FlexColumn)`
 `;
 
 const MobileNavMenu = (props) => {
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <TransBack
       transition="transform"
@@ -75,21 +77,22 @@ const MobileNavMenu = (props) => {
           <Svg width="16px" height="16px" src={cupIco} />
           <Menu as="li">Challenges</Menu>
         </FlexRow>
-        <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
-          <Svg size="cover" width="16px" height="16px" src={createIco} />
-          <Menu as="li">Challenge create</Menu>
-        </FlexRow>
-        {IS_LOGGED_IN() && (
+
+        {!loggedIn && (
           <FlexRow as={Link} to={REGISTER_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={registerIco} />
             <Menu as="li">Register</Menu>
           </FlexRow>
         )}
-        {IS_LOGGED_IN() ? (
+        {loggedIn ? (
           <>
             <FlexRow as={Link} to={PROFILE_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={userIco} size="cover" />
               <Menu as="li">Profile</Menu>
+            </FlexRow>
+            <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
+              <Svg size="cover" width="16px" height="16px" src={createIco} />
+              <Menu as="li">Challenge create</Menu>
             </FlexRow>
             <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={policyIco} size="cover" />

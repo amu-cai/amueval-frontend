@@ -4,7 +4,6 @@ import {
   CHALLENGE_CREATE_PAGE,
   CHALLENGE_PAGE,
   CHALLENGE_SECTIONS,
-  IS_LOGGED_IN,
   LOGIN_PAGE,
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
@@ -20,9 +19,10 @@ import PageNotFound from '../../pages/PageNotFound/PageNotFound';
 import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
 import LoginPage from '../../pages/auth/LoginPage';
 import RegisterPage from '../../pages/auth/RegisterPage';
+import { useSelector } from 'react-redux';
 
 const RoutingManager = (props) => {
-  const loggedIn = IS_LOGGED_IN();
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const logInRoutesRender = () => {
     if (loggedIn) {

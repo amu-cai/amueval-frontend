@@ -4,7 +4,7 @@ import TableRowTags from '../TableRowTags/TableRowTags';
 import TableRowButtons from '../TableRowButtons/TableRowButtons';
 import pensilIco from '../../../../../assets/pencil_ico.svg';
 import deleteIco from '../../../../../assets/delete_ico.svg';
-import KeyCloakService from '../../../../../services/KeyCloakService';
+import { useSelector } from 'react-redux';
 
 const TableRowFooter = ({
   rowFooter,
@@ -14,8 +14,10 @@ const TableRowFooter = ({
   deleteItem,
   editItem,
 }) => {
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const getButtonAccessMessage = () => {
-    if (!KeyCloakService.isLoggedIn()) {
+    if (!loggedIn) {
       return 'You must be logged in to use this option.';
     }
     if (subpage === 'MY_ENTRIES') {

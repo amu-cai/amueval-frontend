@@ -5,10 +5,11 @@ import { H3 } from '../../../utils/fonts';
 import PropsTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
-  // MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
+  MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
   IS_MOBILE,
 } from '../../../utils/globals';
+import { useSelector } from 'react-redux';
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -43,9 +44,10 @@ const Option = styled(FlexColumn)`
 `;
 
 const DesktopChallengeMenu = (props) => {
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
-  // if (KeyCloakService.isLoggedIn())
-  //   options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
+  if (loggedIn) options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   return (
     <DesktopChallengeMenuStyle>
       {options.map((option, index) => {

@@ -11,14 +11,12 @@ import { Menu } from '../../../utils/fonts';
 import registerIco from '../../../assets/register_ico.svg';
 import {
   CHALLENGES_PAGE,
-  CHALLENGE_CREATE_PAGE,
-  IS_LOGGED_IN,
   LOGIN_PAGE,
   REGISTER_PAGE,
 } from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './NavBarStyle';
-import createIco from '../../../assets/create_ico.svg';
+import { useSelector } from 'react-redux';
 
 const MenuButton = styled(Container)`
   width: 20px;
@@ -36,6 +34,8 @@ const MenuButton = styled(Container)`
 `;
 
 const NavBar = (props) => {
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const [navMenuTranslateY, setNavMenuTranslateY] = React.useState(
     'calc(-100vh - 42px)'
   );
@@ -66,17 +66,14 @@ const NavBar = (props) => {
                 <Svg width="16px" height="16px" src={cupIco} />
                 <Menu as="li">Challenges</Menu>
               </FlexRow>
-              <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
-                <Svg size="cover" width="16px" height="16px" src={createIco} />
-                <Menu as="li">Challenge create</Menu>
-              </FlexRow>
-              {!IS_LOGGED_IN() && (
+
+              {!loggedIn && (
                 <FlexRow as={Link} to={REGISTER_PAGE} gap="12px">
                   <Svg width="16px" height="16px" src={registerIco} />
                   <Menu as="li">Register</Menu>
                 </FlexRow>
               )}
-              {IS_LOGGED_IN() ? (
+              {loggedIn ? (
                 <Svg
                   as="button"
                   onClick={props.loggedBarVisibleHandler}

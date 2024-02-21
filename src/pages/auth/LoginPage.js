@@ -12,13 +12,17 @@ import theme from '../../utils/theme';
 import { REGISTER_PAGE } from '../../utils/globals';
 import login from '../../api/login';
 import auth from '../../api/auth';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/authSlice';
 
 const LoginPage = () => {
-  const [loginResult, setLoginResult] = React.useState(null);
-  const [authResult, setAuthResult] = React.useState(null);
+  const dispatch = useDispatch();
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const [loginResult, setLoginResult] = React.useState(null);
+  const [authResult, setAuthResult] = React.useState(null);
 
   React.useEffect(() => {
     if (loginResult) {
@@ -31,8 +35,11 @@ const LoginPage = () => {
   }, [loginResult]);
 
   React.useEffect(() => {
-    console.log(authResult);
-  }, [authResult]);
+    const auth = authResult?.User;
+    if (auth?.username && loginResult?.access_token) {
+      dispatch(logIn({ user: auth.username, token: loginResult.access_token }));
+    }
+  }, [authResult, dispatch, loginResult?.access_token]);
 
   return (
     <FlexRow width="100%" height="100vh">
@@ -46,6 +53,7 @@ const LoginPage = () => {
           />
           <AuthInput
             label="Password"
+            type="password"
             handler={(e) => setPassword(e.target.value)}
             value={password}
           />

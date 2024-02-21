@@ -3,13 +3,13 @@ import { FlexRow } from '../../../utils/containers';
 import styled from 'styled-components';
 import { Medium } from '../../../utils/fonts';
 import PropsTypes from 'prop-types';
-import KeyCloakService from '../../../services/KeyCloakService';
 import {
   CHALLENGE_SECTIONS,
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
 } from '../../../utils/globals';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MenuOption = styled(Medium)`
   cursor: pointer;
@@ -23,9 +23,10 @@ const MenuOption = styled(Medium)`
 `;
 
 const MobileChallengeMenu = (props) => {
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
-  if (KeyCloakService.isLoggedIn())
-    options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
+  if (loggedIn) options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   const renderLoggedOptions = () => {
     if (options === MENU_CHALLENGE_SECTIONS_WITH_LOGIN)
       return (
