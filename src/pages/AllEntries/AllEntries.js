@@ -26,8 +26,8 @@ const AllEntries = (props) => {
   let elements = newEntries?.map((item) => {
     return {
       ...item,
-      dev_result: parseFloat(item.dev_result).toFixed(2),
-      test_result: parseFloat(item.test_result).toFixed(2),
+      dev_result: parseFloat(item.dev_result).toFixed(5),
+      test_result: parseFloat(item.test_result).toFixed(5),
     };
   });
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
