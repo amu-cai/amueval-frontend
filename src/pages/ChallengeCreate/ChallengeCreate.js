@@ -8,6 +8,7 @@ import { Menu } from '../../utils/fonts';
 import challengeCreate from '../../api/challengeCreate';
 import getMetrics from '../../api/getMetrics';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
+import { useDispatch } from 'react-redux';
 
 const ChallengeCreate = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const ChallengeCreate = () => {
         dispatch(popUpMessageHandler({header: "Challenge create success", message: `${uploadResult.challenge}: ${uploadResult.message}`}));
       }
     }
-  }, [uploadResult]);
+  }, [uploadResult, dispatch]);
 
   const challengeCreateSubmit = async () => {
     const challengeInput = {

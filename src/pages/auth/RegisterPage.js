@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { LOGIN_PAGE } from '../../utils/globals';
 import createUser from '../../api/createUser';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
+import { useDispatch } from 'react-redux';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const RegisterPage = () => {
         dispatch(popUpMessageHandler({header: "Register success", message: `Success: ${registerResult.message}`}));
       }
     }
-  }, [registerResult]);
+  }, [registerResult, dispatch]);
 
   const repeatPasswordError = password !== passwordRepeat;
   const emailFormatError = !validateEmail(email);

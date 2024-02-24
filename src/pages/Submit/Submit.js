@@ -5,19 +5,22 @@ import theme from '../../utils/theme';
 import SubmitStyle from './SubmitStyle';
 import challengeSubmissionSubmit from '../../api/challengeSubmissionSubmit';
 import SubmitInput from '../../components/generic/SubmitInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const Submit = (props) => {
-  const [description, setDescription] = React.useState();
-  // const [repoUrl, setRepoUrl] = React.useState();
-  const [submissionZip, setSubmissionZip] = React.useState();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
+  const [description, setDescription] = React.useState();
+  const [submissionZip, setSubmissionZip] = React.useState();
   const [submissionResult, setSubmissionResult] = React.useState();
 
   React.useEffect(() => {
     if (submissionResult) {
       dispatch(popUpMessageHandler({header: "Adding submission success", message: `${submissionResult.submission}: ${submissionResult.message}`, borderColor: theme.colors.green}));
     }
-  }, [submissionResult]);
+  }, [submissionResult, dispatch]);
 
   return (
     <SubmitStyle as="section">
@@ -31,12 +34,6 @@ const Submit = (props) => {
           setDescription(value);
         }}
       />
-      {/* <SubmitInput
-        label="Submission repo URL"
-        handler={(value) => {
-          setRepoUrl(value);
-        }}
-      /> */}
       <SubmitInput
         label="Submission Zip File"
         type="file"
@@ -51,7 +48,7 @@ const Submit = (props) => {
         handler={() =>
           challengeSubmissionSubmit(
             {
-              submitter: 'x',
+              submitter: user,
               description: description,
               submission_zip: submissionZip,
               challenge_title: props.challengeName,

@@ -33,7 +33,7 @@ const LoginPage = () => {
         auth(loginResult.access_token, setAuthResult);
       }
     }
-  }, [loginResult]);
+  }, [loginResult, dispatch]);
 
   React.useEffect(() => {
     const auth = authResult?.User;
