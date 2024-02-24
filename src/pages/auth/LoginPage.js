@@ -39,6 +39,7 @@ const LoginPage = () => {
     const auth = authResult?.User;
     if (auth?.username && loginResult?.access_token) {
       dispatch(logIn({ user: auth.username, token: loginResult.access_token }));
+      dispatch(popUpMessageHandler({header: "Log in success", message: `Success: log in as ${auth.username}`, borderColor: theme.colors.green}));
     }
   }, [authResult, dispatch, loginResult?.access_token]);
 
