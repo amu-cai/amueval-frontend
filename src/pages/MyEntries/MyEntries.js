@@ -8,9 +8,9 @@ import Table from '../../components/generic/Table/Table';
 import Search from '../../components/generic/Search';
 import orderKeys from './orderKeys';
 import { ELEMENTS_PER_PAGE } from '../../utils/globals';
-import getEntries from '../../api/getEntries';
 import searchHandler from './searchHandler';
 import { Medium } from '../../utils/fonts';
+import getMySubmissions from '../../api/getMySubmissions';
 
 const MyEntries = (props) => {
   const [myEntriesAll, setMyEntriesAll] = React.useState([]);
@@ -22,21 +22,29 @@ const MyEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  let elements = myEntries.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  console.log(myEntries);
+  let elements = myEntries?.map((item) => {
+    return {
+      ...item,
+      [`dev_${props.mainMetric}`]: parseFloat(item.dev_result).toFixed(5),
+      [`test_${props.mainMetric}`]: parseFloat(item.test_result).toFixed(5),
+    };
+  });
+  elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
 
-  React.useMemo(() => {
-    getEntries(
-      'challenge-my-submissions',
-      props.challengeName,
-      [setMyEntries, setMyEntriesAll],
-      setLoading,
-      setScoresSorted
-    );
+  React.useEffect(() => {
+    if (props.challengeName) {
+      getMySubmissions(
+        props.challengeName,
+        [setMyEntries, setMyEntriesAll],
+        setLoading,
+      );
+    }
   }, [props.challengeName]);
 
   const sortByUpdate = React.useCallback(
     (elem) => {
-      let newEntries = myEntries.slice();
+      let newEntries = myEntries?.slice();
       const possibleMetrics = orderKeys(myEntries[0]).filter(
         (key) => !['id', 'submitter', 'when'].includes(key)
       );
@@ -104,7 +112,13 @@ const MyEntries = (props) => {
             <Container width="100%" overflowX="auto">
               <Table
                 items={elements}
-                orderedKeys={orderKeys(myEntries[0])}
+                orderedKeys={[
+                  'id',
+                  'description',
+                  `dev_${props.mainMetric}`,
+                  `test_${props.mainMetric}`,
+                  'timestamp',
+                ]}
                 sortByUpdate={sortByUpdate}
                 subpage={'MY_ENTRIES'}
                 challengeName={props.challengeName}
