@@ -11,8 +11,10 @@ import LinkStyle from './styles/LinkStyle';
 import { Link } from 'react-router-dom';
 import { LOGIN_PAGE } from '../../utils/globals';
 import createUser from '../../api/createUser';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
   const [registerResult, setRegisterResult] = React.useState(null);
 
   const [email, setEmail] = React.useState('');
@@ -31,9 +33,9 @@ const RegisterPage = () => {
   React.useEffect(() => {
     if (registerResult) {
       if (registerResult?.detail) {
-        alert(`Error: ${registerResult.detail}`);
+        dispatch(popUpMessageHandler({header: "Register error", message: `Error: ${registerResult.detail}`}));
       } else {
-        alert(`Success: ${registerResult.message}`);
+        dispatch(popUpMessageHandler({header: "Register success", message: `Success: ${registerResult.message}`}));
       }
     }
   }, [registerResult]);

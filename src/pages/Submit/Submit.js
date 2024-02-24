@@ -15,7 +15,7 @@ const Submit = (props) => {
 
   React.useEffect(() => {
     if (submissionResult) {
-      alert(`${submissionResult.submission}: ${submissionResult.message}`);
+      dispatch(popUpMessageHandler({header: "Adding submission success", message: `${submissionResult.submission}: ${submissionResult.message}`, borderColor: theme.colors.green}));
     }
   }, [submissionResult]);
 

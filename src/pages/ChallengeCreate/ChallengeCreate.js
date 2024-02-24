@@ -7,8 +7,10 @@ import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
 import challengeCreate from '../../api/challengeCreate';
 import getMetrics from '../../api/getMetrics';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const ChallengeCreate = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [award, setAward] = React.useState('');
@@ -27,9 +29,9 @@ const ChallengeCreate = () => {
   React.useEffect(() => {
     if (uploadResult) {
       if (uploadResult?.detail) {
-        alert(`Error: ${uploadResult.detail}`);
+        dispatch(popUpMessageHandler({header: "Challenge create error", message: `Error: ${uploadResult.detail}`}));
       } else {
-        alert(`${uploadResult.challenge}: ${uploadResult.message}`);
+        dispatch(popUpMessageHandler({header: "Challenge create success", message: `${uploadResult.challenge}: ${uploadResult.message}`}));
       }
     }
   }, [uploadResult]);
