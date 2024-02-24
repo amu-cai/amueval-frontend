@@ -5,19 +5,21 @@ import theme from '../../utils/theme';
 import SubmitStyle from './SubmitStyle';
 import challengeSubmissionSubmit from '../../api/challengeSubmissionSubmit';
 import SubmitInput from '../../components/generic/SubmitInput';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const Submit = (props) => {
-  const [description, setDescription] = React.useState();
-  // const [repoUrl, setRepoUrl] = React.useState();
-  const [submissionZip, setSubmissionZip] = React.useState();
+  const dispatch = useDispatch();
 
+  const [description, setDescription] = React.useState();
+  const [submissionZip, setSubmissionZip] = React.useState();
   const [submissionResult, setSubmissionResult] = React.useState();
 
   React.useEffect(() => {
     if (submissionResult) {
-      alert(`${submissionResult.submission}: ${submissionResult.message}`);
+      dispatch(popUpMessageHandler({header: "Adding submission success", message: `${submissionResult.submission}: ${submissionResult.message}`, borderColor: theme.colors.green}));
     }
-  }, [submissionResult]);
+  }, [submissionResult, dispatch]);
 
   return (
     <SubmitStyle as="section">

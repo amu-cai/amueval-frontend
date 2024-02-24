@@ -14,6 +14,7 @@ import login from '../../api/login';
 import auth from '../../api/auth';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/authSlice';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -27,12 +28,12 @@ const LoginPage = () => {
   React.useEffect(() => {
     if (loginResult) {
       if (loginResult?.detail) {
-        alert(`Error: ${loginResult.detail}`);
+        dispatch(popUpMessageHandler({header: "Log in error", message: `Error: ${loginResult.detail}`, borderColor: theme.colors.red}));
       } else {
         auth(loginResult.access_token, setAuthResult);
       }
     }
-  }, [loginResult]);
+  }, [loginResult, dispatch]);
 
   React.useEffect(() => {
     const auth = authResult?.User;
