@@ -6,7 +6,6 @@ import Search from '../../components/generic/Search';
 import Table from '../../components/generic/Table';
 import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
-import orderKeys from './orderKeys';
 import leaderboardSearchQueryHandler from './leaderboardSearchQueryHandler';
 import getLeaderboard from '../../api/getLeaderboard';
 
@@ -15,10 +14,12 @@ const Leaderboard = (props) => {
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
   const [idSorted, setIdSorted] = React.useState([]);
-  const [scoresSorted, setScoresSorted] = React.useState([]);
   const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [entriesAll, setEntriesAll] = React.useState(null);
+  const [devSorted, setDevSorted] = React.useState(false);
+  const [testSorted, setTestSorted] = React.useState(false);
+  const [descriptionSorted, setDescriptionSorted] = React.useState(false);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
 
@@ -43,82 +44,122 @@ const Leaderboard = (props) => {
     }
   }, [entriesAll, entries]);
 
-  const sortByUpdate = React.useCallback(
-    (elem) => {
-      let newEntries = elements.slice();
-      const possibleMetrics = orderKeys(elements[0]).filter(
-        (key) => !['id', 'submitter', 'when'].includes(key)
-      );
-      let metricIndex = possibleMetrics.indexOf(elem);
-      let newScoresSorted = scoresSorted.slice();
-      switch (elem) {
-        case 'id':
-          if (idSorted) {
-            setIdSorted(false);
-            newEntries = newEntries.sort((a, b) =>
-              a.id > b.id ? 1 : b.id > a.id ? -1 : 0
-            );
-          } else {
-            setIdSorted(true);
-            newEntries = newEntries.sort((a, b) =>
-              a.id < b.id ? 1 : b.id < a.id ? -1 : 0
-            );
-          }
-          break;
-        case 'submitter':
-          if (submitterSorted) {
-            setSubmitterSorted(false);
-            newEntries = newEntries.sort((a, b) =>
-              a.submitter.toLowerCase() < b.submitter.toLowerCase()
-                ? 1
-                : b.submitter.toLowerCase() < a.submitter.toLowerCase()
-                ? -1
-                : 0
-            );
-          } else {
-            setSubmitterSorted(true);
-            newEntries = newEntries.sort((a, b) =>
-              a.submitter.toLowerCase() > b.submitter.toLowerCase()
-                ? 1
-                : b.submitter.toLowerCase() > a.submitter.toLowerCase()
-                ? -1
-                : 0
-            );
-          }
-          break;
-        case 'when':
-          if (whenSorted) {
-            setWhenSorted(false);
-            newEntries = newEntries.sort((a, b) =>
-              a.when < b.when ? 1 : b.when < a.when ? -1 : 0
-            );
-          } else {
-            setWhenSorted(true);
-            newEntries = newEntries.sort((a, b) =>
-              a.when > b.when ? 1 : b.when > a.when ? -1 : 0
-            );
-          }
-          break;
-        default:
-          if (scoresSorted[metricIndex]) {
-            newEntries = newEntries.sort(
-              (a, b) => (b ? b[elem] : -1) - (a ? a[elem] : -1)
-            );
-            newScoresSorted[metricIndex] = false;
-            setScoresSorted(newScoresSorted);
-          } else {
-            newEntries = newEntries.sort(
-              (a, b) => (a ? a[elem] : -1) - (b ? b[elem] : -1)
-            );
-            newScoresSorted[metricIndex] = true;
-            setScoresSorted(newScoresSorted);
-          }
-          break;
+  const sortByUpdate = (elem) => {
+    let entriesUpdated = elements.slice();
+    switch (elem) {
+      case 'id': {
+        if (idSorted) {
+          setIdSorted(false);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+          );
+        } else {
+          setIdSorted(true);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.id < b.id ? 1 : b.id < a.id ? -1 : 0
+          );
+        }
+        break;
       }
-      setEntries(newEntries);
-    },
-    [elements, idSorted, scoresSorted, submitterSorted, whenSorted]
-  );
+      case 'submitter': {
+        if (submitterSorted) {
+          setSubmitterSorted(false);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.submitter.toLowerCase() < b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() < a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        } else {
+          setSubmitterSorted(true);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.submitter.toLowerCase() > b.submitter.toLowerCase()
+              ? 1
+              : b.submitter.toLowerCase() > a.submitter.toLowerCase()
+              ? -1
+              : 0
+          );
+        }
+        break;
+      }
+      case 'description': {
+        if (descriptionSorted) {
+          setDescriptionSorted(false);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.description.toLowerCase() < b.description.toLowerCase()
+              ? 1
+              : b.description.toLowerCase() < a.description.toLowerCase()
+              ? -1
+              : 0
+          );
+        } else {
+          setDescriptionSorted(true);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.description.toLowerCase() > b.description.toLowerCase()
+              ? 1
+              : b.description.toLowerCase() > a.description.toLowerCase()
+              ? -1
+              : 0
+          );
+        }
+        break;
+      }
+      case 'timestamp': {
+        if (whenSorted) {
+          setWhenSorted(false);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.when < b.when ? 1 : b.when < a.when ? -1 : 0
+          );
+        } else {
+          setWhenSorted(true);
+          entriesUpdated = entriesUpdated.sort((a, b) =>
+            a.when > b.when ? 1 : b.when > a.when ? -1 : 0
+          );
+        }
+        break;
+      }
+      case `dev_${props.mainMetric}`: {
+        if (devSorted) {
+          setDevSorted(false);
+          entriesUpdated = entriesUpdated.sort(
+            (a, b) =>
+              (b ? b[`dev_${props.mainMetric}`] : -1) -
+              (a ? a[`dev_${props.mainMetric}`] : -1)
+          );
+        } else {
+          setDevSorted(true);
+          entriesUpdated = entriesUpdated.sort(
+            (a, b) =>
+              (a ? a[`dev_${props.mainMetric}`] : -1) -
+              (b ? b[`dev_${props.mainMetric}`] : -1)
+          );
+        }
+        break;
+      }
+      case `test_${props.mainMetric}`: {
+        if (testSorted) {
+          setTestSorted(false);
+          entriesUpdated = entriesUpdated.sort(
+            (a, b) =>
+              (b ? b[`test_${props.mainMetric}`] : -1) -
+              (a ? a[`test_${props.mainMetric}`] : -1)
+          );
+        } else {
+          setTestSorted(true);
+          entriesUpdated = entriesUpdated.sort(
+            (a, b) =>
+              (a ? a[`test_${props.mainMetric}`] : -1) -
+              (b ? b[`test_${props.mainMetric}`] : -1)
+          );
+        }
+        break;
+      }
+      default:
+        break;
+    }
+    setEntries(entriesUpdated);
+  };
 
   const leaderboardRender = () => {
     const tableNotEmpty = elements?.length;
