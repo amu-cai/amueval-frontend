@@ -5,74 +5,29 @@ import {
   FlexRow,
   Svg,
   TransBack,
-} from '../../utils/containers';
-import { Body, Medium } from '../../utils/fonts';
-import theme from '../../utils/theme';
-import userIco from '../../assets/user_ico.svg';
-import loginIco from '../../assets/login_ico.svg';
-import privacyIco from '../../assets/policy_ico.svg';
-import styled from 'styled-components';
+} from '../../../utils/containers';
+import { Body, Medium } from '../../../utils/fonts';
+import theme from '../../../utils/theme';
+import userIco from '../../../assets/user_ico.svg';
+import loginIco from '../../../assets/login_ico.svg';
+import privacyIco from '../../../assets/policy_ico.svg';
+import createIco from '../../../assets/create_ico.svg';
 import { Link } from 'react-router-dom';
 import {
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
   CHALLENGE_CREATE_PAGE,
-} from '../../utils/globals';
-import createIco from '../../assets/create_ico.svg';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../redux/authSlice';
+  REDIRECT_TO_ROOT_PAGE,
+} from '../../../utils/globals';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { ROOT_PAGE } from '../../utils/globals';
-
-const LoggedBarStyle = styled(FlexColumn)`
-  width: 360px;
-  height: calc(100vh - 48px);
-  position: fixed;
-  top: 50px;
-  right: 0;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: ${({ theme }) => theme.shadow};
-  z-index: 3;
-
-  button,
-  a {
-    cursor: pointer;
-
-    li {
-      transition: color 0.3s ease-in-out;
-    }
-
-    div {
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    &:hover {
-      li {
-        color: ${({ theme }) => theme.colors.green};
-      }
-
-      div {
-        background-color: ${({ theme }) => theme.colors.green};
-      }
-    }
-
-    * {
-      cursor: pointer;
-    }
-  }
-`;
+import LoggedBarStyle from './LoggedBarStyle';
 
 const LoggedBar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const redirectToRootPage = () => {
-    const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
-    if (pageName) {
-      navigate(ROOT_PAGE);
-    }
-  };
+  const username = useSelector((state) => state.auth.user);
 
   return (
     <TransBack
@@ -99,7 +54,7 @@ const LoggedBar = (props) => {
             backgroundColor={theme.colors.dark}
             size="cover"
           />
-          <Medium as="p">{props.username}</Medium>
+          <Medium as="p">{username}</Medium>
         </FlexRow>
         <Container
           width="90%"
@@ -129,7 +84,12 @@ const LoggedBar = (props) => {
             onClick={
               props.visible === '0'
                 ? () =>
-                    dispatch(logOut({ redirectToRootPage: redirectToRootPage }))
+                    dispatch(
+                      logOut({
+                        redirectToRootPage: () =>
+                          REDIRECT_TO_ROOT_PAGE(navigate),
+                      })
+                    )
                 : null
             }
             gap="16px"

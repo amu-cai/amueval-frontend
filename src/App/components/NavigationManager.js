@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from '../../components/navigation/NavBar/NavBar';
-import LoggedBar from '../../components/navigation/LoggedBar';
-import KeyCloakService from '../../services/KeyCloakService';
+import LoggedBar from '../../components/navigation/LoggedBar/LoggedBar';
 import { CHILDREN_WITH_PROPS, IS_MOBILE } from '../../utils/globals';
 
 const NavigationManager = ({ children }) => {
@@ -35,7 +34,6 @@ const NavigationManager = ({ children }) => {
           loggedBarVisibleHandler={loggedBarVisibleHandler}
           loggedBarHoverTrue={() => setLoggedBarHover(true)}
           loggedBarHoverFalse={() => setLoggedBarHover(false)}
-          username={KeyCloakService.getUsername()}
         />
       )}
       {CHILDREN_WITH_PROPS(children, { hideNavOptions, showNavOptions })}

@@ -8,9 +8,12 @@ import theme from '../../utils/theme';
 import getPublicKey from '../../api/getPublicKey';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/authSlice';
+import { REDIRECT_TO_ROOT_PAGE } from '../../utils/globals';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [profileInfo, setProfileInfo] = React.useState(null);
   const profileInfoAttributes = [
     { label: 'Username:', key: 'preferred_username' },
@@ -52,7 +55,11 @@ const Profile = () => {
             </FlexColumn>
             <Button
               handler={() => {
-                dispatch(logOut());
+                dispatch(
+                  logOut({
+                    redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate),
+                  })
+                );
               }}
               width="232px"
               height="36px"

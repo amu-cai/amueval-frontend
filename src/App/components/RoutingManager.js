@@ -20,9 +20,49 @@ import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
 import LoginPage from '../../pages/auth/LoginPage';
 import RegisterPage from '../../pages/auth/RegisterPage';
 import { useSelector } from 'react-redux';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { RESET_TOKEN_TIME, REDIRECT_TO_ROOT_PAGE } from '../../utils/globals';
+import LOCAL_STORAGE from '../../utils/localStorage';
+import { useDispatch } from 'react-redux';
+import { logIn, logOut } from '../../redux/authSlice';
+import auth from '../../api/auth';
 
 const RoutingManager = (props) => {
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [authResult, setAuthResult] = React.useState(null);
+
+  React.useEffect(() => {
+    const logInTime = localStorage.getItem(LOCAL_STORAGE.LOG_IN_TIME);
+    if (logInTime) {
+      const timeNow = Date.now();
+      const sessionTime = timeNow - logInTime;
+      if (sessionTime > RESET_TOKEN_TIME) {
+        dispatch(
+          logOut({ redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate) })
+        );
+      }
+    }
+  }, [dispatch, navigate]);
+
+  React.useEffect(() => {
+    const authToken = localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN);
+    if (authToken) {
+      auth(authToken, setAuthResult);
+    }
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    const auth = authResult?.User;
+    const authToken = localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN);
+    if (auth?.username && authToken) {
+      dispatch(
+        logIn({ user: auth.username, token: authToken, sessionReload: true })
+      );
+    }
+  }, [authResult, dispatch]);
 
   const logInRoutesRender = () => {
     if (loggedIn) {
@@ -36,15 +76,12 @@ const RoutingManager = (props) => {
             path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
             element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
           />
-          {/* <Route
+          <Route
             path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-            element={
-              <Challenge
-                section={CHALLENGE_SECTIONS.SUBMIT}
-              />
-            }
-          /> */}
+            element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
+          />
           <Route path={PROFILE_PAGE} element={<Profile />} />
+          <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
         </>
       );
     }
@@ -100,10 +137,6 @@ const RoutingManager = (props) => {
         element={<Challenge section={CHALLENGE_SECTIONS.ALL_ENTRIES} />}
       />
       <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-        element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
-      />
-      <Route
         path={`${CHALLENGE_PAGE}/:challengeId/readme`}
         element={<Challenge section={CHALLENGE_SECTIONS.README} />}
       />
@@ -121,7 +154,6 @@ const RoutingManager = (props) => {
         path={`${POLICY_PRIVACY_PAGE}/register`}
         element={<PolicyPrivacy beforeRegister />}
       />
-      <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
       <Route path={'*'} element={<PageNotFound />} />
       {logInRoutesRender()}
       {rootPageRender()}

@@ -1,24 +1,25 @@
 import React from 'react';
-import { FlexColumn, FlexRow, Svg, TransBack } from '../../utils/containers';
-import { Menu } from '../../utils/fonts';
-import loginIco from '../../assets/login_ico.svg';
-import userIco from '../../assets/user_ico.svg';
-import registerIco from '../../assets/register_ico.svg';
-import cupIco from '../../assets/cup_ico.svg';
+import { FlexColumn, FlexRow, Svg, TransBack } from '../../../utils/containers';
+import { Menu } from '../../../utils/fonts';
+import loginIco from '../../../assets/login_ico.svg';
+import userIco from '../../../assets/user_ico.svg';
+import registerIco from '../../../assets/register_ico.svg';
+import cupIco from '../../../assets/cup_ico.svg';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   CHALLENGES_PAGE,
   CHALLENGE_CREATE_PAGE,
   LOGIN_PAGE,
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
+  REDIRECT_TO_ROOT_PAGE,
   REGISTER_PAGE,
-} from '../../utils/globals';
-import policyIco from '../../assets/policy_ico.svg';
-import createIco from '../../assets/create_ico.svg';
+} from '../../../utils/globals';
+import policyIco from '../../../assets/policy_ico.svg';
+import createIco from '../../../assets/create_ico.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { logOut } from '../../redux/authSlice';
+import { logOut } from '../../../redux/authSlice';
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -60,6 +61,7 @@ const MobileNavMenuStyle = styled(FlexColumn)`
 
 const MobileNavMenu = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
@@ -100,7 +102,17 @@ const MobileNavMenu = (props) => {
               <Svg width="16px" height="16px" src={policyIco} size="cover" />
               <Menu as="li">Privacy policy</Menu>
             </FlexRow>
-            <FlexRow as="button" onClick={() => dispatch(logOut())} gap="16px">
+            <FlexRow
+              as="button"
+              onClick={() =>
+                dispatch(
+                  logOut({
+                    redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate),
+                  })
+                )
+              }
+              gap="16px"
+            >
               <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />
               <Menu as="li">Sign out</Menu>
             </FlexRow>

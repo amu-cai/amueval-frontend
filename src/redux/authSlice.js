@@ -25,11 +25,7 @@ export const authSlice = createSlice({
       state.user = null;
       localStorage.removeItem(LOCAL_STORAGE.LOG_IN_TIME);
       localStorage.removeItem(LOCAL_STORAGE.AUTH_TOKEN);
-      if (redirectToRootPage) {
-        redirectToRootPage();
-      } else {
-        window.location.reload();
-      }
+      redirectToRootPage();
     },
   },
 });
