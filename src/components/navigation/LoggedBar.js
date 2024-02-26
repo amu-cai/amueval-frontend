@@ -21,6 +21,8 @@ import {
 import createIco from '../../assets/create_ico.svg';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROOT_PAGE } from '../../utils/globals';
 
 const LoggedBarStyle = styled(FlexColumn)`
   width: 360px;
@@ -64,6 +66,13 @@ const LoggedBarStyle = styled(FlexColumn)`
 
 const LoggedBar = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const redirectToRootPage = () => {
+    const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
+    if (pageName) {
+      navigate(ROOT_PAGE);
+    }
+  };
 
   return (
     <TransBack
@@ -117,7 +126,12 @@ const LoggedBar = (props) => {
           </FlexRow>
           <FlexRow
             as="button"
-            onClick={props.visible === '0' ? () => dispatch(logOut()) : null}
+            onClick={
+              props.visible === '0'
+                ? () =>
+                    dispatch(logOut({ redirectToRootPage: redirectToRootPage }))
+                : null
+            }
             gap="16px"
           >
             <Svg width="16px" height="16px" src={loginIco} rotate="180deg" />

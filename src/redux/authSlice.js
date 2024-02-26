@@ -19,12 +19,17 @@ export const authSlice = createSlice({
         localStorage.setItem(LOCAL_STORAGE.AUTH_TOKEN, token);
       }
     },
-    logOut: (state) => {
+    logOut: (state, action) => {
+      const { redirectToRootPage } = action.payload;
       state.isLoggedIn = false;
       state.user = null;
       localStorage.removeItem(LOCAL_STORAGE.LOG_IN_TIME);
       localStorage.removeItem(LOCAL_STORAGE.AUTH_TOKEN);
-      window.location.reload();
+      if (redirectToRootPage) {
+        redirectToRootPage();
+      } else {
+        window.location.reload();
+      }
     },
   },
 });
