@@ -12,13 +12,27 @@ const Submit = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
-  const [description, setDescription] = React.useState();
-  const [submissionZip, setSubmissionZip] = React.useState();
-  const [submissionResult, setSubmissionResult] = React.useState();
+  const [description, setDescription] = React.useState(null);
+  const [submissionZip, setSubmissionZip] = React.useState(null);
+  const [submissionResult, setSubmissionResult] = React.useState(null);
 
   React.useEffect(() => {
-    if (submissionResult) {
-      dispatch(popUpMessageHandler({header: "Adding submission success", message: `${submissionResult.submission}: ${submissionResult.message}`, borderColor: theme.colors.green}));
+    if (submissionResult?.submission && submissionResult?.message) {
+      dispatch(
+        popUpMessageHandler({
+          header: 'Adding submission success',
+          message: `${submissionResult.submission}: ${submissionResult.message}`,
+          borderColor: theme.colors.green,
+        })
+      );
+    } else if (submissionResult?.detail) {
+      dispatch(
+        popUpMessageHandler({
+          header: 'Adding submission error',
+          message: `Error: ${submissionResult.detail}`,
+          borderColor: theme.colors.red,
+        })
+      );
     }
   }, [submissionResult, dispatch]);
 

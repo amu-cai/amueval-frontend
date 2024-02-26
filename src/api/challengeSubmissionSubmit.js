@@ -1,4 +1,4 @@
-import { API } from "../utils/globals";
+import { API } from '../utils/globals';
 
 const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
   const formData = new FormData();
@@ -9,7 +9,7 @@ const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
 
   fetch(`${API}/evaluation/submit`, {
     method: 'post',
-    body: formData
+    body: formData,
   })
     .then(
       (res) => {
@@ -18,7 +18,7 @@ const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
           return res.json();
         } else {
           console.log('something went wrong');
-          console.log(res);
+          return res.json();
         }
       },
       (error) => {

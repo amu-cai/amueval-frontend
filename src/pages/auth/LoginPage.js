@@ -28,7 +28,13 @@ const LoginPage = () => {
   React.useEffect(() => {
     if (loginResult) {
       if (loginResult?.detail) {
-        dispatch(popUpMessageHandler({header: "Log in error", message: `Error: ${loginResult.detail}`, borderColor: theme.colors.red}));
+        dispatch(
+          popUpMessageHandler({
+            header: 'Log in error',
+            message: `Error: ${loginResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
       } else {
         auth(loginResult.access_token, setAuthResult);
       }
@@ -38,8 +44,20 @@ const LoginPage = () => {
   React.useEffect(() => {
     const auth = authResult?.User;
     if (auth?.username && loginResult?.access_token) {
-      dispatch(logIn({ user: auth.username, token: loginResult.access_token }));
-      dispatch(popUpMessageHandler({header: "Log in success", message: `Success: log in as ${auth.username}`, borderColor: theme.colors.green}));
+      dispatch(
+        logIn({
+          user: auth.username,
+          token: loginResult.access_token,
+          reloadSession: false,
+        })
+      );
+      dispatch(
+        popUpMessageHandler({
+          header: 'Log in success',
+          message: `Success: log in as ${auth.username}`,
+          borderColor: theme.colors.green,
+        })
+      );
     }
   }, [authResult, dispatch, loginResult?.access_token]);
 

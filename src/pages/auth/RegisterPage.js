@@ -34,9 +34,20 @@ const RegisterPage = () => {
   React.useEffect(() => {
     if (registerResult) {
       if (registerResult?.detail) {
-        dispatch(popUpMessageHandler({header: "Register error", message: `Error: ${registerResult.detail}`}));
+        dispatch(
+          popUpMessageHandler({
+            header: 'Register error',
+            message: `Error: ${registerResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
       } else {
-        dispatch(popUpMessageHandler({header: "Register success", message: `Success: ${registerResult.message}`}));
+        dispatch(
+          popUpMessageHandler({
+            header: 'Register success',
+            message: `Success: ${registerResult.message}`,
+          })
+        );
       }
     }
   }, [registerResult, dispatch]);

@@ -30,9 +30,20 @@ const ChallengeCreate = () => {
   React.useEffect(() => {
     if (uploadResult) {
       if (uploadResult?.detail) {
-        dispatch(popUpMessageHandler({header: "Challenge create error", message: `Error: ${uploadResult.detail}`}));
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge create error',
+            message: `Error: ${uploadResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
       } else {
-        dispatch(popUpMessageHandler({header: "Challenge create success", message: `${uploadResult.challenge}: ${uploadResult.message}`}));
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge create success',
+            message: `${uploadResult.challenge}: ${uploadResult.message}`,
+          })
+        );
       }
     }
   }, [uploadResult, dispatch]);

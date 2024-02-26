@@ -61,8 +61,12 @@ const RoutingManager = (props) => {
       dispatch(
         logIn({ user: auth.username, token: authToken, sessionReload: true })
       );
+    } else if (auth?.detail) {
+      dispatch(
+        logOut({ redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate) })
+      );
     }
-  }, [authResult, dispatch]);
+  }, [authResult, dispatch, navigate]);
 
   const logInRoutesRender = () => {
     if (loggedIn) {

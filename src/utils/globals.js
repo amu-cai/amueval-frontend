@@ -26,7 +26,7 @@ const CSI_LINK = 'https://csi.amu.edu.pl/';
 const ROOT_URL = window.location.origin;
 const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
 
-const RESET_TOKEN_TIME = 10000;
+const RESET_TOKEN_TIME = 600000;
 const CHECK_TOKEN_TIME = 1000;
 
 const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
