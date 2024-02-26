@@ -23,22 +23,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import LoggedBarStyle from './LoggedBarStyle';
+import {
+  loggedBarHoverHandler,
+  loggedBarPositionToggle,
+} from '../../../redux/navigationSlice';
 
-const LoggedBar = (props) => {
+const LoggedBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector((state) => state.auth.user);
+  const loggedBarPosition = useSelector(
+    (state) => state.navigation.loggedBarPosition
+  );
 
   return (
     <TransBack
       transition="transform"
-      translateX={props.visible}
-      onClick={props.loggedBarVisibleHandler}
+      translateX={loggedBarPosition}
+      onClick={() => dispatch(loggedBarPositionToggle())}
       animTime="0.2s"
     >
       <LoggedBarStyle
-        onMouseEnter={props.loggedBarHoverTrue}
-        onMouseLeave={props.loggedBarHoverFalse}
+        onMouseEnter={() => dispatch(loggedBarHoverHandler(true))}
+        onMouseLeave={() => dispatch(loggedBarHoverHandler(false))}
       >
         <FlexRow
           alignmentX="flex-start"
@@ -82,7 +89,7 @@ const LoggedBar = (props) => {
           <FlexRow
             as="button"
             onClick={
-              props.visible === '0'
+              loggedBarPosition === '0'
                 ? () =>
                     dispatch(
                       logOut({

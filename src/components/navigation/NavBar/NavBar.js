@@ -1,8 +1,6 @@
 import React from 'react';
-import { Container, FlexRow, Svg } from '../../../utils/containers';
+import { FlexRow, Svg } from '../../../utils/containers';
 import Logo from '../../generic/Logo';
-import styled from 'styled-components';
-import menuButtonIcon from '../../../assets/menu-button.svg';
 import MobileNavMenu from '../MobileNavMenu';
 import { Link } from 'react-router-dom';
 import loginIco from '../../../assets/login_ico.svg';
@@ -15,90 +13,74 @@ import {
   REGISTER_PAGE,
 } from '../../../utils/globals';
 import cupIco from '../../../assets/cup_ico.svg';
-import NavBarStyle from './NavBarStyle';
-import { useSelector } from 'react-redux';
+import NavBarStyle from './styles/NavBarStyle';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loggedBarPositionToggle,
+  navMenuHoverHandler,
+  navMenuPositionToggle,
+} from '../../../redux/navigationSlice';
+import MenuButtonStyle from './styles/MenuButtonStyle';
 
-const MenuButton = styled(Container)`
-  width: 20px;
-  height: 14px;
-  background-image: url(${menuButtonIcon});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  margin-top: 4px;
-
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
-    display: none;
-  }
-`;
-
-const NavBar = (props) => {
+const NavBar = () => {
+  const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  const [navMenuTranslateY, setNavMenuTranslateY] = React.useState(
-    'calc(-100vh - 42px)'
+  const navOptionsVisible = useSelector(
+    (state) => state.navigation.navOptionsVisible
   );
-  const [mobileMenuHover, setMobileMenuHover] = React.useState(false);
-
-  const mobileMenuHoverTrue = () => {
-    setMobileMenuHover(true);
-  };
-
-  const mobileMenuHoverFalse = () => {
-    setMobileMenuHover(false);
-  };
-
-  const toggleNavMenu = () => {
-    if (navMenuTranslateY === 'calc(-100vh - 42px)') setNavMenuTranslateY('0');
-    else if (!mobileMenuHover) setNavMenuTranslateY('calc(-100vh - 42px)');
-  };
+  const navMenuPosition = useSelector(
+    (state) => state.navigation.navMenuPosition
+  );
 
   return (
-    <NavBarStyle as="header">
-      <FlexRow height="100%" alignmentX="space-between" as="nav">
-        <Logo navOptions={props.navOptions} />
-        {props.navOptions && (
-          <>
-            <MenuButton as="button" onClick={toggleNavMenu} />
-            <FlexRow as="ul" className="ul-desktop" gap="32px">
-              <FlexRow as={Link} to={CHALLENGES_PAGE} gap="12px">
-                <Svg width="16px" height="16px" src={cupIco} />
-                <Menu as="li">Challenges</Menu>
+    <>
+      <NavBarStyle as="header">
+        <FlexRow height="100%" alignmentX="space-between" as="nav">
+          <Logo navOptions={navOptionsVisible} />
+          {navOptionsVisible && (
+            <>
+              <MenuButtonStyle
+                as="button"
+                onClick={() => dispatch(navMenuPositionToggle())}
+              />
+              <FlexRow as="ul" className="ul-desktop" gap="32px">
+                <FlexRow as={Link} to={CHALLENGES_PAGE} gap="12px">
+                  <Svg width="16px" height="16px" src={cupIco} />
+                  <Menu as="li">Challenges</Menu>
+                </FlexRow>
+                {!loggedIn && (
+                  <FlexRow as={Link} to={REGISTER_PAGE} gap="12px">
+                    <Svg width="16px" height="16px" src={registerIco} />
+                    <Menu as="li">Register</Menu>
+                  </FlexRow>
+                )}
+                {loggedIn ? (
+                  <Svg
+                    as="button"
+                    onClick={() => dispatch(loggedBarPositionToggle())}
+                    width="32px"
+                    height="32px"
+                    src={userIco}
+                    margin="0 16px 0 0"
+                  />
+                ) : (
+                  <FlexRow as={Link} to={LOGIN_PAGE} gap="12px">
+                    <Svg width="16px" height="16px" src={loginIco} />
+                    <Menu as="li">Sign in</Menu>
+                  </FlexRow>
+                )}
               </FlexRow>
-
-              {!loggedIn && (
-                <FlexRow as={Link} to={REGISTER_PAGE} gap="12px">
-                  <Svg width="16px" height="16px" src={registerIco} />
-                  <Menu as="li">Register</Menu>
-                </FlexRow>
-              )}
-              {loggedIn ? (
-                <Svg
-                  as="button"
-                  onClick={props.loggedBarVisibleHandler}
-                  width="32px"
-                  height="32px"
-                  src={userIco}
-                  margin="0 16px 0 0"
-                />
-              ) : (
-                <FlexRow as={Link} to={LOGIN_PAGE} gap="12px">
-                  <Svg width="16px" height="16px" src={loginIco} />
-                  <Menu as="li">Sign in</Menu>
-                </FlexRow>
-              )}
-            </FlexRow>
-          </>
-        )}
-      </FlexRow>
+            </>
+          )}
+        </FlexRow>
+      </NavBarStyle>
       <MobileNavMenu
-        mobileMenuHoverTrue={mobileMenuHoverTrue}
-        mobileMenuHoverFalse={mobileMenuHoverFalse}
-        translateY={navMenuTranslateY}
-        toggleNavMenu={toggleNavMenu}
+        mobileMenuHoverTrue={() => dispatch(navMenuHoverHandler(true))}
+        mobileMenuHoverFalse={() => dispatch(navMenuHoverHandler(false))}
+        translateY={navMenuPosition}
+        toggleNavMenu={() => dispatch(navMenuPositionToggle())}
       />
-    </NavBarStyle>
+    </>
   );
 };
 

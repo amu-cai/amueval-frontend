@@ -29,9 +29,9 @@ import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
 
 const RoutingManager = (props) => {
-  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [authResult, setAuthResult] = React.useState(null);
 
   React.useEffect(() => {
