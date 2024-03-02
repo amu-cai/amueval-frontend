@@ -14,7 +14,7 @@ const Csi = () => {
         </H2>
         <Body as="p" margin="0 0 16px 0">
           <Medium as="span" display="inline">
-            Gonito
+            AMU-Eval
           </Medium>{' '}
           belongs to the
           <Medium as="span" display="inline">
@@ -44,7 +44,7 @@ const Csi = () => {
         </FlexRow>
         <Body as="p" margin="0 0 24px 0">
           <Medium as="span" display="inline">
-            Gonito
+            AMU-Eval
           </Medium>{' '}
           belongs to the
           <Medium as="span" display="inline">

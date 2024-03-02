@@ -91,7 +91,7 @@ const ChallengeCreate = () => {
         </FlexColumn>
         <FlexColumn gap="10px" width="100%">
           <SubmitInput
-            label="Challenge source"
+            label="Challenge source link"
             handler={(value) => {
               setChallengeSource(value);
             }}

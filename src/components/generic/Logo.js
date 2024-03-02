@@ -21,7 +21,7 @@ const Logo = (props) => {
       to="/"
       color={theme.colors.green}
     >
-      Gonito
+      AMU-Eval
     </LogoStyle>
   );
 };

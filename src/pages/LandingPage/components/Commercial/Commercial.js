@@ -13,7 +13,7 @@ import commercialImage from '../../../../assets/commercial-image.svg';
 const Commercial = () => {
   const listItemsContent = [
     'A company comes to CSI with a business need',
-    'CSI determines the need with an appropriate challenge on Gonito',
+    'CSI determines the need with an appropriate challenge on AMU-Eval',
     'The challenge is solved by willing users',
     'The company appropriately rewards users who have contributed to the required outcome',
   ];
@@ -28,7 +28,7 @@ const Commercial = () => {
           <Body as="p">
             The artificial intelligence center works with companies by accepting
             machine learning challenges from them that are available to solve on
-            Gonito. Each commercial challenge is properly scored which
+            AMU-Eval. Each commercial challenge is properly scored which
             translates into an award for solving it according to the client's
             requirements.
           </Body>
@@ -68,7 +68,7 @@ const Commercial = () => {
             <Body as="p">
               The artificial intelligence center works with companies by
               accepting machine learning challenges from them that are available
-              to solve on Gonito. Each commercial challenge is properly scored
+              to solve on AMU-Eval. Each commercial challenge is properly scored
               which translates into an award for solving it according to the
               client's requirements.
             </Body>

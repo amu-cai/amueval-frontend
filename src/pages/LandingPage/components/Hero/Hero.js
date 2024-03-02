@@ -21,7 +21,7 @@ const Hero = (props) => {
         <H1 as="h1">
           Welcome to
           <Container display="inline" color={theme.colors.green}>
-            &nbsp;Gonito!
+            &nbsp;AMU-Eval!
           </Container>
         </H1>
         <Body as="p">
@@ -42,7 +42,7 @@ const Hero = (props) => {
           <H1 as="h1">
             Welcome to
             <Container display="inline" color={theme.colors.green}>
-              &nbsp;Gonito!
+              &nbsp;AMU-Eval!
             </Container>
           </H1>
           <Medium as="p" className="HeroStyle__title-paragraph">
@@ -66,7 +66,7 @@ const Hero = (props) => {
             <H1 as="h1">
               Welcome to
               <Container display="inline" color={theme.colors.green}>
-                &nbsp;Gonito!
+                &nbsp;AMU-Eval!
               </Container>
             </H1>
             <Medium as="p" className="HeroStyle__title-paragraph">
