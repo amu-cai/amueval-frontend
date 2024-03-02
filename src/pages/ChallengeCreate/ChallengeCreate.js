@@ -19,6 +19,7 @@ const ChallengeCreate = () => {
   const [deadline, setDeadline] = React.useState('');
   const [type, setType] = React.useState('image');
   const [metric, setMetric] = React.useState('Accuracy');
+  const [challengeSource, setChallengeSource] = React.useState(null);
   const [challengeFile, setChallengeFile] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
 
@@ -53,6 +54,7 @@ const ChallengeCreate = () => {
     const challengeInput = {
       title: title,
       description: description,
+      source: challengeSource,
       type: type,
       main_metric: metric,
       award: award,
@@ -84,6 +86,19 @@ const ChallengeCreate = () => {
           {!title && (
             <Medium fontSize="14px" width="100%" color={theme.colors.red}>
               Title required
+            </Medium>
+          )}
+        </FlexColumn>
+        <FlexColumn gap="10px" width="100%">
+          <SubmitInput
+            label="Challenge source"
+            handler={(value) => {
+              setChallengeSource(value);
+            }}
+          />
+          {!challengeSource && (
+            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
+              Challenge source required
             </Medium>
           )}
         </FlexColumn>

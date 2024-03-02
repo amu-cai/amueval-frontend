@@ -10,6 +10,7 @@ const challengeCreate = async (
 
   formData.append('challenge_file', challengeFile);
   formData.append('challenge_title', challengeInput.title);
+  formData.append('challenge_source', challengeInput.source);
   formData.append('description', challengeInput.description);
   formData.append('deadline', challengeInput.deadline);
   formData.append('award', challengeInput.award);
