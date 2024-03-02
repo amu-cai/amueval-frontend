@@ -1,21 +1,13 @@
 import React from 'react';
-import { IS_MOBILE } from '../../../utils/globals';
+import { CHALLENGE_PAGE, IS_MOBILE } from '../../../utils/globals';
 import { Body, H2, Medium } from '../../../utils/fonts';
 import { FlexColumn, Grid } from '../../../utils/containers';
 import CircleNumber from '../../../components/generic/CircleNumber';
 import CodeShell from '../../../components/generic/CodeShell';
+import theme from '../../../utils/theme';
+import { Link } from 'react-router-dom';
 
 const HowToContent = (props) => {
-  const pullCodeLineRender = () => {
-    if (
-      props.challengeName === 'cnlps-caiccaic' ||
-      props.challengeName === 'cnlps-ticrc'
-    ) {
-      return `git pull git@github.com:kubapok/${props.challengeName}.git`;
-    } else {
-      return `git pull git://gonito.net/${props.challengeName}.git`;
-    }
-  };
   const subpointsGridGap = IS_MOBILE() ? '8px' : '16px';
 
   return (
@@ -35,9 +27,17 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="1" />
         <Body as="p" margin="auto 0">
-          Create a private git repository with the name
-          <Medium as="span">&nbsp;{props.challengeName}</Medium>
-          &nbsp;The name of the repository must match!
+          Download source of
+          <Medium as="span">&nbsp;{props.challengeName}</Medium> challenge&nbsp;
+          <Medium
+            as="a"
+            cursor="pointer"
+            target="_blank"
+            href={props.challengeSource}
+            color={theme.colors.blue}
+          >
+            {props.challengeSource}
+          </Medium>
         </Body>
       </Grid>
       <Grid
@@ -47,15 +47,23 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="2" />
         <Body as="p" margin="auto 0">
-          Clone your repository and pull from the challenge mother repository
+          Challenge should has the following structure;
         </Body>
       </Grid>
       <CodeShell
         codeBlockIndex={1}
+        disablePrompt
+        gap="4px"
         commands={[
-          `git clone your-git-repository/${props.challengeName}`,
-          `cd ${props.challengeName}`,
-          pullCodeLineRender(),
+          `${props.challengeName}:`,
+          '\t\t dev-0:',
+          '\t\t\t\t expected.tsv',
+          '\t\t\t\t in.tsv',
+          '\t\t test-A:',
+          '\t\t\t\t in.tsv',
+          '\t\t train:',
+          '\t\t\t\t train.tsv',
+          '\t\t README.md',
         ]}
       />
       <Grid
@@ -65,9 +73,7 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="3" />
         <Body as="p" margin="auto 0">
-          You need to generate your solution for the test set as{' '}
-          <Medium as="span">test-A/out.tsv</Medium>. You may also create the
-          output for the dev set <Medium as="span">dev-0/out.tsv</Medium>.
+          Work with <Medium>train.tsv</Medium> to train your model
         </Body>
       </Grid>
       <Grid
@@ -77,19 +83,11 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="4" />
         <Body as="p" margin="auto 0">
-          (This step is optional.) You can evaluate results for the dev set
-          locally by <Medium as="span">geval</Medium>.
+          Generate <Medium>out.tsv</Medium> files in <Medium>dev-0</Medium> and{' '}
+          <Medium>test-A</Medium> to evaluate them with{' '}
+          <Medium>expected.tsv</Medium>
         </Body>
       </Grid>
-      <CodeShell
-        codeBlockIndex={3}
-        commands={[
-          'wget https://gonito.net/get/bin/geval',
-          'chmod u+x geval',
-          './geval --help',
-          './geval -t dev-0',
-        ]}
-      />
       <Grid
         width="100%"
         gridTemplateColumns="auto 1fr"
@@ -97,8 +95,7 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="5" />
         <Body as="p" margin="auto 0">
-          Commit and push at least <Medium>*/out.tsv</Medium> files to your
-          repo. It is also recommended to push your source code files.
+          The <Medium>test-A/expected.tsv</Medium> is hidden in the system
         </Body>
       </Grid>
       <Grid
@@ -108,8 +105,16 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="6" />
         <Body as="p" margin="auto 0">
-          Submit your solution to Gonito using <Medium>SUBMIT</Medium> on the
-          panel on the left.
+          Compress your solution files to <Medium>.zip</Medium> and&nbsp;
+          <Medium
+            as={Link}
+            to={`${CHALLENGE_PAGE}/${props.challengeName}/submit`}
+            color={theme.colors.green}
+            cursor="pointer"
+          >
+            SUBMIT
+          </Medium>
+          &nbsp;to see result of evaluation with test-A.
         </Body>
       </Grid>
       <Grid
@@ -119,7 +124,37 @@ const HowToContent = (props) => {
       >
         <CircleNumber number="7" />
         <Body as="p" margin="auto 0">
-          Your repository must be public.
+          Your submission zip file must has the following files and structure:
+        </Body>
+      </Grid>
+      <CodeShell
+        codeBlockIndex={1}
+        disablePrompt
+        gap="4px"
+        commands={[
+          `${props.challengeName}:`,
+          '\t\t dev-0:',
+          '\t\t\t\t out.tsv',
+          '\t\t test-A:',
+          '\t\t\t\t out.tsv',
+        ]}
+      />
+      <Grid
+        width="100%"
+        gridTemplateColumns="auto 1fr"
+        gridGap={subpointsGridGap}
+      >
+        <CircleNumber number="8" />
+        <Body as="p" margin="auto 0">
+          Some extra info about challenge can be in&nbsp;
+          <Medium
+            as={Link}
+            to={`${CHALLENGE_PAGE}/${props.challengeName}/readme`}
+            color={theme.colors.green}
+            cursor="pointer"
+          >
+            README
+          </Medium>
         </Body>
       </Grid>
     </FlexColumn>

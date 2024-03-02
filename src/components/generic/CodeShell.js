@@ -9,7 +9,7 @@ import { Body, Code } from '../../utils/fonts';
 const CodeShellStyle = styled(FlexColumn)`
   position: relative;
   padding: 24px 14px 14px;
-  gap: 8px;
+  gap: ${({ gap }) => (gap ? gap : '8px')};
   background-color: ${({ theme }) => theme.colors.dark07};
   border: 1px solid ${({ theme }) => theme.colors.dark};
   border-radius: 4px;
@@ -18,7 +18,7 @@ const CodeShellStyle = styled(FlexColumn)`
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 'none')};
 
   @media (min-width: ${({ theme }) => theme.overMobile}) {
-    gap: 12px;
+    gap: ${({ gap }) => (gap ? gap : '12px')};
     padding: 40px 32px 32px;
   }
 `;
@@ -71,7 +71,7 @@ const CodeShell = (props) => {
   };
 
   return (
-    <CodeShellStyle as="ul" maxWidth={props.maxWidth}>
+    <CodeShellStyle as="ul" gap={props.gap} maxWidth={props.maxWidth}>
       <Svg
         position="absolute"
         top="12px"

@@ -7,7 +7,7 @@ import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import { useSelector } from 'react-redux';
 
 const HowTo = (props) => {
-  const { challengeName } = props;
+  const { challengeName, challengeSource } = props;
   const [logInReminder, setLogInReminder] = React.useState(true);
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -37,7 +37,10 @@ const HowTo = (props) => {
       maxWidth={IS_MOBILE() ? '668px' : 'none'}
     >
       <FlexColumn maxWidth="680px" alignmentX="flex-start" gap="48px">
-        <HowToContent challengeName={challengeName} />
+        <HowToContent
+          challengeName={challengeName}
+          challengeSource={challengeSource}
+        />
       </FlexColumn>
     </FlexColumn>
   );

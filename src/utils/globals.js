@@ -8,34 +8,36 @@ import imageIco from '../assets/image_ico.svg';
 import tabularIco from '../assets/tabular_ico.svg';
 import React from 'react';
 
-const ELEMENTS_PER_PAGE = 10;
-const MINI_DESCRIPTION_LENGTH = 70;
-const API = process.env.REACT_APP_API;
-const ROOT_PAGE = '/';
-const CHALLENGES_PAGE = '/challenges';
-const CHALLENGE_PAGE = '/challenge';
-const CHALLENGE_CREATE_PAGE = '/challenge-create';
-const PROFILE_PAGE = '/profile';
-const POLICY_PRIVACY_PAGE = '/policy-privacy';
-const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
-const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
-const LOGIN_PAGE = `/login`;
-const REGISTER_PAGE = `/register`;
+export const ELEMENTS_PER_PAGE = 10;
+export const MINI_DESCRIPTION_LENGTH = 70;
+export const API = process.env.REACT_APP_API;
 
-const CSI_LINK = 'https://csi.amu.edu.pl/';
-const ROOT_URL = window.location.origin;
-const LOGIN_REQUIRED_PAGES = ['myentries', 'submit'];
+export const ROOT_PAGE = '/';
+export const CHALLENGES_PAGE = '/challenges';
+export const CHALLENGE_PAGE = '/challenge';
+export const CHALLENGE_CREATE_PAGE = '/challenge-create';
+export const PROFILE_PAGE = '/profile';
+export const POLICY_PRIVACY_PAGE = '/policy-privacy';
+export const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
+export const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
+export const LOGIN_PAGE = `/login`;
+export const REGISTER_PAGE = `/register`;
 
-const RESET_TOKEN_TIME = 600000;
-const CHECK_TOKEN_TIME = 1000;
+export const CSI_LINK = 'https://csi.amu.edu.pl/';
+export const ROOT_URL = window.location.origin;
+export const LOGIN_REQUIRED_PAGES = ['my-submissions', 'submit'];
 
-const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
+export const RESET_TOKEN_TIME = 600000;
+export const CHECK_TOKEN_TIME = 1000;
+
+export const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
   'Leaderboard',
   'All submissions',
   'Readme',
   'How to',
 ];
-const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
+
+export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Leaderboard',
   'All submissions',
   'Readme',
@@ -44,7 +46,7 @@ const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Submit',
 ];
 
-const CHALLENGE_SECTIONS = {
+export const CHALLENGE_SECTIONS = {
   LEADERBOARD: 0,
   ALL_ENTRIES: 1,
   README: 2,
@@ -53,13 +55,13 @@ const CHALLENGE_SECTIONS = {
   SUBMIT: 5,
 };
 
-const CHALLENGES_STATUS_FILTER = {
+export const CHALLENGES_STATUS_FILTER = {
   BOTH: 0,
   CLOSED: 1,
   ACTIVE: 2,
 };
 
-const MINI_DESCRIPTION_RENDER = (description) => {
+export const MINI_DESCRIPTION_RENDER = (description) => {
   if (description) {
     if (description.length <= MINI_DESCRIPTION_LENGTH) return description;
     return `${description.slice(0, MINI_DESCRIPTION_LENGTH)}...`;
@@ -67,7 +69,7 @@ const MINI_DESCRIPTION_RENDER = (description) => {
   return 'xxx';
 };
 
-const RENDER_ICO = (type) => {
+export const RENDER_ICO = (type) => {
   switch (type) {
     case 'metric':
       return metricIco;
@@ -90,12 +92,12 @@ const RENDER_ICO = (type) => {
   }
 };
 
-const CALC_PAGES = (objects, n = 1) => {
+export const CALC_PAGES = (objects, n = 1) => {
   if (objects.length === 0) return 1;
   return Math.ceil(objects.length / (ELEMENTS_PER_PAGE * n));
 };
 
-const RENDER_DEADLINE_TIME = (time) => {
+export const RENDER_DEADLINE_TIME = (time) => {
   if (time) {
     const date = time.slice(0, 10);
     const hour = time.slice(11, 16);
@@ -103,39 +105,40 @@ const RENDER_DEADLINE_TIME = (time) => {
   }
   return '';
 };
-const NEXT_PAGE = (elements, pageNr, setPage) => {
+
+export const NEXT_PAGE = (elements, pageNr, setPage) => {
   if (pageNr !== CALC_PAGES(elements ? elements : [])) {
     let newPage = pageNr + 1;
     setPage(newPage);
   }
 };
 
-const PREVIOUS_PAGE = (pageNr, setPage) => {
+export const PREVIOUS_PAGE = (pageNr, setPage) => {
   if (pageNr !== 1) {
     let newPage = pageNr - 1;
     setPage(newPage);
   }
 };
 
-const RENDER_WHEN = (when) => {
+export const RENDER_WHEN = (when) => {
   return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
 
-const RENDER_METRIC_VALUE = (value) => {
+export const RENDER_METRIC_VALUE = (value) => {
   if (value <= -999999999) return 'N/A';
   else return value;
 };
 
-const EVALUATIONS_FORMAT = (evaluate) => {
+export const EVALUATIONS_FORMAT = (evaluate) => {
   if (Object.hasOwn(evaluate, 'score')) return evaluate.score.slice(0, 7);
   return evaluate.slice(0, 7);
 };
 
-const IS_MOBILE = () => {
+export const IS_MOBILE = () => {
   return document.body.clientWidth <= 1024;
 };
 
-const CHILDREN_WITH_PROPS = (propsChildren, props) =>
+export const CHILDREN_WITH_PROPS = (propsChildren, props) =>
   React.Children.map(propsChildren, (child) => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, props);
@@ -143,46 +146,9 @@ const CHILDREN_WITH_PROPS = (propsChildren, props) =>
     return child;
   });
 
-const REDIRECT_TO_ROOT_PAGE = (navigate) => {
+export const REDIRECT_TO_ROOT_PAGE = (navigate) => {
   const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
   if (pageName) {
     navigate(ROOT_PAGE);
   }
-};
-
-export {
-  ELEMENTS_PER_PAGE,
-  API,
-  ROOT_PAGE,
-  CHALLENGES_PAGE,
-  CHALLENGE_PAGE,
-  MINI_DESCRIPTION_LENGTH,
-  CSI_LINK,
-  POLICY_PRIVACY_PAGE,
-  POLICY_PRIVACY_LOGIN_PAGE,
-  POLICY_PRIVACY_REGISTER_PAGE,
-  LOGIN_PAGE,
-  REGISTER_PAGE,
-  ROOT_URL,
-  LOGIN_REQUIRED_PAGES,
-  CHALLENGE_SECTIONS,
-  MENU_CHALLENGE_SECTIONS_NO_LOGIN,
-  MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
-  CHALLENGES_STATUS_FILTER,
-  PROFILE_PAGE,
-  CHALLENGE_CREATE_PAGE,
-  RESET_TOKEN_TIME,
-  CHECK_TOKEN_TIME,
-  MINI_DESCRIPTION_RENDER,
-  RENDER_ICO,
-  CALC_PAGES,
-  RENDER_DEADLINE_TIME,
-  RENDER_METRIC_VALUE,
-  IS_MOBILE,
-  RENDER_WHEN,
-  EVALUATIONS_FORMAT,
-  PREVIOUS_PAGE,
-  NEXT_PAGE,
-  CHILDREN_WITH_PROPS,
-  REDIRECT_TO_ROOT_PAGE,
 };

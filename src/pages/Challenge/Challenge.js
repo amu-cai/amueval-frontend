@@ -54,7 +54,12 @@ const Challenge = (props) => {
           />
         );
       case CHALLENGE_SECTIONS.HOW_TO:
-        return <HowTo challengeName={challengeName} />;
+        return (
+          <HowTo
+            challengeName={challengeName}
+            challengeSource={challenge.source}
+          />
+        );
       case CHALLENGE_SECTIONS.MY_ENTRIES:
         return <MyEntries challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.SUBMIT:
