@@ -7,15 +7,19 @@ import Hero from './components/Hero/Hero';
 import Partnerships from './components/Partnerships/Partnerships';
 import LandingPageStyle from './LandingPageStyle';
 import EntireScreenLoading from '../../components/generic/EntireScreenLoading/EntrieScreenLoading';
+import { useDispatch } from 'react-redux';
+import { loggedBarPositionHandler } from '../../redux/navigationSlice';
 
 const LandingPage = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
 
   React.useEffect(() => {
     setTimeout(() => {
       setShow(true);
     }, 1000);
-  }, []);
+    dispatch(loggedBarPositionHandler('100vw'));
+  }, [dispatch]);
 
   if (show) {
     return (

@@ -1,6 +1,11 @@
 import { API } from '../utils/globals';
 
-const challengeCreate = async (challengeFile, challengeInput, setResult) => {
+const challengeCreate = async (
+  challengeFile,
+  challengeInput,
+  setResult,
+  token
+) => {
   const formData = new FormData();
 
   formData.append('challenge_file', challengeFile);
@@ -14,6 +19,7 @@ const challengeCreate = async (challengeFile, challengeInput, setResult) => {
   fetch(`${API}/challenges/create-challenge`, {
     method: 'post',
     body: formData,
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then(
       (res) => {

@@ -8,7 +8,6 @@ import theme from '../../../../../utils/theme';
 import SubmitInput from '../../../SubmitInput';
 import TagsChoose from '../../../../../pages/Submit/components/TagsChoose/TagsChoose';
 import editSubmission from '../../../../../api/editSubmission';
-import getTags from '../../../../../api/getTags';
 import { useDispatch } from 'react-redux';
 import { popUpMessageHandler } from '../../../../../redux/popUpMessegeSlice';
 
@@ -38,10 +37,6 @@ const EditPopUp = ({ editPopUp, setEditPopUp, item }) => {
   const [description, setDescription] = React.useState(
     item?.description?.slice()
   );
-
-  React.useMemo(() => {
-    getTags(setTags);
-  }, []);
 
   if (editPopUp) {
     return createPortal(

@@ -9,6 +9,7 @@ import challengeCreate from '../../api/challengeCreate';
 import getMetrics from '../../api/getMetrics';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import { useDispatch } from 'react-redux';
+import LOCAL_STORAGE from '../../utils/localStorage';
 
 const ChallengeCreate = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,12 @@ const ChallengeCreate = () => {
       award: award,
       deadline: deadline,
     };
-    await challengeCreate(challengeFile, challengeInput, setUploadResult);
+    await challengeCreate(
+      challengeFile,
+      challengeInput,
+      setUploadResult,
+      localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
+    );
   };
 
   const deadlineFormat = new RegExp(

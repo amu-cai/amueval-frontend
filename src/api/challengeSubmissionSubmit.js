@@ -1,15 +1,15 @@
 import { API } from '../utils/globals';
 
-const challengeSubmissionSubmit = (submissionInputModel, setResult) => {
+const challengeSubmissionSubmit = (submissionInputModel, setResult, token) => {
   const formData = new FormData();
   formData.append('submission_file', submissionInputModel.submission_zip);
   formData.append('description', submissionInputModel.description);
   formData.append('challenge_title', submissionInputModel.challenge_title);
-  formData.append('submitter', submissionInputModel.submitter);
 
   fetch(`${API}/evaluation/submit`, {
     method: 'post',
     body: formData,
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then(
       (res) => {
