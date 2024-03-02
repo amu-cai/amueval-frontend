@@ -13,7 +13,6 @@ import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
 import PolicyPrivacy from '../../pages/PolicyPrivacy';
 import LandingPage from '../../pages/LandingPage';
-import Submission from '../../pages/Submission';
 import Profile from '../../pages/Profile/Profile';
 import PageNotFound from '../../pages/PageNotFound/PageNotFound';
 import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
@@ -27,6 +26,7 @@ import LOCAL_STORAGE from '../../utils/localStorage';
 import { useDispatch } from 'react-redux';
 import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
+import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 
 const RoutingManager = (props) => {
   const dispatch = useDispatch();
@@ -72,10 +72,11 @@ const RoutingManager = (props) => {
     if (loggedIn) {
       return (
         <>
-          <Route
+          {/* <Route
             path={`/submission/:challengeId/:submissionId`}
             element={<Submission />}
-          />
+          /> */}
+          <Route path={`/admin-panel`} element={<AdminPanel />} />
           <Route
             path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
             element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
