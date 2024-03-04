@@ -1,14 +1,12 @@
 import { API } from '../utils/globals';
 import LOCAL_STORAGE from '../utils/localStorage';
 
-const userRightsUpdate = async (newUserRights, setResult) => {
-  fetch(`${API}/admin/user-rights-update`, {
+const deleteChallenge = async (challenge, setResult) => {
+  fetch(`${API}/admin/delete-challenge/${challenge}`, {
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)}`,
     },
     method: 'post',
-    body: JSON.stringify(newUserRights),
   })
     .then(
       (res) => {
@@ -32,4 +30,4 @@ const userRightsUpdate = async (newUserRights, setResult) => {
     });
 };
 
-export default userRightsUpdate;
+export default deleteChallenge;

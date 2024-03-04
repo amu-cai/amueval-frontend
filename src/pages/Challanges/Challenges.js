@@ -1,7 +1,7 @@
 import React from 'react';
 import Media from 'react-media';
 import theme from '../../utils/theme';
-import getChallenges from '../../api/getChallenges';
+import getChallengesReducer from '../../api/getChallengesReducer';
 import { CHALLENGES_STATUS_FILTER } from '../../utils/globals';
 import FiltersMenu from './components/FiltersMenu';
 import statusFilterHandle from './functions/statusFilterHandle';
@@ -26,7 +26,7 @@ const Challenges = () => {
   });
 
   React.useMemo(() => {
-    getChallenges(dispatch);
+    getChallengesReducer(dispatch);
   }, []);
 
   React.useMemo(() => {

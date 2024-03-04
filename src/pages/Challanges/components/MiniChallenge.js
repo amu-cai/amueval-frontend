@@ -23,6 +23,10 @@ const ChallengeStyle = styled(FlexColumn)`
   position: relative;
   max-width: 420px;
 
+  h3 {
+    overflow-wrap: break-word;
+  }
+
   * {
     cursor: pointer;
   }

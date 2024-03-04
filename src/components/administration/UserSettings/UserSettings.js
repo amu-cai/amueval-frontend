@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexColumn, FlexRow } from '../../../utils/containers';
 import { Body, Medium } from '../../../utils/fonts';
 import theme from '../../../utils/theme';
-import Button from '../Button';
+import Button from '../../generic/Button';
 import userRightsUpdate from '../../../api/userRightsUpdate';
 
 const UserSettings = ({ user, setRightsUpdateResult }) => {
