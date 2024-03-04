@@ -5,7 +5,6 @@ import KeyCloakService from '../../services/KeyCloakService';
 import Loading from '../../components/generic/Loading';
 import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
-import getPublicKey from '../../api/getPublicKey';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/authSlice';
 import { REDIRECT_TO_ROOT_PAGE } from '../../utils/globals';
@@ -35,7 +34,6 @@ const Profile = () => {
 
   React.useEffect(() => {
     getProfileInfo();
-    getPublicKey();
   }, []);
 
   const profileInfoRender = () => {
