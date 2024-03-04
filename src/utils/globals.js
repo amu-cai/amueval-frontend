@@ -17,6 +17,7 @@ export const CHALLENGES_PAGE = '/challenges';
 export const CHALLENGE_PAGE = '/challenge';
 export const CHALLENGE_CREATE_PAGE = '/challenge-create';
 export const PROFILE_PAGE = '/profile';
+export const ADMIN_PANEL_PAGE = '/admin-panel';
 export const POLICY_PRIVACY_PAGE = '/policy-privacy';
 export const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
 export const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
@@ -151,4 +152,12 @@ export const REDIRECT_TO_ROOT_PAGE = (navigate) => {
   if (pageName) {
     navigate(ROOT_PAGE);
   }
+};
+
+export const USE_PREVIOUS = (value) => {
+  const ref = React.useRef();
+  React.useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
 };

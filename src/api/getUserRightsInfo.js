@@ -1,15 +1,17 @@
 import { API } from '../utils/globals';
+import LOCAL_STORAGE from '../utils/localStorage';
 
-const createUser = async (data, setResult) => {
-  fetch(`${API}/auth/create-user`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
-    body: JSON.stringify(data),
+const getUserRightsInfo = async (setResult) => {
+  fetch(`${API}/auth/user-rights-info`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)}`,
+    },
+    method: 'get',
   })
     .then(
       (res) => {
         if (res.ok) {
-          console.log('create user ok');
+          console.log('request ok');
           return res.json();
         } else {
           console.log('something went wrong');
@@ -28,4 +30,4 @@ const createUser = async (data, setResult) => {
     });
 };
 
-export default createUser;
+export default getUserRightsInfo;

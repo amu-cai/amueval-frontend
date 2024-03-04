@@ -11,6 +11,7 @@ import theme from '../../../utils/theme';
 import userIco from '../../../assets/user_ico.svg';
 import loginIco from '../../../assets/login_ico.svg';
 import privacyIco from '../../../assets/policy_ico.svg';
+import adminIco from '../../../assets/admin.svg';
 import createIco from '../../../assets/create_ico.svg';
 import { Link } from 'react-router-dom';
 import {
@@ -18,6 +19,7 @@ import {
   PROFILE_PAGE,
   CHALLENGE_CREATE_PAGE,
   REDIRECT_TO_ROOT_PAGE,
+  ADMIN_PANEL_PAGE,
 } from '../../../utils/globals';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/authSlice';
@@ -27,14 +29,44 @@ import {
   loggedBarHoverHandler,
   loggedBarPositionToggle,
 } from '../../../redux/navigationSlice';
+import { setRightsInfo } from '../../../redux/authSlice';
+import getUserRightsInfo from '../../../api/getUserRightsInfo';
 
 const LoggedBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector((state) => state.auth.user);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const isAuthor = useSelector((state) => state.auth.isAuthor);
+  const [userRightsInfo, setUserRightsInfo] = React.useState(null);
   const loggedBarPosition = useSelector(
     (state) => state.navigation.loggedBarPosition
   );
+
+  React.useEffect(() => {
+    if (
+      (isAdmin === null ||
+        isAdmin === undefined ||
+        isAuthor === null ||
+        isAuthor === undefined) &&
+      username
+    ) {
+      getUserRightsInfo(setUserRightsInfo);
+    } else {
+      setUserRightsInfo({ isAdmin: isAdmin, isAuthor: isAuthor });
+    }
+  }, [isAdmin, isAuthor, username]);
+
+  React.useEffect(() => {
+    if (userRightsInfo) {
+      dispatch(
+        setRightsInfo({
+          isAdmin: userRightsInfo.isAdmin,
+          isAuthor: userRightsInfo.isAuthor,
+        })
+      );
+    }
+  }, [dispatch, userRightsInfo]);
 
   return (
     <TransBack
@@ -78,10 +110,18 @@ const LoggedBar = () => {
             <Svg width="16px" height="16px" src={userIco} size="cover" />
             <Body as="li">Profile</Body>
           </FlexRow>
-          <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
-            <Svg size="cover" width="16px" height="16px" src={createIco} />
-            <Body as="li">Challenge create</Body>
-          </FlexRow>
+          {userRightsInfo?.isAdmin && (
+            <FlexRow as={Link} to={ADMIN_PANEL_PAGE} gap="16px">
+              <Svg width="16px" height="16px" src={adminIco} size="cover" />
+              <Body as="li">Admin panel</Body>
+            </FlexRow>
+          )}
+          {(userRightsInfo?.isAdmin || userRightsInfo?.isAuthor) && (
+            <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
+              <Svg size="cover" width="16px" height="16px" src={createIco} />
+              <Body as="li">Create challenge</Body>
+            </FlexRow>
+          )}
           <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">
             <Svg width="16px" height="16px" src={privacyIco} size="cover" />
             <Body as="li">Privacy policy</Body>

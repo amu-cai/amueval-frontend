@@ -8,6 +8,7 @@ import {
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
   REGISTER_PAGE,
+  USE_PREVIOUS,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
@@ -28,20 +29,12 @@ import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 
-function usePrevious(value) {
-  const ref = React.useRef();
-  React.useEffect(() => {
-    ref.current = value; //assign the value of ref to the argument
-  }, [value]); //this code will run when the value of 'value' changes
-  return ref.current; //in the end, return the current ref value.
-}
-
 const RoutingManager = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [authResult, setAuthResult] = React.useState(null);
-  const prevAuthResult = usePrevious(authResult);
+  const prevAuthResult = USE_PREVIOUS(authResult);
 
   React.useEffect(() => {
     const logInTime = localStorage.getItem(LOCAL_STORAGE.LOG_IN_TIME);
