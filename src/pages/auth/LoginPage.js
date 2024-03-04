@@ -9,15 +9,17 @@ import LinkStyle from './styles/LinkStyle';
 import { Link } from 'react-router-dom';
 import { Body } from '../../utils/fonts';
 import theme from '../../utils/theme';
-import { REGISTER_PAGE } from '../../utils/globals';
+import { CHALLENGES_PAGE, REGISTER_PAGE } from '../../utils/globals';
 import login from '../../api/login';
 import auth from '../../api/auth';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/authSlice';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -58,8 +60,9 @@ const LoginPage = () => {
           borderColor: theme.colors.green,
         })
       );
+      navigate(CHALLENGES_PAGE);
     }
-  }, [authResult, dispatch, loginResult?.access_token]);
+  }, [authResult, dispatch, loginResult?.access_token, navigate]);
 
   return (
     <FlexRow width="100%" height="100vh">
