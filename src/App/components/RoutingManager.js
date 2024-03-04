@@ -28,11 +28,20 @@ import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 
+function usePrevious(value) {
+  const ref = React.useRef();
+  React.useEffect(() => {
+    ref.current = value; //assign the value of ref to the argument
+  }, [value]); //this code will run when the value of 'value' changes
+  return ref.current; //in the end, return the current ref value.
+}
+
 const RoutingManager = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [authResult, setAuthResult] = React.useState(null);
+  const prevAuthResult = usePrevious(authResult);
 
   React.useEffect(() => {
     const logInTime = localStorage.getItem(LOCAL_STORAGE.LOG_IN_TIME);
@@ -55,18 +64,22 @@ const RoutingManager = (props) => {
   }, [dispatch]);
 
   React.useEffect(() => {
-    const auth = authResult?.User;
-    const authToken = localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN);
-    if (auth?.username && authToken) {
-      dispatch(
-        logIn({ user: auth.username, token: authToken, sessionReload: true })
-      );
-    } else if (auth?.detail) {
-      dispatch(
-        logOut({ redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate) })
-      );
+    if (authResult?.User !== prevAuthResult?.User) {
+      const auth = authResult?.User;
+      const authToken = localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN);
+      console.log(auth?.username);
+      console.log(authToken);
+      if (auth?.username && authToken) {
+        dispatch(
+          logIn({ user: auth.username, token: authToken, sessionReload: true })
+        );
+      } else if (auth?.detail) {
+        dispatch(
+          logOut({ redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate) })
+        );
+      }
     }
-  }, [authResult, dispatch, navigate]);
+  }, [authResult, dispatch, navigate, prevAuthResult?.User]);
 
   const logInRoutesRender = () => {
     if (loggedIn) {
