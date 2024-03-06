@@ -1,16 +1,15 @@
-import CHALLENGES_ACTION from '../model/ChallengesActions';
-
-const challengeSearchQueryHandler = (event, challengesFromAPI, dispatch) => {
+const challengeSearchQueryHandler = (
+  event,
+  allChallenges,
+  setChallenges,
+  setPageNr
+) => {
   let searchQuery = event.target.value;
   let challengesToRender = [];
-  dispatch({ type: CHALLENGES_ACTION.SET_PAGE, payload: 1 });
-  if (searchQuery === '')
-    dispatch({
-      type: CHALLENGES_ACTION.SET_CHALLENGES,
-      payload: challengesFromAPI,
-    });
+  setPageNr(1);
+  if (searchQuery === '') setChallenges(allChallenges);
   else {
-    for (let challenge of challengesFromAPI) {
+    for (let challenge of allChallenges) {
       const {
         title,
         description,
@@ -28,10 +27,7 @@ const challengeSearchQueryHandler = (event, challengesFromAPI, dispatch) => {
       if (str.toLowerCase().includes(searchQuery.toLowerCase()))
         challengesToRender.push(challenge);
     }
-    dispatch({
-      type: CHALLENGES_ACTION.SET_CHALLENGES,
-      payload: challengesToRender,
-    });
+    setChallenges(challengesToRender);
   }
 };
 

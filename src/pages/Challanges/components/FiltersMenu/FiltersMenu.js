@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import FilterBy from '../FilterBy';
 import filterOptions from './filterOptions';
 import Media from 'react-media';
-import CHALLENGES_ACTION from '../../model/ChallengesActions';
 
 const FiltersMenuStyle = styled(FlexColumn)`
   position: fixed;
@@ -39,36 +38,11 @@ const FiltersMenuStyle = styled(FlexColumn)`
 `;
 
 const FiltersMenu = (props) => {
-  const sortByHandler = (value) => {
-    props.dispatch({ type: CHALLENGES_ACTION.SET_SORT_BY, payload: value });
-  };
-
-  const statusHandler = (value) => {
-    props.dispatch({
-      type: CHALLENGES_ACTION.SET_STATUS_FILTER,
-      payload: value,
-    });
-  };
-
-  const challengeTypeHandler = (value) => {
-    props.dispatch({
-      type: CHALLENGES_ACTION.SET_CHALLENGE_TYPE_FILTER,
-      payload: value,
-    });
-  };
-
-  const commercialHandler = (value) => {
-    props.dispatch({
-      type: CHALLENGES_ACTION.SET_COMMERCIAL_FILTER,
-      payload: value,
-    });
-  };
-
   const resetHandler = () => {
-    sortByHandler(0);
-    statusHandler(0);
-    challengeTypeHandler(0);
-    commercialHandler(0);
+    props.setSortBy(0);
+    props.setStatusFilter(0);
+    props.setChallengeTypeFilter(0);
+    props.setCommercialFilter(0);
   };
 
   return (
@@ -77,34 +51,32 @@ const FiltersMenu = (props) => {
         backgroundColor={theme.colors.dark03}
         translateX={props.translateX}
         opacity={props.opacity}
-        onClick={() =>
-          props.dispatch({ type: CHALLENGES_ACTION.TOGGLE_FILTERS_MENU })
-        }
+        onClick={() => props.setFiltersMenu(!props.filtersMenu)}
         display={props.transBackDisplay ? props.transBackDisplay : 'flex'}
       />
       <FiltersMenuStyle translateX={props.translateX} gap="16px">
         <FilterBy
           header="Sort by"
           options={filterOptions[0]}
-          handler={sortByHandler}
+          handler={props.setSortBy}
           option={props.sortBy}
         />
         <FilterBy
           header="Status"
           options={filterOptions[1]}
-          handler={statusHandler}
+          handler={props.setStatusFilter}
           option={props.status}
         />
         <FilterBy
           header="Challenge type"
           options={filterOptions[2]}
-          handler={challengeTypeHandler}
+          handler={props.setChallengeTypeFilter}
           option={props.challengeTypeFilter}
         />
         <FilterBy
           header="Commercial"
           options={filterOptions[3]}
-          handler={commercialHandler}
+          handler={props.setCommercialFilter}
           option={props.commercialFilter}
         />
         <Media query={theme.mobile}>
@@ -112,9 +84,7 @@ const FiltersMenu = (props) => {
             <Button
               width="64px"
               height="28px"
-              handler={() =>
-                props.dispatch({ type: CHALLENGES_ACTION.TOGGLE_FILTERS_MENU })
-              }
+              handler={() => props.setFiltersMenu(!props.filtersMenu)}
             >
               Done
             </Button>

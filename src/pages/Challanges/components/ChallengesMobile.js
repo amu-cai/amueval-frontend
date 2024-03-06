@@ -7,7 +7,6 @@ import Search from '../../../components/generic/Search';
 import { CALC_PAGES } from '../../../utils/globals';
 import renderChallenges from '../functions/renderChallenges';
 import Loading from '../../../components/generic/Loading';
-import CHALLENGES_ACTION from '../model/ChallengesActions';
 
 const ChallengesMobile = (props) => {
   return (
@@ -23,11 +22,7 @@ const ChallengesMobile = (props) => {
           <Search
             searchQueryHandler={props.searchQueryHandler}
             filterButton
-            toggleFiltersMenu={() =>
-              props.dispatch({
-                type: CHALLENGES_ACTION.TOGGLE_FILTERS_MENU,
-              })
-            }
+            toggleFiltersMenu={() => props.setFiltersMenu(!props.filtersMenu)}
           />
           <FlexColumn width="100%">
             <Loading visible={props.loading} />

@@ -1,5 +1,4 @@
 import { CHALLENGES_STATUS_FILTER } from '../../../utils/globals';
-import CHALLENGES_ACTION from '../model/ChallengesActions';
 
 const dateIsOlder = (newerDate, olderDate) => {
   if (newerDate.year > olderDate.year) return true;
@@ -18,7 +17,7 @@ const getDeadlineTime = (deadline) => {
   }
 };
 
-const statusFilterHandle = (status, challenges, dispatch) => {
+const statusFilterHandle = (status, challenges, setChallengesFiltered) => {
   let result = challenges;
   const date = new Date();
   const currentDate = {
@@ -48,10 +47,7 @@ const statusFilterHandle = (status, challenges, dispatch) => {
       result = challenges;
       break;
   }
-  dispatch({
-    type: CHALLENGES_ACTION.SET_CHALLENGES_FILTERED,
-    payload: result,
-  });
+  setChallengesFiltered(result);
 };
 
 export default statusFilterHandle;
