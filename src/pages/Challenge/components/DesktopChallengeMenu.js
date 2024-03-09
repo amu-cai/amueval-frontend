@@ -8,6 +8,7 @@ import {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
   IS_MOBILE,
+  MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN,
 } from '../../../utils/globals';
 import { useSelector } from 'react-redux';
 
@@ -44,10 +45,18 @@ const Option = styled(FlexColumn)`
 `;
 
 const DesktopChallengeMenu = (props) => {
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  console.log('user');
+  console.log(user);
 
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
   if (loggedIn) options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
+  if (isAdmin || props.challenge.author === user) {
+    options = MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN;
+  }
   return (
     <DesktopChallengeMenuStyle>
       {options.map((option, index) => {

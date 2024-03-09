@@ -21,8 +21,8 @@ const ChallengeSettings = ({ challenge, setChallengeUpdateResult }) => {
         alignmentX="flex-start"
         alignmentY="flex-end"
       >
-        <Body fontSize="24px">{challenge.title}</Body>
-        {challenge.deleted && (
+        <Body fontSize="24px">{challenge?.title}</Body>
+        {challenge?.deleted && (
           <Medium fontSize="16px" color={theme.colors.red}>
             deleted
           </Medium>
@@ -31,10 +31,10 @@ const ChallengeSettings = ({ challenge, setChallengeUpdateResult }) => {
       <FlexRow width="100%" gap="16px" alignmentX="flex-start">
         <Button
           handler={() => {
-            deleteChallenge(challenge.title, setChallengeUpdateResult);
+            deleteChallenge(challenge?.title, setChallengeUpdateResult);
           }}
           backgroundColor={theme.colors.red}
-          disabled={challenge.deleted}
+          disabled={challenge?.deleted}
           width="164px"
           height="36px"
         >

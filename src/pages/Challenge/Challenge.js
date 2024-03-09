@@ -11,20 +11,53 @@ import MyEntries from '../MyEntries';
 import Submit from '../Submit';
 import Media from 'react-media';
 import DesktopChallengeMenu from './components/DesktopChallengeMenu';
-import { CHALLENGE_SECTIONS, RENDER_ICO } from '../../utils/globals';
+import {
+  CHALLENGES_PAGE,
+  CHALLENGE_SECTIONS,
+  RENDER_ICO,
+} from '../../utils/globals';
 import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
 import AllEntries from '../AllEntries/AllEntries';
+import ChallengeSettings from '../../components/administration/ChallengeSettings';
+import { useDispatch } from 'react-redux';
+import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 
 const Challenge = (props) => {
+  const dispatch = useDispatch();
   const challengeName = useParams().challengeId;
-  const [challenge, setChallenge] = React.useState([]);
+  const [challenge, setChallenge] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [challengeUpdateResult, setChallengeUpdateResult] =
+    React.useState(null);
 
   React.useEffect(() => {
     getChallengeInfo(setChallenge, setLoading, challengeName);
   }, [challengeName]);
+
+  React.useEffect(() => {
+    if (challengeUpdateResult) {
+      if (challengeUpdateResult?.detail) {
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge update error',
+            message: `Error: ${challengeUpdateResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
+      } else {
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge update sucess',
+            message: `${challengeUpdateResult.challenge}: ${challengeUpdateResult.message}`,
+            borderColor: theme.colors.green,
+            confirmHandler: () => window.location.replace(CHALLENGES_PAGE),
+          })
+        );
+      }
+    }
+  }, [challengeUpdateResult, dispatch]);
 
   const sectionRender = () => {
     switch (props.section) {
@@ -64,6 +97,15 @@ const Challenge = (props) => {
         return <MyEntries challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challengeName={challengeName} setLoading={setLoading} />;
+      case CHALLENGE_SECTIONS.SETTINGS:
+        return (
+          <FlexColumn padding="64px 0" width="50%">
+            <ChallengeSettings
+              challenge={challenge}
+              setChallengeUpdateResult={setChallengeUpdateResult}
+            />
+          </FlexColumn>
+        );
       default:
         return (
           <Leaderboard
@@ -111,6 +153,7 @@ const Challenge = (props) => {
           <DesktopChallengeMenu
             challengeName={challengeName}
             section={props.section}
+            challenge={challenge}
           />
           <FlexColumn
             minHeight="100vh"

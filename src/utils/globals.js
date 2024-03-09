@@ -47,6 +47,16 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Submit',
 ];
 
+export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
+  'Leaderboard',
+  'All submissions',
+  'Readme',
+  'How to',
+  'My entries',
+  'Submit',
+  'Settings',
+];
+
 export const CHALLENGE_SECTIONS = {
   LEADERBOARD: 0,
   ALL_ENTRIES: 1,
@@ -54,6 +64,7 @@ export const CHALLENGE_SECTIONS = {
   HOW_TO: 3,
   MY_ENTRIES: 4,
   SUBMIT: 5,
+  SETTINGS: 6,
 };
 
 export const CHALLENGES_STATUS_FILTER = {

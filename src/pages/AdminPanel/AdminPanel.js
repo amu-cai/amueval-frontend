@@ -4,7 +4,7 @@ import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import theme from '../../utils/theme';
 import { FlexColumn } from '../../utils/containers';
-import { H2 } from '../../utils/fonts';
+import { H2, H3 } from '../../utils/fonts';
 import UserSettings from '../../components/administration/UserSettings';
 import getChallenges from '../../api/getChallenges';
 import ChallengeSettings from '../../components/administration/ChallengeSettings';
@@ -95,6 +95,7 @@ const AdminPanel = () => {
       gap="32px"
     >
       <H2 as="h1">Admin panel</H2>
+      <H3 as="h2">Users</H3>
       <FlexColumn maxWidth="800px" width="100%" gap="20px">
         {!usersLoading ? (
           users?.map((user) => {
@@ -110,6 +111,7 @@ const AdminPanel = () => {
           <Loading />
         )}
       </FlexColumn>
+      <H3 as="h2">Challenges</H3>
       <FlexColumn maxWidth="800px" width="100%" gap="20px">
         {!challengesLoading ? (
           challenges?.map((challenge) => {
