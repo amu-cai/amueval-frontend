@@ -18,7 +18,8 @@ const ChallengeCreate = () => {
   const [award, setAward] = React.useState('');
   const [deadline, setDeadline] = React.useState('');
   const [type, setType] = React.useState('image');
-  const [metric, setMetric] = React.useState('Accuracy');
+  const [metric, setMetric] = React.useState('accuracy');
+  const [parameters, setParameters] = React.useState(['']);
   const [challengeSource, setChallengeSource] = React.useState(null);
   const [challengeFile, setChallengeFile] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
@@ -57,9 +58,11 @@ const ChallengeCreate = () => {
       source: challengeSource,
       type: type,
       main_metric: metric,
+      main_metric_parameters: parameters.join(','),
       award: award,
       deadline: deadline,
     };
+
     await challengeCreate(
       challengeFile,
       challengeInput,
@@ -71,6 +74,24 @@ const ChallengeCreate = () => {
   const deadlineFormat = new RegExp(
     '[0-3][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]'
   );
+
+  const metricParametersRender = () => {
+    const choosenMetric = metrics?.find((m) => m['name'] === metric);
+    if (choosenMetric) {
+      return choosenMetric.parameters.map((parameter, index) => {
+        return (
+          <SubmitInput
+            label={`${parameter['name']} (${parameter['data_type']})`}
+            handler={(value) => {
+              const newParameters = parameters.slice();
+              newParameters[index] = `"{${parameter['name']}:${value}}"`;
+              setParameters(newParameters);
+            }}
+          />
+        );
+      });
+    }
+  };
 
   return (
     <FlexColumn padding="80px 0" width="100%" minHeight="100vh" gap="32px">
@@ -144,6 +165,7 @@ const ChallengeCreate = () => {
             setMetric(value); // TODO: ToggleTags component refactor and use
           }}
         />
+        {metricParametersRender()}
         <FlexColumn gap="10px" width="100%">
           <SubmitInput
             label="Challenge Zip File"

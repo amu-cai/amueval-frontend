@@ -64,7 +64,9 @@ const Submit = (props) => {
             {
               description: description,
               submission_zip: submissionZip,
-              challenge_title: props.challengeName,
+              challenge_title: props.challenge.title,
+              metric: props.challenge.mainMetric,
+              parameters: props.challenge.mainMetricParameters,
             },
             setSubmissionResult,
             localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)

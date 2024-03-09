@@ -16,6 +16,10 @@ const challengeCreate = async (
   formData.append('award', challengeInput.award);
   formData.append('type', challengeInput.type);
   formData.append('metric', challengeInput.main_metric);
+  formData.append(
+    'parameters',
+    JSON.stringify(challengeInput.main_metric_parameters)
+  );
 
   fetch(`${API}/challenges/create-challenge`, {
     method: 'post',

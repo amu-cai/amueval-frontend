@@ -96,7 +96,7 @@ const Challenge = (props) => {
       case CHALLENGE_SECTIONS.MY_ENTRIES:
         return <MyEntries challengeName={challengeName} />;
       case CHALLENGE_SECTIONS.SUBMIT:
-        return <Submit challengeName={challengeName} setLoading={setLoading} />;
+        return <Submit challenge={challenge} setLoading={setLoading} />;
       case CHALLENGE_SECTIONS.SETTINGS:
         return (
           <FlexColumn padding="64px 0" width="50%">
