@@ -5,7 +5,7 @@ import theme from '../../../utils/theme';
 import Button from '../../generic/Button';
 import userRightsUpdate from '../../../api/userRightsUpdate';
 
-const UserSettings = ({ user, setRightsUpdateResult }) => {
+const UserSettings = ({ user, currentUser, setRightsUpdateResult }) => {
   return (
     <FlexColumn
       border={`2px solid ${theme.colors.dark05}`}
@@ -62,7 +62,7 @@ const UserSettings = ({ user, setRightsUpdateResult }) => {
             );
           }}
           backgroundColor={theme.colors.red}
-          disabled={!user.is_admin}
+          disabled={!user.is_admin || currentUser === user.username}
           width="146px"
         >
           remove admin

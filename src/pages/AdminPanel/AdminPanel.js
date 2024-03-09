@@ -1,7 +1,7 @@
 import React from 'react';
 import getUsersSettings from '../../api/getUsersSettings';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import theme from '../../utils/theme';
 import { FlexColumn } from '../../utils/containers';
 import { H2 } from '../../utils/fonts';
@@ -12,19 +12,18 @@ import Loading from '../../components/generic/Loading';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.user);
   const [users, setUsers] = React.useState([]);
   const [challenges, setChallenges] = React.useState([]);
   const [rightsUpdateResult, setRightsUpdateResult] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
+  const [usersLoading, setUsersLoading] = React.useState(true);
+  const [challengesLoading, seChallengestLoading] = React.useState(true);
   const [challengeUpdateResult, setChallengeUpdateResult] =
     React.useState(null);
 
   React.useEffect(() => {
-    getUsersSettings(setUsers);
-  }, [rightsUpdateResult]);
-
-  React.useEffect(() => {
-    getChallenges(setChallenges, setLoading);
+    getUsersSettings(setUsers, setUsersLoading);
+    getChallenges(setChallenges, seChallengestLoading);
   }, []);
 
   React.useEffect(() => {
@@ -56,13 +55,36 @@ const AdminPanel = () => {
           popUpMessageHandler({
             header: 'Challenge update sucess',
             message: `${challengeUpdateResult.challenge}: ${challengeUpdateResult.message}`,
-            borderColor: theme.colors.red,
+            borderColor: theme.colors.green,
           })
         );
-        getChallenges(setChallenges, setLoading);
+        getChallenges(setChallenges, seChallengestLoading);
       }
     }
   }, [challengeUpdateResult, dispatch]);
+
+  React.useEffect(() => {
+    if (rightsUpdateResult) {
+      if (rightsUpdateResult?.detail) {
+        dispatch(
+          popUpMessageHandler({
+            header: 'User rights update error',
+            message: `Error: ${rightsUpdateResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
+      } else {
+        dispatch(
+          popUpMessageHandler({
+            header: 'User rights update sucess',
+            message: `${rightsUpdateResult.user}: ${rightsUpdateResult.message}`,
+            borderColor: theme.colors.green,
+          })
+        );
+        getUsersSettings(setUsers);
+      }
+    }
+  }, [rightsUpdateResult, dispatch]);
 
   return (
     <FlexColumn
@@ -74,17 +96,22 @@ const AdminPanel = () => {
     >
       <H2 as="h1">Admin panel</H2>
       <FlexColumn maxWidth="800px" width="100%" gap="20px">
-        {users?.map((user) => {
-          return (
-            <UserSettings
-              user={user}
-              setRightsUpdateResult={setRightsUpdateResult}
-            />
-          );
-        })}
+        {!usersLoading ? (
+          users?.map((user) => {
+            return (
+              <UserSettings
+                user={user}
+                currentUser={currentUser}
+                setRightsUpdateResult={setRightsUpdateResult}
+              />
+            );
+          })
+        ) : (
+          <Loading />
+        )}
       </FlexColumn>
       <FlexColumn maxWidth="800px" width="100%" gap="20px">
-        {!loading ? (
+        {!challengesLoading ? (
           challenges?.map((challenge) => {
             return (
               <ChallengeSettings
