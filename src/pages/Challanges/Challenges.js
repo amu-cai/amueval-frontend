@@ -25,21 +25,8 @@ const Challenges = () => {
   const [commercialFilter, setCommercialFilter] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
 
-  // const [state, dispatch] = React.useReducer(ChallengesReducer, {
-  //   pageNr: 1,
-  //   challengesFromAPI: [],
-  //   challenges: [],
-  //   challengesFiltered: [],
-  //   filtersMenu: false,
-  //   sortBy: 0,
-  //   statusFilter: CHALLENGES_STATUS_FILTER.BOTH,
-  //   challengeTypeFilter: 0,
-  //   commercialFilter: 0,
-  //   loading: true,
-  // });
-
   React.useEffect(() => {
-    getChallenges(setLoading, setAllChallenges);
+    getChallenges(setAllChallenges, setLoading);
   }, []);
 
   React.useEffect(() => {
@@ -74,6 +61,10 @@ const Challenges = () => {
     [filtersMenu, sortBy, statusFilter, challengeTypeFilter, commercialFilter]
   );
 
+  const challengesToRender = challengesFiltered.filter(
+    (challenge) => !challenge.deleted
+  );
+
   return (
     <>
       <Media query={theme.mobile}>
@@ -92,7 +83,7 @@ const Challenges = () => {
           filtersMenu={filtersMenu}
           loading={loading}
           pageNr={pageNr}
-          challengesFiltered={challengesFiltered}
+          challengesToRender={challengesToRender}
         />
       </Media>
       <Media query={theme.desktop}>
@@ -111,7 +102,7 @@ const Challenges = () => {
           filtersMenu={filtersMenu}
           loading={loading}
           pageNr={pageNr}
-          challengesFiltered={challengesFiltered}
+          challengesToRender={challengesToRender}
         />
       </Media>
     </>

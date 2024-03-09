@@ -29,18 +29,18 @@ const ChallengesDesktop = (props) => {
           </FlexRow>
           <FlexColumn width="100%">
             <Loading visible={props.loading} />
-            {renderChallenges(props.pageNr, props.challengesFiltered)}
+            {renderChallenges(props.pageNr, props.challengesToRender)}
           </FlexColumn>
         </FlexColumn>
         {!props.loading && (
           <Pager
             pageNr={props.pageNr}
             setPageNr={props.setPageNr}
-            elements={props.challengesFiltered}
-            pages={CALC_PAGES(props.challengesFiltered)}
+            elements={props.challengesToRender}
+            pages={CALC_PAGES(props.challengesToRender)}
             width="72px"
             borderRadius="64px"
-            number={`${props.pageNr} / ${CALC_PAGES(props.challengesFiltered)}`}
+            number={`${props.pageNr} / ${CALC_PAGES(props.challengesToRender)}`}
           />
         )}
       </ChallengesStyle>

@@ -8,19 +8,23 @@ import { H2 } from '../../utils/fonts';
 import UserSettings from '../../components/administration/UserSettings';
 import getChallenges from '../../api/getChallenges';
 import ChallengeSettings from '../../components/administration/ChallengeSettings';
+import Loading from '../../components/generic/Loading';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
   const [users, setUsers] = React.useState([]);
   const [challenges, setChallenges] = React.useState([]);
   const [rightsUpdateResult, setRightsUpdateResult] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [challengeUpdateResult, setChallengeUpdateResult] =
+    React.useState(null);
 
   React.useEffect(() => {
     getUsersSettings(setUsers);
   }, [rightsUpdateResult]);
 
   React.useEffect(() => {
-    getChallenges(setChallenges);
+    getChallenges(setChallenges, setLoading);
   }, []);
 
   React.useEffect(() => {
@@ -36,6 +40,29 @@ const AdminPanel = () => {
       }
     }
   }, [dispatch, users]);
+
+  React.useEffect(() => {
+    if (challengeUpdateResult) {
+      if (challengeUpdateResult?.detail) {
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge update error',
+            message: `Error: ${challengeUpdateResult.detail}`,
+            borderColor: theme.colors.red,
+          })
+        );
+      } else {
+        dispatch(
+          popUpMessageHandler({
+            header: 'Challenge update sucess',
+            message: `${challengeUpdateResult.challenge}: ${challengeUpdateResult.message}`,
+            borderColor: theme.colors.red,
+          })
+        );
+        getChallenges(setChallenges, setLoading);
+      }
+    }
+  }, [challengeUpdateResult, dispatch]);
 
   return (
     <FlexColumn
@@ -57,9 +84,18 @@ const AdminPanel = () => {
         })}
       </FlexColumn>
       <FlexColumn maxWidth="800px" width="100%" gap="20px">
-        {challenges?.map((challenge) => {
-          return <ChallengeSettings challenge={challenge} />;
-        })}
+        {!loading ? (
+          challenges?.map((challenge) => {
+            return (
+              <ChallengeSettings
+                challenge={challenge}
+                setChallengeUpdateResult={setChallengeUpdateResult}
+              />
+            );
+          })
+        ) : (
+          <Loading />
+        )}
       </FlexColumn>
     </FlexColumn>
   );

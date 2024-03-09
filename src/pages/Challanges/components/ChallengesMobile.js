@@ -26,18 +26,18 @@ const ChallengesMobile = (props) => {
           />
           <FlexColumn width="100%">
             <Loading visible={props.loading} />
-            {renderChallenges(props.pageNr, props.challengesFiltered)}
+            {renderChallenges(props.pageNr, props.challengesToRender)}
           </FlexColumn>
         </FlexColumn>
         {!props.loading && (
           <Pager
             width="48px"
             borderRadius="64px"
-            elements={props.challengesFiltered}
+            elements={props.challengesToRender}
             pageNr={props.pageNr}
             setPage={props.setPage}
-            pages={CALC_PAGES(props.challengesFiltered)}
-            number={`${props.pageNr} / ${CALC_PAGES(props.challengesFiltered)}`}
+            pages={CALC_PAGES(props.challengesToRender)}
+            number={`${props.pageNr} / ${CALC_PAGES(props.challengesToRender)}`}
           />
         )}
       </ChallengesStyle>

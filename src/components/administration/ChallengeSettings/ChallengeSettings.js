@@ -40,16 +40,6 @@ const ChallengeSettings = ({ challenge, setChallengeUpdateResult }) => {
         >
           Delete challenge
         </Button>
-        <Button
-          handler={() => {
-            deleteChallenge(challenge.title, setChallengeUpdateResult);
-          }}
-          disabled={!challenge.deleted}
-          width="164px"
-          height="36px"
-        >
-          Restore challenge
-        </Button>
       </FlexRow>
     </FlexColumn>
   );
