@@ -60,8 +60,6 @@ const RoutingManager = (props) => {
     if (authResult?.User !== prevAuthResult?.User) {
       const auth = authResult?.User;
       const authToken = localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN);
-      console.log(auth?.username);
-      console.log(authToken);
       if (auth?.username && authToken) {
         dispatch(
           logIn({ user: auth.username, token: authToken, sessionReload: true })

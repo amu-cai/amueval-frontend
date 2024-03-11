@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlexColumn } from '../../utils/containers';
 import SubmitInput from '../../components/generic/SubmitInput';
-import { H2, Medium } from '../../utils/fonts';
+import { H2, Medium, Body } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import Button from '../../components/generic/Button';
 import { Menu } from '../../utils/fonts';
@@ -19,7 +19,7 @@ const ChallengeCreate = () => {
   const [deadline, setDeadline] = React.useState('');
   const [type, setType] = React.useState('image');
   const [metric, setMetric] = React.useState('accuracy');
-  const [parameters, setParameters] = React.useState(['']);
+  const [parameters, setParameters] = React.useState(null);
   const [challengeSource, setChallengeSource] = React.useState(null);
   const [challengeFile, setChallengeFile] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
@@ -58,7 +58,7 @@ const ChallengeCreate = () => {
       source: challengeSource,
       type: type,
       main_metric: metric,
-      main_metric_parameters: parameters.join(','),
+      main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
       award: award,
       deadline: deadline,
     };
@@ -75,19 +75,19 @@ const ChallengeCreate = () => {
     '[0-3][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]'
   );
 
-  const metricParametersRender = () => {
+  const parametersListRender = () => {
     const choosenMetric = metrics?.find((m) => m['name'] === metric);
     if (choosenMetric) {
       return choosenMetric.parameters.map((parameter, index) => {
         return (
-          <SubmitInput
-            label={`${parameter['name']} (${parameter['data_type']})`}
-            handler={(value) => {
-              const newParameters = parameters.slice();
-              newParameters[index] = `"{${parameter['name']}:${value}}"`;
-              setParameters(newParameters);
-            }}
-          />
+          <Body
+            as="li"
+            listStyle="inside"
+            key={`metric-param-${index}-${parameter['name']}`}
+            margin="0 0 4px 0"
+          >
+            - {`${parameter['name']} (${parameter['data_type']})`}
+          </Body>
         );
       });
     }
@@ -162,10 +162,34 @@ const ChallengeCreate = () => {
           type="select"
           options={metrics ? metrics.map((m) => m.name) : []}
           handler={(value) => {
-            setMetric(value); // TODO: ToggleTags component refactor and use
+            setMetric(value);
           }}
         />
-        {metricParametersRender()}
+        <FlexColumn width="100%" gap="8px">
+          <Medium width="100%">Metric parameters</Medium>
+          <FlexColumn width="100%" alignmentX="flex-start" as="ol">
+            {parametersListRender()}
+          </FlexColumn>
+          <SubmitInput
+            label="input params as json string"
+            type="textarea"
+            placeholder='for example: {"normalize": true, "sample_weight": [1, 2, 3]}'
+            handler={(value) => setParameters(value)}
+          />
+          <Medium width="100%">
+            Metric&nbsp;
+            <Medium
+              as="a"
+              cursor="pointer"
+              target="__blank"
+              textDecoration="underline"
+              color={theme.colors.blue}
+              href={metrics?.find((m) => m['name'] === metric).link}
+            >
+              link
+            </Medium>
+          </Medium>
+        </FlexColumn>
         <FlexColumn gap="10px" width="100%">
           <SubmitInput
             label="Challenge Zip File"

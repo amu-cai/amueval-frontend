@@ -159,9 +159,11 @@ export const CHILDREN_WITH_PROPS = (propsChildren, props) =>
   });
 
 export const REDIRECT_TO_ROOT_PAGE = (navigate) => {
-  const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
-  if (pageName) {
-    navigate(ROOT_PAGE);
+  if (window.location?.pathname) {
+    const pageName = window.location.pathname.split(ROOT_PAGE).at(-1);
+    if (pageName) {
+      navigate(ROOT_PAGE);
+    }
   }
 };
 

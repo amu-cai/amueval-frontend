@@ -33,6 +33,7 @@ const SubmitInput = (props) => {
             as="textarea"
             id={props.label}
             name={props.label}
+            placeholder={props.placeholder}
             borderRadius="4px"
             width="100%"
             height="80px"

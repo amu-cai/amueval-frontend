@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { FlexColumn } from '../../../utils/containers';
 import { H3 } from '../../../utils/fonts';
-import PropsTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
@@ -49,9 +48,6 @@ const DesktopChallengeMenu = (props) => {
   const isAdmin = useSelector((state) => state.auth.isAdmin);
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  console.log('user');
-  console.log(user);
-
   let options = MENU_CHALLENGE_SECTIONS_NO_LOGIN;
   if (loggedIn) options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   if (isAdmin || props.challenge.author === user) {
@@ -80,16 +76,6 @@ const DesktopChallengeMenu = (props) => {
       })}
     </DesktopChallengeMenuStyle>
   );
-};
-
-DesktopChallengeMenu.propTypes = {
-  section: PropsTypes.number,
-  setSection: PropsTypes.func,
-};
-
-DesktopChallengeMenu.defaultProps = {
-  section: 0,
-  setSection: null,
 };
 
 export default DesktopChallengeMenu;
