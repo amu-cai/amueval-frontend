@@ -12,7 +12,7 @@ const UserSettings = ({ user, currentUser, setRightsUpdateResult }) => {
       width="100%"
       borderRadius="4px"
       alignmentX="flex-start"
-      gap="16px"
+      gap="10px"
       padding="16px"
     >
       <FlexRow
@@ -21,7 +21,7 @@ const UserSettings = ({ user, currentUser, setRightsUpdateResult }) => {
         alignmentX="flex-start"
         alignmentY="flex-end"
       >
-        <Body fontSize="24px">{user.username}</Body>
+        <Body fontSize="20px">user: {user.username}</Body>
         {user.is_admin && (
           <Medium fontSize="16px" color={theme.colors.green}>
             admin
@@ -33,7 +33,13 @@ const UserSettings = ({ user, currentUser, setRightsUpdateResult }) => {
           </Medium>
         )}
       </FlexRow>
-      <FlexRow width="100%" gap="16px" alignmentX="flex-start">
+      <Body fontSize="18px">mail: {user.email}</Body>
+      <FlexRow
+        margin="16px 0 0 0"
+        width="100%"
+        gap="16px"
+        alignmentX="flex-start"
+      >
         <Button
           handler={() => {
             userRightsUpdate(
