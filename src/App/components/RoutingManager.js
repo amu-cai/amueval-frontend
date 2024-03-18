@@ -9,6 +9,7 @@ import {
   PROFILE_PAGE,
   REGISTER_PAGE,
   USE_PREVIOUS,
+  CHALLENGE_CREATE_HOW_TO_PAGE,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
@@ -28,6 +29,7 @@ import { useDispatch } from 'react-redux';
 import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel';
+import ChallengeCreateHowTo from '../../pages/ChallengeCreateHowTo';
 
 const RoutingManager = (props) => {
   const dispatch = useDispatch();
@@ -95,6 +97,10 @@ const RoutingManager = (props) => {
           />
           <Route path={PROFILE_PAGE} element={<Profile />} />
           <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
+          <Route
+            path={CHALLENGE_CREATE_HOW_TO_PAGE}
+            element={<ChallengeCreateHowTo />}
+          />
         </>
       );
     }

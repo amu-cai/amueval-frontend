@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexColumn } from '../../utils/containers';
+import { FlexColumn, FlexRow } from '../../utils/containers';
 import SubmitInput from '../../components/generic/SubmitInput';
 import { H2, Medium, Body } from '../../utils/fonts';
 import theme from '../../utils/theme';
@@ -10,6 +10,8 @@ import getMetrics from '../../api/getMetrics';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import { useDispatch } from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
+import { Link } from 'react-router-dom';
+import { CHALLENGE_CREATE_HOW_TO_PAGE } from '../../utils/globals';
 
 const ChallengeCreate = () => {
   const dispatch = useDispatch();
@@ -95,7 +97,18 @@ const ChallengeCreate = () => {
 
   return (
     <FlexColumn padding="80px 0" width="100%" minHeight="100vh" gap="32px">
-      <H2 as="h1">Challenge Create</H2>
+      <FlexRow gap="12px">
+        <H2 as="h1">Challenge Create</H2>
+        <Medium
+          margin="4px 0 0 0"
+          color={theme.colors.green}
+          to={CHALLENGE_CREATE_HOW_TO_PAGE}
+          as={Link}
+          cursor="pointer"
+        >
+          How To
+        </Medium>
+      </FlexRow>
       <FlexColumn maxWidth="600px" width="100%" gap="20px">
         <FlexColumn gap="10px" width="100%">
           <SubmitInput
@@ -177,7 +190,7 @@ const ChallengeCreate = () => {
             handler={(value) => setParameters(value)}
           />
           <Medium width="100%">
-            Metric&nbsp;
+            Metric documentation&nbsp;
             <Medium
               as="a"
               cursor="pointer"
