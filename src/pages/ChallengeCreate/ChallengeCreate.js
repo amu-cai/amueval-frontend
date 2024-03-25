@@ -218,19 +218,31 @@ const ChallengeCreate = () => {
             </Medium>
           )}
         </FlexColumn>
-        <Button
-          width="122px"
-          height="44px"
-          margin="16px auto 0 0"
-          handler={() => challengeCreateSubmit()}
-          disabled={
-            !challengeFile ||
-            !title ||
-            (!deadlineFormat.test(deadline) && deadline.length > 0)
-          }
-        >
-          <Menu color={theme.colors.white}>Submit</Menu>
-        </Button>
+        <FlexRow width="100%" alignmentX="flex-start" gap="48px">
+          <Button
+            width="122px"
+            height="44px"
+            margin="16px 0 0 0"
+            handler={() => challengeCreateSubmit()}
+            disabled={
+              !challengeFile ||
+              !title ||
+              (!deadlineFormat.test(deadline) && deadline.length > 0)
+            }
+          >
+            <Menu color={theme.colors.white}>Submit</Menu>
+          </Button>
+          <Button
+            width="82px"
+            height="36px"
+            margin="16px 0 0 0"
+            as={Link}
+            to={CHALLENGE_CREATE_HOW_TO_PAGE}
+            backgroundColor={theme.colors.blue}
+          >
+            <Body color={theme.colors.white}>How to</Body>
+          </Button>
+        </FlexRow>
       </FlexColumn>
     </FlexColumn>
   );

@@ -10,8 +10,7 @@ const ChallengeCreateHowTo = () => {
 
   return (
     <FlexColumn
-      margin={IS_MOBILE() ? null : '80px 0'}
-      padding={IS_MOBILE() ? '12px 20px' : null}
+      padding={IS_MOBILE() ? '12px 20px' : '80px 0'}
       gap={IS_MOBILE() ? '24px' : '48px'}
       alignmentX={IS_MOBILE() ? 'flex-start' : 'center'}
       maxWidth={IS_MOBILE() ? '668px' : 'none'}
@@ -93,8 +92,9 @@ const ChallengeCreateHowTo = () => {
             <CircleNumber number="5" />
             <Body as="p" margin="auto 0">
               Attach challenge zip file for evaluation with the following
-              structure;&nbsp;
-              <Medium>(remember to attach test-A/expected.tsv)</Medium>
+              structure&nbsp;(you need also add <strong>out.tsv files</strong>
+              &nbsp;for test submission and&nbsp;
+              <Medium>remember to attach test-A/expected.tsv)</Medium>;
             </Body>
           </Grid>
           <CodeShell
@@ -106,9 +106,11 @@ const ChallengeCreateHowTo = () => {
               '\t\t dev-0:',
               '\t\t\t\t expected.tsv',
               '\t\t\t\t in.tsv',
+              '\t\t\t\t out.tsv (important!)',
               '\t\t test-A:',
-              '\t\t\t\t in.tsv',
               '\t\t\t\t expected.tsv (important!)',
+              '\t\t\t\t in.tsv',
+              '\t\t\t\t out.tsv (important!)',
               '\t\t train:',
               '\t\t\t\t train.tsv',
               '\t\t README.md',
