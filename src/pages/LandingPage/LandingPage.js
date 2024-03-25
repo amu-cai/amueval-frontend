@@ -25,6 +25,7 @@ const LandingPage = () => {
     return (
       <LandingPageStyle as="main">
         <Hero />
+        <Hero />
         <FlexColumn className="LandingPageStyle__main-container">
           <Motivation />
           <Csi />
