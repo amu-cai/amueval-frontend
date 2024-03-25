@@ -2,6 +2,7 @@ import { ELEMENTS_PER_PAGE } from '../../../utils/globals';
 import MiniChallenge from '../components/MiniChallenge';
 import { Grid } from '../../../utils/containers';
 import styled from 'styled-components';
+import { Medium } from '../../../utils/fonts';
 
 const ChallengesGrid = styled(Grid)`
   margin: 32px 0;
@@ -38,7 +39,6 @@ const renderChallenges = (pageNr, challenges) => {
                 award,
                 deadline,
                 name,
-                deleted,
               },
               index
             ) => {
@@ -61,7 +61,7 @@ const renderChallenges = (pageNr, challenges) => {
       </ChallengesGrid>
     );
   }
-  return '';
+  return <Medium margin="72px 0">No results</Medium>;
 };
 
 export default renderChallenges;
