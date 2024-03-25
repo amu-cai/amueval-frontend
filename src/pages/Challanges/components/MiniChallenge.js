@@ -110,9 +110,11 @@ const MiniChallenge = (props) => {
           <IconLabel size="24px" gap="8px" type="metric">
             {props.metric ? props.metric : ''}
           </IconLabel>
-          <IconLabel size="24px" gap="8px" type="bestScore">
-            {props.bestScore ? String(props.bestScore).slice(0, 6) : ''}
-          </IconLabel>
+          {props.bestScore !== null ? (
+            <IconLabel size="24px" gap="8px" type="bestScore">
+              {String(props.bestScore)}
+            </IconLabel>
+          ) : null}
           {deadlineRender()}
           {baselineRender()}
           {props.award && (

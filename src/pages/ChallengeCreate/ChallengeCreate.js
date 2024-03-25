@@ -23,6 +23,7 @@ const ChallengeCreate = () => {
   const [metric, setMetric] = React.useState('accuracy');
   const [parameters, setParameters] = React.useState(null);
   const [challengeSource, setChallengeSource] = React.useState(null);
+  const [metricSorting, setMetricSorting] = React.useState('descending');
   const [challengeFile, setChallengeFile] = React.useState(null);
   const [uploadResult, setUploadResult] = React.useState(null);
 
@@ -62,6 +63,7 @@ const ChallengeCreate = () => {
       main_metric: metric,
       main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
       award: award,
+      sorting: metricSorting,
       deadline: deadline,
     };
 
@@ -203,6 +205,14 @@ const ChallengeCreate = () => {
             </Medium>
           </Medium>
         </FlexColumn>
+        <SubmitInput
+          label="Metric sorting"
+          type="select"
+          options={['descending', 'ascending']}
+          handler={(value) => {
+            setMetricSorting(value);
+          }}
+        />
         <FlexColumn gap="10px" width="100%">
           <SubmitInput
             label="Challenge Zip File"

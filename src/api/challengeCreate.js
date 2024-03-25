@@ -16,6 +16,7 @@ const challengeCreate = async (
   formData.append('award', challengeInput.award);
   formData.append('type', challengeInput.type);
   formData.append('metric', challengeInput.main_metric);
+  formData.append('sorting', challengeInput.sorting);
 
   if (challengeInput?.main_metric_parameters) {
     formData.append('parameters', challengeInput.main_metric_parameters);

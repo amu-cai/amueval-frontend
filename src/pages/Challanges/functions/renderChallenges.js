@@ -22,7 +22,6 @@ const ChallengesGrid = styled(Grid)`
 const renderChallenges = (pageNr, challenges) => {
   const n = (pageNr - 1) * ELEMENTS_PER_PAGE;
   if (challenges && challenges.length) {
-    console.log(challenges);
     return (
       <ChallengesGrid margin="32px 0" gridGap="32px 0">
         {challenges
