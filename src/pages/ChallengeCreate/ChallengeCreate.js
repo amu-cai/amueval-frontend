@@ -64,7 +64,7 @@ const ChallengeCreate = () => {
       main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
       award: award,
       sorting: metricSorting,
-      deadline: deadline,
+      deadline: deadline.replaceAll(' ', '') + ', 23:59:59',
     };
 
     await challengeCreate(
@@ -76,7 +76,7 @@ const ChallengeCreate = () => {
   };
 
   const deadlineFormat = new RegExp(
-    '[0-3][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]'
+    '(([0-2][0-9])|(3[0-1]))-((0[0-9])|(1[0-2]))-[1-9][0-9][0-9][0-9]'
   );
 
   const parametersListRender = () => {
@@ -94,6 +94,17 @@ const ChallengeCreate = () => {
           </Body>
         );
       });
+    }
+  };
+
+  const deadlineValidationRender = () => {
+    const render = deadline?.length && !deadlineFormat.test(deadline);
+    if (render) {
+      return (
+        <Medium fontSize="14px" width="100%" color={theme.colors.red}>
+          Deadline format: dd-mm-yyyy
+        </Medium>
+      );
     }
   };
 
@@ -152,11 +163,7 @@ const ChallengeCreate = () => {
               setDeadline(value);
             }}
           />
-          {deadline.length > 0 && !deadlineFormat.test(deadline) && (
-            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
-              Deadline format: dd.mm.yyyy
-            </Medium>
-          )}
+          {deadlineValidationRender()}
         </FlexColumn>
         <SubmitInput
           label="Award"
@@ -237,7 +244,8 @@ const ChallengeCreate = () => {
             disabled={
               !challengeFile ||
               !title ||
-              (!deadlineFormat.test(deadline) && deadline.length > 0)
+              !challengeSource ||
+              (deadline?.length && !deadlineFormat.test(deadline))
             }
           >
             <Menu color={theme.colors.white}>Submit</Menu>
