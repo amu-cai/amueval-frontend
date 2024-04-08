@@ -1,5 +1,4 @@
 import React from 'react';
-import { FlexColumn } from '../../utils/containers';
 import Motivation from './components/Motivation/Motivation';
 import Csi from './components/Csi/Csi';
 import Commercial from './components/Commercial/Commercial';
@@ -9,6 +8,8 @@ import LandingPageStyle from './LandingPageStyle';
 import EntireScreenLoading from '../../components/generic/EntireScreenLoading/EntrieScreenLoading';
 import { useDispatch } from 'react-redux';
 import { loggedBarPositionHandler } from '../../redux/navigationSlice';
+import {FlexColumn} from "../../utils/containers";
+import Process from "./components/Process";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -23,13 +24,15 @@ const LandingPage = () => {
 
   if (show) {
     return (
-      <LandingPageStyle as="main">
+      <LandingPageStyle>
         <Hero />
-        <Hero />
-        <FlexColumn className="LandingPageStyle__main-container">
+        <FlexColumn
+          gap="150px"
+        >
           <Motivation />
-          <Csi />
           <Commercial />
+          <Process />
+          <Csi />
           <Partnerships />
         </FlexColumn>
       </LandingPageStyle>

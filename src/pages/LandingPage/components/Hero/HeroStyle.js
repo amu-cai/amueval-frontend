@@ -1,29 +1,44 @@
 import styled from 'styled-components';
 import { FlexColumn } from '../../../../utils/containers';
+import colors from "../../../../utils/colors";
 
 const HeroStyle = styled(FlexColumn)`
-  justify-content: flex-start;
-  gap: 24px;
-  max-width: 452px;
-
-  @media (min-width: 1441px) {
-    max-width: none;
+  height: 100vh;
+  
+  .HeroStyle__wave {
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .HeroStyle__wrapper {
+    margin-bottom: 100px;
+  }
+  
+  .HeroStyle__see_more_btn {
+    color: ${colors.green700}
+  }
+  
+  .HeroStyle__down_arrow {
+    animation: jumpInfinite 1.5s infinite;
+  }
+  
+  .HeroStyle__see_more {
+    font-size: 18px;
+  }
+  
+  .HeroStyle__text {
+    max-width: 500px;
   }
 
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
-    justify-content: center;
-    width: 100%;
-    height: calc(100vh - 48px);
-  }
-
-  .HeroStyle__title-paragraph {
-    font-size: 24px;
-    line-height: 36px;
-    font-weight: 300;
-    max-width: 580px;
-
-    @media (min-width: 1441px) {
-      max-width: 600px;
+  @keyframes jumpInfinite {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0);
     }
   }
 `;
