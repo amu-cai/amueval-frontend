@@ -1,24 +1,51 @@
 import styled from 'styled-components';
 import { Container } from './containers';
+import theme from "./theme";
 
 const H1 = styled(Container)`
-  display: inline-block;
   font-family: 'Kanit', sans-serif;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 24px;
-  letter-spacing: 0.1px;
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
+  margin-right: ${({ textLeft }) => (textLeft ? 'auto' : 'none')};
+  @media (${theme.mobile}) {
+   font-size: ${({ fontSize }) => (fontSize ? fontSize : '30px')};
+  }
+  @media (${theme.tablet}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '40px')};
+  }
+  @media (${theme.desktop}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '60px')};
-    line-height: 52px;
   }
 `;
 
+const Body = styled(Container)`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-decoration: ${({ underlineText }) => (underlineText ? 'underline' : 'none')};
+  @media (${theme.mobile}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '14px')};  
+    line-height: 24px;
+  }
+  @media (${theme.tablet}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '19px')};
+    line-height: 30px;
+  }
+  @media (${theme.desktop}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '22px')};
+    line-height: 30px;
+  }
+`;
+
+
 const H2 = styled(H1)`
-  font-size: 20px;
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
-    font-size: 32px;
-    line-height: 36px;
+  margin-bottom: 32px;
+  @media (${theme.mobile}) {
+   font-size: ${({ fontSize }) => (fontSize ? fontSize : '24px')};
+  }
+  @media (${theme.tablet}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '32px')};
+  }
+  @media (${theme.desktop}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '40px')};
   }
 `;
 
@@ -26,7 +53,6 @@ const H3 = styled(H1)`
   font-size: 18px;
   line-height: 22px;
   font-size: ${({ fontSize }) => (fontSize ? fontSize : '18px')};
-
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     font-size: 24px;
     line-height: 26px;
@@ -34,24 +60,18 @@ const H3 = styled(H1)`
   }
 `;
 
-const Body = styled(Container)`
-  display: inline-block;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
-    font-weight: 400;
-    font-size: ${({ fontSize }) => (fontSize ? fontSize : '16px')};
-    line-height: 22px;
-  }
-`;
-
 const Medium = styled(Body)`
-  font-weight: 400;
-  @media (min-width: ${({ theme }) => theme.overMobile}) {
-    font-weight: 500;
-    font-size: ${({ fontSize }) => (fontSize ? fontSize : '16px')};
+  @media (${theme.mobile}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '20px')};
+    line-height: 24px;
+  }
+  @media (${theme.tablet}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '25px')};
+    line-height: 30px;
+  }
+  @media (${theme.desktop}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '34px')};
+    line-height: 40px;
   }
 `;
 

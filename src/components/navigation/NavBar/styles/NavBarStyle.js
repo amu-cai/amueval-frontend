@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 import { Container } from '../../../../utils/containers';
+import colors from "../../../../utils/colors";
 
 const NavBarStyle = styled(Container)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 42px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.navShadow};
   padding: 0 16px;

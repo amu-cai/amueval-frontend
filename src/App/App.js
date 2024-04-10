@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from '../components/navigation/NavBar';
 import LoggedBar from '../components/navigation/LoggedBar';
 import { IS_MOBILE } from '../utils/globals';
+import Footer from "../components/generic/Footer";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <NavBar />
           {!IS_MOBILE() && <LoggedBar />}
           <RoutingManager />
+            <Footer />
         </PopUpMessageManager>
       </BrowserRouter>
     </ThemeProvider>

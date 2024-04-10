@@ -1,84 +1,75 @@
 import React from 'react';
-import { Body, H1, Medium } from '../../../../utils/fonts';
-import { Container, FlexColumn, FlexRow } from '../../../../utils/containers';
 import theme from '../../../../utils/theme';
-import ButtonLink from '../../../../components/generic/ButtonLink';
 import Media from 'react-media';
-import MadeByCsi from '../MadeByCsi/MadeByCsi';
 import HeroStyle from './HeroStyle';
-import { REGISTER_PAGE } from '../../../../utils/globals';
-import { Link } from 'react-router-dom';
+import {FlexColumn, FlexRow, Svg} from "../../../../utils/containers";
+import {H1, Medium} from "../../../../utils/fonts";
+import brain from "../../../../assets/brain.png";
+import amuEval from "../../../../assets/amu_eval.png";
+import wave from "../../../../assets/wave.png";
+import arrowDown from "../../../../assets/arrow_down.svg";
+import colors from "../../../../utils/colors";
+
 
 const Hero = (props) => {
   const mobileRender = () => {
     return (
-      <FlexColumn
-        alignmentX="flex-start"
-        gap="24px"
-        margin="80px 0 48px 0"
-        maxWidth="452px"
-      >
-        <H1 as="h1">
-          Welcome to
-          <Container display="inline" color={theme.colors.green}>
-            &nbsp;AMU-Eval!
-          </Container>
-        </H1>
-        <Body as="p">
-          A data challenge platform for machine learning research, competition,
-          cooperation and reproducibility.
-        </Body>
-        <ButtonLink as={Link} to={REGISTER_PAGE}>
-          Join us!
-        </ButtonLink>
-      </FlexColumn>
+        <HeroStyle>
+           <FlexColumn gap="64px" className="HeroStyle__wrapper">
+                <img src={amuEval} width="250px" alt="amu eval"/>
+                <Medium as="p" className="HeroStyle__text">
+                    A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                </Medium>
+                <img src={brain} alt="brain" width="282px"/>
+            </FlexColumn>
+            <FlexColumn className="HeroStyle__see_more_btn">
+                <p className="HeroStyle__see_more">See more</p>
+                <Svg width="16px" height="16px" src={arrowDown} backgroundColor={colors.green700} className="HeroStyle__down_arrow" />
+            </FlexColumn>
+        </HeroStyle>
+    );
+  };
+
+  const tabletRender = () => {
+    return (
+        <HeroStyle>
+            <FlexRow alignmentY="start" gap="120px" className="HeroStyle__wrapper">
+                <FlexColumn alignmentX="start" gap="16px" className="HeroStyle__text">
+                    <FlexRow gap="16px">
+                        <H1 as="h1">Welcome to</H1>
+                        <img src={amuEval} width="200px" alt="ame eval"/>
+                    </FlexRow>
+                    <Medium as="p">
+                        A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                    </Medium>
+                </FlexColumn>
+                <FlexColumn>
+                    <img src={brain} alt="brain" width="354px"/>
+                </FlexColumn>
+            </FlexRow>
+            <img className="HeroStyle__wave" src={wave} alt="wave"/>
+        </HeroStyle>
     );
   };
 
   const desktopRender = () => {
     return (
       <HeroStyle>
-        <FlexColumn alignmentX="flex-start" gap="40px">
-          <H1 as="h1">
-            Welcome to
-            <Container display="inline" color={theme.colors.green}>
-              &nbsp;AMU-Eval!
-            </Container>
-          </H1>
-          <Medium as="p" className="HeroStyle__title-paragraph">
-            A data challenge platform for machine learning research,
-            competition, cooperation and reproducibility.
-          </Medium>
-          <MadeByCsi position="horizontal" />
-          <ButtonLink as={Link} to={REGISTER_PAGE}>
-            Join us!
-          </ButtonLink>
-        </FlexColumn>
-      </HeroStyle>
-    );
-  };
-
-  const desktopRender2 = () => {
-    return (
-      <HeroStyle>
-        <FlexRow gap="100px">
-          <FlexColumn gap="50px" alignmentX="flex-start">
-            <H1 as="h1">
-              Welcome to
-              <Container display="inline" color={theme.colors.green}>
-                &nbsp;AMU-Eval!
-              </Container>
-            </H1>
-            <Medium as="p" className="HeroStyle__title-paragraph">
-              A data challenge platform for machine learning research,
-              competition, cooperation and reproducibility.
-            </Medium>
-            <ButtonLink as={Link} to={REGISTER_PAGE}>
-              Join us!
-            </ButtonLink>
-          </FlexColumn>
-          <MadeByCsi />
-        </FlexRow>
+          <FlexRow alignmentY="start" gap="180px" className="HeroStyle__wrapper">
+              <FlexColumn alignmentX="start" gap="16px">
+                <FlexRow gap="16px">
+                  <H1 as="h1">Welcome to</H1>
+                  <img src={amuEval} width="250px" alt="ame eval"/>
+                </FlexRow>
+                <Medium as="p">
+                    A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                </Medium>
+              </FlexColumn>
+              <FlexColumn>
+                  <img src={brain} alt="brain" width="518px"/>
+              </FlexColumn>
+          </FlexRow>
+          <img className="HeroStyle__wave" src={wave} alt="wave"/>
       </HeroStyle>
     );
   };
@@ -86,10 +77,8 @@ const Hero = (props) => {
   return (
     <>
       <Media query={theme.mobile}>{mobileRender()}</Media>
-      <Media query="(min-width: 1025px) and (max-width: 1440px)">
-        {desktopRender()}
-      </Media>
-      <Media query="(min-width: 1441px)">{desktopRender2()}</Media>
+      <Media query={theme.tablet}>{tabletRender()}</Media>
+      <Media query={theme.desktop}>{desktopRender()}</Media>
     </>
   );
 };
