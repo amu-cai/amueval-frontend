@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Container } from '../../../../utils/containers';
-import colors from "../../../../utils/colors";
 
 const NavBarStyle = styled(Container)`
   background-color: ${({ theme }) => theme.colors.white};
