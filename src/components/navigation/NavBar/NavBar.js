@@ -21,6 +21,7 @@ import {
     navMenuPositionToggle,
 } from '../../../redux/navigationSlice';
 import MenuButtonStyle from './styles/MenuButtonStyle';
+import colors from "../../../utils/colors";
 
 const NavBar = () => {
     const dispatch = useDispatch();
@@ -45,12 +46,12 @@ const NavBar = () => {
                             />
                             <FlexRow as="ul" className="ul-desktop" gap="32px">
                                 <FlexRow as={Link} to={CHALLENGES_PAGE} gap="12px">
-                                    <Svg width="16px" height="16px" src={cupIco} />
+                                    <Svg width="16px" height="16px" src={cupIco} backgroundColor={colors.green500} />
                                     <Menu as="li">Challenges</Menu>
                                 </FlexRow>
                                 {!loggedIn && (
                                     <FlexRow as={Link} to={REGISTER_PAGE} gap="12px">
-                                        <Svg width="16px" height="16px" src={registerIco} />
+                                        <Svg width="16px" height="16px" src={registerIco} backgroundColor={colors.green500} />
                                         <Menu as="li">Register</Menu>
                                     </FlexRow>
                                 )}
@@ -65,7 +66,7 @@ const NavBar = () => {
                                     />
                                 ) : (
                                     <FlexRow as={Link} to={LOGIN_PAGE} gap="12px">
-                                        <Svg width="16px" height="16px" src={loginIco} />
+                                        <Svg width="16px" height="16px" src={loginIco} backgroundColor={colors.green500} />
                                         <Menu as="li">Sign in</Menu>
                                     </FlexRow>
                                 )}

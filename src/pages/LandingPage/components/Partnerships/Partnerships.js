@@ -9,7 +9,7 @@ import carArena from "../../../../assets/car-arena.png";
 import pons from "../../../../assets/pons.png";
 import {FlexRow} from "../../../../utils/containers";
 import {FlexColumn} from "../../../../utils/containers";
-import {H2} from "../../../../utils/fonts";
+import {H2New} from "../../../../utils/fonts";
 
 
 
@@ -18,14 +18,14 @@ const Partnerships = () => {
         return (
             <PartnershipsStyle>
                 <FlexColumn>
-                    <H2 as="h2">Our partnerships</H2>
+                    <H2New as="h2">Our partnerships</H2New>
                 </FlexColumn>
                 <FlexColumn gap="50px">
-                    <img src={samsung} alt="samsung"/>
-                    <img src={pons} alt="pons"/>
-                    <img src={carArena} alt="car arena"/>
-                    <img src={allegro} alt="allegro"/>
-                    <img src={domdata} alt="domdata"/>
+                    <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
+                    <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
+                    <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
+                    <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
+                    <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
                 </FlexColumn>
             </PartnershipsStyle>
         );
@@ -35,22 +35,22 @@ const Partnerships = () => {
         return (
             <PartnershipsStyle>
                 <FlexColumn gap="32px">
-                    <H2 as="h2">Our partnerships</H2>
+                    <H2New as="h2">Our partnerships</H2New>
                     <FlexRow
                         gap="200px"
                         alignmentX="space-between"
                         className="test"
                     >
-                        <img src={allegro} alt="allegro"/>
-                        <img src={samsung} alt="samsung"/>
-                        <img src={pons} alt="pons"/>
+                        <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
+                        <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
+                        <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
                     </FlexRow>
                     <FlexRow
                         gap="200px"
                         alignmentX="space-around"
                     >
-                        <img src={carArena} alt="car arena"/>
-                        <img src={domdata} alt="domdata"/>
+                        <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
+                        <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
                     </FlexRow>
                 </FlexColumn>
             </PartnershipsStyle>
@@ -61,16 +61,16 @@ const Partnerships = () => {
         return (
             <PartnershipsStyle>
                 <FlexColumn>
-                    <H2 as="h2">Our partnerships</H2>
+                    <H2New as="h2">Our partnerships</H2New>
                     <FlexRow
                         gap="80px"
                         alignmentX="space-between"
                     >
-                        <img src={pons} alt="pons"/>
-                        <img src={allegro} alt="allegro"/>
-                        <img src={carArena} alt="car arena"/>
-                        <img src={domdata} alt="domdata"/>
-                        <img src={samsung} alt="samsung"/>
+                        <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
+                        <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
+                        <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
+                        <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
+                        <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
                     </FlexRow>
                 </FlexColumn>
             </PartnershipsStyle>
@@ -82,7 +82,7 @@ const Partnerships = () => {
         <>
             <Media query={theme.mobile}>{mobileRender()}</Media>
             <Media query={theme.tablet}>{tabletRender()}</Media>
-            <Media query={theme.desktop}>{desktopRender()}</Media>
+            <Media query={theme.desktop2}>{desktopRender()}</Media>
         </>
     );
 };

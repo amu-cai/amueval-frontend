@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { loggedBarPositionHandler } from '../../redux/navigationSlice';
 import {FlexColumn} from "../../utils/containers";
 import Process from "./components/Process";
+import Footer from "../../components/generic/Footer";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const LandingPage = () => {
           <Csi />
           <Partnerships />
         </FlexColumn>
+        <Footer />
       </LandingPageStyle>
     );
   } else return <EntireScreenLoading />;

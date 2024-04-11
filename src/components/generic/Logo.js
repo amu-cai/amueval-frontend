@@ -1,10 +1,10 @@
 import React from 'react';
-import { H1 } from '../../utils/fonts';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import amuEval from '../../assets/amu_eval.png';
+import {FlexColumn} from "../../utils/containers";
 
-const LogoStyle = styled(H1)`
+const LogoStyle = styled(FlexColumn)`
   img {
     width: 150px;
   }
