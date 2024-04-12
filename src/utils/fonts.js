@@ -135,6 +135,7 @@
 import styled from 'styled-components';
 import { Container } from './containers';
 import theme from "./theme";
+import colors from "./colors";
 const H1 = styled(Container)`
   display: inline-block;
   font-family: 'Kanit', sans-serif;
@@ -148,41 +149,17 @@ const H1 = styled(Container)`
   }
 `;
 const H1New = styled(Container)`
-  @font-face {
-    font-family: 'Coolvetica Compressed HV';
-    src: url('../fonts/coolvetica/coolvetica compressed hv.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Coolvetica Condensed RG';
-    src: url('../fonts/coolvetica/coolvetica condensed rg.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Coolvetica Crammed RG';
-    src: url('../fonts/coolvetica/coolvetica crammed rg.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Coolvetica RG';
-    src: url('../fonts/coolvetica/coolvetica rg.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Coolvetica RG It';
-    src: url('../fonts/coolvetica/coolvetica rg it.otf') format('opentype');
-  }
-  font-family: 'Coolvetica Condensed RG', sans-serif;
+  font-family: 'coolvetica-condensed-regular', sans-serif;
   font-weight: 400;
   margin-right: ${({ textLeft }) => (textLeft ? 'auto' : 'none')};
   @media (${theme.mobile}) {
-   font-size: ${({ fontSize }) => (fontSize ? fontSize : '30px')};
+   font-size: ${({ fontSize }) => (fontSize ? fontSize : '34px')};
   }
   @media (${theme.tablet}) {
-    font-size: ${({ fontSize }) => (fontSize ? fontSize : '40px')};
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '45px')};
   }
-  @media (${theme.desktop}) {
-    font-size: ${({ fontSize }) => (fontSize ? fontSize : '60px')};
+  @media (${theme.desktop2}) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '61px')};
   }
 `;
 
@@ -202,7 +179,7 @@ const H2New = styled(H1New)`
   @media (${theme.tablet}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '32px')};
   }
-  @media (${theme.desktop}) {
+  @media (${theme.desktop2}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '40px')};
   }
 `;
@@ -221,6 +198,7 @@ const H3 = styled(H1)`
 const Body = styled(Container)`
   display: inline-block;
   font-family: 'Roboto', sans-serif;
+  color: ${colors.black900};
   font-weight: 300;
   font-size: 14px;
   line-height: 20px;
@@ -232,8 +210,9 @@ const Body = styled(Container)`
 `;
 
 const BodyNew = styled(Container)`
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  color: ${colors.black700};
   text-decoration: ${({ underlineText }) => (underlineText ? 'underline' : 'none')};
   @media (${theme.mobile}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '14px')};
@@ -243,7 +222,7 @@ const BodyNew = styled(Container)`
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '19px')};
     line-height: 30px;
   }
-  @media (${theme.desktop}) {
+  @media (${theme.desktop2}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '22px')};
     line-height: 30px;
   }
@@ -260,15 +239,15 @@ const Medium = styled(Body)`
 const MediumNew = styled(BodyNew)`
   @media (${theme.mobile}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '20px')};
-    line-height: 24px;
+    line-height: 20px;
   }
   @media (${theme.tablet}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '25px')};
     line-height: 30px;
   }
-  @media (${theme.desktop}) {
+  @media (${theme.desktop2}) {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '34px')};
-    line-height: 40px;
+    line-height: 32px;
   }
 `;
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FlexColumn } from '../../../../utils/containers';
 import colors from "../../../../utils/colors";
+import theme from "../../../../utils/theme";
 
 const HeroStyle = styled(FlexColumn)`
   height: 100vh;
@@ -31,6 +32,22 @@ const HeroStyle = styled(FlexColumn)`
     max-width: 500px;
   }
 
+  @media (${theme.mobile}) {
+    .HeroStyle_logo {
+      margin-bottom: 16px;
+    }
+  }
+  @media (${theme.tablet}) {
+    .HeroStyle_logo {
+      margin-bottom: 20px;
+    }
+  }
+  @media (${theme.desktop2}) {
+    .HeroStyle_logo {
+      margin-bottom: 40px;
+    }
+  }
+  
   @keyframes jumpInfinite {
     0% {
       transform: translateY(0);
