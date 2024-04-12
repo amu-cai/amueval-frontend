@@ -10,9 +10,9 @@ const NavBarStyle = styled(Container)`
   .ul-desktop {
     display: none;
   }
+  height: 80px;
 
   @media (min-width: ${({ theme }) => theme.overMobile}) {
-    height: 48px;
     padding: 0 26px;
 
     .ul-desktop {

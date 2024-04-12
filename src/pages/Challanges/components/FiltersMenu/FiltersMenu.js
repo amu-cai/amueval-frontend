@@ -29,7 +29,7 @@ const FiltersMenuStyle = styled(FlexColumn)`
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     width: 310px;
     max-height: none;
-    top: 50px;
+    top: 81px;
     right: auto;
     left: 0;
     box-shadow: ${({ theme }) => theme.shadowRight};

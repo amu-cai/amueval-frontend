@@ -4,7 +4,7 @@ import theme from "../../../utils/theme";
 import {FlexColumn, FlexRow} from "../../../utils/containers";
 import amuEval from "../../../assets/amu_eval.png";
 import csiLogo from "../../../assets/logo-csi.png";
-import {Body, H2, H3} from "../../../utils/fonts";
+import {BodyNew, H2New, H3} from "../../../utils/fonts";
 import FooterStyle from "./FooterStyle";
 
 const Footer = () => {
@@ -12,8 +12,8 @@ const Footer = () => {
     return (
         <FooterStyle>
             <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
-                <H2 as="h2">Made by</H2>
-                <img src={csiLogo} alt="csi" width="350px"/>
+                <H2New as="h2">Made by</H2New>
+                <img src={csiLogo} alt="csi" width="200px"/>
             </FlexColumn>
         </FooterStyle>
     );
@@ -28,18 +28,18 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Shortcuts</H3>
-                    <Body as="p" fontSize="16px" underlineText={true}>Register</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>Challenges</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>Privacy policy</Body>
+                    <BodyNew as="p" fontSize="16px" underlineText={true}>Register</BodyNew>
+                    <BodyNew as="p" fontSize="16px" underlineText={true}>Challenges</BodyNew>
+                    <BodyNew as="p" fontSize="16px" underlineText={true}>Privacy policy</BodyNew>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Contact</H3>
-                    <Body as="p" fontSize="16px" underlineText={true}>csi@amu.edu.pl</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>618 295 308</Body>
+                    <BodyNew as="p" fontSize="16px" underlineText={true}>csi@amu.edu.pl</BodyNew>
+                    <BodyNew as="p" fontSize="16px" underlineText={true}>618 295 308</BodyNew>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
-                    <H2 as="h2">Made by</H2>
-                    <img src={csiLogo} alt="csi" width="257px"/>
+                    <H2New as="h2">Made by</H2New>
+                    <img src={csiLogo} alt="csi" width="280px"/>
                 </FlexColumn>
             </FlexRow>
         </FooterStyle>
@@ -55,18 +55,18 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Shortcuts</H3>
-                    <Body as="p" fontSize="16px" underlineText={true}>Register</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>Challenges</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>Privacy policy</Body>
+                    <a href="/register">Register</a>
+                    <a href="/challenges">Challenges</a>
+                    <a href="/policy-privacy">Privacy policy</a>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Contact</H3>
-                    <Body as="p" fontSize="16px" underlineText={true}>csi@amu.edu.pl</Body>
-                    <Body as="p" fontSize="16px" underlineText={true}>618 295 308</Body>
+                    <a href="mailto:csi@amu.edu.pl">csi@amu.edu.pl</a>
+                    <a href="tel:618 295 308">618 295 308</a>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
-                    <H2 as="h2">Made by</H2>
-                    <img src={csiLogo} alt="csi" width="350px"/>
+                    <H2New as="h2">Made by</H2New>
+                    <img src={csiLogo} alt="csi" width="280px"/>
                 </FlexColumn>
             </FlexRow>
         </FooterStyle>
@@ -76,7 +76,7 @@ const Footer = () => {
       <>
         <Media query={theme.mobile}>{mobileRender()}</Media>
         <Media query={theme.tablet}>{tabletRender()}</Media>
-        <Media query={theme.desktop}>{desktopRender()}</Media>
+        <Media query={theme.desktop2}>{desktopRender()}</Media>
       </>
   );
 };

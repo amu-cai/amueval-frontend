@@ -16,3 +16,28 @@ body {
     background-color: #FCFCFC;
 }
 
+@font-face {
+    font-family: 'coolvetica-condensed-regular';
+    src: local('coolvetica-condensed-regular'), url(./assets/fonts/coolvetica/coolvetica_condensed_rg.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'coolvetica-crammed-regular';
+    src: local('coolvetica-crammed-regular'), url(./assets/fonts/coolvetica/coolvetica_crammed_rg.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'coolvetica-regular';
+    src: local('coolvetica-regular'), url(./assets/fonts/coolvetica/coolvetica_rg.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'coolvetica-italic-regular';
+    src: local('coolvetica-italic-regular'), url(./assets/fonts/coolvetica/coolvetica_rg_it.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'coolvetica-compressed-heavy';
+    src: local('coolvetica-compressed-heavy'), url(./assets/fonts/coolvetica/coolvetica_compressed_hv.otf) format('opentype');
+}
+
