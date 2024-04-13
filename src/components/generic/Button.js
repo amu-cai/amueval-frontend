@@ -47,6 +47,7 @@ const Button = (props) => {
       backgroundColor={props.backgroundColor}
       to={props.to}
       disabled={props.disabled}
+      target={props.target}
     >
       {props.children}
     </ButtonStyle>

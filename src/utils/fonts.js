@@ -198,7 +198,7 @@ const H3 = styled(H1)`
 const Body = styled(Container)`
   display: inline-block;
   font-family: 'Roboto', sans-serif;
-  color: ${colors.black900};
+  color: ${({theme, color}) => color ? color : theme.colors.black900};
   font-weight: 300;
   font-size: 14px;
   line-height: 20px;

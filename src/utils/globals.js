@@ -29,7 +29,7 @@ export const CSI_LINK = 'https://csi.amu.edu.pl/';
 export const ROOT_URL = window.location.origin;
 export const LOGIN_REQUIRED_PAGES = ['my-submissions', 'submit'];
 
-export const RESET_TOKEN_TIME = 900000;
+export const RESET_TOKEN_TIME = 1200000;
 export const CHECK_TOKEN_TIME = 1500;
 
 export const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [

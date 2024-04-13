@@ -257,6 +257,7 @@ const ChallengeCreate = () => {
             as={Link}
             to={CHALLENGE_CREATE_HOW_TO_PAGE}
             backgroundColor={theme.colors.blue}
+            target="__blank"
           >
             <Body color={theme.colors.white}>How to</Body>
           </Button>
