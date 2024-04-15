@@ -39,7 +39,7 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
                     <H2New as="h2">Made by</H2New>
-                    <img src={csiLogo} alt="csi" width="280px"/>
+                    <img src={csiLogo} alt="csi" width="257px"/>
                 </FlexColumn>
             </FlexRow>
         </FooterStyle>
@@ -66,7 +66,7 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
                     <H2New as="h2">Made by</H2New>
-                    <img src={csiLogo} alt="csi" width="280px"/>
+                    <img src={csiLogo} alt="csi" width="350px"/>
                 </FlexColumn>
             </FlexRow>
         </FooterStyle>

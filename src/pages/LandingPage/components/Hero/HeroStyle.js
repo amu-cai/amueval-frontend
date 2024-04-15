@@ -12,10 +12,6 @@ const HeroStyle = styled(FlexColumn)`
     width: 100vw;
   }
   
-  .HeroStyle__wrapper {
-    margin-bottom: 100px;
-  }
-  
   .HeroStyle__see_more_btn {
     color: ${colors.green700}
   }

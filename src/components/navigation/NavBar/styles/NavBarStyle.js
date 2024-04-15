@@ -6,12 +6,15 @@ const NavBarStyle = styled(Container)`
   box-shadow: ${({ theme }) => theme.navShadow};
   padding: 0 16px;
   z-index: 2;
+  position: fixed;
+  top: 0;
+  width: 100%;
 
   .ul-desktop {
     display: none;
   }
   height: 80px;
-
+  
   @media (min-width: ${({ theme }) => theme.overMobile}) {
     padding: 0 26px;
 

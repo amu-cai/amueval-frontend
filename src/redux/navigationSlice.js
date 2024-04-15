@@ -30,10 +30,10 @@ export const navigationSlice = createSlice({
       } else state.loggedBarPosition = '0';
     },
     navMenuPositionToggle: (state) => {
-      if (state.navMenuPosition === 'calc(-100vh - 42px)') {
+      if (state.navMenuPosition === 'calc(-100vh - 82px)') {
         state.navMenuPosition = '0';
       } else if (!state.mobileMenuHover) {
-        state.navMenuPosition = 'calc(-100vh - 42px)';
+        state.navMenuPosition = 'calc(-100vh - 82px)';
       }
     },
   },

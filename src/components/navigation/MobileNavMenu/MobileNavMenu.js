@@ -68,7 +68,7 @@ const MobileNavMenu = (props) => {
     <TransBack
       transition="transform"
       alignmentX="flex-start"
-      top="42px"
+      top="80px"
       translateY={props.translateY}
       onClick={props.toggleNavMenu}
     >
