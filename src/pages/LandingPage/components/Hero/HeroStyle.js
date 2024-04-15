@@ -5,10 +5,6 @@ import theme from "../../../../utils/theme";
 
 const HeroStyle = styled(FlexColumn)`
   height: 100vh;
-
-  .HeroStyle__wrapper {
-    //margin-bottom: 200px;
-  }
   
   .HeroStyle__wave {
     position: absolute;
