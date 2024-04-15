@@ -10,22 +10,13 @@ const getProfileInfo = async (setResult) => {
   })
     .then(
       (res) => {
-        if (res.ok) {
-          console.log('request ok');
-          return res.json();
-        } else {
-          console.log('something went wrong');
-          return res.json();
-        }
+        return res.json();
       },
       (error) => {
         console.log(error);
-        console.error('failed due to network error or cross domain');
       }
     )
     .then((json) => {
-      console.log('json response processing');
-      console.log(json);
       setResult(json);
     });
 };
