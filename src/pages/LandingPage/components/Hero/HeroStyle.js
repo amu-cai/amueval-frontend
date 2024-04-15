@@ -5,7 +5,6 @@ import theme from "../../../../utils/theme";
 
 const HeroStyle = styled(FlexColumn)`
   height: 100vh;
-  padding-bottom: 100px;
   
   .HeroStyle__wave {
     position: absolute;
@@ -43,11 +42,13 @@ const HeroStyle = styled(FlexColumn)`
     .HeroStyle_logo {
       margin-bottom: 20px;
     }
+    padding-bottom: 100px;
   }
   @media (${theme.desktop2}) {
     .HeroStyle_logo {
       margin-bottom: 40px;
     }
+    padding-bottom: 100px;
   }
   
   @keyframes jumpInfinite {
