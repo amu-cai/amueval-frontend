@@ -15,7 +15,7 @@ const Hero = (props) => {
   const mobileRender = () => {
     return (
         <HeroStyle>
-           <FlexColumn gap="64px" className="HeroStyle__wrapper">
+           <FlexColumn gap="20px" className="HeroStyle__wrapper">
                 <img src={amuEval} width="250px" alt="amu eval" className="HeroStyle_logo"/>
                 <MediumNew as="p" className="HeroStyle__text">
                     A data challenge platform for machine learning research, competition, cooperation and reproducibility.
