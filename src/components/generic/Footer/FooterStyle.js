@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {FlexRow} from '../../../utils/containers';
 import colors from "../../../utils/colors";
+import theme from "../../../utils/theme";
 
 const FooterStyle = styled(FlexRow)`
   margin-top: 64px;
@@ -25,6 +26,27 @@ const FooterStyle = styled(FlexRow)`
     font-size: 16px;
     color: ${colors.black700};
     line-height: 24px;
+  }
+
+  @media (${theme.tablet}) {
+    section:nth-child(2) {
+      margin-right: 40px;
+      margin-left: 10px;
+    }
+
+    .FooterStyle__csi_logo {
+      margin: 0 20px;
+    }
+  }
+  @media (${theme.desktop2}) {
+    section:nth-child(2) {
+      margin-right: 100px;
+      margin-left: 40px;
+    }
+    
+    .FooterStyle__csi_logo {
+      margin: 0 40px;
+    }
   }
 `;
 

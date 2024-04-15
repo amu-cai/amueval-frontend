@@ -5,7 +5,7 @@ const LoggedBarStyle = styled(FlexColumn)`
   width: 360px;
   height: calc(100vh - 48px);
   position: fixed;
-  top: 50px;
+  top: 81px;
   right: 0;
   align-items: flex-start;
   justify-content: flex-start;
