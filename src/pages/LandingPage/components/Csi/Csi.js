@@ -13,7 +13,7 @@ const Csi = () => {
                 <FlexColumn
                 >
                     <H2New as="h2" className="CsiStyle__h1_sm">Center for Artificial Intelligence</H2New>
-                    <BodyNew as="p" className="CsiStyle__p_sm">Gonito.net belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
+                    <BodyNew as="p" className="CsiStyle__p_sm">AMU-Eval belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
                     <img className="csiStyle__logo" src={logoCsi} width="350px" alt="c4ai"/>
                 </FlexColumn>
             </CsiStyle>
@@ -28,7 +28,7 @@ const Csi = () => {
                 >
                     <FlexColumn className="CsiStyle__text">
                         <H2New as="h2" textLeft={true}>Center for Artificial Intelligence</H2New>
-                        <BodyNew as="p">Gonito.net belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
+                        <BodyNew as="p">AMU-Eval belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
                     </FlexColumn>
                     <FlexColumn>
                         <img src={logoCsi} width="350px" alt="c4ai"/>
@@ -46,7 +46,7 @@ const Csi = () => {
                 >
                     <FlexColumn class="col1">
                         <H2New as="h2" textLeft={true} className="CsiStyle__h1_lg">Center for Artificial Intelligence</H2New>
-                        <BodyNew as="p" className="CsiStyle__p_lg">Gonito.net belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
+                        <BodyNew as="p" className="CsiStyle__p_lg">AMU-Eval belongs to the Center for Artificial Intelligence (C4AI) at Adam Mickiewicz University (UAM) which conducts research on the development of artificial intelligence, carries out scientific and research and development projects, integrates the research of scientists from various departments of Adam Mickiewicz University and outside it - from leading scientific centers in Poland and abroad as well as those employed in business entities. C4AI also cooperates with business entities in creating new solutions to be implemented in enterprises</BodyNew>
                     </FlexColumn>
                     <FlexColumn class="col2">
                         <div>
