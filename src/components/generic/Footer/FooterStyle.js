@@ -7,20 +7,20 @@ const FooterStyle = styled(FlexRow)`
   .FooterStyle__wrapper {
     height: 300px;
   }
-  
+
   .FooterStyle__wrapper section {
-      height: 100%;
-      padding: 64px 24px 0 24px;
-    }
-  
-  .FooterStyle__csi_logo img{
-    padding: 0 32px 16px 32px;
+    height: 100%;
+    padding: 64px 24px 0 24px;
   }
-  
+
+  .FooterStyle__csi_logo img{
+    margin: 0 32px 16px 32px;
+  }
+
   .FooterStyle__wrapper h3 {
     margin-bottom: 12px;
   }
-  
+
   section a {
     font-size: 16px;
     color: ${colors.black700};

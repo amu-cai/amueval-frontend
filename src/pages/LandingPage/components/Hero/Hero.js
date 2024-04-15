@@ -4,8 +4,8 @@ import Media from 'react-media';
 import HeroStyle from './HeroStyle';
 import {FlexColumn, FlexRow, Svg} from "../../../../utils/containers";
 import {MediumNew} from "../../../../utils/fonts";
-import brain from "../../../../assets/brain.png";
-import amuEval from "../../../../assets/amu_eval.png";
+import brain from "../../../../assets/brain.svg";
+import amuEval from "../../../../assets/logo_amueval.svg";
 import wave from "../../../../assets/wave.png";
 import arrowDown from "../../../../assets/arrow_down.svg";
 import colors from "../../../../utils/colors";
@@ -34,7 +34,7 @@ const Hero = (props) => {
     return (
         <HeroStyle>
             <FlexRow alignmentY="start" gap="120px" className="HeroStyle__wrapper">
-                <FlexColumn alignmentX="start" gap="16px" className="HeroStyle__text">
+                <FlexColumn class="col1" alignmentX="start" gap="16px" className="HeroStyle__text">
                     <FlexRow gap="16px">
                         <img src={amuEval} width="431px" alt="ame eval" className="HeroStyle_logo"/>
                     </FlexRow>
@@ -43,7 +43,7 @@ const Hero = (props) => {
                     </MediumNew>
                 </FlexColumn>
                 <FlexColumn>
-                    <img src={brain} alt="brain" width="354px"/>
+                    <img className="col2" src={brain} alt="brain" width="354px"/>
                 </FlexColumn>
             </FlexRow>
             <img className="HeroStyle__wave" src={wave} alt="wave"/>
@@ -63,9 +63,7 @@ const Hero = (props) => {
                     A data challenge platform for machine learning research, competition, cooperation and reproducibility.
                 </MediumNew>
               </FlexColumn>
-              <FlexColumn>
                   <img src={brain} alt="brain" width="518px"/>
-              </FlexColumn>
           </FlexRow>
           <img className="HeroStyle__wave" src={wave} alt="wave"/>
       </HeroStyle>
