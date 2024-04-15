@@ -33,7 +33,7 @@ const Hero = (props) => {
   const tabletRender = () => {
     return (
         <HeroStyle>
-            <FlexRow alignmentY="start" gap="120px" className="HeroStyle__wrapper">
+            <FlexRow alignmentY="center" gap="120px" className="HeroStyle__wrapper">
                 <FlexColumn class="col1" alignmentX="start" gap="16px" className="HeroStyle__text">
                     <FlexRow gap="16px">
                         <img src={amuEval} width="431px" alt="ame eval" className="HeroStyle_logo"/>
@@ -54,7 +54,7 @@ const Hero = (props) => {
   const desktopRender = () => {
     return (
       <HeroStyle>
-          <FlexRow alignmentY="start" gap="180px" className="HeroStyle__wrapper">
+          <FlexRow alignmentY="center" gap="100px" className="HeroStyle__wrapper">
               <FlexColumn alignmentX="start" gap="16px">
                 <FlexRow gap="16px">
                   <img src={amuEval} width="541px" alt="amu eval" className="HeroStyle_logo"/>
@@ -63,7 +63,7 @@ const Hero = (props) => {
                     A data challenge platform for machine learning research, competition, cooperation and reproducibility.
                 </MediumNew>
               </FlexColumn>
-                  <img src={brain} alt="brain" width="518px"/>
+                  <img className="HeroStyle__brain" src={brain} alt="brain" width="518px"/>
           </FlexRow>
           <img className="HeroStyle__wave" src={wave} alt="wave"/>
       </HeroStyle>

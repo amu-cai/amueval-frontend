@@ -5,11 +5,17 @@ import theme from "../../../../utils/theme";
 
 const HeroStyle = styled(FlexColumn)`
   height: 100vh;
+  padding-bottom: 100px;
   
   .HeroStyle__wave {
     position: absolute;
     bottom: 0;
     width: 100vw;
+    z-index: -1;
+  }
+  
+  .HeroStyle__wrapper {
+    margin: 0 50px;
   }
   
   .HeroStyle__see_more_btn {
