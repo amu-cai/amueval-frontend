@@ -39,7 +39,7 @@ const TableRowFooter = ({
             { title: 'edit', icon: pensilIco, handler: () => editItem() },
             { title: 'delete', icon: deleteIco, handler: () => deleteItem() },
           ]}
-          active={item.isOwner}
+          active={false} // Edit/delete submission not currently used
           buttonAccessMessage={getButtonAccessMessage()}
           i={i}
         />
