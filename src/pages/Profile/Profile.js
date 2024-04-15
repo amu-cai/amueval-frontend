@@ -1,71 +1,46 @@
 import React from 'react';
 import { FlexColumn, FlexRow } from '../../utils/containers';
 import { Body, H2, Medium } from '../../utils/fonts';
-import KeyCloakService from '../../services/KeyCloakService';
 import Loading from '../../components/generic/Loading';
-import Button from '../../components/generic/Button';
 import theme from '../../utils/theme';
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../redux/authSlice';
-import { REDIRECT_TO_ROOT_PAGE } from '../../utils/globals';
-import { useNavigate } from 'react-router-dom';
+import getProfileInfo from '../../api/getProfileInfo';
 
 const Profile = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [profileInfo, setProfileInfo] = React.useState(null);
   const profileInfoAttributes = [
-    { label: 'Username:', key: 'preferred_username' },
-    { label: 'Name:', key: 'name' },
-    { label: 'First name:', key: 'given_name' },
-    { label: 'Surname:', key: 'family_name' },
-    { label: 'Email:', key: 'email' },
+    { label: 'Username:', key: 'username', bool: false },
+    { label: 'Email:', key: 'email', bool: false },
+    { label: 'Admin:', key: 'isAdmin', bool: true },
+    { label: 'Author:', key: 'isAuthor', bool: true },
   ];
 
-  const getProfileInfo = () => {
-    setTimeout(() => {
-      if (KeyCloakService.isLoggedIn()) {
-        KeyCloakService.getProfileInfo(setProfileInfo);
-      } else {
-        setProfileInfo(false);
-      }
-    }, 3000);
-  };
-
   React.useEffect(() => {
-    getProfileInfo();
+    getProfileInfo(setProfileInfo);
   }, []);
+
+  const renderValue = (attr) => {
+    if (attr.bool) {
+      console.log(profileInfo[attr.key]);
+      return profileInfo[attr.key] ? 'Yes' : 'No';
+    } else {
+      return profileInfo[attr.key];
+    }
+  };
 
   const profileInfoRender = () => {
     if (profileInfo !== null) {
-      if (profileInfo) {
+      if (profileInfo?.username) {
         return (
-          <>
-            <FlexColumn as="ul" alignmentX="flex-start" gap="16px">
-              {profileInfoAttributes.map((attr, i) => {
-                return (
-                  <FlexRow key={`profileInfoItem-${i}`} as="li" gap="8px">
-                    <Body fontSize="18px">{attr.label}</Body>
-                    <Medium fontSize="18px">{profileInfo[attr.key]}</Medium>
-                  </FlexRow>
-                );
-              })}
-            </FlexColumn>
-            <Button
-              handler={() => {
-                dispatch(
-                  logOut({
-                    redirectToRootPage: () => REDIRECT_TO_ROOT_PAGE(navigate),
-                  })
-                );
-              }}
-              width="232px"
-              height="36px"
-              backgroundColor={theme.colors.dark}
-            >
-              Sign out & reset all cookies
-            </Button>
-          </>
+          <FlexColumn as="ul" alignmentX="flex-start" gap="16px">
+            {profileInfoAttributes.map((attr, i) => {
+              return (
+                <FlexRow key={`profileInfoItem-${i}`} as="li" gap="8px">
+                  <Body fontSize="18px">{attr.label}</Body>
+                  <Medium fontSize="18px">{renderValue(attr)}</Medium>
+                </FlexRow>
+              );
+            })}
+          </FlexColumn>
         );
       } else {
         return 'Profile loading failed';

@@ -1,7 +1,8 @@
-import KeyCloakService from '../services/KeyCloakService';
 import { API } from '../utils/globals';
 import theme from '../utils/theme';
+import LOCAL_STORAGE from '../utils/localStorage';
 
+// Not currently using
 const deleteSubmission = async (
   item,
   deletedItems,
@@ -12,7 +13,7 @@ const deleteSubmission = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      Authorization: `Bearer ${KeyCloakService.getToken()}`,
+      Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)}`,
     },
   })
     .then((resp) => resp.text())

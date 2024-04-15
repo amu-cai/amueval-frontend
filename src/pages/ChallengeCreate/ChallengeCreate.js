@@ -64,7 +64,7 @@ const ChallengeCreate = () => {
       main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
       award: award,
       sorting: metricSorting,
-      deadline: deadline.replaceAll(' ', '') + ', 23:59:59',
+      deadline: deadline ? deadline.replaceAll(' ', '') + ', 23:59:59' : '',
     };
 
     await challengeCreate(
