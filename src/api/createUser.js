@@ -2,7 +2,9 @@ import { API } from '../utils/globals';
 
 const createUser = async (data, setResult) => {
   fetch(`${API}/auth/create-user`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+        'Content-Type': 'application/json',
+    },
     method: 'post',
     body: JSON.stringify(data),
   })

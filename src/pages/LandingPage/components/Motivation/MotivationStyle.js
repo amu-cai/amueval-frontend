@@ -9,6 +9,14 @@ const MotivationStyle = styled(FlexColumn)`
     width: 100vw;
   }
   
+  .MotivationStyle__text {
+    margin-top: 40px;
+  }
+  
+  .MotivationStyle__img_sm {
+    margin-bottom: 40px;
+  }
+  
   .MotivationStyle__wrapper {
     margin-top: 100px;
   }

@@ -4,6 +4,9 @@ import { Body, H2, Medium } from '../../utils/fonts';
 import Loading from '../../components/generic/Loading';
 import theme from '../../utils/theme';
 import getProfileInfo from '../../api/getProfileInfo';
+import Button from "../../components/generic/Button";
+import {Link} from "react-router-dom";
+import {EDIT_PROFILE_PAGE} from "../../utils/globals";
 
 const Profile = () => {
   const [profileInfo, setProfileInfo] = React.useState(null);
@@ -20,7 +23,6 @@ const Profile = () => {
 
   const renderValue = (attr) => {
     if (attr.bool) {
-      console.log(profileInfo[attr.key]);
       return profileInfo[attr.key] ? 'Yes' : 'No';
     } else {
       return profileInfo[attr.key];
@@ -31,16 +33,16 @@ const Profile = () => {
     if (profileInfo !== null) {
       if (profileInfo?.username) {
         return (
-          <FlexColumn as="ul" alignmentX="flex-start" gap="16px">
-            {profileInfoAttributes.map((attr, i) => {
-              return (
-                <FlexRow key={`profileInfoItem-${i}`} as="li" gap="8px">
-                  <Body fontSize="18px">{attr.label}</Body>
-                  <Medium fontSize="18px">{renderValue(attr)}</Medium>
-                </FlexRow>
-              );
-            })}
-          </FlexColumn>
+            <FlexColumn as="ul" alignmentX="flex-start" gap="16px">
+              {profileInfoAttributes.map((attr, i) => {
+                return (
+                    <FlexRow key={`profileInfoItem-${i}`} as="li" gap="8px">
+                      <Body fontSize="18px">{attr.label}</Body>
+                      <Medium fontSize="18px">{renderValue(attr)}</Medium>
+                    </FlexRow>
+                );
+              })}
+            </FlexColumn>
         );
       } else {
         return 'Profile loading failed';
@@ -50,17 +52,28 @@ const Profile = () => {
   };
 
   return (
-    <FlexColumn width="100%" minHeight="100vh">
-      <FlexColumn
-        gap="32px"
-        border={`2px solid ${theme.colors.green03}`}
-        borderRadius="8px"
-        padding="24px 40px"
-      >
-        <H2 as="h2">Profile Info</H2>
-        {profileInfoRender()}
+      <FlexColumn width="100%" minHeight="100vh">
+        <FlexColumn
+            gap="32px"
+            // border={`2px solid ${theme.colors.green03}`}
+            // borderRadius="8px"
+            padding="24px 40px"
+        >
+          <H2 as="h2">Profile Info</H2>
+          {profileInfoRender()}
+          <Button
+              width="82px"
+              height="36px"
+              margin="16px 0 0 0"
+              as={Link}
+              to={EDIT_PROFILE_PAGE}
+              backgroundColor={theme.colors.blue}
+              target="__blank"
+          >
+            <Body color={theme.colors.white}>Edit</Body>
+          </Button>
+        </FlexColumn>
       </FlexColumn>
-    </FlexColumn>
   );
 };
 

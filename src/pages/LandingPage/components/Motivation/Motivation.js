@@ -12,19 +12,19 @@ const Motivation = () => {
     const mobileRender = () => {
         return (
          <MotivationStyle>
-             <FlexColumn as="section">
+             <FlexColumn as="section" className="MotivationStyle__wrapper">
                  <H2New as="h2">Motivation</H2New>
-                 <img src={virus} width="358px" alt="arrows"/>
+                 <img src={virus} width="358px" alt="arrows" className="MotivationStyle__img_sm"/>
                  <br />
                  <FlexColumn alignmentX="start">
                      <BodyNew as="p">
-                         Explore interesting solutions to problems using AI
+                         &#8226; Develop your ML skills
                      </BodyNew>
                      <BodyNew as="p">
-                         Train by solving our challenges
+                         &#8226; Demonstrate your ML skills to employers
                      </BodyNew>
                      <BodyNew as="p">
-                         Participate in competitions with commercial challenges
+                         &#8226; Become the member of ML community
                      </BodyNew>
                  </FlexColumn>
              </FlexColumn>
@@ -40,19 +40,19 @@ const Motivation = () => {
                     <FlexColumn>
                         <img src={virus} width="442px" alt="arrows"/>
                     </FlexColumn>
-                    <FlexColumn as="section">
+                    <FlexColumn as="section" className="MotivationStyle__text">
                         <H2New as="h2">
                             Motivation
                         </H2New>
                         <FlexColumn alignmentX="start">
                             <BodyNew as="p">
-                                &#8226; Explore interesting solutions to problems using AI
+                                &#8226; Develop your ML skills
                             </BodyNew>
                             <BodyNew as="p">
-                                &#8226; Train by solving our challenges
+                                &#8226; Demonstrate your ML skills to employers
                             </BodyNew>
                             <BodyNew as="p">
-                                &#8226; Participate in competitions with commercial challenges
+                                &#8226; Become the member of ML community
                             </BodyNew>
                         </FlexColumn>
                     </FlexColumn>
@@ -69,19 +69,19 @@ const Motivation = () => {
                     <FlexColumn>
                         <img src={virus} width="460px" alt="arrows"/>
                     </FlexColumn>
-                    <FlexColumn as="section">
+                    <FlexColumn as="section" className="MotivationStyle__text">
                         <H2New as="h2">
                             Motivation
                         </H2New>
                         <FlexColumn alignmentX="start">
                             <BodyNew as="p">
-                                &#8226; Explore interesting solutions to problems using AI
+                                &#8226; Develop your ML skills
                             </BodyNew>
                             <BodyNew as="p">
-                                &#8226; Train by solving our challenges
+                                &#8226; Demonstrate your ML skills to employers
                             </BodyNew>
                             <BodyNew as="p">
-                                &#8226; Participate in competitions with commercial challenges
+                                &#8226; Become the member of ML community
                             </BodyNew>
                         </FlexColumn>
                     </FlexColumn>

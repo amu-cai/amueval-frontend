@@ -18,6 +18,7 @@ export const CHALLENGE_PAGE = '/challenge';
 export const CHALLENGE_CREATE_PAGE = '/challenge-create';
 export const CHALLENGE_CREATE_HOW_TO_PAGE = '/challenge-create-how-to';
 export const PROFILE_PAGE = '/profile';
+export const EDIT_PROFILE_PAGE = '/profile/edit';
 export const ADMIN_PANEL_PAGE = '/admin-panel';
 export const POLICY_PRIVACY_PAGE = '/policy-privacy';
 export const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;

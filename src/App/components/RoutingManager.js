@@ -1,15 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import {
-  CHALLENGES_PAGE,
-  CHALLENGE_CREATE_PAGE,
-  CHALLENGE_PAGE,
-  CHALLENGE_SECTIONS,
-  LOGIN_PAGE,
-  POLICY_PRIVACY_PAGE,
-  PROFILE_PAGE,
-  REGISTER_PAGE,
-  USE_PREVIOUS,
-  CHALLENGE_CREATE_HOW_TO_PAGE,
+    CHALLENGES_PAGE,
+    CHALLENGE_CREATE_PAGE,
+    CHALLENGE_PAGE,
+    CHALLENGE_SECTIONS,
+    LOGIN_PAGE,
+    POLICY_PRIVACY_PAGE,
+    PROFILE_PAGE,
+    REGISTER_PAGE,
+    USE_PREVIOUS,
+    CHALLENGE_CREATE_HOW_TO_PAGE, EDIT_PROFILE_PAGE,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challanges';
@@ -30,6 +30,7 @@ import { logIn, logOut } from '../../redux/authSlice';
 import auth from '../../api/auth';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 import ChallengeCreateHowTo from '../../pages/ChallengeCreateHowTo';
+import EditProfile from "../../pages/EditProfile/EditProfile";
 
 const RoutingManager = (props) => {
   const dispatch = useDispatch();
@@ -173,6 +174,10 @@ const RoutingManager = (props) => {
         path={`${POLICY_PRIVACY_PAGE}/register`}
         element={<PolicyPrivacy beforeRegister />}
       />
+        <Route
+            path={`${EDIT_PROFILE_PAGE}`}
+            element={<EditProfile />}
+        />
       <Route path={'*'} element={<PageNotFound />} />
       {logInRoutesRender()}
       {rootPageRender()}

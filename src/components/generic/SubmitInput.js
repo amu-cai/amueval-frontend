@@ -4,6 +4,11 @@ import { Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 
 const SubmitInput = (props) => {
+  React.useEffect(() => {
+    if (props.initOnChange) {
+      props.handler(props.defaultValue);
+    }
+  }, []);
   const inputRender = () => {
     switch (props.type) {
       case 'select': {
@@ -20,6 +25,7 @@ const SubmitInput = (props) => {
             defaultValue={props.defaultValue}
             padding="4px"
             onChange={(e) => props.handler(e.target.value)}
+            initOnChange={false}
           >
             {props.options.map((option) => {
               return <option value={option}>{option}</option>;

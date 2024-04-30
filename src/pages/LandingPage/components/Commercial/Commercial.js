@@ -11,21 +11,19 @@ const Commercial = () => {
   const mobileRender = () => {
     return (
         <CommercialStyle>
-          <FlexColumn gap="40px" alignmentX="end" class="test">
-            <FlexColumn as="section">
+          <FlexColumn gap="40px" alignmentX="end">
+            <FlexColumn as="section" className="CommercialStyle__wrapper">
               <H2New as="h2">
-                Commercial challenges
+                For Challenge Organizers
               </H2New>
               <BodyNew as="p">
-                The artificial intelligence center works with companies by
-                accepting machine learning challenges from them that are available
-                to solve on AMU-Eval. Each commercial challenge is properly scored
-                which translates into an award for solving it according to the
-                client's requirements.
+                &#8226; Find the best AI solution to your business need
               </BodyNew>
               <BodyNew as="p">
-                Open challenges can allow you to find the right people to work
-                with. Find a challenge for your team and take it on!
+                &#8226; Scout AI talents for your organization
+              </BodyNew>
+              <BodyNew as="p">
+                &#8226; Promote your brand in AI community
               </BodyNew>
             </FlexColumn>
             <FlexRow>
@@ -39,21 +37,19 @@ const Commercial = () => {
   const tabletRender = () => {
     return (
         <CommercialStyle>
-          <FlexRow gap="40px" alignmentY="start">
-            <FlexColumn as="section" className="CommercialStyle__text">
+          <FlexRow gap="40px" alignmentY="start" className="CommercialStyle__wrapper">
+            <FlexColumn as="section" alignmentX="start" className="CommercialStyle__text">
               <H2New textLeft={true} as="h2">
-                Commercial challenges
+                For Challenge Organizers
               </H2New>
               <BodyNew as="p">
-                The artificial intelligence center works with companies by
-                accepting machine learning challenges from them that are available
-                to solve on AMU-Eval. Each commercial challenge is properly scored
-                which translates into an award for solving it according to the
-                client's requirements.
+                &#8226; Find the best AI solution to your business need
               </BodyNew>
               <BodyNew as="p">
-                Open challenges can allow you to find the right people to work
-                with. Find a challenge for your team and take it on!
+                &#8226; Scout AI talents for your organization
+              </BodyNew>
+              <BodyNew as="p">
+                &#8226; Promote your brand in AI community
               </BodyNew>
             </FlexColumn>
             <FlexColumn>
@@ -68,21 +64,19 @@ const Commercial = () => {
   const desktopRender = () => {
     return (
         <CommercialStyle>
-          <FlexRow gap="128px" alignmentY="start">
-            <FlexColumn as="section">
-              <H2New textLeft={true} as="h2">
-                Commercial challenges
+          <FlexRow gap="128px" alignmentY="start" className="CommercialStyle__wrapper">
+            <FlexColumn as="section" alignmentX="start" className="CommercialStyle__text">
+              <H2New as="h2">
+                For Challenge Organizers
               </H2New>
               <BodyNew as="p">
-                The artificial intelligence center works with companies by
-                accepting machine learning challenges from them that are available
-                to solve on AMU-Eval. Each commercial challenge is properly scored
-                which translates into an award for solving it according to the
-                client's requirements.
+                &#8226; Find the best AI solution to your business need
               </BodyNew>
               <BodyNew as="p">
-                Open challenges can allow you to find the right people to work
-                with. Find a challenge for your team and take it on!
+                &#8226; Scout AI talents for your organization
+              </BodyNew>
+              <BodyNew as="p">
+                &#8226; Promote your brand in AI community
               </BodyNew>
             </FlexColumn>
             <FlexColumn>

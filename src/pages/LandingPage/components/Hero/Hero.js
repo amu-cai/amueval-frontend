@@ -18,7 +18,7 @@ const Hero = (props) => {
            <FlexColumn gap="20px" className="HeroStyle__wrapper">
                 <img src={amuEval} width="250px" alt="amu eval" className="HeroStyle_logo"/>
                 <MediumNew as="p" className="HeroStyle__text">
-                    A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                    A challenge platform for machine learning research, competition, cooperation and reproducibility.
                 </MediumNew>
                 <img src={brain} alt="brain" width="282px"/>
             </FlexColumn>
@@ -39,7 +39,7 @@ const Hero = (props) => {
                         <img src={amuEval} width="431px" alt="ame eval" className="HeroStyle_logo"/>
                     </FlexRow>
                     <MediumNew as="p">
-                        A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                        A challenge platform for machine learning research, competition, cooperation and reproducibility.
                     </MediumNew>
                 </FlexColumn>
                 <FlexColumn>
@@ -60,7 +60,7 @@ const Hero = (props) => {
                   <img src={amuEval} width="541px" alt="amu eval" className="HeroStyle_logo"/>
                 </FlexRow>
                 <MediumNew as="p">
-                    A data challenge platform for machine learning research, competition, cooperation and reproducibility.
+                    A challenge platform for machine learning research, competition, cooperation and reproducibility.
                 </MediumNew>
               </FlexColumn>
                   <img className="HeroStyle__brain" src={brain} alt="brain" width="518px"/>
