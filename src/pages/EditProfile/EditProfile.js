@@ -18,7 +18,7 @@ const EditProfile = () => {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
-    
+
 
     const [profileInfo, setProfileInfo] = React.useState(null);
     const [email, setEmail] = React.useState('');
@@ -39,8 +39,8 @@ const EditProfile = () => {
         );
     };
 
-  if (profileInfo !== null) {
-      return (
+    if (profileInfo !== null) {
+        return (
             <FlexColumn width="100%" minHeight="100vh">
                 <FlexColumn
                     gap="32px"
@@ -87,8 +87,8 @@ const EditProfile = () => {
                     </Button>
                 </FlexColumn>
             </FlexColumn>
-      );
-  }
+        );
+    }
 };
 
 export default EditProfile;
