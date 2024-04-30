@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import {PROFILE_PAGE} from "../../utils/globals";
 const EditProfile = () => {
     const dispatch = useDispatch();
-    const emailValidator = (email) => {
+    const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
             .match(
@@ -22,7 +22,7 @@ const EditProfile = () => {
 
     const [profileInfo, setProfileInfo] = React.useState(null);
     const [email, setEmail] = React.useState('');
-    const emailValidated = !emailValidator(email);
+    const emailFormatError = !validateEmail(email);
 
     React.useEffect(() => {
         getProfileInfo(setProfileInfo);
@@ -61,7 +61,7 @@ const EditProfile = () => {
                                 Email required
                             </Medium>
                         )}
-                        {email && emailValidated && (
+                        {email && emailFormatError && (
                             <Medium fontSize="14px" width="100%" color={theme.colors.red}>
                                 Invalid email format
                             </Medium>
@@ -81,7 +81,7 @@ const EditProfile = () => {
                                 })
                             )
                         )}
-                        disabled={emailValidated}
+                        disabled={emailFormatError}
                     >
                         <Menu color={theme.colors.white}>Submit</Menu>
                     </Button>
