@@ -68,7 +68,6 @@ const Profile = () => {
               as={Link}
               to={EDIT_PROFILE_PAGE}
               backgroundColor={theme.colors.blue}
-              target="__blank"
           >
             <Body color={theme.colors.white}>Edit</Body>
           </Button>
