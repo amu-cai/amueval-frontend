@@ -8,7 +8,7 @@ const SubmitInput = (props) => {
     if (props.initOnChange) {
       props.handler(props.defaultValue);
     }
-  }, []);
+  }, [props]);
   const inputRender = () => {
     switch (props.type) {
       case 'select': {
