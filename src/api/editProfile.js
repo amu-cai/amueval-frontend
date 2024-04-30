@@ -11,7 +11,13 @@ const editProfile = async (profile) => {
             Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)}`,
         },
     })
-        .then((res) => res.text())
+        .then((response) => response.text(),
+            (error) => {
+                console.log(error);
+                if (!alert('Oops, something went wrong!')) {
+                    window.location.replace('/');
+                }
+            })
         .then((data) => {
             return data;
         });

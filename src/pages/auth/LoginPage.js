@@ -9,7 +9,7 @@ import LinkStyle from './styles/LinkStyle';
 import { Link } from 'react-router-dom';
 import { Body } from '../../utils/fonts';
 import theme from '../../utils/theme';
-import { CHALLENGES_PAGE, REGISTER_PAGE } from '../../utils/globals';
+import {CHALLENGES_PAGE, REGISTER_PAGE} from '../../utils/globals';
 import login from '../../api/login';
 import auth from '../../api/auth';
 import { useDispatch } from 'react-redux';
