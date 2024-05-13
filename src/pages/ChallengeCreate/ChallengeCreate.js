@@ -1,270 +1,339 @@
 import React from 'react';
-import { FlexColumn, FlexRow } from '../../utils/containers';
-import SubmitInput from '../../components/generic/SubmitInput';
-import { H2, Medium, Body } from '../../utils/fonts';
+import {FlexColumn, FlexRow} from '../../utils/containers';
+import {H1New} from '../../utils/fonts';
 import theme from '../../utils/theme';
 import Button from '../../components/generic/Button';
-import { Menu } from '../../utils/fonts';
 import challengeCreate from '../../api/challengeCreate';
 import getMetrics from '../../api/getMetrics';
-import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
-import { useDispatch } from 'react-redux';
+import {popUpMessageHandler} from '../../redux/popUpMessegeSlice';
+import {useDispatch} from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
-import { Link } from 'react-router-dom';
-import { CHALLENGE_CREATE_HOW_TO_PAGE } from '../../utils/globals';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import ChallengeCreateStyle from "../../components/generic/ChallengeCreateStyle";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import Dropzone from './Dropzone';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
+
 
 const ChallengeCreate = () => {
-  const dispatch = useDispatch();
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [award, setAward] = React.useState('');
-  const [deadline, setDeadline] = React.useState('');
-  const [type, setType] = React.useState('image');
-  const [metric, setMetric] = React.useState('accuracy');
-  const [parameters, setParameters] = React.useState(null);
-  const [challengeSource, setChallengeSource] = React.useState(null);
-  const [metricSorting, setMetricSorting] = React.useState('descending');
-  const [challengeFile, setChallengeFile] = React.useState(null);
-  const [uploadResult, setUploadResult] = React.useState(null);
+    const dispatch = useDispatch();
+    const [title, setTitle] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [award, setAward] = React.useState('');
+    const [deadline, setDeadline] = React.useState('');
+    const [type, setType] = React.useState('image');
+    const [metric, setMetric] = React.useState('');
+    const [challengeSource, setChallengeSource] = React.useState('');
+    const [challengeFile] = React.useState(null);
+    const [uploadResult, setUploadResult] = React.useState(null);
+    const [metrics, setMetrics] = React.useState(null);
+    const [datasetError, setDatasetError] = React.useState(false);
+    const [metricError, setMetricError] = React.useState(false);
+    const [solutionError, setSolutionError] = React.useState(false);
+    const [showAdvanced, setShowAdvanced] = React.useState(false);
 
-  const [metrics, setMetrics] = React.useState(null);
+    const [acceptedFiles, setAcceptedFiles] = React.useState([]);
 
-  React.useEffect(() => {
-    getMetrics(setMetrics);
-  }, []);
 
-  React.useEffect(() => {
-    if (uploadResult) {
-      if (uploadResult?.detail) {
-        dispatch(
-          popUpMessageHandler({
-            header: 'Challenge create error',
-            message: `Error: ${uploadResult.detail}`,
-            borderColor: theme.colors.red,
-          })
-        );
-      } else {
-        dispatch(
-          popUpMessageHandler({
-            header: 'Challenge create success',
-            message: `${uploadResult.challenge}: ${uploadResult.message}`,
-          })
-        );
-      }
-    }
-  }, [uploadResult, dispatch]);
+    React.useEffect(() => {
+        getMetrics(setMetrics);
+    }, []);
 
-  const challengeCreateSubmit = async () => {
-    const challengeInput = {
-      title: title,
-      description: description,
-      source: challengeSource,
-      type: type,
-      main_metric: metric,
-      main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
-      award: award,
-      sorting: metricSorting,
-      deadline: deadline ? deadline.replaceAll(' ', '') + ', 23:59:59' : '',
+
+    React.useEffect(() => {
+        if (uploadResult) {
+            if (uploadResult?.detail) {
+                dispatch(
+                    popUpMessageHandler({
+                        header: 'Challenge create error',
+                        message: `Error: ${uploadResult.detail}`,
+                        borderColor: theme.colors.red,
+                    })
+                );
+            } else {
+                dispatch(
+                    popUpMessageHandler({
+                        header: 'Challenge create success',
+                        message: `${uploadResult.challenge}: ${uploadResult.message}`,
+                    })
+                );
+            }
+        }
+    }, [uploadResult, dispatch]);
+
+    const validateChallenge = () => {
+        const validateDataset = () => {
+            if (!challengeSource) {
+                setDatasetError('Dataset link is required');
+                return false;
+            } else if (!urlRegex.test(challengeSource)) {
+                setDatasetError('Invalid dataset link');
+                return false;
+            }
+            setDatasetError(false);
+            return true;
+        };
+
+        const validateMetric = () => {
+            if (!metric) {
+                setMetricError('Metric is required');
+                return false;
+            }
+            setMetricError(false);
+            return true;
+        };
+
+        const validateSolution = () => {
+            if (!acceptedFiles.length) {
+                setSolutionError('Solution file is required');
+                return false;
+            }
+            setSolutionError(false);
+            return true;
+        };
+
+        const urlRegex = /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(#[-a-z\d_]*)?$/i;
+
+        const isDatasetValid = validateDataset();
+        const isMetricValid = validateMetric();
+        const isSolutionValid = validateSolution();
+
+        return isDatasetValid && isMetricValid && isSolutionValid;
     };
 
-    await challengeCreate(
-      challengeFile,
-      challengeInput,
-      setUploadResult,
-      localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
-    );
-  };
+    const handleShowAdvanced = () => {
+        setShowAdvanced(!showAdvanced);
+    };
 
-  const deadlineFormat = new RegExp(
-    '(([0-2][0-9])|(3[0-1]))-((0[0-9])|(1[0-2]))-[1-9][0-9][0-9][0-9]'
-  );
+    const challengeCreateSubmit = async () => {
+        const challengeValidated = validateChallenge();
+        if (!challengeValidated) {
+            return;
+        }
+        console.log(deadline);
+        console.log('stral do api');
+        const challengeInput = {
+            title: title,
+            description: description,
+            source: challengeSource,
+            type: type,
+            main_metric: metric,
+            // main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
+            award: award,
+            // sorting: metricSorting,
+            deadline: deadline ? deadline.replaceAll(' ', '') + ', 23:59:59' : '',
+        };
 
-  const parametersListRender = () => {
-    const choosenMetric = metrics?.find((m) => m['name'] === metric);
-    if (choosenMetric) {
-      return choosenMetric.parameters.map((parameter, index) => {
-        return (
-          <Body
-            as="li"
-            listStyle="inside"
-            key={`metric-param-${index}-${parameter['name']}`}
-            margin="0 0 4px 0"
-          >
-            - {`${parameter['name']} (${parameter['data_type']})`}
-          </Body>
+        await challengeCreate(
+            challengeFile,
+            challengeInput,
+            setUploadResult,
+            localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
         );
-      });
-    }
-  };
+    };
 
-  const deadlineValidationRender = () => {
-    const render = deadline?.length && !deadlineFormat.test(deadline);
-    if (render) {
-      return (
-        <Medium fontSize="14px" width="100%" color={theme.colors.red}>
-          Deadline format: dd-mm-yyyy
-        </Medium>
-      );
-    }
-  };
+    const customTheme = createTheme({
+        palette: {
+            primary: {
+                main: theme.colors.green700
+            },
+        },
+    });
 
-  return (
-    <FlexColumn padding="80px 0" width="100%" minHeight="100vh" gap="32px">
-      <FlexRow gap="12px">
-        <H2 as="h1">Challenge Create</H2>
-        <Medium
-          margin="4px 0 0 0"
-          color={theme.colors.green}
-          to={CHALLENGE_CREATE_HOW_TO_PAGE}
-          as={Link}
-          cursor="pointer"
-        >
-          How To
-        </Medium>
-      </FlexRow>
-      <FlexColumn maxWidth="600px" width="100%" gap="20px">
-        <FlexColumn gap="10px" width="100%">
-          <SubmitInput
-            label="Title"
-            handler={(value) => {
-              setTitle(value);
-            }}
-          />
-          {!title && (
-            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
-              Title required
-            </Medium>
-          )}
-        </FlexColumn>
-        <FlexColumn gap="10px" width="100%">
-          <SubmitInput
-            label="Challenge source link"
-            handler={(value) => {
-              setChallengeSource(value);
-            }}
-          />
-          {!challengeSource && (
-            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
-              Challenge source required
-            </Medium>
-          )}
-        </FlexColumn>
-        <SubmitInput
-          label="Description"
-          type="textarea"
-          handler={(value) => {
-            setDescription(value);
-          }}
-        />
-        <FlexColumn gap="10px" width="100%">
-          <SubmitInput
-            label="Deadline"
-            handler={(value) => {
-              setDeadline(value);
-            }}
-          />
-          {deadlineValidationRender()}
-        </FlexColumn>
-        <SubmitInput
-          label="Award"
-          handler={(value) => {
-            setAward(value);
-          }}
-        />
-        <SubmitInput
-          label="Type"
-          type="select"
-          options={['image', 'text', 'tabular']}
-          handler={(value) => {
-            setType(value);
-          }}
-        />
-        <SubmitInput
-          label="Metric"
-          type="select"
-          options={metrics ? metrics.map((m) => m.name) : []}
-          handler={(value) => {
-            setMetric(value);
-          }}
-        />
-        <FlexColumn width="100%" gap="8px">
-          <Medium width="100%">Metric parameters</Medium>
-          <FlexColumn width="100%" alignmentX="flex-start" as="ol">
-            {parametersListRender()}
-          </FlexColumn>
-          <SubmitInput
-            label="input params as json string"
-            type="textarea"
-            placeholder='for example: {"normalize": true, "sample_weight": [1, 2, 3]}'
-            handler={(value) => setParameters(value)}
-          />
-          <Medium width="100%">
-            Metric documentation&nbsp;
-            <Medium
-              as="a"
-              cursor="pointer"
-              target="__blank"
-              textDecoration="underline"
-              color={theme.colors.blue}
-              href={metrics?.find((m) => m['name'] === metric).link}
-            >
-              link
-            </Medium>
-          </Medium>
-        </FlexColumn>
-        <SubmitInput
-          label="Metric sorting"
-          type="select"
-          options={['descending', 'ascending']}
-          handler={(value) => {
-            setMetricSorting(value);
-          }}
-        />
-        <FlexColumn gap="10px" width="100%">
-          <SubmitInput
-            label="Challenge Zip File"
-            type="file"
-            accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
-            handler={(e) => {
-              setChallengeFile(e.target.files[0]);
-            }}
-          />
-          {!challengeFile && (
-            <Medium fontSize="14px" width="100%" color={theme.colors.red}>
-              Challenge file required
-            </Medium>
-          )}
-        </FlexColumn>
-        <FlexRow width="100%" alignmentX="flex-start" gap="48px">
-          <Button
-            width="122px"
-            height="44px"
-            margin="16px 0 0 0"
-            handler={() => challengeCreateSubmit()}
-            disabled={
-              !challengeFile ||
-              !title ||
-              !challengeSource ||
-              (deadline?.length && !deadlineFormat.test(deadline))
-            }
-          >
-            <Menu color={theme.colors.white}>Submit</Menu>
-          </Button>
-          <Button
-            width="82px"
-            height="36px"
-            margin="16px 0 0 0"
-            as={Link}
-            to={CHALLENGE_CREATE_HOW_TO_PAGE}
-            backgroundColor={theme.colors.blue}
-            target="__blank"
-          >
-            <Body color={theme.colors.white}>How to</Body>
-          </Button>
-        </FlexRow>
-      </FlexColumn>
-    </FlexColumn>
-  );
+    const handleChallengeSource = (event) => {
+        setChallengeSource(event.target.value);
+    };
+
+    const handleMetricChange = (event) => {
+        setMetric(event.target.value);
+    };
+
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value);
+    };
+
+    const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
+    };
+
+    const handleAwardChange = (event) => {
+        setAward(event.target.value);
+    };
+
+    const handleTypeChange = (event) => {
+        setType(event.target.value);
+    };
+
+    const handleDeadlineChange = (date) => {
+        setDeadline(date);
+    };
+
+    const halfYearFromNow =  dayjs().add(6, 'months');
+
+    const getTitleFromUrl = (url) => {
+        if (!challengeSource) return '';
+        const lastPart = url.split('/').pop();
+        const formattedLastPart = lastPart.replace(/[^a-zA-Z\s]/g, '')
+            .replace(/[-_   ]/g, ' ')
+            .replace(/\b\w/g, c => c.toUpperCase());
+        return formattedLastPart;
+    };
+
+    return (
+        <ChallengeCreateStyle>
+            <FlexColumn padding="140px 0" width="100%" minHeight="100vh" gap="32px">
+                <FlexRow gap="12px">
+                    <H1New as="h1">Create Challenge</H1New>
+                </FlexRow>
+                <FlexColumn maxWidth="800px" width="100%" gap="20px">
+
+                    <ThemeProvider theme={customTheme}>
+                        <span className="topLabel">Dataset link *</span>
+                        <TextField
+                            error={!!datasetError}
+                            label="Share URL to dataset"
+                            variant="outlined"
+                            fullWidth
+                            onChange={handleChallengeSource}
+                            helperText={datasetError ? datasetError: ''}
+                        />
+                    </ThemeProvider>
+
+                    <ThemeProvider theme={customTheme}>
+                        <span className="topLabel">Metric *</span>
+                        <FormControl fullWidth error={!!metricError}>
+                            <InputLabel>Choose your metric</InputLabel>
+                            <Select
+                                value={metric}
+                                onChange={handleMetricChange}
+                                label={"Choose your metric"}
+                                IconComponent={KeyboardArrowDownIcon}
+                            >
+                                <MenuItem key="123" value="metryka">metryka</MenuItem>
+                                {metrics ? metrics.map((m, index) => (
+                                    <MenuItem key={index} value={m}>{m.name}</MenuItem>
+                                )) : []}
+                            </Select>
+                            <FormHelperText>{metricError ? metricError: ''}</FormHelperText>
+                        </FormControl>
+                    </ThemeProvider>
+
+                    <FlexColumn gap="10px" width="100%">
+                        <span className="topLabel">Upload solution *</span>
+                            <Dropzone acceptedFiles={acceptedFiles} setAcceptedFiles={setAcceptedFiles} error={!!solutionError}></Dropzone>
+                            <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{solutionError ? solutionError: ''}</FormHelperText>
+                    </FlexColumn>
+
+                    <div className="customizeBtn">
+                        <Button
+                            backgroundColor={theme.colors.white}
+                            color="#5E5E5E"
+                            underlined={true}
+                            handler={handleShowAdvanced}
+                        >
+                            Advanced
+                            <KeyboardDoubleArrowDownIcon
+                                style={{
+                                    color: theme.colors.green700,
+                                    transform: showAdvanced ? 'rotate(180deg)' : 'none'
+                                }}
+                            />
+                        </Button>
+                    </div>
+
+                    {showAdvanced && (
+                        <>
+                            <ThemeProvider theme={customTheme}>
+                                <span className="topLabel">Title</span>
+                                <TextField
+                                    label="Enter the project title"
+                                    variant="outlined"
+                                    fullWidth
+                                    onChange={handleTitleChange}
+                                    defaultValue={getTitleFromUrl(challengeSource)}
+                                />
+                            </ThemeProvider>
+
+                            <ThemeProvider theme={customTheme}>
+                                <span className="topLabel">Description</span>
+                                <TextField
+                                    label="Enter the project description"
+                                    variant="outlined"
+                                    fullWidth
+                                    onChange={handleDescriptionChange}
+                                />
+                            </ThemeProvider>
+                            <ThemeProvider theme={customTheme}>
+                                <span className="topLabel">Deadline</span>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        label="Enter or pick the submissions deadline"
+                                        onChange={handleDeadlineChange}
+                                        sx={{width: '100%'}}
+                                        defaultValue={halfYearFromNow}
+                                        format="DD.MM.YYYY"
+                                    />
+                                </LocalizationProvider>
+                            </ThemeProvider>
+                            <ThemeProvider theme={customTheme}>
+                                <span className="topLabel">Type</span>
+                                <FormControl fullWidth>
+                                    <InputLabel>Choose data type</InputLabel>
+                                    <Select
+                                        value={type}
+                                        onChange={handleTypeChange}
+                                        label={"Choose data type"}
+                                        IconComponent={KeyboardArrowDownIcon}
+                                    >
+                                        {['image', 'text', 'tabular'].map((type, index) => (
+                                            <MenuItem key={index} value={type}>{type}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </ThemeProvider>
+
+                            <ThemeProvider theme={customTheme}>
+                                <span className="topLabel">Award</span>
+                                <TextField
+                                    label="Enter the award for the winner"
+                                    variant="outlined"
+                                    fullWidth
+                                    onChange={handleAwardChange}
+                                />
+                            </ThemeProvider>
+                        </>
+                    )}
+
+                    <FlexRow width="100%" alignmentX="flex-end" alignmentY="flex-end" gap="20px">
+                        <Button
+                            backgroundColor={theme.colors.white}
+                            color="#5E5E5E"
+                            borderColor={theme.colors.gray500}
+                            height="32px"
+                            width="110px"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            backgroundColor={theme.colors.white}
+                            color="#5E5E5E"
+                            borderColor={theme.colors.green700}
+                            height="40px"
+                            width="140px"
+                            handler={() => challengeCreateSubmit()}
+                        >
+                            Submit
+                        </Button>
+                    </FlexRow>
+                </FlexColumn>
+            </FlexColumn>
+        </ChallengeCreateStyle>
+    );
 };
 
 export default ChallengeCreate;
