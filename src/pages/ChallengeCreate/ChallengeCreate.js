@@ -26,15 +26,16 @@ const ChallengeCreate = () => {
     const [description, setDescription] = React.useState('');
     const [award, setAward] = React.useState('');
     const [deadline, setDeadline] = React.useState('');
-    const [type, setType] = React.useState('image');
+    const [type, setType] = React.useState('');
     const [metric, setMetric] = React.useState('');
     const [challengeSource, setChallengeSource] = React.useState('');
-    const [challengeFile] = React.useState(null);
+    // const [challengeFile] = React.useState(null);
     const [uploadResult, setUploadResult] = React.useState(null);
     const [metrics, setMetrics] = React.useState(null);
     const [datasetError, setDatasetError] = React.useState(false);
     const [metricError, setMetricError] = React.useState(false);
     const [solutionError, setSolutionError] = React.useState(false);
+    const [titleError, setTitleError] = React.useState(false);
     const [showAdvanced, setShowAdvanced] = React.useState(false);
 
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
@@ -97,13 +98,23 @@ const ChallengeCreate = () => {
             return true;
         };
 
+        const validateTitle = () => {
+            if (!title) {
+                setTitleError('Title is required');
+                return false;
+            }
+            setTitleError(false);
+            return true;
+        };
+
         const urlRegex = /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(#[-a-z\d_]*)?$/i;
 
         const isDatasetValid = validateDataset();
         const isMetricValid = validateMetric();
         const isSolutionValid = validateSolution();
+        const isTitleValidated = validateTitle();
 
-        return isDatasetValid && isMetricValid && isSolutionValid;
+        return isDatasetValid && isMetricValid && isSolutionValid && isTitleValidated;
     };
 
     const handleShowAdvanced = () => {
@@ -111,26 +122,26 @@ const ChallengeCreate = () => {
     };
 
     const challengeCreateSubmit = async () => {
+        setTitle(getTitleFromUrl(challengeSource));
+        setDeadline(halfYearFromNow);
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
             return;
         }
-        console.log(deadline);
-        console.log('stral do api');
         const challengeInput = {
             title: title,
             description: description,
             source: challengeSource,
             type: type,
             main_metric: metric,
-            // main_metric_parameters: parameters ? JSON.stringify(parameters) : null,
             award: award,
-            // sorting: metricSorting,
-            deadline: deadline ? deadline.replaceAll(' ', '') + ', 23:59:59' : '',
+            deadline: deadline,
+            sorting: '',
+            main_metric_parameters: '',
         };
 
         await challengeCreate(
-            challengeFile,
+            acceptedFiles[0],
             challengeInput,
             setUploadResult,
             localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
@@ -147,6 +158,7 @@ const ChallengeCreate = () => {
 
     const handleChallengeSource = (event) => {
         setChallengeSource(event.target.value);
+        setTitle(getTitleFromUrl(challengeSource));
     };
 
     const handleMetricChange = (event) => {
@@ -177,11 +189,7 @@ const ChallengeCreate = () => {
 
     const getTitleFromUrl = (url) => {
         if (!challengeSource) return '';
-        const lastPart = url.split('/').pop();
-        const formattedLastPart = lastPart.replace(/[^a-zA-Z\s]/g, '')
-            .replace(/[-_   ]/g, ' ')
-            .replace(/\b\w/g, c => c.toUpperCase());
-        return formattedLastPart;
+        return url.split('/').pop();
     };
 
     return (
@@ -251,11 +259,13 @@ const ChallengeCreate = () => {
                             <ThemeProvider theme={customTheme}>
                                 <span className="topLabel">Title</span>
                                 <TextField
+                                    error={!!titleError}
                                     label="Enter the project title"
                                     variant="outlined"
                                     fullWidth
                                     onChange={handleTitleChange}
                                     defaultValue={getTitleFromUrl(challengeSource)}
+                                    helperText={titleError ? titleError: ''}
                                 />
                             </ThemeProvider>
 
