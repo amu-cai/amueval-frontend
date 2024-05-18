@@ -96,7 +96,7 @@ const MobileNavMenu = (props) => {
             </FlexRow>
             <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
               <Svg size="cover" width="16px" height="16px" src={createIco} />
-              <Menu as="li">Challenge create</Menu>
+              <Menu as="li">Create Challenge</Menu>
             </FlexRow>
             <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={policyIco} size="cover" />

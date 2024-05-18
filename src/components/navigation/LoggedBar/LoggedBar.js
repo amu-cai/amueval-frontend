@@ -12,12 +12,12 @@ import userIco from '../../../assets/user_ico.svg';
 import loginIco from '../../../assets/login_ico.svg';
 import privacyIco from '../../../assets/policy_ico.svg';
 import adminIco from '../../../assets/admin.svg';
-import createIco from '../../../assets/create_ico.svg';
+// import createIco from '../../../assets/create_ico.svg';
 import { Link } from 'react-router-dom';
 import {
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
-  CHALLENGE_CREATE_PAGE,
+  // CHALLENGE_CREATE_PAGE,
   REDIRECT_TO_ROOT_PAGE,
   ADMIN_PANEL_PAGE,
 } from '../../../utils/globals';
@@ -114,12 +114,6 @@ const LoggedBar = () => {
             <FlexRow as={Link} to={ADMIN_PANEL_PAGE} gap="16px">
               <Svg width="16px" height="16px" src={adminIco} size="cover" />
               <Body as="li">Admin panel</Body>
-            </FlexRow>
-          )}
-          {(userRightsInfo?.isAdmin || userRightsInfo?.isAuthor) && (
-            <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
-              <Svg size="cover" width="16px" height="16px" src={createIco} />
-              <Body as="li">Create challenge</Body>
             </FlexRow>
           )}
           <FlexRow as={Link} to={POLICY_PRIVACY_PAGE} gap="16px">

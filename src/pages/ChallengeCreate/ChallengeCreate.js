@@ -35,7 +35,6 @@ const ChallengeCreate = () => {
     const [datasetError, setDatasetError] = React.useState(false);
     const [metricError, setMetricError] = React.useState(false);
     const [solutionError, setSolutionError] = React.useState(false);
-    const [titleError, setTitleError] = React.useState(false);
     const [showAdvanced, setShowAdvanced] = React.useState(false);
 
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
@@ -98,44 +97,34 @@ const ChallengeCreate = () => {
             return true;
         };
 
-        const validateTitle = () => {
-            if (!title) {
-                setTitleError('Title is required');
-                return false;
-            }
-            setTitleError(false);
-            return true;
-        };
-
         const urlRegex = /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(#[-a-z\d_]*)?$/i;
 
         const isDatasetValid = validateDataset();
         const isMetricValid = validateMetric();
         const isSolutionValid = validateSolution();
-        const isTitleValidated = validateTitle();
 
-        return isDatasetValid && isMetricValid && isSolutionValid && isTitleValidated;
+        return isDatasetValid && isMetricValid && isSolutionValid;
     };
 
     const handleShowAdvanced = () => {
         setShowAdvanced(!showAdvanced);
+        setDeadline(halfYearFromNow);
+        setTitle(getTitleFromUrl());
     };
 
     const challengeCreateSubmit = async () => {
-        setTitle(getTitleFromUrl(challengeSource));
-        setDeadline(halfYearFromNow);
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
             return;
         }
         const challengeInput = {
-            title: title,
+            title: title ? title : getTitleFromUrl(),
             description: description,
             source: challengeSource,
             type: type,
             main_metric: metric,
             award: award,
-            deadline: deadline,
+            deadline: deadline ? deadline : halfYearFromNow,
             sorting: '',
             main_metric_parameters: '',
         };
@@ -158,7 +147,6 @@ const ChallengeCreate = () => {
 
     const handleChallengeSource = (event) => {
         setChallengeSource(event.target.value);
-        setTitle(getTitleFromUrl(challengeSource));
     };
 
     const handleMetricChange = (event) => {
@@ -187,9 +175,10 @@ const ChallengeCreate = () => {
 
     const halfYearFromNow =  dayjs().add(6, 'months');
 
-    const getTitleFromUrl = (url) => {
+    const getTitleFromUrl = () => {
         if (!challengeSource) return '';
-        return url.split('/').pop();
+        const title_from_url = challengeSource.split('/').pop();
+        return title_from_url;
     };
 
     return (
@@ -222,7 +211,6 @@ const ChallengeCreate = () => {
                                 label={"Choose your metric"}
                                 IconComponent={KeyboardArrowDownIcon}
                             >
-                                <MenuItem key="123" value="metryka">metryka</MenuItem>
                                 {metrics ? metrics.map((m, index) => (
                                     <MenuItem key={index} value={m}>{m.name}</MenuItem>
                                 )) : []}
@@ -259,13 +247,11 @@ const ChallengeCreate = () => {
                             <ThemeProvider theme={customTheme}>
                                 <span className="topLabel">Title</span>
                                 <TextField
-                                    error={!!titleError}
                                     label="Enter the project title"
                                     variant="outlined"
                                     fullWidth
                                     onChange={handleTitleChange}
-                                    defaultValue={getTitleFromUrl(challengeSource)}
-                                    helperText={titleError ? titleError: ''}
+                                    value={title}
                                 />
                             </ThemeProvider>
 
@@ -286,6 +272,7 @@ const ChallengeCreate = () => {
                                         onChange={handleDeadlineChange}
                                         sx={{width: '100%'}}
                                         defaultValue={halfYearFromNow}
+                                        value={deadline}
                                         format="DD.MM.YYYY"
                                     />
                                 </LocalizationProvider>
@@ -326,6 +313,7 @@ const ChallengeCreate = () => {
                             borderColor={theme.colors.gray500}
                             height="32px"
                             width="110px"
+                            handler={() => window.location.replace('/')}
                         >
                             Cancel
                         </Button>
