@@ -9,14 +9,14 @@ import { useDispatch } from 'react-redux';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import LOCAL_STORAGE from '../../utils/localStorage';
 
+
 const Submit = (props) => {
   const dispatch = useDispatch();
 
-  const [description, setDescription] = React.useState(null);
-  const [submissionZip, setSubmissionZip] = React.useState(null);
+  const [submission, setSubmission] = React.useState(null);
   const [submissionResult, setSubmissionResult] = React.useState(null);
 
-  React.useEffect(() => {
+    React.useEffect(() => {
     if (submissionResult?.submission && submissionResult?.message) {
       dispatch(
         popUpMessageHandler({
@@ -36,24 +36,26 @@ const Submit = (props) => {
     }
   }, [submissionResult, dispatch]);
 
+    const [description, setDescription] = React.useState('');
+
   return (
     <SubmitStyle as="section">
       <H2 as="h2" className="SubmitStyle__header">
         Submit a solution to the challenge
       </H2>
+        <SubmitInput
+            label="Submission description"
+            type="textarea"
+            handler={(value) => {
+                setDescription(value);
+            }}
+        />
       <SubmitInput
-        label="Submission description"
-        type="textarea"
-        handler={(value) => {
-          setDescription(value);
-        }}
-      />
-      <SubmitInput
-        label="Submission Zip File"
+        label="Submission .tsv file"
         type="file"
-        accept='accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"'
+        accept=".tsv,text/tab-separated-values"
         handler={(e) => {
-          setSubmissionZip(e.target.files[0]);
+          setSubmission(e.target.files[0]);
         }}
       />
       <Button
@@ -63,7 +65,7 @@ const Submit = (props) => {
           challengeSubmissionSubmit(
             {
               description: description,
-              submission_zip: submissionZip,
+              submission_zip: submission,
               challenge_title: props.challenge.title,
               metric: props.challenge.mainMetric,
               parameters: props.challenge.mainMetricParameters,

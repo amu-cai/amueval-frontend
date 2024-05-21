@@ -112,6 +112,10 @@ const ChallengeCreate = () => {
         setTitle(getTitleFromUrl());
     };
 
+    const toDbDateTime = (date) => {
+        return dayjs(date).format('DD-MM-YYYY, HH:mm:ss');
+    };
+
     const challengeCreateSubmit = async () => {
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
@@ -122,9 +126,9 @@ const ChallengeCreate = () => {
             description: description,
             source: challengeSource,
             type: type,
-            main_metric: metric,
+            main_metric: metric.name,
             award: award,
-            deadline: deadline ? deadline : halfYearFromNow,
+            deadline: deadline ? toDbDateTime(deadline) : toDbDateTime(halfYearFromNow),
             sorting: '',
             main_metric_parameters: '',
         };
