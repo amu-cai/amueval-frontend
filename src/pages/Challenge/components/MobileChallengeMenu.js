@@ -16,6 +16,7 @@ const MenuOption = styled(Medium)`
   transition: color 0.3s ease-in-out;
   color: ${({ theme, active }) =>
     active ? theme.colors.green : theme.colors.dark};
+  padding-top: 20px;
 
   &:hover {
     color: ${({ theme }) => theme.colors.green};

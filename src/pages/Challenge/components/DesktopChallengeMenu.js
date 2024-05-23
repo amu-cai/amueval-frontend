@@ -18,8 +18,8 @@ const DesktopChallengeMenuStyle = styled(FlexColumn)`
   overflow-y: auto;
   width: 240px;
   height: 100vh;
-  top: 50px;
-  padding: 64px 0 0 0;
+  top: 80px;
+  padding: 50px 0 0 0;
   z-index: 2;
   gap: 32px;
   box-shadow: ${({ theme }) => theme.shadowRight};

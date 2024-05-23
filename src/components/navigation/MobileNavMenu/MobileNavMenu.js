@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexColumn, FlexRow, Svg, TransBack } from '../../../utils/containers';
 import { Menu } from '../../../utils/fonts';
 import loginIco from '../../../assets/login_ico.svg';
-import userIco from '../../../assets/user_ico.svg';
+import userIco from '../../../assets/avatar.svg';
 import registerIco from '../../../assets/register_ico.svg';
 import cupIco from '../../../assets/cup_ico.svg';
 import styled from 'styled-components';

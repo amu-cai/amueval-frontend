@@ -179,7 +179,7 @@ const AllEntries = (props) => {
                   'id',
                   'submitter',
                   'description',
-                  `dev_${props.mainMetric}`,
+                  // `dev_${props.mainMetric}`,
                   `test_${props.mainMetric}`,
                   'timestamp',
                 ]}

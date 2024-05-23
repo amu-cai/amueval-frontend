@@ -18,7 +18,9 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
-
+import howToIcon from '../../assets/how-to.svg';
+import {Link} from "react-router-dom";
+import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE} from "../../utils/globals";
 
 const ChallengeCreate = () => {
     const dispatch = useDispatch();
@@ -112,8 +114,14 @@ const ChallengeCreate = () => {
         setTitle(getTitleFromUrl());
     };
 
-    const toDbDateTime = (date) => {
-        return dayjs(date).format('DD-MM-YYYY, HH:mm:ss');
+    const formatDateString = (dateString, inputFormat, outputFormat) => {
+        return dayjs(dateString, inputFormat).format(outputFormat);
+    };
+
+    const generateDescription = () => {
+        const createdDate = dayjs().format('DD.MM.YYYY');
+        const deadlineFormatted = deadline ? formatDateString(deadline, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY') : formatDateString(halfYearFromNow, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY');
+        return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${metric.name} to evaluate solutions.`;
     };
 
     const challengeCreateSubmit = async () => {
@@ -123,12 +131,12 @@ const ChallengeCreate = () => {
         }
         const challengeInput = {
             title: title ? title : getTitleFromUrl(),
-            description: description,
+            description: description ? description : generateDescription(),
             source: challengeSource,
             type: type,
             main_metric: metric.name,
             award: award,
-            deadline: deadline ? toDbDateTime(deadline) : toDbDateTime(halfYearFromNow),
+            deadline: deadline ? formatDateString(deadline) : formatDateString(halfYearFromNow),
             sorting: '',
             main_metric_parameters: '',
         };
@@ -178,6 +186,7 @@ const ChallengeCreate = () => {
     };
 
     const halfYearFromNow =  dayjs().add(6, 'months');
+    console.log(halfYearFromNow);
 
     const getTitleFromUrl = () => {
         if (!challengeSource) return '';
@@ -190,6 +199,9 @@ const ChallengeCreate = () => {
             <FlexColumn padding="140px 0" width="100%" minHeight="100vh" gap="32px">
                 <FlexRow gap="12px">
                     <H1New as="h1">Create Challenge</H1New>
+                    <FlexColumn as={Link} to={CHALLENGE_CREATE_HOW_TO_PAGE}>
+                        <img className="howToIcon" alt="How to?" src={howToIcon} width="56px" height="53px"></img>
+                    </FlexColumn>
                 </FlexRow>
                 <FlexColumn maxWidth="800px" width="100%" gap="20px">
 
@@ -311,16 +323,17 @@ const ChallengeCreate = () => {
                     )}
 
                     <FlexRow width="100%" alignmentX="flex-end" alignmentY="flex-end" gap="20px">
-                        <Button
-                            backgroundColor={theme.colors.white}
-                            color="#5E5E5E"
-                            borderColor={theme.colors.gray500}
-                            height="32px"
-                            width="110px"
-                            handler={() => window.location.replace('/')}
-                        >
-                            Cancel
-                        </Button>
+                        <FlexRow as={Link} to={ROOT_PAGE}>
+                            <Button
+                                    backgroundColor={theme.colors.white}
+                                    color="#5E5E5E"
+                                    borderColor={theme.colors.gray500}
+                                    height="32px"
+                                    width="110px"
+                            >
+                                Cancel
+                            </Button>
+                        </FlexRow>
                         <Button
                             backgroundColor={theme.colors.white}
                             color="#5E5E5E"

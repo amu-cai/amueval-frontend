@@ -22,7 +22,6 @@ const MyEntries = (props) => {
   const [scoresSorted, setScoresSorted] = React.useState([]);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
-  console.log(myEntries);
   let elements = myEntries?.map((item) => {
     return {
       ...item,
@@ -99,6 +98,7 @@ const MyEntries = (props) => {
   );
 
   const myEntriesTableRender = () => {
+    console.log(123, props);
     const tableNotEmpty = elements.length && myEntries[0];
     if (!loading) {
       if (tableNotEmpty) {
@@ -115,7 +115,7 @@ const MyEntries = (props) => {
                 orderedKeys={[
                   'id',
                   'description',
-                  `dev_${props.mainMetric}`,
+                  // `dev_${props.mainMetric}`,
                   `test_${props.mainMetric}`,
                   'timestamp',
                 ]}

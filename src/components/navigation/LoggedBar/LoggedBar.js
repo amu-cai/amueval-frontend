@@ -1,18 +1,15 @@
 import React from 'react';
 import {
-  Container,
   FlexColumn,
   FlexRow,
   Svg,
   TransBack,
 } from '../../../utils/containers';
-import { Body, Medium } from '../../../utils/fonts';
-import theme from '../../../utils/theme';
-import userIco from '../../../assets/user_ico.svg';
+import { Body } from '../../../utils/fonts';
+import userIco from '../../../assets/avatar.svg';
 import loginIco from '../../../assets/login_ico.svg';
 import privacyIco from '../../../assets/policy_ico.svg';
 import adminIco from '../../../assets/admin.svg';
-// import createIco from '../../../assets/create_ico.svg';
 import { Link } from 'react-router-dom';
 import {
   POLICY_PRIVACY_PAGE,
@@ -79,27 +76,27 @@ const LoggedBar = () => {
         onMouseEnter={() => dispatch(loggedBarHoverHandler(true))}
         onMouseLeave={() => dispatch(loggedBarHoverHandler(false))}
       >
-        <FlexRow
-          alignmentX="flex-start"
-          alignmentY="flex-end"
-          gap="16px"
-          width="100%"
-          padding="12px 16px"
-        >
-          <Svg
-            src={userIco}
-            width="32px"
-            height="32px"
-            backgroundColor={theme.colors.dark}
-            size="cover"
-          />
-          <Medium as="p">{username}</Medium>
-        </FlexRow>
-        <Container
-          width="90%"
-          backgroundColor={theme.colors.dark05}
-          height="1px"
-        />
+        {/*<FlexRow*/}
+        {/*  alignmentX="flex-start"*/}
+        {/*  alignmentY="flex-end"*/}
+        {/*  gap="16px"*/}
+        {/*  width="100%"*/}
+        {/*  padding="12px 16px"*/}
+        {/*>*/}
+        {/*  <Svg*/}
+        {/*    src={userIco}*/}
+        {/*    width="32px"*/}
+        {/*    height="32px"*/}
+        {/*    backgroundColor={theme.colors.dark}*/}
+        {/*    size="cover"*/}
+        {/*  />*/}
+        {/*  <Medium as="p">{username}</Medium>*/}
+        {/*</FlexRow>*/}
+        {/*<Container*/}
+        {/*  width="100%"*/}
+        {/*  backgroundColor={theme.colors.dark05}*/}
+        {/*  height="1px"*/}
+        {/*/>*/}
         <FlexColumn
           as="ul"
           gap="24px"

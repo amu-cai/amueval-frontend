@@ -36,14 +36,14 @@ export const CHECK_TOKEN_TIME = 1500;
 export const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
   'Leaderboard',
   'All submissions',
-  'Readme',
+  'Description',
   'How to',
 ];
 
 export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'Leaderboard',
   'All submissions',
-  'Readme',
+  'Description',
   'How to',
   'My entries',
   'Submit',
@@ -52,7 +52,7 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
 export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
   'Leaderboard',
   'All submissions',
-  'Readme',
+  'Description',
   'How to',
   'My entries',
   'Submit',
@@ -62,7 +62,7 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
 export const CHALLENGE_SECTIONS = {
   LEADERBOARD: 0,
   ALL_ENTRIES: 1,
-  README: 2,
+  DESCRIPTION: 2,
   HOW_TO: 3,
   MY_ENTRIES: 4,
   SUBMIT: 5,

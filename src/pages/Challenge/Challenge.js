@@ -1,12 +1,13 @@
 import React from 'react';
-import { Container, FlexColumn, FlexRow, Svg } from '../../utils/containers';
+// import { Container, FlexColumn, FlexRow, Svg } from '../../utils/containers';
+// import { H1 } from '../../utils/fonts';
+import { FlexColumn, FlexRow } from '../../utils/containers';
 import { useParams } from 'react-router-dom';
-import { H1, Medium } from '../../utils/fonts';
 import theme from '../../utils/theme';
 import MobileChallengeMenu from './components/MobileChallengeMenu';
 import Leaderboard from '../Leaderboard';
 import Readme from '../Readme';
-import HowTo from '../HowTo';
+import HowToSubmission from '../HowToSubmission';
 import MyEntries from '../MyEntries';
 import Submit from '../Submit';
 import Media from 'react-media';
@@ -14,9 +15,9 @@ import DesktopChallengeMenu from './components/DesktopChallengeMenu';
 import {
   CHALLENGES_PAGE,
   CHALLENGE_SECTIONS,
-  RENDER_ICO,
+  // RENDER_ICO,
 } from '../../utils/globals';
-import textIco from '../../assets/text_ico.svg';
+// import textIco from '../../assets/text_ico.svg';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
 import AllEntries from '../AllEntries/AllEntries';
@@ -88,13 +89,13 @@ const Challenge = (props) => {
         );
       case CHALLENGE_SECTIONS.HOW_TO:
         return (
-          <HowTo
+          <HowToSubmission
             challengeName={challengeName}
             challengeSource={challenge.source}
           />
         );
       case CHALLENGE_SECTIONS.MY_ENTRIES:
-        return <MyEntries challengeName={challengeName} />;
+        return <MyEntries challengeName={challengeName} mainMetric={challenge.mainMetric} />;
       case CHALLENGE_SECTIONS.SUBMIT:
         return <Submit challenge={challenge} setLoading={setLoading} />;
       case CHALLENGE_SECTIONS.SETTINGS:
@@ -126,18 +127,18 @@ const Challenge = (props) => {
           padding="66px 0 0 0"
         >
           <Loading visible={loading} />
-          <H1 as="h1" margin="0 0 8px 0" textAlign="center">
-            {challenge.name}
-          </H1>
+          {/*<H1 as="h1" margin="0 0 8px 0" textAlign="center">*/}
+          {/*  {challenge.name}*/}
+          {/*</H1>*/}
           <MobileChallengeMenu
             challengeName={challengeName}
             section={props.section}
           />
-          <Container
-            width="75%"
-            height="1px"
-            backgroundColor={theme.colors.dark}
-          />
+          {/*<Container*/}
+          {/*  width="75%"*/}
+          {/*  height="1px"*/}
+          {/*  backgroundColor={theme.colors.dark}*/}
+          {/*/>*/}
           {sectionRender()}
         </FlexColumn>
       );
@@ -158,26 +159,25 @@ const Challenge = (props) => {
           <FlexColumn
             minHeight="100vh"
             alignmentY="flex-start"
-            padding="64px 24px 64px 280px"
+            padding="100px 24px 64px 280px"
             id="start"
           >
             <FlexRow gap="32px" margin="0 0 32px 0" padding="16px">
-              <FlexColumn alignmentX="flex-start" gap="24px" maxWidth="500px">
-                <H1 as="h1">{challenge.title}</H1>
-                <Medium as="p">{challenge.description}</Medium>
-              </FlexColumn>
-              <Svg
-                src={challenge.type ? RENDER_ICO(challenge.type) : textIco}
-                width="120px"
-                height="120px"
-                size="contain"
-              />
+              {/*<FlexColumn alignmentX="flex-start" gap="24px" maxWidth="500px">*/}
+              {/*  <H1 as="h1">{challenge.title}</H1>*/}
+              {/*</FlexColumn>*/}
+              {/*<Svg*/}
+              {/*  src={challenge.type ? RENDER_ICO(challenge.type) : textIco}*/}
+              {/*  width="120px"*/}
+              {/*  height="120px"*/}
+              {/*  size="contain"*/}
+              {/*/>*/}
             </FlexRow>
-            <Container
-              width="55%"
-              height="1px"
-              backgroundColor={theme.colors.dark}
-            />
+            {/*<Container*/}
+            {/*  width="55%"*/}
+            {/*  height="1px"*/}
+            {/*  backgroundColor={theme.colors.dark}*/}
+            {/*/>*/}
             {sectionRender()}
           </FlexColumn>
         </>

@@ -4,7 +4,7 @@ import Logo from '../../generic/Logo';
 import MobileNavMenu from '../MobileNavMenu';
 import { Link } from 'react-router-dom';
 import loginIco from '../../../assets/login_ico.svg';
-import userIco from '../../../assets/user_ico.svg';
+import userIco from '../../../assets/avatar.svg';
 import {Menu} from '../../../utils/fonts';
 import registerIco from '../../../assets/register_ico.svg';
 import {
@@ -13,7 +13,6 @@ import {
     LOGIN_PAGE,
     REGISTER_PAGE,
 } from '../../../utils/globals';
-import cupIco from '../../../assets/cup_ico.svg';
 import NavBarStyle from './styles/NavBarStyle';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,10 +22,8 @@ import {
 } from '../../../redux/navigationSlice';
 import MenuButtonStyle from './styles/MenuButtonStyle';
 import colors from "../../../utils/colors";
-// import createIco from "../../../assets/create_ico.svg";
 import { setRightsInfo } from '../../../redux/authSlice';
 import getUserRightsInfo from '../../../api/getUserRightsInfo';
-import AddIcon from '@mui/icons-material/Add';
 import theme from "../../../utils/theme";
 
 const NavBar = () => {
@@ -81,16 +78,10 @@ const NavBar = () => {
                             />
                             <FlexRow as="ul" className="ul-desktop" gap="32px">
                                 <FlexRow as={Link} to={CHALLENGES_PAGE} gap="12px">
-                                    <Svg width="16px" height="16px" src={cupIco} backgroundColor={colors.green500} />
                                     <Menu as="li">Challenges</Menu>
                                 </FlexRow>
                                 {(userRightsInfo?.isAdmin || userRightsInfo?.isAuthor) && (
                                     <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">
-                                        <AddIcon
-                                            style={{
-                                                color: theme.colors.green700,
-                                            }}
-                                        />
                                         <Menu as="li">Create challenge</Menu>
                                     </FlexRow>
                                 )}
@@ -102,12 +93,12 @@ const NavBar = () => {
                                 )}
                                 {loggedIn ? (
                                     <Svg
+                                        backgroundColor={theme.colors.green700}
                                         as="button"
                                         onClick={() => dispatch(loggedBarPositionToggle())}
-                                        width="32px"
-                                        height="32px"
+                                        width="42px"
+                                        height="42px"
                                         src={userIco}
-                                        margin="0 16px 0 0"
                                     />
                                 ) : (
                                     <FlexRow as={Link} to={LOGIN_PAGE} gap="12px">

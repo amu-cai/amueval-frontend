@@ -105,6 +105,11 @@ const ChallengeCreateStyle = styled(Container)`
   .dropzoneFileRemove:hover {
     cursor: pointer;
   }
+  
+  .howToIcon {
+    cursor: pointer;
+    margin-left: 16px;
+  }
 `;
 
 export default ChallengeCreateStyle;

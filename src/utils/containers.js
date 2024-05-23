@@ -65,7 +65,7 @@ const Grid = styled(Container)`
 `;
 
 const Svg = styled(Container)`
-  background-color: ${({ backgroundColor, theme }) =>
+   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ? backgroundColor : theme.colors.dark};
   -webkit-mask: url(${({ src }) => src}) no-repeat center;
   mask: url(${({ src }) => src}) no-repeat center;

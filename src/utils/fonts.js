@@ -226,6 +226,7 @@ const BodyNew = styled(Container)`
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '22px')};
     line-height: 30px;
   }
+  margin-right: ${({ textLeft }) => (textLeft ? 'auto' : 'none')};
 `;
 
 const Medium = styled(Body)`
