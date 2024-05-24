@@ -33,7 +33,7 @@ const HowToSubmission = (props) => {
           <FlexColumn className="wrapper">
               <H1New as="h1">Make submission how-to</H1New>
               <BodyNew as="p">If you want to take part in the challenge follow these steps:</BodyNew>
-              <BodyNew as="p"><span className="highlight">1. Get the data:</span> download the dataset from <a target='_blank' href={challengeSource}>{challengeSource}</a></BodyNew>
+              <BodyNew as="p"><span className="highlight">1. Get the data:</span> download the dataset from <a target='_blank' rel="noreferrer" href={challengeSource}>{challengeSource}</a></BodyNew>
               <BodyNew as="p"><span className="highlight">2. Train your model:</span> use the data from the <span className="highlight">train</span> folder to develop your model</BodyNew>
               <BodyNew as="p"><span className="highlight">3. Generate outputs:</span> use your model to generate outputs for the data in the <span className="highlight">in.tsv</span> file stored in the <span className="highlight">test</span> folder.</BodyNew>
               <BodyNew as="p"><span className="highlight">4. Save the outputs:</span> save your generated outputs to the <span className="highlight">out.tsv</span> file.</BodyNew>
