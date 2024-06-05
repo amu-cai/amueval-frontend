@@ -9,7 +9,7 @@ import {popUpMessageHandler} from '../../redux/popUpMessegeSlice';
 import {useDispatch} from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Grid} from "@mui/material";
 import ChallengeCreateStyle from "../../components/generic/ChallengeCreateStyle";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
@@ -21,6 +21,10 @@ import dayjs from "dayjs";
 import howToIcon from '../../assets/how-to.svg';
 import {Link} from "react-router-dom";
 import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE} from "../../utils/globals";
+import InputAdornment from '@mui/material/InputAdornment';
+import LinkIcon from '@mui/icons-material/Link';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
 
 const ChallengeCreate = () => {
     const dispatch = useDispatch();
@@ -38,8 +42,62 @@ const ChallengeCreate = () => {
     const [metricError, setMetricError] = React.useState(false);
     const [solutionError, setSolutionError] = React.useState(false);
     const [showAdvanced, setShowAdvanced] = React.useState(false);
-
+    const [showMetricParameters, setShowMetricParameters] = React.useState(false);
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
+    // const [parameters, setParameters] = React.useState(null);
+
+
+    const parametersListRender = () => {
+        const choosenMetric = metrics?.find((m) => m['name'] === metric.name);
+        console.log(choosenMetric);
+        if (choosenMetric) {
+            return choosenMetric.parameters.map((parameter, index) => {
+                const firstValue = Object.entries(parameter)[0][1];
+                const placeholderParts = [];
+                for (const [key, value] of Object.entries(parameter).slice(1)) {
+                    placeholderParts.push(`"${key}": "${value}"`);
+                }
+                const placeholderText = placeholderParts.join('\n');
+                return (
+                    <Grid item xs={6} key={index}>
+                        <span className="topLabel metricParamLabel">{firstValue}</span>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            placeholder={placeholderText}
+                            multiline
+                            rows={5}
+                            minRows={5}
+                            maxRows={5}
+                            inputProps={{
+                                style: {
+                                    whiteSpace: 'pre-wrap',
+                                }
+                            }}
+                        />
+                    </Grid>
+                );
+            });
+            // return (
+                //     <Grid item xs={6}>
+                //         <TextField
+                //             fullWidth
+                //             variant="outlined"
+                //             placeholder='data_type: int | float | bool | str'
+                //             multiline
+                //             rows={5}
+                //             minRows={5}
+                //             maxRows={5}
+                //             inputProps={{
+                //                 style: {
+                //                     whiteSpace: 'pre-wrap'
+                //                 }
+                //             }}
+                //         />
+                //     </Grid>
+                // );
+        }
+    };
 
 
     React.useEffect(() => {
@@ -112,6 +170,10 @@ const ChallengeCreate = () => {
         setShowAdvanced(!showAdvanced);
         setDeadline(halfYearFromNow);
         setTitle(getTitleFromUrl());
+    };
+
+    const handleMetricParameters = () => {
+        setShowMetricParameters(!showMetricParameters);
     };
 
     const formatDateString = (dateString, inputFormat, outputFormat) => {
@@ -319,6 +381,51 @@ const ChallengeCreate = () => {
                                     onChange={handleAwardChange}
                                 />
                             </ThemeProvider>
+                            {metric && ( <div className="metricParamsButtonWrapper">
+                                <Button
+                                    width="170px"
+                                    backgroundColor='transparent'
+                                    handler={handleMetricParameters}
+                                >
+                                    <span className="metricParamsButton">Metric Parameters</span>
+                                    <KeyboardDoubleArrowDownIcon
+                                        style={{
+                                            color: theme.colors.green700,
+                                            transform: showMetricParameters ? 'rotate(180deg)' : 'none'
+                                        }}
+                                    />
+                                </Button>
+                            </div>
+                            )}
+
+
+                            {showMetricParameters && (
+                                <>
+                                <ThemeProvider theme={customTheme}>
+                                    <span className="topLabel">Sklearn metrics URL</span>
+                                    <TextField
+                                        className="inputCopyMetricLink"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={metric.link}
+                                        size="small"
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">
+                                                <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }}></LinkIcon>
+                                            </InputAdornment>,
+                                            endAdornment: <InputAdornment position="end">
+                                                <ContentCopyIcon style={{ color: theme.colors.black500 }}></ContentCopyIcon>
+                                            </InputAdornment>,
+                                            sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', height: '34px', cursor: 'pointer' },
+                                            readOnly: true,
+                                        }}
+                                    />
+                                    <Grid container spacing={2}>
+                                        {parametersListRender()}
+                                    </Grid>
+                                </ThemeProvider>
+                            </>
+                            )}
                         </>
                     )}
 

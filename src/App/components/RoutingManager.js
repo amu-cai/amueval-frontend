@@ -89,7 +89,7 @@ const RoutingManager = (props) => {
           />
           <Route path={`/admin-panel`} element={<AdminPanel />} />
           <Route
-            path={`${CHALLENGE_PAGE}/:challengeId/myentries`}
+            path={`${CHALLENGE_PAGE}/:challengeId/mysubmissions`}
             element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
           />
           <Route

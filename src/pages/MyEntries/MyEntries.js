@@ -136,7 +136,7 @@ const MyEntries = (props) => {
           </>
         );
       }
-      return <Medium margin="72px 0">No results in AllEntries ;c</Medium>;
+      return <Medium margin="72px 0">No results</Medium>;
     }
     return <Loading />;
   };
@@ -149,7 +149,7 @@ const MyEntries = (props) => {
       width="100%"
       maxWidth="1600px"
     >
-      <H2 as="h2">My Entries</H2>
+      <H2 as="h2">My Submissions</H2>
       {myEntriesTableRender()}
     </FlexColumn>
   );

@@ -45,7 +45,7 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
   'All submissions',
   'Description',
   'How to',
-  'My entries',
+  'My submissions',
   'Submit',
 ];
 
@@ -54,7 +54,7 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
   'All submissions',
   'Description',
   'How to',
-  'My entries',
+  'My submissions',
   'Submit',
   'Settings',
 ];

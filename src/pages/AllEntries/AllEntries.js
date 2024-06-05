@@ -199,7 +199,7 @@ const AllEntries = (props) => {
           </>
         );
       }
-      return <Medium margin="72px 0">No results in AllEntries ;c</Medium>;
+      return <Medium margin="72px 0">No results</Medium>;
     }
     return <Loading />;
   };

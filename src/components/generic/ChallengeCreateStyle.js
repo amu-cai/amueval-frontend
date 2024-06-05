@@ -110,6 +110,23 @@ const ChallengeCreateStyle = styled(Container)`
     cursor: pointer;
     margin-left: 16px;
   }
+  
+  .metricParamsButton {
+    color: ${theme.colors.black500};
+    font-weight: normal;
+    font-size: 20px;
+  }
+  
+  .metricParamsButtonWrapper {
+    margin-right: auto;
+    margin-left: 2px;
+    font-weight: normal;
+  }
+
+  .metricParamLabel {
+    display: block;
+    margin-bottom: 8px;
+  }
 `;
 
 export default ChallengeCreateStyle;
