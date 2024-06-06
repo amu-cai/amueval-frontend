@@ -127,6 +127,10 @@ const ChallengeCreateStyle = styled(Container)`
     display: block;
     margin-bottom: 8px;
   }
+  
+  .inputCopyMetricLink {
+    cursor: pointer;
+  }
 `;
 
 export default ChallengeCreateStyle;

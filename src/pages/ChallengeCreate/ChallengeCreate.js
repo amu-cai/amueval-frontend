@@ -46,10 +46,11 @@ const ChallengeCreate = () => {
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
     // const [parameters, setParameters] = React.useState(null);
 
+    const parameterRefs = React.useState({});
+
 
     const parametersListRender = () => {
         const choosenMetric = metrics?.find((m) => m['name'] === metric.name);
-        console.log(choosenMetric);
         if (choosenMetric) {
             return choosenMetric.parameters.map((parameter, index) => {
                 const firstValue = Object.entries(parameter)[0][1];
@@ -58,6 +59,9 @@ const ChallengeCreate = () => {
                     placeholderParts.push(`"${key}": "${value}"`);
                 }
                 const placeholderText = placeholderParts.join('\n');
+
+                const ref = React.createRef();
+                parameterRefs[parameter.name] = ref;
                 return (
                     <Grid item xs={6} key={index}>
                         <span className="topLabel metricParamLabel">{firstValue}</span>
@@ -74,28 +78,11 @@ const ChallengeCreate = () => {
                                     whiteSpace: 'pre-wrap',
                                 }
                             }}
+                            inputRef={ref}
                         />
                     </Grid>
                 );
             });
-            // return (
-                //     <Grid item xs={6}>
-                //         <TextField
-                //             fullWidth
-                //             variant="outlined"
-                //             placeholder='data_type: int | float | bool | str'
-                //             multiline
-                //             rows={5}
-                //             minRows={5}
-                //             maxRows={5}
-                //             inputProps={{
-                //                 style: {
-                //                     whiteSpace: 'pre-wrap'
-                //                 }
-                //             }}
-                //         />
-                //     </Grid>
-                // );
         }
     };
 
@@ -186,7 +173,20 @@ const ChallengeCreate = () => {
         return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${metric.name} to evaluate solutions.`;
     };
 
+    const createMainMetricParams = () => {
+        let result = {};
+        let keys = Object.keys(parameterRefs);
+        for (let i = 2; i < keys.length; i++) {
+            let key = keys[i];
+            if (parameterRefs[key].current.value) {
+                result[key] = parameterRefs[key].current.value;
+            }
+        }
+        return JSON.stringify(result, null, 2);
+    };
+
     const challengeCreateSubmit = async () => {
+        const mainMetricParams = createMainMetricParams();
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
             return;
@@ -200,7 +200,7 @@ const ChallengeCreate = () => {
             award: award,
             deadline: deadline ? formatDateString(deadline) : formatDateString(halfYearFromNow),
             sorting: '',
-            main_metric_parameters: '',
+            main_metric_parameters: mainMetricParams,
         };
 
         await challengeCreate(
@@ -248,13 +248,13 @@ const ChallengeCreate = () => {
     };
 
     const halfYearFromNow =  dayjs().add(6, 'months');
-    console.log(halfYearFromNow);
 
     const getTitleFromUrl = () => {
         if (!challengeSource) return '';
         const title_from_url = challengeSource.split('/').pop();
         return title_from_url;
     };
+
 
     return (
         <ChallengeCreateStyle>
@@ -410,13 +410,13 @@ const ChallengeCreate = () => {
                                         value={metric.link}
                                         size="small"
                                         InputProps={{
-                                            startAdornment: <InputAdornment position="start">
+                                            startAdornment: <InputAdornment position="start" onClick={() => window.open(metric.link, '_blank')}>
                                                 <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }}></LinkIcon>
                                             </InputAdornment>,
-                                            endAdornment: <InputAdornment position="end">
+                                            endAdornment: <InputAdornment position="end" onClick={() => navigator.clipboard.writeText(metric.link)}>
                                                 <ContentCopyIcon style={{ color: theme.colors.black500 }}></ContentCopyIcon>
                                             </InputAdornment>,
-                                            sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', height: '34px', cursor: 'pointer' },
+                                            sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', height: '34px', input: { cursor: 'pointer' }, cursor: 'pointer'},
                                             readOnly: true,
                                         }}
                                     />
