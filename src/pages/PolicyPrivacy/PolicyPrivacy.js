@@ -114,7 +114,7 @@ const PolicyPrivacy = () => {
           <H2 as="h2">3. Purpose and legal basis of processing</H2>
           <Body as="p">
             Your personal data will be processed in order to set up your user
-            account and enable you to use the gonito platform, as well as to
+            account and enable you to use the AmuEval platform, as well as to
             contact the winners of the competitions, based on your consent,
             pursuant to Article 6(1)(a) of the RODO.
           </Body>

@@ -47,7 +47,7 @@ const ChallengeCreateHowTo = () => {
           <FlexColumn className="wrapper newChallenge">
             <H1New textLeft={true} as="h1">Create a New Challenge</H1New>
             <BodyNew as="p"><span className="highlight">1. Add the dataset source:</span> Paste the link to your dataset repository.</BodyNew>
-            <BodyNew as="p"><span className="highlight">2. Choose an evaluation metric:</span> Select the metric to evaluate solutions.</BodyNew>
+            <BodyNew as="p"><span className="highlight">2. Choose an evaluation metric:</span> Select the metric to evaluate solutions. You can customize your metric in <span className="highlight">advanced</span> section.</BodyNew>
             <BodyNew as="p"><span className="highlight">3. Upload your solution:</span> Upload the <span className="highlight">expected.tsv</span> file to the AmuEval server.</BodyNew>
             <BodyNew as="p"><span className="highlight">4. Customize your challenge (optional):</span> Make your challenge stand out by customizing the following parameters:</BodyNew>
             <BodyNew className="fieldsList">
@@ -56,6 +56,7 @@ const ChallengeCreateHowTo = () => {
               <BodyNew as="p"><span className="highlight">&#8226; Challenge deadline:</span> Set a deadline for submissions (defaults to 6 months from challenge creation date).</BodyNew>
               <BodyNew as="p"><span className="highlight">&#8226; Challenge type:</span> Choose the type of challenge that fits best your dataset.</BodyNew>
               <BodyNew as="p"><span className="highlight">&#8226; Award for winners:</span> Offer an award for the best submissions.</BodyNew>
+              <BodyNew as="p"><span className="highlight">&#8226; Customize your metric:</span> Set metric parameters if you want to customize your metric. Specify values for parameters that you want to change from the default values.</BodyNew>
             </BodyNew>
             <BodyNew as="p"><span className="highlight">5. Create your challenge:</span> Click Create and your challenge will be live and available for everyone to participate!</BodyNew>
           </FlexColumn>
