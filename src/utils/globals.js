@@ -7,6 +7,10 @@ import textIco from '../assets/text_ico.svg';
 import imageIco from '../assets/image_ico.svg';
 import tabularIco from '../assets/tabular_ico.svg';
 import React from 'react';
+import textTypeImg from "../assets/text_type.svg";
+import imageTypeImg from "../assets/image_type.svg";
+import tabularTypeImg from "../assets/tabular_type.svg";
+import {FlexRow, Svg} from "./containers";
 
 export const ELEMENTS_PER_PAGE = 10;
 export const MINI_DESCRIPTION_LENGTH = 70;
@@ -34,39 +38,36 @@ export const RESET_TOKEN_TIME = 1200000;
 export const CHECK_TOKEN_TIME = 1500;
 
 export const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
-  'Leaderboard',
-  'All submissions',
-  'Description',
-  'How to',
+    'Overview',
+    'How To',
+    'Leaderboard',
+    'Submissions',
 ];
 
 export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
-  'Leaderboard',
-  'All submissions',
-  'Description',
-  'How to',
-  'My submissions',
-  'Submit',
+    'Overview',
+    'How To',
+    'Leaderboard',
+    'Submissions',
+    'Add Solution',
 ];
 
 export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
-  'Leaderboard',
-  'All submissions',
-  'Description',
-  'How to',
-  'My submissions',
-  'Submit',
-  'Settings',
+    'Overview',
+    'How To',
+    'Leaderboard',
+    'Submissions',
+    'Edit',
+    'Add Solution',
 ];
 
 export const CHALLENGE_SECTIONS = {
-  LEADERBOARD: 0,
-  ALL_ENTRIES: 1,
-  DESCRIPTION: 2,
-  HOW_TO: 3,
-  MY_ENTRIES: 4,
-  SUBMIT: 5,
-  SETTINGS: 6,
+    OVERVIEW: 0,
+    HOW_TO: 1,
+    LEADERBOARD: 2,
+    SUBMISSIONS: 3,
+    EDIT: 4,
+    ADD_SOLUTION: 5,
 };
 
 export const CHALLENGES_STATUS_FILTER = {
@@ -134,6 +135,10 @@ export const PREVIOUS_PAGE = (pageNr, setPage) => {
   }
 };
 
+export const SET_PAGE = (pageNr, setPage) => {
+    setPage(pageNr);
+};
+
 export const RENDER_WHEN = (when) => {
   return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
@@ -141,6 +146,23 @@ export const RENDER_WHEN = (when) => {
 export const RENDER_METRIC_VALUE = (value) => {
   if (value <= -999999999) return 'N/A';
   else return value;
+};
+
+export const RENDER_PLACE = (value) => {
+    let place = value + 1;
+    if (place <= 3) {
+        let color = '#D6AF36';
+        if (place === 2) color = '#A7A7AD';
+        else if (place === 3) color = '#A77044';
+        return (
+            <>
+                <FlexRow alignmentX="start" gap="64px">
+                    {place}<Svg width="16px" height="16px" backgroundColor={color} src={cupIco}/>
+                </FlexRow>
+            </>
+        );
+    }
+    return place;
 };
 
 export const EVALUATIONS_FORMAT = (evaluate) => {
@@ -175,4 +197,10 @@ export const USE_PREVIOUS = (value) => {
     ref.current = value;
   }, [value]);
   return ref.current;
+};
+
+export const getChallengeImage = (type) => {
+    if (type === 'text') return textTypeImg;
+    else if (type === 'image') return imageTypeImg;
+    else return tabularTypeImg;
 };

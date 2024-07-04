@@ -48,6 +48,10 @@ const FooterStyle = styled(FlexRow)`
       margin: 0 40px;
     }
   }
+  
+  h2 {
+    margin-bottom: 40px;
+  }
 `;
 
 export default FooterStyle;

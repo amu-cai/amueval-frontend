@@ -13,7 +13,6 @@ const getProfileInfo = async (setResult) => {
                 return res.json();
             },
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import theme from "../../../../utils/theme";
 
 const TableStyle = styled.table`
-  border-collapse: separate;
-  border-spacing: 12px 0;
   width: 100%;
+  border-collapse: collapse; 
+  border-spacing: 0;
 
   .TableStyle__th {
     cursor: pointer;
@@ -15,6 +16,7 @@ const TableStyle = styled.table`
   .TableStyle__tr-header {
     height: 48px;
     position: relative;
+    border-bottom: .5px solid ${theme.colors.black700};
   }
 
   .TableStyle__tr {
@@ -23,9 +25,21 @@ const TableStyle = styled.table`
   }
 
   .TableStyle__td {
-    padding: ${({ rowFooter }) => (rowFooter ? '4px 0 32px 0' : '12px 0')};
-    margin: 0 0 0 2px;
-    min-width: 80px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding-right: 8px;
+  }
+
+  .TableStyle__td:last-child {
+    max-width:150px;
+    min-width:150px;
+    width:150px;
+  }
+
+  .TableStyle__td:first-child {
+    padding-left: 40px;
   }
 
   .TableStyle_line {
@@ -44,22 +58,25 @@ const TableStyle = styled.table`
     background-color: ${({ theme }) => theme.colors.green08};
     padding: 4px;
     border-radius: 2px;
+    
     font-size: 12px;
     font-weight: 600;
   }
 
-  .TableStyle__row-footer {
-    width: 100%;
-    justify-content: space-between;
-    position: absolute;
-    top: 55%;
-    left: 0;
-    z-index: 2;
+  .odd {
+    background: #E0FFF4;
   }
 
-  .TableStyle__tags-container {
-    gap: 4px;
-    padding: 0 2px;
+  .even {
+    background: #F5FFFD;
+  }
+
+  .TableStyle__th span{
+    color: ${theme.colors.black500};
+  }
+  
+  .TableStyle__th:first-child{
+    padding-left: 40px;
   }
 `;
 

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-// import {FlexColumn} from '../../../../utils/containers';
 
 const PartnershipsStyle = styled.div`
+
+  h2 {
+    margin-bottom: 40px;
+  }
 `;
 
 export default PartnershipsStyle;

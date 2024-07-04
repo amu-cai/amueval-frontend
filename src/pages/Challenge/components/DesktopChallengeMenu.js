@@ -1,46 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FlexColumn } from '../../../utils/containers';
-import { H3 } from '../../../utils/fonts';
+import { FlexColumn, FlexRow } from '../../../utils/containers';
 import { Link } from 'react-router-dom';
 import {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
-  IS_MOBILE,
   MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN,
 } from '../../../utils/globals';
 import { useSelector } from 'react-redux';
+import Button from '../../../components/generic/Button';
+import theme from "../../../utils/theme";
+import {ThemeProvider} from "@mui/material/styles";
 
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
-  justify-content: flex-start;
-  position: fixed;
-  left: 0;
-  overflow-y: auto;
-  width: 240px;
-  height: 100vh;
-  top: 80px;
-  padding: 50px 0 0 0;
-  z-index: 2;
-  gap: 32px;
-  box-shadow: ${({ theme }) => theme.shadowRight};
-`;
-
-const Option = styled(FlexColumn)`
-  height: 48px;
-  width: 100%;
-  transition: background-color 0.3s ease-in-out;
-  cursor: pointer;
-  background-color: ${({ theme, active }) =>
-    active ? theme.colors.green05 : theme.colors.white};
-  text-decoration: none;
-
-  * {
-    cursor: pointer;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.green05};
-  }
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const DesktopChallengeMenu = (props) => {
@@ -55,25 +29,28 @@ const DesktopChallengeMenu = (props) => {
   }
   return (
     <DesktopChallengeMenuStyle>
-      {options.map((option, index) => {
-        return (
-          <Option
-            key={`challenge_menu_option-${index}`}
-            as={Link}
-            active={index === props.section ? 1 : 0}
-            to={`/challenge/${props.challengeName}/${options[index]
-              .toLowerCase()
-              .replace(' ', '')}`}
-          >
-            <H3
-              fontSize={IS_MOBILE() ? '18px' : '22px'}
-              textTransform="uppercase"
-            >
-              {option}
-            </H3>
-          </Option>
-        );
-      })}
+      <ThemeProvider theme={theme.customTheme}>
+        <FlexRow gap="30px">
+          {options.map((option, index) => {
+            return (
+                <FlexColumn as={Link} to={`/challenge/${props.challengeName}/${options[index]
+                    .toLowerCase()
+                    .replace(' ', '')}`}>
+                  <Button
+                      key={`challenge_menu_option-${index}`}
+                      backgroundColor={index === props.section ? theme.colors.green700 : theme.colors.white}
+                      color={index === props.section ? theme.colors.white : '#5E5E5E'}
+                      borderColor={theme.colors.green700}
+                      height="40px"
+                      width="140px"
+                  >
+                    {option}
+                  </Button>
+                </FlexColumn>
+            );
+          })}
+        </FlexRow>
+      </ThemeProvider>
     </DesktopChallengeMenuStyle>
   );
 };

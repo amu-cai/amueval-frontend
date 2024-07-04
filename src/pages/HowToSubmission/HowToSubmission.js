@@ -31,7 +31,7 @@ const HowToSubmission = (props) => {
   return (
       <HowToSubmissionStyle>
           <FlexColumn className="wrapper">
-              <H1New as="h1">Make submission how-to</H1New>
+              <H1New as="h1" textLeft={true}>Make submission how-to</H1New>
               <BodyNew as="p">If you want to take part in the challenge follow these steps:</BodyNew>
               <BodyNew as="p"><span className="highlight">1. Get the data:</span> download the dataset from <a target='_blank' rel="noreferrer" href={challengeSource}>{challengeSource}</a></BodyNew>
               <BodyNew as="p"><span className="highlight">2. Train your model:</span> use the data from the <span className="highlight">train</span> folder to develop your model</BodyNew>

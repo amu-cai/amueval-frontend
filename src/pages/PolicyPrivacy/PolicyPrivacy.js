@@ -2,7 +2,7 @@ import { FlexColumn, FlexRow } from '../../utils/containers';
 import React from 'react';
 import styled from 'styled-components';
 import { Body, H1, H2, Medium } from '../../utils/fonts';
-import CircleNumber from '../../components/generic/CircleNumber';
+import PageButtons from '../../components/generic/PagerButtons';
 import Button from '../../components/generic/Button';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import { Link } from 'react-router-dom';
@@ -160,7 +160,7 @@ const PolicyPrivacy = () => {
                   privacyPolicy
                   gap="16px"
                 >
-                  <CircleNumber
+                  <PageButtons
                     margin="6px 0 0 0"
                     fontSize="16px"
                     width="24px"

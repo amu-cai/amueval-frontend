@@ -2,25 +2,28 @@ import React from 'react';
 import {
   RENDER_WHEN,
   RENDER_METRIC_VALUE,
+  RENDER_PLACE,
   IS_MOBILE,
 } from '../../../../../utils/globals';
-import { Container } from '../../../../../utils/containers';
-import { Medium } from '../../../../../utils/fonts';
+import {Container} from '../../../../../utils/containers';
 
 const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
   const renderValue = (keyValue) => {
-    if (keyValue === 'when') {
+    if (keyValue === 'timestamp') {
       return RENDER_WHEN(item[keyValue]);
-    } else {
+    }
+    else if (keyValue === 'id') {
+        return RENDER_PLACE(i);
+    }
+    else if (keyValue === 'index') {
+      return i + 1;
+    }
+    else {
       return RENDER_METRIC_VALUE(item[keyValue]);
     }
   };
 
   const renderItem = (keyValue) => {
-    const notMyEntriesPage = subpage !== 'MY_ENTRIES';
-    if (item.isOwner && notMyEntriesPage) {
-      return <Medium>{renderValue(keyValue)}</Medium>;
-    }
     return renderValue(keyValue);
   };
 
@@ -31,11 +34,10 @@ const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
           <td key={`table-item-${i}-${j}`} className="TableStyle__td">
             {IS_MOBILE() && (
               <Container as="span" className="mobile-table-header">
-                {keyValue}
+                {keyValue.name}
               </Container>
             )}
-            {renderItem(keyValue)}
-            {keyValue === '#' && i + 1}
+            {renderItem(keyValue.key)}
           </td>
         );
       })}

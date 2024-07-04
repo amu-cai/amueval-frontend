@@ -53,13 +53,13 @@ const LoginPage = () => {
           reloadSession: false,
         })
       );
-      dispatch(
-        popUpMessageHandler({
-          header: 'Log in success',
-          message: `Success: log in as ${auth.username}`,
-          borderColor: theme.colors.green,
-        })
-      );
+      // dispatch(
+      //   popUpMessageHandler({
+      //     header: 'Log in success',
+      //     message: `Success: log in as ${auth.username}`,
+      //     borderColor: theme.colors.green,
+      //   })
+      // );
       navigate(CHALLENGES_PAGE);
     }
   }, [authResult, dispatch, loginResult?.access_token, navigate]);

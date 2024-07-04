@@ -9,7 +9,6 @@ const getUsersSettings = (setResult, setLoading) => {
     })
         .then((response) => response.json(),
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }

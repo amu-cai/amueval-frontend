@@ -18,7 +18,6 @@ const deleteSubmission = async (
     })
         .then((resp) => resp.text(),
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }

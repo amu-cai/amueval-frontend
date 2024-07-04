@@ -11,10 +11,8 @@ const login = async (data, setResult) => {
         .then(
             (res) => {
                 if (res.ok) {
-                    console.log('login ok');
                     return res.json();
                 } else {
-                    console.log('something went wrong');
                     return res.json();
                 }
             },
@@ -22,12 +20,9 @@ const login = async (data, setResult) => {
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }
-                console.log(error);
             }
         )
         .then((json) => {
-            console.log('json response processing');
-            console.log(json);
             setResult(json);
         });
 };

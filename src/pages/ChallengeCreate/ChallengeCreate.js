@@ -10,10 +10,10 @@ import {useDispatch} from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Grid} from "@mui/material";
-import ChallengeCreateStyle from "../../components/generic/ChallengeCreateStyle";
+import ChallengeCreateStyle from "./ChallengeCreateStyle";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import Dropzone from './Dropzone';
+import Dropzone from "../../components/generic/Dropzone/Dropzone";
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -97,7 +97,7 @@ const ChallengeCreate = () => {
             if (uploadResult?.detail) {
                 dispatch(
                     popUpMessageHandler({
-                        header: 'Challenge create error',
+                        header: 'Overview create error',
                         message: `Error: ${uploadResult.detail}`,
                         borderColor: theme.colors.red,
                     })
@@ -105,7 +105,7 @@ const ChallengeCreate = () => {
             } else {
                 dispatch(
                     popUpMessageHandler({
-                        header: 'Challenge create success',
+                        header: 'Overview create success',
                         message: `${uploadResult.challenge}: ${uploadResult.message}`,
                     })
                 );

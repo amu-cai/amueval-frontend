@@ -172,7 +172,6 @@ const H2 = styled(H1)`
 `;
 
 const H2New = styled(H1New)`
-  margin-bottom: 40px;
   @media (${theme.mobile}) {
    font-size: ${({ fontSize }) => (fontSize ? fontSize : '24px')};
   }

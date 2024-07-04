@@ -5,6 +5,7 @@ import theme from "../../utils/theme";
 const HowToSubmissionStyle = styled(FlexColumn)`
   .wrapper {
     max-width: 950px;
+    margin-bottom: 40px;
   }
   .wrapper p {
     line-height: 48px;

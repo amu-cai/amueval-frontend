@@ -21,23 +21,25 @@ const TableHeader = (props) => {
                 setRotateActiveIcon(false);
               }
               setActiveIcon(i);
-              props.sortByUpdate(keyValue);
+              props.sortByUpdate(keyValue.key);
               props.tableUpdate();
             }}
           >
             <FlexRow as="span" alignmentX="flex-start" gap="8px" width="100%">
-              {keyValue}
-              <FlexRow
-                as="span"
-                className="TableStyle__sort-button"
-                column={keyValue}
-              >
-                <ColumnFilterIcon
-                  index={i}
-                  active={activeIcon}
-                  rotateIcon={rotateActiveIcon}
-                />
-              </FlexRow>
+              {keyValue.sortable && (
+                  <FlexRow
+                      as="span"
+                      className="TableStyle__sort-button"
+                      column={keyValue.key}
+                  >
+                    <ColumnFilterIcon
+                        index={i}
+                        active={activeIcon}
+                        rotateIcon={rotateActiveIcon}
+                    />
+                  </FlexRow>
+              )}
+              {keyValue.name}
             </FlexRow>
           </th>
         );

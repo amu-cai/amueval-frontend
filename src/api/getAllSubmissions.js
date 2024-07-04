@@ -4,7 +4,6 @@ const getAllSubmissions = (challenge, setResult, setLoading) => {
     fetch(`${API}/evaluation/${challenge}/all-submissions`)
         .then((response) => response.json(),
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }

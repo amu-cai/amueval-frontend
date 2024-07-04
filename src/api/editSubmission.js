@@ -19,13 +19,11 @@ const editSubmission = async (
     })
         .then((resp) => resp.text(),
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }
             })
         .then((data) => {
-            console.log(data);
             if (data === 'Submission changed') {
                 popUpMessageHandler(
                     'Submission changed!',

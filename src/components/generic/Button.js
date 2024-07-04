@@ -70,7 +70,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  handler: null,
+  handler: () => {},
   width: '64px',
   height: '28px',
   color: '',

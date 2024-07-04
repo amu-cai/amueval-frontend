@@ -31,6 +31,10 @@ const CommercialStyle = styled(FlexColumn)`
       margin-bottom: 28px;
     }
   }
+  
+  h2 {
+    margin-bottom: 40px;
+  }
 `;
 
 export default CommercialStyle;

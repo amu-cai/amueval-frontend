@@ -8,7 +8,6 @@ const auth = (token, setResult) => {
                 return response.json();
             },
             (error) => {
-                console.log(error);
             }
         )
         .then((data) => {

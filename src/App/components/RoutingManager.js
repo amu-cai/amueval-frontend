@@ -12,7 +12,7 @@ import {
     CHALLENGE_CREATE_HOW_TO_PAGE, EDIT_PROFILE_PAGE,
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
-import Challenges from '../../pages/Challanges';
+import Challenges from '../../pages/Challenges';
 import PolicyPrivacy from '../../pages/PolicyPrivacy';
 import LandingPage from '../../pages/LandingPage';
 import Profile from '../../pages/Profile/Profile';
@@ -84,17 +84,13 @@ const RoutingManager = (props) => {
             element={<Submission />}
           /> */}
           <Route
-            path={`${CHALLENGE_PAGE}/:challengeId/settings`}
-            element={<Challenge section={CHALLENGE_SECTIONS.SETTINGS} />}
+            path={`${CHALLENGE_PAGE}/:challengeId/edit`}
+            element={<Challenge section={CHALLENGE_SECTIONS.EDIT} />}
           />
           <Route path={`/admin-panel`} element={<AdminPanel />} />
           <Route
-            path={`${CHALLENGE_PAGE}/:challengeId/mysubmissions`}
-            element={<Challenge section={CHALLENGE_SECTIONS.MY_ENTRIES} />}
-          />
-          <Route
-            path={`${CHALLENGE_PAGE}/:challengeId/submit`}
-            element={<Challenge section={CHALLENGE_SECTIONS.SUBMIT} />}
+            path={`${CHALLENGE_PAGE}/:challengeId/addsolution`}
+            element={<Challenge section={CHALLENGE_SECTIONS.ADD_SOLUTION} />}
           />
           <Route path={PROFILE_PAGE} element={<Profile />} />
           <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
@@ -146,23 +142,31 @@ const RoutingManager = (props) => {
       <Route path={REGISTER_PAGE} element={<RegisterPage />} />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId`}
-        element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
+        element={<Challenge section={CHALLENGE_SECTIONS.OVERVIEW} />}
       />
+        <Route
+            path={`${CHALLENGE_PAGE}/:challengeId/overview`}
+            element={<Challenge section={CHALLENGE_SECTIONS.OVERVIEW} />}
+        />
+        <Route
+            path={`${CHALLENGE_PAGE}/:challengeId/howto`}
+            element={<Challenge section={CHALLENGE_SECTIONS.HOW_TO} />}
+        />
       <Route
         path={`${CHALLENGE_PAGE}/:challengeId/leaderboard`}
         element={<Challenge section={CHALLENGE_SECTIONS.LEADERBOARD} />}
       />
       <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/allsubmissions`}
-        element={<Challenge section={CHALLENGE_SECTIONS.ALL_ENTRIES} />}
+        path={`${CHALLENGE_PAGE}/:challengeId/submissions`}
+        element={<Challenge section={CHALLENGE_SECTIONS.SUBMISSIONS} />}
       />
       <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/description`}
-        element={<Challenge section={CHALLENGE_SECTIONS.README} />}
+        path={`${CHALLENGE_PAGE}/:challengeId/edit`}
+        element={<Challenge section={CHALLENGE_SECTIONS.EDIT} />}
       />
       <Route
-        path={`${CHALLENGE_PAGE}/:challengeId/howto`}
-        element={<Challenge section={CHALLENGE_SECTIONS.HOW_TO} />}
+        path={`${CHALLENGE_PAGE}/:challengeId/addsolution`}
+        element={<Challenge section={CHALLENGE_SECTIONS.ADD_SOLUTION} />}
       />
       <Route path={CHALLENGES_PAGE} element={<Challenges />} />
       <Route path={POLICY_PRIVACY_PAGE} element={<PolicyPrivacy />} />

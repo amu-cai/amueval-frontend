@@ -9,6 +9,10 @@ const CsiStyle = styled(FlexColumn)`
   .CsiStyle__text {
     max-width: 500px;
   }
+
+  h2 {
+    margin-bottom: 40px;
+  }
 `;
 
 export default CsiStyle;

@@ -45,7 +45,7 @@ const AdminPanel = () => {
       if (challengeUpdateResult?.detail) {
         dispatch(
           popUpMessageHandler({
-            header: 'Challenge update error',
+            header: 'Overview update error',
             message: `Error: ${challengeUpdateResult.detail}`,
             borderColor: theme.colors.red,
           })
@@ -53,7 +53,7 @@ const AdminPanel = () => {
       } else {
         dispatch(
           popUpMessageHandler({
-            header: 'Challenge update sucess',
+            header: 'Overview update sucess',
             message: `${challengeUpdateResult.challenge}: ${challengeUpdateResult.message}`,
             borderColor: theme.colors.green,
           })

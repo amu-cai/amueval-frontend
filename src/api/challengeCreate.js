@@ -30,24 +30,18 @@ const challengeCreate = async (
         .then(
             (res) => {
                 if (res.ok) {
-                    console.log('upload challenge ok');
                     return res.json();
                 } else {
-                    console.log('something went wrong');
                     return res.json();
                 }
             },
             (error) => {
-                console.log(error);
-                console.error('failed due to network error or cross domain');
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }
             }
         )
         .then((json) => {
-            console.log('json response processing');
-            console.log(json);
             setResult(json);
         });
 };

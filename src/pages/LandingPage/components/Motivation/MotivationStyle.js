@@ -25,6 +25,10 @@ const MotivationStyle = styled(FlexColumn)`
     margin-bottom: 28px;
   }
   
+  h2 {
+    margin-bottom: 40px;
+  }
+  
   @media (${theme.mobile}) {
     .MotivationStyle__wrapper p {
       margin-bottom: 14px;

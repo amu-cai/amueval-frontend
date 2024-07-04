@@ -4,7 +4,6 @@ const getChallengeInfo = (setDataState, setLoadingState, challengeTitle) => {
     fetch(`${API}/challenges/challenge/${challengeTitle}`)
         .then((response) => response.json(),
             (error) => {
-                console.log(error);
                 if (!alert('Oops, something went wrong!')) {
                     window.location.replace('/');
                 }

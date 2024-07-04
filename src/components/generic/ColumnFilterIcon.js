@@ -13,7 +13,7 @@ const ColumnFilterIcon = (props) => {
           maxWidth="8px"
           src={filterIco}
           cursor={props.cursor}
-          backgroundColor={theme.colors.dark}
+          backgroundColor={theme.colors.green700}
           margin="0 0 0 2px"
           rotate={props.rotateIcon ? '0' : '180deg'}
         />
@@ -25,7 +25,7 @@ const ColumnFilterIcon = (props) => {
           maxWidth="8px"
           src={arrow}
           cursor={props.cursor}
-          backgroundColor={theme.colors.dark}
+          backgroundColor={theme.colors.green700}
           margin="0 0 2px 0"
         />
       );
@@ -40,7 +40,7 @@ const ColumnFilterIcon = (props) => {
         rotate="180deg"
         src={arrow}
         cursor={props.cursor}
-        backgroundColor={theme.colors.dark}
+        backgroundColor={theme.colors.green700}
         margin="2px 0 0 0"
       />
       {renderSecondIcon()}
