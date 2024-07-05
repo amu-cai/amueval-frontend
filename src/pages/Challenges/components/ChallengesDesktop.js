@@ -7,15 +7,15 @@ import { CALC_PAGES } from '../../../utils/globals';
 import renderChallenges from '../functions/renderChallenges';
 import Loading from '../../../components/generic/Loading';
 import Filters from "../Filters";
-import amus from '../../../assets/amus.svg';
+// import amus from '../../../assets/amus.svg';
 
 const ChallengesDesktop = (props) => {
   return (
     <>
       <ChallengesStyle as="main" id="start">
-          <FlexColumn className="amus">
-              <img src={amus} alt="Amuś"/>
-          </FlexColumn>
+          {/*<FlexColumn className="amus">*/}
+          {/*    <img src={amus} alt="Amuś"/>*/}
+          {/*</FlexColumn>*/}
           <FlexRow>
               <FlexColumn>
                   <FlexColumn>
