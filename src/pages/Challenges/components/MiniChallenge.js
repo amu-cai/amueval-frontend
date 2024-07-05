@@ -13,6 +13,7 @@ import {getChallengeImage} from "../../../utils/globals";
 
 
 const MiniChallengeStyle = styled(FlexColumn)`
+  width: 1100px;
   .challengeTypeImg {
     margin-right: 20px;
   }
@@ -50,16 +51,20 @@ const MiniChallengeStyle = styled(FlexColumn)`
   .wrap, .wrap div {
     cursor: pointer;
   }
+  
+  .description {
+    margin-right: auto;
+  }
 `;
 
 const MiniChallenge = (props) => {
   return (
     <MiniChallengeStyle as={Link} to={`${CHALLENGE_PAGE}/${props.title}`}>
-      <FlexRow className="wrap" alignmentX="space-between">
+      <FlexRow className="wrap" alignmentX="start">
         <FlexColumn as="div">
           <img className="challengeTypeImg" src={getChallengeImage(props.type)} alt="Overview type"/>
         </FlexColumn>
-        <FlexColumn as="div">
+        <FlexColumn as="div" width="100%">
           <FlexRow as="div" width="100%" alignmentY="space-between" alignmentX="space-between">
             <H2New className="titleHeader">{props.title}</H2New>
             <div className="challengeMetadata">
@@ -67,7 +72,7 @@ const MiniChallenge = (props) => {
               <span className="highlight">&nbsp;{props.deadline.slice(0, 10)}</span>
             </div>
           </FlexRow>
-          <FlexRow as="div">
+          <FlexRow as="div" className="description">
             {props.description}
           </FlexRow>
           <FlexRow as="div" className="accuracy">
