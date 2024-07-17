@@ -16,12 +16,12 @@ const FiltersStyle = styled(FlexColumn)`
   }
   
   .metricFilter {
-    width: 240px;
+    width: 250px;
     margin-right: 33px;
   }
   
   .typeFilter {
-    width: 200px;
+    width: 190px;
     margin-right: 33px;
   }
   

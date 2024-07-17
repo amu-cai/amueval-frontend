@@ -89,6 +89,7 @@ const Filters = (props) => {
                             onChange={handleTypeChange}
                         />
                         <Autocomplete
+                            limitTags={1}
                             className="metricFilter"
                             multiple
                             options={metrics.map(metric => metric.name)}

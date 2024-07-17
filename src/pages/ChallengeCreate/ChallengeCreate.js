@@ -9,7 +9,7 @@ import {popUpMessageHandler} from '../../redux/popUpMessegeSlice';
 import {useDispatch} from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Grid} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Grid, ListSubheader} from "@mui/material";
 import ChallengeCreateStyle from "./ChallengeCreateStyle";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
@@ -20,7 +20,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import howToIcon from '../../assets/how-to.svg';
 import {Link} from "react-router-dom";
-import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE} from "../../utils/globals";
+import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE, COMMON_METRICS} from "../../utils/globals";
 import InputAdornment from '@mui/material/InputAdornment';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -289,8 +289,15 @@ const ChallengeCreate = () => {
                                 label={"Choose your metric"}
                                 IconComponent={KeyboardArrowDownIcon}
                             >
-                                {metrics ? metrics.map((m, index) => (
-                                    <MenuItem key={index} value={m}>{m.name}</MenuItem>
+                                <ListSubheader>Common Metrics</ListSubheader>
+                                {metrics ? metrics.filter(m => COMMON_METRICS.includes(m.name)).map((m, index) => (
+                                    <MenuItem key={`common-${index}`} value={m}>{m.name}</MenuItem>
+                                )) : []}
+                                <ListSubheader>Other Metrics</ListSubheader>
+                                {metrics ? metrics.filter(m => !COMMON_METRICS.includes(m.name))
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .map((m, index) => (
+                                    <MenuItem key={`other-${index}`} value={m}>{m.name}</MenuItem>
                                 )) : []}
                             </Select>
                             <FormHelperText>{metricError ? metricError: ''}</FormHelperText>

@@ -204,3 +204,20 @@ export const getChallengeImage = (type) => {
     else if (type === 'image') return imageTypeImg;
     else return tabularTypeImg;
 };
+
+export const COMMON_METRICS = [
+    "accuracy",
+    "precision",
+    "recall",
+    "f1_score",
+    "fbeta_score",
+    "rmse",
+    "mse",
+    "mean_absolute_error",
+    "mean_percentage_absolute_error",
+    "median_absolute_error",
+    "r2",
+    "dcg",
+    "ndcg",
+    "bleu"
+];
