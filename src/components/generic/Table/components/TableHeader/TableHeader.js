@@ -14,6 +14,9 @@ const TableHeader = (props) => {
             key={`table-header-${i}`}
             className="TableStyle__th"
             onClick={() => {
+              if (!keyValue.sortable) {
+                return;
+              }
               if (activeIcon === i) {
                 let newRotateActiveIcon = !rotateActiveIcon;
                 setRotateActiveIcon(newRotateActiveIcon);
@@ -26,9 +29,8 @@ const TableHeader = (props) => {
             }}
           >
             <FlexRow as="span" alignmentX="flex-start" gap="8px" width="100%">
-              {keyValue.sortable && (
+              {keyValue.sortable ? (
                   <FlexRow
-                      as="span"
                       className="TableStyle__sort-button"
                       column={keyValue.key}
                   >
@@ -37,14 +39,16 @@ const TableHeader = (props) => {
                         active={activeIcon}
                         rotateIcon={rotateActiveIcon}
                     />
+                    <span className="sortHeaderName">{keyValue.name}</span>
                   </FlexRow>
-              )}
-              {keyValue.name}
+              ) :
+                  <span>
+                    {keyValue.name}
+                  </span>}
             </FlexRow>
           </th>
         );
       })}
-      <FlexRow className="TableStyle__line" as="td" />
     </tr>
   );
 };

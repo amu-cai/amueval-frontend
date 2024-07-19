@@ -4,7 +4,7 @@ import theme from "../../utils/theme";
 
 const ChallengeStyle = styled(FlexColumn)`
   max-width: 1000px;
-  margin: 150px auto 0 auto;
+  margin: 0 auto 0 auto;
   
   .challengeImg {
     margin-right: 20px;
@@ -15,6 +15,10 @@ const ChallengeStyle = styled(FlexColumn)`
     height: 1px;
     background: ${theme.colors.black700};
     margin-bottom: 20px;
+  }
+  
+  .challengeName {
+    margin-top: 150px;
   }
 `;
 

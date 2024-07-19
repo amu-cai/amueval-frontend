@@ -289,11 +289,25 @@ const ChallengeCreate = () => {
                                 label={"Choose your metric"}
                                 IconComponent={KeyboardArrowDownIcon}
                             >
-                                <ListSubheader>Common Metrics</ListSubheader>
+                                <ListSubheader
+                                    sx={{
+                                        '&': {
+                                            color: theme.colors.black900,
+                                            backgroundColor: '#BAE7E1',
+                                        },
+                                    }}
+                                >Common Metrics</ListSubheader>
                                 {metrics ? metrics.filter(m => COMMON_METRICS.includes(m.name)).map((m, index) => (
                                     <MenuItem key={`common-${index}`} value={m}>{m.name}</MenuItem>
                                 )) : []}
-                                <ListSubheader>Other Metrics</ListSubheader>
+                                <ListSubheader
+                                    sx={{
+                                        '&': {
+                                            color: theme.colors.black900,
+                                            backgroundColor: '#BAE7E1',
+                                        },
+                                    }}
+                                >Other Metrics</ListSubheader>
                                 {metrics ? metrics.filter(m => !COMMON_METRICS.includes(m.name))
                                     .sort((a, b) => a.name.localeCompare(b.name))
                                     .map((m, index) => (

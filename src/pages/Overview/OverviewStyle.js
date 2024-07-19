@@ -17,7 +17,7 @@ const OverviewStyle = styled(FlexColumn)`
 
   p {
     color: #5E5E5E;
-    font-size: 14px;
+    font-size: 16px;
     margin-right: auto;
   }
   

@@ -28,7 +28,6 @@ const Leaderboard = (props) => {
   });
 
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
-
   React.useEffect(() => {
     if (props.challengeName) {
       getLeaderboard(props.challengeName, setSubmissionsAll, setLoading);

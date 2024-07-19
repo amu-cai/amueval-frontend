@@ -45,6 +45,10 @@ const ChallengeCreateStyle = styled(Container)`
   .inputCopyMetricLink {
     cursor: pointer;
   }
+
+  .MuiList-root {
+    background: red;!important;
+  }
 `;
 
 export default ChallengeCreateStyle;

@@ -28,6 +28,7 @@ const AllSubmissions = (props) => {
       [`test_${props.mainMetric}`]: parseFloat(item.test_result).toFixed(5),
     };
   });
+  console.log(elements);
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE);
 
   React.useEffect(() => {
@@ -164,8 +165,7 @@ const AllSubmissions = (props) => {
     const orderedKeys = [
       { key: 'index', name: '#', sortable: false },
       { key: 'submitter', name: 'User', sortable: false },
-      { key: 'description', name: 'Description', sortable: false },
-      { key: `test_${props.mainMetric}`, name: `Main Metric`, sortable: true },
+      { key: 'main_metric_result', name: `Main Metric`, sortable: true },
       { key: 'timestamp', name: 'Timestamp', sortable: true }
     ];
     if (!loading) {

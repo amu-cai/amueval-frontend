@@ -7,7 +7,7 @@ const FiltersStyle = styled(FlexColumn)`
   width: 1100px;
 
   .inputSearch {
-    width: 300px;
+    width: 290px;
     margin-bottom: 10px;
   }
   
@@ -16,20 +16,16 @@ const FiltersStyle = styled(FlexColumn)`
   }
   
   .metricFilter {
-    width: 250px;
-    margin-right: 33px;
+    width: 300px;
   }
   
   .typeFilter {
     width: 190px;
-    margin-right: 33px;
+    margin-right: 20px;
   }
   
   .sorting img {
     margin-left: 8px;
-  }
-
-  .sortParticipants {
   }
 
   .sortDeadline {
@@ -40,11 +36,12 @@ const FiltersStyle = styled(FlexColumn)`
   }
   
   .sorting {
-    width: 100%;
-    padding-left: 22px;
     margin-bottom: 10px;
   }
-
+  
+  .MuiListSubheader-sticky {
+    background: #1B998B;
+  }
 
 `;
 

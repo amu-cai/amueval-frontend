@@ -15,6 +15,7 @@ import {ThemeProvider} from "@mui/material/styles";
 const DesktopChallengeMenuStyle = styled(FlexColumn)`
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-right: auto;
 `;
 
 const DesktopChallengeMenu = (props) => {

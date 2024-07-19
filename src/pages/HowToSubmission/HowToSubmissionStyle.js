@@ -9,12 +9,12 @@ const HowToSubmissionStyle = styled(FlexColumn)`
   }
   .wrapper p {
     line-height: 48px;
-    font-size: 24px;
+    font-size: 18px;
     margin-right: auto;
   }
   
-  .wrapper h1 {
-    margin-bottom: 40px;
+  .wrapper h2 {
+    margin-bottom: 20px;
   }
   
   .wrapper .highlight {

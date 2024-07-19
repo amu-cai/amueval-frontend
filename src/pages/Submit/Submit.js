@@ -104,10 +104,10 @@ const Submit = (props) => {
                         className={descriptionError ? 'error' : ''}
                     />
                     <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{descriptionError ? descriptionError: ''}</FormHelperText>
-                    <FlexColumn gap="10px" width="100%">
+                    <FlexColumn width="100%">
                         <span className="topLabel">Upload solution *</span>
                         <Dropzone acceptedFiles={solution} setAcceptedFiles={setSolution} error={!!solutionError}></Dropzone>
-                        <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{solutionError ? solutionError: ''}</FormHelperText>
+                        <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px', marginTop: '10px'}}>{solutionError ? solutionError: ''}</FormHelperText>
                     </FlexColumn>
 
                 </FlexColumn>

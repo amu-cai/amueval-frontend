@@ -3,10 +3,11 @@ import theme from "../../../../utils/theme";
 
 const TableStyle = styled.table`
   width: 100%;
-  border-collapse: collapse; 
+  border-collapse: collapse;
   border-spacing: 0;
+  table-layout: fixed;
 
-  .TableStyle__th {
+  .TableStyle__sort-button {
     cursor: pointer;
     * {
       cursor: pointer;
@@ -22,6 +23,8 @@ const TableStyle = styled.table`
   .TableStyle__tr {
     position: relative;
     height: ${({ rowFooter }) => (rowFooter ? '72px' : 'auto')};
+    font-weight: bolder;
+    font-family: 'Inter', sans-serif;
   }
 
   .TableStyle__td {
@@ -33,9 +36,9 @@ const TableStyle = styled.table`
   }
 
   .TableStyle__td:last-child {
-    max-width:150px;
-    min-width:150px;
-    width:150px;
+    //max-width:150px;
+    //min-width:150px;
+    //width:150px;
   }
 
   .TableStyle__td:first-child {
@@ -58,7 +61,7 @@ const TableStyle = styled.table`
     background-color: ${({ theme }) => theme.colors.green08};
     padding: 4px;
     border-radius: 2px;
-    
+
     font-size: 12px;
     font-weight: 600;
   }
@@ -74,9 +77,16 @@ const TableStyle = styled.table`
   .TableStyle__th span{
     color: ${theme.colors.black500};
   }
-  
+
   .TableStyle__th:first-child{
     padding-left: 40px;
+  }
+  
+  .sortHeaderName {
+    margin-left: 8px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 

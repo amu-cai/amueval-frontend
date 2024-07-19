@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlexRow} from "../../utils/containers";
 import theme from "../../utils/theme";
-import {Autocomplete, TextField} from "@mui/material";
+import {Autocomplete, ListSubheader, TextField} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import Button from "../../components/generic/Button";
 import SortIco from '../../assets/sort_ico.png';
@@ -9,6 +9,7 @@ import getMetrics from "../../api/getMetrics";
 import InputAdornment from "@mui/material/InputAdornment";
 import searchIco from "../../assets/search_ico.svg";
 import FiltersStyle from "./FiltersStyle";
+import {COMMON_METRICS} from "../../utils/globals";
 
 const Filters = (props) => {
     const [metrics, setMetrics] = React.useState([]);
@@ -67,6 +68,24 @@ const Filters = (props) => {
         });
     };
 
+    const categorizeMetrics = (metrics) => {
+        let common = [];
+        let other = [];
+        metrics.forEach(metric => {
+            if (COMMON_METRICS.includes(metric.name)) {
+                common.push(metric.name);
+            } else {
+                other.push(metric.name);
+            }
+        });
+        other = other.sort((a, b) => a.localeCompare(b));
+        return [
+            { title: 'Common', metrics: common },
+            { title: 'Other', metrics: other },
+        ];
+    };
+
+    const groupedMetrics = categorizeMetrics(metrics);
 
     return (
         <FiltersStyle width="100%">
@@ -74,6 +93,8 @@ const Filters = (props) => {
                 <FlexRow className="filters" alignmentY="end">
                     <ThemeProvider theme={theme.customTheme}>
                         <Autocomplete
+                            size="small"
+                            limitTags="1"
                             className="typeFilter"
                             multiple
                             options={['image', 'text', 'tabular']}
@@ -89,12 +110,28 @@ const Filters = (props) => {
                             onChange={handleTypeChange}
                         />
                         <Autocomplete
-                            limitTags={1}
+                            size="small"
+                            limitTags="1"
                             className="metricFilter"
                             multiple
-                            options={metrics.map(metric => metric.name)}
+                            options={groupedMetrics.flatMap(group => group.metrics)}
+                            groupBy={(option) => {
+                                return groupedMetrics.find(group => group.metrics.includes(option)).title;
+                            }}
                             defaultValue={[]}
                             value={selectedMetrics}
+                            renderGroup={(params) => (
+                                <React.Fragment>
+                                    <ListSubheader
+                                        sx={{
+                                            color: theme.colors.black900,
+                                            backgroundColor: '#BAE7E1',
+                                            top: '-10px',
+                                        }}
+                                        className="subheader">{params.group}</ListSubheader>
+                                    {params.children}
+                                </React.Fragment>
+                            )}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}

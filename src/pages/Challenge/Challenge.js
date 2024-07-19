@@ -121,7 +121,7 @@ const Challenge = (props) => {
     if (!loading) {
       return (
           <ChallengeStyle>
-            <FlexRow width="100%" alignmentX="start" alignmentY="start">
+            <FlexRow className="challengeName" width="100%" alignmentX="start" alignmentY="start">
               <img className="challengeImg" src={getChallengeImage(challenge.type)} alt="Overview type"/>
               <H1New textLeft={true} className="challengeTitle">
                 {challenge.title}
@@ -133,7 +133,7 @@ const Challenge = (props) => {
                 challenge={challenge}
             />
             <div className="spacer"></div>
-            {sectionRender()}
+              {sectionRender()}
           </ChallengeStyle>
       );
     } else {

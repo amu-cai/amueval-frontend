@@ -8,14 +8,14 @@ const DropzoneStyle = styled(Container)`
   }
   
   .dropzoneArea {
-    border: 1px dashed ${theme.colors.black900};
+    border: 1px dashed #ABABAB;
     border-radius: 8px;
     height: 206px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: ${theme.colors.black700};
+    color: #6B6B68;
   }
   
   .dropzoneArea:hover {

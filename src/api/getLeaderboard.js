@@ -9,6 +9,7 @@ const getLeaderboard = (challenge, setResult, setLoading) => {
                 }
             })
         .then((data) => {
+            console.log(data);
             setResult(data);
             if (setLoading) {
                 setLoading(false);
