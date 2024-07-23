@@ -10,6 +10,7 @@ import {
 import {H2New} from '../../../utils/fonts';
 import theme from "../../../utils/theme";
 import {getChallengeImage} from "../../../utils/globals";
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 
 
 const MiniChallengeStyle = styled(FlexColumn)`
@@ -40,12 +41,16 @@ const MiniChallengeStyle = styled(FlexColumn)`
     color: ${theme.colors.green700}
   }
   
-  .challengeMetadata {
-    margin-right: 10px;
+  .peopleIcon {
+    color: ${theme.colors.green700};
   }
   
-  .highlight:nth-child(2) {
-    margin-left: 10px;
+  .deadline {
+    margin-left: 20px;
+  }
+  
+  .participants {
+    margin-left: 6px;
   }
   
   .wrap, .wrap div {
@@ -68,8 +73,12 @@ const MiniChallenge = (props) => {
           <FlexRow as="div" width="100%" alignmentY="space-between" alignmentX="space-between">
             <H2New className="titleHeader">{props.title}</H2New>
             <div className="challengeMetadata">
-              <span className="highlight">&nbsp;24</span>&nbsp;&nbsp;&nbsp;&nbsp;
-              <span className="highlight">&nbsp;{props.deadline.slice(0, 10)}</span>
+              <FlexRow>
+                <FlexRow>
+                  <PeopleOutlineIcon className="peopleIcon" /><span className="highlight participants">24</span>
+                </FlexRow>
+                <span className="highlight deadline">&nbsp;{props.deadline.slice(0, 10)}</span>
+              </FlexRow>
             </div>
           </FlexRow>
           <FlexRow as="div" className="description">

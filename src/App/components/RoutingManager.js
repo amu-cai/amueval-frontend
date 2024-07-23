@@ -93,7 +93,7 @@ const RoutingManager = (props) => {
             element={<Challenge section={CHALLENGE_SECTIONS.ADD_SOLUTION} />}
           />
           <Route path={PROFILE_PAGE} element={<Profile />} />
-          <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
+          {/*<Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />*/}
           <Route
             path={CHALLENGE_CREATE_HOW_TO_PAGE}
             element={<ChallengeCreateHowTo />}
@@ -138,6 +138,7 @@ const RoutingManager = (props) => {
 
   return (
     <Routes>
+        <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate />} />
       <Route path={LOGIN_PAGE} element={<LoginPage />} />
       <Route path={REGISTER_PAGE} element={<RegisterPage />} />
       <Route

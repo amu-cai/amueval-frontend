@@ -8,8 +8,18 @@ import getMetrics from '../../api/getMetrics';
 import {popUpMessageHandler} from '../../redux/popUpMessegeSlice';
 import {useDispatch} from 'react-redux';
 import LOCAL_STORAGE from '../../utils/localStorage';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Grid, ListSubheader} from "@mui/material";
+import {ThemeProvider} from '@mui/material/styles';
+import {
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+    Grid,
+    ListSubheader,
+    Autocomplete
+} from "@mui/material";
 import ChallengeCreateStyle from "./ChallengeCreateStyle";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
@@ -24,6 +34,7 @@ import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE, COMMON_METRICS} from "../../uti
 import InputAdornment from '@mui/material/InputAdornment';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import customTheme from "../../utils/customTheme";
 
 
 const ChallengeCreate = () => {
@@ -33,26 +44,27 @@ const ChallengeCreate = () => {
     const [award, setAward] = React.useState('');
     const [deadline, setDeadline] = React.useState('');
     const [type, setType] = React.useState('');
-    const [metric, setMetric] = React.useState('');
     const [challengeSource, setChallengeSource] = React.useState('');
-    // const [challengeFile] = React.useState(null);
     const [uploadResult, setUploadResult] = React.useState(null);
-    const [metrics, setMetrics] = React.useState(null);
+    const [metrics, setMetrics] = React.useState([]);
     const [datasetError, setDatasetError] = React.useState(false);
     const [metricError, setMetricError] = React.useState(false);
     const [solutionError, setSolutionError] = React.useState(false);
     const [showAdvanced, setShowAdvanced] = React.useState(false);
     const [showMetricParameters, setShowMetricParameters] = React.useState(false);
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
-    // const [parameters, setParameters] = React.useState(null);
-
+    const [selectedMetrics, setSelectedMetrics] = React.useState([]);
+    const [selectedFullMetrics, setSelectedFullMetrics] = React.useState([]);
     const parameterRefs = React.useState({});
 
+    const parametersListRender = (metricName) => {
+        const fullMetric = metrics?.find((m) => m['name'] === metricName);
+        if (fullMetric) {
+            if (!parameterRefs[fullMetric.name]) {
+                parameterRefs[fullMetric.name] = {};
+            }
 
-    const parametersListRender = () => {
-        const choosenMetric = metrics?.find((m) => m['name'] === metric.name);
-        if (choosenMetric) {
-            return choosenMetric.parameters.map((parameter, index) => {
+            return fullMetric.parameters.map((parameter, index) => {
                 const firstValue = Object.entries(parameter)[0][1];
                 const placeholderParts = [];
                 for (const [key, value] of Object.entries(parameter).slice(1)) {
@@ -61,7 +73,8 @@ const ChallengeCreate = () => {
                 const placeholderText = placeholderParts.join('\n');
 
                 const ref = React.createRef();
-                parameterRefs[parameter.name] = ref;
+                parameterRefs[fullMetric.name][parameter.name] = ref;
+
                 return (
                     <Grid item xs={6} key={index}>
                         <span className="topLabel metricParamLabel">{firstValue}</span>
@@ -70,7 +83,6 @@ const ChallengeCreate = () => {
                             variant="outlined"
                             placeholder={placeholderText}
                             multiline
-                            rows={5}
                             minRows={5}
                             maxRows={5}
                             inputProps={{
@@ -84,6 +96,7 @@ const ChallengeCreate = () => {
                 );
             });
         }
+        return null;
     };
 
 
@@ -126,8 +139,8 @@ const ChallengeCreate = () => {
             return true;
         };
 
-        const validateMetric = () => {
-            if (!metric) {
+        const validateMetrics = () => {
+            if (!selectedMetrics.length) {
                 setMetricError('Metric is required');
                 return false;
             }
@@ -147,20 +160,10 @@ const ChallengeCreate = () => {
         const urlRegex = /^(https?|ftp):\/\/(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost)(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(#[-a-z\d_]*)?$/i;
 
         const isDatasetValid = validateDataset();
-        const isMetricValid = validateMetric();
+        const isMetricValid = validateMetrics();
         const isSolutionValid = validateSolution();
 
         return isDatasetValid && isMetricValid && isSolutionValid;
-    };
-
-    const handleShowAdvanced = () => {
-        setShowAdvanced(!showAdvanced);
-        setDeadline(halfYearFromNow);
-        setTitle(getTitleFromUrl());
-    };
-
-    const handleMetricParameters = () => {
-        setShowMetricParameters(!showMetricParameters);
     };
 
     const formatDateString = (dateString, inputFormat, outputFormat) => {
@@ -170,20 +173,52 @@ const ChallengeCreate = () => {
     const generateDescription = () => {
         const createdDate = dayjs().format('DD.MM.YYYY');
         const deadlineFormatted = deadline ? formatDateString(deadline, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY') : formatDateString(halfYearFromNow, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY');
-        return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${metric.name} to evaluate solutions.`;
+        return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${selectedMetrics[0].name} to evaluate solutions.`;
     };
 
     const createMainMetricParams = () => {
         let result = {};
-        let keys = Object.keys(parameterRefs);
-        for (let i = 2; i < keys.length; i++) {
-            let key = keys[i];
-            if (parameterRefs[key].current.value) {
-                result[key] = parameterRefs[key].current.value;
+        let metrics = Object.keys(parameterRefs);
+        for (let i = 2; i < metrics.length; i++) {
+            let metric = metrics[i];
+            result[metric] = {};
+            let params = Object.keys(parameterRefs[metric]);
+            for (let j = 0; j < params.length; j++) {
+                let param = params[j];
+                let value = parameterRefs[metric][param].current.value;
+                if (value) {
+                    result[metric][param] = value;
+                }
             }
         }
         return JSON.stringify(result, null, 2);
     };
+
+    const halfYearFromNow =  dayjs().add(6, 'months');
+
+    const getTitleFromUrl = () => {
+        if (!challengeSource) return '';
+        return challengeSource.split('/').pop();
+    };
+
+    const categorizeMetrics = (metrics) => {
+        let common = [];
+        let other = [];
+        metrics.forEach(metric => {
+            if (COMMON_METRICS.includes(metric.name)) {
+                common.push(metric.name);
+            } else {
+                other.push(metric.name);
+            }
+        });
+        other = other.sort((a, b) => a.localeCompare(b));
+        return [
+            { title: 'Common', metrics: common },
+            { title: 'Other', metrics: other },
+        ];
+    };
+
+    const groupedMetrics = categorizeMetrics(metrics);
 
     const challengeCreateSubmit = async () => {
         const mainMetricParams = createMainMetricParams();
@@ -196,7 +231,7 @@ const ChallengeCreate = () => {
             description: description ? description : generateDescription(),
             source: challengeSource,
             type: type,
-            main_metric: metric.name,
+            main_metric: selectedMetrics[0],
             award: award,
             deadline: deadline ? formatDateString(deadline) : formatDateString(halfYearFromNow),
             sorting: '',
@@ -211,20 +246,18 @@ const ChallengeCreate = () => {
         );
     };
 
-    const customTheme = createTheme({
-        palette: {
-            primary: {
-                main: theme.colors.green700
-            },
-        },
-    });
+    const handleShowAdvanced = () => {
+        setShowAdvanced(!showAdvanced);
+        setDeadline(halfYearFromNow);
+        setTitle(getTitleFromUrl());
+    };
+
+    const handleMetricParameters = () => {
+        setShowMetricParameters(!showMetricParameters);
+    };
 
     const handleChallengeSource = (event) => {
         setChallengeSource(event.target.value);
-    };
-
-    const handleMetricChange = (event) => {
-        setMetric(event.target.value);
     };
 
     const handleTitleChange = (event) => {
@@ -247,15 +280,10 @@ const ChallengeCreate = () => {
         setDeadline(date);
     };
 
-    const halfYearFromNow =  dayjs().add(6, 'months');
-
-    const getTitleFromUrl = () => {
-        if (!challengeSource) return '';
-        const title_from_url = challengeSource.split('/').pop();
-        return title_from_url;
+    const handleSelectedMetricsChange = (event, value) => {
+        setSelectedMetrics(value);
+        setSelectedFullMetrics(metrics.filter((m) => value.includes(m['name'])));
     };
-
-
     return (
         <ChallengeCreateStyle>
             <FlexColumn padding="140px 0" width="100%" minHeight="100vh" gap="32px">
@@ -278,42 +306,40 @@ const ChallengeCreate = () => {
                             helperText={datasetError ? datasetError: ''}
                         />
                     </ThemeProvider>
-
-                    <ThemeProvider theme={customTheme}>
-                        <span className="topLabel">Metric *</span>
+                        <ThemeProvider theme={customTheme}>
+                        <span className="topLabel">Metrics *</span>
                         <FormControl fullWidth error={!!metricError}>
-                            <InputLabel>Choose your metric</InputLabel>
-                            <Select
-                                value={metric}
-                                onChange={handleMetricChange}
-                                label={"Choose your metric"}
-                                IconComponent={KeyboardArrowDownIcon}
-                            >
-                                <ListSubheader
-                                    sx={{
-                                        '&': {
-                                            color: theme.colors.black900,
-                                            backgroundColor: '#BAE7E1',
-                                        },
-                                    }}
-                                >Common Metrics</ListSubheader>
-                                {metrics ? metrics.filter(m => COMMON_METRICS.includes(m.name)).map((m, index) => (
-                                    <MenuItem key={`common-${index}`} value={m}>{m.name}</MenuItem>
-                                )) : []}
-                                <ListSubheader
-                                    sx={{
-                                        '&': {
-                                            color: theme.colors.black900,
-                                            backgroundColor: '#BAE7E1',
-                                        },
-                                    }}
-                                >Other Metrics</ListSubheader>
-                                {metrics ? metrics.filter(m => !COMMON_METRICS.includes(m.name))
-                                    .sort((a, b) => a.name.localeCompare(b.name))
-                                    .map((m, index) => (
-                                    <MenuItem key={`other-${index}`} value={m}>{m.name}</MenuItem>
-                                )) : []}
-                            </Select>
+                            <Autocomplete
+                                className="metricFilter"
+                                multiple
+                                getOptionDisabled={(groupedMetrics) => (selectedMetrics.length > 2)}
+                                options={groupedMetrics.flatMap(group => group.metrics)}
+                                groupBy={(option) => {
+                                    return groupedMetrics.find(group => group.metrics.includes(option)).title;
+                                }}
+                                defaultValue={[]}
+                                value={selectedMetrics}
+                                renderGroup={(params) => (
+                                    <React.Fragment>
+                                        <ListSubheader
+                                            sx={{
+                                                color: theme.colors.black900,
+                                                backgroundColor: '#BAE7E1',
+                                                top: '-10px',
+                                            }}
+                                            className="subheader">{params.group}</ListSubheader>
+                                        {params.children}
+                                    </React.Fragment>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        variant="outlined"
+                                        placeholder="Select your metrics (maximum 3)"
+                                    />
+                                )}
+                                onChange={handleSelectedMetricsChange}
+                            />
                             <FormHelperText>{metricError ? metricError: ''}</FormHelperText>
                         </FormControl>
                     </ThemeProvider>
@@ -402,7 +428,7 @@ const ChallengeCreate = () => {
                                     onChange={handleAwardChange}
                                 />
                             </ThemeProvider>
-                            {metric && ( <div className="metricParamsButtonWrapper">
+                            {!!selectedMetrics.length && ( <div className="metricParamsButtonWrapper">
                                 <Button
                                     width="170px"
                                     backgroundColor='transparent'
@@ -422,30 +448,39 @@ const ChallengeCreate = () => {
 
                             {showMetricParameters && (
                                 <>
-                                <ThemeProvider theme={customTheme}>
-                                    <span className="topLabel">Sklearn metrics URL</span>
-                                    <TextField
-                                        className="inputCopyMetricLink"
-                                        variant="outlined"
-                                        fullWidth
-                                        value={metric.link}
-                                        size="small"
-                                        InputProps={{
-                                            startAdornment: <InputAdornment position="start" onClick={() => window.open(metric.link, '_blank')}>
-                                                <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }}></LinkIcon>
-                                            </InputAdornment>,
-                                            endAdornment: <InputAdornment position="end" onClick={() => navigator.clipboard.writeText(metric.link)}>
-                                                <ContentCopyIcon style={{ color: theme.colors.black500 }}></ContentCopyIcon>
-                                            </InputAdornment>,
-                                            sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', height: '34px', input: { cursor: 'pointer' }, cursor: 'pointer'},
-                                            readOnly: true,
-                                        }}
-                                    />
-                                    <Grid container spacing={2}>
-                                        {parametersListRender()}
-                                    </Grid>
-                                </ThemeProvider>
-                            </>
+                                    <ThemeProvider theme={customTheme}>
+                                        {selectedFullMetrics.map((metric, index) => (
+                                            <React.Fragment key={index}>
+                                                <span className="metricNameLabel">{metric.name}</span>
+                                                <span className="topLabel">Sklearn metric URL</span>
+                                                <TextField
+                                                    className="inputCopyMetricLink"
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    value={metric.link}
+                                                    size="small"
+                                                    InputProps={{
+                                                        startAdornment: (
+                                                            <InputAdornment position="start" onClick={() => window.open(metric.link, '_blank')}>
+                                                                <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }} />
+                                                            </InputAdornment>
+                                                        ),
+                                                        endAdornment: (
+                                                            <InputAdornment position="end" onClick={() => navigator.clipboard.writeText(metric.link)}>
+                                                                <ContentCopyIcon style={{ color: theme.colors.black500 }} />
+                                                            </InputAdornment>
+                                                        ),
+                                                        sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', input: { cursor: 'pointer' }, cursor: 'pointer'},
+                                                        readOnly: true,
+                                                    }}
+                                                />
+                                                <Grid container spacing={2}>
+                                                    {parametersListRender(metric.name)}
+                                                </Grid>
+                                            </React.Fragment>
+                                        ))}
+                                    </ThemeProvider>
+                                </>
                             )}
                         </>
                     )}

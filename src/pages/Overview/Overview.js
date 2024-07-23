@@ -31,7 +31,7 @@ const Overview = (props) => {
             </FlexColumn>
             <span className="spacer"></span>
             <FlexColumn width="100%">
-                <H2New as="h2" textLeft={true}>Metric</H2New>
+                <H2New as="h2" textLeft={true}>Metrics</H2New>
                 <BodyNew as="p">{props.challenge.mainMetric}</BodyNew>
             </FlexColumn>
             { props.challenge.type &&<FlexColumn width="100%">

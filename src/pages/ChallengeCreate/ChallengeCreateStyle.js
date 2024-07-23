@@ -9,6 +9,7 @@ const ChallengeCreateStyle = styled(Container)`
       color: ${theme.colors.black500};
       font-weight: normal;
       font-size: 16px;
+      font-family: 'Inter', sans-serif;
   }
   
   .hidden {
@@ -40,14 +41,24 @@ const ChallengeCreateStyle = styled(Container)`
   .metricParamLabel {
     display: block;
     margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
   }
   
   .inputCopyMetricLink {
     cursor: pointer;
+    padding: 0;
   }
 
-  .MuiList-root {
-    background: red;!important;
+  .metricNameLabel {
+    margin-right: auto;
+    color: ${theme.colors.black500};
+    font-weight: normal;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .MuiInputBase-multiline {
+    background: #F2F2F1;
   }
 `;
 

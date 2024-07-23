@@ -45,7 +45,6 @@ const Leaderboard = (props) => {
     const orderedKeys = [
       { key: 'id', name: 'Place', sortable: false},
       { key: 'submitter', name: 'User', sortable: false },
-      { key: 'description', name: 'Description', sortable: false },
       { key: `test_${props.mainMetric}`, name: `Main Metric`, sortable: false },
       { key: 'timestamp', name: 'Timestamp', sortable: false }
     ];
