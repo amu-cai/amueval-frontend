@@ -12,7 +12,7 @@ import {TextField} from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import {PersonOutlined, LockOutlined} from "@mui/icons-material";
 import {Link} from "react-router-dom";
-import {REGISTER_PAGE, CHALLENGES_PAGE} from "../../utils/globals";
+import {REGISTER_PAGE, CHALLENGES_PAGE, FORGOT_PASSWORD_PAGE} from "../../utils/globals";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -158,7 +158,9 @@ const LoginPage = () => {
                         helperText={passwordError ? passwordError: ''}
                     />
                 </FlexColumn>
-                <p className="forgotPasswordLink">Forgot your password?</p>
+                <FlexColumn as={Link} to={FORGOT_PASSWORD_PAGE}>
+                    <p className="forgotPasswordLink">Forgot your password?</p>
+                </FlexColumn>
                 <Button
                     as="button"
                     width="140px"

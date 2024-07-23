@@ -29,7 +29,7 @@ export const POLICY_PRIVACY_LOGIN_PAGE = `${POLICY_PRIVACY_PAGE}/login`;
 export const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
 export const LOGIN_PAGE = `/login`;
 export const REGISTER_PAGE = `/register`;
-
+export const FORGOT_PASSWORD_PAGE = `/forgot-password`;
 export const CSI_LINK = 'https://csi.amu.edu.pl/';
 export const ROOT_URL = window.location.origin;
 export const LOGIN_REQUIRED_PAGES = ['my-submissions', 'submit'];

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FlexColumn } from '../../../utils/containers';
 import loginRegisterBg from '../../../assets/login_register_bg.svg';
 import loginRegisterSideBg from '../../../assets/login_register_side_bg.svg';
+import forgotPasswordBg from '../../../assets/forgot_password_bg.svg';
 import theme from "../../../utils/theme";
 
 const MainContainerStyle = styled(FlexColumn)`
@@ -14,7 +15,7 @@ const MainContainerStyle = styled(FlexColumn)`
     height: 680px;
     background-image: url(${loginRegisterBg});
     border-radius: 20px;
-    box-shadow: 0px 2px 8px 0px #00000026;
+    box-shadow: 0 2px 8px 0 #00000026;
   }
   
   .sideSection {
@@ -80,6 +81,7 @@ const MainContainerStyle = styled(FlexColumn)`
     letter-spacing: -0.28px;
     text-decoration-line: underline;
     margin: 20px 0 0 0;
+    cursor: pointer;
   }
 
   .mainSection button {
@@ -89,6 +91,21 @@ const MainContainerStyle = styled(FlexColumn)`
   
   .MuiInputAdornment-positionEnd:hover {
     cursor: pointer;
+  }
+  
+  .forgotPassword {
+    width: 440px;
+    margin: 350px 100px 0 0;
+  }
+  
+  .forgotPassword .description {
+    width: 310px;
+    color: ${theme.colors.green700};
+    margin: 0 0 16px 0;
+  }
+  
+  .forgotPasswordBg {
+    background-image: url(${forgotPasswordBg});
   }
 `;
 
