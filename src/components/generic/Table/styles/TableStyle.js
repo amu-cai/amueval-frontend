@@ -76,6 +76,9 @@ const TableStyle = styled.table`
 
   .TableStyle__th span{
     color: ${theme.colors.black500};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .TableStyle__th:first-child{

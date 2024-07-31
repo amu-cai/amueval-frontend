@@ -8,7 +8,7 @@ import {
 import {Container} from '../../../../../utils/containers';
 
 const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
-  const renderValue = (keyValue) => {
+  const renderValue = (keyValue, additionalMetricName = null) => {
     if (keyValue === 'timestamp') {
       return RENDER_WHEN(item[keyValue]);
     }
@@ -18,13 +18,16 @@ const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
     else if (keyValue === 'index') {
       return i + 1;
     }
+    else if (keyValue === 'additional_metric' && additionalMetricName) {
+      return item.additional_metrics_results.find(item => item.name === additionalMetricName).score;
+    }
     else {
       return RENDER_METRIC_VALUE(item[keyValue]);
     }
   };
 
-  const renderItem = (keyValue) => {
-    return renderValue(keyValue);
+  const renderItem = (keyValue, additionalMetricName) => {
+    return renderValue(keyValue, additionalMetricName);
   };
 
   return (
@@ -37,7 +40,7 @@ const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
                 {keyValue.name}
               </Container>
             )}
-            {renderItem(keyValue.key)}
+            {renderItem(keyValue.key, keyValue.additionalMetricName)}
           </td>
         );
       })}

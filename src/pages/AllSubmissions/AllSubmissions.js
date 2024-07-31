@@ -28,7 +28,6 @@ const AllSubmissions = (props) => {
       [`test_${props.mainMetric}`]: parseFloat(item.test_result).toFixed(5),
     };
   });
-  console.log(elements);
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE);
 
   React.useEffect(() => {
@@ -162,12 +161,23 @@ const AllSubmissions = (props) => {
 
   const allSubmissionsTableRender = () => {
     const tableNotEmpty = elements?.length;
-    const orderedKeys = [
+    let orderedKeys = [
       { key: 'index', name: '#', sortable: false },
       { key: 'submitter', name: 'User', sortable: false },
-      { key: 'main_metric_result', name: `Main Metric`, sortable: true },
-      { key: 'timestamp', name: 'Timestamp', sortable: true }
+      { key: 'main_metric_result', name: props.mainMetric, sortable: true },
     ];
+
+    if (elements?.length > 0) {
+      const additionalKeys = elements[0].additional_metrics_results.map((metric, index) => ({
+        key: 'additional_metric',
+        additionalMetricName: metric.name,
+        name: metric.name,
+        sortable: true
+      }));
+      orderedKeys = orderedKeys.concat(additionalKeys);
+    }
+    orderedKeys.push({ key: 'timestamp', name: 'Timestamp', sortable: true });
+
     if (!loading) {
       if (tableNotEmpty) {
         return (
