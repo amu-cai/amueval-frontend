@@ -259,7 +259,7 @@ const ChallengeCreate = () => {
             sorting: '',
             main_metric: selectedMetrics[0],
             main_metric_parameters: mainMetricParams,
-            additional_metrics: []
+            additional_metrics: additionalMetrics
         };
 
         await challengeCreate(

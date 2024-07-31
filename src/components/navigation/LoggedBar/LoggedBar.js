@@ -114,7 +114,7 @@ const LoggedBar = () => {
                             backgroundColor={theme.colors.green700}
                             size="cover"
                         />
-                        <span>{username}</span>
+                        <span>{username.length > 12 ? username.slice(0, 12) + '...' : username}</span>
                     </FlexRow>
                     <div className="border"></div>
                     {(userRightsInfo?.isAdmin || userRightsInfo?.isAuthor) && (
