@@ -3,8 +3,8 @@ import menuButtonIcon from '../../../../assets/menu-button.svg';
 import { Container } from '../../../../utils/containers';
 
 const MenuButtonStyle = styled(Container)`
-  width: 20px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   background-image: url(${menuButtonIcon});
   background-position: center;
   background-size: cover;

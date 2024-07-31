@@ -11,7 +11,7 @@ const Footer = () => {
   const mobileRender = () => {
     return (
         <FooterStyle>
-            <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
+            <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo" id="contact">
                 <H2New as="h2">Made by</H2New>
                 <img src={csiLogo} alt="csi" width="200px"/>
             </FlexColumn>
@@ -22,7 +22,7 @@ const Footer = () => {
   const tabletRender = () => {
     return (
         <FooterStyle>
-            <FlexRow className="FooterStyle__wrapper">
+            <FlexRow className="FooterStyle__wrapper" id="contact">
                 <FlexColumn as="section" alignmentY="start">
                     <img src={amuEval} alt="amu eval" width="250px"/>
                 </FlexColumn>
@@ -49,7 +49,7 @@ const Footer = () => {
   const desktopRender = () => {
     return (
         <FooterStyle>
-            <FlexRow className="FooterStyle__wrapper">
+            <FlexRow className="FooterStyle__wrapper" id="contact">
                 <FlexColumn as="section" alignmentY="start">
                     <img src={amuEval} alt="amu eval" width="316px"/>
                 </FlexColumn>

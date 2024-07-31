@@ -11,7 +11,7 @@ const ChallengesStyle = styled(FlexColumn)`
   }
 
   h1 {
-    margin-top: 100px;
+    margin-top: 40px;
   }
 
   @media (${theme.desktop2}) {

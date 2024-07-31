@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Container } from '../../../../utils/containers';
+import theme from "../../../../utils/theme";
 
 const NavBarStyle = styled(Container)`
   background-color: ${({ theme }) => theme.colors.white};
@@ -16,7 +17,7 @@ const NavBarStyle = styled(Container)`
   height: 80px;
   
   @media (min-width: ${({ theme }) => theme.overMobile}) {
-    padding: 0 26px;
+    padding: 0 60px;
 
     .ul-desktop {
       display: flex;
@@ -46,6 +47,14 @@ const NavBarStyle = styled(Container)`
         }
       }
     }
+  }
+  
+  .ul-desktop span {
+    color: ${theme.colors.black700};
+    text-decoration: underline;
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'coolvetica-condensed-regular', sans-serif;
   }
 `;
 

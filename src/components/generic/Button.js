@@ -24,7 +24,7 @@ const ButtonStyle = styled(Medium)`
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   transition: transform 0.3s ease-in-out;
   border: ${({ borderColor }) => (borderColor ? `2px solid ${borderColor}`  : 'none')};
-  font-family: 'coolvetica-condensed-regular';
+  font-family: 'coolvetica-condensed-regular', sans-serif;
   font-size: 24px;
   text-decoration: ${({ underlined }) => (underlined ? 'underline'  : 'none')};
 

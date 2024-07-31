@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { FlexColumn } from '../../../utils/containers';
+import theme from "../../../utils/theme";
 
 const LoggedBarStyle = styled(FlexColumn)`
-  width: 360px;
-  height: calc(100vh - 48px);
+  width: 210px;
+  height: 100vh;
   position: fixed;
-  top: 81px;
   right: 0;
   align-items: flex-start;
   justify-content: flex-start;
@@ -38,6 +38,34 @@ const LoggedBarStyle = styled(FlexColumn)`
     * {
       cursor: pointer;
     }
+  }
+  
+  .loggedBarLogo {
+    width: 126px;
+    height: 13px;
+  }
+  
+  .border {
+    width: 100%;
+    height: 1px;
+    background: ${theme.colors.black700};
+  }
+  
+  .sideMenuItem {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'coolvetica-condensed-regular', sans-serif;
+    margin-bottom: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .sideMenuList {
+    margin-left: 18px;
+  }
+
+  .toggleMenu {
+    cursor: pointer;
   }
 `;
 
