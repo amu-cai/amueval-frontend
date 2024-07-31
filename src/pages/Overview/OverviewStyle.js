@@ -24,6 +24,10 @@ const OverviewStyle = styled(FlexColumn)`
   h2 {
     margin-bottom: 14px;
   }
+  
+  .mainMetric {
+    font-weight: bold;
+  }
 `;
 
 export default OverviewStyle;

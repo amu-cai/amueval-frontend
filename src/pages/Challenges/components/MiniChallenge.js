@@ -85,7 +85,7 @@ const MiniChallenge = (props) => {
             {props.description}
           </FlexRow>
           <FlexRow as="div" className="accuracy">
-            {props.metric}
+            {props.main_metric}
           </FlexRow>
         </FlexColumn>
       </FlexRow>

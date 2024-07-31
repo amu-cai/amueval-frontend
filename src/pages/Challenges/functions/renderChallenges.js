@@ -29,7 +29,7 @@ const renderChallenges = (pageNr, challenges) => {
                           title,
                           type,
                           description,
-                          mainMetric,
+                          main_metric,
                           bestScore,
                           baseline,
                           award,
@@ -47,7 +47,7 @@ const renderChallenges = (pageNr, challenges) => {
                                 title={title}
                                 type={type}
                                 description={description}
-                                metric={mainMetric}
+                                main_metric={main_metric}
                                 bestScore={bestScore}
                                 baseline={baseline}
                                 award={award}

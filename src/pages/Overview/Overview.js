@@ -12,6 +12,8 @@ const Overview = (props) => {
     return '';
   };
 
+  console.log(props);
+
   const desktopRender = () => {
     return (
         <OverviewStyle>
@@ -32,9 +34,12 @@ const Overview = (props) => {
             <span className="spacer"></span>
             <FlexColumn width="100%">
                 <H2New as="h2" textLeft={true}>Metrics</H2New>
-                <BodyNew as="p">{props.challenge.mainMetric}</BodyNew>
+                <BodyNew as="p" className="mainMetric">{props.challenge.mainMetric}</BodyNew>
+                {props.challenge.additional_metrics.map((metric) => (
+                    <BodyNew as="p">{metric}</BodyNew>
+                ))}
             </FlexColumn>
-            { props.challenge.type &&<FlexColumn width="100%">
+            { props.challenge.type && <FlexColumn width="100%">
             <span className="spacer"></span>
              <H2New as="h2" textLeft={true}>Type</H2New>
                 <BodyNew as="p">{props.challenge.type}</BodyNew>
