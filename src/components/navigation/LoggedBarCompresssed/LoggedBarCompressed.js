@@ -75,7 +75,7 @@ const LoggedBarCompressed = () => {
 
     return (
         <>
-            {loggedIn (
+            {loggedIn && (
                 <LoggedBarCompressedStyle
                     onMouseEnter={() => dispatch(loggedBarHoverHandler(true))}
                     onMouseLeave={() => dispatch(loggedBarHoverHandler(false))}
