@@ -6,7 +6,7 @@ const initialState = {
     loggedBarPosition: '100vw',
     navOptionsVisible: true,
     loggedBarHover: false,
-    showLoggedBarCompressed: true
+    toggleLoggedBarCompressed: true
 };
 
 export const navigationSlice = createSlice({
@@ -37,8 +37,9 @@ export const navigationSlice = createSlice({
                 state.navMenuPosition = 'calc(-100vh - 82px)';
             }
         },
-        showLoggedBarCompressed: (state) => {
-            state.showLoggedBarCompressed = !state.showLoggedBarCompressed;
+        toggleLoggedBarCompressed: (state) => {
+            console.log(state.toggleLoggedBarCompressed);
+            state.toggleLoggedBarCompressed = !state.toggleLoggedBarCompressed;
         },
     },
 });
@@ -50,7 +51,7 @@ export const {
     loggedBarHoverHandler,
     navMenuHoverHandler,
     navMenuPositionToggle,
-    showLoggedBarCompressed,
+    toggleLoggedBarCompressed,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

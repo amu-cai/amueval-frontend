@@ -18,7 +18,7 @@ import {useNavigate} from 'react-router-dom';
 import LoggedBarCompressedStyle from './LoggedBarCompressedStyle';
 import {
     loggedBarHoverHandler,
-    // loggedBarPositionToggle,
+    toggleLoggedBarCompressed
 } from '../../../redux/navigationSlice';
 import {setRightsInfo} from '../../../redux/authSlice';
 import getUserRightsInfo from '../../../api/getUserRightsInfo';
@@ -40,13 +40,7 @@ const LoggedBarCompressed = () => {
     const isAdmin = useSelector((state) => state.auth.isAdmin);
     const isAuthor = useSelector((state) => state.auth.isAuthor);
     const [userRightsInfo, setUserRightsInfo] = React.useState(null);
-    // const loggedBarPosition = useSelector(
-    //     (state) => state.navigation.loggedBarPosition
-    // );
     const loggedIn = useSelector((state) => state.auth.isLoggedIn);
-    const showLoggedBarCompressed = useSelector(
-        (state) => state.navigation.showLoggedBarCompressed
-    );
 
     React.useEffect(() => {
         if (
@@ -84,7 +78,7 @@ const LoggedBarCompressed = () => {
                         as="button"
                         onClick={
                             () =>
-                                dispatch(showLoggedBarCompressed(false))
+                                dispatch(toggleLoggedBarCompressed(false))
                         }
                         alignmentX="space-between"
                         alignmentY="center"
@@ -93,6 +87,7 @@ const LoggedBarCompressed = () => {
                         padding="20px"
                     >
                         <Svg
+                            className="toggleMenu"
                             src={menuButton}
                             backgroundColor={theme.colors.green700}
                             size="cover"

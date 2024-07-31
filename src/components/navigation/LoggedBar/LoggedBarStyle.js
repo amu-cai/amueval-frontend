@@ -63,6 +63,10 @@ const LoggedBarStyle = styled(FlexColumn)`
   .sideMenuList {
     margin-left: 18px;
   }
+
+  .toggleMenu {
+    cursor: pointer;
+  }
 `;
 
 export default LoggedBarStyle;

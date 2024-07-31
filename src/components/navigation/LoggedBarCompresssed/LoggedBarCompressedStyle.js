@@ -27,6 +27,10 @@ const LoggedBarCompressedStyle = styled(FlexColumn)`
     margin-bottom: 16px;
     cursor: pointer;
   }
+
+  .toggleMenu {
+    cursor: pointer;
+  }
 `;
 
 export default LoggedBarCompressedStyle;

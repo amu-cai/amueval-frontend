@@ -19,7 +19,7 @@ import {useNavigate} from 'react-router-dom';
 import LoggedBarStyle from './LoggedBarStyle';
 import {
     loggedBarHoverHandler,
-    // loggedBarPositionToggle,
+    toggleLoggedBarCompressed,
 } from '../../../redux/navigationSlice';
 import {setRightsInfo} from '../../../redux/authSlice';
 import getUserRightsInfo from '../../../api/getUserRightsInfo';
@@ -42,9 +42,6 @@ const LoggedBar = () => {
     const isAdmin = useSelector((state) => state.auth.isAdmin);
     const isAuthor = useSelector((state) => state.auth.isAuthor);
     const [userRightsInfo, setUserRightsInfo] = React.useState(null);
-    // const loggedBarPosition = useSelector(
-    //     (state) => state.navigation.loggedBarPosition
-    // );
     const loggedIn = useSelector((state) => state.auth.isLoggedIn);
 
     React.useEffect(() => {
@@ -92,6 +89,11 @@ const LoggedBar = () => {
                             src={logoAmuEval}
                         />
                         <Svg
+                            onClick={
+                                () =>
+                                    dispatch(toggleLoggedBarCompressed(false))
+                            }
+                            className="toggleMenu"
                             src={menuButton}
                             backgroundColor={theme.colors.green700}
                             size="cover"
@@ -101,11 +103,11 @@ const LoggedBar = () => {
                     </FlexRow>
                     <div className="border"></div>
                     <FlexRow as={Link} to={PROFILE_PAGE}
-                        alignmentX="flex-start"
-                        alignmentY="center"
-                        gap="16px"
-                        width="100%"
-                        padding="20px"
+                             alignmentX="flex-start"
+                             alignmentY="center"
+                             gap="16px"
+                             width="100%"
+                             padding="20px"
                     >
                         <Svg
                             src={userIco}
