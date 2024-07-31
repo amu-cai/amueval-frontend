@@ -57,6 +57,7 @@ const LoggedBarStyle = styled(FlexColumn)`
     font-family: 'coolvetica-condensed-regular', sans-serif;
     margin-bottom: 16px;
     text-decoration: underline;
+    cursor: pointer;
   }
   
   .sideMenuList {

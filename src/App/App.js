@@ -5,7 +5,7 @@ import PopUpMessageManager from './components/PopUpMessageManager';
 import RoutingManager from './components/RoutingManager';
 import { BrowserRouter } from 'react-router-dom';
 import NavBar from '../components/navigation/NavBar';
-import LoggedBar from '../components/navigation/LoggedBar';
+import LoggedBar from '../components/navigation/LoggedBarCompresssed';
 import { IS_MOBILE } from '../utils/globals';
 
 const App = () => {
