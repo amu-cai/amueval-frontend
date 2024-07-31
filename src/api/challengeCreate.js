@@ -22,6 +22,10 @@ const challengeCreate = async (
         formData.append('parameters', challengeInput.main_metric_parameters);
     }
 
+    if (challengeInput?.additional_metrics) {
+        formData.append('additional_metrics', challengeInput.additional_metrics);
+    }
+
     fetch(`${API}/challenges/create-challenge`, {
         method: 'post',
         body: formData,

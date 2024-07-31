@@ -22,7 +22,7 @@ const Overview = (props) => {
             <span className="spacer"></span>
             <FlexColumn width="100%">
                 <H2New as="h2" textLeft={true}>Participants</H2New>
-                <BodyNew as="p">24</BodyNew>
+                <BodyNew as="p">{props.challenge.participants}</BodyNew>
             </FlexColumn>
             <span className="spacer"></span>
             <FlexColumn width="100%">

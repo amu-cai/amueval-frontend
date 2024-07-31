@@ -51,7 +51,7 @@ const ChallengeCreate = () => {
     const [metricError, setMetricError] = React.useState(false);
     const [solutionError, setSolutionError] = React.useState(false);
     const [showAdvanced, setShowAdvanced] = React.useState(false);
-    const [showMetricParameters, setShowMetricParameters] = React.useState(false);
+    const [showMetricParameters, setShowMetricParameters] = React.useState(true);
     const [acceptedFiles, setAcceptedFiles] = React.useState([]);
     const [selectedMetrics, setSelectedMetrics] = React.useState([]);
     const [selectedFullMetrics, setSelectedFullMetrics] = React.useState([]);
@@ -173,22 +173,44 @@ const ChallengeCreate = () => {
     const generateDescription = () => {
         const createdDate = dayjs().format('DD.MM.YYYY');
         const deadlineFormatted = deadline ? formatDateString(deadline, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY') : formatDateString(halfYearFromNow, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY');
-        return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${selectedMetrics[0].name} to evaluate solutions.`;
+        return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${selectedMetrics[0]} to evaluate solutions.`;
     };
 
     const createMainMetricParams = () => {
         let result = {};
-        let metrics = Object.keys(parameterRefs);
-        for (let i = 2; i < metrics.length; i++) {
-            let metric = metrics[i];
-            result[metric] = {};
-            let params = Object.keys(parameterRefs[metric]);
-            for (let j = 0; j < params.length; j++) {
-                let param = params[j];
-                let value = parameterRefs[metric][param].current.value;
-                if (value) {
-                    result[metric][param] = value;
+        const main_metric = selectedMetrics[0];
+        let params = Object.keys(parameterRefs[main_metric]);
+        for (let j = 0; j < params.length; j++) {
+            let param = params[j];
+            let value = parameterRefs[main_metric][param]?.current.value;
+            console.log(param);
+            console.log(parameterRefs, parameterRefs[param], parameterRefs[param]?.current.value);
+            if (value) {
+                result[param] = value;
+            }
+        }
+        return JSON.stringify(result, null, 2);
+    };
+
+    const createAdditionalMetrics = () => {
+        let result = [];
+        if (selectedMetrics.length > 1) {
+            let metrics = Object.keys(parameterRefs);
+            for (let i = 3; i < metrics.length; i++) {
+                let metric = metrics[i];
+                let metricObject = {
+                    name: metric,
+                    params: {}
+                };
+                let params = Object.keys(parameterRefs[metric]);
+                for (let j = 0; j < params.length; j++) {
+                    let param = params[j];
+                    let value = parameterRefs[metric][param].current.value;
+                    if (value) {
+                        metricObject.params[param] = value;
+                    }
                 }
+                result.push(metricObject);
             }
         }
         return JSON.stringify(result, null, 2);
@@ -222,6 +244,9 @@ const ChallengeCreate = () => {
 
     const challengeCreateSubmit = async () => {
         const mainMetricParams = createMainMetricParams();
+        const additionalMetrics = createAdditionalMetrics();
+        console.log(mainMetricParams);
+        console.log(additionalMetrics);
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
             return;
@@ -231,11 +256,12 @@ const ChallengeCreate = () => {
             description: description ? description : generateDescription(),
             source: challengeSource,
             type: type,
-            main_metric: selectedMetrics[0],
             award: award,
             deadline: deadline ? formatDateString(deadline) : formatDateString(halfYearFromNow),
             sorting: '',
+            main_metric: selectedMetrics[0],
             main_metric_parameters: mainMetricParams,
+            additional_metrics: []
         };
 
         await challengeCreate(
@@ -428,60 +454,61 @@ const ChallengeCreate = () => {
                                     onChange={handleAwardChange}
                                 />
                             </ThemeProvider>
-                            {!!selectedMetrics.length && ( <div className="metricParamsButtonWrapper">
-                                <Button
-                                    width="170px"
-                                    backgroundColor='transparent'
-                                    handler={handleMetricParameters}
-                                >
-                                    <span className="metricParamsButton">Metric Parameters</span>
-                                    <KeyboardDoubleArrowDownIcon
-                                        style={{
-                                            color: theme.colors.green700,
-                                            transform: showMetricParameters ? 'rotate(180deg)' : 'none'
-                                        }}
-                                    />
-                                </Button>
-                            </div>
-                            )}
+                        </>
+                    )}
+
+                    {!!selectedMetrics.length && ( <div className="metricParamsButtonWrapper">
+                            <Button
+                                width="170px"
+                                backgroundColor='transparent'
+                                handler={handleMetricParameters}
+                            >
+                                <span className="metricParamsButton">Metric Parameters</span>
+                                <KeyboardDoubleArrowDownIcon
+                                    style={{
+                                        color: theme.colors.green700,
+                                        transform: showMetricParameters ? 'rotate(180deg)' : 'none'
+                                    }}
+                                />
+                            </Button>
+                        </div>
+                    )}
 
 
-                            {showMetricParameters && (
-                                <>
-                                    <ThemeProvider theme={customTheme}>
-                                        {selectedFullMetrics.map((metric, index) => (
-                                            <React.Fragment key={index}>
-                                                <span className="metricNameLabel">{metric.name}</span>
-                                                <span className="topLabel">Sklearn metric URL</span>
-                                                <TextField
-                                                    className="inputCopyMetricLink"
-                                                    variant="outlined"
-                                                    fullWidth
-                                                    value={metric.link}
-                                                    size="small"
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start" onClick={() => window.open(metric.link, '_blank')}>
-                                                                <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }} />
-                                                            </InputAdornment>
-                                                        ),
-                                                        endAdornment: (
-                                                            <InputAdornment position="end" onClick={() => navigator.clipboard.writeText(metric.link)}>
-                                                                <ContentCopyIcon style={{ color: theme.colors.black500 }} />
-                                                            </InputAdornment>
-                                                        ),
-                                                        sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', input: { cursor: 'pointer' }, cursor: 'pointer'},
-                                                        readOnly: true,
-                                                    }}
-                                                />
-                                                <Grid container spacing={2}>
-                                                    {parametersListRender(metric.name)}
-                                                </Grid>
-                                            </React.Fragment>
-                                        ))}
-                                    </ThemeProvider>
-                                </>
-                            )}
+                    {showMetricParameters && (
+                        <>
+                            <ThemeProvider theme={customTheme}>
+                                {selectedFullMetrics.map((metric, index) => (
+                                    <React.Fragment key={index}>
+                                        <span className="metricNameLabel">{metric.name}</span>
+                                        <span className="topLabel">Sklearn metric URL</span>
+                                        <TextField
+                                            className="inputCopyMetricLink"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={metric.link}
+                                            size="small"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" onClick={() => window.open(metric.link, '_blank')}>
+                                                        <LinkIcon style={{ transform: 'rotate(-45deg)', color: theme.colors.green700 }} />
+                                                    </InputAdornment>
+                                                ),
+                                                endAdornment: (
+                                                    <InputAdornment position="end" onClick={() => navigator.clipboard.writeText(metric.link)}>
+                                                        <ContentCopyIcon style={{ color: theme.colors.black500 }} />
+                                                    </InputAdornment>
+                                                ),
+                                                sx: { borderRadius: '8px', color: theme.colors.black500, fontSize: '12px', input: { cursor: 'pointer' }, cursor: 'pointer'},
+                                                readOnly: true,
+                                            }}
+                                        />
+                                        <Grid container spacing={2}>
+                                            {parametersListRender(metric.name)}
+                                        </Grid>
+                                    </React.Fragment>
+                                ))}
+                            </ThemeProvider>
                         </>
                     )}
 

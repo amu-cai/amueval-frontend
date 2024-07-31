@@ -24,10 +24,12 @@ const ChallengeEditStyle = styled(Container)`
     line-height: 1.5;
     padding: 8px 12px;
     border-radius: 8px;
+    color: ${theme.colors.black500};
     border: 1px solid rgba(0, 0, 0, 0.23);
     width: 100%;
     transition: border 0.2s ease-in-out;
     box-sizing: border-box;
+    margin-bottom: 12px;
 
     &:hover {
       border: 1px solid rgba(0, 0, 0, 0.87);
@@ -37,6 +39,14 @@ const ChallengeEditStyle = styled(Container)`
       outline: 2px solid ${theme.colors.green700};
       outline-offset: -2px;
     }
+  }
+
+  .error {
+    border: 1px solid ${theme.colors.red};
+  }
+
+  .error::placeholder {
+    color: ${theme.colors.red};
   }
 `;
 

@@ -1,20 +1,59 @@
-import React from 'react';
-import {FlexColumn, FlexRow} from '../../utils/containers';
-// import theme from '../../../utils/theme';
+import React, { useState } from 'react';
+import { FlexColumn, FlexRow } from '../../utils/containers';
 import Button from "../../components/generic/Button";
-import {ThemeProvider} from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import customTheme from "../../utils/customTheme";
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import theme from "../../utils/theme";
-import {TextareaAutosize} from '@mui/base/TextareaAutosize';
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import ChallengeEditStyle from "./ChallengeEditStyle";
 import dayjs from "dayjs";
+import { FormHelperText } from "@mui/material";
+import challengeEdit from "../../api/challengeEdit";
+import LOCAL_STORAGE from "../../utils/localStorage";
 
-const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
+const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
+    const [deadline, setDeadline] = useState(dayjs(challenge.deadline, 'YYYY-MM-DDTHH:mm:ssZ'));
+    const [description, setDescription] = useState(challenge.description);
+    const [deadlineError, setDeadlineError] = useState(false);
+    const [descriptionError, setDescriptionError] = useState(false);
+
+    const validateForm = () => {
+        let valid = true;
+
+        if (!deadline || !dayjs(deadline).isValid()) {
+            setDeadlineError('Deadline is required');
+            valid = false;
+        } else {
+            setDeadlineError(false);
+        }
+
+        if (!description || description.trim() === '') {
+            setDescriptionError('Description is required');
+            valid = false;
+        } else {
+            setDescriptionError(false);
+        }
+
+        return valid;
+    };
+
     const challengeEditSubmit = async () => {
-        console.log('edit');
+        const validated = validateForm();
+        if (!validated) {
+            return;
+        }
+        console.log(challenge.title);
+        await challengeEdit({
+                challenge_title: challenge.title,
+                deadline: deadline,
+                description: description,
+            },
+            localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
+
+        );
     };
 
     return (
@@ -24,16 +63,36 @@ const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
                     <span className="topLabel">Deadline</span>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
+                            error={!!deadlineError}
                             className="deadline"
-                            sx={{width: '100%'}}
-                            defaultValue={dayjs(challenge.deadline, 'YYYY-MM-DDTHH:mm:ssZ')}
+                            sx={{
+                                width: '100%',
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: deadlineError ? theme.colors.red : 'initial'
+                                    },
+                                },
+                            }}
+                            value={deadline}
+                            onChange={(date) => setDeadline(date)}
                             format="DD.MM.YYYY"
                         />
                     </LocalizationProvider>
+                    {deadlineError && <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{deadlineError ? deadlineError: ''}</FormHelperText>}
 
                     <span className="topLabel">Description</span>
-                    <TextareaAutosize as="textarea" aria-label="minimum height" minRows={6} defaultValue={challenge.description}
-                                      placeholder="Description"/>
+                    <TextareaAutosize
+                        error={!!descriptionError}
+                        className={descriptionError ? 'error' : ''}
+                        as="textarea"
+                        aria-label="minimum height"
+                        minRows={6}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Description"
+                    />
+                    {descriptionError && <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{descriptionError ? descriptionError: ''}</FormHelperText>}
+
                     <FlexRow width="100%" alignmentX="end" className="submitButton">
                         <Button
                             backgroundColor={theme.colors.white}

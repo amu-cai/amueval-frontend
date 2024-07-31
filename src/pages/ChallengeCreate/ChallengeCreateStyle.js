@@ -18,7 +18,7 @@ const ChallengeCreateStyle = styled(Container)`
   
   .customizeBtn {
     margin-right: auto;
-    margin-left: 30px;
+    margin-left: 15px;
   }
   
   .howToIcon {
@@ -34,7 +34,7 @@ const ChallengeCreateStyle = styled(Container)`
   
   .metricParamsButtonWrapper {
     margin-right: auto;
-    margin-left: 2px;
+    margin-left: -16px;
     font-weight: normal;
   }
 

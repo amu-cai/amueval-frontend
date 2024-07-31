@@ -75,7 +75,7 @@ const MiniChallenge = (props) => {
             <div className="challengeMetadata">
               <FlexRow>
                 <FlexRow>
-                  <PeopleOutlineIcon className="peopleIcon" /><span className="highlight participants">24</span>
+                  <PeopleOutlineIcon className="peopleIcon" /><span className="highlight participants">{props.participants}</span>
                 </FlexRow>
                 <span className="highlight deadline">&nbsp;{props.deadline.slice(0, 10)}</span>
               </FlexRow>

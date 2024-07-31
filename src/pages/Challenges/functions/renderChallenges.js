@@ -35,6 +35,7 @@ const renderChallenges = (pageNr, challenges) => {
                           award,
                           deadline,
                           name,
+                          participants
                         },
                         index
                     ) => {
@@ -52,6 +53,7 @@ const renderChallenges = (pageNr, challenges) => {
                                 award={award}
                                 deadline={deadline}
                                 name={name}
+                                participants={participants}
                             />
                           </div>
                       );
