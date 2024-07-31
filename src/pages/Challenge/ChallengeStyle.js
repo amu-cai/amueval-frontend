@@ -18,7 +18,7 @@ const ChallengeStyle = styled(FlexColumn)`
   }
   
   .challengeName {
-    margin-top: 150px;
+    margin-top: 40px;
   }
 `;
 

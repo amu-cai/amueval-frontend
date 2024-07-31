@@ -11,6 +11,7 @@ const Csi = () => {
         return (
             <CsiStyle>
                 <FlexColumn
+                    id="csi"
                 >
                     <H2New as="h2" className="CsiStyle__h1_sm">Center for Artificial Intelligence</H2New>
                     <BodyNew as="p">
@@ -30,6 +31,7 @@ const Csi = () => {
             <CsiStyle>
                 <FlexRow
                     gap="100px"
+                    id="csi"
                 >
                     <FlexColumn className="CsiStyle__text">
                         <H2New as="h2" textLeft={true}>Center for Artificial Intelligence</H2New>
@@ -53,6 +55,7 @@ const Csi = () => {
             <CsiStyle>
                 <FlexRow
                     gap="100px"
+                    id="csi"
                 >
                     <FlexColumn class="col1">
                         <H2New as="h2" textLeft={true} className="CsiStyle__h1_lg">Center for Artificial Intelligence</H2New>

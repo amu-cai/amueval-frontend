@@ -245,8 +245,6 @@ const ChallengeCreate = () => {
     const challengeCreateSubmit = async () => {
         const mainMetricParams = createMainMetricParams();
         const additionalMetrics = createAdditionalMetrics();
-        console.log(mainMetricParams);
-        console.log(additionalMetrics);
         const challengeValidated = validateChallenge();
         if (!challengeValidated) {
             return;
