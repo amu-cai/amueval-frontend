@@ -183,8 +183,6 @@ const ChallengeCreate = () => {
         for (let j = 0; j < params.length; j++) {
             let param = params[j];
             let value = parameterRefs[main_metric][param]?.current.value;
-            console.log(param);
-            console.log(parameterRefs, parameterRefs[param], parameterRefs[param]?.current.value);
             if (value) {
                 result[param] = value;
             }
@@ -196,8 +194,11 @@ const ChallengeCreate = () => {
         let result = [];
         if (selectedMetrics.length > 1) {
             let metrics = Object.keys(parameterRefs);
-            for (let i = 3; i < metrics.length; i++) {
+            for (let i = 2; i < metrics.length; i++) {
                 let metric = metrics[i];
+                if (metric === selectedMetrics[0]) {
+                    continue;
+                }
                 let metricObject = {
                     name: metric,
                     params: {}
