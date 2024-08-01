@@ -144,7 +144,6 @@ const LoggedBar = () => {
                         alignmentX="flex-start"
                         className="sideMenuList"
                     >
-                        {userRightsInfo?.isAdmin && (
                             <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
                                 <img
                                     alt="home"
@@ -152,7 +151,7 @@ const LoggedBar = () => {
                                 />
                                 <span>Home</span>
                             </FlexRow>
-                        )}
+                        {userRightsInfo?.isAdmin && (
                         <FlexRow as={Link} to={ADMIN_PANEL_PAGE} gap="16px" className="sideMenuItem">
                             <img
                                 alt="admin panel"
@@ -160,6 +159,7 @@ const LoggedBar = () => {
                             />
                             <span>Admin panel</span>
                         </FlexRow>
+                        )}
                         <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
                             <img
                                 alt="your submissions"

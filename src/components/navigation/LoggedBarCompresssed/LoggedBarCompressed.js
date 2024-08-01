@@ -136,20 +136,20 @@ const LoggedBarCompressed = () => {
                         className="sideMenuList"
                         alignmentX="center"
                     >
+                        <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
+                            <img
+                                alt="home"
+                                src={menuHome}
+                            />
+                        </FlexRow>
                         {userRightsInfo?.isAdmin && (
-                            <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
+                            <FlexRow as={Link} to={ADMIN_PANEL_PAGE} gap="16px" className="sideMenuItem">
                                 <img
-                                    alt="home"
-                                    src={menuHome}
+                                    alt="admin panel"
+                                    src={menuAdminPanel}
                                 />
                             </FlexRow>
                         )}
-                        <FlexRow as={Link} to={ADMIN_PANEL_PAGE} gap="16px" className="sideMenuItem">
-                            <img
-                                alt="admin panel"
-                                src={menuAdminPanel}
-                            />
-                        </FlexRow>
                         <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
                             <img
                                 alt="your submissions"
