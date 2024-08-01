@@ -9,7 +9,6 @@ import userIco from '../../../assets/avatar.svg';
 import {Link} from 'react-router-dom';
 import {
     PROFILE_PAGE,
-    // CHALLENGE_CREATE_PAGE,
     REDIRECT_TO_ROOT_PAGE,
     ADMIN_PANEL_PAGE, CHALLENGE_CREATE_PAGE, ROOT_PAGE,
 } from '../../../utils/globals';
@@ -76,7 +75,7 @@ const LoggedBar = () => {
                     onMouseEnter={() => dispatch(loggedBarHoverHandler(true))}
                     onMouseLeave={() => dispatch(loggedBarHoverHandler(false))}
                 >
-                    <FlexRow
+                    <FlexRow as={Link} to={ROOT_PAGE}
                         alignmentX="space-between"
                         alignmentY="center"
                         gap="16px"

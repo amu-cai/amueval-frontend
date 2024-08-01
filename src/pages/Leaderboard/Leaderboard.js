@@ -45,7 +45,7 @@ const Leaderboard = (props) => {
     const orderedKeys = [
       { key: 'id', name: 'Place', sortable: false},
       { key: 'submitter', name: 'User', sortable: false },
-      { key: 'main_metric_result', name: `Main Metric`, sortable: false },
+      { key: 'main_metric_result', name: props.mainMetric, sortable: false },
       { key: 'timestamp', name: 'Timestamp', sortable: false }
     ];
     if (!loading) {

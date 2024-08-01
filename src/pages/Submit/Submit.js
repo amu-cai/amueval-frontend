@@ -13,6 +13,7 @@ import {TextareaAutosize} from "@mui/base/TextareaAutosize";
 import {ThemeProvider} from "@mui/material/styles";
 import Dropzone from "../../components/generic/Dropzone/Dropzone";
 import {FormHelperText} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 
 const Submit = (props) => {
@@ -23,6 +24,7 @@ const Submit = (props) => {
     const [descriptionError, setDescriptionError] = React.useState(false);
     const [solution, setSolution] = React.useState([]);
     const [solutionError, setSolutionError] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value);
@@ -73,13 +75,14 @@ const Submit = (props) => {
 
     React.useEffect(() => {
         if (submissionResult?.submission && submissionResult?.message) {
-            dispatch(
-                popUpMessageHandler({
-                    header: 'Adding submission success',
-                    message: `${submissionResult.submission}: ${submissionResult.message}`,
-                    borderColor: theme.colors.green,
-                })
-            );
+            // dispatch(
+            //     popUpMessageHandler({
+            //         header: 'Adding submission success',
+            //         message: `${submissionResult.submission}: ${submissionResult.message}`,
+            //         borderColor: theme.colors.green,
+            //     })
+            // );
+            navigate(`/challenge/${props.challenge.title}/submissions`);
         } else if (submissionResult?.detail) {
             dispatch(
                 popUpMessageHandler({

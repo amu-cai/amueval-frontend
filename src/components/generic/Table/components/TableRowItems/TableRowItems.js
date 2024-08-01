@@ -19,7 +19,10 @@ const TableRowItems = ({ orderedKeys, item, i, subpage }) => {
       return i + 1;
     }
     else if (keyValue === 'additional_metric' && additionalMetricName) {
-      return item.additional_metrics_results.find(item => item.name === additionalMetricName).score;
+      return RENDER_METRIC_VALUE(item.additional_metrics_results.find(item => item.name === additionalMetricName).score);
+    }
+    else if (keyValue === 'submitter') {
+      return item[keyValue];
     }
     else {
       return RENDER_METRIC_VALUE(item[keyValue]);
