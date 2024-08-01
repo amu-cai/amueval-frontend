@@ -92,7 +92,7 @@ const Submit = (props) => {
                 })
             );
         }
-    }, [submissionResult, dispatch]);
+    }, [submissionResult, dispatch, navigate, props.challenge.title]);
 
     return (
         <SubmitStyle as="section">
