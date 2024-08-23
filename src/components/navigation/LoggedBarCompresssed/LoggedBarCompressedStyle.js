@@ -31,6 +31,11 @@ const LoggedBarCompressedStyle = styled(FlexColumn)`
   .toggleMenu {
     cursor: pointer;
   }
+
+  button,
+  a, a > div {
+    cursor: pointer;
+  }
 `;
 
 export default LoggedBarCompressedStyle;

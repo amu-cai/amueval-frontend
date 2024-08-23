@@ -30,7 +30,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import howToIcon from '../../assets/how-to.svg';
 import {Link} from "react-router-dom";
-import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE, COMMON_METRICS, CHALLENGES_PAGE} from "../../utils/globals";
+import {CHALLENGE_CREATE_HOW_TO_PAGE, ROOT_PAGE, COMMON_METRICS, CHALLENGES_PAGE, formatDateString} from "../../utils/globals";
 import InputAdornment from '@mui/material/InputAdornment';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -119,12 +119,6 @@ const ChallengeCreate = () => {
                 );
             } else {
                 navigate(CHALLENGES_PAGE);
-                // dispatch(
-                //     popUpMessageHandler({
-                //         header: 'Overview create success',
-                //         message: `${uploadResult.challenge}: ${uploadResult.message}`,
-                //     })
-                // );
             }
         }
     }, [uploadResult, dispatch, navigate]);
@@ -167,10 +161,6 @@ const ChallengeCreate = () => {
         const isSolutionValid = validateSolution();
 
         return isDatasetValid && isMetricValid && isSolutionValid;
-    };
-
-    const formatDateString = (dateString, inputFormat, outputFormat) => {
-        return dayjs(dateString, inputFormat).format(outputFormat);
     };
 
     const generateDescription = () => {

@@ -5,6 +5,7 @@ import {Autocomplete, ListSubheader, TextField} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import Button from "../../components/generic/Button";
 import SortIco from '../../assets/sort_ico.png';
+import DefaultSortIco from '../../assets/default_sort_ico.png';
 import getMetrics from "../../api/getMetrics";
 import InputAdornment from "@mui/material/InputAdornment";
 import searchIco from "../../assets/search_ico.svg";
@@ -16,6 +17,8 @@ const Filters = (props) => {
     const [selectedTypes, setSelectedTypes] = React.useState([]);
     const [selectedMetrics, setSelectedMetrics] = React.useState([]);
     const [searchPhrase, setSearchPhrase] = React.useState("");
+    const [sortByParticipants, setSortByParticipants] = React.useState('');
+    const [sortByDeadline, setSortByDeadline] = React.useState('');
 
     React.useEffect(() => {
         getMetrics(setMetrics);
@@ -28,6 +31,8 @@ const Filters = (props) => {
             types: selectedTypes,
             metrics: selectedMetrics,
             searchPhrase: value,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
         });
     };
 
@@ -37,6 +42,8 @@ const Filters = (props) => {
             types: value,
             metrics: selectedMetrics,
             searchPhrase: searchPhrase,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
         });
     };
 
@@ -46,16 +53,45 @@ const Filters = (props) => {
             types: selectedTypes,
             metrics: value,
             searchPhrase: searchPhrase,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
         });
     };
 
-    const handleFilters = ({ types, metrics, searchPhrase }) => {
+    const handleSortByParticipants = () => {
+        const newSortOrder = sortByParticipants === 'asc' ? 'desc' : 'asc';
+        console.log(newSortOrder);
+        setSortByParticipants(newSortOrder);
+        setSortByDeadline(null);
+        handleFilters({
+            types: selectedTypes,
+            metrics: selectedMetrics,
+            searchPhrase: searchPhrase,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
+        });
+    };
+
+    const handleSortByDeadline = () => {
+        const newSortOrder = sortByDeadline === 'asc' ? 'desc' : 'asc';
+        setSortByDeadline(newSortOrder);
+        setSortByParticipants(null);
+        handleFilters({
+            types: selectedTypes,
+            metrics: selectedMetrics,
+            searchPhrase: searchPhrase,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
+        });
+    };
+
+    const handleFilters = ({types, metrics, searchPhrase, sortByParticipants, sortByDeadline}) => {
         props.filtersHandler({
             types: types,
             metrics: metrics,
             searchPhrase: searchPhrase,
-            sortByParticipants: false,
-            sortByDeadline: false,
+            sortByParticipants: sortByParticipants,
+            sortByDeadline: sortByDeadline
         });
     };
 
@@ -71,8 +107,8 @@ const Filters = (props) => {
         });
         other = other.sort((a, b) => a.localeCompare(b));
         return [
-            { title: 'Common', metrics: common },
-            { title: 'Other', metrics: other },
+            {title: 'Common', metrics: common},
+            {title: 'Other', metrics: other},
         ];
     };
 
@@ -186,16 +222,17 @@ const Filters = (props) => {
                             backgroundColor="transparent"
                             color="#5E5E5E"
                             width="120px"
+                            handler={handleSortByParticipants}
                         >
                             Participants
                             <img
                                 alt="Sort by participants"
                                 width="20px"
                                 height="12px"
-                                src={SortIco}
+                                src={!sortByParticipants ? DefaultSortIco : SortIco}
                                 style={{
                                     color: theme.colors.green700,
-                                    // transform: showAdvanced ? 'rotate(180deg)' : 'none'
+                                    transform: sortByParticipants === 'desc' ? 'scaleY(-1)' : 'none'
                                 }}
                             />
                         </Button>
@@ -205,16 +242,17 @@ const Filters = (props) => {
                             backgroundColor="transparent"
                             color="#5E5E5E"
                             width="120px"
+                            handler={handleSortByDeadline}
                         >
                             Deadline
                             <img
                                 alt="Sort by deadline"
                                 width="20px"
                                 height="12px"
-                                src={SortIco}
+                                src={!sortByDeadline ? DefaultSortIco : SortIco}
                                 style={{
                                     color: theme.colors.green700,
-                                    // transform: showAdvanced ? 'rotate(180deg)' : 'none'
+                                    transform: sortByDeadline === 'desc' ? 'scaleY(-1)' : 'none'
                                 }}
                             />
                         </Button>

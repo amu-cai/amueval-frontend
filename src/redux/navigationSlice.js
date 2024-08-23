@@ -38,7 +38,6 @@ export const navigationSlice = createSlice({
             }
         },
         toggleLoggedBarCompressed: (state) => {
-            console.log(state.toggleLoggedBarCompressed);
             state.toggleLoggedBarCompressed = !state.toggleLoggedBarCompressed;
         },
     },

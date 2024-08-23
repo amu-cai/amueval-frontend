@@ -122,8 +122,8 @@ const Challenge = (props) => {
       return (
           <ChallengeStyle>
             <FlexRow className="challengeName" width="100%" alignmentX="start" alignmentY="start">
-              <img className="challengeImg" src={getChallengeImage(challenge.type)} alt="Overview type"/>
-              <H1New textLeft={true} className="challengeTitle">
+              <img as="img" className="challengeImg" src={getChallengeImage(challenge.type)} alt="Overview type"/>
+              <H1New as="h1" textLeft={true} className="challengeTitle">
                 {challenge.title}
               </H1New>
             </FlexRow>

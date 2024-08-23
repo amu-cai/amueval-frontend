@@ -11,6 +11,8 @@ import textTypeImg from "../assets/text_type.svg";
 import imageTypeImg from "../assets/image_type.svg";
 import tabularTypeImg from "../assets/tabular_type.svg";
 import {FlexRow, Svg} from "./containers";
+import dayjs from "dayjs";
+
 
 export const ELEMENTS_PER_PAGE = 10;
 export const MINI_DESCRIPTION_LENGTH = 70;
@@ -203,6 +205,11 @@ export const getChallengeImage = (type) => {
     if (type === 'text') return textTypeImg;
     else if (type === 'image') return imageTypeImg;
     else return tabularTypeImg;
+};
+
+export const formatDateString = (dateString, inputFormat, outputFormat) => {
+    console.log('dupa');
+    return dayjs(dateString, inputFormat).format(outputFormat);
 };
 
 export const COMMON_METRICS = [

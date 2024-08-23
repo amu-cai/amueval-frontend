@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { FlexColumn, FlexRow } from '../../utils/containers';
+import React, {useState} from 'react';
+import {FlexColumn, FlexRow} from '../../utils/containers';
 import Button from "../../components/generic/Button";
-import { ThemeProvider } from "@mui/material/styles";
+import {ThemeProvider} from "@mui/material/styles";
 import customTheme from "../../utils/customTheme";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import theme from "../../utils/theme";
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+import {TextareaAutosize} from '@mui/base/TextareaAutosize';
 import ChallengeEditStyle from "./ChallengeEditStyle";
 import dayjs from "dayjs";
-import { FormHelperText } from "@mui/material";
+import {FormHelperText} from "@mui/material";
 import challengeEdit from "../../api/challengeEdit";
 import LOCAL_STORAGE from "../../utils/localStorage";
+import {formatDateString} from '../../utils/globals';
 
-const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
+const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
     const [deadline, setDeadline] = useState(dayjs(challenge.deadline, 'YYYY-MM-DDTHH:mm:ssZ'));
     const [description, setDescription] = useState(challenge.description);
     const [deadlineError, setDeadlineError] = useState(false);
@@ -45,15 +46,15 @@ const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
         if (!validated) {
             return;
         }
-        console.log(challenge.title);
         await challengeEdit({
                 challenge_title: challenge.title,
-                deadline: deadline,
+                deadline: formatDateString(deadline, 'DD.MM.YYYY', 'YYYY-MM-DDTHH:mm:ssZ'),
                 description: description,
             },
             localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
-
-        );
+        ).then(
+            window.location.replace('/')
+    );
     };
 
     return (
@@ -73,12 +74,16 @@ const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
                                     },
                                 },
                             }}
-                            value={deadline}
+                            defaultValue={dayjs(deadline)}
                             onChange={(date) => setDeadline(date)}
-                            format="DD.MM.YYYY"
+                            format='DD.MM.YYYY'
                         />
                     </LocalizationProvider>
-                    {deadlineError && <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{deadlineError ? deadlineError: ''}</FormHelperText>}
+                    {deadlineError && <FormHelperText style={{
+                        color: theme.colors.red,
+                        marginRight: 'auto',
+                        marginLeft: '20px'
+                    }}>{deadlineError ? deadlineError : ''}</FormHelperText>}
 
                     <span className="topLabel">Description</span>
                     <TextareaAutosize
@@ -91,7 +96,11 @@ const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Description"
                     />
-                    {descriptionError && <FormHelperText style={{ color: theme.colors.red, marginRight: 'auto', marginLeft: '20px'}}>{descriptionError ? descriptionError: ''}</FormHelperText>}
+                    {descriptionError && <FormHelperText style={{
+                        color: theme.colors.red,
+                        marginRight: 'auto',
+                        marginLeft: '20px'
+                    }}>{descriptionError ? descriptionError : ''}</FormHelperText>}
 
                     <FlexRow width="100%" alignmentX="end" className="submitButton">
                         <Button

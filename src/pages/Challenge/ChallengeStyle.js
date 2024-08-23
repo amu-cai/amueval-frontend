@@ -10,6 +10,10 @@ const ChallengeStyle = styled(FlexColumn)`
     margin-right: 20px;
   }
   
+  h1, img {
+    margin-top: 100px;
+  }
+  
   .spacer {
     width: 100%;
     height: 1px;

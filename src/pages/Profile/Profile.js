@@ -1,79 +1,68 @@
 import React from 'react';
-import { FlexColumn, FlexRow } from '../../utils/containers';
-import { Body, H2, Medium } from '../../utils/fonts';
 import Loading from '../../components/generic/Loading';
-import theme from '../../utils/theme';
 import getProfileInfo from '../../api/getProfileInfo';
-import Button from "../../components/generic/Button";
-import {Link} from "react-router-dom";
-import {EDIT_PROFILE_PAGE} from "../../utils/globals";
+import {FlexRow, FlexColumn} from "../../utils/containers";
+import ProfileStyle from "./ProfileStyle";
+import AvatarIcon from '../../assets/avatar.svg';
+import {H1New} from "../../utils/fonts";
 
 const Profile = () => {
-  const [profileInfo, setProfileInfo] = React.useState(null);
-  const profileInfoAttributes = [
-    { label: 'Username:', key: 'username', bool: false },
-    { label: 'Email:', key: 'email', bool: false },
-    { label: 'Admin:', key: 'isAdmin', bool: true },
-    { label: 'Author:', key: 'isAuthor', bool: true },
-  ];
+    const [profileInfo, setProfileInfo] = React.useState(null);
 
-  React.useEffect(() => {
-    getProfileInfo(setProfileInfo);
-  }, []);
+    const getUserRoles = () => {
+        let roles = [];
+        if (profileInfo.isAuthor) {
+            roles.push('Author');
+        }
+        if (profileInfo.isAdmin) {
+            roles.push('Admin');
+        }
 
-  const renderValue = (attr) => {
-    if (attr.bool) {
-      return profileInfo[attr.key] ? 'Yes' : 'No';
-    } else {
-      return profileInfo[attr.key];
-    }
-  };
+        return roles.join(', ');
+    };
 
-  const profileInfoRender = () => {
-    if (profileInfo !== null) {
-      if (profileInfo?.username) {
-        return (
-            <FlexColumn as="ul" alignmentX="flex-start" gap="16px">
-              {profileInfoAttributes.map((attr, i) => {
+    React.useEffect(() => {
+        getProfileInfo(setProfileInfo);
+    }, []);
+
+    const profileInfoRender = () => {
+        if (profileInfo !== null) {
+            if (profileInfo?.username) {
                 return (
-                    <FlexRow key={`profileInfoItem-${i}`} as="li" gap="8px">
-                      <Body fontSize="18px">{attr.label}</Body>
-                      <Medium fontSize="18px">{renderValue(attr)}</Medium>
-                    </FlexRow>
+                    <ProfileStyle>
+                        <FlexColumn className="wrapper">
+                            <FlexColumn gap="16px">
+                                <img src={AvatarIcon} alt="user icon" width="180px" height="180px"/>
+                                <H1New>{profileInfo.username}</H1New>
+                                <p>Email: {profileInfo.email}</p>
+                                <p className="roles">Roles: {getUserRoles()}</p>
+                            </FlexColumn>
+                            <FlexRow className="stats">
+                                <FlexColumn>
+                                    <span className="text"> Challenges Created</span>
+                                    <span className="number">0</span>
+                                </FlexColumn>
+                                <div className="spacer"></div>
+                                <FlexColumn>
+                                    <span className="text"> Submissions Added</span>
+                                    <span className="number">0</span>
+                                </FlexColumn>
+                            </FlexRow>
+                        </FlexColumn>
+                    </ProfileStyle>
                 );
-              })}
-            </FlexColumn>
-        );
-      } else {
-        return 'Profile loading failed';
-      }
-    }
-    return <Loading />;
-  };
+            } else {
+                return 'Profile loading failed';
+            }
+        }
+        return <Loading/>;
+    };
 
-  return (
-      <FlexColumn width="100%" minHeight="100vh">
-        <FlexColumn
-            gap="32px"
-            // border={`2px solid ${theme.colors.green03}`}
-            // borderRadius="8px"
-            padding="24px 40px"
-        >
-          <H2 as="h2">Profile Info</H2>
-          {profileInfoRender()}
-          <Button
-              width="82px"
-              height="36px"
-              margin="16px 0 0 0"
-              as={Link}
-              to={EDIT_PROFILE_PAGE}
-              backgroundColor={theme.colors.blue}
-          >
-            <Body color={theme.colors.white}>Edit</Body>
-          </Button>
-        </FlexColumn>
-      </FlexColumn>
-  );
+    return (
+        <div>
+            {profileInfoRender()}
+        </div>
+    );
 };
 
 export default Profile;

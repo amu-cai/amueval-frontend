@@ -1,6 +1,5 @@
 import React from 'react';
 import {FlexColumn, FlexRow} from '../../../utils/containers';
-// import theme from '../../../utils/theme';
 import Button from '../../generic/Button';
 import {ThemeProvider} from "@mui/material/styles";
 import customTheme from "../../../utils/customTheme";
@@ -10,11 +9,30 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import theme from "../../../utils/theme";
 import {TextareaAutosize as BaseTextareaAutosize} from '@mui/base/TextareaAutosize';
 import styled from "styled-components";
+import deleteChallenge from '../../../api/deleteChallenge';
+import {useNavigate} from 'react-router-dom';
+import {CHALLENGES_PAGE} from '../../../utils/globals';
+
 
 const ChallengeSettings = ({challenge, setChallengeUpdateResult}) => {
-    const challengeEditSubmit = async () => {
-        console.log('edit');
+    const navigate = useNavigate();
+    const [result, setResult] = React.useState();
+
+    const challengeDeleteSubmit = async () => {
+        try {
+            await deleteChallenge(challenge.title, setResult);
+
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    React.useEffect(() => {
+        if (result?.success) {
+            navigate(CHALLENGES_PAGE);
+        }
+    }, [result, navigate]);
+
 
     const TextareaAutosize = styled(BaseTextareaAutosize)(
         ({theme}) => `
@@ -62,8 +80,8 @@ const ChallengeSettings = ({challenge, setChallengeUpdateResult}) => {
                         borderColor={theme.colors.green700}
                         height="40px"
                         width="140px"
-                        handler={() => challengeEditSubmit()}
-                    >Edit</Button>
+                        handler={() => challengeDeleteSubmit()}
+                    >Delete</Button>
                 </FlexRow>
             </FlexColumn>
         </ThemeProvider>
