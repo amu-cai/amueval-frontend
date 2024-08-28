@@ -110,7 +110,7 @@ const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
                             height="40px"
                             width="140px"
                             handler={() => challengeEditSubmit()}
-                        >Edit</Button>
+                        >Submit</Button>
                     </FlexRow>
                 </FlexColumn>
             </ThemeProvider>

@@ -11,10 +11,10 @@ const Profile = () => {
 
     const getUserRoles = () => {
         let roles = [];
-        if (profileInfo.isAuthor) {
+        if (profileInfo.is_author) {
             roles.push('Author');
         }
-        if (profileInfo.isAdmin) {
+        if (profileInfo.is_admin) {
             roles.push('Admin');
         }
 
@@ -40,12 +40,12 @@ const Profile = () => {
                             <FlexRow className="stats">
                                 <FlexColumn>
                                     <span className="text"> Challenges Created</span>
-                                    <span className="number">0</span>
+                                    <span className="number">{profileInfo.challenges_number}</span>
                                 </FlexColumn>
                                 <div className="spacer"></div>
                                 <FlexColumn>
-                                    <span className="text"> Submissions Added</span>
-                                    <span className="number">0</span>
+                                    <span className="text">Submissions Added</span>
+                                    <span className="number">{profileInfo.submissions_number}</span>
                                 </FlexColumn>
                             </FlexRow>
                         </FlexColumn>
