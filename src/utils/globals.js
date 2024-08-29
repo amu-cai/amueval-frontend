@@ -208,7 +208,6 @@ export const getChallengeImage = (type) => {
 };
 
 export const formatDateString = (dateString, inputFormat, outputFormat) => {
-    console.log('dupa');
     return dayjs(dateString, inputFormat).format(outputFormat);
 };
 

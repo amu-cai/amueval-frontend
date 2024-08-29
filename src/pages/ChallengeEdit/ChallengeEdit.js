@@ -19,6 +19,7 @@ const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
     const [deadline, setDeadline] = useState(dayjs(challenge.deadline, 'YYYY-MM-DDTHH:mm:ssZ'));
     const [description, setDescription] = useState(challenge.description);
     const [deadlineError, setDeadlineError] = useState(false);
+    const [result, setResult] = React.useState();
     const [descriptionError, setDescriptionError] = useState(false);
 
     const validateForm = () => {
@@ -46,16 +47,25 @@ const ChallengeEdit = ({challenge, setChallengeUpdateResult}) => {
         if (!validated) {
             return;
         }
-        await challengeEdit({
-                challenge_title: challenge.title,
-                deadline: formatDateString(deadline, 'DD.MM.YYYY', 'YYYY-MM-DDTHH:mm:ssZ'),
-                description: description,
-            },
-            localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)
-        ).then(
-            window.location.replace('/')
-    );
+        try {
+            await challengeEdit({
+                    challenge_title: challenge.title,
+                    deadline: formatDateString(deadline, 'DD.MM.YYYY', 'YYYY-MM-DDTHH:mm:ssZ'),
+                    description: description,
+                },
+                localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN),
+                setResult
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+    React.useEffect(() => {
+        if (result?.success) {
+            window.location.replace('/');
+        }
+    }, [result]);
 
     return (
         <ChallengeEditStyle>

@@ -1,8 +1,9 @@
-import { API } from '../utils/globals';
+import {API} from '../utils/globals';
 
 const challengeEdit = async (
     data,
-    token
+    token,
+    setResult
 ) => {
     const formData = new FormData();
 
@@ -10,22 +11,29 @@ const challengeEdit = async (
     formData.append('description', data.description);
     formData.append('deadline', data.deadline);
 
-    try {
-        const response = await fetch(`${API}/challenges/edit-challenge`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            body: formData
-        });
-
-        if (!response.ok) {
-            new Error(`HTTP error! Status: ${response.status}`);
+    fetch(`${API}/challenges/edit-challenge`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        body: formData
+    }).then(
+        (res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return res.json();
+            }
+        },
+        (error) => {
+            if (!alert('Oops, something went wrong!')) {
+                window.location.replace('/');
+            }
         }
-
-    } catch (error) {
-        console.log(error);
-    }
+    )
+    .then((json) => {
+        setResult(json);
+    });
 };
 
 export default challengeEdit;
