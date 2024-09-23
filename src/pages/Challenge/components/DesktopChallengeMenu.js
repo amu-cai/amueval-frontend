@@ -6,6 +6,7 @@ import {
   MENU_CHALLENGE_SECTIONS_WITH_LOGIN,
   MENU_CHALLENGE_SECTIONS_NO_LOGIN,
   MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN,
+  challengeDeadlineHasPassed
 } from '../../../utils/globals';
 import { useSelector } from 'react-redux';
 import Button from '../../../components/generic/Button';
@@ -27,6 +28,9 @@ const DesktopChallengeMenu = (props) => {
   if (loggedIn) options = MENU_CHALLENGE_SECTIONS_WITH_LOGIN;
   if (isAdmin || props.challenge.author === user) {
     options = MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN;
+  }
+  if (challengeDeadlineHasPassed(props.challenge.deadline)) {
+    options = options.filter(option => option.toLowerCase() !== 'add submission');
   }
   return (
     <DesktopChallengeMenuStyle>

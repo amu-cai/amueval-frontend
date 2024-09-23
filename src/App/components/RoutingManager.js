@@ -91,8 +91,8 @@ const RoutingManager = (props) => {
                     />
                     <Route path={`/admin-panel`} element={<AdminPanel/>}/>
                     <Route
-                        path={`${CHALLENGE_PAGE}/:challengeId/addsolution`}
-                        element={<Challenge section={CHALLENGE_SECTIONS.ADD_SOLUTION}/>}
+                        path={`${CHALLENGE_PAGE}/:challengeId/addsubmission`}
+                        element={<Challenge section={CHALLENGE_SECTIONS.ADD_SUBMISSION}/>}
                     />
                     <Route path={PROFILE_PAGE} element={<Profile/>}/>
                     <Route path={CHALLENGE_CREATE_PAGE} element={<ChallengeCreate/>}/>
@@ -168,7 +168,7 @@ const RoutingManager = (props) => {
             />
             <Route
                 path={`${CHALLENGE_PAGE}/:challengeId/addsolution`}
-                element={<Challenge section={CHALLENGE_SECTIONS.ADD_SOLUTION}/>}
+                element={<Challenge section={CHALLENGE_SECTIONS.ADD_SUBMISSION}/>}
             />
             <Route path={CHALLENGES_PAGE} element={<Challenges/>}/>
             <Route path={POLICY_PRIVACY_PAGE} element={<PolicyPrivacy/>}/>

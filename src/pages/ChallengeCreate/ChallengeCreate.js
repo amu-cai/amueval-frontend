@@ -26,7 +26,7 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import Dropzone from "../../components/generic/Dropzone/Dropzone";
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {DateTimePicker} from '@mui/x-date-pickers';
 import dayjs from "dayjs";
 import howToIcon from '../../assets/how-to.svg';
 import {Link} from "react-router-dom";
@@ -165,19 +165,21 @@ const ChallengeCreate = () => {
 
     const generateDescription = () => {
         const createdDate = dayjs().format('DD.MM.YYYY');
-        const deadlineFormatted = deadline ? formatDateString(deadline, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY') : formatDateString(halfYearFromNow, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY');
+        const deadlineFormatted = deadline ? formatDateString(deadline, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY') : formatDateString(oneYearFromNow, 'YYYY-MM-DDTHH:mm:ssZ', 'DD.MM.YYYY');
         return `The ${title ? title : getTitleFromUrl()} challenge was created on ${createdDate}. Its deadline is set to ${deadlineFormatted}. The challenge uses ${selectedMetrics[0]} to evaluate solutions.`;
     };
 
     const createMainMetricParams = () => {
         let result = {};
-        const main_metric = selectedMetrics[0];
-        let params = Object.keys(parameterRefs[main_metric]);
-        for (let j = 0; j < params.length; j++) {
-            let param = params[j];
-            let value = parameterRefs[main_metric][param]?.current.value;
-            if (value) {
-                result[param] = value;
+        if (selectedMetrics.length) {
+            const main_metric = selectedMetrics[0];
+            let params = Object.keys(parameterRefs[main_metric]);
+            for (let j = 0; j < params.length; j++) {
+                let param = params[j];
+                let value = parameterRefs[main_metric][param]?.current.value;
+                if (value) {
+                    result[param] = value;
+                }
             }
         }
         return JSON.stringify(result, null, 2);
@@ -210,7 +212,7 @@ const ChallengeCreate = () => {
         return JSON.stringify(result, null, 2);
     };
 
-    const halfYearFromNow =  dayjs().add(6, 'months');
+    const oneYearFromNow =  dayjs().add(1, 'years').hour(23).minute(59);
 
     const getTitleFromUrl = () => {
         if (!challengeSource) return '';
@@ -249,7 +251,7 @@ const ChallengeCreate = () => {
             source: challengeSource,
             type: type,
             award: award,
-            deadline: deadline ? formatDateString(deadline) : formatDateString(halfYearFromNow),
+            deadline: deadline ? formatDateString(deadline) : formatDateString(oneYearFromNow),
             sorting: '',
             main_metric: selectedMetrics[0],
             main_metric_parameters: mainMetricParams,
@@ -266,7 +268,7 @@ const ChallengeCreate = () => {
 
     const handleShowAdvanced = () => {
         setShowAdvanced(!showAdvanced);
-        setDeadline(halfYearFromNow);
+        setDeadline(oneYearFromNow);
         setTitle(getTitleFromUrl());
     };
 
@@ -295,7 +297,9 @@ const ChallengeCreate = () => {
     };
 
     const handleDeadlineChange = (date) => {
-        setDeadline(date);
+        if (date && dayjs(date).isValid()) {
+            setDeadline(date);
+        }
     };
 
     const handleSelectedMetricsChange = (event, value) => {
@@ -410,13 +414,15 @@ const ChallengeCreate = () => {
                             <ThemeProvider theme={customTheme}>
                                 <span className="topLabel">Deadline</span>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
+                                    <DateTimePicker
                                         label="Enter or pick the submissions deadline"
                                         onChange={handleDeadlineChange}
                                         sx={{width: '100%'}}
-                                        defaultValue={halfYearFromNow}
+                                        defaultValue={oneYearFromNow}
                                         value={deadline}
-                                        format="DD.MM.YYYY"
+                                        format='DD.MM.YYYY HH:mm'
+                                        ampm={false}
+                                        timeSteps={{'minutes': 1}}
                                     />
                                 </LocalizationProvider>
                             </ThemeProvider>

@@ -9,7 +9,9 @@ import Media from 'react-media';
 import DesktopChallengeMenu from './components/DesktopChallengeMenu';
 import {
   CHALLENGES_PAGE,
-  CHALLENGE_SECTIONS, getChallengeImage,
+  CHALLENGE_SECTIONS,
+  getChallengeImage,
+  challengeDeadlineHasPassed
 } from '../../utils/globals';
 import getChallengeInfo from '../../api/getChallengeInfo';
 import Loading from '../../components/generic/Loading';
@@ -86,8 +88,12 @@ const Challenge = (props) => {
             challengeSource={challenge.source}
           />
         );
-      case CHALLENGE_SECTIONS.ADD_SOLUTION:
-        return <Submit challenge={challenge} setLoading={setLoading} />;
+      case CHALLENGE_SECTIONS.ADD_SUBMISSION:
+        return !challengeDeadlineHasPassed(challenge?.deadline) ? (
+            <Submit challenge={challenge} setLoading={setLoading} />
+        ) : (
+            <span>Deadline for submissions has passed.</span>
+        );
       case CHALLENGE_SECTIONS.EDIT:
         return (
             <ChallengeEdit

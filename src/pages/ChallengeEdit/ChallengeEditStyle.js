@@ -15,7 +15,6 @@ const ChallengeEditStyle = styled(Container)`
   }
 
   .deadline {
-    margin-bottom: 12px;
     color: #1B998B;
   }
 

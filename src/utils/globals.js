@@ -51,7 +51,7 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
     'How To',
     'Leaderboard',
     'Submissions',
-    'Add Solution',
+    'Add Submission',
 ];
 
 export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
@@ -60,7 +60,7 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
     'Leaderboard',
     'Submissions',
     'Edit',
-    'Add Solution',
+    'Add Submission',
 ];
 
 export const CHALLENGE_SECTIONS = {
@@ -69,7 +69,7 @@ export const CHALLENGE_SECTIONS = {
     LEADERBOARD: 2,
     SUBMISSIONS: 3,
     EDIT: 4,
-    ADD_SOLUTION: 5,
+    ADD_SUBMISSION: 5,
 };
 
 export const CHALLENGES_STATUS_FILTER = {
@@ -209,6 +209,10 @@ export const getChallengeImage = (type) => {
 
 export const formatDateString = (dateString, inputFormat, outputFormat) => {
     return dayjs(dateString, inputFormat).format(outputFormat);
+};
+
+export const challengeDeadlineHasPassed = (deadline) => {
+    return new Date() > new Date(deadline);
 };
 
 export const COMMON_METRICS = [
