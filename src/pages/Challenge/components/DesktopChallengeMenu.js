@@ -35,7 +35,7 @@ const DesktopChallengeMenu = (props) => {
   return (
     <DesktopChallengeMenuStyle>
       <ThemeProvider theme={theme.customTheme}>
-        <FlexRow gap="30px">
+        <FlexRow gap="10px">
           {options.map((option, index) => {
             return (
                 <FlexColumn as={Link} to={`/challenge/${props.challengeName}/${options[index]
@@ -47,7 +47,7 @@ const DesktopChallengeMenu = (props) => {
                       color={index === props.section ? theme.colors.white : '#5E5E5E'}
                       borderColor={theme.colors.green700}
                       height="40px"
-                      width="140px"
+                      width="134px"
                   >
                     {option}
                   </Button>

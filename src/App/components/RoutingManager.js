@@ -10,7 +10,7 @@ import {
     REGISTER_PAGE,
     USE_PREVIOUS,
     CHALLENGE_CREATE_HOW_TO_PAGE, EDIT_PROFILE_PAGE,
-    FORGOT_PASSWORD_PAGE
+    FORGOT_PASSWORD_PAGE, YOUR_CHALLENGES_PAGE
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challenges';
@@ -33,6 +33,7 @@ import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 import ChallengeCreateHowTo from '../../pages/ChallengeCreateHowTo';
 import EditProfile from "../../pages/EditProfile/EditProfile";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
+import YourChallenges from "../../pages/YourChallenges";
 
 const RoutingManager = (props) => {
     const dispatch = useDispatch();
@@ -99,6 +100,10 @@ const RoutingManager = (props) => {
                     <Route
                         path={CHALLENGE_CREATE_HOW_TO_PAGE}
                         element={<ChallengeCreateHowTo/>}
+                    />
+                    <Route
+                        path={YOUR_CHALLENGES_PAGE}
+                        element={<YourChallenges/>}
                     />
                 </>
             );

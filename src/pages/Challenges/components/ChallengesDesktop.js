@@ -19,7 +19,11 @@ const ChallengesDesktop = (props) => {
           <FlexRow>
               <FlexColumn>
                   <FlexColumn>
-                      <H1New as="h1">Challenges</H1New>
+                      {props.yourChallenges ? (
+                          <H1New as="h1">Your Challenges</H1New>
+                      ) : (
+                          <H1New as="h1">Challenges</H1New>
+                      )}
                       <FlexRow width="100%">
                           <Filters
                               // searchQueryHandler={props.searchQueryHandler}

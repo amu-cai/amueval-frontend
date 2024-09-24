@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 import {
     PROFILE_PAGE,
     REDIRECT_TO_ROOT_PAGE,
-    ADMIN_PANEL_PAGE, CHALLENGE_CREATE_PAGE, ROOT_PAGE,
+    ADMIN_PANEL_PAGE, CHALLENGE_CREATE_PAGE, ROOT_PAGE, YOUR_CHALLENGES_PAGE
 } from '../../../utils/globals';
 import {useDispatch, useSelector} from 'react-redux';
 import {logOut} from '../../../redux/authSlice';
@@ -29,9 +29,8 @@ import Button from "../../generic/Button";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import menuAdminPanel from '../../../assets/menu_admin_panel.svg';
 import menuHome from '../../../assets/menu_home.svg';
-import menuYourSubmissions from '../../../assets/menu_your_submissions.svg';
 import menuYourChallenges from '../../../assets/menu_your_challenges.svg';
-import menuSettings from '../../../assets/menu_settings.svg';
+// import menuSettings from '../../../assets/menu_settings.svg';
 import menuLogOut from '../../../assets/menu_logout.svg';
 
 const LoggedBar = () => {
@@ -159,27 +158,20 @@ const LoggedBar = () => {
                             <span>Admin panel</span>
                         </FlexRow>
                         )}
-                        <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
-                            <img
-                                alt="your submissions"
-                                src={menuYourSubmissions}
-                            />
-                            <span>Your submissions</span>
-                        </FlexRow>
-                        <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
+                        <FlexRow as={Link} to={YOUR_CHALLENGES_PAGE} gap="16px" className="sideMenuItem">
                             <img
                                 alt="your challenges"
                                 src={menuYourChallenges}
                             />
                             <span>Your challenges</span>
                         </FlexRow>
-                        <FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">
-                            <img
-                                alt="settings"
-                                src={menuSettings}
-                            />
-                            <span>Settings</span>
-                        </FlexRow>
+                        {/*<FlexRow as={Link} to={ROOT_PAGE} gap="16px" className="sideMenuItem">*/}
+                        {/*    <img*/}
+                        {/*        alt="settings"*/}
+                        {/*        src={menuSettings}*/}
+                        {/*    />*/}
+                        {/*    <span>Settings</span>*/}
+                        {/*</FlexRow>*/}
                         <FlexRow
                             as="button"
                             gap="16px" className="sideMenuItem"

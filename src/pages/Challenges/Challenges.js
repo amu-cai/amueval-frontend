@@ -8,11 +8,11 @@ import statusFilterHandle from './functions/statusFilterHandle';
 import ChallengesMobile from './components/ChallengesMobile';
 import ChallengesDesktop from './components/ChallengesDesktop';
 // import challengeSearchQueryHandler from './functions/challengeSearchQueryHandler';
-// import filterByTypeHandler from "../Challenges/functions/filterByTypeHandler";
+// import filterByTypeHandler from "../YourChallenges/functions/filterByTypeHandler";
 import filtersHandler from "./functions/filtersHandler";
 
 
-const Challenges = () => {
+const Challenges = ({yourChallenges}) => {
   const [allChallenges, setAllChallenges] = React.useState([]);
   const [challenges, setChallenges] = React.useState([]);
   const [challengesFiltered, setChallengesFiltered] = React.useState([]);
@@ -28,8 +28,8 @@ const Challenges = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    getChallenges(setAllChallenges, setLoading);
-  }, []);
+    getChallenges(setAllChallenges, setLoading, yourChallenges);
+  }, [yourChallenges]);
 
 
   React.useEffect(() => {
@@ -121,6 +121,7 @@ const Challenges = () => {
                       setPageNr
                   )
               }
+              yourChallenges={yourChallenges}
           />
         </div>
       </Media>

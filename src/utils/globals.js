@@ -32,11 +32,12 @@ export const POLICY_PRIVACY_REGISTER_PAGE = `${POLICY_PRIVACY_PAGE}/register`;
 export const LOGIN_PAGE = `/login`;
 export const REGISTER_PAGE = `/register`;
 export const FORGOT_PASSWORD_PAGE = `/forgot-password`;
+export const YOUR_CHALLENGES_PAGE = `/your-challenges`;
 export const CSI_LINK = 'https://csi.amu.edu.pl/';
 export const ROOT_URL = window.location.origin;
 export const LOGIN_REQUIRED_PAGES = ['my-submissions', 'submit'];
 
-export const RESET_TOKEN_TIME = 1200000;
+export const RESET_TOKEN_TIME = 86400000;
 export const CHECK_TOKEN_TIME = 1500;
 
 export const MENU_CHALLENGE_SECTIONS_NO_LOGIN = [
@@ -51,6 +52,7 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
     'How To',
     'Leaderboard',
     'Submissions',
+    'Your Submissions',
     'Add Submission',
 ];
 
@@ -59,6 +61,7 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
     'How To',
     'Leaderboard',
     'Submissions',
+    'Your Submissions',
     'Edit',
     'Add Submission',
 ];
@@ -68,8 +71,9 @@ export const CHALLENGE_SECTIONS = {
     HOW_TO: 1,
     LEADERBOARD: 2,
     SUBMISSIONS: 3,
-    EDIT: 4,
-    ADD_SUBMISSION: 5,
+    MY_SUBMISSIONS: 4,
+    EDIT: 5,
+    ADD_SUBMISSION: 6,
 };
 
 export const CHALLENGES_STATUS_FILTER = {

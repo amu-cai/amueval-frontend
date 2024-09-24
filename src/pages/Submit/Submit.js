@@ -75,15 +75,9 @@ const Submit = (props) => {
 
     React.useEffect(() => {
         if (submissionResult?.submission && submissionResult?.message) {
-            // dispatch(
-            //     popUpMessageHandler({
-            //         header: 'Adding submission success',
-            //         message: `${submissionResult.submission}: ${submissionResult.message}`,
-            //         borderColor: theme.colors.green,
-            //     })
-            // );
             navigate(`/challenge/${props.challenge.title}/submissions`);
-        } else if (submissionResult?.detail) {
+        }
+        else if (submissionResult?.detail) {
             dispatch(
                 popUpMessageHandler({
                     header: 'Adding submission error',
