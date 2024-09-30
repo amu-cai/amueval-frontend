@@ -1,7 +1,7 @@
 import Keycloak from 'keycloak-js';
-import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../utils/globals';
+// import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../utils/globals';
 import SESSION_STORAGE from '../utils/sessionStorage';
-import LOCAL_STORAGE from '../utils/localStorage';
+// import LOCAL_STORAGE from '../utils/localStorage';
 
 const _kc = new Keycloak({
   url: process.env.REACT_APP_KC_URL,
@@ -28,18 +28,19 @@ const initKeycloak = (onAuthenticatedCallback) => {
 };
 
 const doLogin = () => {
-  const privacyPolicyAccept = localStorage.getItem(
-    LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
-  );
-  if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
-    window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`);
-  } else {
-    sessionStorage.setItem(
+  // const privacyPolicyAccept = localStorage.getItem(
+  //   LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
+  // );
+  // if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
+  //   window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`);
+  // } else {
+
+  sessionStorage.setItem(
       SESSION_STORAGE.LOGGED,
       SESSION_STORAGE.STATIC_VALUE.YES
-    );
-    _kc.login();
-  }
+  );
+  _kc.login();
+  // }
 };
 
 const doLogout = (event, reset) => {
@@ -58,14 +59,14 @@ const doLogout = (event, reset) => {
 const getToken = () => _kc.token;
 
 const doRegister = () => {
-  const privacyPolicyAccept = localStorage.getItem(
-    LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
-  );
-  if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
-    window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/register`);
-  } else {
-    _kc.register();
-  }
+  // const privacyPolicyAccept = localStorage.getItem(
+  //   LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
+  // );
+  // if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
+  //   window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/register`);
+  // } else {
+  _kc.register();
+  // }
 };
 
 const isLoggedIn = () => !!_kc.token;

@@ -5,7 +5,7 @@ const TableStyle = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  table-layout: fixed;
+  table-layout: auto;
 
   .TableStyle__sort-button {
     cursor: pointer;
@@ -28,7 +28,7 @@ const TableStyle = styled.table`
   }
 
   .TableStyle__td {
-    max-width: 80px;
+    //max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0;
@@ -91,6 +91,26 @@ const TableStyle = styled.table`
     -ms-user-select: none;
     user-select: none;
   }
+  
+  .TableStyle__row-footer, .TableStyle__tr {
+    height: 72px;
+  }
+  
+  .TableStyle__row-footer {
+    display: inline-block;
+    //align-content: end;
+    float: right;
+    padding: 24px 8px;
+  }
+  
+  .TableStyle__row-footer svg {
+    color: ${theme.colors.green700};
+  }
+  
+  .TableStyle__td:has(.roleTable){
+    width: 40px;
+  }
+  
 `;
 
 export default TableStyle;

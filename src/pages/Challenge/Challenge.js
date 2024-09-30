@@ -22,6 +22,7 @@ import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
 import ChallengeStyle from "./ChallengeStyle";
 import {H1New} from "../../utils/fonts";
 import Overview from "../Overview";
+import YourSubmissions from "../YourSubmissions";
 
 const Challenge = (props) => {
   const dispatch = useDispatch();
@@ -99,6 +100,14 @@ const Challenge = (props) => {
             <ChallengeEdit
               challenge={challenge}
               setChallengeUpdateResult={setChallengeUpdateResult}
+            />
+        );
+      case CHALLENGE_SECTIONS.YOUR_SUBMISSIONS:
+        return (
+            <YourSubmissions
+                challengeName={challengeName}
+                mainMetric={challenge.mainMetric}
+                setLoading={setLoading}
             />
         );
       default:

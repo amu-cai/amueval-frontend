@@ -2,6 +2,7 @@ import React from 'react';
 import TableStyle from '../../styles/TableStyle';
 import TableHeader from '../TableHeader/TableHeader';
 import TableRowItems from '../TableRowItems/TableRowItems';
+import TableRowFooter from "../TableRowFooter/TableRowFooter";
 
 const DesktopTable = (props) => {
   return (
@@ -19,6 +20,22 @@ const DesktopTable = (props) => {
                   <TableRowItems
                       orderedKeys={props.orderedKeys}
                       subpage={props.subpage}
+                      item={item}
+                      i={i}
+                      users={props.users}
+                      setRightsUpdateResult={props.setRightsUpdateResult}
+                  />
+                  <TableRowFooter
+                      deleteItem={() => {
+                          props.setItemToHandle(item);
+                          props.setDeletePopUp(true);
+                      }}
+                      editItem={() => {
+                          props.setItemToHandle(item);
+                          props.setEditPopUp(true);
+                      }}
+                      subpage={props.subpage}
+                      rowFooter={props.rowFooter}
                       item={item}
                       i={i}
                   />

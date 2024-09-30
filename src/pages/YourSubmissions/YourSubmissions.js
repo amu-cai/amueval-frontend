@@ -2,12 +2,12 @@ import React from 'react';
 import { Container, FlexColumn } from '../../utils/containers';
 import { Medium } from '../../utils/fonts';
 import Pager from '../../components/generic/Pager';
-import getAllSubmissions from '../../api/getAllSubmissions';
+import getYourSubmissions from '../../api/getYourSubmissions';
 import Table from '../../components/generic/Table';
 import Loading from '../../components/generic/Loading';
 import { CALC_PAGES, ELEMENTS_PER_PAGE } from '../../utils/globals';
 
-const AllSubmissions = (props) => {
+const YourSubmissions = (props) => {
   const [submissions, setSubmissions] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
@@ -32,7 +32,7 @@ const AllSubmissions = (props) => {
 
   React.useEffect(() => {
     if (props.challengeName) {
-      getAllSubmissions(props.challengeName, setSubmissionsAll, setLoading);
+      getYourSubmissions(props.challengeName, setSubmissionsAll, setLoading);
     }
   }, [props.challengeName]);
 
@@ -163,7 +163,6 @@ const AllSubmissions = (props) => {
     const tableNotEmpty = elements?.length;
     let orderedKeys = [
       { key: 'index', name: '#', sortable: false },
-      { key: 'submitter', name: 'User', sortable: false },
       { key: 'main_metric_result', name: props.mainMetric, sortable: true },
     ];
 
@@ -176,6 +175,7 @@ const AllSubmissions = (props) => {
       }));
       orderedKeys = orderedKeys.concat(additionalKeys);
     }
+    orderedKeys.push({ key: 'description', name: 'Description' });
     orderedKeys.push({ key: 'timestamp', name: 'Timestamp', sortable: true });
 
     if (!loading) {
@@ -188,7 +188,7 @@ const AllSubmissions = (props) => {
                 orderedKeys={orderedKeys}
                 sortByUpdate={sortByUpdate}
                 challengeName={props.challengeName}
-                rowFooter={false}
+                rowFooter={true}
               />
             </Container>
             <Pager
@@ -219,4 +219,4 @@ const AllSubmissions = (props) => {
   );
 };
 
-export default AllSubmissions;
+export default YourSubmissions;

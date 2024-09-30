@@ -105,6 +105,10 @@ const RoutingManager = (props) => {
                         path={YOUR_CHALLENGES_PAGE}
                         element={<YourChallenges/>}
                     />
+                    <Route
+                        path={`${CHALLENGE_PAGE}/:challengeId/yoursubmissions`}
+                        element={<Challenge section={CHALLENGE_SECTIONS.YOUR_SUBMISSIONS}/>}
+                    />
                 </>
             );
         }

@@ -13,6 +13,8 @@ const Table = ({
   subpage,
   challengeName,
   rowFooter = true,
+  users = [],
+  setRightsUpdateResult = null
 }) => {
   const [, updateState] = React.useState();
   const tableUpdate = React.useCallback(() => updateState({}), []);
@@ -70,6 +72,8 @@ const Table = ({
           setEditPopUp={setEditPopUp}
           setDeletePopUp={setDeletePopUp}
           setDeletedItems={setDeletedItems}
+          users={users}
+          setRightsUpdateResult={setRightsUpdateResult}
         />
       </Media>
     </>

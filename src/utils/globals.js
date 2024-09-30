@@ -12,6 +12,10 @@ import imageTypeImg from "../assets/image_type.svg";
 import tabularTypeImg from "../assets/tabular_type.svg";
 import {FlexRow, Svg} from "./containers";
 import dayjs from "dayjs";
+import {Switch} from "@mui/material";
+import {ThemeProvider} from "@mui/material/styles";
+import customTheme from "./customTheme";
+import userRightsUpdate from "../api/userRightsUpdate";
 
 
 export const ELEMENTS_PER_PAGE = 10;
@@ -71,7 +75,7 @@ export const CHALLENGE_SECTIONS = {
     HOW_TO: 1,
     LEADERBOARD: 2,
     SUBMISSIONS: 3,
-    MY_SUBMISSIONS: 4,
+    YOUR_SUBMISSIONS: 4,
     EDIT: 5,
     ADD_SUBMISSION: 6,
 };
@@ -150,7 +154,7 @@ export const RENDER_WHEN = (when) => {
 };
 
 export const RENDER_METRIC_VALUE = (value) => {
-  if (value <= -999999999) return 'N/A';
+  if (value <= -999999999 ) return 'N/A';
   else return value.toFixed(4);
 };
 
@@ -170,6 +174,42 @@ export const RENDER_PLACE = (value) => {
     }
     return place;
 };
+
+export const RENDER_ROLE = (username, roleName, roleValue, otherRoleValue) => {
+    return (
+        <>
+            <div className="roleTable">
+                <ThemeProvider theme={customTheme}>
+                    <Switch
+                        checked={roleValue}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                        onChange={(event) =>
+                            // setRole(username, event.target.checked, roleName, otherRoleValue)
+                            userRightsUpdate(
+                                {
+                                    username: username,
+                                    is_admin: roleName === 'admin' ? event.target.checked : otherRoleValue,
+                                    is_author: roleName === 'author' ? event.target.checked : otherRoleValue,
+                                }
+                            )
+                    }
+                    />
+                </ThemeProvider>
+            </div>
+        </>
+    );
+};
+
+// const setRole = async (username, newRoleValue, roleName, otherRoleValue, setRightsUpdateResult) => {
+//     await userRightsUpdate(
+//         {
+//             username: username,
+//             is_admin: roleName === 'admin' ? newRoleValue : otherRoleValue,
+//             is_author: roleName === 'author' ? newRoleValue : otherRoleValue,
+//         },
+//         setRightsUpdateResult
+//     );
+// };
 
 export const EVALUATIONS_FORMAT = (evaluate) => {
   if (Object.hasOwn(evaluate, 'score')) return evaluate.score.slice(0, 7);
