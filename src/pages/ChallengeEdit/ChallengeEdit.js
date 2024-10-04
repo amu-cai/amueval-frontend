@@ -63,11 +63,10 @@ const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
     };
 
     React.useEffect(() => {
-        console.log(result);
         if (result === null) {
             window.location.replace(`/challenge/${challenge.title}`);
         }
-    }, [result]);
+    }, [result, challenge.title]);
 
     const handleDateTimeChange = (newDateTime) => {
         if (newDateTime && dayjs(newDateTime).isValid()) {
