@@ -57,6 +57,7 @@ const Leaderboard = (props) => {
                 items={elements}
                 orderedKeys={orderedKeys}
                 challengeName={props.challengeName}
+                rowFooter={false}
               />
             </Container>
             <Pager

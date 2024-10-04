@@ -2,7 +2,6 @@ import {API} from '../utils/globals';
 import LOCAL_STORAGE from '../utils/localStorage';
 
 const userRightsUpdate = async (newUserRights, setResult) => {
-    console.log(newUserRights);
     fetch(`${API}/admin/user-rights-update`, {
         headers: {
             'Content-Type': 'application/json',

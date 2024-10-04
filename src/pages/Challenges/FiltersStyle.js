@@ -13,6 +13,12 @@ const FiltersStyle = styled(FlexColumn)`
     margin-top: 6px;
   }
   
+  .inputSearchAdminPanel {
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 6px;
+  }
+  
   .filters {
     margin-bottom: 12px;
   }

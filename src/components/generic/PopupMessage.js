@@ -4,6 +4,7 @@ import theme from '../../utils/theme';
 import { Body, H3 } from '../../utils/fonts';
 import Button from './Button';
 
+
 const PopupMessage = (props) => {
   const confirmPopUp = () => {
     if (props.confirmHandler) {
@@ -11,6 +12,7 @@ const PopupMessage = (props) => {
     }
     props.popUpMessageHandler('', '', null, null);
   };
+
 
   return (
     <FlexColumn

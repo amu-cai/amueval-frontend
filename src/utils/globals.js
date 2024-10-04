@@ -175,7 +175,7 @@ export const RENDER_PLACE = (value) => {
     return place;
 };
 
-export const RENDER_ROLE = (username, roleName, roleValue, otherRoleValue) => {
+export const RENDER_ROLE = (username, roleName, roleValue, otherRoleValue, setRightsUpdateResult) => {
     return (
         <>
             <div className="roleTable">
@@ -184,13 +184,13 @@ export const RENDER_ROLE = (username, roleName, roleValue, otherRoleValue) => {
                         checked={roleValue}
                         inputProps={{ 'aria-label': 'controlled' }}
                         onChange={(event) =>
-                            // setRole(username, event.target.checked, roleName, otherRoleValue)
                             userRightsUpdate(
                                 {
                                     username: username,
                                     is_admin: roleName === 'admin' ? event.target.checked : otherRoleValue,
                                     is_author: roleName === 'author' ? event.target.checked : otherRoleValue,
-                                }
+                                },
+                                setRightsUpdateResult
                             )
                     }
                     />
@@ -199,17 +199,6 @@ export const RENDER_ROLE = (username, roleName, roleValue, otherRoleValue) => {
         </>
     );
 };
-
-// const setRole = async (username, newRoleValue, roleName, otherRoleValue, setRightsUpdateResult) => {
-//     await userRightsUpdate(
-//         {
-//             username: username,
-//             is_admin: roleName === 'admin' ? newRoleValue : otherRoleValue,
-//             is_author: roleName === 'author' ? newRoleValue : otherRoleValue,
-//         },
-//         setRightsUpdateResult
-//     );
-// };
 
 export const EVALUATIONS_FORMAT = (evaluate) => {
   if (Object.hasOwn(evaluate, 'score')) return evaluate.score.slice(0, 7);

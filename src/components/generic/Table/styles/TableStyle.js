@@ -100,7 +100,7 @@ const TableStyle = styled.table`
     display: inline-block;
     //align-content: end;
     float: right;
-    padding: 24px 8px;
+    padding: 24px 16px;
   }
   
   .TableStyle__row-footer svg {
@@ -108,7 +108,10 @@ const TableStyle = styled.table`
   }
   
   .TableStyle__td:has(.roleTable){
+  //.roleTable {
     width: 40px;
+    position: relative;
+    left: -10px;
   }
   
 `;

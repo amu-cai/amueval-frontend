@@ -1,15 +1,16 @@
 import {API} from '../utils/globals';
-import theme from '../utils/theme';
+// import theme from '../utils/theme';
 import LOCAL_STORAGE from '../utils/localStorage';
 
 // Not currently using
 const deleteSubmission = async (
     item,
-    deletedItems,
-    setDeletedItems,
-    popUpMessageHandler
+    // deletedItems,
+    // setDeletedItems,
+    // popUpMessageHandler,
+    setResult
 ) => {
-    fetch(`${API}/delete-submission/${item.id}`, {
+    fetch(`${API}/evaluation/${item.id}/delete-submission`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -23,31 +24,32 @@ const deleteSubmission = async (
                 }
             })
         .then((data) => {
-            if (data === 'deleted') {
-                let newDeletedItems = deletedItems.slice();
-                newDeletedItems.push(item);
-                setDeletedItems(newDeletedItems);
-                popUpMessageHandler(
-                    'Complete',
-                    `Submission "${item.id}" deleted`,
-                    null,
-                    null
-                );
-            } else if (data.includes('<!doctype html>') && data.includes('Login')) {
-                popUpMessageHandler(
-                    'Error',
-                    'You have to be login in to edit submission!',
-                    null,
-                    theme.colors.red
-                );
-            } else {
-                popUpMessageHandler(
-                    'Error',
-                    "You can't delete this submission!",
-                    null,
-                    theme.colors.red
-                );
-            }
+            setResult(data);
+            // if (data === 'deleted') {
+            //     let newDeletedItems = deletedItems.slice();
+            //     newDeletedItems.push(item);
+            //     setDeletedItems(newDeletedItems);
+            //     popUpMessageHandler(
+            //         'Complete',
+            //         `Submission "${item.id}" deleted`,
+            //         null,
+            //         null
+            //     );
+            // } else if (data.includes('<!doctype html>') && data.includes('Login')) {
+            //     popUpMessageHandler(
+            //         'Error',
+            //         'You have to be login in to edit submission!',
+            //         null,
+            //         theme.colors.red
+            //     );
+            // } else {
+            //     popUpMessageHandler(
+            //         'Error',
+            //         "You can't delete this submission!",
+            //         null,
+            //         theme.colors.red
+            //     );
+            // }
         });
 };
 

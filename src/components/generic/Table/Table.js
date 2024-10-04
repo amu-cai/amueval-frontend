@@ -14,7 +14,8 @@ const Table = ({
   challengeName,
   rowFooter = true,
   users = [],
-  setRightsUpdateResult = null
+  setRightsUpdateResult = null,
+  setYourSubmissionsResult = null
 }) => {
   const [, updateState] = React.useState();
   const tableUpdate = React.useCallback(() => updateState({}), []);
@@ -74,6 +75,7 @@ const Table = ({
           setDeletedItems={setDeletedItems}
           users={users}
           setRightsUpdateResult={setRightsUpdateResult}
+          setYourSubmissionsResult={setYourSubmissionsResult}
         />
       </Media>
     </>

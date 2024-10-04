@@ -74,18 +74,21 @@ const LoggedBar = () => {
                     onMouseEnter={() => dispatch(loggedBarHoverHandler(true))}
                     onMouseLeave={() => dispatch(loggedBarHoverHandler(false))}
                 >
-                    <FlexRow as={Link} to={ROOT_PAGE}
+                    <FlexRow
                         alignmentX="space-between"
                         alignmentY="center"
                         gap="16px"
                         width="100%"
                         padding="20px"
                     >
-                        <img
-                            alt="logo"
-                            className="loggedBarLogo"
-                            src={logoAmuEval}
-                        />
+                        <FlexRow
+                            as={Link} to={ROOT_PAGE}>
+                            <img
+                                alt="logo"
+                                className="loggedBarLogo"
+                                src={logoAmuEval}
+                            />
+                        </FlexRow>
                         <Svg
                             onClick={
                                 () =>

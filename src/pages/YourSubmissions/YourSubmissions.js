@@ -18,8 +18,9 @@ const YourSubmissions = (props) => {
   const [devSorted, setDevSorted] = React.useState(false);
   const [testSorted, setTestSorted] = React.useState(false);
   const [descriptionSorted, setDescriptionSorted] = React.useState(false);
+  const [yourSubmissionsResult, setYourSubmissionsResult] = React.useState(null);
 
-  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE );
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE);
 
   let elements = submissions?.map((item) => {
     return {
@@ -41,6 +42,12 @@ const YourSubmissions = (props) => {
       setSubmissions(submissionsAll);
     }
   }, [submissionsAll, submissions]);
+
+  React.useEffect(() => {
+    if (yourSubmissionsResult === 'null') {
+      window.location.reload();
+    }
+  }, [yourSubmissionsResult]);
 
   const sortByUpdate = (elem) => {
     let submissionsUpdated = elements.slice();
@@ -189,6 +196,7 @@ const YourSubmissions = (props) => {
                 sortByUpdate={sortByUpdate}
                 challengeName={props.challengeName}
                 rowFooter={true}
+                setYourSubmissionsResult={setYourSubmissionsResult}
               />
             </Container>
             <Pager
