@@ -2,7 +2,7 @@ import {API} from '../utils/globals';
 import LOCAL_STORAGE from "../utils/localStorage";
 
 const getYourSubmissions = (challenge, setResult, setLoading) => {
-    fetch(`${API}/evaluation/${challenge}/all-submissions`, {
+    fetch(`${API}/evaluation/${challenge}/my-submissions`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE.AUTH_TOKEN)}`,
         }
