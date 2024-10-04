@@ -63,8 +63,9 @@ const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
     };
 
     React.useEffect(() => {
-        if (result?.success) {
-            window.location.replace('/');
+        console.log(result);
+        if (result === null) {
+            window.location.replace(`/challenge/${challenge.title}`);
         }
     }, [result]);
 
