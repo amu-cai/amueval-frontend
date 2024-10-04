@@ -7,7 +7,6 @@ import HttpService from './services/HttpService';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import KeyCloakService from './services/KeyCloakService';
-import SESSION_STORAGE from "./utils/sessionStorage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,6 +19,5 @@ const renderApp = () =>
 
 KeyCloakService.initKeycloak(renderApp);
 HttpService.configure();
-console.log(SESSION_STORAGE);
 
 renderApp();
