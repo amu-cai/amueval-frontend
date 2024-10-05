@@ -4,7 +4,7 @@ import './index.css';
 import './normalize.css';
 import App from './App';
 import HttpService from './services/HttpService';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './redux/store';
 import KeyCloakService from './services/KeyCloakService';
 
@@ -17,7 +17,8 @@ const renderApp = () =>
     </Provider>
   );
 
-KeyCloakService.initKeycloak(renderApp);
+KeyCloakService.initKeycloak(renderApp, store.dispatch);
 HttpService.configure();
+
 
 renderApp();

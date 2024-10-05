@@ -18,7 +18,7 @@ import {
 } from '../../../utils/globals';
 import policyIco from '../../../assets/policy_ico.svg';
 import createIco from '../../../assets/create_ico.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/authSlice';
 
 const MobileNavMenuStyle = styled(FlexColumn)`

@@ -11,7 +11,7 @@ const _axios = axios.create();
 
 const configure = () => {
     _axios.interceptors.request.use((config) => {
-        if (KeyCloakService.isLoggedIn()) {
+        if (!KeyCloakService.isLoggedIn()) {
             const cb = () => {
                 config.headers.Authorization = `Bearer ${KeyCloakService.getToken()}`;
                 return Promise.resolve(config);

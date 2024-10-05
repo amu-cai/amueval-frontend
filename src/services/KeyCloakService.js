@@ -1,7 +1,9 @@
 import Keycloak from 'keycloak-js';
 // import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../utils/globals';
 import SESSION_STORAGE from '../utils/sessionStorage';
+import {logIn, logOut} from "../redux/authSlice";
 // import LOCAL_STORAGE from '../utils/localStorage';
+import store from "../redux/store";
 
 const _kc = new Keycloak({
   url: process.env.REACT_APP_KC_URL,
@@ -9,25 +11,60 @@ const _kc = new Keycloak({
   clientId: process.env.REACT_APP_KC_CLIENT_ID,
 });
 
-const initKeycloak = (onAuthenticatedCallback) => {
-  _kc
-      .init({
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-            window.location.origin + '/silent-check-sso.html',
-        pkceMethod: 'S256',
-        checkLoginIframe: false,
-      })
-      .then((authenticated) => {
-        if (!authenticated) {
-            console.log('user is NOT authenticated..!');
-        }
-        else {
+const initKeycloak = (onAuthenticatedCallback, dispatch) => {
+    _kc
+        .init({
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri:
+                window.location.origin + '/silent-check-sso.html',
+            pkceMethod: 'S256',
+            checkLoginIframe: false,
+        })
+        .then((authenticated) => {
+            if (!authenticated) {
+                console.log('user is NOT authenticated..!');
+            }
+            dispatch(
+                logIn({
+                    user: getUsername(),
+                    token: getToken(),
+                    reloadSession: false,
+                })
+            );
             onAuthenticatedCallback();
-        }
-      })
-      .catch(console.error);
+        })
+        .catch(console.error);
 };
+
+
+
+// const initKeycloak = (onAuthenticatedCallback) => {
+//   _kc
+//       .init({
+//         onLoad: "check-sso",
+//         silentCheckSsoRedirectUri:
+//             window.location.origin + '/silent-check-sso.html',
+//         pkceMethod: 'S256',
+//         checkLoginIframe: false,
+//       }
+//       )
+//       .then((authenticated) => {
+//         if (!authenticated) {
+//             console.log('user is NOT authenticated..!');
+//         }
+//         else {
+//             console.log(authenticated);
+//             console.log('123123123');
+//             onAuthenticatedCallback();
+//         }
+//       })
+//       .catch(error => {
+//           console.log('Keycloak URL:', process.env.REACT_APP_KC_URL);
+//           console.log('Keycloak Realm:', process.env.REACT_APP_KC_REALM);
+//           console.log('Keycloak Client ID:', process.env.REACT_APP_KC_CLIENT_ID);
+//           console.error('Keycloak initialization error:', error);
+//       });
+// };
 
 const doLogin = () => {
   // const privacyPolicyAccept = localStorage.getItem(
@@ -54,6 +91,11 @@ const doLogout = (event, reset) => {
       SESSION_STORAGE.LOGGED,
       SESSION_STORAGE.STATIC_VALUE.NO
   );
+    store.dispatch(
+        logOut({
+            redirectToRootPage: () => window.location.reload(),
+        })
+    );
   _kc.logout();
 };
 

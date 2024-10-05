@@ -1,14 +1,14 @@
 import React from 'react';
-import { FlexRow } from '../../../utils/containers';
+import {FlexRow} from '../../../utils/containers';
 import Logo from '../../generic/Logo';
 import MobileNavMenu from '../MobileNavMenu';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
     CHALLENGES_PAGE,
     ROOT_PAGE
 } from '../../../utils/globals';
 import NavBarStyle from './styles/NavBarStyle';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
     navMenuHoverHandler,
     navMenuPositionToggle,
@@ -22,7 +22,7 @@ import KeyCloakService from '../../../services/KeyCloakService';
 
 const NavBar = () => {
     const dispatch = useDispatch();
-    // const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const loggedIn = useSelector((state) => state.auth.isLoggedIn);
     const navOptionsVisible = useSelector(
         (state) => state.navigation.navOptionsVisible
     );
@@ -61,10 +61,10 @@ const NavBar = () => {
 
     return (
         <>
-            {!KeyCloakService.isLoggedIn() && (
+            {!loggedIn && (
                 <NavBarStyle as="header">
                     <FlexRow height="100%" alignmentX="space-between" as="nav">
-                        <Logo navOptions={navOptionsVisible} />
+                        <Logo navOptions={navOptionsVisible}/>
                         {navOptionsVisible && (
                             <>
                                 <MenuButtonStyle
@@ -114,20 +114,6 @@ const NavBar = () => {
                                             >
                                                 Sign In
                                             </Button>
-                                        </FlexRow>
-                                        <FlexRow
-                                            onClick={KeyCloakService.doLogout}
-                                        >
-                                            <Button
-                                                backgroundColor={theme.colors.white}
-                                                color={theme.colors.green700}
-                                                borderColor={theme.colors.green700}
-                                                height="36px"
-                                                width="110px"
-                                            >
-                                                Sign Out
-                                            </Button>
-                                            {KeyCloakService.getToken()}
                                         </FlexRow>
                                     </FlexRow>
                                 </FlexRow>

@@ -9,12 +9,9 @@ import userIco from '../../../assets/avatar.svg';
 import {Link} from 'react-router-dom';
 import {
     PROFILE_PAGE,
-    REDIRECT_TO_ROOT_PAGE,
     ADMIN_PANEL_PAGE, CHALLENGE_CREATE_PAGE, ROOT_PAGE, YOUR_CHALLENGES_PAGE,
 } from '../../../utils/globals';
 import {useDispatch, useSelector} from 'react-redux';
-import {logOut} from '../../../redux/authSlice';
-import {useNavigate} from 'react-router-dom';
 import LoggedBarCompressedStyle from './LoggedBarCompressedStyle';
 import {
     loggedBarHoverHandler,
@@ -31,10 +28,10 @@ import menuHome from '../../../assets/menu_home.svg';
 import menuYourChallenges from '../../../assets/menu_your_challenges.svg';
 // import menuSettings from '../../../assets/menu_settings.svg';
 import menuLogOut from '../../../assets/menu_logout.svg';
+import KeyCloakService from "../../../services/KeyCloakService";
 
 const LoggedBarCompressed = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const username = useSelector((state) => state.auth.user);
     const isAdmin = useSelector((state) => state.auth.isAdmin);
     const isAuthor = useSelector((state) => state.auth.isAuthor);
@@ -164,15 +161,7 @@ const LoggedBarCompressed = () => {
                         <FlexRow
                             as="button"
                             gap="16px" className="sideMenuItem"
-                            onClick={
-                                () =>
-                                    dispatch(
-                                        logOut({
-                                            redirectToRootPage: () =>
-                                                REDIRECT_TO_ROOT_PAGE(navigate),
-                                        })
-                                    )
-                            }
+                            onClick={KeyCloakService.doLogout}
                         >
                             <img
                                 alt="sign out"
