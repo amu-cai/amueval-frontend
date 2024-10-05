@@ -39,6 +39,7 @@ const RoutingManager = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+
     const [authResult, setAuthResult] = React.useState(null);
     const prevAuthResult = USE_PREVIOUS(authResult);
 
