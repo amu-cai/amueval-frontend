@@ -16,7 +16,7 @@ const initKeycloak = (onAuthenticatedCallback, dispatch) => {
         .init({
             onLoad: 'check-sso',
             silentCheckSsoRedirectUri:
-                window.location.origin + '/silent-check-sso.html',
+                window.location.origin + '/silent-check2-sso.html',
             pkceMethod: 'S256',
             checkLoginIframe: false,
         })
@@ -36,49 +36,12 @@ const initKeycloak = (onAuthenticatedCallback, dispatch) => {
         .catch(console.error);
 };
 
-
-
-// const initKeycloak = (onAuthenticatedCallback) => {
-//   _kc
-//       .init({
-//         onLoad: "check-sso",
-//         silentCheckSsoRedirectUri:
-//             window.location.origin + '/silent-check-sso.html',
-//         pkceMethod: 'S256',
-//         checkLoginIframe: false,
-//       }
-//       )
-//       .then((authenticated) => {
-//         if (!authenticated) {
-//             console.log('user is NOT authenticated..!');
-//         }
-//         else {
-//             console.log(authenticated);
-//             console.log('123123123');
-//             onAuthenticatedCallback();
-//         }
-//       })
-//       .catch(error => {
-//           console.log('Keycloak URL:', process.env.REACT_APP_KC_URL);
-//           console.log('Keycloak Realm:', process.env.REACT_APP_KC_REALM);
-//           console.log('Keycloak Client ID:', process.env.REACT_APP_KC_CLIENT_ID);
-//           console.error('Keycloak initialization error:', error);
-//       });
-// };
-
 const doLogin = () => {
-  // const privacyPolicyAccept = localStorage.getItem(
-  //     LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
-  // );
-  // if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
-  //   window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/login`);
-  // } else {
     sessionStorage.setItem(
         SESSION_STORAGE.LOGGED,
         SESSION_STORAGE.STATIC_VALUE.YES
     );
     _kc.login();
-  // }
 };
 
 const doLogout = (event, reset) => {
@@ -96,21 +59,17 @@ const doLogout = (event, reset) => {
             redirectToRootPage: () => window.location.reload(),
         })
     );
-  _kc.logout();
+  _kc.logout({
+      redirectUri: window.location.origin,
+  });
 };
 
 const getToken = () => _kc.token;
 
 const doRegister = () => {
-  // const privacyPolicyAccept = localStorage.getItem(
-  //     LOCAL_STORAGE.PRIVACY_POLICY_ACCEPT
-  // );
-  // if (privacyPolicyAccept !== LOCAL_STORAGE.STATIC_VALUE.YES) {
-  //   window.location.replace(`${ROOT_URL}${POLICY_PRIVACY_PAGE}/register`);
-  // } else {
-    _kc.register();
-  // }
+    _kc.login({action: "register"});
 };
+
 
 const isLoggedIn = () => !!_kc.token;
 
