@@ -1,6 +1,11 @@
 import {API} from '../utils/globals';
 
 const auth = (token, setResult) => {
+    if (!token || token === "undefined") {
+        console.log('Token is undefined or null');
+        setResult({ detail: 'Authentication token is missing' });
+        return;
+    }
     fetch(`${API}/auth`, {
         headers: {Authorization: `Bearer ${token}`},
     })

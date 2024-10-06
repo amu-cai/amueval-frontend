@@ -6,9 +6,9 @@ import {logIn, logOut} from "../redux/authSlice";
 import store from "../redux/store";
 
 const _kc = new Keycloak({
-  url: process.env.REACT_APP_KC_URL,
-  realm: process.env.REACT_APP_KC_REALM,
-  clientId: process.env.REACT_APP_KC_CLIENT_ID,
+    url: process.env.REACT_APP_KC_URL,
+    realm: process.env.REACT_APP_KC_REALM,
+    clientId: process.env.REACT_APP_KC_CLIENT_ID,
 });
 
 const initKeycloak = (onAuthenticatedCallback, dispatch) => {
@@ -24,14 +24,16 @@ const initKeycloak = (onAuthenticatedCallback, dispatch) => {
             if (!authenticated) {
                 console.log('user is NOT authenticated..!');
             }
-            dispatch(
-                logIn({
-                    user: getUsername(),
-                    token: getToken(),
-                    reloadSession: false,
-                })
-            );
-            onAuthenticatedCallback();
+            else {
+                dispatch(
+                    logIn({
+                        user: getUsername(),
+                        token: getToken(),
+                        reloadSession: false,
+                    })
+                );
+                onAuthenticatedCallback();
+            }
         })
         .catch(console.error);
 };
@@ -45,23 +47,23 @@ const doLogin = () => {
 };
 
 const doLogout = (event, reset) => {
-  event.preventDefault();
-  sessionStorage.clear();
-  if (reset) {
-    localStorage.clear();
-  }
-  sessionStorage.setItem(
-      SESSION_STORAGE.LOGGED,
-      SESSION_STORAGE.STATIC_VALUE.NO
-  );
+    event.preventDefault();
+    sessionStorage.clear();
+    if (reset) {
+        localStorage.clear();
+    }
+    sessionStorage.setItem(
+        SESSION_STORAGE.LOGGED,
+        SESSION_STORAGE.STATIC_VALUE.NO
+    );
     store.dispatch(
         logOut({
             redirectToRootPage: () => window.location.reload(),
         })
     );
-  _kc.logout({
-      redirectUri: window.location.origin,
-  });
+    _kc.logout({
+        redirectUri: window.location.origin,
+    });
 };
 
 const getToken = () => _kc.token;
@@ -81,25 +83,25 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
 const goToProfile = () => {
-  // _kc.accountManagement();
+    // _kc.accountManagement();
 };
 
 const getProfileInfo = async (setProfileInfo) => {
-  _kc.loadUserInfo().then((response) => setProfileInfo(response));
+    _kc.loadUserInfo().then((response) => setProfileInfo(response));
 };
 
 const KeyCloakService = {
-  initKeycloak,
-  doLogin,
-  doLogout,
-  isLoggedIn,
-  getToken,
-  updateToken,
-  getUsername,
-  hasRole,
-  doRegister,
-  goToProfile,
-  getProfileInfo,
+    initKeycloak,
+    doLogin,
+    doLogout,
+    isLoggedIn,
+    getToken,
+    updateToken,
+    getUsername,
+    hasRole,
+    doRegister,
+    goToProfile,
+    getProfileInfo,
 };
 
 export default KeyCloakService;
