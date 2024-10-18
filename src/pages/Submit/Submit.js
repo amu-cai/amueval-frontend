@@ -45,6 +45,10 @@ const Submit = (props) => {
                 setDescriptionError('Description is required');
                 return false;
             }
+            if (description.length > 25) {
+                setDescriptionError('Description can not be longer that 25 characters');
+                return false;
+            }
             setDescriptionError(false);
             return true;
         };

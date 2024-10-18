@@ -66,8 +66,8 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
     'Leaderboard',
     'Submissions',
     'Your Submissions',
-    'Edit',
     'Add Submission',
+    'Edit',
 ];
 
 export const CHALLENGE_SECTIONS = {
@@ -76,8 +76,8 @@ export const CHALLENGE_SECTIONS = {
     LEADERBOARD: 2,
     SUBMISSIONS: 3,
     YOUR_SUBMISSIONS: 4,
-    EDIT: 5,
-    ADD_SUBMISSION: 6,
+    ADD_SUBMISSION: 5,
+    EDIT: 6,
 };
 
 export const CHALLENGES_STATUS_FILTER = {
