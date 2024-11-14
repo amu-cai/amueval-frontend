@@ -32,7 +32,7 @@ const Hero = (props) => {
             </span>
             <span>
               The AmuEval paper can be found in the{" "}
-              <a href="https://proceedings.isecon.org/">
+              <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
                 ISECON 2024 Proceedings
               </a>
             </span>
@@ -81,7 +81,7 @@ const Hero = (props) => {
               </span>
               <span>
                 The AmuEval paper can be found in the{" "}
-                <a href="https://proceedings.isecon.org/">
+                <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
                   ISECON 2024 Proceedings
                 </a>
               </span>
@@ -119,7 +119,7 @@ const Hero = (props) => {
               </span>
               <span>
                 The AmuEval paper can be found in the{" "}
-                <a href="https://proceedings.isecon.org/">
+                <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
                   ISECON 2024 Proceedings
                 </a>
               </span>
