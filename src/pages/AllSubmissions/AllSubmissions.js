@@ -11,21 +11,14 @@ const AllSubmissions = (props) => {
   const [submissions, setSubmissions] = React.useState([]);
   const [pageNr, setPageNr] = React.useState(1);
   const [loading, setLoading] = React.useState(true);
-  const [idSorted, setIdSorted] = React.useState([]);
-  const [submitterSorted, setSubmitterSorted] = React.useState(false);
   const [whenSorted, setWhenSorted] = React.useState(false);
   const [submissionsAll, setSubmissionsAll] = React.useState(null);
-  const [devSorted, setDevSorted] = React.useState(false);
-  const [testSorted, setTestSorted] = React.useState(false);
-  const [descriptionSorted, setDescriptionSorted] = React.useState(false);
 
   const n = (pageNr - 1) * (ELEMENTS_PER_PAGE );
 
   let elements = submissions?.map((item) => {
     return {
-      ...item,
-      [`dev_${props.mainMetric}`]: parseFloat(item.dev_result).toFixed(5),
-      [`test_${props.mainMetric}`]: parseFloat(item.test_result).toFixed(5),
+      ...item
     };
   });
   elements = elements?.slice(n, n + ELEMENTS_PER_PAGE);
@@ -42,122 +35,55 @@ const AllSubmissions = (props) => {
     }
   }, [submissionsAll, submissions]);
 
-  const sortByUpdate = (elem) => {
-    let submissionsUpdated = elements.slice();
-    switch (elem) {
-      case 'id': {
-        if (idSorted) {
-          setIdSorted(false);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.id > b.id ? 1 : b.id > a.id ? -1 : 0
-          );
-        } else {
-          setIdSorted(true);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.id < b.id ? 1 : b.id < a.id ? -1 : 0
-          );
-        }
-        break;
-      }
-      case 'submitter': {
-        if (submitterSorted) {
-          setSubmitterSorted(false);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.submitter.toLowerCase() < b.submitter.toLowerCase()
-              ? 1
-              : b.submitter.toLowerCase() < a.submitter.toLowerCase()
-              ? -1
-              : 0
-          );
-        } else {
-          setSubmitterSorted(true);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.submitter.toLowerCase() > b.submitter.toLowerCase()
-              ? 1
-              : b.submitter.toLowerCase() > a.submitter.toLowerCase()
-              ? -1
-              : 0
-          );
-        }
-        break;
-      }
-      case 'description': {
-        if (descriptionSorted) {
-          setDescriptionSorted(false);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.description.toLowerCase() < b.description.toLowerCase()
-              ? 1
-              : b.description.toLowerCase() < a.description.toLowerCase()
-              ? -1
-              : 0
-          );
-        } else {
-          setDescriptionSorted(true);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.description.toLowerCase() > b.description.toLowerCase()
-              ? 1
-              : b.description.toLowerCase() > a.description.toLowerCase()
-              ? -1
-              : 0
-          );
-        }
-        break;
-      }
+  const sortByUpdate = (key, metricName = null) => {
+    let submissionsUpdated = [...submissions];
+
+    switch (key) {
       case 'timestamp': {
-        if (whenSorted) {
-          setWhenSorted(false);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.when < b.when ? 1 : b.when < a.when ? -1 : 0
-          );
-        } else {
-          setWhenSorted(true);
-          submissionsUpdated = submissionsUpdated.sort((a, b) =>
-            a.when > b.when ? 1 : b.when > a.when ? -1 : 0
-          );
+        submissionsUpdated.sort((a, b) => {
+          if (whenSorted) {
+            return new Date(b.timestamp) - new Date(a.timestamp);
+          } else {
+            return new Date(a.timestamp) - new Date(b.timestamp);
+          }
+        });
+        break;
+      }
+
+      case 'main_metric_result': {
+        submissionsUpdated.sort((a, b) => {
+          if (whenSorted) {
+            return b.main_metric_result - a.main_metric_result;
+          } else {
+            return a.main_metric_result - b.main_metric_result;
+          }
+        });
+        break;
+      }
+
+      case 'additional_metric': {
+        if (metricName) {
+          submissionsUpdated.sort((a, b) => {
+            const aMetric = a.additional_metrics_results.find((metric) => metric.name === metricName)?.score ?? 0;
+            const bMetric = b.additional_metrics_results.find((metric) => metric.name === metricName)?.score ?? 0;
+            if (whenSorted) {
+              return bMetric - aMetric;
+            } else {
+              return aMetric - bMetric;
+            }
+          });
         }
         break;
       }
-      case `dev_${props.mainMetric}`: {
-        if (devSorted) {
-          setDevSorted(false);
-          submissionsUpdated = submissionsUpdated.sort(
-            (a, b) =>
-              (b ? b[`dev_${props.mainMetric}`] : -1) -
-              (a ? a[`dev_${props.mainMetric}`] : -1)
-          );
-        } else {
-          setDevSorted(true);
-          submissionsUpdated = submissionsUpdated.sort(
-            (a, b) =>
-              (a ? a[`dev_${props.mainMetric}`] : -1) -
-              (b ? b[`dev_${props.mainMetric}`] : -1)
-          );
-        }
-        break;
-      }
-      case `test_${props.mainMetric}`: {
-        if (testSorted) {
-          setTestSorted(false);
-          submissionsUpdated = submissionsUpdated.sort(
-            (a, b) =>
-              (b ? b[`test_${props.mainMetric}`] : -1) -
-              (a ? a[`test_${props.mainMetric}`] : -1)
-          );
-        } else {
-          setTestSorted(true);
-          submissionsUpdated = submissionsUpdated.sort(
-            (a, b) =>
-              (a ? a[`test_${props.mainMetric}`] : -1) -
-              (b ? b[`test_${props.mainMetric}`] : -1)
-          );
-        }
-        break;
-      }
+
       default:
         break;
     }
+
+    setWhenSorted(!whenSorted);
     setSubmissions(submissionsUpdated);
   };
+
 
   const allSubmissionsTableRender = () => {
     const tableNotEmpty = elements?.length;
@@ -175,6 +101,7 @@ const AllSubmissions = (props) => {
         sortable: true
       }));
       orderedKeys = orderedKeys.concat(additionalKeys);
+
     }
     orderedKeys.push({ key: 'timestamp', name: 'Timestamp', sortable: true });
 
@@ -184,11 +111,17 @@ const AllSubmissions = (props) => {
           <>
             <Container width="100%" overflowX="auto">
               <Table
-                items={elements}
-                orderedKeys={orderedKeys}
-                sortByUpdate={sortByUpdate}
-                challengeName={props.challengeName}
-                rowFooter={false}
+                  items={elements}
+                  orderedKeys={orderedKeys}
+                  sortByUpdate={(key, additionalMetricName) => {
+                    if (key === 'additional_metric') {
+                      sortByUpdate(key, additionalMetricName);
+                    } else {
+                      sortByUpdate(key);
+                    }
+                  }}
+                  challengeName={props.challengeName}
+                  rowFooter={false}
               />
             </Container>
             <Pager

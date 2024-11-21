@@ -17,7 +17,6 @@ import {ThemeProvider} from "@mui/material/styles";
 import customTheme from "./customTheme";
 import userRightsUpdate from "../api/userRightsUpdate";
 
-
 export const ELEMENTS_PER_PAGE = 10;
 export const MINI_DESCRIPTION_LENGTH = 70;
 export const API = process.env.REACT_APP_API;
@@ -56,7 +55,7 @@ export const MENU_CHALLENGE_SECTIONS_WITH_LOGIN = [
     'How To',
     'Leaderboard',
     'Submissions',
-    'Your Submissions',
+    'My Submissions',
     'Add Submission',
 ];
 
@@ -65,7 +64,7 @@ export const MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN = [
     'How To',
     'Leaderboard',
     'Submissions',
-    'Your Submissions',
+    'My Submissions',
     'Add Submission',
     'Edit',
 ];
@@ -75,7 +74,7 @@ export const CHALLENGE_SECTIONS = {
     HOW_TO: 1,
     LEADERBOARD: 2,
     SUBMISSIONS: 3,
-    YOUR_SUBMISSIONS: 4,
+    MY_SUBMISSIONS: 4,
     ADD_SUBMISSION: 5,
     EDIT: 6,
 };
@@ -150,7 +149,8 @@ export const SET_PAGE = (pageNr, setPage) => {
 };
 
 export const RENDER_WHEN = (when) => {
-  return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
+    return dayjs(when).format('YYYY-MM-DD HH:mm');
+  // return `${when.slice(0, 10)} ${when.slice(11, 16)}`;
 };
 
 export const RENDER_METRIC_VALUE = (value) => {

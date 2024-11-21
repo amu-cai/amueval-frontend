@@ -32,7 +32,6 @@ const DesktopChallengeMenu = (props) => {
   if (challengeDeadlineHasPassed(props.challenge.deadline)) {
     options = options.filter(option => option.toLowerCase() !== 'add submission');
   }
-  console.log(options, props);
   return (
     <DesktopChallengeMenuStyle>
       <ThemeProvider theme={theme.customTheme}>

@@ -65,8 +65,9 @@ const Challenges = ({yourChallenges}) => {
   );
 
   const challengesToRender = challengesFiltered.filter(
-    (challenge) => !challenge.deleted
-  );
+      (challenge) => !challenge.deleted)
+      .sort((a, b) => b.participants - a.participants);
+
   return (
     <>
       <Media query={theme.mobile}>

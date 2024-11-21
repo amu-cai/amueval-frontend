@@ -24,7 +24,11 @@ const TableHeader = (props) => {
                 setRotateActiveIcon(false);
               }
               setActiveIcon(i);
-              props.sortByUpdate(keyValue.key);
+              if (keyValue.key === 'additional_metric') {
+                props.sortByUpdate(keyValue.key, keyValue.additionalMetricName);
+              } else {
+                props.sortByUpdate(keyValue.key);
+              }
               props.tableUpdate();
             }}
           >
