@@ -1,21 +1,15 @@
-import React from 'react';
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { FlexColumn, FlexRow } from "../../../utils/containers";
+import { H2New } from "../../../utils/fonts";
 import {
-    FlexColumn, FlexRow
-} from '../../../utils/containers';
-import styled from 'styled-components';
-import {Link, useNavigate} from 'react-router-dom';
-import {
-    // CHALLENGE_PAGE, CHALLENGES_PAGE,
-    CHALLENGE_PAGE,
-} from '../../../utils/globals';
-import {H2New} from '../../../utils/fonts';
+  // CHALLENGE_PAGE, CHALLENGES_PAGE,
+  CHALLENGE_PAGE,
+  getChallengeImage,
+} from "../../../utils/globals";
 import theme from "../../../utils/theme";
-import {getChallengeImage} from "../../../utils/globals";
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import Button from "../../../components/generic/Button";
-import deleteChallenge from "../../../api/deleteChallenge";
-import {useSelector} from "react-redux";
-
 
 const MiniChallengeStyle = styled(FlexColumn)`
   width: 1100px;
@@ -44,7 +38,7 @@ const MiniChallengeStyle = styled(FlexColumn)`
 
   .highlight {
     font-weight: bold;
-    color: ${theme.colors.green700}
+    color: ${theme.colors.green700};
   }
 
   .peopleIcon {
@@ -59,7 +53,8 @@ const MiniChallengeStyle = styled(FlexColumn)`
     margin-left: 6px;
   }
 
-  .wrap, .wrap div {
+  .wrap,
+  .wrap div {
     cursor: pointer;
   }
 
@@ -76,67 +71,63 @@ const MiniChallengeStyle = styled(FlexColumn)`
   }
 `;
 
-const MiniChallenge = (props) => {
-    const navigate = useNavigate();
-    const [result, setResult] = React.useState();
-    const isAdmin = useSelector((state) => state.auth.isAdmin);
+const MiniChallenge = ({ isOwn, ...props }) => {
+  const navigate = useNavigate();
+  const [result] = React.useState();
 
-    const challengeDeleteSubmit = async () => {
-        try {
-            if (window.confirm(`Are you sure you want to delete challenge ${props.title}?`)) {
-                await deleteChallenge(props.title, setResult);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    React.useEffect(() => {
-        if (result?.success === true) {
-            window.location.replace('/');
-            // navigate(CHALLENGES_PAGE);
-        }
-    }, [result, navigate]);
-    return (
-        <MiniChallengeStyle>
-            <FlexRow className="wrap" alignmentX="start" as={Link} to={`${CHALLENGE_PAGE}/${props.title}`}>
-                <FlexColumn as="div">
-                    <img className="challengeTypeImg" src={getChallengeImage(props.type)} alt="Overview type"/>
-                </FlexColumn>
-                <FlexColumn as="div" width="100%">
-                    <FlexRow as="div" width="100%" alignmentY="space-between" alignmentX="space-between">
-                        <H2New className="titleHeader">{props.title}</H2New>
-                        <div className="challengeMetadata">
-                            <FlexRow>
-                                <FlexRow>
-                                    <PeopleOutlineIcon className="peopleIcon"/><span
-                                    className="highlight participants">{props.participants}</span>
-                                </FlexRow>
-                                <span className="highlight deadline">&nbsp;{props.deadline.slice(0, 10)}</span>
-                            </FlexRow>
-                        </div>
-                    </FlexRow>
-                    <FlexRow as="div" className="description">
-                        {props.description}
-                    </FlexRow>
-                    <FlexRow as="div" className="accuracy">
-                        {props.main_metric}
-                    </FlexRow>
-                </FlexColumn>
-            </FlexRow>
-            {(isAdmin) && (
-                <Button
-                    as="button"
-                    backgroundColor="transparent"
-                    color="red"
-                    borderColor={theme.colors.red}
-                    height="28px"
-                    width="72px"
-                    handler={() => challengeDeleteSubmit()}
-                >Delete</Button>
-            )}
-        </MiniChallengeStyle>
-    );
+  React.useEffect(() => {
+    if (result?.success === true) {
+      window.location.replace("/");
+      // navigate(CHALLENGES_PAGE);
+    }
+  }, [result, navigate]);
+  return (
+    <MiniChallengeStyle>
+      <FlexRow
+        className="wrap"
+        alignmentX="start"
+        as={Link}
+        to={`${CHALLENGE_PAGE}/${props.title}`}
+      >
+        <FlexColumn as="div">
+          <img
+            className="challengeTypeImg"
+            src={getChallengeImage(props.type)}
+            alt="Overview type"
+          />
+        </FlexColumn>
+        <FlexColumn as="div" width="100%">
+          <FlexRow
+            as="div"
+            width="100%"
+            alignmentY="space-between"
+            alignmentX="space-between"
+          >
+            <H2New className="titleHeader">{props.title}</H2New>
+            <div className="challengeMetadata">
+              <FlexRow>
+                <FlexRow>
+                  <PeopleOutlineIcon className="peopleIcon" />
+                  <span className="highlight participants">
+                    {props.participants}
+                  </span>
+                </FlexRow>
+                <span className="highlight deadline">
+                  &nbsp;{props.deadline.slice(0, 10)}
+                </span>
+              </FlexRow>
+            </div>
+          </FlexRow>
+          <FlexRow as="div" className="description">
+            {props.description}
+          </FlexRow>
+          <FlexRow as="div" className="accuracy">
+            {props.main_metric}
+          </FlexRow>
+        </FlexColumn>
+      </FlexRow>
+    </MiniChallengeStyle>
+  );
 };
 
 export default MiniChallenge;

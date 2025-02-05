@@ -18,7 +18,7 @@ const ChallengeStyle = styled(FlexColumn)`
     width: 100%;
     height: 1px;
     background: ${theme.colors.black700};
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
   
   .challengeName {

@@ -49,7 +49,7 @@ const DesktopChallengeMenu = (props) => {
                       height="40px"
                       width="134px"
                   >
-                    {option}
+                    {option === "Edit" ? "Settings": option}
                   </Button>
                 </FlexColumn>
             );
