@@ -1,4 +1,4 @@
-import React from "react";
+import { default as React } from "react";
 import Media from "react-media";
 import arrowDown from "../../../../assets/arrow_down.svg";
 import brain from "../../../../assets/brain.svg";
