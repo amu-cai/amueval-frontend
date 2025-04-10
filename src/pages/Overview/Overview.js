@@ -11,9 +11,6 @@ const Overview = (props) => {
   const mobileRender = () => {
     return '';
   };
-
-  console.log(props);
-
   const desktopRender = () => {
     return (
         <OverviewStyle>

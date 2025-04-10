@@ -23,6 +23,7 @@ import ChallengeStyle from "./ChallengeStyle";
 import {H1New} from "../../utils/fonts";
 import Overview from "../Overview";
 import YourSubmissions from "../YourSubmissions";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 const Challenge = (props) => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Challenge = (props) => {
   const [loading, setLoading] = React.useState(true);
   const [challengeUpdateResult, setChallengeUpdateResult] =
     React.useState(null);
+
 
   React.useEffect(() => {
     getChallengeInfo(setChallenge, setLoading, challengeName);
@@ -119,6 +121,10 @@ const Challenge = (props) => {
         );
     }
   };
+
+  if (!challenge?.title) {
+    return <PageNotFound />;
+  }
 
   const mobileRender = () => {
     if (!loading) {
