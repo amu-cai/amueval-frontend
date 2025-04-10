@@ -102,7 +102,7 @@ const Challenge = (props) => {
               setChallengeUpdateResult={setChallengeUpdateResult}
             />
         );
-      case CHALLENGE_SECTIONS.YOUR_SUBMISSIONS:
+      case CHALLENGE_SECTIONS.MY_SUBMISSIONS:
         return (
             <YourSubmissions
                 challengeName={challengeName}
