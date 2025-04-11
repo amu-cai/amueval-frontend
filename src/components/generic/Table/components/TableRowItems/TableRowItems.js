@@ -13,8 +13,8 @@ const TableRowItems = ({ orderedKeys, item, i, subpage, users, setRightsUpdateRe
     if (keyValue === 'timestamp') {
       return RENDER_WHEN(item[keyValue]);
     }
-    else if (keyValue === 'id') {
-        return RENDER_PLACE(i);
+    else if (keyValue === 'place') {
+        return RENDER_PLACE(item[keyValue]);
     }
     else if (keyValue === 'index') {
       return i + 1;

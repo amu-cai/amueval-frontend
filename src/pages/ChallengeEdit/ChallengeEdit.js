@@ -20,7 +20,6 @@ import Section from "./Section";
 import Subtitle from "./Subtitle";
 
 const ChallengeEdit = ({ challenge, setChallengeUpdateResult }) => {
-  console.log("erferf", challenge);
   const initialDeadline = dayjs(challenge.deadline, "YYYY-MM-DDTHH:mm:ssZ");
   const [deadline, setDeadline] = useState(initialDeadline);
   const [description, setDescription] = useState(challenge.description);

@@ -13,7 +13,7 @@ const Leaderboard = (props) => {
   const [loading, setLoading] = React.useState(true);
   const [submissionsAll, setSubmissionsAll] = React.useState(null);
 
-  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE * 2);
+  const n = (pageNr - 1) * (ELEMENTS_PER_PAGE);
 
   let elements = submissions?.map((item) => {
     return {
@@ -27,7 +27,7 @@ const Leaderboard = (props) => {
     return parseFloat(b[key]) - parseFloat(a[key]);
   });
 
-  elements = elements?.slice(n, n + ELEMENTS_PER_PAGE * 2);
+  elements = elements?.slice(n, n + ELEMENTS_PER_PAGE);
   React.useEffect(() => {
     if (props.challengeName) {
       getLeaderboard(props.challengeName, setSubmissionsAll, setLoading);
@@ -43,7 +43,7 @@ const Leaderboard = (props) => {
   const leaderboardRender = () => {
     const tableNotEmpty = elements?.length;
     const orderedKeys = [
-      { key: 'id', name: 'Place', sortable: false},
+      { key: 'place', name: 'Place', sortable: false},
       { key: 'submitter', name: 'User', sortable: false },
       { key: 'main_metric_result', name: props.mainMetric, sortable: false },
       { key: 'timestamp', name: 'Timestamp', sortable: false }
@@ -61,13 +61,14 @@ const Leaderboard = (props) => {
               />
             </Container>
             <Pager
-              pageNr={pageNr}
-              elements={submissions}
-              setPageNr={setPageNr}
-              width="72px"
-              borderRadius="64px"
-              pages={CALC_PAGES(submissions, 2)}
-              number={`${pageNr} / ${CALC_PAGES(submissions, 2)}`}
+                pageNr={pageNr}
+                setPageNr={setPageNr}
+                elements={submissions}
+                pages={submissions}
+                width="72px"
+                borderRadius="64px"
+                currentPage={pageNr}
+                totalPages={CALC_PAGES(submissions)}
             />
           </>
         );

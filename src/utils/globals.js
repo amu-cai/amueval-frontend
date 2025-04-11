@@ -158,8 +158,7 @@ export const RENDER_METRIC_VALUE = (value) => {
   else return value.toFixed(4);
 };
 
-export const RENDER_PLACE = (value) => {
-    let place = value + 1;
+export const RENDER_PLACE = (place) => {
     if (place <= 3) {
         let color = '#D6AF36';
         if (place === 2) color = '#A7A7AD';

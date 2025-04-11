@@ -60,7 +60,6 @@ const Filters = (props) => {
 
   const handleSortByParticipants = () => {
     const newSortOrder = sortByParticipants === "asc" ? "desc" : "asc";
-    console.log(newSortOrder);
     setSortByParticipants(newSortOrder);
     setSortByDeadline(null);
     handleFilters({

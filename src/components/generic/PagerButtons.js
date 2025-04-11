@@ -7,7 +7,6 @@ import theme from "../../utils/theme";
 import {ThemeProvider} from "@mui/material/styles";
 
 const PagerButtons = (props) => {
-
   return (
         <FlexRow gap="6px">
           <ThemeProvider theme={theme.customTheme}>
