@@ -183,7 +183,7 @@ const YourSubmissions = (props) => {
       orderedKeys = orderedKeys.concat(additionalKeys);
     }
     orderedKeys.push({ key: 'description', name: 'Description' });
-    orderedKeys.push({ key: 'timestamp', name: 'Timestamp', sortable: true });
+    orderedKeys.push({ key: 'timestamp', name: 'Submission Date', sortable: true });
 
     if (!loading) {
       if (tableNotEmpty) {
