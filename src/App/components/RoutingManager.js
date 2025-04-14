@@ -4,13 +4,12 @@ import {
     CHALLENGE_CREATE_PAGE,
     CHALLENGE_PAGE,
     CHALLENGE_SECTIONS,
-    LOGIN_PAGE,
     POLICY_PRIVACY_PAGE,
     PROFILE_PAGE,
-    REGISTER_PAGE,
     USE_PREVIOUS,
-    CHALLENGE_CREATE_HOW_TO_PAGE, EDIT_PROFILE_PAGE,
-    FORGOT_PASSWORD_PAGE, YOUR_CHALLENGES_PAGE
+    CHALLENGE_CREATE_HOW_TO_PAGE,
+    EDIT_PROFILE_PAGE,
+    YOUR_CHALLENGES_PAGE
 } from '../../utils/globals';
 import Challenge from '../../pages/Challenge';
 import Challenges from '../../pages/Challenges';
@@ -19,8 +18,6 @@ import LandingPage from '../../pages/LandingPage';
 import Profile from '../../pages/Profile/Profile';
 import PageNotFound from '../../pages/PageNotFound/PageNotFound';
 import ChallengeCreate from '../../pages/ChallengeCreate/ChallengeCreate';
-import LoginPage from '../../pages/auth/LoginPage';
-import RegisterPage from '../../pages/auth/RegisterPage';
 import {useSelector} from 'react-redux';
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -32,7 +29,6 @@ import auth from '../../api/auth';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel';
 import ChallengeCreateHowTo from '../../pages/ChallengeCreateHowTo';
 import EditProfile from "../../pages/EditProfile/EditProfile";
-import ForgotPassword from "../../pages/auth/ForgotPassword";
 import YourChallenges from "../../pages/YourChallenges";
 
 const RoutingManager = (props) => {
@@ -150,8 +146,6 @@ const RoutingManager = (props) => {
 
     return (
         <Routes>
-            <Route path={LOGIN_PAGE} element={<LoginPage/>}/>
-            <Route path={REGISTER_PAGE} element={<RegisterPage/>}/>
             <Route
                 path={`${CHALLENGE_PAGE}/:challengeId`}
                 element={<Challenge section={CHALLENGE_SECTIONS.OVERVIEW}/>}
@@ -187,16 +181,8 @@ const RoutingManager = (props) => {
                 element={<PolicyPrivacy beforeLogin/>}
             />
             <Route
-                path={`${POLICY_PRIVACY_PAGE}/register`}
-                element={<PolicyPrivacy beforeRegister/>}
-            />
-            <Route
                 path={`${EDIT_PROFILE_PAGE}`}
                 element={<EditProfile/>}
-            />
-            <Route
-                path={`${FORGOT_PASSWORD_PAGE}`}
-                element={<ForgotPassword/>}
             />
             <Route path={'*'} element={<PageNotFound/>}/>
             {logInRoutesRender()}

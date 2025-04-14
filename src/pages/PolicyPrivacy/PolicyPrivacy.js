@@ -5,10 +5,9 @@ import { Body, H1, H2, Medium } from '../../utils/fonts';
 import PageButtons from '../../components/generic/PagerButtons';
 import Button from '../../components/generic/Button';
 import LOCAL_STORAGE from '../../utils/localStorage';
-import { Link } from 'react-router-dom';
-import { LOGIN_PAGE } from '../../utils/globals';
 import { useDispatch } from 'react-redux';
 import { popUpMessageHandler } from '../../redux/popUpMessegeSlice';
+import KeyCloakService from "../../services/KeyCloakService";
 
 const PolicyPrivacyStyle = styled(FlexColumn)`
   justify-content: flex-start;
@@ -72,8 +71,8 @@ const PolicyPrivacy = () => {
 
   const renderButtons = () => {
     return (
-      <FlexRow margin="32px 0 0 0" gap="48px" width="90%">
-        <Button as={Link} to={LOGIN_PAGE} width="72px" height="32px">
+      <FlexRow onClick={KeyCloakService.doLogin} margin="32px 0 0 0" gap="48px" width="90%">
+        <Button width="72px" height="32px">
           Accept
         </Button>
       </FlexRow>

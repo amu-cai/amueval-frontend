@@ -10,16 +10,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   CHALLENGES_PAGE,
   CHALLENGE_CREATE_PAGE,
-  LOGIN_PAGE,
   POLICY_PRIVACY_PAGE,
   PROFILE_PAGE,
   REDIRECT_TO_ROOT_PAGE,
-  REGISTER_PAGE,
 } from '../../../utils/globals';
 import policyIco from '../../../assets/policy_ico.svg';
 import createIco from '../../../assets/create_ico.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/authSlice';
+import KeyCloakService from "../../../services/KeyCloakService";
 
 const MobileNavMenuStyle = styled(FlexColumn)`
   gap: 32px;
@@ -83,7 +82,7 @@ const MobileNavMenu = (props) => {
         </FlexRow>
 
         {!loggedIn && (
-          <FlexRow as={Link} to={REGISTER_PAGE} gap="16px">
+          <FlexRow onClick={KeyCloakService.doRegister} gap="16px">
             <Svg width="16px" height="16px" src={registerIco} />
             <Menu as="li">Register</Menu>
           </FlexRow>
@@ -118,7 +117,7 @@ const MobileNavMenu = (props) => {
             </FlexRow>
           </>
         ) : (
-          <FlexRow as={Link} to={LOGIN_PAGE} gap="16px">
+          <FlexRow onclick={KeyCloakService.doLogin} gap="16px">
             <Svg width="16px" height="16px" src={loginIco} />
             <Menu as="li">Sign in</Menu>
           </FlexRow>
