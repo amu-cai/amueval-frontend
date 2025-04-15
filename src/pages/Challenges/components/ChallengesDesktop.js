@@ -45,7 +45,7 @@ const ChallengesDesktop = (props) => {
                 pageNr={props.pageNr}
                 setPageNr={props.setPageNr}
                 elements={props.challengesToRender}
-                pages={CALC_PAGES(props.challengesToRender)}
+                pages={props.challengesToRender}
                 width="72px"
                 borderRadius="64px"
                 currentPage={props.pageNr}

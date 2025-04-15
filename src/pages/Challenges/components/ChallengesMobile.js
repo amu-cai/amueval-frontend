@@ -36,8 +36,8 @@ const ChallengesMobile = (props) => {
             elements={props.challengesToRender}
             pageNr={props.pageNr}
             setPage={props.setPage}
-            pages={CALC_PAGES(props.challengesToRender)}
-            number={`${props.pageNr} / ${CALC_PAGES(props.challengesToRender)}`}
+            pages={props.challengesToRender}
+            totalPages={CALC_PAGES(props.challengesToRender)}
           />
         )}
       </ChallengesStyle>
