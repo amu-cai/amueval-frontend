@@ -122,6 +122,7 @@ const AllSubmissions = (props) => {
                   }}
                   challengeName={props.challengeName}
                   rowFooter={false}
+                  subpage={pageNr}
               />
             </Container>
             <Pager

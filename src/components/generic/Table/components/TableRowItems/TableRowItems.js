@@ -4,7 +4,8 @@ import {
   RENDER_METRIC_VALUE,
   RENDER_PLACE,
   IS_MOBILE,
-  RENDER_ROLE
+  RENDER_ROLE,
+  ELEMENTS_PER_PAGE
 } from '../../../../../utils/globals';
 import {Container} from '../../../../../utils/containers';
 
@@ -17,7 +18,7 @@ const TableRowItems = ({ orderedKeys, item, i, subpage, users, setRightsUpdateRe
         return RENDER_PLACE(item[keyValue]);
     }
     else if (keyValue === 'index') {
-      return i + 1;
+      return (subpage - 1) * ELEMENTS_PER_PAGE + i + 1;
     }
     else if (keyValue === 'additional_metric' && additionalMetricName) {
       return RENDER_METRIC_VALUE(item.additional_metrics_results.find(item => item.name === additionalMetricName).score);

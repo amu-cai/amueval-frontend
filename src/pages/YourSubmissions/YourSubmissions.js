@@ -197,6 +197,7 @@ const YourSubmissions = (props) => {
                 challengeName={props.challengeName}
                 rowFooter={true}
                 setYourSubmissionsResult={setYourSubmissionsResult}
+                subpage={pageNr}
               />
             </Container>
             <Pager

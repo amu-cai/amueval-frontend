@@ -20,7 +20,7 @@ import userRightsUpdate from "../api/userRightsUpdate";
 
 dayjs.extend(utc);
 
-export const ELEMENTS_PER_PAGE = 10;
+export const ELEMENTS_PER_PAGE = 3;
 export const MINI_DESCRIPTION_LENGTH = 70;
 export const API = process.env.REACT_APP_API;
 
