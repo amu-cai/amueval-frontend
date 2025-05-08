@@ -29,16 +29,34 @@ const DesktopChallengeMenu = (props) => {
   if (isAdmin || props.challenge.author === user) {
     options = MENU_CHALLENGE_SECTIONS_MY_CHALLENGE_OR_ADMIN;
   }
-  if (challengeDeadlineHasPassed(props.challenge.deadline)) {
-    options = options.filter(option => option.toLowerCase() !== 'add submission');
+
+  const CHALLENGE_DEADLINE_HAS_PASSED = challengeDeadlineHasPassed(props.challenge.deadline);
+  let optionsWithKeys = options.map((value, index) => ({ index, value }));
+
+  if (CHALLENGE_DEADLINE_HAS_PASSED) {
+    optionsWithKeys = optionsWithKeys.filter(
+        o => o.value.toLowerCase() !== 'add submission'
+    );
   }
+
+  if (!CHALLENGE_DEADLINE_HAS_PASSED && props.challenge.description.endsWith('<PRIVATE-TEST>')) {
+    optionsWithKeys = optionsWithKeys.filter(
+        o => o.value.toLowerCase() !== 'leaderboard'
+    );
+  }
+
+  const filteredOptions = [];
+  optionsWithKeys.forEach(({ index, value }) => {
+    filteredOptions[index] = value;
+  });
+
   return (
     <DesktopChallengeMenuStyle>
       <ThemeProvider theme={theme.customTheme}>
         <FlexRow gap="10px">
-          {options.map((option, index) => {
+          {filteredOptions.map((option, index) => {
             return (
-                <FlexColumn as={Link} to={`/challenge/${props.challengeName}/${options[index]
+                <FlexColumn as={Link} to={`/challenge/${props.challengeName}/${filteredOptions[index]
                     .toLowerCase()
                     .replace(' ', '')}`}>
                   <Button

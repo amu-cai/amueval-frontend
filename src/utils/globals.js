@@ -147,7 +147,7 @@ export const RENDER_WHEN = (when) => {
 };
 
 export const RENDER_METRIC_VALUE = (value) => {
-  if (value <= -999999999 ) return 'N/A';
+  if (value === null) return 'hidden';
   else return value.toFixed(4);
 };
 
