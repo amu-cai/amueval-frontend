@@ -1,8 +1,6 @@
 import Keycloak from 'keycloak-js';
-// import { POLICY_PRIVACY_PAGE, ROOT_URL } from '../utils/globals';
 import SESSION_STORAGE from '../utils/sessionStorage';
 import {logIn, logOut} from "../redux/authSlice";
-// import LOCAL_STORAGE from '../utils/localStorage';
 import store from "../redux/store";
 
 const _kc = new Keycloak({
@@ -23,8 +21,7 @@ const initKeycloak = (onAuthenticatedCallback, dispatch) => {
         .then((authenticated) => {
             if (!authenticated) {
                 console.log('user is NOT authenticated..!');
-            }
-            else {
+            } else {
                 dispatch(
                     logIn({
                         user: getUsername(),
@@ -32,11 +29,45 @@ const initKeycloak = (onAuthenticatedCallback, dispatch) => {
                         reloadSession: false,
                     })
                 );
+                scheduleTokenRefresh();
                 onAuthenticatedCallback();
             }
         })
         .catch(console.error);
 };
+
+
+const scheduleTokenRefresh = () => {
+    const expiresIn = _kc.tokenParsed?.exp - Math.floor(Date.now() / 1000);
+    const refreshTime = expiresIn - 30; // Refresh 30 seconds before expiration
+    if (refreshTime > 0) {
+        setTimeout(refreshToken, refreshTime * 1000);
+    }
+};
+
+const refreshToken = () => {
+    _kc.updateToken(60)
+        .then((refreshed) => {
+            if (refreshed) {
+                console.log('Token successfully refreshed');
+                store.dispatch(
+                    logIn({
+                        user: getUsername(),
+                        token: getToken(),
+                        reloadSession: false,
+                    })
+                );
+                scheduleTokenRefresh();
+            } else {
+                console.log('Token still valid');
+            }
+        })
+        .catch(() => {
+            console.warn('Token refresh failed. Forcing login.');
+            doLogin();
+        });
+};
+
 
 const doLogin = () => {
     sessionStorage.setItem(
