@@ -144,6 +144,7 @@ const AdminPanel = () => {
                             rowFooter={false}
                             users={filteredUsers}
                             setRightsUpdateResult={setRightsUpdateResult}
+                            subpage={pageNr}
                         />
                     </Container>
                 </FiltersStyle>

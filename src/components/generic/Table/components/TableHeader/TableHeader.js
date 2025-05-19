@@ -11,7 +11,7 @@ const TableHeader = (props) => {
       {props.orderedKeys.map((keyValue, i) => {
         return (
           <th
-            key={`table-header-${i}`}
+            key={`table-header-${keyValue.key}`}
             className="TableStyle__th"
             onClick={() => {
               if (!keyValue.sortable) {
