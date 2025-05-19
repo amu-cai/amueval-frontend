@@ -29,6 +29,7 @@ const filtersHandler = (
             return challenge.title.toLowerCase().includes(filters.searchPhrase.toLowerCase());
         });
     }
+
     if (filters.sortByParticipants) {
         filteredChallenges.sort((a, b) => {
             return filters.sortByParticipants === 'asc'
@@ -38,7 +39,7 @@ const filtersHandler = (
     }
 
     if (filters.sortByDeadline) {
-        filteredChallenges = filteredChallenges.sort((a, b) => {
+        filteredChallenges.sort((a, b) => {
             const deadlineA = new Date(a.deadline);
             const deadlineB = new Date(b.deadline);
             return filters.sortByDeadline === 'asc'
@@ -47,7 +48,7 @@ const filtersHandler = (
         });
     }
 
-    setChallenges([].concat(filteredChallenges));
+    setChallenges([...filteredChallenges]);
 
     setPageNr(1);
 };

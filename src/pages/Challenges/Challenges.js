@@ -64,9 +64,7 @@ const Challenges = ({yourChallenges}) => {
     [filtersMenu, sortBy, statusFilter, challengeTypeFilter, commercialFilter]
   );
 
-  const challengesToRender = challengesFiltered.filter(
-      (challenge) => !challenge.deleted)
-      .sort((a, b) => b.participants - a.participants);
+  const challengesToRender = challengesFiltered;
 
   return (
     <>
@@ -96,22 +94,6 @@ const Challenges = ({yourChallenges}) => {
               loading={loading}
               pageNr={pageNr}
               challengesToRender={challengesToRender}
-              // searchQueryHandler={(event) =>
-              //     challengeSearchQueryHandler(
-              //         event,
-              //         allChallenges,
-              //         setChallenges,
-              //         setPageNr
-              //     )
-              // }
-              // filterByTypeHandler={(event) =>
-              //     filterByTypeHandler(
-              //         event,
-              //         allChallenges,
-              //         setChallenges,
-              //         setPageNr
-              //     )
-              // }
               allChallenges={allChallenges}
               setChallenges={setChallenges}
               filtersHandler={(filters) =>
