@@ -45,10 +45,10 @@ const LandingPage = () => {
                 <FlexColumn
                     gap="150px"
                 >
-                    <Motivation/>
+                    {/* <Motivation/>
                     <Commercial/>
                     <Process/>
-                    <Csi/>
+                    <Csi/> */}
                     <Partnerships/>
                 </FlexColumn>
                 <Footer/>
