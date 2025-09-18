@@ -2,6 +2,9 @@ import React from 'react';
 import PartnershipsStyle from './PartnershipsStyle';
 import Media from "react-media";
 import theme from "../../../../utils/theme";
+import logoCsi from "../../../../assets/logo-csi.png";
+import logoZil from "../../../../assets/zil.png";
+import logoSages from "../../../../assets/sages.png";
 import allegro from "../../../../assets/allegro.png";
 import samsung from "../../../../assets/samsung.png";
 import domdata from "../../../../assets/domdata.png";
@@ -21,11 +24,9 @@ const Partnerships = () => {
                     <H2New as="h2">Our partnerships</H2New>
                 </FlexColumn>
                 <FlexColumn gap="50px">
-                    <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
-                    <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
-                    <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
-                    <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
-                    <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
+                    <a href="https://zil.ipipan.waw.pl/"><img src={logoZil} alt="ZIL"/></a>
+                    <a href="https://csi.amu.edu.pl/en"><img src={logoCsi} alt="CSI"/></a>
+                    <a href="https://www.sages.pl"><img src={logoSages} alt="Sages"/></a>
                 </FlexColumn>
             </PartnershipsStyle>
         );
@@ -41,16 +42,15 @@ const Partnerships = () => {
                         alignmentX="space-between"
                         className="test"
                     >
-                        <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
-                        <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
-                        <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
+                        <a href="https://zil.ipipan.waw.pl/"><img src={logoZil} alt="ZIL"/></a>
+                        <a href="https://csi.amu.edu.pl/en"><img src={logoCsi} alt="CSI"/></a>
+                        <a href="https://www.sages.pl"><img src={logoSages} alt="Sages"/></a>
                     </FlexRow>
                     <FlexRow
                         gap="200px"
                         alignmentX="space-around"
                     >
-                        <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
-                        <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
+                        <p>&nbsp;</p>
                     </FlexRow>
                 </FlexColumn>
             </PartnershipsStyle>
@@ -66,11 +66,9 @@ const Partnerships = () => {
                         gap="80px"
                         alignmentX="space-between"
                     >
-                        <a href="https://pons.pl/"><img src={pons} alt="pons"/></a>
-                        <a href="https://allegro.pl/"><img src={allegro} alt="allegro"/></a>
-                        <a href="https://cararena.pl/"><img src={carArena} alt="car arena"/></a>
-                        <a href="https://domdata.pl/"><img src={domdata} alt="domdata"/></a>
-                        <a href="https://www.samsung.com/"><img src={samsung} alt="samsung"/></a>
+                        <a href="https://zil.ipipan.waw.pl/"><img src={logoZil} alt="ZIL"/></a>
+                        <a href="https://csi.amu.edu.pl/en"><img src={logoCsi} alt="CSI"/></a>
+                        <a href="https://www.sages.pl"><img src={logoSages} alt="Sages"/></a>
                     </FlexRow>
                 </FlexColumn>
             </PartnershipsStyle>
