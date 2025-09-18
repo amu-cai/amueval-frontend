@@ -27,14 +27,13 @@ const Hero = (props) => {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <span>
-              A challenge platform for machine learning research, competition,
-              cooperation and reproducibility.
+              {" "}
+              <a href="https://poleval.pl/">
+                PolEval
+              </a> is a SemEval-inspired evaluation campaign for natural language processing tools for Polish.
             </span>
             <span>
-              The AmuEval paper can be found in the{" "}
-              <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
-                ISECON 2024 Proceedings
-              </a>
+              Submitted tools compete against one another within certain tasks selected by organizers, using available data and are evaluated according to pre-established procedures.
             </span>
           </MediumNew>
           <img src={brain} alt="brain" width="282px" />
@@ -76,15 +75,14 @@ const Hero = (props) => {
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             >
               <span>
-                A challenge platform for machine learning research, competition,
-                cooperation and reproducibility.
-              </span>
-              <span>
-                The AmuEval paper can be found in the{" "}
-                <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
-                  ISECON 2024 Proceedings
-                </a>
-              </span>
+              {" "}
+              <a href="https://poleval.pl/">
+                PolEval
+              </a> is a SemEval-inspired evaluation campaign for natural language processing tools for Polish.
+            </span>
+            <span>
+              Submitted tools compete against one another within certain tasks selected by organizers, using available data and are evaluated according to pre-established procedures.
+            </span>
             </MediumNew>
           </FlexColumn>
           <FlexColumn>
@@ -114,15 +112,14 @@ const Hero = (props) => {
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             >
               <span>
-                A challenge platform for machine learning research, competition,
-                cooperation and reproducibility.
-              </span>
-              <span>
-                The AmuEval paper can be found in the{" "}
-                <a href="https://proceedings.isecon.org/download/iqfvbwt42na9n9ggsccn">
-                  ISECON 2024 Proceedings
-                </a>
-              </span>
+              {" "}
+              <a href="https://poleval.pl/">
+                PolEval
+              </a> is a SemEval-inspired evaluation campaign for natural language processing tools for Polish.
+            </span>
+            <span>
+              Submitted tools compete against one another within certain tasks selected by organizers, using available data and are evaluated according to pre-established procedures.
+            </span>
             </MediumNew>
           </FlexColumn>
           <img
