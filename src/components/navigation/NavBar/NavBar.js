@@ -79,9 +79,6 @@ const NavBar = () => {
                                         <FlexRow as={Link} to={`${ROOT_PAGE}#contact`}>
                                             <span>Contact</span>
                                         </FlexRow>
-                                        <FlexRow as={Link} to={`${ROOT_PAGE}#csi`}>
-                                            <span>CSI</span>
-                                        </FlexRow>
                                     </FlexRow>
                                     {/*{(userRightsInfo?.isAdmin || userRightsInfo?.isAuthor) && (*/}
                                     {/*    <FlexRow as={Link} to={CHALLENGE_CREATE_PAGE} gap="12px">*/}
