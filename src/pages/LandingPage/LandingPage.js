@@ -1,7 +1,7 @@
 import React from 'react';
-import Motivation from './components/Motivation/Motivation';
-import Csi from './components/Csi/Csi';
-import Commercial from './components/Commercial/Commercial';
+// import Motivation from './components/Motivation/Motivation';
+// import Csi from './components/Csi/Csi';
+// import Commercial from './components/Commercial/Commercial';
 import Hero from './components/Hero/Hero';
 import Partnerships from './components/Partnerships/Partnerships';
 import LandingPageStyle from './LandingPageStyle';
@@ -9,7 +9,7 @@ import EntireScreenLoading from '../../components/generic/EntireScreenLoading/En
 import {useDispatch} from 'react-redux';
 import {loggedBarPositionHandler} from '../../redux/navigationSlice';
 import {FlexColumn} from "../../utils/containers";
-import Process from "./components/Process";
+// import Process from "./components/Process";
 import Footer from "../../components/generic/Footer";
 
 const LandingPage = () => {
