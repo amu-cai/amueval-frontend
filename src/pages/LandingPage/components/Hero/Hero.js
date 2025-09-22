@@ -2,7 +2,6 @@ import { default as React } from "react";
 import Media from "react-media";
 import arrowDown from "../../../../assets/arrow_down.svg";
 import polevalLogo from "../../../../assets/poleval_logo.png";
-import amuEval from "../../../../assets/logo_amueval.svg";
 import wave from "../../../../assets/wave.png";
 import colors from "../../../../utils/colors";
 import { FlexColumn, FlexRow, Svg } from "../../../../utils/containers";
@@ -15,12 +14,6 @@ const Hero = (props) => {
     return (
       <HeroStyle>
         <FlexColumn gap="20px" className="HeroStyle__wrapper">
-          <img
-            src={amuEval}
-            width="250px"
-            alt="amu eval"
-            className="HeroStyle_logo"
-          />
           <MediumNew
             as="p"
             className="HeroStyle__text"
@@ -61,14 +54,6 @@ const Hero = (props) => {
             gap="16px"
             className="HeroStyle__text"
           >
-            <FlexRow gap="16px">
-              <img
-                src={amuEval}
-                width="431px"
-                alt="ame eval"
-                className="HeroStyle_logo"
-              />
-            </FlexRow>
             <MediumNew
               as="p"
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
@@ -98,14 +83,6 @@ const Hero = (props) => {
       <HeroStyle>
         <FlexRow alignmentY="center" gap="100px" className="HeroStyle__wrapper">
           <FlexColumn alignmentX="start" gap="16px">
-            <FlexRow gap="16px">
-              <img
-                src={amuEval}
-                width="541px"
-                alt="amu eval"
-                className="HeroStyle_logo"
-              />
-            </FlexRow>
             <MediumNew
               as="p"
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
