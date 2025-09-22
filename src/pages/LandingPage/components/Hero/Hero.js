@@ -1,7 +1,7 @@
 import { default as React } from "react";
 import Media from "react-media";
 import arrowDown from "../../../../assets/arrow_down.svg";
-import brain from "../../../../assets/brain.svg";
+import polevalLogo from "../../../../assets/poleval_logo.png";
 import amuEval from "../../../../assets/logo_amueval.svg";
 import wave from "../../../../assets/wave.png";
 import colors from "../../../../utils/colors";
@@ -36,7 +36,6 @@ const Hero = (props) => {
               Submitted tools compete against one another within certain tasks selected by organizers, using available data and are evaluated according to pre-established procedures.
             </span>
           </MediumNew>
-          <img src={brain} alt="brain" width="282px" />
         </FlexColumn>
         <FlexColumn className="HeroStyle__see_more_btn">
           <p className="HeroStyle__see_more">See more</p>
@@ -86,7 +85,7 @@ const Hero = (props) => {
             </MediumNew>
           </FlexColumn>
           <FlexColumn>
-            <img className="col2" src={brain} alt="brain" width="354px" />
+            <img className="col2" src={polevalLogo} alt="PolEval Logo" width="354px" />
           </FlexColumn>
         </FlexRow>
         <img className="HeroStyle__wave" src={wave} alt="wave" />
@@ -124,8 +123,8 @@ const Hero = (props) => {
           </FlexColumn>
           <img
             className="HeroStyle__brain"
-            src={brain}
-            alt="brain"
+            src={polevalLogo}
+            alt="PolEval Logo"
             width="518px"
           />
         </FlexRow>
