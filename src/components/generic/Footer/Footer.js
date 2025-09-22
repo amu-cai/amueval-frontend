@@ -34,8 +34,7 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Contact</H3>
-                    <a href="mailto:csi@amu.edu.pl">csi@amu.edu.pl</a>
-                    <a href="tel:618 295 308">618 295 308</a>
+                    <a href="https://discord.gg/dpn94tUSyT">Our Discord server</a>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
                     <H2New as="h2">Made by</H2New>
@@ -61,8 +60,7 @@ const Footer = () => {
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" alignmentX="start">
                     <H3 as="h3" fontSize="18px">Contact</H3>
-                    <a href="mailto:csi@amu.edu.pl">csi@amu.edu.pl</a>
-                    <a href="tel:618 295 308">618 295 308</a>
+                    <a href="https://discord.gg/dpn94tUSyT">Our Discord server</a>
                 </FlexColumn>
                 <FlexColumn as="section" alignmentY="start" className="FooterStyle__csi_logo">
                     <H2New as="h2">Made by</H2New>
