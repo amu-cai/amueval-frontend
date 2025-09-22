@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import amuEval from '../../assets/amu_eval.png';
+import topLogo from '../../assets/poleval_toplogo.png';
 import {FlexColumn} from "../../utils/containers";
 
 const LogoStyle = styled(FlexColumn)`
@@ -17,7 +17,7 @@ const Logo = (props) => {
       cursor="pointer"
       to="/"
     >
-      <img src={amuEval} alt="amu eval"/>
+      <img src={topLogo} alt="PolEval logo"/>
     </LogoStyle>
   );
 };
